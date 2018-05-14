@@ -1,7 +1,8 @@
 .bbg-banner {
 	background-color: $color-gray-lightest;
 	@include backgroundCover();
-	height: $banner-image-height * .75;
+	// HEIGHT DETERMING BY WIDTH BY usagm-main.js
+	max-height: 675px;
 	margin-bottom: .5rem;
 	max-width: 9999px;
 	position: relative;
@@ -94,12 +95,12 @@
 		}
 	}
 	.bbg-banner__gradient {
-		background-image: linear-gradient(transparent 0%, #000 200%);
-		height: 25%;
 		position: absolute;
-		right: 0;
-		bottom: 0;
+		top: 0;
 		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
 	}
 }
 

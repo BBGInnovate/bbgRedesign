@@ -154,21 +154,14 @@ get_header();
 				} else {
 
 					$useRandomImage = true;
-					$includeBannerLogo = true;
 					$bannerCutline = '';
 					$bannerAdjustStr = '';
 
 					if ( $homepageBannerType == 'specific_image' ) {
-
-						$includeBannerLogo = get_field( 'homepage_banner_image_include_logo', 'option' );
-
 						$img = get_field( 'homepage_banner_image', 'option' );
-
 						if ( $img ) {
-
 							$attachment_id = $img['ID'];
 							$useRandomImage = false;
-
 							$featuredImageCutline='';
 							$thumbnail_image = get_posts(
 								array(
@@ -176,7 +169,6 @@ get_header();
 									'post_type' => 'attachment'
 								)
 							);
-
 							if ($thumbnail_image && isset($thumbnail_image[0])) {
 								$bannerCutline=$thumbnail_image[0]->post_excerpt;
 							}
@@ -237,12 +229,6 @@ get_header();
 						<div class="bbg-banner">
 							<div class="bbg-banner__gradient"></div>
 							<div class="usa-grid bbg-banner__container--home">
-								<?php if ( $includeBannerLogo ): ?>
-								<img class="bbg-banner__site-logo" src="<?php echo get_template_directory_uri() ?>/img/logo-agency-square.png" alt="BBG logo">
-								<?php endif; ?>
-								<div class="bbg-banner-box">
-									<h1 class="bbg-banner-site-title"><?php echo bbginnovate_site_name_html(); ?></h1>
-								</div>
 								<div class="bbg-social__container">
 									<div class="bbg-social">
 									</div>

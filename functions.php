@@ -194,6 +194,7 @@ function bbginnovate_scripts() {
 	wp_enqueue_style( 'bbginnovate-style-fonts', get_template_directory_uri() . "/css/bbg-fonts.css" );
 
 	wp_enqueue_script( 'bbginnovate-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
+	wp_enqueue_script( 'usag-main', get_template_directory_uri() . '/js/usagm-main.js', array('jquery'), '20151215', true );
 
 	wp_enqueue_script( 'bbginnovate-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
@@ -264,6 +265,7 @@ require get_template_directory() . '/inc/bbg-functions-boardAndSeniorManagement.
 require get_template_directory() . '/inc/bbg-functions-bizOpps.php';
 require get_template_directory() . '/inc/bbg-functions-congressional-committees.php';
 require get_template_directory() . '/inc/bbg-functions-contactCards.php';
+require get_template_directory() . '/inc/bbg-functions-header.php';
 require get_template_directory() . '/inc/bbg-functions-impact.php';
 require get_template_directory() . '/inc/bbg-functions-interns.php';
 require get_template_directory() . '/inc/bbg-functions-jobs.php';

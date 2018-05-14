@@ -1,5 +1,6 @@
 // Typography
-$font-sans: 'Lato', 'Helvetica', 'Arial', sans-serif;
+$font-sans:           'Alegreya Sans', sans-serif;
+$font-serif:          'Carrara-Regular', serif;
 
 $base-font-size:            rem(16px);
 $small-font-size: 			rem(13px);
@@ -7,6 +8,13 @@ $medium-font-size:          rem(18px);
 $read-in-font-size:         rem(20px);
 $caption-font-size:         rem(12px);
 $site-title-font-size:      rem(40px);
+
+// $h1-font-size:          4rem !default;
+// $h2-font-size:        1.8rem !default;
+// $h3-font-size:        1.6rem !default;
+// $h4-font-size:        3.2rem !default;
+// $h5-font-size:        2.2rem !default;
+// $h6-font-size:        1.4rem !default;
 
 $base-line-height:          1.7;
 $small-line-height:         1.4;
@@ -20,7 +28,23 @@ $font-bold:     700;
 
 $focus-shadow: none; //overwriting default set in _variables.scss
 
-// Color
+// USAGM COLORS
+$color-blue-darkest:  #283166;
+$color-blue-darker:   #284f91;
+$color-blue:          #3f7ad1;
+$color-cool-blue:     #82afd2;
+
+$color-taupe-dark:    #8b8278;
+$color-taupe-light:   #aca299;
+$color-tan-dark:      #c9c4ba;
+$color-tan-light:     #d5d1c4;
+
+$color-red:           #b2201c;
+$color-gold:          #c0ba86;
+
+$black6:              #666666;
+
+// Other Color
 $color-share-facebook:        #3d5a98;
 $color-share-twitter:         #55acee;
 $color-share-instagram:       #507ea3;

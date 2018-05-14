@@ -775,7 +775,7 @@ body {
   content: " | "; }
 
 .readin, .bbg__staff__author-bio, .single-post .bbg__article-content > p:first-of-type, .bbg__page-header-description, .page-template-page-board .content-area .usa-grid > p:first-of-type {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 1.6rem;
   font-weight: 300;
   line-height: 2.04;
@@ -817,7 +817,7 @@ button,
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 1.6rem;
   font-weight: 700;
   line-height: 1;
@@ -1489,7 +1489,7 @@ legend {
 
 .usa-form-hint {
   color: #757575;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin-bottom: 0; }
 
 /**
@@ -1761,7 +1761,7 @@ table {
   border-right: 0; }
 
 html {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 10px; }
 
 body {
@@ -1786,7 +1786,7 @@ a {
 
 h1, h2, h3, .bbg__sidebar__table caption, h4, .bbg__board__committee-list li a, h5, .bbg__sidebar__table th, h6 {
   clear: both;
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   line-height: 1.3;
   margin-bottom: .5em;
   margin-top: 1.5em; }
@@ -1812,7 +1812,7 @@ h5, .bbg__sidebar__table th {
   font-weight: 700; }
 
 h6 {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 1.3rem;
   font-weight: 400;
   text-transform: uppercase; }
@@ -1834,10 +1834,10 @@ p a,
   text-decoration: underline; }
 
 .usa-sans p, .usa-sans a, .usa-sans li, .usa-sans span {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+  font-family: "Alegreya Sans", sans-serif; }
 
 .usa-serif p, .usa-serif a, .usa-serif li, .usa-serif span {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif; }
+  font-family: "Carrara-Regular", serif; }
 
 .usa-sans a {
   border-bottom: none;
@@ -1857,7 +1857,7 @@ p a,
       font-weight: 700; } }
 
 .usa-font-lead, .bbg__about__intro p:first-of-type, .bbg__about__child__intro p:first-of-type, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 2rem;
   line-height: 1.7; }
 
@@ -1938,7 +1938,7 @@ p a,
     .usa-accordion > ul > li,
     .usa-accordion-bordered > ul > li {
       background-color: #f1f1f1;
-      font-family: "Lato", "Helvetica", "Arial", sans-serif;
+      font-family: "Alegreya Sans", sans-serif;
       list-style: none;
       margin-bottom: 6px;
       width: 100%; }
@@ -1962,7 +1962,7 @@ p a,
       color: #212121;
       cursor: pointer;
       display: inline-block;
-      font-family: "Lato", "Helvetica", "Arial", sans-serif;
+      font-family: "Alegreya Sans", sans-serif;
       font-weight: 700;
       margin: 0;
       padding: 1.5rem 5.5rem 1.5rem 3rem;
@@ -2011,7 +2011,7 @@ p a,
   .usa-accordion > li,
   .usa-accordion-bordered > li {
     background-color: #f1f1f1;
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     list-style: none;
     margin-bottom: 6px;
     width: 100%; }
@@ -2052,7 +2052,7 @@ p a,
   color: #212121;
   cursor: pointer;
   display: inline-block;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-weight: 700;
   margin: 0;
   padding: 1.5rem 5.5rem 1.5rem 3rem;
@@ -2135,7 +2135,7 @@ p a,
       margin-top: .3rem; } }
 
 .usa-alert-text {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin-bottom: 0;
   margin-top: 0; }
 
@@ -2464,7 +2464,7 @@ form input[name="password"], form input[name="confirmPassword"] {
 
 .usa-form-note {
   float: right;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 1.5rem;
   margin: 0 0 1.5rem; }
   .usa-form-note + * {
@@ -2676,7 +2676,7 @@ form[id^=fscf_form] {
     border: none;
     color: #212121;
     display: block;
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     line-height: 1;
     padding: 1rem 1rem 1rem 1.8rem; }
     .usa-sidenav-list a:hover {
@@ -2889,7 +2889,7 @@ form[id^=fscf_form] {
       margin-left: 1rem;
       pointer-events: auto; }
   .bbg__comments-list .comment .comment-content {
-    font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+    font-family: "Carrara-Regular", serif;
     font-size: 1.6rem; }
 
 .bbg__comments-list .reply {
@@ -3194,7 +3194,7 @@ svg {
 
 .bbg__mugshot__caption {
   display: block;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-weight: bold;
   line-height: 1;
   margin-top: -.5rem;
@@ -3479,7 +3479,7 @@ body:not(.home) .bbg__main-navigation {
   position: absolute;
   width: auto; }
   .menu-toggle:focus {
-    background-color: #205493; }
+    background-color: #82afd2; }
   @media screen and (min-width: 481px) {
     .menu-toggle {
       background-position: 10px center;
@@ -3541,34 +3541,26 @@ body:not(.home) .bbg__main-navigation {
     display: block;
     right: 0;
     z-index: 9998;
-    /* drop down navigation */ }
+    /* DROPDOWN NAV */ }
     .bbg__main-navigation ul ul {
       position: absolute;
       right: auto;
       width: auto; }
       .bbg__main-navigation ul ul li {
-        border-top: 1px dotted #CCC;
-        border-left: 1px solid #CCC;
+        display: inline-block;
         float: none;
         padding-left: 0; }
         .bbg__main-navigation ul ul li a {
           padding-left: 2.2rem; }
         .bbg__main-navigation ul ul li a:before {
           content: ""; }
-      .bbg__main-navigation ul ul li:first-of-type {
-        border-radius: 0px; }
-      .bbg__main-navigation ul ul li:last-of-type {
-        border-bottom: 1px solid #CCC;
-        border-radius: 0 0 0.3rem 0.3rem; }
   .bbg__main-navigation li {
-    background-color: #FFF;
-    border-bottom: 1px solid #CCC;
-    border-right: 1px solid #CCC;
+    float: left;
     font-size: 14px;
     font-weight: 700;
-    float: left;
     margin: 0;
-    padding: 0; }
+    padding: 0;
+    background-color: #FFF; }
   .bbg__main-navigation .menu-item-has-children > a {
     background-position: center;
     background-repeat: no-repeat;
@@ -3582,12 +3574,6 @@ body:not(.home) .bbg__main-navigation {
     display: block !important; }
   .bbg__main-navigation .menu-item-has-children > ul {
     display: none; }
-  .bbg__main-navigation li:first-of-type {
-    border-left: 1px solid #CCC; }
-  .bbg__main-navigation li:first-of-type,
-  .bbg__main-navigation li:first-of-type a:hover,
-  .bbg__main-navigation li:first-of-type a:focus {
-    border-radius: 0 0 0 0.3rem; }
   .bbg__main-navigation li:after {
     display: none; }
   .bbg__main-navigation a {
@@ -3699,6 +3685,9 @@ body:not(.home) .bbg__main-navigation {
   .bbg__article__nav .bbg__article__nav-next {
     float: right; }
 
+input[type="search"] {
+  border: none; }
+
 .bbg__avatar__container {
   margin: 0 auto;
   max-width: 200px; }
@@ -3777,7 +3766,7 @@ body:not(.home) .bbg__main-navigation {
 .bbg__entity__text-description,
 .bbg__team__text-description {
   clear: none;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin-top: 0;
   max-width: 600px; }
 
@@ -3879,7 +3868,7 @@ body:not(.home) .bbg__main-navigation {
       text-align: left; } }
 
 .bbg__staff__author-bio {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   line-height: 1.8;
   margin-top: 1rem; }
   @media screen and (min-width: 481px) {
@@ -3925,7 +3914,7 @@ body:not(.home) .bbg__main-navigation {
 
 /* Author byline */
 .bbg__article-meta {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 1.3rem;
   font-weight: 300; }
   @media screen and (min-width: 900px) {
@@ -3996,7 +3985,7 @@ body:not(.home) .bbg__main-navigation {
   word-wrap: break-word; }
 
 .bbg__article-content strong {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+  font-family: "Alegreya Sans", sans-serif; }
 
 .bbg__article-content .bbg__article-content__subhead {
   color: #757575;
@@ -4054,7 +4043,7 @@ body:not(.home) .bbg__main-navigation {
     border-bottom-color: #0071bc;
     border-bottom-style: solid;
     border-bottom-width: 6px;
-    font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+    font-family: "Carrara-Regular", serif;
     font-size: 2rem;
     margin-bottom: 3rem; }
     @media screen and (min-width: 900px) {
@@ -4193,7 +4182,7 @@ ul.bbg__article-content__list--inline {
       font-weight: 400;
       margin-bottom: 1.3rem; }
     .bbg__article-author .bbg__author-description .bbg__author-bio {
-      font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+      font-family: "Carrara-Regular", serif;
       font-size: 1.3rem;
       font-weight: 300;
       line-height: 1.7;
@@ -4240,13 +4229,13 @@ ul.bbg__article-content__list--inline {
 /*   of press releases                  */
 .bbg__contact-box {
   border-top: 1px solid #CCC;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin-top: 3rem;
   padding-top: 3rem;
   /* Contact card share links */
   /* Article share links: text */ }
   .bbg__contact-box p, .bbg__contact-box a, .bbg__contact-box ul, .bbg__contact-box li, .bbg__contact-box span {
-    font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+    font-family: "Alegreya Sans", sans-serif; }
   .bbg__contact-box li.bbg__contact__link {
     display: inline-block;
     margin: 0 2rem 0 0; }
@@ -4294,7 +4283,7 @@ ul.bbg__article-content__list--inline {
 .bbg-tagline,
 .bbg-tagline p {
   color: #757575;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 1.5rem;
   line-height: 1.7;
   margin-bottom: 3rem; }
@@ -4322,7 +4311,7 @@ e.g. on the intern testimonial page */
 /** Read more link **/
 .bbg__read-more, a.bbg__kits__intro__more--link {
   color: #0071bc;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 80%;
   font-weight: bold;
   font-transform: uppercase;
@@ -4531,9 +4520,7 @@ ol li:before {
   color: green; }
 
 h1, h2, h3, .bbg__sidebar__table caption, h4, .bbg__board__committee-list li a, h5, .bbg__sidebar__table th, h6 {
-  color: #112e51;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
-  margin-top: .5rem; }
+  font-family: "Alegreya Sans", sans-serif; }
 
 h1 a,
 h2 a,
@@ -4572,7 +4559,7 @@ a:not(.bbg__article-share__icon):focus {
   word-break: keep-all; }
 
 p {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif; }
+  font-family: "Carrara-Regular", serif; }
 
 img > a:hover,
 img > a:focus,
@@ -4592,22 +4579,21 @@ img > a:focus,
   text-decoration: none; }
 
 .usa-font-lead, .bbg__about__intro p:first-of-type, .bbg__about__child__intro p:first-of-type, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
-  color: #000; }
+  color: #666666; }
 
 .usa-disclaimer {
   text-align: center; }
 
 .bbg__label {
-  background-color: #981b1e;
   color: #FFF;
   display: inline-block;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 1.7rem;
   font-weight: bold;
   margin-top: 0;
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
-  text-transform: uppercase; }
+  background-color: #981b1e; }
   .bbg__label a {
     color: #FFF;
     text-decoration: underline; }
@@ -4680,7 +4666,7 @@ img > a:focus,
 
 .bbg__page-header__tagline {
   color: #757575;
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 1.4rem;
   font-style: italic;
   font-weight: 500;
@@ -4756,7 +4742,7 @@ article {
 .bbg-header__site-title {
   clear: none;
   display: inline-block;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif !important;
+  font-family: "Alegreya Sans", sans-serif !important;
   font-size: 2rem;
   line-height: 1;
   margin: 0;
@@ -4809,19 +4795,19 @@ article {
 .bbg__article-content {
   margin-bottom: 3rem; }
   .bbg__article-content li {
-    font-family: "Merriweather", "Georgia", "Times New Roman", serif; }
+    font-family: "Carrara-Regular", serif; }
 
 .bbg__article-header__banner--profile {
   margin-bottom: 0; }
 
 .bbg__article-sidebar {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin: 0 auto;
   max-width: 600px; }
   .bbg__article-sidebar p,
   .bbg__article-sidebar ul,
   .bbg__article-sidebar ol {
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     margin-top: 0; }
   .bbg__article-sidebar .bbg__article-sidebar__tagline {
     color: #757575;
@@ -4937,7 +4923,7 @@ article {
       margin-right: 0;
       margin-left: 0; }
       .bbg__article-content p strong {
-        font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+        font-family: "Alegreya Sans", sans-serif; }
     .bbg__article-content.large {
       border-right: 1px dotted #CCC;
       margin-left: 0;
@@ -4952,7 +4938,7 @@ article {
         margin-bottom: 3rem; }
   .bbg__article-sidebar {
     float: right;
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     width: 30%; }
     .bbg__article-sidebar p,
     .bbg__article-sidebar li {
@@ -5011,7 +4997,7 @@ article {
   padding: 0 3rem; }
 
 .bbg-continue a {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   font-size: .9em; }
@@ -5066,7 +5052,7 @@ article {
 /*    Used on home page, landing pages, */
 /*    profiles and entity pages         */
 .bbg__excerpt-meta {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 1.4rem;
   font-style: italic; }
   .bbg__excerpt-meta a {
@@ -5140,7 +5126,7 @@ article {
   width: 50%; }
 
 .bbg-blog__excerpt-content p {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+  font-family: "Alegreya Sans", sans-serif; }
 
 @media screen and (min-width: 600px) {
   .secondary-stories .bbg-blog__excerpt-title--list {
@@ -5352,7 +5338,7 @@ div.banner_readmore h6 a:visited {
   margin: 0 auto; }
 
 .bbg__quotation .bbg__quotation-attribution {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin-top: 1.5rem;
   display: table-row; }
   @media screen and (min-width: 900px) {
@@ -5542,14 +5528,14 @@ div.banner_readmore h6 a:visited {
 
 .bbg__award-excerpt__source {
   color: #757575;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin-top: 0;
   margin-bottom: 1rem; }
 
 /* Used on the jobs page? */
 .usa-width-one-third.bbg__sidebar,
 .usa-width-one-third.bbg__sidebar p {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+  font-family: "Alegreya Sans", sans-serif; }
 
 .bbg__committee-list + .bbg__committee-list {
   margin-top: 0; }
@@ -5591,7 +5577,7 @@ div.banner_readmore h6 a:visited {
       color: #FFF; }
   .bbg__ribbon--thin p {
     color: #FFF;
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     padding-bottom: 3rem; }
   .bbg__ribbon--thin a {
     color: #9bdaf1; }
@@ -5638,7 +5624,7 @@ div.banner_readmore h6 a:visited {
     color: #FFF; }
   .bbg__banner--thin p {
     color: #000;
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     padding-bottom: 3rem; }
   .bbg__banner--thin a {
     color: #046b99; }
@@ -5707,7 +5693,7 @@ div.banner_readmore h6 a:visited {
   margin-bottom: 3rem;
   padding: 2rem; }
   .bbg__infobox p, .bbg__infobox a, .bbg__infobox ul, .bbg__infobox li {
-    font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+    font-family: "Alegreya Sans", sans-serif; }
   .bbg__infobox ul li:after,
   .bbg__infobox ol li:after {
     margin-bottom: 0; }
@@ -5719,7 +5705,7 @@ div.banner_readmore h6 a:visited {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 300px;
+  max-height: 675px;
   margin-bottom: .5rem;
   max-width: 9999px;
   position: relative;
@@ -5767,7 +5753,7 @@ div.banner_readmore h6 a:visited {
         padding-right: 3rem; } }
     .bbg-banner .bbg-banner-box .bbg-banner-site-title {
       color: #FFF;
-      font-family: "Lato", "Helvetica", "Arial", sans-serif !important;
+      font-family: "Alegreya Sans", sans-serif !important;
       font-size: 3.2rem;
       line-height: 1;
       margin-bottom: 5px;
@@ -5796,12 +5782,12 @@ div.banner_readmore h6 a:visited {
         .bbg-banner .bbg-banner-box .bbg-banner-site-description {
           font-size: 2rem; } }
   .bbg-banner .bbg-banner__gradient {
-    background-image: linear-gradient(transparent 0%, #000 200%);
-    height: 25%;
     position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0; }
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, white, rgba(255, 255, 255, 0)); }
 
 .bbg__social__container {
   position: fixed;
@@ -6015,7 +6001,7 @@ section.usa-section.bbg-banner__section {
 
 .bbg__about__child--mission p, .bbg__about--marquee p {
   color: #000;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 2.5rem;
   font-weight: 300;
   line-height: 1.7;
@@ -6045,7 +6031,7 @@ section.usa-section.bbg-banner__section {
 
 .bbg__about__grandchild .bbg__about__grandchild__subtitle {
   color: #757575;
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-weight: 700;
   text-transform: capitalize; }
 
@@ -6081,12 +6067,12 @@ section.usa-section.bbg-banner__section {
   line-height: 2;
   margin-top: 0;
   /* Temporary edits from brian */
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 1.6rem;
   line-height: 1.7; }
 
 .bbg__about__grandchild__link {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   margin-left: 1rem;
   text-align: right;
   text-decoration: none;
@@ -6105,7 +6091,7 @@ section.usa-section.bbg-banner__section {
     margin-top: 1rem;
     margin-bottom: 0; }
   .bbg__employee-profile__excerpt .bbg__employee-profile__excerpt__title {
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     margin-top: 0; }
   .bbg__employee-profile__excerpt .bbg__employee-profile__excerpt__title {
     line-height: 1.3;
@@ -6156,7 +6142,7 @@ section.usa-section.bbg-banner__section {
     .bbg__contact-card {
       position: relative; } }
   .bbg__contact-card p, .bbg__contact-card a, .bbg__contact-card ul, .bbg__contact-card li {
-    font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+    font-family: "Alegreya Sans", sans-serif; }
   .bbg__contact-card.bbg__contact-card--include-map {
     padding: 0; }
     .bbg__contact-card.bbg__contact-card--include-map .bbg__contact-card__text {
@@ -6351,7 +6337,7 @@ section.usa-section.bbg-banner__section {
   /*@extend .bbg__label;*/
   color: #981b1e;
   display: inline-block;
-  font-family: "Lato", "Helvetica", "Arial", sans-serif;
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 1.7rem;
   font-weight: bold;
   margin-top: 0;
@@ -6484,7 +6470,7 @@ section.usa-section.bbg-banner__section {
 .bbg__profile-excerpt__occupation {
   color: #757575;
   display: block;
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-style: italic;
   margin-bottom: 1rem; }
 
@@ -6520,12 +6506,12 @@ section.usa-section.bbg-banner__section {
 
 .public-law {
   color: #000;
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 1.6rem;
   text-align: center; }
 
 .bill_text_content {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 1.3rem;
   line-height: 1.4;
   /*** LEGISLATIVE DOCUMENT HEADER **/
@@ -6742,10 +6728,10 @@ div.appropriations-small > p.header {
   margin-bottom: 0; }
 
 .bbg__impact-model p {
-  font-family: "Lato", "Helvetica", "Arial", sans-serif; }
+  font-family: "Alegreya Sans", sans-serif; }
 
 .bbg__impact-model p.usa-font-lead, .bbg__impact-model .bbg__about__intro p:first-of-type, .bbg__about__intro .bbg__impact-model p:first-of-type, .bbg__impact-model .bbg__about__child__intro p:first-of-type, .bbg__about__child__intro .bbg__impact-model p:first-of-type, .bbg__impact-model .bbg__kits__intro p, .bbg__kits__intro .bbg__impact-model p, .bbg__impact-model .bbg__kits__child__intro p:first-of-type, .bbg__kits__child__intro .bbg__impact-model p:first-of-type {
-  font-family: "Merriweather", "Georgia", "Times New Roman", serif; }
+  font-family: "Carrara-Regular", serif; }
 
 .bbg__impact-model p.bbg__infobox__tagline {
   margin-top: 0; }
@@ -6850,7 +6836,7 @@ div.appropriations-small > p.header {
     color: #999; }
   .bbg__profile-grid__profile .bbg__profile-grid__profile__description {
     color: #f1f1f1;
-    font-family: "Lato", "Helvetica", "Arial", sans-serif;
+    font-family: "Alegreya Sans", sans-serif;
     font-size: 90%; }
 
 @media screen and (min-width: 300px) and (max-width: 600px) {
@@ -6894,7 +6880,7 @@ div.appropriations-small > p.header {
       border-radius: 0.3rem;
       padding: 3rem;
       color: #000;
-      font-family: "Lato", "Helvetica", "Arial", sans-serif;
+      font-family: "Alegreya Sans", sans-serif;
       font-size: 2.25rem;
       font-weight: 300;
       line-height: 1.7;
@@ -6973,7 +6959,7 @@ a.bbg__kits__intro__more--link {
       padding: 1.5rem; }
       .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__pitch--rev p {
         color: #981b1e;
-        font-family: "Lato", "Helvetica", "Arial", sans-serif;
+        font-family: "Alegreya Sans", sans-serif;
         font-size: 2rem;
         font-weight: 700;
         line-height: 1.7;
@@ -6985,7 +6971,7 @@ a.bbg__kits__intro__more--link {
         .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__pitch--rev {
           padding: 3rem; } }
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__table--borderless {
-      font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+      font-family: "Carrara-Regular", serif;
       font-size: 2rem;
       font-weight: 700; }
       .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__table--borderless th {
@@ -7005,7 +6991,7 @@ a.bbg__kits__intro__more--link {
         .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__table--borderless {
           font-size: 2rem; } }
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__list {
-      font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+      font-family: "Carrara-Regular", serif;
       font-size: 1.6rem;
       line-height: 2;
       margin-right: auto;
@@ -7015,7 +7001,7 @@ a.bbg__kits__intro__more--link {
         font-weight: 700;
         line-height: 1.4; }
       .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__list--sans {
-        font-family: "Lato", "Helvetica", "Arial", sans-serif;
+        font-family: "Alegreya Sans", sans-serif;
         font-size: 2.75rem;
         font-weight: 700;
         line-height: 1.4; }
@@ -7052,7 +7038,7 @@ a.bbg__kits__intro__more--link {
       text-transform: uppercase; }
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__subtitle {
       color: #757575;
-      font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+      font-family: "Carrara-Regular", serif;
       font-weight: 700;
       text-transform: capitalize; }
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__thumb {
@@ -7087,14 +7073,14 @@ a.bbg__kits__intro__more--link {
           margin-bottom: 0;
           min-height: 20rem; } }
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile p {
-      font-family: "Lato", "Helvetica", "Arial", sans-serif;
+      font-family: "Alegreya Sans", sans-serif;
       font-size: 1.6rem;
       line-height: 1.7;
       margin-top: 0; }
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__downloads {
       line-height: 1.15; }
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__link {
-      font-family: "Lato", "Helvetica", "Arial", sans-serif;
+      font-family: "Alegreya Sans", sans-serif;
       margin-left: 1rem;
       text-align: right;
       text-decoration: none;
@@ -7265,7 +7251,7 @@ a.bbg__kits__intro__more--link {
     .bbg__article .bbg__article-content a,
     .bbg__article .bbg__article-content ul,
     .bbg__article .bbg__article-content li {
-      font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+      font-family: "Carrara-Regular", serif;
       font-size: 1.4rem;
       line-height: 1.8; }
     .bbg__article .bbg__article-content p:first-of-type {
@@ -7453,7 +7439,7 @@ a.bbg__kits__intro__more--link {
     .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text__details {
       margin-top: 0; }
       .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text__details p {
-        font-family: "Lato", "Helvetica", "Arial", sans-serif;
+        font-family: "Alegreya Sans", sans-serif;
         font-size: 1.8rem;
         line-height: 1.7; }
         @media screen and (min-width: 600px) {
@@ -7461,7 +7447,7 @@ a.bbg__kits__intro__more--link {
             font-size: 1.6rem;
             line-height: 1.4; } }
     .bbg__map-area__text .bbg__map__entity--small p {
-      font-family: "Lato", "Helvetica", "Arial", sans-serif;
+      font-family: "Alegreya Sans", sans-serif;
       font-size: 1.6rem;
       line-height: 1.7; }
       @media screen and (min-width: 481px) {
@@ -7480,7 +7466,7 @@ a.bbg__kits__intro__more--link {
     .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details {
       margin-top: 0; }
       .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details p {
-        font-family: "Lato", "Helvetica", "Arial", sans-serif;
+        font-family: "Alegreya Sans", sans-serif;
         font-size: 1.8rem;
         line-height: 1.7; }
         @media screen and (min-width: 600px) {
@@ -7492,7 +7478,7 @@ a.bbg__kits__intro__more--link {
   .bbg__map-area__text .subgroup-block {
     margin-bottom: 3rem; }
   .bbg__map-area__text .bbg__map__entity-global {
-    font-family: "Merriweather", "Georgia", "Times New Roman", serif;
+    font-family: "Carrara-Regular", serif;
     font-weight: 700;
     margin-top: 2rem; }
   @media screen and (min-width: 600px) {

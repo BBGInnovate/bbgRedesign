@@ -13,9 +13,9 @@
 /* used on the entire site  */
 .testing_staging {color: green;}
 h1, h2, h3, h4, h5, h6 {
-    color: $color-primary-darkest;
+    // color: $color-primary-darkest;
     font-family: $font-sans;
-    margin-top: .5rem;
+    // margin-top: .5rem;
 }
 
 h1 a,
@@ -80,7 +80,7 @@ img,
 }
 
 .usa-font-lead {
-    color: #000;
+    color: $black6;
 }
 
 .usa-disclaimer {
@@ -91,7 +91,6 @@ img,
 }
 
 .bbg__label {
-    background-color: $color-secondary-darkest;
     color: #FFF;
     display: inline-block;
     font: {
@@ -104,7 +103,8 @@ img,
         bottom: $site-margins-small;
     }
     padding: .5rem $site-margins-small;
-    text-transform: uppercase;
+    // text-transform: uppercase;
+    background-color: $color-secondary-darkest;
 
     a {
         color: #FFF;

@@ -178,105 +178,14 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 <div id="page" class="site main-content" role="main">
 	<a class="skipnav skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bbginnovate' ); ?></a>
 
-	<?php
-
-	if ( $sitewideAlert == "complex" && ( !isset( $_COOKIE['richBannerDismissed'] ))  ) {
-
-		$q = get_field( 'sitewide_alert_complex', 'option' );	//off, simple, or complex
-		// var_dump($q);
-
-
-		$alertCalloutID = $q -> ID;
-		$bannerTitleText = $q -> post_title;
-		// $calloutMugshot = get_field( 'callout_mugshot', $alertCalloutID, true);
-		// check if the post has a Post Thumbnail assigned to it.
-		if ( has_post_thumbnail($alertCalloutID) ) {
-			$calloutImageID = get_post_thumbnail_id( $q );
-			$calloutImageURL = wp_get_attachment_image_url( $calloutImageID, $size = 'small-thumb', $icon = false );
-		}
-
-		$calloutNetwork = get_post_meta( $alertCalloutID, 'callout_network', true );
-		$callToAction = get_post_meta( $alertCalloutID, 'callout_call_to_action', true );
-		$bannerPromoReadCTA = get_post_meta( $alertCalloutID, 'callout_action_label', true );
-		$bannerPromoLink = get_post_meta( $alertCalloutID, 'callout_action_link', true );
-		$bannerSubtitle = my_excerpt( $alertCalloutID );
-		$bannerPromoImage = wp_get_attachment_image_src( $calloutImageID , 'single-post-thumbnail');
-
-		// var_dump($bannerPromoImage);
-
-		if ( $calloutNetwork == "" ) {
-			$calloutNetwork = "BBG";
-		}
-		$colors = array(
-			'VOA' =>  '#1330bf',
-			'OCB' => '#003a8d',
-			'RFE/RL' => '#EA6903',
-			'RFA' => '#478406',
-			'MBN' => '#E64C66',
-			'BBG' => '#981B1E'
-		);
-		$networkBackgroundColor = $colors[$calloutNetwork];
-	?>
-			<div id="dismissableBanner" class="bbg__site-alert--complex">
-				<div class="usa-grid-full" >
-					<div class="bbg__banner-table" >
-						<div class="bbg__banner-table__cell--left" style="background-image: url('<?php echo $calloutImageURL ?>');">
-						</div>
-						<div class="bbg__banner-table__cell--middle">
-							<h3><?php echo $bannerTitleText; ?></h3>
-							<h6><?php echo $bannerSubtitle; ?></h6>
-							<div class="banner_readmore" >
-								<h6><a href="<?php echo $bannerPromoLink; ?>"><?php echo $bannerPromoReadCTA; ?></a></h6>
-							</div>
-						</div>
-						<div class="bbg__banner-table__cell--right">
-							<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>
-						</div>
-					</div>
-				</div>
-			</div>
-			<script type='text/javascript'>
-				jQuery( document ).ready(function() {
-					jQuery( '#dismissBanner' ).click(function(e) {
-						setCookie( 'richBannerDismissed', 1, 7);
-						jQuery('#dismissableBanner').hide();
-					});
-				});
-			</script>
-	<?php } ?>
-
-	<?php
-	if ($splash_overlay == 'Yes' && (!isset($_COOKIE['splashPageDismissed']))) {
-		$story_link_items = get_field('splash_story_link', 'options');
-
-		$splash  = '<div id="splash-bg">';
-		$splash .= 	'<div id="text-box" class="bbg__quotation">';
-		$splash .= 		'<a id="close-splash" class="ck-set" href="javascript:void(0)">';
-		$splash .= 			'<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>';
-		$splash .= 		'</a>';
-		$splash .= 		'<h2 class="bbg__quotation-text--large">';
-		$splash .= 			get_field('splash_quote', 'option');
-		$splash .= 		'</h2>';
-		$splash .= 		'<a class="ck-set" href="';
-		$splash .= 			$story_link_items->guid;
-		$splash .= 			'"><p>';
-		$splash .= 			get_field('splash_link_text', 'option');
-		$splash .= 		'</p></a>';
-		$splash .= 	'</div>';
-		$splash .= '</div>';
-		echo $splash;
-	?>
-	<script type='text/javascript'>
-		jQuery(document).ready(function() {
-			jQuery('.ck-set').click(function(e) {
-				setCookie('splashPageDismissed', 1, 7);
-				jQuery('#splash-bg').hide();
-			});
-		});
-	</script>
-	<?php
+<?php
+	if ( $sitewideAlert == "complex" && ( !isset( $_COOKIE['richBannerDismissed']))) {
+		display_site_wide_banner();
 	}
-	?>
+	if ($splash_overlay == 'Yes' && (!isset($_COOKIE['splashPageDismissed']))) {
+		display_splash_overlay();
+	}
+?>
 
 	<header id="masthead" class="site-header bbg-header" role="banner">
 
@@ -290,7 +199,6 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 				$moveUSAbannerBecauseOfAlert = " bbg__site-alert--active";
 				echo '<div class="bbg__site-alert">';
 				if ( $sitewideAlertLink != "" ) {
-
 					$targetStr="";
 					if ( $sitewideAlertNewWindow && $sitewideAlertNewWindow != "" ) {
 						$targetStr = " target ='_blank' ";
@@ -327,32 +235,9 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 			</div>
 		</div>
 
+		<!-- MENU TOGGLE -->
+		<button id="bbg__menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><span class="menu-toggle-label"><?php esc_html_e( 'Menu', 'bbginnovate' ); ?></span></button>
 
-
-
-		<?php
-			/* exclude default site-branding on the custom home page */
-			if ($templateName!="customBBGHome"){
-		?>
-		<div>
-			<div id="header" class="usa-grid-full bbg-header__container__box" style="">
-
-				<div class="bbg-header__container">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="bbg-header__link">
-						<img src="<?php echo get_template_directory_uri() ?>/img/logo-agency-square.png" alt="Logo for the Broadcasting Board of Governors" class="bbg-header__logo">
-						<h1 class="bbg-header__site-title"><?php echo bbginnovate_site_name_html(); ?></h1>
-					</a>
-
-					<button id="bbg__menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><span class="menu-toggle-label"><?php esc_html_e( 'Menu', 'bbginnovate' ); ?></span></button>
-				</div>
-
-			</div>
-		</div>
-
-
-		<?php } else { ?>
-			<button id="bbg__menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><span class="menu-toggle-label"><?php esc_html_e( 'Menu', 'bbginnovate' ); ?></span></button>
-		<?php } ?>
 
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
 			<?php
@@ -360,14 +245,14 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 			$btnSearch = "<input alt='Search' type='image' class='bbg__main-navigation__search-toggle' src='" . get_template_directory_uri() . "/img/search.png'>";
 			$btnSearch = "";
 
-			$searchBox = '<form class="usa-search usa-search-small" action="' . site_url() . '">';
-			$searchBox .= '<div role="search">';
-			$searchBox .= '<label class="usa-sr-only" for="search-field-small">Search small</label>';
-			$searchBox .= '<input id="search-field-small" type="search" name="s" placeholder="Search ...">';
-			$searchBox .= '<button type="submit">';
-			$searchBox .= '<span class="usa-sr-only">Search</span>';
-			$searchBox .= '</button>';
-			$searchBox .= '</div>';
+			$searchBox  = '<form class="usa-search usa-search-small" action="' . site_url() . '">';
+			$searchBox .= 	'<div role="search">';
+			$searchBox .= 		'<label class="usa-sr-only" for="search-field-small">Search small</label>';
+			$searchBox .= 		'<input id="search-field-small" type="search" name="s" placeholder="Search ...">';
+			$searchBox .= 		'<button type="submit">';
+			$searchBox .= 			'<span class="usa-sr-only">Search</span>';
+			$searchBox .= 		'</button>';
+			$searchBox .= 	'</div>';
 			$searchBox .= '</form>';
 
 			wp_nav_menu( array(
