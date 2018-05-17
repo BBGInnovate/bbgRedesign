@@ -60,8 +60,11 @@ $color-rferl:                 #EA6903;
 $color-voa:                   #1330bf;
 
 
-// Additional breakpoint(s)
-$medium-large-screen:         900px;
+// Mobile First Breakpoints
+$small-screen:          481px;
+$medium-screen:         600px;
+$medium-large-screen:   900px;
+$large-screen:         1201px;
 
 
 // Misc styles

@@ -179,9 +179,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 	<a class="skipnav skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bbginnovate' ); ?></a>
 
 <?php
-	if ( $sitewideAlert == "complex" && ( !isset( $_COOKIE['richBannerDismissed']))) {
-		display_site_wide_banner();
-	}
+	display_site_wide_banner_if();
 	if ($splash_overlay == 'Yes' && (!isset($_COOKIE['splashPageDismissed']))) {
 		display_splash_overlay();
 	}
@@ -240,26 +238,28 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 
 
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
+			<img id="nav-logo" src="<?php echo get_template_directory_uri(); ?>/img/USAGM-Logo.png">
 			<?php
-
 			$btnSearch = "<input alt='Search' type='image' class='bbg__main-navigation__search-toggle' src='" . get_template_directory_uri() . "/img/search.png'>";
 			$btnSearch = "";
 
-			$searchBox  = '<form class="usa-search usa-search-small" action="' . site_url() . '">';
+			$searchBox  = '<form id="top-nav-search-form" class="usa-search usa-search-small" action="' . site_url() . '">';
+			$searchBox .= 	'<button type="submit" id="nav-search-bu">';
+			$searchBox .= 		'<span class="usa-sr-only">Search</span>';
+			$searchBox .= 	'</button>';
 			$searchBox .= 	'<div role="search">';
 			$searchBox .= 		'<label class="usa-sr-only" for="search-field-small">Search small</label>';
 			$searchBox .= 		'<input id="search-field-small" type="search" name="s" placeholder="Search ...">';
-			$searchBox .= 		'<button type="submit">';
-			$searchBox .= 			'<span class="usa-sr-only">Search</span>';
-			$searchBox .= 		'</button>';
 			$searchBox .= 	'</div>';
 			$searchBox .= '</form>';
 
-			wp_nav_menu( array(
+			wp_nav_menu(array(
 				'theme_location' => 'primary',
 				'menu_id' => 'primary-menu',
 				'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul><div class="bbg__main-navigation__search">' . $searchBox . '</div>',
-				'walker' => new bbginnovate_walker_header_usa_menu() ) ); ?>
+				'walker' => new bbginnovate_walker_header_usa_menu()
+			)); 
+			?>
 		</nav><!-- #site-navigation -->
 
 	</header><!-- #masthead -->

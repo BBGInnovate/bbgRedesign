@@ -4,7 +4,7 @@
  * Handles toggling the navigation menu for small screens and enables tab
  * support for dropdown menus.
  */
-( function() {
+(function($) {
 	var container, button, menu, links, subMenus;
 
 	container = document.getElementById( 'site-navigation' );
@@ -62,15 +62,6 @@
 		//allow jQuery click events to bubble up - fixes body nav click issue on iOS
 		//TODO: check if Android works by default
 		/iP/i.test(navigator.userAgent) && jQuery('*').css('cursor', 'pointer');
-		
-		/*
-		jQuery("li.menu-item-has-children ul a").click(function(e) {
-			e.stopPropagation(); //we do this so that the preventDefault() below doesn't affect subnav items
-		});
-		jQuery("li.menu-item-has-children ul a").keydown(function(e) {
-			e.stopPropagation(); //same as above
-		});
-		*/
 
 		// see http://stackoverflow.com/questions/7394796/jquery-click-event-how-to-tell-if-mouse-was-clicked-or-enter-key-was-pressed
 		/* don't enable hover on mobile breakpoints */
@@ -155,7 +146,6 @@
 	 * END BBG CUSTOM SECOND LEVEL NAVIGATION CODE
 	 */
 
-	
 
 	// Each time a menu link is focused or blurred, toggle focus.
 	for ( i = 0, len = links.length; i < len; i++ ) {
@@ -184,4 +174,15 @@
 			self = self.parentElement;
 		}
 	}
-} )();
+
+	var searchField = $('#search-field-small');
+	var searchBu = $('#nav-search-bu');
+	searchField.width('0px');
+	searchField.hide();
+	$('#top-nav-search-form').hover(function() {
+		searchField.show().animate({'width':'50rem'}, 100);
+	}, function() {
+		searchField.hide().animate({'width':'0px'});
+	});
+
+})(jQuery);
