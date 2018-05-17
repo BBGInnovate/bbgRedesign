@@ -15,34 +15,34 @@ global $pageBodyID, $metaAuthor, $metaAuthorTwitter, $metaKeywords;
 global $templateName;
 
 $twitterCardType = "summary_large_image";
-if (! isset( $ogImage ) ) {
+if (!isset($ogImage)) {
 	$ogImage=DEFAULT_IMAGE;
 	$twitterCardType = "summary";
 }
 
-if (! isset( $ogTitle ) ) {
-	$ogTitle=DEFAULT_TITLE;
+if (!isset($ogTitle)) {
+	$ogTitle = DEFAULT_TITLE;
 }
 
-if (! isset( $ogDescription ) ) {
-	$ogDescription=DEFAULT_DESCRIPTION;
+if (!isset($ogDescription)) {
+	$ogDescription = DEFAULT_DESCRIPTION;
 }
 
-if (! isset( $metaAuthor ) ) {
-	$metaAuthor=DEFAULT_AUTHOR;
+if (!isset($metaAuthor)) {
+	$metaAuthor = DEFAULT_AUTHOR;
 }
 
 $metaTwitter = "";
-if (isset( $metaAuthorTwitter ) ) {
+if (isset($metaAuthorTwitter)) {
 	$metaAuthorTwitter = str_replace("@","", $metaAuthorTwitter);
 	$metaTwitter = '<meta name="twitter:creator" content="@'.$metaAuthorTwitter.'">';
 }
 
-if (! isset( $metaKeywords ) ) {
-	$metaKeywords=DEFAULT_KEYWORDS;
+if (!isset($metaKeywords)) {
+	$metaKeywords = DEFAULT_KEYWORDS;
 }
 
-if (! isset( $ogUrl ) ) {
+if (!isset($ogUrl)) {
 	//only place we override this is on our trending page where it's the permalink to the post instead of the page itself
 	$ogUrl = get_permalink();
 }
@@ -114,17 +114,16 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 <?php wp_head(); ?>
 
 <script type="text/javascript">
-	bbgConfig={};
+	bbgConfig = {};
 	bbgConfig.MAPBOX_API_KEY = '<?php echo MAPBOX_API_KEY; ?>';
 	bbgConfig.template_directory_uri = '<?php echo get_template_directory_uri() . "/"; ?>';
 
 	// SET COOKIES FOR SITEWIDE ALERT AND SPLASH OVERLAY
 	function setCookie(cname, cvalue, exdays) {
-		console.log("Setting cookie");
 		var d = new Date();
 		d.setTime(d.getTime() + (exdays*24*60*60*1000));
-		var expires = "expires="+d.toUTCString();
-		document.cookie = cname + "=" + cvalue + "; " + expires;
+		var expires = "expires= " + d.toUTCString();
+		document.cookie = cname + " = " + cvalue + "; " + expires;
 	}
 </script>
 
@@ -178,52 +177,30 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 <div id="page" class="site main-content" role="main">
 	<a class="skipnav skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bbginnovate' ); ?></a>
 
-<?php
-	display_site_wide_banner_if();
-	if ($splash_overlay == 'Yes' && (!isset($_COOKIE['splashPageDismissed']))) {
-		display_splash_overlay();
-	}
-?>
+	<?php
+		// DISPLAY SPLASH OVERLAY BEFORE PAGE
+		if ($splash_overlay == 'Yes' && (!isset($_COOKIE['splashPageDismissed']))) {
+			display_splash_overlay();
+		}
+	?>
 
 	<header id="masthead" class="site-header bbg-header" role="banner">
-
 		<?php
+			// SITE WIDE NOTIFICATIONS
 			$moveUSAbannerBecauseOfAlert = '';
-
-			if ( $sitewideAlert == "simple" ) {
-				$sitewideAlertText = get_field( 'sitewide_alert_text', 'option' );
-				$sitewideAlertLink = get_field( 'sitewide_alert_link', 'option' );
-				$sitewideAlertNewWindow = get_field( 'sitewide_alert_new_window', 'option' );
-				$moveUSAbannerBecauseOfAlert = " bbg__site-alert--active";
-				echo '<div class="bbg__site-alert">';
-				if ( $sitewideAlertLink != "" ) {
-					$targetStr="";
-					if ( $sitewideAlertNewWindow && $sitewideAlertNewWindow != "" ) {
-						$targetStr = " target ='_blank' ";
-					}
-					echo "<span class='bbg__site-alert__text'><a $targetStr href='$sitewideAlertLink'>$sitewideAlertText</a></span>";
-				} else {
-					echo "<span class='bbg__site-alert__text'>$sitewideAlertText</span>";
+			$banner = display_site_wide_banner_if();
+			if (!empty($banner)) {
+				echo $banner['msg'];
+				if ($banner['type'] == "simple") {
+					$moveUSAbannerBecauseOfAlert = ' bbg__site-alert--active';
 				}
-				echo '</div>';
+			}
+			if ($_SERVER['HTTP_HOST'] == "bbgredesign.voanews.com" && !is_user_logged_in()) {
+				display_development_alert_banner("This is the Development Server");
 			}
 		?>
-
-		<?php
-			if ($_SERVER['HTTP_HOST'] == "bbgredesign.voanews.com" && !is_user_logged_in()):
-
-		?>
-			<div style="background-color:#FF0000; color:#FFFFFF; z-index:9999; position:fixed; width:100%;" class="usa-disclaimer<?php echo $moveUSAbannerBecauseOfAlert; ?>">
-			<div class="usa-grid">
-				<span class="usa-disclaimer-official">
-					Development server.  Content may be dated or innacurate.
-				</span>
-			</div>
-		</div>
-		<?php
-			endif;
-		?>
-
+		
+		<!-- OFFICIAL SITE OF USA GOV -->
 		<div class="usa-disclaimer<?php echo $moveUSAbannerBecauseOfAlert; ?>">
 			<div class="usa-grid">
 				<span class="usa-disclaimer-official">
@@ -234,34 +211,37 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 		</div>
 
 		<!-- MENU TOGGLE -->
-		<button id="bbg__menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><span class="menu-toggle-label"><?php esc_html_e( 'Menu', 'bbginnovate' ); ?></span></button>
+		<button id="bbg__menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+			<span class="menu-toggle-label">
+				<?php esc_html_e( 'Menu', 'bbginnovate' ); ?>
+			</span>
+		</button>
 
-
+		<!-- NAVIGATION BAR -->
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
 			<img id="nav-logo" src="<?php echo get_template_directory_uri(); ?>/img/USAGM-Logo.png">
 			<?php
-			$btnSearch = "<input alt='Search' type='image' class='bbg__main-navigation__search-toggle' src='" . get_template_directory_uri() . "/img/search.png'>";
-			$btnSearch = "";
+				$btnSearch = "<input alt='Search' type='image' class='bbg__main-navigation__search-toggle' src='" . get_template_directory_uri() . "/img/search.png'>";
+				$btnSearch = "";
 
-			$searchBox  = '<form id="top-nav-search-form" class="usa-search usa-search-small" action="' . site_url() . '">';
-			$searchBox .= 	'<button type="submit" id="nav-search-bu">';
-			$searchBox .= 		'<span class="usa-sr-only">Search</span>';
-			$searchBox .= 	'</button>';
-			$searchBox .= 	'<div role="search">';
-			$searchBox .= 		'<label class="usa-sr-only" for="search-field-small">Search small</label>';
-			$searchBox .= 		'<input id="search-field-small" type="search" name="s" placeholder="Search ...">';
-			$searchBox .= 	'</div>';
-			$searchBox .= '</form>';
+				$searchBox  = '<form id="top-nav-search-form" class="usa-search usa-search-small" action="' . site_url() . '">';
+				$searchBox .= 	'<button type="submit" id="nav-search-bu">';
+				$searchBox .= 		'<span class="usa-sr-only">Search</span>';
+				$searchBox .= 	'</button>';
+				$searchBox .= 	'<div role="search">';
+				$searchBox .= 		'<label class="usa-sr-only" for="search-field-small">Search small</label>';
+				$searchBox .= 		'<input id="search-field-small" type="search" name="s" placeholder="Search ...">';
+				$searchBox .= 	'</div>';
+				$searchBox .= '</form>';
 
-			wp_nav_menu(array(
-				'theme_location' => 'primary',
-				'menu_id' => 'primary-menu',
-				'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul><div class="bbg__main-navigation__search">' . $searchBox . '</div>',
-				'walker' => new bbginnovate_walker_header_usa_menu()
-			)); 
+				wp_nav_menu(array(
+					'theme_location' => 'primary',
+					'menu_id' => 'primary-menu',
+					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul><div class="bbg__main-navigation__search">' . $searchBox . '</div>',
+					'walker' => new bbginnovate_walker_header_usa_menu()
+				)); 
 			?>
-		</nav><!-- #site-navigation -->
-
-	</header><!-- #masthead -->
+		</nav>
+	</header>
 
 	<div id="content" class="site-content">

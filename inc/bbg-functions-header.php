@@ -1,8 +1,37 @@
 <?php
+function display_splash_overlay() {
+	$story_link_items = get_field('splash_story_link', 'options');
+
+	$splash  = '<div id="splash-bg">';
+	$splash .= 	'<div id="text-box" class="bbg__quotation">';
+	$splash .= 		'<a id="close-splash" class="ck-set" href="javascript:void(0)">';
+	$splash .= 			'<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>';
+	$splash .= 		'</a>';
+	$splash .= 		'<h2 class="bbg__quotation-text--large">';
+	$splash .= 			get_field('splash_quote', 'option');
+	$splash .= 		'</h2>';
+	$splash .= 		'<a class="ck-set" href="';
+	$splash .= 			$story_link_items->guid;
+	$splash .= 			'"><p>';
+	$splash .= 			get_field('splash_link_text', 'option');
+	$splash .= 		'</p></a>';
+	$splash .= 	'</div>';
+	$splash .= '</div>';
+	$splash .= '<script type="text/javascript">';
+	$splash .= 	'jQuery(document).ready(function() {';
+	$splash .= 		'jQuery(".ck-set").click(function(e) {';
+	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
+	$splash .= 			'jQuery("#splash-bg").hide();';
+	$splash .= 		'});';
+	$splash .= 	'});';
+	$splash .= '</script>';
+	echo $splash;
+}
+
 function display_site_wide_banner_if() {
 	$sitewideAlert = get_field('sitewide_alert', 'option');
+	$q = get_field('sitewide_alert_complex', 'option');	//off, simple, or complex
 	if ($sitewideAlert == "complex" && (!isset( $_COOKIE['richBannerDismissed']))) {
-		$q = get_field('sitewide_alert_complex', 'option');	//off, simple, or complex
 
 		$alertCalloutID = $q -> ID;
 		$bannerTitleText = $q -> post_title;
@@ -32,63 +61,68 @@ function display_site_wide_banner_if() {
 		);
 		$networkBackgroundColor = $colors[$calloutNetwork];
 
-		$site_alert  = '<div id="dismissableBanner" class="bbg__site-alert--complex">';
-		$site_alert .= 	'<div class="usa-grid-full">';
-		$site_alert .= 		'<div class="bbg__banner-table">';
-		$site_alert .= 			'<div class="bbg__banner-table__cell--left" style="background-image: url(' . $calloutImageURL . ');"></div>';
-		$site_alert .= 			'<div class="bbg__banner-table__cell--middle">';
-		$site_alert .= 				'<h3>' . $bannerTitleText . '</h3>';
-		$site_alert .= 				'<h6>' . $bannerSubtitle . '</h6>';
-		$site_alert .= 				'<div class="banner_readmore">';
-		$site_alert .= 					'<h6><a href="';
-		$site_alert .= 						$bannerPromoLink;
-		$site_alert .= 						'">';
-		$site_alert .= 						$bannerPromoReadCTA;
-		$site_alert .= 					'</a></h6>';
-		$site_alert .= 				'</div>';
-		$site_alert .= 			'</div>';
-		$site_alert .= 			'<div class="bbg__banner-table__cell--right">';
-		$site_alert .= 				'<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>';
-		$site_alert .= '</div></div>';
-		$site_alert .= '<script type="text/javascript">';
-		$site_alert .= 	'jQuery(document).ready(function() {';
-		$site_alert .= 		'jQuery("#dismissBanner").click(function(e) {';
-		$site_alert .= 			'setCookie( "richBannerDismissed", 1, 7);';
-		$site_alert .= 			'jQuery("#dismissableBanner").hide();';
-		$site_alert .= 		'});';
-		$site_alert .= 	'});';
-		$site_alert .= '</script>';
-		$site_alert .= '</div></div>';
-		echo $site_alert;
+		$alert_complex  = '<div id="dismissableBanner" class="bbg__site-alert--complex">';
+		$alert_complex .= 	'<div class="usa-grid-full">';
+		$alert_complex .= 		'<div class="bbg__banner-table">';
+		$alert_complex .= 			'<div class="bbg__banner-table__cell--left" style="background-image: url(' . $calloutImageURL . ');"></div>';
+		$alert_complex .= 			'<div class="bbg__banner-table__cell--middle">';
+		$alert_complex .= 				'<h3>' . $bannerTitleText . '</h3>';
+		$alert_complex .= 				'<h6>' . $bannerSubtitle . '</h6>';
+		$alert_complex .= 				'<div class="banner_readmore">';
+		$alert_complex .= 					'<h6><a href="';
+		$alert_complex .= 						$bannerPromoLink;
+		$alert_complex .= 						'">';
+		$alert_complex .= 						$bannerPromoReadCTA;
+		$alert_complex .= 					'</a></h6>';
+		$alert_complex .= 			'</div></div>';
+		$alert_complex .= 			'<div class="bbg__banner-table__cell--right">';
+		$alert_complex .= 				'<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>';
+		$alert_complex .= '</div></div>';
+		$alert_complex .= '<script type="text/javascript">';
+		$alert_complex .= 	'jQuery(document).ready(function() {';
+		$alert_complex .= 		'jQuery("#dismissBanner").click(function(e) {';
+		$alert_complex .= 			'setCookie( "richBannerDismissed", 1, 7);';
+		$alert_complex .= 			'jQuery("#dismissableBanner").hide();';
+		$alert_complex .= 		'});';
+		$alert_complex .= 	'});';
+		$alert_complex .= '</script>';
+		$alert_complex .= '</div></div>';
+		$alert_package = array('msg' => $alert_complex, 'type' => $sitewideAlert);
 	}
+	else if ($sitewideAlert == "simple") {
+		$sitewideAlertText = get_field( 'sitewide_alert_text', 'option' );
+		$sitewideAlertLink = get_field( 'sitewide_alert_link', 'option' );
+		$sitewideAlertNewWindow = get_field( 'sitewide_alert_new_window', 'option' );
+		$moveUSAbannerBecauseOfAlert = " bbg__site-alert--active";
+
+		$alert_simple  = '<div class="bbg__site-alert">';
+		if ($sitewideAlertLink != "") {
+			$targetStr = "";
+			if ($sitewideAlertNewWindow && $sitewideAlertNewWindow != "") {
+				$targetStr = " target ='_blank' ";
+			}
+			$alert_simple .= '<span class="bbg__site-alert__text">';
+			$alert_simple .= 	'<a href="';
+			$alert_simple .= 		$sitewideAlertLink;
+			$alert_simple .= 		'">';
+			$alert_simple .= 			$sitewideAlertText;
+			$alert_simple .= '</a></span>';
+		} else {
+			$alert_simple .= '<span class="bbg__site-alert__text">';
+			$alert_simple .= 	$sitewideAlertText;
+			$alert_simple .= '</span>';
+		}
+		$alert_simple .= '</div>';
+		$alert_package = array('msg' => $alert_simple, 'type' => $sitewideAlert);
+	}
+	return $alert_package;
 }
 
-function display_splash_overlay() {
-	$story_link_items = get_field('splash_story_link', 'options');
-
-	$splash  = '<div id="splash-bg">';
-	$splash .= 	'<div id="text-box" class="bbg__quotation">';
-	$splash .= 		'<a id="close-splash" class="ck-set" href="javascript:void(0)">';
-	$splash .= 			'<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>';
-	$splash .= 		'</a>';
-	$splash .= 		'<h2 class="bbg__quotation-text--large">';
-	$splash .= 			get_field('splash_quote', 'option');
-	$splash .= 		'</h2>';
-	$splash .= 		'<a class="ck-set" href="';
-	$splash .= 			$story_link_items->guid;
-	$splash .= 			'"><p>';
-	$splash .= 			get_field('splash_link_text', 'option');
-	$splash .= 		'</p></a>';
-	$splash .= 	'</div>';
-	$splash .= '</div>';
-	$splash .= '<script type="text/javascript">';
-	$splash .= 	'jQuery(document).ready(function() {';
-	$splash .= 		'jQuery(".ck-set").click(function(e) {';
-	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
-	$splash .= 			'jQuery("#splash-bg").hide();';
-	$splash .= 		'});';
-	$splash .= 	'});';
-	$splash .= '</script>';
-	echo $splash;
+function display_development_alert_banner($message) {
+	$dev_alert  = '<div style="background-color:#FF0000; color:#FFFFFF; z-index:9999; position:fixed; width:100%;" class="usa-disclaimer<?php echo $moveUSAbannerBecauseOfAlert; ?>">';
+	$dev_alert .= 	'<div class="usa-grid">';
+	$div_alert .= 		'<span class="usa-disclaimer-official">';
+	$div_alert .= 			$message;
+	$div_alert .= '</div></div></span>';
 }
 ?>

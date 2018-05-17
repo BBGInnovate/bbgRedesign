@@ -5834,7 +5834,7 @@ section.usa-section.bbg-banner__section {
 
 @media screen and (min-width: 600px) {
   .bbg-banner {
-    height: 400px; }
+    max-height: 50vh; }
     .bbg-banner .bbg-banner__container.usa-grid {
       padding-right: 0; }
     .bbg-banner .bbg-banner-box {
@@ -5860,7 +5860,7 @@ section.usa-section.bbg-banner__section {
 
 @media screen and (min-width: 900px) {
   .bbg-banner {
-    margin-top: 4.8rem; }
+    max-height: 60vh; }
     .bbg-banner .bbg-banner__container {
       border-left: 1px solid rgba(240, 240, 240, 0.4);
       border-right: 1px solid rgba(240, 240, 240, 0.4);

@@ -168,7 +168,7 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 // MEDIA QUERIES
 @include media($medium-screen) {
 	.bbg-banner {
-		height: $banner-image-height;
+		max-height: 50vh;
 
 		.bbg-banner__container {
 			&.usa-grid {padding-right: 0;}
@@ -201,7 +201,7 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 }
 @include media($medium-large-screen) {
 	.bbg-banner {
-		margin-top: 4.8rem;
+		max-height: 60vh;
 		.bbg-banner__container {
 			border-left: 1px solid rgba(240, 240, 240, .4);
 			border-right: 1px solid rgba(240, 240, 240, .4);
