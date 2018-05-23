@@ -164,6 +164,37 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 	}
 }
 
+#threats-to-journalism {
+	background-image: url('/wp-content/themes/bbgRedesign/img/site-icons/USAGM_tourch.png');
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: contain;
+	.threats-box {
+		@include grid-push(2);
+		article {
+			@include grid-container;
+			border-bottom: 1px solid $color-blue-darkest;
+			.image-block {
+				@include grid-column(5);
+			}
+			.threat-copy {
+				@include grid-column(7);
+			}
+		}
+	}
+}
+
+#home-entities {
+	$entity-home-grid: (
+		columns: 5
+	);
+	#entity-grid {
+		@include grid-container;
+		article {
+			@include grid-column(1, $entity-home-grid);
+		}
+	}
+}
 
 // MEDIA QUERIES
 @include media($medium-screen) {

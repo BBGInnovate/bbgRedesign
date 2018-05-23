@@ -1,258 +1,14 @@
 /**
- * CH 01 - BASIC TYPOGRAPHY
- * CH 02 - SITE TITLE + HEADER
- * CH 03 - 2- and 3-COLUMN PAGE STRUCTURE
- * CH 04 - FOOTER STYLES
- * CH 05 - EXCERPT STYLES
- * CH 06 - SITEWIDE ALERT STYLES
- * CH 07 - Misc post/page styles
+ * CH 01 - SITE TITLE + HEADER
+ * CH 02 - 2- and 3-COLUMN PAGE STRUCTURE
+ * CH 03 - FOOTER STYLES
+ * CH 04 - EXCERPT STYLES
+ * CH 05 - SITEWIDE ALERT STYLES
+ * CH 06 - Misc post/page styles
 **/
 
 /******************************/
-/* CH 01 - BASIC TYPOGRAPHY  */
-/* used on the entire site  */
-.testing_staging {color: green;}
-h1, h2, h3, h4, h5, h6 {
-    // color: $color-primary-darkest;
-    font-family: $font-sans;
-    // margin-top: .5rem;
-}
-
-h1 a,
-h2 a,
-h3 a,
-h4 a {
-    color: $color-primary-darker;
-}
-
-a:not(.bbg__article-share__icon) {
-    &:focus {
-        background-color: $color-gray-cool-light;
-
-        img,
-        *[class*="avatar"],
-        /**[class*="icon"],*/
-        *[class*="image"],
-        *[class*="photo"],
-        *[class*="thumbnail"]/*,
-			*[style*="background-image"]*/
-        {
-            background-color: transparent;
-            text-decoration: none;
-
-            >a:hover,
-            >a:focus {
-                // removes background color and underline for linked images
-                background-color: transparent;
-                text-decoration: none;
-            }
-        }
-    }
-}
-
-// add class for right-angle quotes after links
-.bbg__links--right-angle-quote {
-    font-size: calc(100% * 1.3);
-    page-break: {
-        before: avoid;
-        inside: avoid;
-    }
-    word-break: keep-all;
-}
-
-p {
-    font-family: $font-serif;
-}
-
-img,
-*[class*="avatar"],
-*[class*="icon"],
-*[class*="image"],
-*[class*="photo"],
-*[class*="thumbnail"],
-*[style*="background-image"] {
-    >a:hover,
-    >a:focus {
-        // removes background color and underline for linked images
-        background-color: transparent;
-        text-decoration: none;
-    }
-}
-
-.usa-font-lead {
-    color: $black6;
-}
-
-.usa-disclaimer {
-    text-align: center;
-    @include media($large-screen) {
-        //text-align: left;
-    }
-}
-
-.bbg__label {
-    color: #FFF;
-    display: inline-block;
-    font: {
-        family: $font-sans;
-        size: 1.7rem;
-        weight: bold;
-    }
-    margin: {
-        top: 0;
-        bottom: $site-margins-small;
-    }
-    padding: .5rem $site-margins-small;
-    // text-transform: uppercase;
-    background-color: $color-secondary-darkest;
-
-    a {
-        color: #FFF;
-        text-decoration: underline;
-    }
-
-    &--mobile {
-        background-color: transparent;
-        color: $color-secondary-darkest;
-        display: block;
-        font: {
-            size: 2.5rem;
-            weight: $font-bold;
-        }
-        margin-bottom: $site-margins-medium;
-        padding: 0;
-
-        a {
-            color: $color-secondary-darkest;
-        }
-    }
-
-    @include media($small-screen) {
-        background-color: transparent;
-        color: $color-secondary-darkest;
-        display: block;
-        font-size: 2.5rem;
-        padding: 0;
-
-        &--mobile {
-            font-size: 3rem;
-        }
-
-        a {
-            color: $color-secondary-darkest;
-        }
-    }
-
-    &--mobile.small,
-    &.small {
-        font-size: 1.3rem;
-
-        @include media($small-screen) {
-            font-size: 2rem;
-        }
-    }
-
-    &--mobile.large,
-    &.large {
-        margin-bottom: 0;
-        text-transform: uppercase;
-
-        @include media($small-screen) {
-            //font-size: 3rem;
-            font-size: 2.5rem;
-            margin-bottom: $site-margins-medium;
-        }
-    }
-
-    &--mobile.large {
-        margin-bottom: $site-margins-small;
-    }
-}
-
-.bbg__label_inverted {
-    background-color: $color-primary;
-    color: #FFF;
-    display: inline-block;
-    font-size: 1.7rem;
-    padding: .5rem 1rem;
-    margin-top: 1rem;
-    a {
-        color: #FFF;
-        text-transform: uppercase;
-    }
-}
-
-// .usa-label variants (colors)
-.bbg__label--advisory {
-    background-color: $color-primary-darker; // dark blue
-}
-
-.bbg__label--rumor {
-    background-color: $color-primary; // main blue
-}
-
-.bbg__label--myth {
-    background-color: $color-gray-medium; // medium gray
-}
-
-.bbg__label--untruth {
-    background-color: $color-secondary-darkest; // darkest red
-}
-
-.bbg__label--burke {
- 	color: $color-burke-darker; // dark green burke
- 	text-transform: uppercase;
-}
-
-.bbg__file-size {
-    color: $color-gray-dark;
-    font-size: 75%;
-}
-
-.bbg__page-header__tagline {
-    color: $color-gray-medium;
-    font: {
-        family: $font-serif;
-        size: 1.4rem;
-        style: italic;
-        weight: 500;
-    }
-    margin: {
-        top: 0;
-        bottom: 2rem;
-    }
-    text-transform: none;
-
-    @include media($medium-large-screen) {
-        font-size: 1.7rem;
-    }
-}
-
-section.usa-section {
-    margin-bottom: $site-margins-large;
-}
-
-.bbg__section--medium {
-    margin-bottom: 4rem;
-}
-
-article {
-    margin-bottom: $site-margins;
-
-    @include media($medium-screen) {
-        margin-bottom: 0;
-    }
-
-    &.bbg-grid--1-2-3 {
-        @include media($medium-screen) {
-            margin-bottom: $site-margins;
-        }
-    }
-}
-
-
-/******************************/
-/* CH 02 – SITE TITLE + HEADER */
+/* CH 01 – SITE TITLE + HEADER */
 /* used on all internal pages */
 
 .bbg-header__container {
@@ -345,7 +101,7 @@ article {
 
 
 /***************************************************/
-/*    CH 03 – 2- and 3-COLUMN PAGE STRUCTURE       */
+/*    CH 02 – 2- and 3-COLUMN PAGE STRUCTURE       */
 /*    3-column: used on most posts and many pages  */
 /*    2-column: used on expanded profiles e.g. CEO */
 
@@ -658,7 +414,7 @@ article {
 }
 
 /*******************************/
-/*    CH 04 – FOOTER STYLES    */
+/*    CH 03 – FOOTER STYLES    */
 
 .bbg__footer {
     position: relative;
@@ -755,7 +511,7 @@ article {
 }
 
 /****************************************/
-/*    CH 05 – EXCERPT STYLES            */
+/*    CH 04 – EXCERPT STYLES            */
 /*    Used on home page, landing pages, */
 /*    profiles and entity pages         */
 
@@ -858,9 +614,9 @@ article {
     width: 50%;
 }
 
-.bbg-blog__excerpt-content p {
-    font-family: $font-sans;
-}
+// .bbg-blog__excerpt-content p {
+//     font-family: $font-sans;
+// }
 
 .secondary-stories .bbg-blog__excerpt-title--list {
     @include media($medium-screen) {
@@ -941,13 +697,16 @@ article {
 
 
 /**********************************************/
-/*    CH 06 – SITEWIDE ALERT STYLES           */
+/*    CH 05 – SITEWIDE ALERT STYLES           */
 /*    Styles for simple/persistent ribbon     */
 /*    Styles for rich, dismissible ribbon     */
 
 
 // SIMPLE, PERSISTENT RIBBON: for alerts and event announcements
 // thin/short, uses custom content set at time of activation
+.usa-disclaimer-official {font-size: 1.5rem;}
+img.usa-flag_icon {margin-bottom: 0 !important;}
+
 .bbg__site-alert {
     background-color: $color-gray-dark;
     max-width: none;
@@ -1079,7 +838,7 @@ div.banner_readmore h6 a:visited {
 
 
 /***************************************/
-/*    CH 07 - Misc post/page styles    */
+/*    CH 06 - Misc post/page styles    */
 .bbg__form__sign-up {
     display: inline-block;
     position: relative;
@@ -1624,7 +1383,7 @@ div.banner_readmore h6 a:visited {
 }
 
 .bbg__ribbon {
-    background-color: $color-gray-dark;
+    background-color: $color-blue-darkest;
     padding-bottom: $site-margins;
 
     a {

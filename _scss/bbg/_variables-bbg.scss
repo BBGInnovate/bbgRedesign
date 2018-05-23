@@ -1,25 +1,25 @@
 // Typography
-$font-sans:           'Alegreya Sans', sans-serif;
-$font-serif:          'Carrara-Regular', serif;
+$font-sans:  'Alegreya Sans', sans-serif;
+$font-serif: 'Carrara-Regular', serif;
 
-$base-font-size:            rem(16px);
-$small-font-size: 			rem(13px);
-$medium-font-size:          rem(18px);
-$read-in-font-size:         rem(20px);
-$caption-font-size:         rem(12px);
-$site-title-font-size:      rem(40px);
+$base-font-size: 		rem(16px);
+$small-font-size: 		rem(13px);
+$medium-font-size: 		rem(18px);
+$read-in-font-size: 	rem(20px);
+$caption-font-size: 	rem(12px);
+$site-title-font-size: 	rem(40px);
 
-// $h1-font-size:          4rem !default;
-// $h2-font-size:        1.8rem !default;
-// $h3-font-size:        1.6rem !default;
-// $h4-font-size:        3.2rem !default;
-// $h5-font-size:        2.2rem !default;
-// $h6-font-size:        1.4rem !default;
+$h1-font-size:   4rem;
+$h2-font-size: 1.8rem;
+$h3-font-size: 1.6rem;
+$h4-font-size: 3.2rem;
+$h5-font-size: 2.2rem;
+$h6-font-size: 1.4rem;
 
-$base-line-height:          1.7;
-$small-line-height:         1.4;
+$base-line-height:  1.7;
+$small-line-height: 1.4;
 
-$text-shadow:               1px 1px 1px rgba(#000, .5);
+$text-shadow: 1px 1px 1px rgba(#000, .5);
 
 $font-light:    300;
 $font-normal:   400;

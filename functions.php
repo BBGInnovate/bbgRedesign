@@ -426,9 +426,15 @@ function featured_video ($url) {
 			$extraClass = 'youtube';
 		}
 
-		$return="<div class='bbg-embed-shell bbg__featured-video'><div class='embed-container $extraClass'>";
-		$return.='<iframe scrolling="no" src="' . $url . '" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;"></iframe>';
-		$return.="</div></div>";
+		$video_markup  = '<div class="bbg-embed-shell bbg__featured-video">';
+		$video_markup .= 	'<div class="embed-container ';
+		$video_markup .= 		$extraClass;
+		$video_markup .= 		'">';
+		$video_markup .= 		'<iframe scrolling="no" src="';
+		$video_markup .= 			$url;
+		$video_markup .= 			'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;"></iframe>';
+		$video_markup .= '</div></div>';
+		return $video_markup;
 	}
 	return $return;
 }
@@ -1072,165 +1078,6 @@ function my_excerpt( $post_id ) {
 		wp_reset_postdata();
 		return $excerpt;
 	}
-}
-
-function getSoapboxStr( $soap ) {
-	//takes a soap post object and returns the markup
-	$soap = $soap[0]; //new with switch to relationship field
-	$s = "";
-	$id = $soap -> ID; // set a variable with soapbox post id
-	$soapCategory = wp_get_post_categories( $id ); // get soapbox post category
-
-	$isCEOPost = FALSE;
-	$isSpeech = FALSE;
-	$relatedProfile = FALSE;
-	$soapClass = "";
-	$soapHeaderPermalink = "";
-	$soapHeaderText = "";
-	$soapPostPermalink = get_the_permalink( $id );
-	$profilePhoto = "";
-	$profileName = "";
-
-	// Check if alternate byline override is checked
-	$includeByline = get_post_meta( $id, 'include_byline', true );
-
-	if ( $includeByline ) {
-		// if ovverride is checked populate variable
-		$bylineOverride = get_post_meta( $id, 'byline_override', true );
-	} else {
-		// else leave variable empty
-		$bylineOverride = "";
-	}
-
-	// Check for profile post related to main post
-	$relatedProfileID = get_post_meta( $id, 'statement_related_profile', true );
-
-	// Is there a related profile?
-	if ( $relatedProfileID ) {
-		$includeRelatedProfile = TRUE;
-
-		// Check for an alternate profile photo
-		$alternatePhotoID = get_post_meta( $id, 'statement_alternate_profile_image', true );
-
-		// Set profile photo to image object for alternate or attached to profile post
-		if ( $alternatePhotoID ) {
-			$profilePhotoID = $alternatePhotoID;
-		} else {
-			$profilePhotoID = get_post_meta( $relatedProfileID, 'profile_photo', true );
-		}
-
-		// Get image object and set to mugshot size
-		if ( $profilePhotoID ) {
-			$profilePhoto = wp_get_attachment_image_src( $profilePhotoID , 'medium-thumb' );
-			$profilePhoto = $profilePhoto[0];
-		}
-
-		// if there's an alternate byline
-		if ( $bylineOverride !== "" ) {
-			// set profile name to byline variable
-			$profileName =  $bylineOverride;
-		} else {
-			// get profile name from the title of the profile post
-			$profileName = get_the_title( $relatedProfileID );
-		}
-	}
-
-
-	//Allow an override for the READ MORE label
-	$homepageSoapboxReadMore = get_field( 'homepage_soapbox_read_more', 'options' );
-	$readMoreLabel = "READ MORE";
-	if ( $homepageSoapboxReadMore != "" ) {
-		$readMoreLabel = strtoupper($homepageSoapboxReadMore);
-	}
-
-	//Allow an override for the SOAPBOX LABEL
-	$homepageSoapboxLabel = get_field( 'homepage_soapbox_label', 'options' );
-
-	//use the blue background by default
-	$soapClass = "bbg__voice--featured";
-	if ( $homepageSoapboxLabel != "" ) {
-		// if the user manually entered a soapbox label, use the manually entered link as well
-		$soapHeaderText = $homepageSoapboxLabel;
-		$soapHeaderPermalink = get_field( 'homepage_soapbox_link', 'options' );
-	} else {
-		/** if the user did not manually enter a soapbox label, use the categories on this post
-			to decide the class (background color) as well as the header link, and in some cases the profile photo/name
-		**/
-
-		foreach ( $soapCategory as $c ) {
-			$cat = get_category( $c );
-			$soapHeaderPermalink = get_category_link( $cat -> term_id );
-			$soapHeaderText = $cat -> name;
-
-			if ( $cat -> slug == "from-the-ceo" ) {
-				$isCEOPost = TRUE;
-				$soapClass = "bbg__voice--ceo";
-				$soapHeaderText = "From the CEOX";
-				$profilePhoto = "/wp-content/media/2016/07/john_lansing_ceo-sq-200x200.jpg";
-				// $profilePhoto = "/innovationWP/bbg/wp-content/uploads/sites/2/2017/03/john_lansing_ceo-sq-200x200.jpg"; //for local testing
-				$profileName = "John Lansing";
-			} else if ( $cat -> slug == "usim-matters" ) {
-				$isSpeech = TRUE;
-				$soapClass = "bbg__voice--guest";
-			} else if (  $cat -> slug == "speech" ||  $cat -> slug == "statement" || $cat -> slug == "media-advisory" ) {
-				$isMediaAdvisory = TRUE;
-				$soapClass = "bbg__voice--featured";
-			}
-		}
-	}
-
-	//users may manually override the soapbox image
-	$homepageSoapboxImage = get_field( 'homepage_soapbox_image', 'option' );
-	if ( $homepageSoapboxImage ) {
-		$profilePhoto = wp_get_attachment_image_src( $homepageSoapboxImage , 'profile_photo' );
-		$profilePhoto = $profilePhoto[0];
-	}
-
-	//users may manually override the caption inside the soapbox
-	$homepageSoapboxImageCaption = get_field('homepage_soapbox_image_caption', 'option');
-	if ( $homepageSoapboxImageCaption != "" ) {
-		$profileName = $homepageSoapboxImageCaption;
-	}
-
-	$mugshotImageFloat = "left";
-	$homepageSoapboxImageFloat = get_field( 'homepage_soapbox_image_float', 'options' );
-	if ( $homepageSoapboxImageFloat ) {
-		$mugshotImageFloat = $homepageSoapboxImageFloat;
-	}
-
-	$s .= '<div class="usa-width-one-half ' . $soapClass . '">';
-
-		$s .= '<header class="entry-header bbg__article-icons-container">';
-			if ( $homepageSoapboxLabel == '' ) {
-				$s .= '<div class="bbg__article-icon"></div>';
-			}
-
-
-			if ( $soapHeaderPermalink != "" ) {
-					$s .= '<h6 class="bbg__label small"><a href="' . $soapHeaderPermalink . '">' . $soapHeaderText . '</a></h6>';
-			} else if ( $soapHeaderText != "" ) {
-				$s .= '<h6 class="bbg__label small">' . $soapHeaderText . '</h6>';
-			}
-		$s .= '</header>';
-
-	$s .= '<h2 class="bbg-blog__excerpt-title"><a href="' . $soapPostPermalink. '">';
-	$s .= $soap -> post_title;
-	$s .= '</a></h2>';
-
-	$s .= '<p class="">';
-
-	if ( $profilePhoto != "" ) {
-		$s .= '<span class="bbg__mugshot" style="float: ' . $mugshotImageFloat . ' !important;"><img src="' . $profilePhoto . '" class="bbg__ceo-post__mugshot" />';
-		if ( $profileName != "" ) {
-			$s .= '<span class="bbg__mugshot__caption">' . $profileName . '</span>';
-		}
-		$s .= '</span>';
-	}
-
-	$s .= my_excerpt( $id );
-	$s .= ' <a href="' . $soapPostPermalink. '" class="bbg__read-more">' . $readMoreLabel . ' »</a></p>';
-	$s .= '</div>';
-	return $s;
 }
 
 add_filter('the_posts', 'show_future_posts');

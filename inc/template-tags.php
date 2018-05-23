@@ -56,7 +56,7 @@ function bbginnovate_posted_on() {
 	} else {
 		$byline = '<span class="posted-on">' . $posted_on . '</span>'; 
 	}
-	echo $byline;
+	return $byline;
 
 
 }

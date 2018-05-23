@@ -16,7 +16,8 @@ function isOdd( $pageTotal ) {
 
 require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
-function showUmbrellaArea($atts) {	
+function showUmbrellaArea($atts) {
+	
 	$itemTitle = $atts['itemTitle'];
 	$columnTitle = $atts['columnTitle'];
 	$link = $atts['link'];
@@ -98,13 +99,26 @@ endif;
 wp_reset_postdata();
 wp_reset_query();
 
+
 get_header();
+
 ?>
 
 <div id="main" class="site-main">
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
+			<?php
+				// NOT SURE IF THIS IS USED?
+				if ($addFeaturedGallery) {
+					$featuredGalleryID = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
+					$gallery_build  = '<div class="usa-grid">';
+					$gallery_build .= 	'<div class="usa-grid bbg__article-featured__gallery">';
+					$gallery_build .= 		putUniteGallery($featuredGalleryID);
+					$gallery_build .= '</div>';
+					echo $gallery_build;
+				}
+			?>
 			<?php
 				$hideFeaturedImage = false;
 				if ( $addFeaturedGallery ) {
@@ -128,21 +142,31 @@ get_header();
 					$pageTotal = 1;
 					$containerClass = 'bbg__about__child ';
 
-					while (have_rows('about_flexible_page_rows')) : the_row();
+					while ( have_rows('about_flexible_page_rows') ) : the_row();
 						$counter++;
 
-						$row_openner = '';
-						if (get_row_layout() != 'about_ribbon_page') {
-// OPEN SECTION 1
-							$row_openner  =  '<!-- ROW ' . $counter . '-->';
-							$row_openner .= '<section class="usa-grid-full bbg__about__children--row">';
+						if (get_row_layout() != 'about_ribbon_page') { // Check if row is a ribbon
+							echo '<!-- ROW ' . $counter . '-->'; // Add row counter
+							echo '<section class="usa-grid-full bbg__about__children--row">'; // Open row
+						} else {
+							echo '<!-- ROW ' . $counter . '-->'; // Add row counter
+							echo '<section class="usa-grid-full bbg__about__children--row bbg__ribbon--thin">'; // Open row and add ribbon class
 						}
-						echo $row_openner;
 
 						if (get_row_layout() == 'marquee'):
-							$marquee_row = get_flexible_row_data('marquee');
-							echo $marquee_row;
-	// IF ECHO BLOCK
+							$marqueeHeading = get_sub_field('marquee_heading');
+							$marqueeLink = get_sub_field('marquee_link');
+							$marqueeContent = get_sub_field('marquee_content');
+							$marqueeContent = apply_filters( 'the_content', $marqueeContent );
+							$marqueeContent = str_replace( ']]>', ']]&gt;', $marqueeContent ); 
+
+							$marquee_markup  = '<section class="usa-grid bbg__about__children--row bbg__about--marquee">';
+							$marquee_markup .= 		'<article id="post-25948" class="bbg__about__excerpt bbg__about__child bbg__about__child--mission bbg-grid--1-1-1 post-25948 page type-page status-publish has-post-thumbnail hentry">';
+							$marquee_markup .= 			'<div class="entry-content bbg__about__excerpt-content">' . $marqueeContent . '</div>';
+							$marquee_markup .= 		'</article>';
+							$marquee_markup .= '</section>';
+							echo $marquee_markup;
+
 						elseif ( get_row_layout() == 'umbrella' ): 
 							/*** BEGIN DISPLAY OF ENTIRE UMBRELLA ROW ***/
 							$sectionHeading = get_sub_field('umbrella_section_heading');
@@ -157,7 +181,6 @@ get_header();
 									$sectionHeading = '<a href="' . $sectionHeadingLink . '">' . $sectionHeading . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
 								} 
 								echo '<h6 class="bbg__label">' . $sectionHeading . '</h6>';	
-	// IF ECHO SECTION HEADER								
 							} 
 							//output intro section text if it exists
 							if ($sectionIntroText != "") {
@@ -173,13 +196,13 @@ get_header();
 							}
 
 							echo '<div class="usa-grid-full bbg__about__grandchildren">'; // open grandchildren container
-							// showUmbrellaArea FUNCTION CALL IS IN HERE
 							while ( have_rows('umbrella_content') ) : the_row();
 								if (get_row_layout() == 'umbrella_content_external') {
 									$thumbnail = get_sub_field('umbrella_content_external_thumbnail');
 									$thumbnailID = $thumbnail['ID'];
 									$thumbSrc = wp_get_attachment_image_src( $thumbnailID , 'medium-thumb' );
 									if ($thumbSrc) {
+										//$thumbSrc = 'src="' . $thumbSrc[0] . '"';	
 										$thumbSrc = $thumbSrc[0];
 									} 
 									showUmbrellaArea(array(
@@ -292,7 +315,7 @@ get_header();
 							endwhile;
 							echo '</div>';
 							echo '</section>'; // close row
-							/*** END DISPLAY OF ENTIRE UMBRELLA ROW ***/
+						/*** END DISPLAY OF ENTIRE UMBRELLA ROW ***/
 
 						elseif( get_row_layout() == 'about_ribbon_page' ):
 							/*** BEGIN DISPLAY OF ENTIRE RIBBON ROW ***/
@@ -303,34 +326,37 @@ get_header();
 							$headlineLink = get_sub_field( 'about_ribbon_headline_link' );
 							$summary = get_sub_field( 'about_ribbon_summary' );
 							$imageURL = get_sub_field( 'about_ribbon_image' );
+
 							// allow shortcodes in intro text
 							$summary = apply_filters( 'the_content', $summary );
 							$summary = str_replace( ']]>', ']]&gt;', $summary );
 
-							echo 	'<div class="usa-grid">';
-							echo 		'<div class="bbg__announcement__flexbox" name="' . $labelText . '">'; // open ribbon container and set div name to $labelText
-							if ( $imageURL ) { // Output image thumbnail if set
-								echo 		'<div class="bbg__announcement__photo" style="background-image: url(' . $imageURL . ');"></div>';
-							}
-							echo 			'<div>'; // Open ribbon text container
-							if ( $labelLink ) { // Output label with link if set
-								echo 			'<h6 class="bbg__label"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h6>';
-							} else { // Else output link only
-								echo 			'<h6 class="bbg__label">' . $labelText . '</h6>';
-							}
+							echo '<div class="usa-grid">';
+								echo '<div class="bbg__announcement__flexbox" name="' . $labelText . '">'; // open ribbon container and set div name to $labelText
 
-							if ( $headlineLink ) { // Output headline with link if set
-								echo 			'<h2 class="bbg__announcement__headline"><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h2>';
-							} else { // Else output headline only
-								echo 			'<h2 class="bbg__announcement__headline">' . $headlineText . '</h2>';
-							}
+									if ( $imageURL ) { // Output image thumbnail if set
+										echo '<div class="bbg__announcement__photo" style="background-image: url(' . $imageURL . ');"></div>';
+									}
 
-							echo $summary;
-							echo 			'</div>'; // close ribbon text container
-							echo 		'</div><!-- .bbg__announcement__flexbox -->'; // close ribbon container
-							echo 	'</div><!-- .usa-grid -->';
-							echo '</section>';
-							/*** END DISPLAY OF ENTIRE RIBBON ROW ***/
+									echo '<div>'; // Open ribbon text container
+										if ( $labelLink ) { // Output label with link if set
+											echo '<h6 class="bbg__label"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h6>';
+										} else { // Else output link only
+											echo '<h6 class="bbg__label">' . $labelText . '</h6>';
+										}
+
+										if ( $headlineLink ) { // Output headline with link if set
+											echo '<h2 class="bbg__announcement__headline"><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h2>';
+										} else { // Else output headline only
+											echo '<h2 class="bbg__announcement__headline">' . $headlineText . '</h2>';
+										}
+
+										echo $summary;
+									echo '</div>'; // close ribbon text container
+								echo '</div><!-- .bbg__announcement__flexbox -->'; // close ribbon container
+							echo '</div><!-- .usa-grid -->';
+						echo '</section>';
+						/*** END DISPLAY OF ENTIRE RIBBON ROW ***/
 
 						elseif ( get_row_layout() == 'about_office' ):
 							/*** BEGIN DISPLAY OF OFFICE ROW ***/
@@ -338,15 +364,14 @@ get_header();
 							$officeTagBoolean = get_sub_field('office_tags_boolean_operator');
 							$officeTitle = get_sub_field( 'office_title' );
 							$officeEmail = get_sub_field( 'office_email' );
+							$officeEmail = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $officeEmail . '" title="Contact us">' . $officeEmail . '</a></li>';
 							$officePhone = get_sub_field( 'office_phone' );
+							$officePhone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $officePhone . '">' . $officePhone . '</a></li>';
 							$officeFacebook = get_sub_field( 'office_facebook' );
 							$officeTwitter = get_sub_field( 'office_twitter' );
 							$officeYoutube = get_sub_field( 'office_youtube' );
 							$officeEvent = false;
 							$postIDsUsed = [];
-
-							$officeEmail = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $officeEmail . '" title="Contact us">' . $officeEmail . '</a></li>';
-							$officePhone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $officePhone . '">' . $officePhone . '</a></li>';
 
 							// set upcoming events query parameters
 							$qParamsUpcoming = array(
@@ -357,9 +382,8 @@ get_header();
 								,'posts_per_page' => 1
 							);
 							$tagIDs = array();
-
 							foreach($officeTag as $term) {
-								$tagIDs [] = $term -> term_id;
+								$tagIDs []= $term->term_id;
 							}
 							if (count($officeTag)) {
 								if ($officeTagBoolean == "AND") {
@@ -435,7 +459,7 @@ get_header();
 			<style>
 				.bbg-blog__officeEvent-label {margin-top: 15px !important;}
 			</style>
-			<!-- THESE BLOCKS EXECUTE IF ABOUT_OFFICE -->
+
 			<article class="bbg__article bbg__kits__section">
 				<div class="usa-grid-full">
 					<?php if ( $officeEvent ): ; ?>
@@ -526,6 +550,7 @@ get_header();
 												echo '<a class="bbg__kits__social-link usa-link-youtube" href="' . $officeYoutube . '" role="img" aria-label="youtube"></a>';
 											}
 										echo '</div>';
+
 									?>
 								</div>
 							</div>

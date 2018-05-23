@@ -65,11 +65,10 @@
 .bbg__team__icon {
 	border-radius: 50%;
 	height: $bbg__team__icon-width;
-	margin: 0 auto 2.5rem;
 	width: $bbg__team__icon-width;
 
 	@include media($small-screen) {
-		margin-bottom: 0;
+		margin-bottom: 3rem;
 	}
 }
 

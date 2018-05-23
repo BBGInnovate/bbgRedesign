@@ -202,8 +202,9 @@
 	    usort($budget, "cmpFiscalYear");
 
 	    $latestBudget=0;
+
 	    for ($i=0; $i < count($budget); $i++) {
-	    	if ($latestBudget == 0 && ($budget[$i]['status'] == 'Requested')) {
+	    	if ($latestBudget == 0 && ($budget[$i]['status'] == 'requested')) {
 	    		$latestBudget = round($budget[$i]['dollar_amount'],0);
 	    	}
 	    }

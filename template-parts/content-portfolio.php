@@ -30,44 +30,29 @@ if ( isset($_GET['category_id']) ) {
 
 ?>
 
-
-<article id="post-<?php the_ID(); ?>" <?php post_class($classNames); ?>>
+<article id="post-<?php the_ID(); ?>" <?php get_post_class($classNames); ?>>
 	<header class="entry-header bbg-portfolio__excerpt-header">
-
-	<?php
-		$link = sprintf( '<a href="%s" rel="bookmark">', $postPermalink );
-		$linkImage = sprintf( '<a href="%s" rel="bookmark" tabindex="-1">', $postPermalink );
-		$linkH3 = '<h3 class="entry-title bbg-portfolio__excerpt-title">'.$link;
-	?>
 		<div class="single-post-thumbnail clear bbg__excerpt-header__thumbnail--medium">
 			<?php
-
-
-
-				echo $linkImage;
-
-				/* Set a default thumbnail image in case one isn't set */
-				$thumbnail = '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
-
-				if ( has_post_thumbnail() ) {
-					$thumbnail = the_post_thumbnail( 'medium-thumb' );
+				$image_tag_opener  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
+				if (has_post_thumbnail()) {
+					$image_tag_opener .= the_post_thumbnail('medium-thumb');
+				} else {
+					$image_tag_opener .= 	'<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
 				}
-				echo $thumbnail;
-
-
+				$image_tag_opener .= '</a>';
+				echo $image_tag_opener;
 			?>
-			</a>
 		</div>
 		<?php echo buildLabel( implode( get_post_class( $classNames ) ) );	//check bbg-functions-utilities ?>
-		<?php the_title( sprintf( $linkH3, $postPermalink ), '</a></h3>' ); ?>
-
-		<?php if ( 'post' === get_post_type() ) : ?>
-			<!--
-		<div class="entry-meta bbg__article-meta">
-			<?php bbginnovate_posted_on(); ?>
-		</div>-->
-		<?php endif; ?>
-
+		<?php
+			$link_header  = '<h3>';
+			$link_header .= 	'<a href="' . $postPermalink . ' rel="bookmark">';
+			$link_header .= 		get_the_title();
+			$link_header .= 	'</a>';
+			$link_header .= '</h3>';
+			echo $link_header;
+		?>
 	</header><!-- .entry-header -->
 
 	<?php if ( $includeDescription ) { ?>
