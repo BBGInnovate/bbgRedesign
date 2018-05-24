@@ -117,8 +117,14 @@ get_header();
 				<?php echo $pageContent; ?>
 			</section>
 
-
-
+<div class="usa-section usa-grid">
+	<div class="usa-width-one-third">
+		x
+	</div>
+	<div class="usa-width-two-thirds">
+		xxx
+	</div>
+</div>
 
 			<!-- Child pages -->
 			<div id="page-children" class="usa-section usa-grid bbg__about__children">
@@ -143,7 +149,7 @@ get_header();
 							$marquee_row = get_flexible_row_data('marquee');
 							echo $marquee_row;
 	// IF ECHO BLOCK
-						elseif ( get_row_layout() == 'umbrella' ): 
+						elseif (get_row_layout() == 'umbrella' ): 
 							/*** BEGIN DISPLAY OF ENTIRE UMBRELLA ROW ***/
 							$sectionHeading = get_sub_field('umbrella_section_heading');
 							$sectionHeadingLink = get_sub_field('umbrella_section_heading_link');

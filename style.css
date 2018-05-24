@@ -2853,6 +2853,9 @@ p {
   font-family: "Alegreya Sans", sans-serif;
   margin-bottom: 3rem; }
 
+a:visited {
+  color: #ff00ff; }
+
 a:not(.bbg__article-share__icon):visited {
   color: inherit; }
 
@@ -4712,17 +4715,6 @@ ul li:before,
 ol li:before {
   width: 1.2rem; }
 
-/**
- * CH 01 - SITE TITLE + HEADER
- * CH 02 - 2- and 3-COLUMN PAGE STRUCTURE
- * CH 03 - FOOTER STYLES
- * CH 04 - EXCERPT STYLES
- * CH 05 - SITEWIDE ALERT STYLES
- * CH 06 - Misc post/page styles
-**/
-/******************************/
-/* CH 01 – SITE TITLE + HEADER */
-/* used on all internal pages */
 .bbg-header__container, .bbg-header__container--home {
   padding-right: 6rem; }
   .bbg-header__container:after, .bbg-header__container--home:after {
@@ -4733,22 +4725,12 @@ ol li:before {
     visibility: hidden; }
   .bbg-header__container:focus, .bbg-header__container--home:focus {
     background: none; }
-  @media screen and (min-width: 900px) {
-    .bbg-header__container, .bbg-header__container--home {
-      margin-bottom: 0; } }
 
 .bbg-header__container--home {
   margin-bottom: 0; }
 
 .bbg-header__link {
   padding: 0; }
-  @media screen and (min-width: 600px) {
-    .bbg-header__link {
-      font-size: 8rem;
-      line-height: 0; } }
-  @media screen and (min-width: 900px) {
-    .bbg-header__link {
-      font-size: 5rem; } }
   .bbg-header__link:hover {
     text-decoration: none; }
     .bbg-header__link:hover .bbg-header__site-title {
@@ -4760,12 +4742,6 @@ ol li:before {
   float: left;
   height: 5.2rem;
   margin-right: 1rem; }
-  @media screen and (min-width: 481px) {
-    .bbg-header__logo {
-      height: 7rem; } }
-  @media screen and (min-width: 600px) {
-    .bbg-header__logo {
-      height: 8.8rem; } }
 
 .bbg-header__site-title {
   clear: none;
@@ -4775,25 +4751,50 @@ ol li:before {
   line-height: 1;
   margin: 0;
   padding-top: .5rem; }
-  @media screen and (min-width: 481px) {
-    .bbg-header__site-title {
-      font-size: 2.66667rem;
-      padding-top: 1rem; } }
-  @media screen and (min-width: 600px) {
-    .bbg-header__site-title {
-      font-size: 4rem;
-      padding-top: .2rem; } }
-  @media screen and (min-width: 900px) {
-    .bbg-header__site-title {
-      font-size: 5rem;
-      padding-top: 1.5rem; } }
 
 .bbg-header__site-title--breakline {
   display: block; }
-  @media screen and (min-width: 900px) {
-    .bbg-header__site-title--breakline {
-      display: inline-block; } }
 
+@media screen and (min-width: 481px) {
+  .bbg-header__logo {
+    height: 7rem; }
+  .bbg-header__site-title {
+    font-size: 2.66667rem;
+    padding-top: 1rem; } }
+
+@media screen and (min-width: 600px) {
+  .bbg-header__link {
+    font-size: 8rem;
+    line-height: 0; }
+  .bbg-header__logo {
+    height: 8.8rem; }
+  .bbg-header__site-title {
+    font-size: 4rem;
+    padding-top: .2rem; } }
+
+@media screen and (min-width: 900px) {
+  .bbg-header__container, .bbg-header__container--home {
+    margin-bottom: 0; }
+  .bbg-header__link {
+    font-size: 5rem; }
+  .bbg-header__site-title {
+    font-size: 5rem;
+    padding-top: 1.5rem; }
+  .bbg-header__site-title--breakline {
+    display: inline-block; } }
+
+#neat-container::after {
+  clear: both;
+  content: "";
+  display: block; }
+
+/**
+ * CH 02 - 2- and 3-COLUMN PAGE STRUCTURE
+ * CH 03 - FOOTER STYLES
+ * CH 04 - EXCERPT STYLES
+ * CH 05 - SITEWIDE ALERT STYLES
+ * CH 06 - Misc post/page styles
+**/
 /***************************************************/
 /*    CH 02 – 2- and 3-COLUMN PAGE STRUCTURE       */
 /*    3-column: used on most posts and many pages  */

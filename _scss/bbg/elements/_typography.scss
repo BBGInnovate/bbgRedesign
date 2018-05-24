@@ -29,6 +29,8 @@ p {
     margin-bottom: 3rem;
 }
 
+a:visited {color: #ff00ff;}
+
 a:not(.bbg__article-share__icon) {
     &:visited {color: inherit;}
     &:focus {
@@ -44,7 +46,7 @@ a:not(.bbg__article-share__icon) {
         {
             background-color: transparent;
             text-decoration: none;
-
+            
             >a:hover,
             >a:focus {
                 // removes background color and underline for linked images
