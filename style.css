@@ -4755,6 +4755,9 @@ ol li:before {
 .bbg-header__site-title--breakline {
   display: block; }
 
+.header-feature {
+  margin-left: calc(16.66667% - 23.33333px + 40px); }
+
 @media screen and (min-width: 481px) {
   .bbg-header__logo {
     height: 7rem; }

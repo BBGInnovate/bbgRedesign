@@ -117,14 +117,14 @@ get_header();
 				<?php echo $pageContent; ?>
 			</section>
 
-<div class="usa-section usa-grid">
+<!-- <div class="usa-section usa-grid">
 	<div class="usa-width-one-third">
 		x
 	</div>
 	<div class="usa-width-two-thirds">
 		xxx
 	</div>
-</div>
+</div> -->
 
 			<!-- Child pages -->
 			<div id="page-children" class="usa-section usa-grid bbg__about__children">
@@ -162,7 +162,7 @@ get_header();
 								if ( $sectionHeadingLink ) { // if the label has a URL add link and right arrow
 									$sectionHeading = '<a href="' . $sectionHeadingLink . '">' . $sectionHeading . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
 								} 
-								echo '<h6 class="bbg__label">' . $sectionHeading . '</h6>';	
+								echo '<h2 class="bbg__label">' . $sectionHeading . '</h2>';	
 	// IF ECHO SECTION HEADER								
 							} 
 							//output intro section text if it exists

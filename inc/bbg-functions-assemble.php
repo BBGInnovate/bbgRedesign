@@ -7,7 +7,7 @@ function check_featured_media_type() {
 	if ($videoUrl != "") {
 		$hideFeaturedImage = true;
 		$video_tags  = '<div class="usa-grid">';
-		$video_tags .= 		'<div class="usa-width-two-thirds feature-spot">';
+		$video_tags .= 		'<div class="header-feature feature-spot">';
 		$video_tags .= 			featured_video($videoUrl);
 		$video_tags .= '</div></div>';
 		echo $video_tags;

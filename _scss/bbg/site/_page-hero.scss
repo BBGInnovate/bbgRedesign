@@ -38,6 +38,9 @@
 
 .bbg-header__site-title--breakline {display: block;}
 
+.header-feature {
+	@include grid-push(2);
+}
 
 // MEDIA QUERIES
 @include media($small-screen) {
