@@ -4,6 +4,7 @@ node_modules
 tmp
 .sass-cache
 *.css.map
+sftp-config.json
 
 page-private-fields.php
 

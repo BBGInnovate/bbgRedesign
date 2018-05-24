@@ -15,6 +15,7 @@
 
 // FUNCTION THAT BUILD SECTIONS
 require get_template_directory() . '/inc/bbg-functions-home.php';
+require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
 $templateName = 'customBBGHome';
 
@@ -181,61 +182,7 @@ get_header();
 			</section>
 
 			<!-- ENTITY LIST -->
-			<section id="entities" class="usa-section bbg__staff">
-				<div class="usa-grid">
-					<h2><a href="<?php echo get_permalink(get_page_by_path('networks')); ?>" title="A list of the BBG broadcasters.">Our networks</a></h2>
-					<div class="usa-intro bbg__broadcasters__intro">
-						<h3 class="usa-font-lead">Every week, more than <?php echo do_shortcode('[audience]'); ?> listeners, viewers and internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</h3>
-					</div>
-					<div id="home-entities">
-					<?php
-						$entityParentPage = get_page_by_path('networks');
-						$qParams = array(
-							'post_type' => array('page'),
-							'posts_per_page' => -1,
-							'post_parent' => $entityParentPage->ID,
-							'orderby' => 'meta_value_num',
-							'meta_key' => 'entity_year_established',
-							'order' => 'ASC'
-						);
-						$custom_query = new WP_Query($qParams);
-
-						if ($custom_query -> have_posts()) {
-							$entity_markup .= '<div id="entity-grid">';
-
-							while ($custom_query -> have_posts())  {
-								$custom_query -> the_post();
-								$id = get_the_ID();
-								$fullName = get_post_meta($id, 'entity_full_name', true);
-								if ($fullName != "") {
-									$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
-									$abbreviation = str_replace("/", "",$abbreviation);
-									$description = get_post_meta($id, 'entity_description', true);
-									$description = apply_filters('the_content', $description);
-									$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
-									$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
-
-									$entity_markup .= '<article class="home_entities">';
-									$entity_markup .= 	'<div class="bbg__entity__icon" >';
-									$entity_markup .= 		'<a href="' . $link . '" tabindex="-1">';
-									$entity_markup .= 			'<div class="bbg__entity__icon__image" style="background-image: url(' . $imgSrc . ');"></div>';
-									$entity_markup .= 		'</a>';
-									$entity_markup .= 	'</div>';
-									$entity_markup .= 	'<div>';
-									$entity_markup .= 		'<h5><a href="' . $link . '">' . $fullName . '</a></h5>';
-									$entity_markup .= 			'<p class="">' . $description . '</p>';
-									$entity_markup .= 	'</div>';
-									$entity_markup .= '</article>';
-								}
-							}
-							$entity_markup .= '</div>';
-						}
-						echo $entity_markup;
-						wp_reset_postdata();
-					?>
-					</div>
-				</div>
-			</section><!-- entity list -->
+			<?php echo get_entity_data(); ?>
 
 			<!-- Quotation -->
 			<section class="usa-section ">

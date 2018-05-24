@@ -52,7 +52,7 @@ function showUmbrellaArea($atts) {
 			if ($link != "") {
 				$columnTitle = '<a ' . $anchorTarget . ' href="' . $link . '">' . $columnTitle . '</a>';
 			}
-			echo '<h6 class="bbg__label">' . $columnTitle . '</h6>';
+			echo '<h2>' . $columnTitle . '</h2>';
 		}
 		
 		if ($thumbSrc) {
@@ -61,7 +61,7 @@ function showUmbrellaArea($atts) {
 			echo '</div>';	
 		}
 		
-		echo '<h3 class="bbg__about__grandchild__title"><a ' . $anchorTarget . ' href="' . $link . '">' . $itemTitle . '</a>'  . $linkSuffix . '</h3>';
+		echo '<h5 class="bbg__about__grandchild__title"><a ' . $anchorTarget . ' href="' . $link . '">' . $itemTitle . '</a>'  . $linkSuffix . '</h5>';
 		if ($subTitle != "") {
 			echo '<h5 class="bbg__about__grandchild__subtitle">' . $subTitle . '</h5>';
 		}
@@ -75,7 +75,7 @@ function showUmbrellaArea($atts) {
 			$columnTitle = '<a '  . $anchorTarget . ' href="' . $link . '">' . $columnTitle . '</a>';
 		}
 		$columnTitle = $columnTitle . $linkSuffix;
-		echo '<h3 class="bbg__about__grandchild__title">' . $columnTitle . '</h3>';	
+		echo '<h5 class="bbg__about__grandchild__title">' . $columnTitle . '</h5>';	
 		echo '<a '  . $anchorTarget . ' href="' . $link . '">';
 		echo '<div class="bbg__about__grandchild__thumb" style="background-image: url(' . $thumbSrc . '); background-position:center center;"></div></a>' . $description;
 		echo '</article>';
@@ -549,31 +549,13 @@ get_header();
 			?>
 			</div> <!-- End id="page-children" -->
 
-
-
-
-
-
 			<!-- NETWORKS -->
 			<?php
 				$showNetworks = get_field( 'about_networks_row' );
-				if ( $showNetworks ) { ?>
-
-				<!-- Entity list -->
-				<section id="entities" class="usa-section bbg__staff">
-					<div class="usa-grid">
-						<h6 class="bbg__label"><a href="<?php echo get_permalink( get_page_by_path( 'networks' ) ); ?>" title="List of all BBG broadcasters">Our networks</a></h6>
-						<div class="usa-intro bbg__broadcasters__intro">
-							<h3 class="usa-font-lead">Every week, more than <?php echo do_shortcode('[audience]'); ?> listeners, viewers and Internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</h3>
-						</div>
-						<?php echo outputBroadcasters('2'); ?>
-					</div>
-				</section><!-- entity list -->
-			<?php
+				if ($showNetworks) {
+					echo get_entity_data();
 				}
-			wp_reset_postdata();
 			?>
-
 		</main>
 	</div><!-- #primary .content-area -->
 </div><!-- #main .site-main -->

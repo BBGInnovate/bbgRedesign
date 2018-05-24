@@ -52,7 +52,7 @@ function getNetworkExcerptJS() {
 
 	return $s;
 }
-
+// soon to be deleted, replaced with bbg-functions get_entity_data()
 function outputBroadcasters($cols) {
 	$entityParentPage = get_page_by_path('networks');
 	$qParams=array(
@@ -68,8 +68,7 @@ function outputBroadcasters($cols) {
 		$columnsClass = " bbg-grid--1-1-1-2";
 	}
 
-	$s = '';
-	$s .= '<div class="usa-grid-full">';
+	$entity_markup  = '<div class="usa-grid-full">';
 	$custom_query = new WP_Query($qParams);
 	if ($custom_query -> have_posts()) {
 		while ( $custom_query -> have_posts() )  {
@@ -84,23 +83,23 @@ function outputBroadcasters($cols) {
 				$link=get_permalink( get_page_by_path( "/networks/$abbreviation/" ) );
 				$imgSrc=get_template_directory_uri().'/img/logo_'.$abbreviation.'--circle-200.png'; //need to fix this
 
-				$s .= '<article class="bbg__entity'. $columnsClass .'">';
-				$s .=  '<div class="bbg__avatar__container bbg__entity__icon">';
-				$s .=  '<a href="'.$link.'" tabindex="-1">';
-				$s .=  '<div class="bbg__avatar bbg__entity__icon__image" style="background-image: url('.$imgSrc.');"></div>';
-				$s .=  '</a></div>';
-				$s .=  '<div class="bbg__entity__text">';
-				$s .=  '<h2 class="bbg__entity__name"><a href="'.$link.'">'.$fullName.'</a></h2>';
-				$s .=  '<p class="bbg__entity__text-description">'.$description.'</p>';
-				$s .=  '</div>';
-				$s .=  '</article>';
+				$entity_markup .= '<article class="bbg__entity'. $columnsClass .'">';
+				$entity_markup .=  '<div class="bbg__avatar__container bbg__entity__icon">';
+				$entity_markup .=  '<a href="'.$link.'" tabindex="-1">';
+				$entity_markup .=  '<div class="bbg__avatar bbg__entity__icon__image" style="background-image: url('.$imgSrc.');"></div>';
+				$entity_markup .=  '</a></div>';
+				$entity_markup .=  '<div class="bbg__entity__text">';
+				$entity_markup .=  '<h2><a href="'.$link.'">'.$fullName.'</a></h2>';
+				$entity_markup .=  '<p class="bbg__entity__text-description">'.$description.'</p>';
+				$entity_markup .=  '</div>';
+				$entity_markup .=  '</article>';
 			}
 		}
 	}
 
-	$s .= '</div>';
+	
 	wp_reset_postdata();
-	return $s;
+	return $entity_markup;
 }
 
 function broadcasters_list_shortcode($atts) {

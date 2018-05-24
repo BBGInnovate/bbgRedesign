@@ -91,3 +91,61 @@ function build_flexible_row($row_data) {
 		echo "you got the ";
 	}
 }
+
+function get_entity_data() {
+	$entityParentPage = get_page_by_path('networks');
+	$qParams = array(
+		'post_type' => array('page'),
+		'posts_per_page' => -1,
+		'post_parent' => $entityParentPage->ID,
+		'orderby' => 'meta_value_num',
+		'meta_key' => 'entity_year_established',
+		'order' => 'ASC'
+	);
+	$custom_query = new WP_Query($qParams);
+	return build_entity_markup($custom_query);
+}
+
+function build_entity_markup($data) {
+	$entity_markup .= '<section id="entities" class="">';
+	$entity_markup .= 	'<h1 class="header-outliner">Entities</h1>';
+	$entity_markup .= 	'<div class="usa-grid">';
+	$entity_markup .= 		'<h2><a href="' . get_permalink(get_page_by_path('networks')) . '" title="A list of the BBG broadcasters.">Our networks</a></h2>';
+	$entity_markup .= 		'<div class="usa-intro bbg__broadcasters__intro">';
+	$entity_markup .= 			'<h3 class="usa-font-lead">Every week, more than ' . do_shortcode('[audience]') . ' listeners, viewers and internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</h3>';
+	$entity_markup .= 		'</div>';
+	$entity_markup .= 		'<div id="home-entities">';
+
+	if ($data -> have_posts()) {
+		$entity_markup .= '<div id="entity-grid">';
+
+		while ($data -> have_posts())  {
+			$data -> the_post();
+			$id = get_the_ID();
+			$fullName = get_post_meta($id, 'entity_full_name', true);
+			if ($fullName != "") {
+				$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
+				$abbreviation = str_replace("/", "",$abbreviation);
+				$description = get_post_meta($id, 'entity_description', true);
+				$description = apply_filters('the_content', $description);
+				$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
+				$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
+
+				$entity_markup .= '<article class="home_entity">';
+				$entity_markup .= 	'<div class="bbg__entity__icon" >';
+				$entity_markup .= 		'<a href="' . $link . '" tabindex="-1">';
+				$entity_markup .= 			'<div class="bbg__entity__icon__image" style="background-image: url(' . $imgSrc . ');"></div>';
+				$entity_markup .= 		'</a>';
+				$entity_markup .= 	'</div>';
+				$entity_markup .= 	'<div>';
+				$entity_markup .= 		'<h5><a href="' . $link . '">' . $fullName . '</a></h5>';
+				$entity_markup .= 			'<p class="">' . $description . '</p>';
+				$entity_markup .= 	'</div>';
+				$entity_markup .= '</article>';
+			}
+		}
+		$entity_markup .= 	'</div>'; // END HOME ENTITIES
+		$entity_markup .= '</div></section>';
+		return $entity_markup;
+	}
+}
