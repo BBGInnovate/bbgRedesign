@@ -549,7 +549,7 @@ function build_soap_markup($data) {
 function build_impact_markup($divide_blocks) {
 	$impact_markup  = '<div class="' . $divide_blocks . '">';
 	$impact_markup .=  	'<a href="' . get_the_permalink() . '">';
-	if (has_post_thumbnail()) {
+	if (get_the_post_thumbnail()) {
 		$impact_markup .= 		get_the_post_thumbnail();
 	} else {
 		$impact_markup .= 		'<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';

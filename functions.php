@@ -1170,7 +1170,7 @@ function foia_upload_check($file) {
 	}
 	return $file;
 }
-add_filter('wp_handle_upload_prefilter', 'foia_upload_check');
+// add_filter('wp_handle_upload_prefilter', 'foia_upload_check');
 
 // CHANGE UPLOAD PATH IF FOIA REPORTS
 function foia_upload($file) {
