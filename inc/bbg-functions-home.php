@@ -270,8 +270,9 @@ function get_corner_hero_data() {
 		$cornerHeroLabel = 'This week';
 	}
 
+	$postIDsUsed = array();
 	if ($homepage_hero_corner == 'event' && $featuredEvent) {
-		$postIDsUsed[] = $featuredEvent -> ID;
+		$postIDsUsed = $featuredEvent -> ID;
 	}
 
 	if (($homepage_hero_corner == 'event' && $featuredEvent) || ($homepage_hero_corner == 'advisory' && $featuredAdvisory)) {
