@@ -69,7 +69,8 @@ function get_flexible_row_data($str) {
 		$flex_row_data = array('type' => 'umbrella');
 	}
 	
-	return build_flexible_row($flex_row_data);;
+	// return build_flexible_row($flex_row_data);
+	return $flex_row_data;
 }
 
 function build_flexible_row($row_data) {

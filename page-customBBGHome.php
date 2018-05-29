@@ -59,7 +59,7 @@ get_header();
 					echo $site_introduction;
 				?>
 			</section>
-<a href="php_info.php">Check PHP Info</a>
+
 			<!-- BBG NEWS -->
 			<section id="recent-posts" class="usa-section usa-grid bbg__home__recent-posts">
 				<h1 class="header-outliner">BBG News</h1>
