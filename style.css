@@ -5928,16 +5928,10 @@ section.usa-section.bbg-banner__section {
       height: 100%; }
   .bbg__voice--ceo {
     padding: 3rem; }
-    .bbg__voice--ceo p {
-      line-height: 2.2; }
   .bbg__voice--guest {
     padding: 3rem; }
-    .bbg__voice--guest p {
-      line-height: 2.2; }
   .bbg__voice--featured {
     padding: 3rem; }
-    .bbg__voice--featured p {
-      line-height: 2.2; }
   .bbg__event-announcement .bbg__event-announcement__excerpt,
   .bbg__advisory-announcement .bbg__event-announcement__excerpt {
     display: block; }

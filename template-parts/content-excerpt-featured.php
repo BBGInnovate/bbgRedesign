@@ -35,7 +35,7 @@ $hideFeaturedImage = false;
 
 
 // MARKUP
-$featured_post .= '<article id="' . get_the_ID() . '">';
+$featured_post = '<article id="' . get_the_ID() . '">';
 $hideFeaturedImage = false;
 if ($videoUrl != "") {
 	$hideFeaturedImage = true;

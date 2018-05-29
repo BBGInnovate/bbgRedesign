@@ -244,7 +244,7 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 		@for $i from 1 through length( $voiceTypes ) {
 			&--#{ nth( $voiceTypes, $i ) } {
 				padding: $site-margins;
-				p {line-height: 2.2;}
+				// p {line-height: 2.2;}
 			}
 		}
 	}

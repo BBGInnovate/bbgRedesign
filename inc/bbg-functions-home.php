@@ -31,7 +31,7 @@ function select_impact_story_id_at_random($used) {
 
 function select_recent_post_query_params($numPosts, $used, $catExclude) {
 	$qParams = array(
-		'post_type' => array( 'post' ),
+		'post_type' => array('post'),
 		'posts_per_page' => $numPosts,
 		'orderby' => 'post_date',
 		'order' => 'desc',
@@ -47,6 +47,7 @@ function select_recent_post_query_params($numPosts, $used, $catExclude) {
 			)
 		)
 	);
+	$recent_post_package = array('params' => $qParams, 'used_posts' => $used);
 	return $qParams;
 }
 
@@ -187,7 +188,7 @@ function get_homepage_banner_data() {
 		if ( $bannerAdjustStr != "" ) {
 			echo "\t.bbg-banner { background-position: $bannerAdjustStr; }";
 		}
-		$counter=0;
+		$counter = 0;
 		foreach( $tempSources as $key => $tempSourceObj ) {
 			$counter++;
 			$tempSource=$tempSourceObj['src'];
@@ -222,6 +223,7 @@ function get_homepage_banner_data() {
 
 function get_impact_stories_data($numPosts) {
 	global $includePortfolioDescription;
+	global $postIDsUsed;
 
 	$impactPostIDs = select_impact_story_id_at_random($postIDsUsed);
 	$qParams = array(
@@ -329,6 +331,7 @@ function display_featured_post() {
 	}
 	query_posts($qParams);
 
+	$counter = 0;
 	if (have_posts()) {
 		while (have_posts()) {
 			the_post();
@@ -341,9 +344,11 @@ function display_featured_post() {
 	wp_reset_query();
 }
 
-function display_additional_recent_posts() {
-	$maxPostsToShow = 2;
-	$qParams = select_recent_post_query_params($maxPostsToShow, $postIDsUsed, $STANDARD_POST_CATEGORY_EXCLUDES);
+function display_additional_recent_posts($maxPostsToShow) {
+	global $used;
+	global $catExclude;
+	// $maxPostsToShow = 2;
+	$qParams = select_recent_post_query_params($maxPostsToShow, $used, $catExclude);
 	query_posts($qParams);
 
 	if (have_posts()) {
@@ -374,8 +379,8 @@ function display_additional_recent_posts() {
 function get_soap_box_data() {
 	$soap_contents = get_field('homepage_soapbox_post', 'option');
 
-	if ($soap) {
-		$postIDsUsed[] = $soap[0] -> ID;
+	if ($soap_contents) {
+		$postIDsUsed[] = $soap_contents[0] -> ID;
 	}
 	$soap_index = $soap_contents[0];
 	$id = $soap_index -> ID;
@@ -529,7 +534,7 @@ function build_soap_markup($data) {
 	$soapbox_markup .= 		$data['title'];
 	$soapbox_markup .= 	'</a></h5>';
 	$soapbox_markup .= 		'<p>';
-	$soapbox_markup .= 		my_excerpt($id);
+	$soapbox_markup .= 		my_excerpt($data['post_id']);
 	$soapbox_markup .= 		' <a href="' . $data['post_link'] . '" class="bbg__read-more">' . $data['read_more'] . ' »</a></p>';
 	if (!empty($data['profile_image'])) {
 		$soapbox_markup .= '</div>';

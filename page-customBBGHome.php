@@ -67,13 +67,15 @@ get_header();
 				<div class="usa-width-two-thirds">
 				<?php
 					// FEATURED POST FROM HOMEPAGE SETTINGS OR MOST RECENT POST
-					display_featured_post();
+					$featured_post = display_featured_post();
 				?>
 				</div>
 
 				<div class="usa-width-one-third">
 					<?php
-						display_additional_recent_posts();
+						$post_qty = 2;
+
+						display_additional_recent_posts($post_qty );
 					?>
 					<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
 						<h2 class="screen-reader-text">Recent Posts Navigation</h2>
@@ -89,6 +91,7 @@ get_header();
 			<!-- SOAPBOX, CORNER HERO  -->
 			<section class="usa-grid">
 				<?php
+					// TEST FOR SHOWING BOTH, ONE OR NEITHER
 					$test = 1;
 
 					$soap_result = get_soap_box_data();
@@ -153,6 +156,7 @@ get_header();
 							}
 							query_posts($qParams);
 
+							$counter = 0;
 							if (have_posts()) {
 								while (have_posts()) : the_post();
 									$counter++;
@@ -161,7 +165,8 @@ get_header();
 									$postIDsUsed[] = $id;
 									$permalink = get_the_permalink();
 
-									$threat_markup  = '<article id="post-' . $id . '" ' . get_post_class() . '>';
+									$threat_markup  = '<article id="post-' . $id . '">';
+									// $threat_markup  = '<article id="post-' . $id . '" ' . get_post_class() . '>';
 									$threat_markup .= 	'<div class="image-block">';
 									$threat_markup .= 		'<a href="' . $permalink . '" rel="bookmark" tabindex="-1">';
 									$threat_markup .= 			get_the_post_thumbnail();

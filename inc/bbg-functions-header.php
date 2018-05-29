@@ -31,6 +31,7 @@ function display_splash_overlay() {
 function display_site_wide_banner_if() {
 	$sitewideAlert = get_field('sitewide_alert', 'option');
 	$q = get_field('sitewide_alert_complex', 'option');	//off, simple, or complex
+	$alert_package = '';
 	if ($sitewideAlert == "complex" && (!isset( $_COOKIE['richBannerDismissed']))) {
 
 		$alertCalloutID = $q -> ID;

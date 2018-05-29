@@ -107,7 +107,7 @@ function get_entity_data() {
 }
 
 function build_entity_markup($data) {
-	$entity_markup .= '<section id="entities" class="">';
+	$entity_markup  = '<section id="entities" class="">';
 	$entity_markup .= 	'<h1 class="header-outliner">Entities</h1>';
 	$entity_markup .= 	'<div class="usa-grid">';
 	$entity_markup .= 		'<h2><a href="' . get_permalink(get_page_by_path('networks')) . '" title="A list of the BBG broadcasters.">Our networks</a></h2>';
