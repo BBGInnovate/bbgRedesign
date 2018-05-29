@@ -1150,37 +1150,40 @@ add_action('acf/init', 'my_acf_init');
 
 // FOIA GROUP
 // CHECK IF FOIA REPORT MATCH
-function foia_regex_check($str) {
-	$foia_regex = ['/^BBG-20[0-9]{2}-Q[1-4]\.zip/', 
-				   '/^FOIA-20[0-9]{2}-Annual-Report-Raw-Data\.csv/', 
-				   '/^BBG\.FY[0-9]{2}\.FINAL\.xml/'];
-	foreach($foia_regex as $cur_regex) {
-		if (preg_match($cur_regex, $str)) {
-			return true;
-		}
-	}
-	return false;
-}
+
+// COMMENT TO TEST UPLOAD IMAGES ISSUE
+
+// function foia_regex_check($str) {
+// 	$foia_regex = ['/^BBG-20[0-9]{2}-Q[1-4]\.zip/', 
+// 				   '/^FOIA-20[0-9]{2}-Annual-Report-Raw-Data\.csv/', 
+// 				   '/^BBG\.FY[0-9]{2}\.FINAL\.xml/'];
+// 	foreach($foia_regex as $cur_regex) {
+// 		if (preg_match($cur_regex, $str)) {
+// 			return true;
+// 		}
+// 	}
+// 	return false;
+// }
 
 // ON UPLOAD, RUN FOIA CHECK
-function foia_upload_check($file) {
-	if (foia_regex_check($file['name'])) {
-		add_filter('option_uploads_use_yearmonth_folders', '__return_false', 100);
-		add_filter('upload_dir', 'foia_upload');
-	}
-	return $file;
-}
-add_filter('wp_handle_upload_prefilter', 'foia_upload_check');
+// function foia_upload_check($file) {
+// 	if (foia_regex_check($file['name'])) {
+// 		add_filter('option_uploads_use_yearmonth_folders', '__return_false', 100);
+// 		add_filter('upload_dir', 'foia_upload');
+// 	}
+// 	return $file;
+// }
+// add_filter('wp_handle_upload_prefilter', 'foia_upload_check');
 
 // CHANGE UPLOAD PATH IF FOIA REPORTS
-function foia_upload($file) {
-	// define('UPLOADS', 'wp-content/uploads'); // LOCAL
-	define('UPLOADS', 'wp-content/media'); // LIVE
-	$foia_path = '/foia-reports';
-	$file['path'] = $file['path'] . $foia_path;
-	$file['url'] = $file['url'] . $foia_path;
-	return $file;
-}
+// function foia_upload($file) {
+// 	// define('UPLOADS', 'wp-content/uploads'); // LOCAL
+// 	define('UPLOADS', 'wp-content/media'); // LIVE
+// 	$foia_path = '/foia-reports';
+// 	$file['path'] = $file['path'] . $foia_path;
+// 	$file['url'] = $file['url'] . $foia_path;
+// 	return $file;
+// }
 // END FOIA GROUP
 
 ?>
