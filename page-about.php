@@ -16,84 +16,6 @@ function isOdd( $pageTotal ) {
 	return ( $pageTotal % 2 ) ? TRUE : FALSE;
 }
 
-function showUmbrellaArea($atts) {
-	$itemTitle = $atts['itemTitle'];
-	$columnTitle = $atts['columnTitle'];
-	$link = $atts['link'];
-	$gridClass = $atts['gridClass'];
-	$description = $atts['description'];
-	$forceContentLabels = $atts['forceContentLabels'];
-	$thumbPosition = "center center";
-	$subTitle = $atts['subTitle'];
-	$thumbSrc = $atts['thumbSrc'];
-	$columnType = $atts['columnType'];
-	$anchorTarget = "";
-	$layout = $atts['layout'];
-	$linkSuffix = "";
-
-	if ($columnType == "file") {
-		$fileSize = $atts['fileSize'];
-		$fileExt = $atts['fileExt'];
-		$linkSuffix = ' <span class="bbg__file-size">(' . $fileExt . ', ' . $fileSize . ')</span>';
-	
-	}
-	if ($columnType == "external" || $columnType == "file") {
-		$anchorTarget = " target='_blank' ";
-	}
-
-	$layout_package = array('layout' => $layout, 'grid' => $gridClass, 'column_title' => $columnTitle, 'force_content_label' => $forceContentLabels, 'anchor' => $anchorTarget, 'link' => $link, 'link_suffix' => $linkSuffix, 'thumb' => $thumbSrc, 'item_title' => $itemTitle, 'sub_title' => $subTitle, 'description' => $description);
-	return build_layout_module($layout_package);
-}
-
-function build_layout_module($build_data) {
-	if ($build_data['layout'] == 'full') {
-		$layout_markup = '<article class="' . $build_data['grid'] . ' bbg__about__grandchild bbg__about__child">';
-		if ($build_data['column_title'] == "") {
-			if ($build_data['force_content_label']) {
-				$layout_markup .= '<h6 class="bbg__label">&nbsp;</h6>';	
-			}
-		} else {
-			if ($build_data['link'] != "") {
-				$columnTitle = '<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '">' . $build_data['column_title'] . '</a>';
-			}
-			$layout_markup .= '<h6 class="bbg__label">' . $build_data['column_title'] . '</h6>';
-		}
-		
-		if ($build_data['thumb']) {
-			$layout_markup .= '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--medium">'; 
-			$layout_markup .= 	'<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '" rel="bookmark" tabindex="-1">';
-			$layout_markup .= 		'<img width="1040" height="624" src="' . $build_data['thumb'] .  '" class="attachment-large-thumb size-large-thumb">';
-			$layout_markup .= 	'</a>';
-			$layout_markup .= '</div>';	
-		}
-		
-		$layout_markup .= '<h3 class="bbg__about__grandchild__title">';
-		$layout_markup .= 	'<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '">' . $build_data['item_title'] . '</a>';
-		$layout_markup .= 	$build_data['link_suffix'];
-		$layout_markup .= '</h3>';
-
-		if ($build_data['sub_title'] != "") {
-			$layout_markup .= '<h5 class="bbg__about__grandchild__subtitle">' . $build_data['sub_title'] . '</h5>';
-		}
-		$layout_markup .= 	$build_data['description'];
-		$layout_markup .= '</article>';
-		echo $layout_markup;
-	}
-	else {
-		$layout_markup  = '<article class="' . $build_data['grid'] . ' bbg__about__grandchild">';
-		$columnTitle = $itemTitle;
-		if ($build_data['link'] != "") {
-			$columnTitle = '<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '">' . $build_data['column_title'] . '</a>';
-		}
-		$columnTitle = $columnTitle . $build_data['link_suffix'];
-		$layout_markup .= '<h3 class="bbg__about__grandchild__title">' . $columnTitle . '</h3>';	
-		$layout_markup .= '<a '  . $build_data['anchor'] . ' href="' . $build_data['link'] . '">';
-		$layout_markup .= '<div class="bbg__about__grandchild__thumb" style="background-image: url(' . $build_data['thumb'] . '); background-position:center center;"></div></a>' . $build_data['description'];
-		$layout_markup .= '</article>';
-		echo $layout_markup;
-	}
-}
-
 $templateName = "about";
 
 $bannerPosition = get_field( 'adjust_the_banner_image', '', true);
@@ -206,9 +128,9 @@ get_header();
 							$marqueeContent = str_replace( ']]>', ']]&gt;', $marqueeContent ); 
 
 							echo '<section class="usa-grid-full bbg__about__children--row bbg__about--marquee">';
-							echo '<article id="post-25948" class="bbg__about__excerpt bbg__about__child bbg__about__child--mission bbg-grid--1-1-1 post-25948 page type-page status-publish has-post-thumbnail hentry">';
-								echo '<header class="entry-header bbg__about__excerpt-header"><h6 class="bbg__label"><a href="' . $marqueeLink . '">' . $marqueeHeading . '</a></h6></header>';
-								echo '<div class="entry-content bbg__about__excerpt-content">' . $marqueeContent . '</div>';
+							echo 	'<article id="post-25948" class="bbg__about__excerpt bbg__about__child bbg__about__child--mission bbg-grid--1-1-1 post-25948 page type-page status-publish has-post-thumbnail hentry">';
+							echo 		'<header class="entry-header bbg__about__excerpt-header"><h6 class="bbg__label"><a href="' . $marqueeLink . '">' . $marqueeHeading . '</a></h6></header>';
+							echo 	'<div class="entry-content bbg__about__excerpt-content">' . $marqueeContent . '</div>';
 							echo '</article>';
 							echo '</section>';
 
@@ -222,7 +144,6 @@ get_header();
 							$sectionIntroText = get_sub_field('umbrella_section_intro_text');
 							$sectionIntroText = apply_filters( 'the_content', $sectionIntroText );
 							$sectionIntroText = str_replace( ']]>', ']]&gt;', $sectionIntroText );
-
 
 							//output intro section label if it exists (with or without link)
 							if ($sectionHeading != "") {
@@ -277,7 +198,7 @@ get_header();
 									$titleOverride = get_sub_field('umbrella_content_internal_title');
 									$secondaryHeadline = get_post_meta( $id, 'headline', true );
 									$lawName = get_post_meta( $id, 'law_name', true );
- 
+
 									if ( $includeTitle ) {
 										$titleOverride = get_sub_field('umbrella_content_internal_item_title');
 										if ($titleOverride != "" ) {
