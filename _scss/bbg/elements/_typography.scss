@@ -19,9 +19,18 @@ h2 {
     text-transform: uppercase;
     color: $color-red;
 }
-h4, h5 {
+h3, h4 {
     font-weight: $font-normal;
     color: $color-blue-darker;
+}
+h5 {
+    font-weight: $font-bold;
+    color: $color-blue-darkest;
+}
+
+h6 {
+    font-weight: $font-bold;
+    color: $color-taupe-dark;
 }
 
 p {

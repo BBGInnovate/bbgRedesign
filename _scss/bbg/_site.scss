@@ -260,11 +260,7 @@
         font-family: $font-sans; //max-width: 17rem;
         width: 30%;
 
-        p,
-        li {
-            font-size: 90%;
-            line-height: 1.5;
-        }
+        p, li {line-height: 1.5;}
 
         &.large {
             max-width: none;

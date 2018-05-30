@@ -7,43 +7,40 @@
  * @package bbginnovate
  */
 
-//Default adds a space above header if there's no image set
+// ADDS HEAD SPACE IF NO IMAGE IS SET
 $featuredImageClass = " bbg__article--no-featured-image";
 
-//Add featured video
-$videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
+$videoUrl = get_post_meta(get_the_ID(), 'featured_video_url', true);
 
-//Dateline not automatically included - if the user checked the custom field, prepare it.
 $dateline = "";
-$includeDateline = get_post_meta( get_the_ID(), 'include_dateline', true );
-if ( in_category('Press Release') && $includeDateline ){
-	$dateline = '<span class="bbg__article-dateline">';
-	$dateline .= get_post_meta( get_the_ID(), 'dateline_location', true );
+$includeDateline = get_post_meta(get_the_ID(), 'include_dateline', true);
+if ( in_category('Press Release') && $includeDateline) {
+	$dateline  = '<span class="bbg__article-dateline">';
+	$dateline .= 	get_post_meta( get_the_ID(), 'dateline_location', true);
 	$dateline .= " — </span>";
 }
 
-//place dateline immediately inside first paragraph tag for formatting purposes
+// DATELINE GOES INSIDE FIRST PARAGRAPH TAG FOR FORMATTING
 $pageContent = get_the_content();
 $pageContent = apply_filters('the_content', $pageContent);
 $pageContent = str_replace(']]>', ']]&gt;', $pageContent);
 if ($dateline != "") {
-	$needle="<p>";
-	$replaceNeedle="<p>".$dateline;
+	$needle = "<p>";
+	$replaceNeedle = "<p>" . $dateline;
 	$pos = strpos($pageContent, $needle);
 	if ($pos !== false) {
 		$pageContent = substr_replace($pageContent, $replaceNeedle, $pos, strlen($needle));
 	}
 }
 
-
-//if the user has selected a related profile, it will show up in the right sidebar
-$relatedProfileID = get_post_meta( get_the_ID(), 'statement_related_profile', true );
+// RELATIVE PROFILE? SHOW IN RIGHT SIDEBAR
+$relatedProfileID = get_post_meta(get_the_ID(), 'statement_related_profile', true);
 $includeRelatedProfile = false;
+
 if ($relatedProfileID) {
-
 	$includeRelatedProfile = true;
+	$alternatePhotoID = get_post_meta(get_the_ID(), 'statement_alternate_profile_image', true);
 
-	$alternatePhotoID = get_post_meta( get_the_ID(), 'statement_alternate_profile_image', true );
 	if ($alternatePhotoID) {
 		$profilePhotoID = $alternatePhotoID;
 	} else {
@@ -53,33 +50,31 @@ if ($relatedProfileID) {
 	$profilePhoto = "";
 
 	if ($profilePhotoID) {
-		$profilePhoto = wp_get_attachment_image_src( $profilePhotoID , 'Large Mugshot');
+		$profilePhoto = wp_get_attachment_image_src($profilePhotoID, 'Large Mugshot');
 		$profilePhoto = $profilePhoto[0];
 	}
-	$twitterProfileHandle = get_post_meta( $relatedProfileID, 'twitter_handle', true );
+	$twitterProfileHandle = get_post_meta($relatedProfileID, 'twitter_handle', true);
 	$profileName = get_the_title($relatedProfileID);
-	$occupation = get_post_meta( $relatedProfileID, 'occupation', true );
+	$occupation = get_post_meta($relatedProfileID, 'occupation', true);
 	$profileLink = get_page_link($relatedProfileID);
 	$profileExcerpt = my_excerpt($relatedProfileID);
 
-	$relatedProfile = '<div class="bbg__sidebar__primary">';
-	$relatedProfile .= '<a href="' . $profileLink . '"><img class="bbg__sidebar__primary-image" src="'.$profilePhoto.'"/></a>';
-	$relatedProfile .= '<h3 class="bbg__sidebar__primary-headline"><a href="' . $profileLink . '">' . $profileName . '</a></h3>';
-	$relatedProfile .= '<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
-	$relatedProfile .= '<p class="">' . $profileExcerpt . '</p></div>';
+	$relatedProfile  = '<div class="bbg__sidebar__primary">';
+	$relatedProfile .= 		'<a href="' . $profileLink . '"><img class="bbg__sidebar__primary-image" src="'.$profilePhoto.'"/></a>';
+	$relatedProfile .= 		'<h3 class="bbg__sidebar__primary-headline"><a href="' . $profileLink . '">' . $profileName . '</a></h3>';
+	$relatedProfile .= 		'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
+	$relatedProfile .= 		'<p class="">' . $profileExcerpt . '</p>';
+	$relatedProfile .= '</div>';
 }
 
-$listsInclude = get_field( 'sidebar_dropdown_include', '', true);
+$listsInclude = get_field('sidebar_dropdown_include', '', true);
 
 include get_template_directory() . "/inc/shared_sidebar.php";
-
-
-//Include sidebar map
 
 $includeMap = get_post_meta( get_the_ID(), 'map_include', true );
 $mapLocation = get_post_meta( get_the_ID(), 'map_location', true );
 
-//fake a map location
+// FAKE A MAP LOCATION
 if (get_post_type() == "threat_to_press") {
 	$mapLocation = get_post_meta( get_the_ID(), 'threats_to_press_coordinates', true );
 	if ($mapLocation) {
@@ -87,7 +82,7 @@ if (get_post_type() == "threat_to_press") {
 	}
 }
 
-if ( $includeMap && $mapLocation) {
+if ($includeMap && $mapLocation) {
 	$mapHeadline = get_post_meta( get_the_ID(), 'map_headline', true );
 	$mapDescription = get_post_meta( get_the_ID(), 'map_description', true );
 	$mapPin = get_post_meta( get_the_ID(), 'map_pin', true );
@@ -107,16 +102,16 @@ if ( $includeMap && $mapLocation) {
 		$pin = "pin-s+990000(" . $lng .",". $lat .")/";
 	}
 
-	//Static map version like this:
-	//$map = "https://api.mapbox.com/v4/mapbox.emerald/" . $pin . $lng . ",". $lat . "," . $zoom . "/170x300.png?access_token=" . $key;
+	// STATIC MAP REFERENCE 
+	// $map = "https://api.mapbox.com/v4/mapbox.emerald/" . $pin . $lng . ",". $lat . "," . $zoom . "/170x300.png?access_token=" . $key;
 }
 
-// Include sidebar list of people who worked on the project
+// SIDEBAR: LIST OF PROJECT WORKERS
 $teamRoster = "";
 if( have_rows('project_team_members') ):
 
 	$s = "<div class='bbg__project-team'><h5 class='bbg__project-team__header'>Project team</h5>";
-	while ( have_rows('project_team_members') ) : the_row();
+	while (have_rows('project_team_members')) : the_row();
 
 		if ( get_row_layout() == 'team_member') {
 			$teamMemberName = get_sub_field( 'team_member_name' );
@@ -481,50 +476,57 @@ $hideFeaturedImage = false;
 
 	<div class="usa-grid">
 	<?php 
-		echo '<header class="entry-header bbg__article-header' . $featuredImageClass . '">';
-
+		$header_markup = '<header>';
 		if (get_post_type() == "threat_to_press") {
-			$link = get_permalink( get_page_by_path( 'threats-to-press' ) );
-			echo '<h5 class="entry-category bbg__label"><a href="' . $link . '" title="Threats to Press">Threats to Press</a></h5>';
+			$link = get_permalink( get_page_by_path('threats-to-press'));
+
+			$threats_header  = '<h5 class="entry-category bbg__label">';
+			$threats_header .= 		'<a href="' . $link . '" title="Threats to Press">Threats to Press</a>';
+			$threats_header .= '</h5>';
+
+			$header_markup .= $threats_header;
 		} else {
-			echo bbginnovate_post_categories();
+			$header_markup .= bbginnovate_post_categories();
 		}
-		// .bbg__label
-		the_title( '<h1 class="entry-title bbg__article-header__title">', '</h1>' );
+		
+		$header_markup .= '<h3>' . get_the_title() . '</h3>';
 
-		// .bbg__article-header__title
 		if ($addFeaturedGallery) {
-			echo "<div class='usa-grid-full bbg__article-featured__gallery' >";
-			$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
-			putUniteGallery($featuredGalleryID);
-			echo "</div>";
-		}
-	?>
-		<div class="entry-meta bbg__article-meta">
-			<?php bbginnovate_posted_on(); ?>
-		</div><!-- .bbg__article-meta -->
-	</header><!-- .bbg__article-header -->
+			$featuredGalleryID = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
 
+			echo '<div class="usa-grid-full bbg__article-featured__gallery">';
+			echo 	putUniteGallery($featuredGalleryID);
+			echo '</div>';
+		}
+		$header_markup .= 	'<div class="entry-meta bbg__article-meta">';
+		$header_markup .= 		bbginnovate_posted_on();
+		$header_markup .=  '</div>';
+		$header_markup .= '</header>';
+		echo $header_markup;
+	?>
 
 
 		<div class="bbg__article-sidebar--left">
 			<?php
 				$numLogos = count($entityLogos);
-				if ( $numLogos > 0 && $numLogos < 3) {
-					for ($i=0; $i < $numLogos; $i++) {
+				if ($numLogos > 0 && $numLogos < 3) {
+					for ($i = 0; $i < $numLogos; $i++) {
 						$e = $entityLogos[$i];
 						$entityLink = $e['link'];
 						$entityLogo = $e['logo'];
 						$firstClass = "";
-						//attach a utility class to allow us to apply spacing at mobile when you have multiple entity icons
-						if ($i ==0 && $numLogos > 0) {
+						// UTILITY CLASS FOR ADDED SPACE WHEN MULTIPLE ICONS
+						if ($i == 0 && $numLogos > 0) {
 							$firstClass = "bbg__entity-logo__press-release-first-of-many";
 						}
-						echo '<a href="'.$entityLink.'" title="Learn more"><img src="'. $entityLogo . '" class="bbg__entity-logo__press-release ' . $firstClass . '"/></a>';
+						$entity_icons  = '<a href="'.$entityLink.'" title="Learn more">';
+						$entity_icons .= 	'<img src="'. $entityLogo . '" class="bbg__entity-logo__press-release ' . $firstClass . '">';
+						$entity_icons .= '</a>';
+						echo $entity_icons;
 					}
 				}
 			?>
-			<h3 class="bbg__sidebar-label bbg__contact-label">Share </h3>
+			<h6 class="bbg__sidebar-label bbg__contact-label">Share </h6>
 			<ul class="bbg__article-share">
 				<li class="bbg__article-share__link facebook">
 					<a href="<?php echo $fbUrl; ?>">
@@ -552,7 +554,7 @@ $hideFeaturedImage = false;
 					echo $podcastTranscript;
 				}
 
-				/* START AWARD INFO */
+				// AWARD INFO
 				if ($isAward) {
 					$awardDescription = get_post_meta( get_the_ID(), 'standardpost_award_description', true );
 					if ( isset($awardDescription) && $awardDescription!= "" ) {
@@ -564,30 +566,26 @@ $hideFeaturedImage = false;
 						if ( $awardLogo ){
 							$awardLogoImage = wp_get_attachment_image_src( $awardLogo , 'small-thumb-uncropped');
 							$awardLogoImage = $awardLogoImage[0];
-							// $awardLogoImage = '<img src="' . $awardLogoImage . '" class="bbg__sidebar__primary-image"/>';
 							$awardLogoImage = '<img src="' . $awardLogoImage . '" class="bbg__profile-excerpt__photo"/>';
 						}
-
-						echo '<div class="usa-grid-full bbg__contact-box">';
-							echo '<h3>About ' . $awardOrganization . '</h3>';
-							echo $awardLogoImage;
-							echo '<p><span class="bbg__tagline">' . $awardDescription . '</span></p>';
-						echo '</div>';
+						$award_markup  = '<div class="usa-grid-full bbg__contact-box">';
+						$award_markup .= 	'<h3>About ' . $awardOrganization . '</h3>';
+						$award_markup .= 	$awardLogoImage;
+						$award_markup .= 	'<p><span class="bbg__tagline">' . $awardDescription . '</span></p>';
+						$award_markup .= '</div>';
+						echo $award_markup;
 					}
-					/* END AWARD INFO */
 				}
 
-
-				/* START CONTACT CARDS */
-				$contactPostIDs = get_post_meta( $post->ID, 'contact_post_id',true );
+				// CONTACT CARDS
+				$contactPostIDs = get_post_meta( $post->ID, 'contact_post_id', true );
 				renderContactCard($contactPostIDs);
-				/* END CONTACT CARDS */
 			?>
 		</div><!-- .entry-content -->
 
 		<div class="bbg__article-sidebar">
 			<?php
-				if ( $includeRelatedProfile ) {
+				if ($includeRelatedProfile) {
 					echo $relatedProfile;
 				}
 
@@ -596,22 +594,23 @@ $hideFeaturedImage = false;
 
 				echo getInterviewees();
 
-				if ( $includeMap  && $mapLocation){
-					//echo "<img src='" . $map . "' class='bbg__locator-map'/>";
-					echo "<h4>" . $mapHeadline . "</h4>";
-					echo "<div id='map' class='bbg__locator-map'>";
-						echo "<p>" . $mapDescription . "</p>";
-					echo "</div>";
+				if ($includeMap  && $mapLocation) {
+					$sidebar_map  = "<h4>" . $mapHeadline . "</h4>";
+					$sidebar_map .= "<div id='map' class='bbg__locator-map'>";
+					$sidebar_map .= 	"<p>" . $mapDescription . "</p>";
+					$sidebar_map .= "</div>";
+					echo $sidebar_map;
 				}
 
-				if ( $isAward ) {
-					echo "<h5 class='bbg__label small bbg__sidebar__download__label'>About the Award</h5>";
-					echo '<div class="bbg__sidebar__primary">';
-						echo getAwardInfo( get_the_ID(), true );	//getAwardInfo is found in bbg-functions-awards.php
-					echo '</div>';
+				if ($isAward) {
+					$award_info  = "<h5 class='bbg__label small bbg__sidebar__download__label'>About the Award</h5>";
+					$award_info .= '<div class="bbg__sidebar__primary">';
+					$award_info .= 		getAwardInfo(get_the_ID(), true);
+					$award_info .= '</div>';
+					echo $award_info;
 				}
 
-				if ( $includeSidebar ) {
+				if ($includeSidebar) {
 					echo $sidebar;
 				}
 
@@ -739,7 +738,7 @@ if ($addFeaturedMap && $media_dev_map == "") {
 
 <?php
 /* if the map is set, then load the necessary JS and CSS files */
-if ( $includeMap  && $mapLocation){
+if ($includeMap && $mapLocation){
 ?>
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />

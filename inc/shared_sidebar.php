@@ -4,31 +4,33 @@
  * show single downloads, quotations, external links, internal links, & photos
  * @var [boolean]
  */
-$includeSidebar = get_post_meta( get_the_ID(), 'sidebar_include', true );
+
+$includeSidebar = get_post_meta(get_the_ID(), 'sidebar_include', true);
 $sidebar = "";
 $sidebarDownloads = "";
-if ( $includeSidebar ) {
 
-	// check if the flexible content field has rows of data
+if ($includeSidebar) {
 
-	$s = "";
+	// DOES FLEXIBLE CONTENT FIELD HAVE ROWS OF DATA
+	$sidebar_markup = "";
 
-	$sidebarTitle = get_post_meta( get_the_ID(), 'sidebar_title', true );
-	if ( $sidebarTitle != "" ) {
-		$s .= "<h5 class='bbg__label small bbg__sidebar__download__label'>" . $sidebarTitle ."</h5>";
+	$sidebarTitle = get_post_meta(get_the_ID(), 'sidebar_title', true);
+	if ($sidebarTitle != "") {
+		$sidebar_markup .= "<h6>" . $sidebarTitle . "</h6>";
 	}
 
-	$sidebarDescription = get_post_meta( get_the_ID(), 'sidebar_description', true );
-	if ( $sidebarDescription != "" ) {
+	$sidebarDescription = get_post_meta( get_the_ID(), 'sidebar_description', true);
+	if ($sidebarDescription != "") {
 		$sidebarDescription = apply_filters('the_content', $sidebarDescription);
 		$sidebarDescription = str_replace(']]>', ']]&gt;', $sidebarDescription);
-		$s .= $sidebarDescription;
+
+		$sidebar_markup .= $sidebarDescription;
 	}
 
-	if ( have_rows('sidebar_items') ):
-		while ( have_rows('sidebar_items') ) : the_row();
-			if ( get_row_layout() == 'sidebar_download_file' ) {
-			/* START DOWNLOAD FILES */
+	if (have_rows('sidebar_items')):
+		while (have_rows('sidebar_items')) : the_row();
+			if (get_row_layout() == 'sidebar_download_file') {
+				// DOWNLOAD FILES
 				$sidebarDownloadTitle = get_sub_field( 'sidebar_download_title' );
 				$sidebarDownloadThumbnail = get_sub_field( 'sidebar_download_thumbnail' );
 				$sidebarDownloadLinkObj = get_sub_field( 'sidebar_download_link' );
@@ -40,7 +42,7 @@ if ( $includeSidebar ) {
 				$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
 				$filesize = formatBytes(filesize($file));
 
-				// ADDING A FALLBACK TO FETCH THE FILE NAME WHEN WE DON'T ENTER ONE IN THE CUSTOM FIELD
+				// ADD FALLBACK TO FETCH FILE NAME IF NOT ENTERED IN CUSTOM FIELD
 				if ( $sidebarDownloadTitle == "" ) {
 					$sidebarDownloadTitle = $sidebarDownloadLinkObj['post_title'];
 				}
@@ -50,73 +52,82 @@ if ( $includeSidebar ) {
 					$sidebarImage = "<img src='" . $sidebarDownloadThumbnail . "' class='bbg__sidebar__download__thumbnail' alt='Thumbnail image for download' />";
 				}
 
-				$sidebarDescription = "";
-				if ($sidebarDownloadDescription && $sidebarDownloadDescription != ""){
-					$sidebarDescription = "<p class='bbg__sidebar__download__description'>" . $sidebarDownloadDescription . "</p>";
+				$sidebar_download  = '<div class="bbg__sidebar__download">';
+				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
+				$sidebar_download .= 	'<h5 class="bbg__sidebar__download__title">';
+				$sidebar_download .= 		'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
+				$sidebar_download .= 		'<span class="bbg__file-size">($ext, $filesize)</span>';
+				$sidebar_download .= 	'</h5>';
+				
+				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
+					$sidebar_download .= '<p class="bbg__sidebar__download__description">';
+					$sidebar_download .= 	$sidebarDownloadDescription;
+					$sidebar_download .= '</p>';
 				}
+				$sidebar_download .= '</div>';
 
-				$sidebarDownload = "";
-				$sidebarDownload = "<a target='_blank' href='" . $sidebarDownloadLink . "'>" . $sidebarImage . "</a><h5 class='bbg__sidebar__download__title'><a target='_blank' href='" . $sidebarDownloadLink . "'>" . $sidebarDownloadTitle . "</a> <span class='bbg__file-size'>($ext, $filesize)</span></h5>" . $sidebarDescription;
-
-				$s .= "<div class='bbg__sidebar__download'>" . $sidebarDownload . "</div>";
-			/* END DOWNLOAD FILES */
+				$sidebar_markup .= $sidebar_download;
+			
 			} else if (get_row_layout() == 'sidebar_quote'){
-			/* START QUOTATIONS */
 				$sidebarQuotationText = get_sub_field( 'sidebar_quotation_text', false);
 				$sidebarQuotationSpeaker = get_sub_field( 'sidebar_quotation_speaker' );
 				$sidebarQuotationSpeakerTitle = get_sub_field( 'sidebar_quotation_speaker_title' );
 
-				$s .= '<div class="bbg__quotation"><h5 class="bbg__quotation-text--large">“' . $sidebarQuotationText . '”</h5><p class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">' . $sidebarQuotationSpeaker . ',</span><span class="bbg__quotation-attribution__credit"> ' . $sidebarQuotationSpeakerTitle ."</span></p></div>";
-			/* END QUOTATIONS */
-			} else if (get_row_layout() == 'sidebar_external_link'){
-			/* START EXTERNAL LINKS */
+				$quote_markup  = '<div class="bbg__quotation">';
+				$quote_markup .= 	'<h5 class="bbg__quotation-text--large">' . $sidebarQuotationText . '</h5>';
+				$quote_markup .= 	'<p class="bbg__quotation-attribution__text">';
+				$quote_markup .= 		'<span class="bbg__quotation-attribution__name">' . $sidebarQuotationSpeaker . ',</span>';
+				$quote_markup .= 		'<span class="bbg__quotation-attribution__credit">' . $sidebarQuotationSpeakerTitle . '</span>';
+				$quote_markup .= 	'</p>';
+				$quote_markup .= '</div>';
+
+				$sidebar_markup .= $quote_markup;
+
+			} else if (get_row_layout() == 'sidebar_external_link') {
 				$sidebarLinkTitle = get_sub_field( 'sidebar_link_title', false);
 				$sidebarLinkLink = get_sub_field( 'sidebar_link_link' );
 				$sidebarLinkImage = get_sub_field( 'sidebar_link_image' );
-				$sidebarLinkDescription = get_sub_field( 'sidebar_link_description', false);
+				$sidebarLinkDescription = get_sub_field('sidebar_link_description', false);
 
-				$sidebarDescription = "";
+				$external_links  = '<div>';
+				if ($sidebarLinkImage && $sidebarLinkImage != "") {
+					$external_links .= '<a target="blank" href="' . $sidebarLinkLink . '">';
+					$external_links .= 		'<img class="bbg__sidebar__primary-image" src="' . $sidebarLinkImage['sizes']['medium'] . '">';
+					$external_links .= '</a>';
+				}
+				$external_links .= 		'<h5>';
+				$external_links .= 			'<a target="blank" href="' . $sidebarLinkLink . '">' . $sidebarLinkTitle . '</a>';
+				$external_links .= 		'</h5>';
+
 				if ($sidebarLinkDescription && $sidebarLinkDescription != ""){
-					$sidebarDescription = "<p>" . $sidebarLinkDescription . "</p>";
+					$external_links .= '<p>';
+					$external_links .= 		$sidebarLinkDescription;
+					$external_links .= '</p>';
 				}
+				$external_links .= '</div>';
 
-				$sidebarImage = "";
-				if ($sidebarLinkImage && $sidebarLinkImage != ""){
+				$sidebar_markup .= $external_links;
 
-					$sidebarImageSrc = $sidebarLinkImage['sizes']['medium'];
-					$sidebarImage = '<a target="blank" href="' . $sidebarLinkLink . '"><img class="bbg__sidebar__primary-image" src="' . $sidebarImageSrc . '"/></a>';
-				}
-
-				$s .= '<div>' . $sidebarImage . '<h5 class="bbg__sidebar__primary-headline"><a target="blank" href="' . $sidebarLinkLink . '">' . $sidebarLinkTitle . '</a></h5>' . $sidebarDescription . '</div>';
-			/* END EXTERNAL LINKS */
 			} else if (get_row_layout() == 'sidebar_internal_link') {
-			/* START INTERNAL LINKS */
-				$sidebarInternalTitle = get_sub_field( 'sidebar_internal_title', false);
-				$sidebarInternalLocation = get_sub_field( 'sidebar_internal_location' );
-				$sidebarInternalDescription = get_sub_field( 'sidebar_internal_description', false);
+				$sidebarInternalTitle = get_sub_field('sidebar_internal_title', false);
+				$sidebarInternalLocation = get_sub_field('sidebar_internal_location');
+				$sidebarInternalDescription = get_sub_field('sidebar_internal_description', false);
 
-				// get data out of WP object
-				$url = get_permalink( $sidebarInternalLocation->ID ); // Use WP object ID to get permalink for link
-				$title = $sidebarInternalLocation->post_title; // WP object title
-
-				$sidebarSectionTitle = "";
-				// Set text for the internal link
+				$internal_links  = '<div>';
+				$internal_links .= 	'<h5 class="bbg__sidebar__primary-headline">';
+				$internal_links .= 		'<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
 				if ($sidebarInternalTitle && $sidebarInternalTitle != "") {
-					// User-defined title
-					$sidebarSectionTitle = $sidebarInternalTitle;
+					$sidebarSectionTitle .= $sidebarInternalTitle;
 				} else {
-					// WP object title (set above)
-					$sidebarSectionTitle = $title;
+					$sidebarSectionTitle .= $sidebarInternalLocation -> post_title;
 				}
-
-				$sidebarDescription = "";
-				// Set text for description beneath link
+				$internal_links .= 		'</a>';
+				$internal_links .= 	'</h5>';
 				if ($sidebarInternalDescription && $sidebarInternalDescription != "") {
-					// User-defined description
-					$sidebarDescription = "<p>" . $sidebarInternalDescription . "</p>";
+					$internal_links .= 	$sidebarDescription;
 				}
-
-				$s .= '<div><h5 class="bbg__sidebar__primary-headline"><a href="' . $url . '">' . $sidebarSectionTitle . '</a></h5>' . $sidebarDescription . '</div>';
+				$internal_links .= '</div>';
+				$sidebar_markup .= $internal_links;
 			/* END INTERNAL LINKS */
 			} else if (get_row_layout() == 'sidebar_photo'){
 			/* START PHOTOS */
@@ -129,6 +140,7 @@ if ( $includeSidebar ) {
 					$sidebarPhotoImageSrc = $sidebarPhotoImage['sizes']['medium'];
 					$sidebarImage = '<img class="" src="' . $sidebarPhotoImageSrc . '"/>';
 				}
+
 				/*
 				helpful for debugging
 				var_dump($sidebarPhotoImage);
@@ -151,55 +163,59 @@ if ( $includeSidebar ) {
 					$sidebarDescription = "<p class='bbg__sidebar__photo-caption'>" . $sidebarPhotoCaption . "</p>";
 				}
 
-				$s .= '<div>' . $sidebarImage . $sidebarImageTitle . $sidebarDescription . '</div>';
+				$sidebar_markup .= '<div>' . $sidebarImage . $sidebarImageTitle . $sidebarDescription . '</div>';
 			/* END PHOTOS */
 			} else if (get_row_layout() == 'sidebar_accordion'){
-				$s = "";
+				$accordion = "";
 				$accordionTitle = get_sub_field('sidebar_accordion_title');
 				if ($accordionTitle != "") {
-					$s .= "<h5 class='bbg__label small bbg__sidebar__download__label'>$accordionTitle</h5>";
+					$accordion .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $accordionTitle . '</h5>';
 				}
-				if( have_rows('sidebar_accordion_items') ):
-					$s .= '<style>
-					div.usa-accordion-content {
-						padding:1.5rem !important;
-					}
-					</style>';
+				if(have_rows('sidebar_accordion_items')) {
+					$accordion .= '<style>';
+					$accordion .= 	'div.usa-accordion-content {padding:1.5rem !important;}';
+					$accordion .= '</style>';
 
-					$s .= '<div class="usa-accordion bbg__committee-list"><ul class="usa-unstyled-list">';
+					$accordion .= '<div class="usa-accordion bbg__committee-list">';
+					$accordion .= 		'<ul class="usa-unstyled-list">';
 					$i = 0;
-					while ( have_rows('sidebar_accordion_items') ) : the_row();
+					while (have_rows('sidebar_accordion_items')) : the_row();
 						$i++;
 						$itemLabel = get_sub_field('sidebar_accordion_item_label');
 						$itemText = get_sub_field('sidebar_accordion_item_text');
-						$s .= '<li>';
-						$s .= '<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $itemLabel . '</button>';
-						$s .= '<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
-						$s .= $itemText;
-						$s .= '</div>';
-						$s .= '</li>';
-						endwhile;
-						$s .= '</ul></div>';
-				endif;
+
+						$accordion .= 	'<li>';
+						$accordion .= 		'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $itemLabel . '</button>';
+						$accordion .= 		'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
+						$accordion .= 			$itemText;
+						$accordion .= 		'</div>';
+						$accordion .= 	'</li>';
+					endwhile;
+					$accordion .= 	'</ul>';
+					$accordion .= '</div>';
+
+					$sidebar_markup .= $accordion;
+				}
 			} else if (get_row_layout() == 'sidebar_related_award'){
 				$relatedPosts = get_sub_field('sidebar_related_award_post');
+				
 				if (is_array($relatedPosts) && count($relatedPosts) > 0) {
 					$label = "About the Award";
 					if (count($relatedPosts) > 1) {
 						$label .= "s";
 					}
 
-					$s .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $label . '</h5>';
-					$s .='<div class="bbg__sidebar__primary">';
-					$counter =0;
+					$sidebar_markup .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $label . '</h5>';
+					$sidebar_markup .='<div class="bbg__sidebar__primary">';
+					$counter = 0;
 					foreach ($relatedPosts as $relatedPost) {
 						$counter++;
 						if ($counter > 1) {
-							$s .= "<br />";
+							$sidebar_markup .= "<br />";
 						}
-						$s .= getAwardInfo($relatedPost -> ID, false);
+						$sidebar_markup .= getAwardInfo($relatedPost -> ID, false);
 					}
-					$s .=  '</div>';
+					$sidebar_markup .=  '</div>';
 				}
 			} else if (get_row_layout() == 'sidebar_twitter_widget'){
 				//create widgets @ https://twitter.com/settings/widgets
@@ -217,20 +233,20 @@ if ( $includeSidebar ) {
 						$widgetLink = "https://twitter.com/hashtag/$widgetHashtag";
 						$widgetLinkLabel = '#' . $widgetHashtag;
 					}
-					$s .= '<h5 class="bbg__label small bbg__sidebar__download__label">Follow on Twitter</h5>';
-					$s .= '<ul class="bbg__article-share ">';
-					$s .= '<li class="bbg__article-share__link twitter">';
-					$s .= '<a href="' . $widgetLink . '" title="Follow on Twitter"><span class="bbg__article-share__icon twitter"></span><span class="">' . $widgetLinkLabel . '</span></a>';
-					$s .= '</li>';
-					$s .= '</ul>';
+					$sidebar_markup .= '<h5 class="bbg__label small bbg__sidebar__download__label">Follow on Twitter</h5>';
+					$sidebar_markup .= '<ul class="bbg__article-share ">';
+					$sidebar_markup .= '<li class="bbg__article-share__link twitter">';
+					$sidebar_markup .= '<a href="' . $widgetLink . '" title="Follow on Twitter"><span class="bbg__article-share__icon twitter"></span><span class="">' . $widgetLinkLabel . '</span></a>';
+					$sidebar_markup .= '</li>';
+					$sidebar_markup .= '</ul>';
 
 					if ($widgetAuthor) {
-						$s .= '<a data-tweet-limit="2" data-show-replies="false" data-chrome="noheader nofooter noborders transparent noscrollbar" data-dnt="true" data-theme="light" class="twitter-timeline" href="https://twitter.com/' . $widgetAuthor . '">Tweets by ' . $widgetAuthor . '</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+						$sidebar_markup .= '<a data-tweet-limit="2" data-show-replies="false" data-chrome="noheader nofooter noborders transparent noscrollbar" data-dnt="true" data-theme="light" class="twitter-timeline" href="https://twitter.com/' . $widgetAuthor . '">Tweets by ' . $widgetAuthor . '</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
 					} else if ($widgetHashtag) {
-						$s .= '<a data-chrome="noheader" class="twitter-timeline"  href="https://twitter.com/hashtag/' . $widgetHashtag . '" data-widget-id="' . $widgetID . '">#' . $widgetHashtag . ' Tweets</a>';
-						$s .= '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?';
-						$s .= "'http':'https'";
-						$s .= ';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
+						$sidebar_markup .= '<a data-chrome="noheader" class="twitter-timeline"  href="https://twitter.com/hashtag/' . $widgetHashtag . '" data-widget-id="' . $widgetID . '">#' . $widgetHashtag . ' Tweets</a>';
+						$sidebar_markup .= '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?';
+						$sidebar_markup .= "'http':'https'";
+						$sidebar_markup .= ';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
 					}
 				}
 			} else if (get_row_layout() == 'sidebar_accordion_dynamic'){
@@ -255,22 +271,22 @@ if ( $includeSidebar ) {
 					}
 				}
 				if (!count($tagIDs)) {
-					$s .= "Dynamic accordion requires at least one tag.<BR>";
+					$sidebar_markup .= "Dynamic accordion requires at least one tag.<BR>";
 				} else {
 					if ($accordionTitle != "") {
-						$s .= "<h5 class='bbg__label small bbg__sidebar__download__label'>$accordionTitle</h5>";
+						$sidebar_markup .= "<h5 class='bbg__label small bbg__sidebar__download__label'>$accordionTitle</h5>";
 					}
 
 					if ($sectionDescription) {
-						$s .= '<p>' . $sectionDescription . '</p>';
+						$sidebar_markup .= '<p>' . $sectionDescription . '</p>';
 					}
-					$s .= '<style>
+					$sidebar_markup .= '<style>
 					div.usa-accordion-content {
 						padding:1.5rem !important;
 					}
 					</style>';
 
-					$s .= '<div class="usa-accordion bbg__committee-list"><ul class="usa-unstyled-list">';
+					$sidebar_markup .= '<div class="usa-accordion bbg__committee-list"><ul class="usa-unstyled-list">';
 					$qParams=array(
 						'post_type' => array('post'),
 						'posts_per_page' => 999,
@@ -319,25 +335,25 @@ if ( $includeSidebar ) {
 						$itemID = $tag -> term_id;
 						$itemLabel = str_replace("Region: ", "", $itemLabel);
 						if (isset($postsByTag[$itemID])) {
-							$s .= '<li>';
-							$s .= '<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $itemLabel . '</button>';
-							$s .= '<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
+							$sidebar_markup .= '<li>';
+							$sidebar_markup .= '<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $itemLabel . '</button>';
+							$sidebar_markup .= '<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
 							$j=0;
 							foreach($postsByTag[$itemID] as $article) {
 								$j++;
 								if ($maxItems == 0 || $j <= $maxItems) {
 									if ($j > 1) {
-										$s .= "<BR><BR>";
+										$sidebar_markup .= "<BR><BR>";
 									}
 									$link = $article['link'];
 									$id = $article['id'];
 									$title = $article['title'];
-									$s .= "<a href='$link'>$title</a>";
+									$sidebar_markup .= "<a href='$link'>$title</a>";
 								}
 							}
 
-							$s .= '</div>';
-							$s .= '</li>';
+							$sidebar_markup .= '</div>';
+							$sidebar_markup .= '</li>';
 						}
 					}
 				}
@@ -393,18 +409,18 @@ if ( $includeSidebar ) {
 
 					$custom_query = new WP_Query($qParams);
 					if ($custom_query -> found_posts || $sectionDescription) {
-						$s .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $sectionTitle . '</h5>';
+						$sidebar_markup .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $sectionTitle . '</h5>';
 						if ($sectionDescription) {
-							$s .= '<p>' . $sectionDescription . '</p>';
+							$sidebar_markup .= '<p>' . $sectionDescription . '</p>';
 						}
 						if ($custom_query -> found_posts) {
 							$i=0;
-							$s .= '<p>';
+							$sidebar_markup .= '<p>';
 							while ( $custom_query->have_posts() )  {
 								$custom_query->the_post();
 								$i++;
 								if ($i > 1) {
-									$s .= "<BR><BR>";
+									$sidebar_markup .= "<BR><BR>";
 								}
 								$id = get_the_ID();
 								if ($pastOrFuture == "past") {
@@ -419,33 +435,31 @@ if ( $includeSidebar ) {
 								}
 
 								$title = get_the_title();
-								$s .= "<a style='text-decoration:none;' href='$permalink'>$title</a>";
+								$sidebar_markup .= "<a style='text-decoration:none;' href='$permalink'>$title</a>";
 							}
-							$s .= '</p>';
+							$sidebar_markup .= '</p>';
 						}
-						$s .= '<BR>';
+						$sidebar_markup .= '<BR>';
 					}
 					wp_reset_postdata();
 				}
 			}
 		endwhile;
-		// Add all content types to the sidebar variable
-
 	endif;
-	$sidebar = $s;
+	$sidebar = $sidebar_markup;
 }
 
 /**
  * Sidebar drop-down for multiple downloads (2-col pages)
  * @var [boolean]
  */
-$listsInclude = get_field( 'sidebar_dropdown_include', '', true);
+$listsInclude = get_field('sidebar_dropdown_include', '', true);
 
 if ( $listsInclude ) {
 
 	$dropdownTitle = get_field( 'sidebar_dropdown_title' );
 
-	if ( have_rows('sidebar_dropdown_content') ) {
+	if (have_rows('sidebar_dropdown_content')) {
 
 		$s = "";
 		if ($dropdownTitle && $dropdownTitle != "") {

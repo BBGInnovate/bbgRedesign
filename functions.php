@@ -459,31 +459,27 @@ if ( ! function_exists( 'bbginnovate_post_categories' ) ) :
 	 * @since bbginnovate 1.0
 	 */
 	function bbginnovate_post_categories() {
-		$separator='';
+		$separator = '';
 		$categories = get_the_category();
-		$output     = '';
-		$selectedCategory=false;
-		$impact=false;
+		$selectedCategory = false;
+		$impact = false;
 		$suppressOutput = false;
-		if ( $categories ) {
 
-
-			if ( !$selectedCategory ) {
-				foreach ( $categories as $category ) {
-					if ( $category->name == "Media Development Map" ) {
+		if ($categories) {
+			if (!$selectedCategory) {
+				foreach ($categories as $category) {
+					if ($category->name == "Media Development Map") {
 						$suppressOutput = true;
 						break;
 					}
 				}
 			}
 			if (!$suppressOutput) {
-
 				/******* TODO: Rewrite this section ... no need for so many loops ****/
-
 				/* JBF 9/12/2017: 'From the CEO' takes precedence over all */
-				if ( !$selectedCategory ) {
-					foreach ( $categories as $category ) {
-						if ( $category->name == "From the CEO" ) {
+				if (!$selectedCategory) {
+					foreach ($categories as $category) {
+						if ($category -> name == "From the CEO") {
 							$selectedCategory = $category;
 							break;
 						}
@@ -513,8 +509,6 @@ if ( ! function_exists( 'bbginnovate_post_categories' ) ) :
 					}
 				}
 
-
-
 				if ( !$selectedCategory ) {
 					foreach ( $categories as $category ) {
 						if ( $category->name == "Impact" ) {
@@ -541,12 +535,14 @@ if ( ! function_exists( 'bbginnovate_post_categories' ) ) :
 				}
 				$link = false;
 				if ($impact) {
-					$link = get_permalink( get_page_by_path( "/our-work/impact-and-results/" ) );
+					$link = get_permalink(get_page_by_path("/our-work/impact-and-results/"));
 				} else if ($selectedCategory) {
-					$link = get_category_link( $selectedCategory->term_id );
+					$link = get_category_link($selectedCategory -> term_id);
 				}
 				if ($link) {
-					$output .= '<h5 class="entry-category bbg__label"><a href="' . $link . '" title="' . esc_attr( sprintf( __( "View all posts in %s", 'bbginnovate' ), $selectedCategory->name ) ) . '">' . $selectedCategory->cat_name . '</a></h5>' . $separator;
+					$output  = '<h2>';
+					$output .= 		'<a href="' . $link . '" title="' . esc_attr(sprintf(__( 'View all posts in %s', 'bbginnovate' ), $selectedCategory -> name )) . '">' . $selectedCategory -> cat_name . '</a>';
+					$output .= '</h2>';
 				}
 			}
 		}
