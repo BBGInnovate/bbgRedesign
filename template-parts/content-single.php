@@ -313,7 +313,7 @@ if ($addFeaturedMap) {
 	$featuredMapItems = get_field( 'featured_map_items', get_the_ID(), true);
 	$features = [];
 
-	for ($i=0; $i < count($featuredMapItems); $i++) {
+	for ($i = 0; $i < count($featuredMapItems); $i++) {
 		$item = $featuredMapItems[$i];
 		$featuredMapItemLocation = $item['featured_map_item_coordinates'];
 		$featuredMapItemTitle = $item['featured_map_item_title'];
@@ -424,7 +424,7 @@ $twitterText .= " " . get_permalink();
 
 $twitterURL="//twitter.com/intent/tweet?text=" . rawurlencode( $twitterText );
 $fbUrl="//www.facebook.com/sharer/sharer.php?u=" . urlencode( get_permalink() );
-$hideFeaturedImage = FALSE;
+$hideFeaturedImage = false;
 ?>
 <style>
 .leaflet-popup-pane {
@@ -435,76 +435,75 @@ $hideFeaturedImage = FALSE;
 <article id="post-<?php the_ID(); ?>" <?php post_class( "bbg__article" ); ?>>
 
 	<?php
-		//in order of priority, use one of the following: featured map, video, image
-
+		// PRIORITY: VIDEO, IMAGE, MAP
 		if ($addFeaturedGallery) {
 			$hideFeaturedImage = true;
 		}
 
-		if ($addFeaturedMap || $media_dev_map) {
-			echo "<div class='usa-grid-full'><div id='map-featured' class='bbg__map--banner'></div>";
-			if ($featuredMapCaption != "") {
-				echo "<p class='bbg__article-header__caption'>$featuredMapCaption</p>";
-			}
-			echo "</div>";
-			$hideFeaturedImage = TRUE;
-		} else if ( $videoUrl != "" ) {
-			echo featured_video($videoUrl);
-			$hideFeaturedImage = TRUE;
-		} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-			echo '<div class="usa-grid-full">';
-			$featuredImageClass = "";
-			$featuredImageCutline="";
-			$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
+		if ($videoUrl != "") {
+			$featured_video = featured_video($videoUrl);
+			echo $featured_video;
+			
+		}
+		 else if (has_post_thumbnail()) {
+		 	$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
+		 	$featuredImageClass = "";
+			$featuredImageCutline = "";
+
+			$featured_image = '<div class="usa-grid-full">';
 			if ($thumbnail_image && isset($thumbnail_image[0])) {
-				$featuredImageCutline=$thumbnail_image[0]->post_excerpt;
+				$featuredImageCutline = $thumbnail_image[0]->post_excerpt;
 			}
-			echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large">';
-			//echo '<div style="position: absolute;"><h5 class="bbg__label">Label</h5></div>';
-			echo the_post_thumbnail( 'large-thumb' );
-
-			if ( $featuredImageCutline != "" ) {
-				echo '<div class="usa-grid">';
-					echo "<div class='wp-caption-text'>$featuredImageCutline</div>";
-				echo '</div> <!-- usa-grid -->';
+			$featured_image .= 	'<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large">';
+			$featured_image .= 		get_the_post_thumbnail();
+			if ($featuredImageCutline != "") {
+				$featured_image .= '<div class="usa-grid">';
+				$featured_image .= 	'<div class="wp-caption-text">';
+				$featured_image .= 		$featuredImageCutline;
+				$featured_image .= 	'</div>';
+				$featured_image .= '</div>';
 			}
+			$featured_image .= '</div></div>';
+			echo $featured_image;
 
-			echo '</div>';
-			echo '</div> <!-- usa-grid-full -->';
+		} elseif ($addFeaturedMap || $media_dev_map) {
+			$featured_map  = '<div class="usa-grid-full">';
+			$featured_map .= 	'<div id="map-featured" class="bbg__map--banner"></div>';
+			if ($featuredMapCaption != "") {
+				$featured_map .= '<p class="bbg__article-header__caption">';
+				$featured_map .= 	$featuredMapCaption;
+				$featured_map .= '</p>';
+			}
+			$featured_map .= "</div><!--test-->";
+			echo $featured_map;
 		}
 	?><!-- .bbg__article-header__thumbnail -->
 
 	<div class="usa-grid">
+	<?php 
+		echo '<header class="entry-header bbg__article-header' . $featuredImageClass . '">';
 
-		<?php echo '<header class="entry-header bbg__article-header' . $featuredImageClass . '">'; ?>
+		if (get_post_type() == "threat_to_press") {
+			$link = get_permalink( get_page_by_path( 'threats-to-press' ) );
+			echo '<h5 class="entry-category bbg__label"><a href="' . $link . '" title="Threats to Press">Threats to Press</a></h5>';
+		} else {
+			echo bbginnovate_post_categories();
+		}
+		// .bbg__label
+		the_title( '<h1 class="entry-title bbg__article-header__title">', '</h1>' );
 
-		<?php
-			if (get_post_type() == "threat_to_press") {
-				$link = get_permalink( get_page_by_path( 'threats-to-press' ) );
-				echo '<h5 class="entry-category bbg__label"><a href="' . $link . '" title="Threats to Press">Threats to Press</a></h5>';
-			} else {
-				echo bbginnovate_post_categories();
-			}
-
-		?>
-		<!-- .bbg__label -->
-
-			<?php the_title( '<h1 class="entry-title bbg__article-header__title">', '</h1>' ); ?>
-			<!-- .bbg__article-header__title -->
-
-			<?php
-				if ($addFeaturedGallery) {
-					echo "<div class='usa-grid-full bbg__article-featured__gallery' >";
-					$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
-					putUniteGallery($featuredGalleryID);
-					echo "</div>";
-				}
-			?>
-
-			<div class="entry-meta bbg__article-meta">
-				<?php bbginnovate_posted_on(); ?>
-			</div><!-- .bbg__article-meta -->
-		</header><!-- .bbg__article-header -->
+		// .bbg__article-header__title
+		if ($addFeaturedGallery) {
+			echo "<div class='usa-grid-full bbg__article-featured__gallery' >";
+			$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
+			putUniteGallery($featuredGalleryID);
+			echo "</div>";
+		}
+	?>
+		<div class="entry-meta bbg__article-meta">
+			<?php bbginnovate_posted_on(); ?>
+		</div><!-- .bbg__article-meta -->
+	</header><!-- .bbg__article-header -->
 
 
 
@@ -525,7 +524,6 @@ $hideFeaturedImage = FALSE;
 					}
 				}
 			?>
-
 			<h3 class="bbg__sidebar-label bbg__contact-label">Share </h3>
 			<ul class="bbg__article-share">
 				<li class="bbg__article-share__link facebook">
@@ -539,7 +537,6 @@ $hideFeaturedImage = FALSE;
 					</a>
 				</li>
 			</ul>
-
 		</div><!-- .bbg__article-sidebar--left -->
 
 		<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
