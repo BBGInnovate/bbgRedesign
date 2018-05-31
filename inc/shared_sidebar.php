@@ -117,9 +117,9 @@ if ($includeSidebar) {
 				$internal_links .= 	'<h5 class="bbg__sidebar__primary-headline">';
 				$internal_links .= 		'<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
 				if ($sidebarInternalTitle && $sidebarInternalTitle != "") {
-					$sidebarSectionTitle .= $sidebarInternalTitle;
+					$internal_links .= $sidebarInternalTitle;
 				} else {
-					$sidebarSectionTitle .= $sidebarInternalLocation -> post_title;
+					$internal_links .= $sidebarInternalLocation -> post_title;
 				}
 				$internal_links .= 		'</a>';
 				$internal_links .= 	'</h5>';

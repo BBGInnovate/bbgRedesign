@@ -276,7 +276,8 @@ get_header();
 									$titleOverride = get_sub_field('umbrella_content_internal_title');
 									$secondaryHeadline = get_post_meta( $id, 'headline', true );
 									$lawName = get_post_meta( $id, 'law_name', true );
-// var_dump($pageObj);
+echo "debug<br>";
+var_dump($pageObj);
 									if ( $includeTitle ) {
 										$titleOverride = get_sub_field('umbrella_content_internal_item_title');
 										if ($titleOverride != "" ) {
