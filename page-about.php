@@ -8,6 +8,9 @@
  * @package bbgRedesign
  */
 
+// REMOVE P TAGS FROM CONTENT TO PUT IN YOUR OWN PARAGRAPHY STYLES
+remove_filter ('the_content', 'wpautop');
+
 require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
 /* @Check if number of pages is odd or even
@@ -22,7 +25,7 @@ function showUmbrellaArea($atts) {
 	$link = $atts['link'];
 	$gridClass = $atts['gridClass'];
 	$description = $atts['description'];
-	$forceContentLabels = $atts['forceContentLabels'];
+	$force_content_labels = $atts['forceContentLabels'];
 	$thumbPosition = "center center";
 	$subTitle = $atts['subTitle'];
 	$thumbSrc = $atts['thumbSrc'];
@@ -40,44 +43,53 @@ function showUmbrellaArea($atts) {
 		$anchorTarget = " target='_blank' ";
 	}
 
-	$layout_package = array('layout' => $layout, 'grid' => $gridClass, 'column_title' => $columnTitle, 'force_content_label' => $forceContentLabels, 'anchor' => $anchorTarget, 'link' => $link, 'link_suffix' => $linkSuffix, 'thumb' => $thumbSrc, 'item_title' => $itemTitle, 'sub_title' => $subTitle, 'description' => $description);
-	echo 'test: ' . $subTitle;
+	$layout_package = array('layout' => $layout, 'grid' => $gridClass, 'column_title' => $columnTitle, 'force_content_label' => $force_content_labels, 'anchor' => $anchorTarget, 'link' => $link, 'link_suffix' => $linkSuffix, 'thumb' => $thumbSrc, 'item_title' => $itemTitle, 'sub_title' => $subTitle, 'description' => $description);
 	return build_layout_module($layout_package);
 }
 
 function build_layout_module($build_data) {
 	if ($build_data['layout'] == 'full') {
-		$layout_markup = '<article class="' . $build_data['grid'] . '">';
+
 		if ($build_data['column_title'] == "") {
 			if ($build_data['force_content_label']) {
-				$layout_markup .= '<h6 class="bbg__label">&nbsp;</h6>';	
+				$blank_title = '&nbsp;';
+				$section_header_build = $blank_title;
 			}
 		} else {
 			if ($build_data['link'] != "") {
-				$columnTitle = '<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '">' . $build_data['column_title'] . '</a>';
+				$linked_title  = '<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '">';
+				$linked_title .= 	$build_data['column_title'];
+				$linked_title .= '</a>';
+				$section_header_build = $linked_title;
 			}
-			$layout_markup .= '<h6 class="bbg__label">' . $columnTitle . '</h6>';
 		}
-		
-		if ($build_data['thumb']) {
-			$layout_markup .= '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--medium">'; 
-			$layout_markup .= 	'<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '" rel="bookmark" tabindex="-1">';
-			$layout_markup .= 		'<img width="1040" height="624" src="' . $build_data['thumb'] .  '" class="attachment-large-thumb size-large-thumb">';
-			$layout_markup .= 	'</a>';
-			$layout_markup .= '</div>';	
-		}
-		
-		$layout_markup .= '<h3 class="bbg__about__grandchild__title">';
-		$layout_markup .= 	'<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '">' . $build_data['item_title'] . '</a>';
-		$layout_markup .= 	$build_data['link_suffix'];
-		$layout_markup .= '</h3>';
 
-		if ($build_data['sub_title'] != "") {
-			$layout_markup .= '<h5 class="bbg__about__grandchild__subtitle">' . $build_data['sub_title'] . '</h5>';
+		$full_layout_markup  = '<article class="' . $build_data['grid'] . '">';
+		$full_layout_markup .= 		'<h2>' . $section_header_build . '</h2>';
+
+		if ($build_data['thumb']) {
+			$thumbnail  = 	'<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '" rel="bookmark" tabindex="-1">';
+			$thumbnail .= 		'<img src="' . $build_data['thumb'] .  '">';
+			$thumbnail .= 	'</a>';
+			$full_layout_markup .= $thumbnail;
 		}
-		$layout_markup .= 	$build_data['description'];
-		$layout_markup .= '</article>';
-		echo $layout_markup;
+		$title  = '<h4 class="bbg__about__grandchild__title">';
+		$title .= 	'<a ' . $build_data['anchor'] . ' href="' . $build_data['link'] . '">';
+		$title .= 		$build_data['item_title'];
+		$title .= 	'</a>';
+		$title .= 	$build_data['link_suffix'];
+		$title .= '</h4>';
+		$full_layout_markup .= $title;
+		
+		if ($build_data['sub_title'] != "") {
+			$subtitle = '<h5 class="bbg__about__grandchild__subtitle">' . $build_data['sub_title'] . '</h5>';
+			$full_layout_markup .= $subtitle;
+		}
+		
+		$full_layout_markup .= 		$build_data['description'];
+		$full_layout_markup .= '</article>';
+
+		echo $full_layout_markup;
 	}
 	else {
 		$layout_markup  = '<article class="' . $build_data['grid'] . ' bbg__about__grandchild">';
@@ -95,10 +107,6 @@ function build_layout_module($build_data) {
 }
 
 $templateName = "about";
-
-$bannerPosition = get_field( 'adjust_the_banner_image', '', true);
-$videoUrl = get_field( 'featured_video_url', '', true );
-$addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
 
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
@@ -121,7 +129,7 @@ get_header();
 
 			<div class="usa-grid">
 				<header class="page-header">
-					<?php the_title( '<h5 class="bbg__label--mobile large">', '</h5>' ); ?>
+					<?php //the_title( '<h5 class="bbg__label--mobile large">', '</h5>' ); ?>
 				</header><!-- .page-header -->
 			</div>
 
@@ -137,43 +145,58 @@ get_header();
 			</div>
 
 			<?php
-				$hideFeaturedImage = FALSE;
+				// GET RID OF THIS FOR NOW, WE'RE NOT EVEN USING IT ANYWHERE
+				// $addFeaturedGallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
+				// if ($addFeaturedGallery) {
+				// 	$hideFeaturedImage = true;
+				// }
 
-				if ( $addFeaturedGallery ) {
-					$hideFeaturedImage = true; // Hide featured image if there's a gallery
+				$bannerPosition = get_field('adjust_the_banner_image', '', true);
+				$videoUrl = get_field('featured_video_url', '', true);
+
+				if ($videoUrl != "") {
+					$hideFeaturedImage = true;
+					$video_data = featured_video($videoUrl);
+
+					$video_markup  = '<iframe scrolling="no" src="';
+					$video_markup .= 	$video_data['url'];
+					$video_markup .= '" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;"></iframe>';
+
+					$featured_data = $video_markup;
+
+				} elseif ( has_post_thumbnail()) {
+					$featuredImageClass = "";
+					$featuredImageCutline = "";
+					$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
+					$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+
+					if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
+						$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
+					}
+
+					$featured_image  = '<div class="feature-image">';
+					$featured_image .= 		'<img src="' . $src[0] . '">';
+					$featured_image .= '</div>';
+
+					$featured_data =  $featured_image;
 				}
 
-				if ( $videoUrl != "" ) {
-					echo featured_video( $videoUrl );
-					$hideFeaturedImage = TRUE; // Hide featured image if there's a video
-				} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-					echo '<div class="usa-grid-full">';
-						$featuredImageClass = "";
-						$featuredImageCutline = "";
-						$thumbnail_image = get_posts( array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment') );
-
-						if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
-							$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-						}
-
-						$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 700,450 ), false, '' );
-
-						// Output featured image
-						echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '"></div>';
-
-						// Output caption for featured image
-						if ($featuredImageCutline != "") {
-							echo '<div class="usa-grid">';
-							echo 	'<div class="bbg__article-header__caption">' . $featuredImageCutline . '</div>';
-							echo '</div>';
-						}
-					echo '</div>'; // END usa-grid-ful
+				// ACTUAL BANNER MARKUP
+				if ($videoURL != "" || has_post_thumbnail()) {
+					$featured_markup  = '<div class="usa-grid">';
+					$featured_markup .= 	'<div class="feature-element">';
+					$featured_markup .= 		$featured_data;
+					$featured_markup .= 	'</div>';
+					$featured_markup .= '</div>';
+					echo $featured_markup;
 				}
-			?><!-- .bbg__article-header__thumbnail -->
+			?>
 
-			<!-- Page introduction (content) -->
-			<section id="page-intro" class="usa-section usa-grid bbg__about__intro">
-				<?php echo $pageContent; ?>
+			<!-- PAGE CONTENT -->
+			<section class="usa-section usa-grid">
+				<p class="lead-in">
+					<?php echo $pageContent; ?>
+				</p>
 			</section>
 
 			<!-- Child pages -->
@@ -206,7 +229,7 @@ get_header();
 
 							$marquee_markup  = '<section class="usa-grid-full bbg__about__children--row bbg__about--marquee">';
 							$marquee_markup .= 	'<article id="post-25948" class="bbg__about__excerpt bbg__about__child bbg__about__child--mission bbg-grid--1-1-1 post-25948 page type-page status-publish has-post-thumbnail hentry">';
-							$marquee_markup .= 		'<header class="entry-header bbg__about__excerpt-header"><h6 class="bbg__label"><a href="' . $marqueeLink . '">' . $marqueeHeading . '</a></h6></header>';
+							$marquee_markup .= 		'<header><h2><a href="' . $marqueeLink . '">' . $marqueeHeading . '</a></h2></header>';
 							$marquee_markup .= 		'<div class="entry-content bbg__about__excerpt-content">' . $marqueeContent . '</div>';
 							$marquee_markup .= 	'</article>';
 							$marquee_markup .= '</section>';
@@ -216,25 +239,34 @@ get_header();
 						elseif ( get_row_layout() == 'umbrella' ): 
 							/*** BEGIN DISPLAY OF ENTIRE UMBRELLA ROW ***/
 							
-							$sectionHeading = get_sub_field('umbrella_section_heading');
-							$sectionHeadingLink = get_sub_field('umbrella_section_heading_link');
-							$forceContentLabels = get_sub_field('umbrella_force_content_labels');
-							$sectionIntroText = get_sub_field('umbrella_section_intro_text');
-							$sectionIntroText = apply_filters( 'the_content', $sectionIntroText );
-							$sectionIntroText = str_replace( ']]>', ']]&gt;', $sectionIntroText );
+							$section_header = get_sub_field('umbrella_section_heading');
+							$section_heading_link = get_sub_field('umbrella_section_heading_link');
+							$force_content_labels = get_sub_field('umbrella_force_content_labels');
+							$section_intro_text = get_sub_field('umbrella_section_intro_text');
 
-							//output intro section label if it exists (with or without link)
-							if ($sectionHeading != "") {
-								if ( $sectionHeadingLink ) { // if the label has a URL add link and right arrow
-									$sectionHeading = '<a href="' . $sectionHeadingLink . '">' . $sectionHeading . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
-								} 
-								echo '<h6 class="bbg__label">' . $sectionHeading . '</h6>';	
+							$section_intro_text = apply_filters('the_content', $section_intro_text);
+							$section_intro_text = str_replace(']]>', ']]&gt;', $section_intro_text);
+
+							if ($section_header != "") {
+								$section_head  = '<h2>';
+								if ( $section_heading_link ) {
+									$section_head .= '<a href="' . $section_heading_link . '">';
+									$section_head .= 	'testing ' . $section_header;
+									// ARROW ICON
+									$section_head .= 	'<span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
+									$section_head .= '</a>';
+								} else {
+									$section_head .= 	'testing ' . $section_header;
+								}
+								$section_head .= '</h2>';
+								echo $section_head_markup;
 							} 
 							
-							//output intro section text if it exists
-							if ($sectionIntroText != "") {
-								if ( $sectionIntroText ) { 
-									echo '<div class="bbg__about__child__intro">' . $sectionIntroText . '</div>';
+							if ($section_intro_text != "") {
+								if ($section_intro_text) { 
+									$section_intro_markup  = '<div class="bbg__about__child__intro">';
+									$section_intro_markup .= 	$section_intro_text;
+									$section_intro_markup .= '</div>';
 								}
 							}
 
@@ -245,15 +277,14 @@ get_header();
 							}
 
 							echo '<div class="usa-grid-full bbg__about__grandchildren">'; // open grandchildren container
-							while ( have_rows('umbrella_content') ) : the_row();
+							while (have_rows('umbrella_content')) : the_row();
 								if (get_row_layout() == 'umbrella_content_external') {
 									$thumbnail = get_sub_field('umbrella_content_external_thumbnail');
 									$thumbnailID = $thumbnail['ID'];
 									$thumbSrc = wp_get_attachment_image_src( $thumbnailID , 'medium-thumb' );
 									if ($thumbSrc) {
-										//$thumbSrc = 'src="' . $thumbSrc[0] . '"';	
 										$thumbSrc = $thumbSrc[0];
-									} 
+									}
 									showUmbrellaArea(array(
 										'columnTitle' => get_sub_field('umbrella_content_external_column_title'),
 										'itemTitle' => get_sub_field('umbrella_content_external_item_title'),
@@ -261,7 +292,7 @@ get_header();
 										'link' => get_sub_field('umbrella_content_external_link'),
 										'thumbSrc' => $thumbSrc,
 										'gridClass' => $containerClass,
-										'forceContentLabels' => $forceContentLabels,
+										'forceContentLabels' => $force_content_labels,
 										'columnType' => 'external',
 										'layout' => get_sub_field('umbrella_content_external_layout'),
 										'subTitle' => ''
@@ -276,8 +307,7 @@ get_header();
 									$titleOverride = get_sub_field('umbrella_content_internal_title');
 									$secondaryHeadline = get_post_meta( $id, 'headline', true );
 									$lawName = get_post_meta( $id, 'law_name', true );
-echo "debug<br>";
-var_dump($pageObj);
+
 									if ( $includeTitle ) {
 										$titleOverride = get_sub_field('umbrella_content_internal_item_title');
 										if ($titleOverride != "" ) {
@@ -296,7 +326,6 @@ var_dump($pageObj);
 									if ($showFeaturedImage) {
 										$thumbSrc = wp_get_attachment_image_src( get_post_thumbnail_id($id) , 'medium-thumb' );
 										if ($thumbSrc) {
-											//$thumbSrc = 'src="' . $thumbSrc[0] . '"';	
 											$thumbSrc = $thumbSrc[0];
 										}
 									}
@@ -305,7 +334,6 @@ var_dump($pageObj);
 									$description = "";
 									if ($showExcerpt) {
 										$description = my_excerpt( $id );
-										//$description = $description . '<a href="' . $link . '" class="bbg__about__grandchild__link">Read more »</a>';
 										$description = apply_filters( 'the_content', $description );
 										$description = str_replace( ']]>', ']]&gt;', $description );
 
@@ -318,7 +346,7 @@ var_dump($pageObj);
 										'link' => $link, 
 										'thumbSrc' => $thumbSrc,
 										'gridClass' => $containerClass,
-										'forceContentLabels' => $forceContentLabels,
+										'forceContentLabels' => $force_content_labels,
 										'columnType' => 'internal',
 										'layout' => get_sub_field('umbrella_content_internal_layout'),
 										'subTitle' => $lawName
@@ -364,7 +392,7 @@ var_dump($pageObj);
 										'link' => $fileURL, 
 										'thumbSrc' => $thumbSrc,
 										'gridClass' => $containerClass,
-										'forceContentLabels' => $forceContentLabels,
+										'forceContentLabels' => $force_content_labels,
 										'columnType' => 'file',
 										'layout' => $layout,
 										'fileExt' => $fileExt,
@@ -374,7 +402,7 @@ var_dump($pageObj);
 								}
 							endwhile;
 							echo '</div>';
-							echo '</section>'; // close row
+							echo '</section><!-- END UMBRELLAS -->'; // close row
 						/*** END DISPLAY OF ENTIRE UMBRELLA ROW ***/
 
 						elseif( get_row_layout() == 'about_ribbon_page' ):

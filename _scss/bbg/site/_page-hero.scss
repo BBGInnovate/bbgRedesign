@@ -1,3 +1,24 @@
+// KR GRID STYLES
+
+// PUT IN LARGE SECTION AFTER MAKING RESPECTIVE SIZES
+.feature-element {
+	@include grid-push(2);
+	margin-bottom: 3rem;
+
+	iframe {
+		width: 100%;
+		height: 45rem;
+	}
+	.feature-image {
+		margin: 0;
+
+		img {margin: 0;}
+	}
+}
+
+
+
+
 .bbg-header__container {
 	@include clearfix();
 	padding-right: $site-margins-large;

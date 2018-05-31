@@ -2861,6 +2861,11 @@ p {
   font-family: "Alegreya Sans", sans-serif;
   margin-bottom: 3rem; }
 
+p.lead-in {
+  font-size: 2rem;
+  font-family: "Carrara-Regular", serif;
+  font-color: #999999; }
+
 a:visited {
   color: #ff00ff; }
 
@@ -4722,6 +4727,17 @@ form select:focus {
 ul li:before,
 ol li:before {
   width: 1.2rem; }
+
+.feature-element {
+  margin-left: calc(16.66667% - 23.33333px + 40px);
+  margin-bottom: 3rem; }
+  .feature-element iframe {
+    width: 100%;
+    height: 45rem; }
+  .feature-element .feature-image {
+    margin: 0; }
+    .feature-element .feature-image img {
+      margin: 0; }
 
 .bbg-header__container, .bbg-header__container--home {
   padding-right: 6rem; }

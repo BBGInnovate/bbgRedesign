@@ -38,6 +38,12 @@ p {
     margin-bottom: 3rem;
 }
 
+p.lead-in {
+    font-size: 2rem;
+    font-family: $font-serif;
+    font-color: $black9;
+}
+
 a:visited {color: #ff00ff;}
 
 a:not(.bbg__article-share__icon) {

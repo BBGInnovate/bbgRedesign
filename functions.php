@@ -426,15 +426,8 @@ function featured_video ($url) {
 			$extraClass = 'youtube';
 		}
 
-		$video_markup  = '<div class="bbg-embed-shell bbg__featured-video">';
-		$video_markup .= 	'<div class="embed-container ';
-		$video_markup .= 		$extraClass;
-		$video_markup .= 		'">';
-		$video_markup .= 		'<iframe scrolling="no" src="';
-		$video_markup .= 			$url;
-		$video_markup .= 			'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;"></iframe>';
-		$video_markup .= '</div></div>';
-		return $video_markup;
+		$video_package = array('extra_classes' => $extraClass, 'url' => $url);
+		return $video_package;
 	}
 	return $return;
 }
