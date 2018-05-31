@@ -141,11 +141,11 @@ if (in_category($categoriesThatShowEntityIcons))  {
 	if ( in_category($entityCategories)) {
 		foreach ( $entityCategories as $eCat ) {
 			if ( in_category($eCat) ) {
-				$broadcastersPage=get_page_by_title('Our Networks');
+				$broadcastersPage = get_page_by_title('Our Networks');
 				$args = array(
 					'post_type' => 'page',
 					'posts_per_page' => 1,
-					'post_parent' => $broadcastersPage->ID,
+					'post_parent' => $broadcastersPage -> ID,
 					'name' => str_replace('-press-release', '', $eCat)
 				);
 				$custom_query = new WP_Query($args);
