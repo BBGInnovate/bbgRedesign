@@ -91,14 +91,10 @@ get_header();
 			<!-- SOAPBOX, CORNER HERO  -->
 			<section class="usa-grid">
 				<?php
-					// TEST FOR SHOWING BOTH, ONE OR NEITHER
-					$test = 1;
-
 					$soap_result = get_soap_box_data();
 					$corner_hero_result = get_corner_hero_data();
 
-					if ($test == 1) {
-					// if (!empty($soap_result) && !empty($corner_hero_result)) {
+					if (!empty($soap_result) && !empty($corner_hero_result)) {
 						echo '<div class="kr-five-twelfths">';
 					} else {
 						echo '<div class="usa-width-one-whole">';
@@ -111,13 +107,13 @@ get_header();
 					}
 					echo '</div>';
 
-					$qty = '';
-					if ($test == 1) {
-					// if (!empty($soap_result) && !empty($corner_hero_result)) {
-						$qty = 1;
+					$impact_post_qty = '';
+					if (!empty($soap_result) && !empty($corner_hero_result)) {
+						$impact_post_qty = 1;
 						echo '<div class="kr-seven-twelfths">';
-					} else {
-						$qty = 2;
+					}
+					else {
+						$impact_post_qty = 2;
 						echo '<div class="usa-width-one-whole">';
 					}
 				?>
@@ -126,7 +122,7 @@ get_header();
 							<a href="<?php echo $impactPortfolioPermalink; ?>">Impact stories</a>
 						</h2>
 						<div class="usa-grid-full" style="margin-bottom: 1.5rem;">
-							<?php get_impact_stories_data($qty); ?>
+							<?php get_impact_stories_data($impact_post_qty); ?>
 
 							<div class="usa-width-one-whole u--space-below-mobile--large">
 								<a href="<?php echo $impactPermalink; ?>">Find out how the BBG defines and measures impact »</a>
