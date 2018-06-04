@@ -8,6 +8,9 @@
  * @package bbgRedesign
  */
 
+// REMOVE P TAGS FROM CONTENT TO PUT IN YOUR OWN PARAGRAPHY STYLES
+remove_filter ('the_content', 'wpautop');
+
 /* @Check if number of pages is odd or even
 *  Return BOOL (true/false) */
 function isOdd( $pageTotal ) {
@@ -17,7 +20,6 @@ function isOdd( $pageTotal ) {
 require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
 function showUmbrellaArea($atts) {
-	
 	$itemTitle = $atts['itemTitle'];
 	$columnTitle = $atts['columnTitle'];
 	$link = $atts['link'];
@@ -47,13 +49,13 @@ function showUmbrellaArea($atts) {
 		echo '<article class="' . $gridClass . ' bbg__about__grandchild bbg__about__child">';
 		if ($columnTitle == "") {
 			if ($forceContentLabels) {
-				echo '<h6 class="bbg__label">&nbsp;</h6>';	
+				echo '<h2 class="bbg__label">&nbsp;</h2>';	
 			}
 		} else {
 			if ($link != "") {
 				$columnTitle = '<a ' . $anchorTarget . ' href="' . $link . '">' . $columnTitle . '</a>';
 			}
-			echo '<h6 class="bbg__label">' . $columnTitle . '</h6>';
+			echo '<h2>' . $columnTitle . '</h2>';
 		}
 		
 		if ($thumbSrc) {
@@ -64,12 +66,12 @@ function showUmbrellaArea($atts) {
 			echo '</div>';
 		}
 		
-		echo '<h3 class="bbg__about__grandchild__title">';
+		echo '<h4 class="bbg__about__grandchild__title">';
 		echo 	'<a ' . $anchorTarget . ' href="' . $link . '">' . $itemTitle . '</a>';
 		echo 	$linkSuffix;
-		echo '</h3>';
+		echo '</h4>';
 		if ($subTitle != "") {
-			echo '<h4 class="bbg__about__grandchild__subtitle">' . $subTitle . '</h4>';
+			echo '<h5>' . $subTitle . '</h5>';
 		}
 		echo $description; // Output page excerpt
 		echo '</article>';
@@ -114,30 +116,31 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 			<?php
-				// NOT SURE IF THIS IS USED?
+				// NOT SURE WHERE THIS IS USED?
 				if ($addFeaturedGallery) {
 					$featuredGalleryID = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
 					$gallery_build  = '<div class="usa-grid">';
 					$gallery_build .= 	'<div class="usa-grid bbg__article-featured__gallery">';
 					$gallery_build .= 		putUniteGallery($featuredGalleryID);
 					$gallery_build .= '</div>';
-					echo $gallery_build;
+					// echo $gallery_build;
 				}
+				// $hideFeaturedImage = false;
+				// if ($addFeaturedGallery) {
+				// 	$hideFeaturedImage = true;
+				// }
 			?>
 			<?php
-				$hideFeaturedImage = false;
-				if ( $addFeaturedGallery ) {
-					$hideFeaturedImage = true;
-				}
 				check_featured_media_type();
 			?>
 			<!-- CONTENT -->
-			<section id="page-intro" class="usa-section usa-grid bbg__about__intro">
-				<?php echo $pageContent; ?>
+			<section class="container">
+				<div class="full-grid">
+				<?php
+					echo '<p id="site-intro" class="usa-font-lead">' . $pageContent . '</p>';
+				?>
+				</div>
 			</section>
-
-
-
 
 			<!-- Child pages -->
 			<div id="page-children" class="usa-section usa-grid bbg__about__children">
@@ -185,7 +188,7 @@ get_header();
 								if ( $sectionHeadingLink ) { // if the label has a URL add link and right arrow
 									$sectionHeading = '<a href="' . $sectionHeadingLink . '">' . $sectionHeading . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
 								} 
-								echo '<h6 class="bbg__label">' . $sectionHeading . '</h6>';	
+								echo '<h2>' . $sectionHeading . '</h2>';	
 							} 
 							//output intro section text if it exists
 							if ($sectionIntroText != "") {

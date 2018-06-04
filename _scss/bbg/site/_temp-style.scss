@@ -1,7 +1,2 @@
-.container {
-	@include grid-container;
-	
-}
-.rad {
-	color: #ff00ff;
-}
+.container {@include grid-container;}
+.full-grid {@include grid-column(12);}

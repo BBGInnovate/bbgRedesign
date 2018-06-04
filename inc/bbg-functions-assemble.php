@@ -4,39 +4,84 @@ function check_featured_media_type() {
 	global $videoUrl;
 	global $addFeaturedGallery;
 
+	$bannerPosition = get_field('adjust_the_banner_image', '', true);
+	$videoUrl = get_field('featured_video_url', '', true);
+
 	if ($videoUrl != "") {
 		$hideFeaturedImage = true;
-		$video_tags  = '<div class="usa-grid">';
-		$video_tags .= 		'<div class="header-feature feature-spot">';
-		$video_tags .= 			featured_video($videoUrl);
-		$video_tags .= '</div></div>';
-		echo $video_tags;
+		$video_data = featured_video($videoUrl);
+
+		$video_markup  = '<iframe scrolling="no" src="';
+		$video_markup .= 	$video_data['url'];
+		$video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+		$video_markup .= '</iframe>';
+		$featured_data = $video_markup;
+	} 
+	elseif (has_post_thumbnail()) {
+		$featuredImageClass = "";
+		$featuredImageCutline = "";
+		$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
+		$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+
+		if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
+			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
+		}
+
+		$post_featured_image  = '<div class="feature-image">';
+		$post_featured_image .= 	'<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" ';
+		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
+		$post_featured_image .= 	'</div>';
+		$post_featured_image .= '</div>';
+
+		$featured_data =  $post_featured_image;
 	}
-	elseif (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
-		$featured_featured_image_markup  = '<div class="usa-grid">';
-			$featuredImageClass = "";
-			$featuredImageCutline = "";
-			$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
 
-			if ($thumbnail_image && isset($thumbnail_image[0])) {
-				$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-			}
-
-			$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
-
-			// Output featured image
-			$featured_featured_image_markup .= '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '"></div>';
-
-			// Output caption for featured image
-			if ($featuredImageCutline != "") {
-				$cutline  = '<div class="usa-grid">';
-				$cutline .= 	'<div class="bbg__article-header__caption">' . $featuredImageCutline . '</div>';
-				$cutline .= '</div><!-- usa-grid -->';
-				$featured_featured_image_markup .= $cutline;
-			}
-		$featured_featured_image_markup .= '</div>';
-		echo $featured_featured_image_markup;
+	// ACTUAL BANNER MARKUP
+	if ($videoURL != "" || has_post_thumbnail()) {
+		$featured_markup  = '<div class="container">';
+		$featured_markup  = 	'<div class="full-grid">';
+		$featured_markup .= 		'<div class="feature-element">';
+		$featured_markup .= 		$featured_data;
+		$featured_markup .= 		'</div>';
+		$featured_markup .= 	'</div>';
+		$featured_markup .= '</div>';
+		echo $featured_markup;
 	}
+
+	// if ($videoUrl != "") {
+	// 	$hideFeaturedImage = true;
+	// 	$video_tags  = '<div class="usa-grid">';
+	// 	$video_tags .= 		'<div class="header-feature feature-spot">';
+	// 	$video_tags .= 			featured_video($videoUrl);
+	// 	$video_tags .= '</div></div>';
+	// 	echo $video_tags;
+	// }
+	// elseif (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
+	// 	$featuredImageClass = "";
+	// 	$featuredImageCutline = "";
+	// 	$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
+	// 	if ($thumbnail_image && isset($thumbnail_image[0])) {
+	// 		$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
+	// 	}
+	// 	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+
+	// 	// $feat_image_markup  = '<div class="usa-grid">';
+	// 	$feat_image_markup  = '<div class="container">';
+	// 	$feat_image_markup .= 	'<div class="full-grid">';
+	// 	$feat_image_markup .= 		'<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" ';
+	// 	$feat_image_markup .= 			'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
+	// 	$feat_image_markup .= 		'</div>';
+
+	// 	if ($featuredImageCutline != "") {
+	// 		$cutline  = 			'<div class="usa-grid">';
+	// 		$cutline .= 				'<div class="bbg__article-header__caption">' . $featuredImageCutline . '</div>';
+	// 		$cutline .= 			'</div><!-- usa-grid -->';
+	// 		$feat_image_markup .= $cutline;
+	// 	}
+	// 	$feat_image_markup .= 	'</div>'; // END .full-grid
+	// 	$feat_image_markup .= '</div>';// END .containter
+	// 	echo $feat_image_markup;
+	// }
 }
 
 function get_flexible_row_data($str) {
