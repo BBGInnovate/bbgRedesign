@@ -65,14 +65,14 @@ a:focus .bbg__article-share__icon {
 
 /* Article share links: icons */
 .bbg__article-share__icon {
-	background-color: $color-gray-lightest;
-	@include backgroundCover();
-	border-radius: $border-radius;
+	width: $share-icon-small;
+	height: $share-icon-small;
 	display: inline-block;
-	height: $share-icon-large;
 	margin-right: .5rem;
+	background-color: $color-gray-lightest;
+	border-radius: $border-radius;
+	@include backgroundCover();
 	vertical-align: middle;
-	width: $share-icon-large;
 }
 
 .bbg__contact__icon.email,

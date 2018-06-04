@@ -8,9 +8,6 @@
  * @package bbgRedesign
  */
 
-// REMOVE P TAGS FROM CONTENT TO PUT IN YOUR OWN PARAGRAPHY STYLES
-remove_filter ('the_content', 'wpautop');
-
 /* @Check if number of pages is odd or even
 *  Return BOOL (true/false) */
 function isOdd( $pageTotal ) {

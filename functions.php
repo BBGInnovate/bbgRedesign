@@ -1175,4 +1175,7 @@ add_action('acf/init', 'my_acf_init');
 // }
 // END FOIA GROUP
 
+// REMOVE P TAGS FROM CONTENT TO PUT IN YOUR OWN PARAGRAPHY STYLES
+remove_filter ('the_content', 'wpautop');
+
 ?>

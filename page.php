@@ -17,33 +17,28 @@ if( $post -> post_parent ) {
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-			<div class="usa-grid-full">
-
-				<?php while ( have_posts() ) : the_post();
-					// IF the page is a law under the Legislation parent:
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		<div class="usa-grid-full">
+			<?php 
+				while (have_posts()) {
+					the_post();
 					if ( $parentTitle == "Legislation" ) {
-						get_template_part( 'template-parts/content-law', 'page' );
+						get_template_part('template-parts/content-law', 'page');
 					} else {
-						get_template_part( 'template-parts/content', 'page' );
+						get_template_part('template-parts/content', 'page');
 					}
-				?>
 
-					<div class="bbg-post-footer">
-					<?php
-						// If comments are open or we have at least one comment, load up the comment template.
-						if ( comments_open() || get_comments_number() ) :
-							comments_template();
-						endif;
-					?>
-					</div>
-
-				<?php endwhile; // End of the loop. ?>
-			</div><!-- .usa-grid-full -->
-		</main><!-- #main -->
-	</div><!-- #primary -->
+					echo '<div class="bbg-post-footer">';
+					if ( comments_open() || get_comments_number() ) {
+						comments_template();
+					}
+					echo '</div>';
+				 }
+			 ?>
+		</div><!-- .usa-grid-full -->
+	</main><!-- #main -->
+</div><!-- #primary -->
 
 <?php /*get_sidebar();*/ ?>
 <?php get_footer(); ?>

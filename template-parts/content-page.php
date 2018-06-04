@@ -8,40 +8,45 @@
  */
 
 
-//Add featured video
+require get_template_directory() . '/inc/bbg-functions-assemble.php';
+
 $videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
-//Add featured timeline
 $timelineUrl = get_post_meta( get_the_ID(), 'featured_timeline_url', true );
 
-//Experimenting with adding the social share code to Pages
-//the title/headline field, followed by the URL and the author's twitter handle
-$twitterText = "";
-$twitterText .= html_entity_decode( get_the_title() );
+// EXPERIMENTING WITH ADDING THE SOCIAL SHARE CODE TO PAGES
+// TITLE/HEADLINE, URL, AUTHOR'S TWITTER HANDLE
+$twitterText  = "";
+$twitterText .= html_entity_decode(get_the_title());
 $twitterText .= " by @bbggov " . get_permalink();
-$twitterURL="//twitter.com/intent/tweet?text=" . rawurlencode( $twitterText );
-$fbUrl="//www.facebook.com/sharer/sharer.php?u=" . urlencode( get_permalink() );
 
+$twitterURL = "//twitter.com/intent/tweet?text=" . rawurlencode( $twitterText );
+$fbUrl = "//www.facebook.com/sharer/sharer.php?u=" . urlencode( get_permalink() );
 
-// Include sidebar list of people who worked on the project
+// INCLUDE SIDEBAR LIST OF PEOPLE WHO WHORED ON THE PROJECT
 $teamRoster = "";
-if( have_rows( 'project_team_members' ) ):
+if(have_rows('project_team_members')):
+	$s  = '<div class="bbg__project-team">';
+	$s .= 	'<h5 class="bbg__project-team__header">Project team</h5>';
+	while (have_rows('project_team_members')) {
+		the_row();
+		if (get_row_layout() == 'team_member') {
+			$team_member_name = get_sub_field('team_member_name');
+			$teamMemberRole = get_sub_field('team_member_role');
+			$team_member_twitter_handle = get_sub_field('team_member_twitter_handle');
 
-	$s = "<div class='bbg__project-team'><h5 class='bbg__project-team__header'>Project team</h5>";
-	while ( have_rows('project_team_members') ) : the_row();
-
-		if ( get_row_layout() == 'team_member') {
-			$teamMemberName = get_sub_field( 'team_member_name' );
-			$teamMemberRole = get_sub_field( 'team_member_role' );
-			$teamMemberTwitterHandle = get_sub_field( 'team_member_twitter_handle' );
-
-			if ($teamMemberTwitterHandle && $teamMemberTwitterHandle != ""){
-				$teamMemberName = "<a href='https://twitter.com/" . $teamMemberTwitterHandle ."'>" . $teamMemberName . "</a>";
+			if ($team_member_twitter_handle && $team_member_twitter_handle != "") {
+				$team_member_name  = '<a href="https://twitter.com/' . $team_member_twitter_handle .'">';
+				$team_member_name .= 	$team_member_name;
+				$team_member_name .= '</a>';
 			}
 
-			$s .= "<p><span class='bbg__project-team__name'>$teamMemberName,</span> <span class='bbg__project-team__role'>$teamMemberRole</span></p>";
+			$s .= '<p>';
+			$s .= 	'<span class="bbg__project-team__name">' . $team_member_name . ',</span>';
+			$s .= 	'<span class="bbg__project-team__role">$teamMemberRole</span>';
+			$s .= '</p>';
 		}
-	endwhile;
-	$s .= "</div>";
+	}
+	$s .= '</div>';
 	$teamRoster .= $s;
 endif;
 
@@ -53,85 +58,43 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 
 	<?php
-		$hideFeaturedImage = FALSE;
-
-		// If a featured video is set, include it.
-		if ( $videoUrl != "" ) {
-			echo featured_video( $videoUrl );
-			$hideFeaturedImage = TRUE;
-
-		//ELSE if a featured timeline is set, include it.
-		} /*elseif ( $timelineUrl != "" ) {
-			$urlParts = parse_url($timelineUrl); // Parse string as a URL
-			$domain = $urlParts['host']; 		// Get Domain. i.e. crunchify.com
-			$path = $urlParts['path'];			// Get Path. i.e. /path
-			$urlQuery = $urlParts['query'];		// Get query params (everything after the ?)
-
-			// Merge URL parts to generate complete URL
-			$timelineUrl = "//" . $domain . $path . "?" . $urlQuery;
-			// echo $timelineUrl;
-			echo featured_timeline($timelineUrl);
-			$hideFeaturedImage = TRUE;
-
-		//ELSE if a featured image is set, include it.
-		} */ elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-			echo '<div class="usa-grid-full">';
-			$featuredImageClass = "";
-			$featuredImageCutline = "";
-			$thumbnail_image = get_posts( array( 'p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment' ) );
-
-			if ( $thumbnail_image && isset( $thumbnail_image[0] ) ) {
-				$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-			}
-
-			echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large">';
-			echo the_post_thumbnail( 'large-thumb' );
-
-			if ( $featuredImageCutline != "" ) {
-				echo '<div class="usa-grid">';
-					echo "<div class='bbg__article-header__caption'>$featuredImageCutline</div>";
-				echo '</div> <!-- usa-grid -->';
-			}
-
-			echo '</div>';
-
-			echo '</div> <!-- usa-grid-full -->';
-		}
+		check_featured_media_type();
 	?><!-- .bbg__article-header__thumbnail -->
 
 	<div class="usa-grid">
-		<header class="entry-header">
+	<?php
+		$page_header = '<header class="entry-header">';
+		if($post -> post_parent) {
+			// REFERENCE: https://wordpress.org/support/topic/link-to-parent-page
+			$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+			$parent_link_data = get_permalink($post -> post_parent) ;
 
-			<?php if( $post -> post_parent ) {
-				//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-				$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
-				$parent_link = get_permalink( $post -> post_parent) ;
-			?>
-				<h5 class="bbg__label">
-					<a href="<?php echo $parent_link; ?>"><?php echo $parent -> post_title; ?></a>
-				</h5>
-			<?php /*} else {*/ ?>
-				<!-- <h5 class="bbg__label"><?php the_title(); ?></h5> -->
-			<?php } ?>
+			$parent_link_markup  = '<h2>';
+			$parent_link_markup .= 	'<a href"' . $parent_link_data . '">';
+			$parent_link_markup .= 		$parent -> post_title;
+			$parent_link_markup .= 	'</a>';
+			$parent_link_markup .= '</h2>';
 
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-		</header><!-- .entry-header -->
+			$page_header .= $parent_link_markup;
+		}
 
-		<div class="bbg__article-sidebar--left">
-			<h3 class="bbg__sidebar-label bbg__contact-label">Share </h3>
-			<ul class="bbg__article-share">
-				<li class="bbg__article-share__link facebook">
+		$page_header  = 	'<h1 class="entry-title">';
+		$page_header .= 		get_the_title();
+		$page_header .= 	'</h1>';
+		$page_header .= '</header>';
+		echo $page_header;
+	?>
+
+		<!-- <div class="bbg__article-sidebar--left"> -->
+		<div class="">
+			<h6>Share </h6>
 					<a href="<?php echo $fbUrl; ?>">
 						<span class="bbg__article-share__icon facebook"></span>
 					</a>
-				</li>
-				<li class="bbg__article-share__link twitter">
 					<a href="<?php echo $twitterURL; ?>">
 						<span class="bbg__article-share__icon twitter"></span>
 					</a>
-				</li>
-			</ul>
-		</div><!-- .bbg__article-sidebar--left -->
+		</div>
 
 		<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
 
@@ -185,14 +148,13 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 	</div><!-- .usa-grid -->
 
 	<?php if ( $timelineUrl != "" ) {
-		$urlParts = parse_url($timelineUrl); // Parse string as a URL
-		$domain = $urlParts['host']; 		// Get Domain. i.e. crunchify.com
-		$path = $urlParts['path'];			// Get Path. i.e. /path
-		$urlQuery = $urlParts['query'];		// Get query params (everything after the ?)
+		$urlParts = parse_url($timelineUrl);
+		$domain = $urlParts['host'];
+		$path = $urlParts['path'];
+		$urlQuery = $urlParts['query'];
 
-		// Merge URL parts to generate complete URL
 		$timelineUrl = "//" . $domain . $path . "?" . $urlQuery;
-		// echo $timelineUrl;
+
 		echo featured_timeline($timelineUrl);
 		$hideFeaturedImage = TRUE;
 	} ?>
