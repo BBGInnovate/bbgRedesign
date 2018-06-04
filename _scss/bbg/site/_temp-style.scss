@@ -1,4 +1,7 @@
-#neat-container {
+.container {
 	@include grid-container;
 	
+}
+.rad {
+	color: #ff00ff;
 }
