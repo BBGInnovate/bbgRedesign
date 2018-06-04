@@ -112,7 +112,7 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 		</div><!-- .entry-content -->
 
 
-		<div class="bbg__article-sidebar">
+		<div class="">
 			<?php
 				// Right sidebar
 				echo "<!-- Sidebar content -->";
@@ -127,6 +127,7 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 				echo $sidebarDownloads;
 
 				echo $teamRoster;
+				echo "Roster";
 			?>
 		</div><!-- .bbg__article-sidebar -->
 
