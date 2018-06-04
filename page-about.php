@@ -58,13 +58,18 @@ function showUmbrellaArea($atts) {
 		
 		if ($thumbSrc) {
 			echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--medium">';
-			echo '<a ' . $anchorTarget . ' href="' . $link . '" rel="bookmark" tabindex="-1"><img width="1040" height="624" src="' . $thumbSrc .  '" class="attachment-large-thumb size-large-thumb"></a>';
-			echo '</div>';	
+			echo 	'<a ' . $anchorTarget . ' href="' . $link . '" rel="bookmark" tabindex="-1">';
+			echo 		'<img width="1040" height="624" src="' . $thumbSrc .  '" class="attachment-large-thumb size-large-thumb">';
+			echo 	'</a>';
+			echo '</div>';
 		}
 		
-		echo '<h3 class="bbg__about__grandchild__title"><a ' . $anchorTarget . ' href="' . $link . '">' . $itemTitle . '</a>'  . $linkSuffix . '</h3>';
+		echo '<h3 class="bbg__about__grandchild__title">';
+		echo 	'<a ' . $anchorTarget . ' href="' . $link . '">' . $itemTitle . '</a>';
+		echo 	$linkSuffix;
+		echo '</h3>';
 		if ($subTitle != "") {
-			echo '<h5 class="bbg__about__grandchild__subtitle">' . $subTitle . '</h5>';
+			echo '<h4 class="bbg__about__grandchild__subtitle">' . $subTitle . '</h4>';
 		}
 		echo $description; // Output page excerpt
 		echo '</article>';
