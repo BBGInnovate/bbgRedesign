@@ -508,7 +508,7 @@ function build_impact_markup($divide_blocks) {
 	$impact_markup .= 	'</a>';
 	$impact_markup .= 	'<h5><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h5>';
 	$impact_markup .= 	'<p>';
-	$impact_markup .= 		get_the_content();
+	$impact_markup .= 		get_the_excerpt();
 	$impact_markup .= 	'</p>';
 	$impact_markup .= '</div>';
 	echo $impact_markup;

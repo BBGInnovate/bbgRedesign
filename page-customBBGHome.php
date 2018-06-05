@@ -14,8 +14,8 @@
  */
 
 // FUNCTION THAT BUILD SECTIONS
-require 'inc/bbg-functions-home.php';
-require 'inc/bbg-functions-assemble.php';
+require get_template_directory() . '/inc/bbg-functions-home.php';
+require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
 $templateName = 'customBBGHome';
 
@@ -39,7 +39,7 @@ if ($threatsToPressPost) {
 
 get_header();
 ?>
-<!-- test rsub -->
+
 <div id="main" class="site-main">
 	<div id="primary" class="content-area">
 		<main id="bbg-home" class="site-content bbg-home-main" role="main">
