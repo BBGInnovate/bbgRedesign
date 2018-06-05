@@ -82,22 +82,6 @@ a:not(.bbg__article-share__icon) {
     word-break: keep-all;
 }
 
-img,
-*[class*="avatar"],
-*[class*="icon"],
-*[class*="image"],
-*[class*="photo"],
-*[class*="thumbnail"],
-*[style*="background-image"] {
-    >a:hover,
-    >a:focus {
-        // removes background color and underline for linked images
-        background-color: transparent;
-        text-decoration: none;
-    }
-    margin-bottom: 1.5rem;
-}
-
 .usa-font-lead {color: $black6;}
 .usa-disclaimer {text-align: center;}
 

@@ -2900,31 +2900,6 @@ a:not(.bbg__article-share__icon):focus {
   page-break-inside: avoid;
   word-break: keep-all; }
 
-img,
-*[class*="avatar"],
-*[class*="icon"],
-*[class*="image"],
-*[class*="photo"],
-*[class*="thumbnail"],
-*[style*="background-image"] {
-  margin-bottom: 1.5rem; }
-  img > a:hover,
-  img > a:focus,
-  *[class*="avatar"] > a:hover,
-  *[class*="avatar"] > a:focus,
-  *[class*="icon"] > a:hover,
-  *[class*="icon"] > a:focus,
-  *[class*="image"] > a:hover,
-  *[class*="image"] > a:focus,
-  *[class*="photo"] > a:hover,
-  *[class*="photo"] > a:focus,
-  *[class*="thumbnail"] > a:hover,
-  *[class*="thumbnail"] > a:focus,
-  *[style*="background-image"] > a:hover,
-  *[style*="background-image"] > a:focus {
-    background-color: transparent;
-    text-decoration: none; }
-
 .usa-font-lead, .bbg__about__intro p:first-of-type, .bbg__about__child__intro p:first-of-type, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
   color: #666666; }
 
@@ -4816,6 +4791,34 @@ ol li:before {
   float: left;
   margin-left: 20px; }
 
+.red-special {
+  font-family: "Carrara-Regular", serif;
+  font-size: 3.2rem;
+  font-style: italic;
+  color: #b2201c; }
+
+img,
+*[class*="avatar"],
+*[class*="icon"],
+*[class*="image"],
+*[class*="photo"],
+*[style*="background-image"] {
+  margin-bottom: 0.2em; }
+  img > a:hover,
+  img > a:focus,
+  *[class*="avatar"] > a:hover,
+  *[class*="avatar"] > a:focus,
+  *[class*="icon"] > a:hover,
+  *[class*="icon"] > a:focus,
+  *[class*="image"] > a:hover,
+  *[class*="image"] > a:focus,
+  *[class*="photo"] > a:hover,
+  *[class*="photo"] > a:focus,
+  *[style*="background-image"] > a:hover,
+  *[style*="background-image"] > a:focus {
+    background-color: transparent;
+    text-decoration: none; }
+
 /**
  * CH 02 - 2- and 3-COLUMN PAGE STRUCTURE
  * CH 03 - FOOTER STYLES
@@ -6095,7 +6098,6 @@ section.usa-section.bbg-banner__section {
   background-repeat: no-repeat;
   background-position: center center;
   float: left;
-  margin-top: 1rem;
   margin-right: 1rem;
   max-height: 40rem;
   max-width: 40rem;

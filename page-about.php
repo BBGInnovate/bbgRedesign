@@ -10,10 +10,18 @@
 
 /* @Check if number of pages is odd or even
 *  Return BOOL (true/false) */
+
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+
+// REMOVE P TAGS FROM CONTENT TO PUT IN YOUR OWN PARAGRAPHY STYLES
+remove_filter ('the_content', 'wpautop');
+
 function isOdd( $pageTotal ) {
 	return ( $pageTotal % 2 ) ? TRUE : FALSE;
 }
 
+require 'inc/custom_field_data_retriever.php';
 require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
 function showUmbrellaArea($atts) {
@@ -80,7 +88,7 @@ function showUmbrellaArea($atts) {
 			$columnTitle = '<a '  . $anchorTarget . ' href="' . $link . '">' . $columnTitle . '</a>';
 		}
 		$columnTitle = $columnTitle . $linkSuffix;
-		echo '<h3 class="bbg__about__grandchild__title">' . $columnTitle . '</h3>';	
+		echo '<h4 class="bbg__about__grandchild__title">' . $columnTitle . '</h4>';	
 		echo '<a '  . $anchorTarget . ' href="' . $link . '">';
 		echo '<div class="bbg__about__grandchild__thumb" style="background-image: url(' . $thumbSrc . '); background-position:center center;"></div></a>' . $description;
 		echo '</article>';
@@ -159,55 +167,52 @@ get_header();
 						}
 
 						if (get_row_layout() == 'marquee'):
-							$marqueeHeading = get_sub_field('marquee_heading');
-							$marqueeLink = get_sub_field('marquee_link');
-							$marqueeContent = get_sub_field('marquee_content');
-							$marqueeContent = apply_filters( 'the_content', $marqueeContent );
-							$marqueeContent = str_replace( ']]>', ']]&gt;', $marqueeContent ); 
+							$marquee_result = get_marquee_data();
+							// $umbrella_result = get_umbrella_main_data();
 
-							$marquee_markup  = '<section class="usa-grid bbg__about__children--row bbg__about--marquee">';
-							$marquee_markup .= 		'<article id="post-25948" class="bbg__about__excerpt bbg__about__child bbg__about__child--mission bbg-grid--1-1-1 post-25948 page type-page status-publish has-post-thumbnail hentry">';
-							$marquee_markup .= 			'<div class="entry-content bbg__about__excerpt-content">' . $marqueeContent . '</div>';
-							$marquee_markup .= 		'</article>';
-							$marquee_markup .= '</section>';
+							if ($umbrella_result['section_header'] == 'History') {
+								// echo 'dont cache';
+								// $umbrella_content = get_umbrella_content_data();
+								// echo $umbrella_content_package['column_title'];
+							}
+
+							$marquee_markup  = '<div class="container">';
+							$marquee_markup .= 		'<div class="full-grid">';
+							$marquee_markup .= 			'<p class="red-special">' . $marquee_result['content'] . '</p>';
+							$marquee_markup .= 		'</div>';
+							$marquee_markup .= '</div>';
 							echo $marquee_markup;
 
 						elseif ( get_row_layout() == 'umbrella' ): 
 							/*** BEGIN DISPLAY OF ENTIRE UMBRELLA ROW ***/
-							$sectionHeading = get_sub_field('umbrella_section_heading');
-							$sectionHeadingLink = get_sub_field('umbrella_section_heading_link');
-							$forceContentLabels = get_sub_field('umbrella_force_content_labels');
-							$sectionIntroText = get_sub_field('umbrella_section_intro_text');
-							$sectionIntroText = apply_filters( 'the_content', $sectionIntroText );
-							$sectionIntroText = str_replace( ']]>', ']]&gt;', $sectionIntroText );
-							//output intro section label if it exists (with or without link)
-							if ($sectionHeading != "") {
-								if ( $sectionHeadingLink ) { // if the label has a URL add link and right arrow
-									$sectionHeading = '<a href="' . $sectionHeadingLink . '">' . $sectionHeading . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
+							$umbrella_result = get_umbrella_main_data();
+
+							if ($umbrella_result['header'] != "") {
+								if ($umbrella_result['header_link']) { // if the label has a URL add link and right arrow
+									$sectionHeading = '<a href="' . $umbrella_result['header_link'] . '">' . $umbrella_result['header_link'] . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
 								} 
-								echo '<h2>' . $sectionHeading . '</h2>';	
+								echo '<h2>' . $umbrella_result['header'] . '</h2>';	
 							} 
 							//output intro section text if it exists
-							if ($sectionIntroText != "") {
-								if ( $sectionIntroText ) { 
-									echo '<div class="bbg__about__child__intro">' . $sectionIntroText . '</div>';
+							if ($umbrella_result['intro_text'] != "") {
+								if ($umbrella_result['intro_text']) { 
+									echo '<div class="bbg__about__child__intro">' . $umbrella_result['intro_text'] . '</div>';
 								}
 							}
 
 							$numRows = count(get_sub_field('umbrella_content'));
 							$containerClass = 'bbg-grid--1-2-2';
-							if ( isOdd($numRows)) {
+							if (isOdd($numRows)) {
 								$containerClass = 'bbg-grid--1-3-3'; // add 3-col grid class
 							}
 
 							echo '<div class="usa-grid-full bbg__about__grandchildren">'; // open grandchildren container
-							while ( have_rows('umbrella_content') ) : the_row();
+							while (have_rows('umbrella_content')) : the_row();
 								if (get_row_layout() == 'umbrella_content_external') {
 									$thumbnail = get_sub_field('umbrella_content_external_thumbnail');
 									$thumbnailID = $thumbnail['ID'];
 									$thumbSrc = wp_get_attachment_image_src( $thumbnailID , 'medium-thumb' );
 									if ($thumbSrc) {
-										//$thumbSrc = 'src="' . $thumbSrc[0] . '"';	
 										$thumbSrc = $thumbSrc[0];
 									} 
 									showUmbrellaArea(array(
@@ -573,29 +578,13 @@ get_header();
 			?>
 			</div> <!-- End id="page-children" -->
 
-
-
-
-
-
 			<!-- NETWORKS -->
 			<?php
-				$showNetworks = get_field( 'about_networks_row' );
-				if ( $showNetworks ) { ?>
-
-				<!-- Entity list -->
-				<section id="entities" class="usa-section bbg__staff">
-					<div class="usa-grid">
-						<h6 class="bbg__label"><a href="<?php echo get_permalink( get_page_by_path( 'networks' ) ); ?>" title="List of all BBG broadcasters">Our networks</a></h6>
-						<div class="usa-intro bbg__broadcasters__intro">
-							<h3 class="usa-font-lead">Every week, more than <?php echo do_shortcode('[audience]'); ?> listeners, viewers and Internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</h3>
-						</div>
-						<?php echo outputBroadcasters('2'); ?>
-					</div>
-				</section><!-- entity list -->
-			<?php
+				$showNetworks = get_field('about_networks_row');
+				if ($showNetworks) {
+					echo get_entity_data();
 				}
-			wp_reset_postdata();
+				wp_reset_postdata();
 			?>
 
 		</main>
