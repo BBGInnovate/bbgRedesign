@@ -1,3 +1,4 @@
+<?php header("Cache-Control: no-cache"); ?>
 <?php
 /**
  * The header for our theme.

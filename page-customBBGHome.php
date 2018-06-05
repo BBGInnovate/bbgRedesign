@@ -14,8 +14,8 @@
  */
 
 // FUNCTION THAT BUILD SECTIONS
-require get_template_directory() . '/inc/bbg-functions-home.php';
-require get_template_directory() . '/inc/bbg-functions-assemble.php';
+require 'inc/bbg-functions-home.php';
+require 'inc/bbg-functions-assemble.php';
 
 $templateName = 'customBBGHome';
 
@@ -50,7 +50,7 @@ get_header();
 				<h1 class="header-outliner">About the BBG</h1>
 				<?php
 					$settings_result = get_site_settings_data();
-					$site_introduction  = '<p id="site-intro" class="usa-font-lead">';
+					$site_introduction  = '<p class="usa-font-lead">';
 					$site_introduction .= 	$settings_result['intro_content'];
 					$site_introduction .= 	'<a href="';
 					$site_introduction .= 		$settings_result['intro_link'];
@@ -74,7 +74,6 @@ get_header();
 				<div class="usa-width-one-third">
 					<?php
 						$post_qty = 2;
-
 						display_additional_recent_posts($post_qty );
 					?>
 					<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
@@ -91,13 +90,13 @@ get_header();
 			<!-- SOAPBOX, CORNER HERO  -->
 			<section class="usa-grid">
 				<?php
-					$soap_result = get_soap_box_data();
+					$soap_result = get_soapbox_data();
 					$corner_hero_result = get_corner_hero_data();
 
 					if (!empty($soap_result) && !empty($corner_hero_result)) {
 						echo '<div class="kr-five-twelfths">';
 					} else {
-						echo '<div class="usa-width-one-whole">';
+						echo '<div class="container">';
 					}
 					if ($soap_result) {
 						echo $soap_result;
@@ -141,42 +140,63 @@ get_header();
 				<div class="usa-grid">
 					<div class="threats-box">
 					<?php
-						$threats_post_qty = 2;
+$randomFeaturedThreatsID = false;
+function get_threats_post_data() {
+	$threatsToPressPost = get_field('homepage_threats_to_press_post', 'option');
+	$threatsPermalink = get_permalink(get_page_by_path('threats-to-press'));
+	$randomFeaturedThreatsID = false;
+	
+	if ($threatsToPressPost) {
+		$randKey = array_rand($threatsToPressPost);
+		$randomFeaturedThreatsID = $threatsToPressPost[$randKey];
+	}
+	build_threat_params();
+}
+get_threats_post_data();
 						$threatsUsedPosts = array();
+						$counter = 0;
+						$threat_post_qty = 2;
+
+						function build_threat_params() {
 							if ($randomFeaturedThreatsID) {
 								$qParams = array(
 									'post__in' => array($randomFeaturedThreatsID),
 								);
 							} else {
-								$qParams = create_threats_post_query_params($threats_post_qty, $threatsUsedPosts);
+								$qParams = array(
+									'post_type' => array('post'),
+									'posts_per_page' => 2,
+									'orderby' => 'post_date',
+									'order' => 'desc',
+									'cat' => get_cat_id('Threats to Press'),
+									'post__not_in' => $threatsUsedPosts
+								);
 							}
 							query_posts($qParams);
+							while (have_posts()) : the_post();
+								$counter++;
+								$id = get_the_ID();
+								$threatsUsedPosts[] = $id;
+								$postIDsUsed[] = $id;
+								$permalink = get_the_permalink();
 
-							$counter = 0;
-							if (have_posts()) {
-								while (have_posts()) : the_post();
-									$counter++;
-									$id = get_the_ID();
-									$threatsUsedPosts[] = $id;
-									$postIDsUsed[] = $id;
-									$permalink = get_the_permalink();
-
-									$threat_markup  = '<article id="post-' . $id . '">';
-									// $threat_markup  = '<article id="post-' . $id . '" ' . get_post_class() . '>';
-									$threat_markup .= 	'<div class="image-block">';
-									$threat_markup .= 		'<a href="' . $permalink . '" rel="bookmark" tabindex="-1">';
-									$threat_markup .= 			get_the_post_thumbnail();
-									$threat_markup .= 		'</a>';
-									$threat_markup .= 	'</div>';
-									$threat_markup .= 	'<div class="threat-copy">';
-									$threat_markup .= 		'<header><h5 class=""><a href="'.get_the_permalink().'">' . get_the_title() . '</a></h5></header>';
-									$threat_markup .= 		'<p>' . get_the_excerpt() . '</p>';
-									$threat_markup .= 	'</div>';
-									$threat_markup .= '</article>';
-									echo $threat_markup;
-								endwhile;
-							}	
-							wp_reset_query();
+								$threat_markup  = '<article id="post-' . $id . '">';
+								$threat_markup .= 	'<div class="image-block">';
+								$threat_markup .= 		'<a href="' . $permalink . '" rel="bookmark" tabindex="-1">';
+								$threat_markup .= 			get_the_post_thumbnail();
+								$threat_markup .= 		'</a>';
+								$threat_markup .= 	'</div>';
+								$threat_markup .= 	'<div class="threat-copy">';
+								$threat_markup .= 		'<header><h5 class=""><a href="'.get_the_permalink().'">' . get_the_title() . '</a></h5></header>';
+								$threat_markup .= 		'<p>' . get_the_excerpt() . '</p>';
+								$threat_markup .= 	'</div>';
+								$threat_markup .= '</article>';
+								echo $threat_markup;
+							endwhile;
+						}
+						if ($counter > $threat_post_qty) {
+							get_threats_post_data();
+						}
 					?>
 					</div>
 				</div>

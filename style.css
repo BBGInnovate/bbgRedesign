@@ -4494,6 +4494,16 @@ e.g. on the intern testimonial page */
   font-transform: uppercase;
   margin-left: 1rem; }
 
+.container::after {
+  clear: both;
+  content: "";
+  display: block; }
+
+.full-grid {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
 .kr-five-twelfths {
   float: left;
   display: block;
@@ -4524,19 +4534,27 @@ e.g. on the intern testimonial page */
   margin-right: 0; }
 
 @media screen and (min-width: 600px) {
-  .kr-five-twelfths {
+  .full-grid {
+    width: calc(100% - 40px);
     float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 40.29137%; }
-    .kr-five-twelfths:last-child {
-      margin-right: 0; }
+    margin-left: 20px; }
+  .half-grid {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px; }
   .kr-seven-twelfths {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 57.35098%; }
     .kr-seven-twelfths:last-child {
+      margin-right: 0; }
+  .kr-five-twelfths {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 40.29137%; }
+    .kr-five-twelfths:last-child {
       margin-right: 0; }
   .bbg-grid--1-2-2 {
     float: left;
@@ -4781,15 +4799,11 @@ ol li:before {
   .bbg-header__site-title--breakline {
     display: inline-block; } }
 
-.container::after {
-  clear: both;
-  content: "";
-  display: block; }
-
-.full-grid {
-  width: calc(100% - 40px);
+.soapbox-image {
+  width: calc(16.66667% - 23.33333px);
   float: left;
-  margin-left: 20px; }
+  margin-left: 20px;
+  border: 1px solid blue; }
 
 .red-special {
   font-family: "Carrara-Regular", serif;
@@ -4802,6 +4816,7 @@ img,
 *[class*="icon"],
 *[class*="image"],
 *[class*="photo"],
+*[class*="thumbnail"],
 *[style*="background-image"] {
   margin-bottom: 0.2em; }
   img > a:hover,
@@ -4814,6 +4829,8 @@ img,
   *[class*="image"] > a:focus,
   *[class*="photo"] > a:hover,
   *[class*="photo"] > a:focus,
+  *[class*="thumbnail"] > a:hover,
+  *[class*="thumbnail"] > a:focus,
   *[style*="background-image"] > a:hover,
   *[style*="background-image"] > a:focus {
     background-color: transparent;

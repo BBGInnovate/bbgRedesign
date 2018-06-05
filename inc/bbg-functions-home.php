@@ -64,59 +64,6 @@ function create_threats_post_query_params($numPosts, $used) {
 	// return $threats_package;
 }
 
-// function get_entity_data() {
-	// $entityParentPage = get_page_by_path('networks');
-	// $qParams = array(
-	// 	'post_type' => array('page'),
-	// 	'posts_per_page' => -1,
-	// 	'post_parent' => $entityParentPage->ID,
-	// 	'orderby' => 'meta_value_num',
-	// 	'meta_key' => 'entity_year_established',
-	// 	'order' => 'ASC'
-	// );
-
-	// $custom_query = new WP_Query($qParams);
-	// return build_entity_list($custom_query);
-
-	// if ($custom_query -> have_posts()) {
-	// 	$entity_markup = '<div class="usa-grid-full">';
-
-	// 	while ($custom_query -> have_posts())  {
-	// 		$custom_query -> the_post();
-	// 		$id = get_the_ID();
-	// 		$fullName = get_post_meta($id, 'entity_full_name', true);
-
-	// 		if ($fullName != "") {
-	// 			$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
-	// 			$abbreviation = str_replace("/", "",$abbreviation);
-	// 			$description = get_post_meta($id, 'entity_description', true);
-	// 			$description = apply_filters('the_content', $description);
-	// 			$link = get_permalink( get_page_by_path("/networks/$abbreviation/" ));
-	// 			$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
-
-	// 			// $entity_data_package = array('column_rule' => $columnsClass, 'link' => $link, 'img_src' => $imgSrc, 'desc' => $description);
-	// 			// return build_entity_list($entity_data_package);
-
-	// 			$entity_markup .= '<article class="bbg__entity'. $columnsClass .'">';
-	// 			$entity_markup .= 	'<div class="bbg__avatar__container bbg__entity__icon">';
-	// 			$entity_markup .= 		'<a href="'.$link.'" tabindex="-1">';
-	// 			$entity_markup .= 			'<div class="bbg__avatar bbg__entity__icon__image" style="background-image: url('.$imgSrc.');"></div>';
-	// 			$entity_markup .= 		'</a>';
-	// 			$entity_markup .= 	'</div>';
-	// 			$entity_markup .= 	'<div class="bbg__entity__text">';
-	// 			$entity_markup .= 		'<h2 class="bbg__entity__name"><a href="'.$link.'">'.$fullName.'</a></h2>';
-	// 			$entity_markup .= 		'<p class="bbg__entity__text-description">'.$description.'</p>';
-	// 			$entity_markup .= 	'</div>';
-	// 			$entity_markup .= '</article>';
-	// 		}
-	// 	}
-	// 	$entity_markup .= '</div>';
-	// 	// echo $entity_markup;
-	// }
-	// wp_reset_postdata();
-	// return $entity_markup;
-// }
-
 // CUSTOM FIELD DATA
 function get_site_settings_data() {
 	$intro_content = get_field('site_setting_mission_statement','options','false');
@@ -377,7 +324,7 @@ function display_additional_recent_posts($maxPostsToShow) {
 	wp_reset_query();
 }
 
-function get_soap_box_data() {
+function get_soapbox_data() {
 	$soap_contents = get_field('homepage_soapbox_post', 'option');
 
 	if ($soap_contents) {
@@ -385,8 +332,8 @@ function get_soap_box_data() {
 	}
 	$soap_index = $soap_contents[0];
 	$id = $soap_index -> ID;
-	$soapCategory = wp_get_post_categories( $id );
-	$isCEOPost = false;
+	$soap_category = wp_get_post_categories( $id );
+	$is_ceo_post = false;
 	$isSpeech = false;
 	$relatedProfile = false;
 	$soap_class = "";
@@ -436,29 +383,28 @@ function get_soap_box_data() {
 	}
 
 	// CHANGE SOAPBOX LABEL
-	$homepageSoapboxLabel = get_field( 'homepage_soapbox_label', 'options' );
+	$homepage_soapbox_label = get_field( 'homepage_soapbox_label', 'options' );
 
 	// BLUE BACKGROUND DEFAULT
 	$soap_class = "bbg__voice--featured";
-	if ( $homepageSoapboxLabel != "" ) {
-		$soapHeaderText = $homepageSoapboxLabel;
-		$soapHeaderPermalink = get_field( 'homepage_soapbox_link', 'options' );
+	if ( $homepage_soapbox_label != "" ) {
+		$soapHeaderText = $homepage_soapbox_label;
+		$soapHeaderPermalink = get_field('homepage_soapbox_link', 'options');
 	} else {
 		/** if the user did not manually enter a soapbox label, use the categories on this post
 			to decide the class (background color) as well as the header link, and in some cases the profile photo/name
 		**/
 
-		foreach ($soapCategory as $c) {
+		foreach ($soap_category as $c) {
 			$cat = get_category($c);
 			$soapHeaderPermalink = get_category_link($cat -> term_id);
 			$soapHeaderText = $cat -> name;
 
 			if ($cat -> slug == "from-the-ceo") {
-				$isCEOPost = true;
+				$is_ceo_post = true;
 				$soap_class = "bbg__voice--ceo";
-				$soapHeaderText = "From the CEO";
-				// $profilePhoto = "/wp-content/media/2016/07/john_lansing_ceo-sq-200x200.jpg";
-				$profilePhoto = "/wp-content/themes/bbgRedesign/img/john_lansing_ceo-sq-200x200.jpg"; //for local testing
+				$soapHeaderText = "From x the CEO";
+				$profilePhoto = get_field('homepage_soapbox_image', 'option');
 				$profileName = "John Lansing";
 			} else if ($cat -> slug == "usim-matters") {
 				$isSpeech = true;
@@ -517,7 +463,6 @@ function build_corner_hero($data) {
 }
 
 function build_soap_markup($data) {
-	// var_dump($data['profile_image']);
 	// BUILD MARKUP
 	$soapbox_markup  = '<article class="' . $data['article_class'] . '">';
 	if (!empty($data['profile_image'])) {
@@ -563,46 +508,10 @@ function build_impact_markup($divide_blocks) {
 	$impact_markup .= 	'</a>';
 	$impact_markup .= 	'<h5><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h5>';
 	$impact_markup .= 	'<p>';
-	$impact_markup .= 		get_the_excerpt();
+	$impact_markup .= 		get_the_content();
 	$impact_markup .= 	'</p>';
 	$impact_markup .= '</div>';
 	echo $impact_markup;
 }
 
-// function build_entity_list($data) {
-// 	if ($custom_query -> have_posts()) {
-// 		$entity_markup = '<div class="usa-grid-full">';
-
-// 		while ($custom_query -> have_posts())  {
-// 			$custom_query -> the_post();
-// 			$id = get_the_ID();
-// 			$fullName = get_post_meta($id, 'entity_full_name', true);
-
-// 			if ($fullName != "") {
-// 				$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
-// 				$abbreviation = str_replace("/", "",$abbreviation);
-// 				$description = get_post_meta($id, 'entity_description', true);
-// 				$description = apply_filters('the_content', $description);
-// 				$link = get_permalink( get_page_by_path("/networks/$abbreviation/" ));
-// 				$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
-
-// 				$entity_markup .= '<article class="bbg__entity'. $columnsClass .'">';
-// 				$entity_markup .= 	'<div class="bbg__avatar__container bbg__entity__icon">';
-// 				$entity_markup .= 		'<a href="'.$link.'" tabindex="-1">';
-// 				$entity_markup .= 			'<div class="bbg__avatar bbg__entity__icon__image" style="background-image: url('.$imgSrc.');"></div>';
-// 				$entity_markup .= 		'</a>';
-// 				$entity_markup .= 	'</div>';
-// 				$entity_markup .= 	'<div class="bbg__entity__text">';
-// 				$entity_markup .= 		'<h2 class="bbg__entity__name"><a href="'.$link.'">'.$fullName.'</a></h2>';
-// 				$entity_markup .= 		'<p class="bbg__entity__text-description">'.$description.'</p>';
-// 				$entity_markup .= 	'</div>';
-// 				$entity_markup .= '</article>';
-// 			}
-// 		}
-// 		$entity_markup .= '</div>';
-// 		// echo $entity_markup;
-// 	}
-// 	wp_reset_postdata();
-// 	return $entity_markup;
-// }
 ?>
