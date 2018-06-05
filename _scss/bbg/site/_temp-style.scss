@@ -1,2 +1,23 @@
 .container {@include grid-container;}
 .full-grid {@include grid-column(12);}
+.red-special {
+	font-family: $font-serif;
+	font-size: 3.2rem;
+	font-style: italic;
+	color: $color-red;
+}
+img,
+*[class*="avatar"],
+*[class*="icon"],
+*[class*="image"],
+*[class*="photo"],
+// *[class*="thumbnail"],
+*[style*="background-image"] {
+    >a:hover,
+    >a:focus {
+        // removes background color and underline for linked images
+        background-color: transparent;
+        text-decoration: none;
+    }
+    margin-bottom: 0.2em;
+}
