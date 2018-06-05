@@ -170,12 +170,12 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 	background-position: left;
 	background-size: contain;
 	.threats-box {
-		@include grid-push(2);
+		@include grid-push(1);
 		article {
 			@include grid-container;
 			border-bottom: 1px solid $color-blue-darkest;
 			.image-block {
-				@include grid-column(5);
+				@include grid-column(4);
 			}
 			.threat-copy {
 				@include grid-column(7);

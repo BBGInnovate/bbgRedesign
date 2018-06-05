@@ -120,33 +120,28 @@ get_header();
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-			<?php
-				// NOT SURE WHERE THIS IS USED?
-				if ($addFeaturedGallery) {
-					$featuredGalleryID = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
-					$gallery_build  = '<div class="usa-grid">';
-					$gallery_build .= 	'<div class="usa-grid bbg__article-featured__gallery">';
-					$gallery_build .= 		putUniteGallery($featuredGalleryID);
-					$gallery_build .= '</div>';
-					// echo $gallery_build;
-				}
-				// $hideFeaturedImage = false;
-				// if ($addFeaturedGallery) {
-				// 	$hideFeaturedImage = true;
-				// }
-			?>
-			<?php
-				check_featured_media_type();
-			?>
-			<!-- CONTENT -->
-			<section class="container">
-				<div class="full-grid">
-				<?php
-					echo '<p id="site-intro" class="usa-font-lead">' . $pageContent . '</p>';
-				?>
-				</div>
-			</section>
+		<?php
+			// NOT SURE WHERE THIS IS USED?
+			if ($addFeaturedGallery) {
+				$featuredGalleryID = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
+				$gallery_build  = '<div class="usa-grid">';
+				$gallery_build .= 	'<div class="usa-grid bbg__article-featured__gallery">';
+				$gallery_build .= 		putUniteGallery($featuredGalleryID);
+				$gallery_build .= '</div>';
+				// echo $gallery_build;
+			}
+			// $hideFeaturedImage = false;
+			// if ($addFeaturedGallery) {
+			// 	$hideFeaturedImage = true;
+			// }
 
+			check_featured_media_type();
+
+			$page_content  = '<div class="usa-grid page-content">';
+			$page_content .= 	'<p class="lead-in">' . $pageContent . '</p>';
+			$page_content .= '</div>';
+			echo $page_content;
+		?>
 			<!-- Child pages -->
 			<div id="page-children" class="usa-section usa-grid bbg__about__children">
 			<?php
