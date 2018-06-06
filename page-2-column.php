@@ -104,7 +104,7 @@ get_header(); ?>
 									?>
 									<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5>
 								<?php } else { ?>
-									<h5 class="bbg__label--mobile large"><?php the_title(); ?></h5>
+									<h5 class="bbg__label--mobile large"><?php //the_title(); ?></h5>
 								<?php } ?>
 
 							</header><!-- .page-header -->
