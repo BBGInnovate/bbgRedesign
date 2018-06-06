@@ -397,16 +397,17 @@ function featured_video ($url) {
 		if(strpos($url, 'youtu.be') !== false) {
 			//URL's of the youtu.be form, which are what you get click share, don't naturally embed.  let's transform them.
 			//Convert url's like https://youtu.be/SOME_KEY and https://youtu.be/SOME_KEY?t=55s to https://www.youtube.com?v=SOME_KEY&start=55
-			$o = explode("/",$url);
+			$o = explode("/", $url);
 			$key = array_pop($o);
-			$timeSeconds=0;
+			$timeSeconds = 0;
+
 			if (strpos($key,'?t=') !== false) {
-				$o = explode("?",$key);
+				$o = explode("?", $key);
 				$timeStr = array_pop($o);
 				$key = $o[0];
-				$o = explode("=",$timeStr);
-				$timeSecondsStr=array_pop($o);
-				$timeSeconds = str_replace("s","",$timeSecondsStr);
+				$o = explode("=", $timeStr);
+				$timeSecondsStr = array_pop($o);
+				$timeSeconds = str_replace("s", "", $timeSecondsStr);
 			}
 			$url = "https://www.youtube.com/watch?v=" . $key;
 			if ($timeSeconds > 0) {

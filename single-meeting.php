@@ -7,6 +7,9 @@
  * @package bbgRedesign
  */
 /* we go through the loop once and reset it in order to get some vars for our og tags */
+
+require 'inc/bbg-functions-assemble.php';
+
 if ( have_posts() ) {
 	the_post();
 
@@ -108,6 +111,7 @@ $listsInclude = get_field( 'sidebar_dropdown_include', '', true);
 include get_template_directory() . "/inc/shared_sidebar.php";
 
 get_header(); ?>
+
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -136,31 +140,38 @@ get_header(); ?>
 				<?php
 					//If a featured video is set, include it.
 					//ELSE if a featured image is set, include it.
-					$hideFeaturedImage = FALSE;
-					if ($videoUrl!="") {
-						echo featured_video($videoUrl);
-						$hideFeaturedImage = TRUE;
-					} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-						echo '<div class="usa-grid-full">';
-						$featuredImageClass = "";
-						$featuredImageCutline="";
-						$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
-						if ($thumbnail_image && isset($thumbnail_image[0])) {
-							$featuredImageCutline=$thumbnail_image[0]->post_excerpt;
-						}
-						echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large">';
-						//echo '<div style="position: absolute;"><h5 class="bbg__label">Label</h5></div>';
-						echo the_post_thumbnail( 'large-thumb' );
+					// $hideFeaturedImage = false;
+					// if ($videoUrl != "") {
+					// 	$video_data featured_video($videoUrl);
+					// 	$hideFeaturedImage = true;
 
-						if ( $featuredImageCutline != "" ) {
-							echo '<div class="usa-grid">';
-								echo "<div class='wp-caption-text'>$featuredImageCutline</div>";
-							echo '</div> <!-- usa-grid -->';
-						}
+					// 	$video_markup  = '<iframe scrolling="no" src="';
+					// 	$video_markup .= 	$video_data['url'];
+					// 	$video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+					// 	$video_markup .= '</iframe>';
+					// 	echo 
+					// } elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
+					// 	echo '<div class="usa-grid-full">';
+					// 	$featuredImageClass = "";
+					// 	$featuredImageCutline="";
+					// 	$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
+					// 	if ($thumbnail_image && isset($thumbnail_image[0])) {
+					// 		$featuredImageCutline=$thumbnail_image[0]->post_excerpt;
+					// 	}
+					// 	echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large">';
+					// 	echo the_post_thumbnail( 'large-thumb' );
 
-						echo '</div>';
-						echo '</div> <!-- usa-grid-full -->';
-					}
+					// 	if ( $featuredImageCutline != "" ) {
+					// 		echo '<div class="usa-grid">';
+					// 			echo "<div class='wp-caption-text'>$featuredImageCutline</div>";
+					// 		echo '</div> <!-- usa-grid -->';
+					// 	}
+
+					// 	echo '</div>';
+					// 	echo '</div> <!-- usa-grid-full -->';
+					// }
+
+				display_feature_media_type();
 				?><!-- .bbg__article-header__thumbnail -->
 
 
@@ -253,85 +264,71 @@ get_header(); ?>
 
 						<p class="bbg-tagline bbg-tagline--main"><?php echo $meetingContactTagline; ?></p>
 
-						<!-- Speakers -->
+						<!-- SPEAKERS -->
 						<?php
-							// check if the flexible content field has rows of data
 							if ( have_rows('board_meeting_speakers') ) {
 								$speakersLabel = get_field('board_meeting_speaker_label');
-
-								echo '<h3 class="bbg__sidebar-label">' . $speakersLabel . '</h3>';
-							     // loop through the rows of data
+								
+								echo '<h6>' . $speakersLabel . '</h6>';
 							    while ( have_rows('board_meeting_speakers') ) : the_row();
 
-							        // show internal speaker list
-							        if ( get_row_layout() == 'board_meeting_speakers_internal' ) {
-
-						        		if ( get_sub_field('bbg_speaker_name') ) {
+							        // SHOW INTERNAL SPEAKER LIST
+							        if (get_row_layout() == 'board_meeting_speakers_internal') {
+						        		if (get_sub_field('bbg_speaker_name')) {
 						        			$profiles = get_sub_field('bbg_speaker_name');
 
 					        				echo "<ul class='usa-unstyled-list'>";
-					        				foreach ( $profiles as $profile ) {
+
+					        				foreach ($profiles as $profile) {
 					        					$pID = $profile->ID;
-					        					$profileID = get_post_meta( $pID );
+					        					$profile_id = get_post_meta($pID);
 												$includeProfile = false;
 
-												if ( $profileID ) {
+												if ($profile_id) {
 													$includeProfile = true;
-													/*$profilePhotoID = get_post_meta( $pID, 'profile_photo', true );
-													$profilePhoto = "";
 
-													if ($profilePhotoID) {
-														$profilePhoto = wp_get_attachment_image_src( $profilePhotoID , 'mugshot');
-														$profilePhoto = $profilePhoto[0];
-													}*/ // HIDING PHOTO
-
-													$twitterProfileHandle = get_post_meta( $pID, 'twitter_handle', true );
+													$twitterProfileHandle = get_post_meta($pID, 'twitter_handle', true);
 													$profileName = get_the_title( $pID );
-													$occupation = get_post_meta( $pID, 'occupation', true );
-													$profileLink = get_page_link( $pID );
-													// $profileExcerpt = get_the_excerpt( $pID ); // HIDING EXCERPT
+													$occupation = get_post_meta($pID, 'occupation', true);
+													$profileLink = get_page_link($pID);
 
-													// $relatedProfile = '<a href="' . $profileLink . '"><img class="bbg__sidebar__primary-image" src="'. $profilePhoto .'"/></a>'; // HIDING PHOTO
-													$relatedProfile = '<li>';
-														$relatedProfile .= '<h5 class="bbg__sidebar__primary-headline"><a href="' . $profileLink . '">' . $profileName . '</a></h5>';
-														$relatedProfile .= '<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
-													$relatedProfile .= '</li>';
-													// $relatedProfile .= '<p class="">' . $profileExcerpt . '</p>'; // HIDING EXCERPT
+													$profile_list  = '<li>';
+													$profile_list .= 	'<h5>';
+													$profile_list .= 		'<a href="' . $profileLink . '">' . $profileName . '</a>';
+													$profile_list .= 	'</h5>';
+													$profile_list .= 	'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
+													$profile_list .= '</li>';
 												}
 
 												if ($includeProfile) {
-													echo $relatedProfile;
+													echo $profile_list;
 												}
-
 					        				}
 					        				echo "</ul>";
-						        		// end internal speaker list
 						        		}
-							        } else if ( get_row_layout() == 'board_meeting_speakers_external' ) {
-							        // show external speaker list
-						        		if ( get_sub_field('meeting_speaker') ) {
+							        } else if (get_row_layout() == 'board_meeting_speakers_external') {
+						        		if (get_sub_field('meeting_speaker')) {
 						        			$profiles = get_sub_field('meeting_speaker');
 
 					        				echo "<ul class='usa-unstyled-list'>";
-					        				foreach ( $profiles as $profile ) {
+
+					        				foreach ($profiles as $profile) {
 					        					$speakerName = $profile["meeting_speaker_name"];
 					        					$speakerTitle = $profile["meeting_speaker_title"];
 					        					$speakerLink = $profile["meeting_speaker_url"];
 
-												if ( $speakerName && $speakerLink != "" ) {
-													$externalSpeaker = '<li>';
-														$externalSpeaker .= '<h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name"><a href="' . $speakerLink . '">' . $speakerName . '</a></h5>';
-														$externalSpeaker .= '<span class="bbg__profile-excerpt__occupation">' . $speakerTitle . '</span>';
-													$externalSpeaker .= '</li>';
+												$external_speaker_list  = '<li>';
+												$external_speaker_list .= 	'<h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name">';
+												if ($speakerName && $speakerLink != "") {
+													$external_speaker_list .= 		'<a href="' . $speakerLink . '">' . $speakerName . '</a>';
 												} else {
-													$externalSpeaker = '<li>';
-														$externalSpeaker .= '<h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name">' . $speakerName . '</h5>';
-														$externalSpeaker .= '<span class="bbg__profile-excerpt__occupation">' . $speakerTitle . '</span>';
-													$externalSpeaker .= '</li>';
+													$external_speaker_list .= $speakerName;
 												}
+												$external_speaker_list .= 	'</h5>';
+												$external_speaker_list .= 	'<span class="bbg__profile-excerpt__occupation">' . $speakerTitle . '</span>';
+												$external_speaker_list .= '</li>';
 
-												echo $externalSpeaker;
-
+												echo $external_speaker_list;
 					        				}
 					        				echo "</ul>";
 						        		}

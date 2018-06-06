@@ -9,8 +9,6 @@
 /* we go through the loop once and reset it in order to get some vars for our og tags */
 if ( have_posts() ) {
 	the_post();
-
-
 	$metaAuthor = get_the_author();
 	$ogTitle = get_the_title();
 
@@ -35,7 +33,7 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-
+<?php echo 'here'; ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 
 			<?php get_template_part( 'template-parts/content', 'single' ); ?>

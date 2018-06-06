@@ -51,15 +51,15 @@ $linkImage = sprintf('<a href="%s" rel="bookmark" tabindex="-1">', esc_url(get_p
 $excerpt_list  = '<article id="'. get_the_ID() . '">';
 $excerpt_list .= 	'<header>';
 if ($includeDate) { // FOR EVENT PAGE EXCERPTS ONLY
-	$excerpt_list .= 	'<h5 class="bbg__excerpt__event-date">' . get_the_date() . '</h5>';
+	$excerpt_list .= 	'<p class="bbg__excerpt__event-date">' . get_the_date() . '</p>';
 }
-$excerpt_list .= 		'<h5 class="entry-title bbg-blog__excerpt-title--list ';
+$excerpt_list .= 		'<h4 class="';
 if ($includeDate) {
 	$excerpt_list .= 		'bbg__excerpt-title--showDate';
 }
 $excerpt_list .= 		'">';
 $excerpt_list .= 			'<a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
-$excerpt_list .= 		'</h5>';
+$excerpt_list .= 		'</h4>';
 $excerpt_list .= 	'</header>';
 // if ($includeImage && has_post_thumbnail()) {
 // 	$excerpt_list .= '<div class="single-post-thumbnail clear bbg__excerpt-header__thumbnail--small">';

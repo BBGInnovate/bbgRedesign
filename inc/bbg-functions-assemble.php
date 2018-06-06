@@ -1,5 +1,4 @@
 <?php
-
 function display_feature_media_type() {
 	global $videoUrl;
 	global $addFeaturedGallery;
@@ -11,14 +10,11 @@ function display_feature_media_type() {
 		$hideFeaturedImage = true;
 		$video_data = featured_video($videoUrl);
 
-		$feature_video_markup  = '<div class="feature-container">';
-		$feature_video_markup  = 	'<iframe scrolling="no" src="';
-		$feature_video_markup .= 		$video_data['url'];
-		$feature_video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
-		$feature_video_markup .= 	'</iframe>';
-		$feature_video_markup .= '</div>';
-
-		$feature_data = $feature_video_markup;
+		$video_markup  = '<iframe scrolling="no" src="';
+		$video_markup .= 	$video_data['url'];
+		$video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+		$video_markup .= '</iframe>';
+		$featured_data = $video_markup;
 	} 
 	elseif (has_post_thumbnail()) {
 		$featuredImageClass = "";
@@ -26,19 +22,30 @@ function display_feature_media_type() {
 		$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
 		$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
 
-		if ($thumbnail_image && isset($thumbnail_image[0])) {
+		if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
 			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
 		}
 
-		$feature_image_markup  = '<div class="feature-container">';
-		$feature_image_markup .= 	'<div class="feature-image" ';
-		$feature_image_markup .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
-		$feature_image_markup .= 	'</div>';
-		$feature_image_markup .= '</div>';
+		$post_featured_image  = '<div class="feature-image">';
+		$post_featured_image .= 	'<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" ';
+		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
+		$post_featured_image .= 	'</div>';
+		$post_featured_image .= '</div>';
 
-		$feature_data = $feature_image_markup;
+		$featured_data =  $post_featured_image;
 	}
-	echo $feature_data;
+
+	// ACTUAL BANNER MARKUP
+	if ($videoURL != "" || has_post_thumbnail()) {
+		$featured_markup  = '<div class="container">';
+		$featured_markup  = 	'<div class="full-grid">';
+		$featured_markup .= 		'<div class="feature-element">';
+		$featured_markup .= 		$featured_data;
+		$featured_markup .= 		'</div>';
+		$featured_markup .= 	'</div>';
+		$featured_markup .= '</div>';
+		echo $featured_markup;
+	}
 }
 
 function get_flexible_row_data($str) {

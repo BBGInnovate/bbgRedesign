@@ -7,9 +7,10 @@
  */
 
 // REMOVE P TAGS FROM CONTENT TO PUT IN YOUR OWN PARAGRAPHY STYLES
-remove_filter ('the_content', 'wpautop');
+// remove_filter ('the_content', 'wpautop');
 
-require get_template_directory() . '/inc/bbg-functions-assemble.php';
+require 'inc/feature_hero.php';
+require 'inc/bbg-functions-assemble.php';
 
 /* @Check if number of pages is odd or even
 *  Return BOOL (true/false) */
@@ -213,46 +214,8 @@ get_header();
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-			<?php
-				$bannerPosition = get_field('adjust_the_banner_image', '', true);
-				$videoUrl = get_field('featured_video_url', '', true);
-
-				if ($videoUrl != "") {
-					$hideFeaturedImage = true;
-					$video_data = featured_video($videoUrl);
-
-					$video_markup  = '<iframe scrolling="no" src="';
-					$video_markup .= 	$video_data['url'];
-					$video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
-					$video_markup .= '</iframe>';
-					$featured_data = $video_markup;
-				} 
-				elseif (has_post_thumbnail()) {
-					$featuredImageClass = "";
-					$featuredImageCutline = "";
-					$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
-					$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
-
-					if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
-						$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-					}
-
-					$post_featured_image  = '<div class="feature-image">';
-					$post_featured_image .= 		'<img src="' . $src[0] . '">';
-					$post_featured_image .= '</div>';
-
-					$featured_data =  $post_featured_image;
-				}
-
-				// ACTUAL BANNER MARKUP
-				if ($videoURL != "" || has_post_thumbnail()) {
-					$featured_markup  = '<div class="usa-grid">';
-					$featured_markup .= 	'<div class="feature-element">';
-					$featured_markup .= 		$featured_data;
-					$featured_markup .= 	'</div>';
-					$featured_markup .= '</div>';
-					echo $featured_markup;
-				}
+			<?php 
+				build_feature_hero();
 			?>
 
 			<!-- PAGE CONTENT -->

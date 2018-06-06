@@ -22,7 +22,7 @@ function isOdd( $pageTotal ) {
 }
 
 require 'inc/custom_field_data_retriever.php';
-require get_template_directory() . '/inc/bbg-functions-assemble.php';
+require 'inc/bbg-functions-assemble.php';
 
 function showUmbrellaArea($atts) {
 	$itemTitle = $atts['itemTitle'];
