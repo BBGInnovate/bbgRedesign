@@ -325,12 +325,12 @@ function display_additional_recent_posts($maxPostsToShow) {
 }
 
 function get_soapbox_data() {
-	$soap_contents = get_field('homepage_soapbox_post', 'option');
+	$soapbox_post = get_field('homepage_soapbox_post', 'option');
 
-	if ($soap_contents) {
-		$postIDsUsed[] = $soap_contents[0] -> ID;
+	if ($soapbox_post) {
+		$postIDsUsed[] = $soapbox_post[0] -> ID;
 	}
-	$soap_index = $soap_contents[0];
+	$soap_index = $soapbox_post[0];
 	$id = $soap_index -> ID;
 	$soap_category = wp_get_post_categories( $id );
 	$is_ceo_post = false;
@@ -404,9 +404,11 @@ function get_soapbox_data() {
 				$is_ceo_post = true;
 				$soap_class = "bbg__voice--ceo";
 				$soapHeaderText = "From x the CEO";
-				$profilePhoto = get_field('homepage_soapbox_image', 'option');
+				$profilePhoto = get_template_directory_uri() . '/img/john_lansing_ceo-sq-200x200.jpg';
 				$profileName = "John Lansing";
-			} else if ($cat -> slug == "usim-matters") {
+				break;
+			}
+			else if ($cat -> slug == "usim-matters") {
 				$isSpeech = true;
 				$soap_class = "bbg__voice--guest";
 			} else if ($cat -> slug == "speech" ||  $cat -> slug == "statement" || $cat -> slug == "media-advisory") {
@@ -417,12 +419,12 @@ function get_soapbox_data() {
 	}
 
 	// MANUALLY OVERRIDE SOAPBOX IMAGE
-	if ($soap_contents) {
-		if (wp_get_attachment_image_src($soap_contents , 'profile_photo')) {
-			$profilePhoto = wp_get_attachment_image_src($soap_contents , 'profile_photo');
-			$profilePhoto = $profilePhoto[0];
-		}
-	}
+	// if ($soapbox_post) {
+	// 	if (wp_get_attachment_image_src($soapbox_post , 'profile_photo')) {
+	// 		$profilePhoto = wp_get_attachment_image_src($soapbox_post , 'profile_photo');
+	// 		$profilePhoto = $profilePhoto[0];
+	// 	}
+	// }
 
 	// OVERRIDE SOAPBOX CAPTION
 	$soap_contents_caption = get_field('homepage_soapbox_image_caption', 'option');
@@ -437,7 +439,7 @@ function get_soapbox_data() {
 	}
 
 	$soapbox_data = array('post_id' => $id, 'article_class' => $soap_class, 'title' => get_the_title($id), 'header_link' => $soapHeaderPermalink, 'header_text' => $soapHeaderText, 'post_link' => $soapPostPermalink, 'profile_image' => $profilePhoto, 'profile_name' => $profileName, 'read_more' => $readMoreLabel);
-	return build_soap_markup($soapbox_data);
+	return $soapbox_data;
 }
 
 // BUILDIND BLOCKS
@@ -462,40 +464,6 @@ function build_corner_hero($data) {
 	return $corner_hero_markup;
 }
 
-function build_soap_markup($data) {
-	// BUILD MARKUP
-	$soapbox_markup  = '<article class="' . $data['article_class'] . '">';
-	if (!empty($data['profile_image'])) {
-		$soapbox_markup .= '<div class="usa-grid-full">';
-		$soapbox_markup .= 	'<div class="usa-width-two-thirds">';
-	}
-	$soapbox_markup .= 	'<header class="entry-header bbg__article-icons-container">';
-	if (!empty($data['post_link'])) {
-		$soapbox_markup .= '<h2><a href="' . $data['header_link'] . '">' . $data['header_text'] . '</a></h2>';
-	} else if (!empty($data['header_text'])) {
-		$soapbox_markup .= '<h2>' . $data['header_text'] . '</h2>';
-	}
-	$soapbox_markup .= 	'</header>';
-	$soapbox_markup .= 	'<h5 class="bbg-blog__excerpt-title"><a href="' . $data['header_link'] . '">';
-	$soapbox_markup .= 		$data['title'];
-	$soapbox_markup .= 	'</a></h5>';
-	$soapbox_markup .= 		'<p>';
-	$soapbox_markup .= 		my_excerpt($data['post_id']);
-	$soapbox_markup .= 		' <a href="' . $data['post_link'] . '" class="bbg__read-more">' . $data['read_more'] . ' »</a></p>';
-	if (!empty($data['profile_image'])) {
-		$soapbox_markup .= '</div>';
-		$soapbox_markup .= '<div class="usa-width-one-third">';
-		$soapbox_markup .= 	'<span class="bbg__mugshot"><img src="' . $data['profile_image'] . '" class="bbg__ceo-post__mugshot" />';
-		if ($data['profile_name'] != "") {
-			$soapbox_markup .= '<span class="bbg__mugshot__caption">' . $data['profile_name'] . '</span>';
-		}
-		$soapbox_markup .= 		'</span>';
-		$soapbox_markup .= 	'</div>';
-	}
-	$soapbox_markup .= '</article>';
-
-	return $soapbox_markup;
-}
 
 function build_impact_markup($divide_blocks) {
 	$impact_markup  = '<div class="' . $divide_blocks . '">';
@@ -508,7 +476,7 @@ function build_impact_markup($divide_blocks) {
 	$impact_markup .= 	'</a>';
 	$impact_markup .= 	'<h5><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h5>';
 	$impact_markup .= 	'<p>';
-	$impact_markup .= 		get_the_content();
+	$impact_markup .= 		get_the_excerpt();
 	$impact_markup .= 	'</p>';
 	$impact_markup .= '</div>';
 	echo $impact_markup;

@@ -36,6 +36,7 @@ $hideFeaturedImage = false;
 
 // MARKUP
 $featured_post = '<article id="' . get_the_ID() . '">';
+$hideFeaturedImage = false;
 if ($videoUrl != "") {
 	$hideFeaturedImage = true;
 	$featured_post .= featured_video($videoUrl);
@@ -51,11 +52,9 @@ elseif (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
 	$featured_post .= '<a href="' . $postPermalink . '" rel="bookmark">';
 	$featured_post .= 		get_the_post_thumbnail();
 	$featured_post .= '</a>';
-	$featured_post .= '<h4>';
-	$featured_post .= 	'<a href="' . $postPermalink . '" rel="bookmark">';
-	$featured_post .= 		get_the_title();
-	$featured_post .= 	'</a>';
-	$featured_post .= '</h4>';
+	$featured_post .= '<h4><a href="' . $postPermalink . '" rel="bookmark">';
+	$featured_post .= 	get_the_title();
+	$featured_post .= '</a></h4>';
 	if ($includeMetaFeatured) {
 		$featured_post .= bbginnovate_posted_on();
 	}

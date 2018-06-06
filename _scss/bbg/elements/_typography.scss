@@ -40,11 +40,12 @@ p {
 
 p.lead-in {
     font-size: 2rem;
+    line-height: 2em;
     font-family: $font-serif;
-    font-color: $black9;
+    color: $black9;
 }
 
-a:visited {color: #ff00ff;}
+a:visited {color: inherit;}
 
 a:not(.bbg__article-share__icon) {
     &:visited {color: inherit;}

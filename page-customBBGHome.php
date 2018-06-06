@@ -14,8 +14,8 @@
  */
 
 // FUNCTION THAT BUILD SECTIONS
-require 'inc/bbg-functions-home.php';
-require 'inc/bbg-functions-assemble.php';
+require get_template_directory() . '/inc/bbg-functions-home.php';
+require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
 $templateName = 'customBBGHome';
 
@@ -39,7 +39,7 @@ if ($threatsToPressPost) {
 
 get_header();
 ?>
-<!-- test rsub -->
+
 <div id="main" class="site-main">
 	<div id="primary" class="content-area">
 		<main id="bbg-home" class="site-content bbg-home-main" role="main">
@@ -93,14 +93,46 @@ get_header();
 					$soap_result = get_soapbox_data();
 					$corner_hero_result = get_corner_hero_data();
 
+					// OPEN DIV FOR SOAPBOX AND CORNER HERO ON SIDE
+					// OR JUST ONE OVER TOP
 					if (!empty($soap_result) && !empty($corner_hero_result)) {
 						echo '<div class="kr-five-twelfths">';
 					} else {
 						echo '<div class="container">';
 					}
-					if ($soap_result) {
-						echo $soap_result;
+
+					$soapbox_markup  = '<article class="' . $soap_result['article_class'] . '">';
+					if (!empty($soap_result['profile_image'])) {
+						$soapbox_markup .= '<div class="usa-grid-full">';
+						$soapbox_markup .= 	'<div class="usa-width-two-thirds">';
 					}
+					$soapbox_markup .= 	'<header class="entry-header bbg__article-icons-container">';
+					if (!empty($soap_result['post_link'])) {
+						$soapbox_markup .= '<h2><a href="' . $soap_result['header_link'] . '">' . $soap_result['header_text'] . '</a></h2>';
+					} else if (!empty($soap_result['header_text'])) {
+						$soapbox_markup .= '<h2>' . $soap_result['header_text'] . '</h2>';
+					}
+
+					$soapbox_markup .= 	'</header>';
+					$soapbox_markup .= 	'<h5 class="bbg-blog__excerpt-title"><a href="' . $soap_result['header_link'] . '">';
+					$soapbox_markup .= 		$soap_result['title'];
+					$soapbox_markup .= 	'</a></h5>';
+					$soapbox_markup .= 		'<p>';
+					$soapbox_markup .= 		my_excerpt($soap_result['post_id']);
+					$soapbox_markup .= 		' <a href="' . $soap_result['post_link'] . '" class="bbg__read-more">' . $soap_result['read_more'] . ' »</a></p>';
+					if ($soap_result['profile_image'] != '') {
+						$soapbox_markup .= '</div>';
+						$soapbox_markup .= '<div class="usa-width-one-third">';
+						$soapbox_markup .= 	'<span class="bbg__mugshot"><img src="' . $soap_result['profile_image'] . '" class="bbg__ceo-post__mugshot" />';
+						if ($soap_result['profile_name'] != "") {
+							$soapbox_markup .= '<span class="bbg__mugshot__caption">' . $soap_result['profile_name'] . '</span>';
+						}
+						$soapbox_markup .= 		'</span>';
+						$soapbox_markup .= 	'</div>';
+					}
+					$soapbox_markup .= '</article>';
+					echo $soapbox_markup;
+
 					if ($corner_hero_result) {
 						echo $corner_hero_result;
 					}
@@ -187,7 +219,9 @@ get_threats_post_data();
 								$threat_markup .= 		'</a>';
 								$threat_markup .= 	'</div>';
 								$threat_markup .= 	'<div class="threat-copy">';
-								$threat_markup .= 		'<header><h5 class=""><a href="'.get_the_permalink().'">' . get_the_title() . '</a></h5></header>';
+								$threat_markup .= 		'<header>';
+								$threat_markup .= 			'<h5><a href="'.get_the_permalink().'">' . get_the_title() . '</a></h5>';
+								$threat_markup .= 		'</header>';
 								$threat_markup .= 		'<p>' . get_the_excerpt() . '</p>';
 								$threat_markup .= 	'</div>';
 								$threat_markup .= '</article>';

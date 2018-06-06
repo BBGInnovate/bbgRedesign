@@ -2863,8 +2863,9 @@ p {
 
 p.lead-in {
   font-size: 2rem;
+  line-height: 2em;
   font-family: "Carrara-Regular", serif;
-  font-color: #999999; }
+  color: #999999; }
 
 a:visited {
   color: #ff00ff; }
@@ -4608,6 +4609,8 @@ e.g. on the intern testimonial page */
     margin-right: 0; } }
 
 @media screen and (min-width: 900px) {
+  .usa-grid {
+    max-width: 1140px; }
   .bbg-grid--1-1-1-2 {
     float: left;
     display: block;
@@ -5910,7 +5913,7 @@ section.usa-section.bbg-banner__section {
   background-position: left;
   background-size: contain; }
   #threats-to-journalism .threats-box {
-    margin-left: calc(16.66667% - 23.33333px + 40px); }
+    margin-left: calc(8.33333% - 21.66667px + 40px); }
     #threats-to-journalism .threats-box article {
       border-bottom: 1px solid #283166; }
       #threats-to-journalism .threats-box article::after {
@@ -5918,7 +5921,7 @@ section.usa-section.bbg-banner__section {
         content: "";
         display: block; }
       #threats-to-journalism .threats-box article .image-block {
-        width: calc(41.66667% - 28.33333px);
+        width: calc(33.33333% - 26.66667px);
         float: left;
         margin-left: 20px; }
       #threats-to-journalism .threats-box article .threat-copy {
