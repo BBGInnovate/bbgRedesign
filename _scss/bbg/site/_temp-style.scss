@@ -1,9 +1,19 @@
 // GRID 
+html, body {height: 100%;}
 .soapbox-image {
 	@include grid-column(2);
 	border: 1px solid blue;
 }
 
+// FEATURE CONTENT
+.feature-container {
+	margin-bottom: 6rem;
+
+	iframe {} // COME BACK HERE TO FIX WIDHT OF VIDEOS
+	.feature-image {
+		height: 50rem;
+	}
+}
 
 // TYPOGRAPHY
 .red-special {
@@ -28,5 +38,21 @@ img,
 	>a:focus {
 		background-color: transparent;
 		text-decoration: none;
+	}
+}
+
+@include media($medium-large-screen) {
+	.feature-container {
+		.feature-image {
+			height: 50rem;
+		}
+	}
+}
+
+@include media($large-screen) {
+	.feature-container {
+		.feature-image {
+			height: 60rem;
+		}
 	}
 }

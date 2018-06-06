@@ -2868,7 +2868,7 @@ p.lead-in {
   color: #999999; }
 
 a:visited {
-  color: #ff00ff; }
+  color: inherit; }
 
 a:not(.bbg__article-share__icon):visited {
   color: inherit; }
@@ -4495,10 +4495,12 @@ e.g. on the intern testimonial page */
   font-transform: uppercase;
   margin-left: 1rem; }
 
-.container::after {
-  clear: both;
-  content: "";
-  display: block; }
+.container {
+  max-width: 1140px; }
+  .container::after {
+    clear: both;
+    content: "";
+    display: block; }
 
 .full-grid {
   width: calc(100% - 40px);
@@ -4802,11 +4804,19 @@ ol li:before {
   .bbg-header__site-title--breakline {
     display: inline-block; } }
 
+html, body {
+  height: 100%; }
+
 .soapbox-image {
   width: calc(16.66667% - 23.33333px);
   float: left;
   margin-left: 20px;
   border: 1px solid blue; }
+
+.feature-container {
+  margin-bottom: 6rem; }
+  .feature-container .feature-image {
+    height: 50rem; }
 
 .red-special {
   font-family: "Carrara-Regular", serif;
@@ -4838,6 +4848,14 @@ img,
   *[style*="background-image"] > a:focus {
     background-color: transparent;
     text-decoration: none; }
+
+@media screen and (min-width: 900px) {
+  .feature-container .feature-image {
+    height: 50rem; } }
+
+@media screen and (min-width: 1201px) {
+  .feature-container .feature-image {
+    height: 60rem; } }
 
 /**
  * CH 02 - 2- and 3-COLUMN PAGE STRUCTURE

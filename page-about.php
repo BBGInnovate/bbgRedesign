@@ -135,7 +135,7 @@ get_header();
 			// 	$hideFeaturedImage = true;
 			// }
 
-			check_featured_media_type();
+			display_feature_media_type();
 
 			$page_content  = '<div class="usa-grid page-content">';
 			$page_content .= 	'<p class="lead-in">' . $pageContent . '</p>';

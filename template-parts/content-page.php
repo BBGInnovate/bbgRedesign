@@ -58,7 +58,7 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 
 	<?php
-		check_featured_media_type();
+		display_feature_media_type();
 	?><!-- .bbg__article-header__thumbnail -->
 
 	<div class="usa-grid">
