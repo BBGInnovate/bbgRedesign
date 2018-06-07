@@ -254,9 +254,8 @@ body:not(.home) {
 		a:hover, a:active {color: $color-cool-blue; text-decoration: none;}
 	}
 	li.subnav-open {
-		// RULE IS IMPORTANT BECAUSE IT'S TEMPORARY
+		// OK FOR IMPORTANT BECAUSE IT'S ONLY TEMPORARY
 		a:link, a:visited {color: $color-blue-darker !important;}
-		// a:hover, a:active {color: $color-taupe-dark !important;}
 		ul {
 			a:link, a:visited {color: $color-blue-darker !important;}
 			a:hover, a:active {color: $color-tan-light !important;}
@@ -278,13 +277,35 @@ body:not(.home) {
 
 	.menu-toggle {display: none;}
 	.bbg__main-navigation {
+		position: relative;
+		:not(#nav-logo) {text-align: right;}
+
 		#nav-logo {width: 25rem;}
 		.bbg__top-nav__link-text {width: auto;}
+		a {padding: 1.5rem 1.5rem 1rem 1.5rem;}
+		a:hover {
+			text-decoration: underline;
+			background-color: transparent;
+		}
+
+		.menu-usagm-container {
+			position: absolute;
+			top: 3.5rem;
+			right: 0;
+
+			ul li {display: inline-block}
+		}
 		ul {
 			border-top: none;
 			display: block;
 			margin-right: 7rem;
-
+			
+			li {
+				margin: 0;
+				padding: 0;
+				background-color: #ffffff;
+				:after {display: none}
+			}
 			/* DROPDOWN NAV */
 			ul {
 				position: absolute;
@@ -301,39 +322,6 @@ body:not(.home) {
 				}
 			}
 		}
-		button#nav-search-bu {float: right; background-color: transparent;}
-		.bbg__main-navigation__search {padding: 1rem;}
-	}
-
-	.bbg__main-navigation {
-		position: relative;
-		:not(#nav-logo) {text-align: right;}
-		
-
-		.menu-usagm-container {
-			position: absolute;
-			top: 3.5rem;
-			right: 0;
-		}
-		.usa-search [type="search"] {
-			float: right;
-			width: 3.5rem;
-			height: 4rem;
-			border-top: none;
-			border-left: none;
-		}
-		.bbg__main-navigation__search  {
-			position: absolute;
-			display: block;
-			top: 0;
-			right: 0;
-		}
-		.menu-usagm-container ul li {display: inline-block}
-		li {
-			margin: 0;
-			padding: 0;
-			background-color: #FFF;
-		}
 		.menu-item-has-children > a {
 			width: auto;
 			padding-right: 2rem;
@@ -345,22 +333,29 @@ body:not(.home) {
 			}
 			border-left: none;
 		}
+		.menu-item-has-children > ul {
+			display: none;}
 		.showChildren {
 			display: block !important;
 			left: auto !important;
 		}
 
-		.menu-item-has-children > ul {display: none;}
-
-		li:after {display: none;}
-
-		a {padding: 1.5rem 1.5rem 1rem 1.5rem;}
-
-		a:hover {
-			text-decoration: underline;
-			background-color: transparent;
+		button#nav-search-bu {float: right; background-color: transparent;}
+		.bbg__main-navigation__search  {
+			position: absolute;
+			display: block;
+			top: 0;
+			right: 0;
+			padding: 1rem;
 		}
-	} 
+		.usa-search [type="search"] {
+			float: right;
+			width: 3.5rem;
+			height: 4rem;
+			border-top: none;
+			border-left: none;
+		}
+	}
 
 	.bbg__main-navigation__toggler {
 		display: inline-block !important;

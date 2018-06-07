@@ -101,7 +101,7 @@
 		jQuery("li.menu-item-has-children input[type='image']").keydown(function(e) {
 			/**** enter key on caret toggles the menu at all viewports.  this should only fire on a desktop ****/
 			if(e.keyCode == 13) {
-				window.enterPressHover=true;
+				window.enterPressHover = true;
 				if (jQuery(this).parent().find("ul.sub-menu").is(':visible')) {
 					jQuery(this).parent().find("ul.sub-menu").hide();	
 				} else {
@@ -112,18 +112,19 @@
 				e.preventDefault();
 			} else {
 				/* tabbing key on caret going backwards hides all */
-				if (window.innerWidth >=900) {
+				if (window.innerWidth >= 900) {
 					if (e.which == 9 && e.shiftKey) {
 						jQuery('ul.sub-menu').hide();
 					}
 				}
 			}
 		});
+
 		jQuery("li.menu-item-has-children input[type='image']").click(function(e) {
 			//the image should be clickable on mobile at all widths (so, even at desktop width for instance iPad, because there is now hover)
 			//on a desktop, it should only be clickable at < 900 so the narrow menu version works
 			if( window.innerWidth  < 900 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-				var displayVal=jQuery(this).parent().find(".sub-menu").css('display');
+				var displayVal = jQuery(this).parent().find(".sub-menu").css('display');
 				if (displayVal != 'none') {
 					jQuery(this).parent().find("ul.sub-menu").hide();
 				} else {
@@ -135,29 +136,24 @@
 			}
 		});
 		
-		/* clicking on the body should hide all subnav items */
-		
+		// CLICKING OUTSIDE OF NAV HIDES SUBNAV ITEMS
 		jQuery(document).on('click', function(e){
-			//console.log('length is ' +  jQuery(this).parents('#site-navigation').length );
 			if (jQuery(this).parents('#site-navigation').length == 0) {
 				jQuery(this).find("ul.sub-menu").hide();
+				jQuery("li.menu-item-has-children").removeClass('subnav-open');
 			}
 		});
 	
-
-		/* tabbing off last child should hide it */
+		// TABBING OFF LAST CHILD HIDES IT
 		jQuery('li.menu-item-has-children ul li:last-child').keydown(function (e) {
-		    if (window.innerWidth >=900) {
+		    if (window.innerWidth >= 900) {
 				if (e.which == 9 && e.shiftKey) {
-					//they are going backwards from the last item in the list up. ... keep it.
+					// they are going backwards from the last item in the list up. ... keep it.
 				} else if (e.which == 9) {
 					jQuery('ul.sub-menu').hide();
 				}
 			}
 		});
-
-		
-		
 	}
 	levelTwoNav();
 	/**
