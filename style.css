@@ -3785,6 +3785,19 @@ body:not(.home) .bbg__main-navigation {
     display: block; } }
 
 @media screen and (min-width: 900px) {
+  .bbg__main-navigation__toggler:focus {
+    background-color: transparent; }
+  li.menu-item a:link, li.menu-item a:visited {
+    color: #3f7ad1; }
+  li.menu-item a:hover, li.menu-item a:active {
+    color: #82afd2;
+    text-decoration: none; }
+  li.subnav-open a:link, li.subnav-open a:visited {
+    color: #284f91 !important; }
+  li.subnav-open ul a:link, li.subnav-open ul a:visited {
+    color: #284f91 !important; }
+  li.subnav-open ul a:hover, li.subnav-open ul a:active {
+    color: #d5d1c4 !important; }
   body:not(.home) .menu-all-pages-container {
     min-height: 5rem;
     margin-bottom: 2rem;

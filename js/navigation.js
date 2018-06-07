@@ -65,15 +65,33 @@
 
 		// see http://stackoverflow.com/questions/7394796/jquery-click-event-how-to-tell-if-mouse-was-clicked-or-enter-key-was-pressed
 		/* don't enable hover on mobile breakpoints */
-		jQuery("li.menu-item-has-children").hover(function(e) {
-			if (window.innerWidth >=900) {
-				jQuery(this).find("ul.sub-menu").css('display','block');	
-				e.stopPropagation();
-				e.preventDefault();
-			}
-		}, function(e) {
-			if (window.innerWidth >=900) {
-				jQuery(this).find("ul.sub-menu").hide();
+		// jQuery("li.menu-item-has-children").hover(function(e) {
+		// 	if (window.innerWidth >= 900) {
+		// 		jQuery(this).find("ul.sub-menu").css('display','block');	
+		// 		e.stopPropagation();
+		// 		e.preventDefault();
+		// 	}
+		// }, function(e) {
+		// 	if (window.innerWidth >=900) {
+		// 		jQuery(this).find("ul.sub-menu").hide();
+		// 		e.stopPropagation();
+		// 		e.preventDefault();
+		// 	}
+		// });
+		jQuery("li.menu-item-has-children input.bbg__main-navigation__toggler").on('click', function(e) {
+			if (window.innerWidth >= 900) {
+				if (!jQuery(this).parent().hasClass('subnav-open')) {
+					console.log('show');
+					jQuery("li.menu-item-has-children").removeClass('subnav-open');
+					jQuery("ul.sub-menu").css('display', 'none');
+					jQuery(this).parent().addClass('subnav-open');
+					jQuery(this).parent().find("ul.sub-menu").css('display', 'block');
+				}
+				else {
+					console.log('hide');
+					jQuery(this).parent().find("ul.sub-menu").css('display', 'none');
+					jQuery(this).parent().removeClass('subnav-open');
+				}
 				e.stopPropagation();
 				e.preventDefault();
 			}

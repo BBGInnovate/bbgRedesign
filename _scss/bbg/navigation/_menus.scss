@@ -246,6 +246,27 @@ body:not(.home) {
 }
 
 @include media($medium-large-screen) {
+
+
+	.bbg__main-navigation__toggler:focus {background-color: transparent;}
+	li.menu-item {
+		a:link, a:visited {color: $color-blue;}
+		a:hover, a:active {color: $color-cool-blue; text-decoration: none;}
+	}
+	li.subnav-open {
+		// RULE IS IMPORTANT BECAUSE IT'S TEMPORARY
+		a:link, a:visited {color: $color-blue-darker !important;}
+		// a:hover, a:active {color: $color-taupe-dark !important;}
+		ul {
+			a:link, a:visited {color: $color-blue-darker !important;}
+			a:hover, a:active {color: $color-tan-light !important;}
+		}
+	}
+
+
+
+
+
 	body:not(.home) {
 		.menu-all-pages-container {
 			min-height: 5rem;
