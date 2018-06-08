@@ -45,10 +45,10 @@ p.lead-in {
     color: $black9;
 }
 
-a:visited {color: inherit;}
+// a:visited {color: inherit;}
 
 a:not(.bbg__article-share__icon) {
-    &:visited {color: inherit;}
+    // &:visited {color: inherit;}
     &:focus {
         background-color: $color-gray-cool-light;
 

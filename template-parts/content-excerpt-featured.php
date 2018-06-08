@@ -16,6 +16,7 @@ if (! isset ($includeMetaFeatured)) {
 
 $postPermalink = esc_url( get_permalink() );
 
+
 /*** the only way you should ever have a future post status here is if a future event is featured on the homepage */
 if (get_post_status() == 'future') {
 	global $post;
@@ -36,7 +37,8 @@ $hideFeaturedImage = false;
 
 // MARKUP
 $featured_post = '<article id="' . get_the_ID() . '">';
-$hideFeaturedImage = false;
+$hideFeaturedImage = true;
+echo $hideFeaturedImage;
 if ($videoUrl != "") {
 	$hideFeaturedImage = true;
 	$featured_post .= featured_video($videoUrl);

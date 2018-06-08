@@ -19,10 +19,7 @@ $custom-grid: (
 
 	p {margin: 0;}
 	p.profile-name {font-size: 0.9em;}
-	.full-width {
-		@include grid-column(12, $custom-grid);
-		// @include grid-container;
-	}
+	.full-width {@include grid-column(12, $custom-grid);}
 	.soapbox-image {
 		@include grid-column(1);
 		margin: 0;
@@ -37,20 +34,20 @@ $custom-grid: (
 	}
 }
 
+.corner-hero-side {
+	padding: 1.5rem;
+	margin-bottom: 3rem;
+	p {margin-bottom: 0;}
+	p.profile-name {font-size: 0.9em;}
+}
 .corner-hero-full {
 	padding: 1.5rem;
 	margin-bottom: 3rem;
 	@include grid-container;
-	
-	.full-width {
-		@include grid-column(12, $custom-grid);
-	}
-	.corner-hero-image {
-		@include grid-column(1);
-	}
-	.corner-hero-content {
-		@include grid-column(9);
-	}
+
+	.full-width {@include grid-column(12, $custom-grid);}
+	.corner-hero-image {@include grid-column(1);}
+	.corner-hero-content {@include grid-column(9);}
 }
 
 @include media($medium-screen) {

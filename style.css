@@ -2867,12 +2867,6 @@ p.lead-in {
   font-family: "Carrara-Regular", serif;
   color: #999999; }
 
-a:visited {
-  color: inherit; }
-
-a:not(.bbg__article-share__icon):visited {
-  color: inherit; }
-
 a:not(.bbg__article-share__icon):focus {
   background-color: #dce4ef; }
   a:not(.bbg__article-share__icon):focus img,
@@ -4851,6 +4845,14 @@ ol li:before {
     width: calc(75% - 35px);
     float: left;
     margin-left: 20px; }
+
+.corner-hero-side {
+  padding: 1.5rem;
+  margin-bottom: 3rem; }
+  .corner-hero-side p {
+    margin-bottom: 0; }
+  .corner-hero-side p.profile-name {
+    font-size: 0.9em; }
 
 .corner-hero-full {
   padding: 1.5rem;
