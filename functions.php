@@ -1057,10 +1057,9 @@ if ( function_exists ('acf_add_options_page') ) {
 	));
 }
 
-function my_excerpt( $post_id ) {
-	$post = get_post( $post_id );
-	if ( $post -> post_excerpt ) {
-		// excerpt set, return it
+function my_excerpt($post_id) {
+	$post = get_post($post_id);
+	if ($post -> post_excerpt) {
 		return $post -> post_excerpt;
 	} else {
 		setup_postdata( $post );

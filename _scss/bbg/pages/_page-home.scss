@@ -95,11 +95,7 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 // SOAPBOX
 .bbg__voice {
 	$voiceTypes: ceo, guest, featured;
-	@for $i from 1 through length( $voiceTypes ) {
-		&--#{ nth( $voiceTypes, $i ) } {
-			padding: $site-margins-medium-plus;
-		}
-	}
+
 	// CEO BOX
 	&--ceo {
 		background-color: $color-cool-blue-lightest;
@@ -239,15 +235,18 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 			height: 100%;
 		}
 	}
+	/*
 	.bbg__voice {
 		$voiceTypes: ceo, guest, featured;
 		@for $i from 1 through length( $voiceTypes ) {
-			&--#{ nth( $voiceTypes, $i ) } {
-				padding: $site-margins;
+			// remove the double slashe below if uncommenting block
+			&--#//{ nth( $voiceTypes, $i ) } {
+				padding: $site-margins-small;
 				// p {line-height: 2.2;}
 			}
 		}
 	}
+	*/
 	.bbg__event-announcement, 
 	.bbg__advisory-announcement {
 		.bbg__event-announcement__excerpt {display: block;}

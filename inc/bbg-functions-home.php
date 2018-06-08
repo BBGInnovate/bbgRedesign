@@ -200,68 +200,6 @@ function get_impact_stories_data($numPosts) {
 	wp_reset_query();
 }
 
-function get_corner_hero_data() {
-	//What will go in the corner hero? off (gives random quote), event, callout, advisory
-	$homepage_hero_corner = get_field( 'homepage_hero_corner', 'option' );
-
-	if ( $homepage_hero_corner  == 'event' ) {
-		$featuredEvent = get_field( 'homepage_featured_event', 'option' );
-	} else if ( $homepage_hero_corner == 'advisory' ) {
-		$featuredAdvisory = get_field( 'homepage_featured_advisory', 'option' );
-	} else if ( $homepage_hero_corner == "callout" ) {
-		$featuredCallout = get_field('homepage_featured_callout', 'option');
-	}
-
-	$cornerHeroLabel = get_field( 'corner_hero_label', 'option' );
-	if ( $cornerHeroLabel == '' ) {
-		$cornerHeroLabel = 'This week';
-	}
-
-	$postIDsUsed = array();
-	if ($homepage_hero_corner == 'event' && $featuredEvent) {
-		$postIDsUsed = $featuredEvent -> ID;
-	}
-
-	if (($homepage_hero_corner == 'event' && $featuredEvent) || ($homepage_hero_corner == 'advisory' && $featuredAdvisory)) {
-		if ($homepage_hero_corner == 'event') {
-			$cornerHeroPost = $featuredEvent;
-		} else {
-			$cornerHeroPost = $featuredAdvisory;
-		}
-		$cornerHeroClass = 'bbg__event-announcement';
-		if (has_category('Media Advisory', $featuredEvent)) {
-			$cornerHeroClass = 'bbg__advisory-announcement';
-		}
-		$id = $cornerHeroPost -> ID;
-		$cornerHeroPermalink = get_the_permalink( $id );
-
-		/* permalinks for future posts by default don't return properly. fix that. */
-		if ($cornerHeroPost -> post_status == 'future') {
-			$my_post = clone $cornerHeroPost;
-			$my_post -> post_status = 'published';
-			$my_post -> post_name = sanitize_title($my_post -> post_name ? $my_post -> post_name : $my_post -> post_title, $my_post -> ID);
-			$cornerHeroPermalink = get_permalink($my_post);
-		}
-
-		$cornerHeroTitle = $cornerHeroPost -> post_title;
-		$excerpt = my_excerpt($id);
-		$corner_hero_package = array('class' => $cornerHeroClass, 'p_link' => $cornerHeroPermalink, 'label' => $cornerHeroLabel, 'title' => $cornerHeroTitle, 'excerpt' => $excerpt);
-
-		return build_corner_hero($corner_hero_package);
-	}
-	// CONTINUE WORKING ON STATEMENTS BELOW
-	else if ( $homepage_hero_corner == 'callout' && $featuredCallout ) {
-		outputCallout($featuredCallout);
-	} else {
-		//in this case, either the user selected 'off' for the hero corner, or there was no valid callout/event/advisory selected
-		$q = getRandomQuote( 'allEntities', $postIDsUsed );
-		if ( $q ) {
-			$postIDsUsed[] = $q['ID'];
-			outputQuote( $q, '' );
-		}
-	}
-}
-
 function display_featured_post() {
 	$featuredPost = get_field('homepage_featured_post', 'option');
 	if ($featuredPost) {
@@ -312,10 +250,10 @@ function display_additional_recent_posts($maxPostsToShow) {
 				$includeExcerpt = false;
 				if ($counter == 3) {
 					$read_more  = '</div>';
-					$read_more .= '<div class="usa-width-one-half tertiary-stories">';
+					$read_more .= '<div class="usa-width-one-half">';
 					$read_more .= 		'<header class="page-header">';
-					$read_more .= 			'<h6 class="page-title bbg__label small">More news';
-					$read_more .=  '</h6></header>';
+					$read_more .= 			'<h6 class="page-title bbg__label small">More news</h6>';
+					$read_more .= 		'</header>';
 				}
 			}
 			get_template_part('template-parts/content-excerpt-list', get_post_format());
@@ -325,6 +263,7 @@ function display_additional_recent_posts($maxPostsToShow) {
 }
 
 function get_soapbox_data() {
+	$soapbox_toggle = get_field('soapbox_toggle', 'option');
 	$soapbox_post = get_field('homepage_soapbox_post', 'option');
 
 	if ($soapbox_post) {
@@ -403,8 +342,8 @@ function get_soapbox_data() {
 			if ($cat -> slug == "from-the-ceo") {
 				$is_ceo_post = true;
 				$soap_class = "bbg__voice--ceo";
-				$soapHeaderText = "From x the CEO";
-				$profilePhoto = get_template_directory_uri() . '/img/john_lansing_ceo-sq-200x200.jpg';
+				$soapHeaderText = "From the CEO";
+				$profilePhoto = get_field('homepage_soapbox_image', 'options');
 				$profileName = "John Lansing";
 				break;
 			}
@@ -419,12 +358,12 @@ function get_soapbox_data() {
 	}
 
 	// MANUALLY OVERRIDE SOAPBOX IMAGE
-	// if ($soapbox_post) {
-	// 	if (wp_get_attachment_image_src($soapbox_post , 'profile_photo')) {
-	// 		$profilePhoto = wp_get_attachment_image_src($soapbox_post , 'profile_photo');
-	// 		$profilePhoto = $profilePhoto[0];
-	// 	}
-	// }
+	if ($soapbox_post) {
+		if (wp_get_attachment_image_src($soapbox_post , 'profile_photo')) {
+			$profilePhoto = wp_get_attachment_image_src($soapbox_post , 'profile_photo');
+			$profilePhoto = $profilePhoto[0];
+		}
+	}
 
 	// OVERRIDE SOAPBOX CAPTION
 	$soap_contents_caption = get_field('homepage_soapbox_image_caption', 'option');
@@ -432,38 +371,118 @@ function get_soapbox_data() {
 		$profileName = $soap_contents_caption;
 	}
 
-	$mugshotImageFloat = "right";
-	$soap_contents_float = get_field('homepage_soapbox_image_float', 'options');
-	if ($soap_contents_float) {
-		$mugshotImageFloat = $soap_contents_float;
+	$soapbox_package = array('toggle' => $soapbox_toggle, 'post_id' => $id, 'article_class' => $soap_class, 'title' => get_the_title($id), 'header_link' => $soapHeaderPermalink, 'header_text' => $soapHeaderText, 'post_link' => $soapPostPermalink, 'profile_image' => $profilePhoto, 'profile_name' => $profileName, 'read_more' => $readMoreLabel);
+	return build_soapbox_pieces($soapbox_package);
+}
+
+function get_corner_hero_data() {
+	//What will go in the corner hero? off (gives random quote), event, callout, advisory
+	$homepage_hero_corner = get_field( 'homepage_hero_corner', 'option' );
+
+	if ( $homepage_hero_corner  == 'event' ) {
+		$featuredEvent = get_field( 'homepage_featured_event', 'option' );
+	} else if ( $homepage_hero_corner == 'advisory' ) {
+		$featuredAdvisory = get_field( 'homepage_featured_advisory', 'option' );
+	} else if ( $homepage_hero_corner == "callout" ) {
+		$featuredCallout = get_field('homepage_featured_callout', 'option');
 	}
 
-	$soapbox_data = array('post_id' => $id, 'article_class' => $soap_class, 'title' => get_the_title($id), 'header_link' => $soapHeaderPermalink, 'header_text' => $soapHeaderText, 'post_link' => $soapPostPermalink, 'profile_image' => $profilePhoto, 'profile_name' => $profileName, 'read_more' => $readMoreLabel);
-	return $soapbox_data;
+	$cornerHeroLabel = get_field( 'corner_hero_label', 'option' );
+	if ( $cornerHeroLabel == '' ) {
+		$cornerHeroLabel = 'This week';
+	}
+
+	$postIDsUsed = array();
+	if ($homepage_hero_corner == 'event' && $featuredEvent) {
+		$postIDsUsed = $featuredEvent -> ID;
+	}
+
+	if (($homepage_hero_corner == 'event' && $featuredEvent) || ($homepage_hero_corner == 'advisory' && $featuredAdvisory)) {
+		if ($homepage_hero_corner == 'event') {
+			$cornerHeroPost = $featuredEvent;
+		} else {
+			$cornerHeroPost = $featuredAdvisory;
+		}
+		$cornerHeroClass = 'bbg__event-announcement';
+		if (has_category('Media Advisory', $featuredEvent)) {
+			$cornerHeroClass = 'bbg__advisory-announcement';
+		}
+		$id = $cornerHeroPost -> ID;
+		$cornerHeroPermalink = get_the_permalink( $id );
+
+		/* permalinks for future posts by default don't return properly. fix that. */
+		if ($cornerHeroPost -> post_status == 'future') {
+			$my_post = clone $cornerHeroPost;
+			$my_post -> post_status = 'published';
+			$my_post -> post_name = sanitize_title($my_post -> post_name ? $my_post -> post_name : $my_post -> post_title, $my_post -> ID);
+			$cornerHeroPermalink = get_permalink($my_post);
+		}
+
+		$cornerHeroTitle = $cornerHeroPost -> post_title;
+		$excerpt = my_excerpt($id);
+		$corner_hero_package = array('class' => $cornerHeroClass, 'p_link' => $cornerHeroPermalink, 'label' => $cornerHeroLabel, 'title' => $cornerHeroTitle, 'excerpt' => $excerpt);
+
+		return build_corner_hero($corner_hero_package);
+	}
+	// CONTINUE WORKING ON STATEMENTS BELOW
+	else if ( $homepage_hero_corner == 'callout' && $featuredCallout ) {
+		outputCallout($featuredCallout);
+	} else {
+		//in this case, either the user selected 'off' for the hero corner, or there was no valid callout/event/advisory selected
+		$q = getRandomQuote( 'allEntities', $postIDsUsed );
+		if ( $q ) {
+			$postIDsUsed[] = $q['ID'];
+			outputQuote( $q, '' );
+		}
+	}
 }
 
 // BUILDIND BLOCKS
-function build_corner_hero($data) {
-	$corner_hero_markup  = '<article class="bbg-portfolio__excerpt ' . $data['class'] . '">';
-	$corner_hero_markup .= 	'<header class="entry-header bbg__article-icons-container">';
-	$corner_hero_markup .= 		'<div class="bbg__article-icon"></div>';
-	$corner_hero_markup .= 		'<h2 class="bbg__label bbg__label--outside">' . $data['label'] . '</h2>';
-	$corner_hero_markup .= 	'</header>';
-	$corner_hero_markup .= 	'<div class="bbg__event-announcement__content">';
-	$corner_hero_markup .= 		'<header class="entry-header bbg-portfolio__excerpt-header">';
-	$corner_hero_markup .= 			'<h3 class="entry-title bbg-portfolio__excerpt-title bbg__event-announcement__title">';
-	$corner_hero_markup .= 				'<a href="' . $data['p_link'] . '" rel="bookmark">"' . $data['title'] . '"</a>';
-	$corner_hero_markup .= 			'</h3>';
-	$corner_hero_markup .= 		'</header>';
-	$corner_hero_markup .= 		'<div class="entry-content bbg-portfolio__excerpt-content bbg-blog__excerpt-content bbg__event-announcement__excerpt">';
-	$corner_hero_markup .= 			'<p>' . $data['excerpt'] . '</p>';
-	$corner_hero_markup .= 		'</div>';
-	$corner_hero_markup .= 	'</div>';
-	$corner_hero_markup .= '</article>';
+function build_soapbox_pieces($soap_data) {
+	$toggle = $soap_data['toggle'];
+	$article_class = $soap_data['article_class'];
+	$soapbox_content .= '<header class="entry-header bbg__article-icons-container">';
+	if (!empty($soap_data['post_link'])) {
+		$soapbox_content .= '<h2><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
+	} else if (!empty($soap_data['header_text'])) {
+		$soapbox_content .= '<h2>' . $soap_data['header_text'] . '</h2>';
+	}
+	$soapbox_content .= '</header>';
+	$soapbox_content .= '<h5>';
+	$soapbox_content .= 	'<a href="' . $soap_data['header_link'] . '">';
+	$soapbox_content .= 		$soap_data['title'];
+	$soapbox_content .= 	'</a>';
+	$soapbox_content .= '</h5>';
+	$soapbox_content .= '<p>';
+	$soapbox_content .= 	my_excerpt($soap_data['post_id']);
+	$soapbox_content .= 	' <a href="' . $soap_data['post_link'] . '" class="bbg__read-more">' . $soap_data['read_more'] . ' »</a>';
+	$soapbox_content .= '</p>';
 
-	return $corner_hero_markup;
+	if (!empty($soap_data['profile_image'])) {
+		$soapbox_image = '<img src="' . $soap_data['profile_image'] . '">';
+		if ($soap_data['profile_name'] != "") {
+			$soapbox_image .= '<p class="profile-name">' . $soap_data['profile_name'] . '</p>';
+		}
+	}
+	$soapbox_pieces = array('toggle' => $toggle, 'class' => $article_class, 'content' => $soapbox_content, 'image' => $soapbox_image);
+	return $soapbox_pieces;
 }
 
+function build_corner_hero($corner_hero_data) {
+	$corner_hero_image = 		'<img src="' . content_url( $path = '/uploads/2018/06/usagm-touch-image.png' ) . '">';
+
+	$corner_hero_content  = 		'<div class="bbg__article-icons-container">';
+	$corner_hero_content .= 			'<h2 class="bbg__label bbg__label--outside">' . $corner_hero_data['label'] . '</h2>';
+	$corner_hero_content .= 			'<div class="bbg__article-icon"></div>';
+	$corner_hero_content .= 		'</div>';
+	$corner_hero_content .= 		'<h5>';
+	$corner_hero_content .= 			'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
+	$corner_hero_content .= 		'</h5>';
+	$corner_hero_content .= 		'<p>' . $corner_hero_data['excerpt'] . '</p>';
+
+	$corner_hero_pieces = array('image' => $corner_hero_image, 'content' => $corner_hero_content);
+	return $corner_hero_pieces;
+}
 
 function build_impact_markup($divide_blocks) {
 	$impact_markup  = '<div class="' . $divide_blocks . '">';

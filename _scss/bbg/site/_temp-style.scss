@@ -1,18 +1,63 @@
 // GRID 
-html, body {height: 100%;}
-.soapbox-image {
-	@include grid-column(2);
-	border: 1px solid blue;
+
+.soapbox-side {
+	padding: 1.5rem;
+	margin-bottom: 3rem;
+	p {margin-bottom: 0;}
+	p.profile-name {font-size: 0.9em;}
 }
 
-// FEATURE CONTENT
-.feature-container {
+$custom-grid: (
+	columns: 10,
+	gutter: 1.5rem,
+);
+
+.soapbox-full {
+	@include grid-container;
+	padding: 1.5rem;
 	margin-bottom: 6rem;
 
-	iframe {} // COME BACK HERE TO FIX WIDHT OF VIDEOS
-	.feature-image {
-		height: 50rem;
+	p {margin: 0;}
+	p.profile-name {font-size: 0.9em;}
+	.full-width {
+		@include grid-column(12, $custom-grid);
+		// @include grid-container;
 	}
+	.soapbox-image {
+		@include grid-column(1);
+		margin: 0;
+
+		img {
+			max-width: 100%;
+			margin-bottom: 0;
+		}
+	}
+	.soapbox-content {
+		@include grid-column(9);
+	}
+}
+
+.corner-hero-full {
+	padding: 1.5rem;
+	margin-bottom: 3rem;
+	@include grid-container;
+	
+	.full-width {
+		@include grid-column(12, $custom-grid);
+	}
+	.corner-hero-image {
+		@include grid-column(1);
+	}
+	.corner-hero-content {
+		@include grid-column(9);
+	}
+}
+
+@include media($medium-screen) {
+	
+}
+@include media($medium-large-screen) {
+	
 }
 
 // TYPOGRAPHY
@@ -38,21 +83,5 @@ img,
 	>a:focus {
 		background-color: transparent;
 		text-decoration: none;
-	}
-}
-
-@include media($medium-large-screen) {
-	.feature-container {
-		.feature-image {
-			height: 50rem;
-		}
-	}
-}
-
-@include media($large-screen) {
-	.feature-container {
-		.feature-image {
-			height: 60rem;
-		}
 	}
 }

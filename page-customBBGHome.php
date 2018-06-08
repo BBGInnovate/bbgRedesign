@@ -95,51 +95,75 @@ get_header();
 
 					// OPEN DIV FOR SOAPBOX AND CORNER HERO ON SIDE
 					// OR JUST ONE OVER TOP
-					if (!empty($soap_result) && !empty($corner_hero_result)) {
+					if (($soap_result['toggle'] == 'on') && !empty($corner_hero_result)) {
+					// if (!empty($soap_result) && !empty($corner_hero_result)) {
+						$layout = 'side';
 						echo '<div class="kr-five-twelfths">';
 					} else {
-						echo '<div class="container">';
+						$layout = 'full';
+						echo '<div class="soapbox container">';
 					}
-
-					$soapbox_markup  = '<article class="' . $soap_result['article_class'] . '">';
-					if (!empty($soap_result['profile_image'])) {
-						$soapbox_markup .= '<div class="usa-grid-full">';
-						$soapbox_markup .= 	'<div class="usa-width-two-thirds">';
-					}
-					$soapbox_markup .= 	'<header class="entry-header bbg__article-icons-container">';
-					if (!empty($soap_result['post_link'])) {
-						$soapbox_markup .= '<h2><a href="' . $soap_result['header_link'] . '">' . $soap_result['header_text'] . '</a></h2>';
-					} else if (!empty($soap_result['header_text'])) {
-						$soapbox_markup .= '<h2>' . $soap_result['header_text'] . '</h2>';
-					}
-
-					$soapbox_markup .= 	'</header>';
-					$soapbox_markup .= 	'<h5 class="bbg-blog__excerpt-title"><a href="' . $soap_result['header_link'] . '">';
-					$soapbox_markup .= 		$soap_result['title'];
-					$soapbox_markup .= 	'</a></h5>';
-					$soapbox_markup .= 		'<p>';
-					$soapbox_markup .= 		my_excerpt($soap_result['post_id']);
-					$soapbox_markup .= 		' <a href="' . $soap_result['post_link'] . '" class="bbg__read-more">' . $soap_result['read_more'] . ' »</a></p>';
-					if ($soap_result['profile_image'] != '') {
-						$soapbox_markup .= '</div>';
-						$soapbox_markup .= '<div class="usa-width-one-third">';
-						$soapbox_markup .= 	'<span class="bbg__mugshot"><img src="' . $soap_result['profile_image'] . '" class="bbg__ceo-post__mugshot" />';
-						if ($soap_result['profile_name'] != "") {
-							$soapbox_markup .= '<span class="bbg__mugshot__caption">' . $soap_result['profile_name'] . '</span>';
+					if ($soap_result['toggle'] == 'on') {
+						if ($layout == 'side') {
+							$soapbox_side  = '<article class="' . $soap_result['class'] . ' soapbox-side">';
+							$soapbox_side .= 	'<div class="usa-grid-full">';
+							$soapbox_side .= 		'<div class="usa-width-two-thirds">';
+							$soapbox_side .= 			$soap_result['content'];
+							$soapbox_side .= 		'</div>';
+							$soapbox_side .= 		'<div class="usa-width-one-third">';
+							$soapbox_side .= 			$soap_result['image'];
+							$soapbox_side .= 		'</div>';
+							$soapbox_side .= 	'</div>';
+							$soapbox_side .= '</article>';
+							echo $soapbox_side;
+						} else if ($layout == 'full') {
+							$soapbox_full  = '<article class="' . $soap_result['class'] . ' soapbox-full">';
+							$soapbox_full .= 	'<div class="full-width">';
+							$soapbox_full .= 		'<div class="soapbox-image">';
+							$soapbox_full .= 			$soap_result['image'];
+							$soapbox_full .= 		'</div>';
+							$soapbox_full .= 		'<div class="soapbox-content">';
+							$soapbox_full .= 			$soap_result['content'];
+							$soapbox_full .= 		'</div>';
+							$soapbox_full .= 	'</div>';
+							$soapbox_full .= '</article>';
+							echo $soapbox_full;
 						}
-						$soapbox_markup .= 		'</span>';
-						$soapbox_markup .= 	'</div>';
 					}
-					$soapbox_markup .= '</article>';
-					echo $soapbox_markup;
 
-					if ($corner_hero_result) {
-						echo $corner_hero_result;
+					if ($corner_hero_result != "") {
+						if ($layout == 'side') {
+							$corner_hero_side  = '<article class="' . $corner_hero_result['class'] . ' corner-hero-side">';
+							$corner_hero_side .= 	'<div class="usa-grid-full">';
+							$corner_hero_side .= 		'<div class="usa-width-one-third">';
+							$corner_hero_side .= 			$corner_hero_result['image'];
+							$corner_hero_side .= 		'</div>';
+							$corner_hero_side .= 		'<div class="usa-width-two-thirds">';
+							$corner_hero_side .= 			$corner_hero_result['content'];
+							$corner_hero_side .= 		'</div>';
+							$corner_hero_side .= 	'</div>';
+							$corner_hero_side .= '</article>';
+							echo $corner_hero_side;
+						} 
+						else if ($layout == 'full') {
+							$corner_hero_full  = '<article class="' . $corner_hero_result['class'] . ' corner-hero-full">';
+							$corner_hero_full .= 	'<div class="full-width">';
+							$corner_hero_full .= 		'<div class="corner-hero-image">';
+							$corner_hero_full .= 			$corner_hero_result['image'];
+							$corner_hero_full .= 		'</div>';
+							$corner_hero_full .= 		'<div class="corner-hero-content">';
+							$corner_hero_full .= 			$corner_hero_result['content'];
+							$corner_hero_full .= 		'</div>';
+							$corner_hero_full .= 	'</div>';
+							$corner_hero_full .= '</article>';
+							echo $corner_hero_full;
+						}
+						// echo $corner_hero_result;
 					}
 					echo '</div>';
 
 					$impact_post_qty = '';
-					if (!empty($soap_result) && !empty($corner_hero_result)) {
+					if (($soap_result['toggle'] == 'on') && !empty($corner_hero_result)) {
 						$impact_post_qty = 1;
 						echo '<div class="kr-seven-twelfths">';
 					}
