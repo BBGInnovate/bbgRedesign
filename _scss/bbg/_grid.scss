@@ -4,10 +4,6 @@
 // But USWDS supersedes Neat's mixin for media (which would accept min, max and column count)
 
 // CONVERT GRIDS (SMALL, MEDIUM, LARGE) FOR SCREEN SIZES
-.container {
-	@include grid-container;
-	max-width: 1140px;
-}
 .full-grid {@include grid-column(12);}
 .kr-five-twelfths {@include span-columns(12);}
 .kr-seven-twelfths {@include span-columns(12);}

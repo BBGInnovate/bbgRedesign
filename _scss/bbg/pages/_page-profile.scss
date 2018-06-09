@@ -12,21 +12,6 @@
 	}
 }
 
-/*
-.bbg__profile,
-.category-profile {
-	@include media($medium-large-screen) {
-		.bbg__article-content.bbg__article--no-featured-image{
-			//this causes problems on post pages with no featured image.
-			//only needed for profile pages.
-			margin-top: $profile-photo-margin-large;
-		}
-	}
-}
-*/
-
-
-
 .bbg__profile-photo {
 	margin: -60px auto 0;
 	position: relative;
@@ -46,15 +31,12 @@
 		width: 20%;
 	}
 
-
 	.bbg__profile-photo__image {
 		background-color: #FFF;
 		border: 5px solid #FFF;
 		max-width: 100%;
 	}
 }
-
-
 
 .bbg__profile-title {
 	text-align: center;
@@ -141,32 +123,6 @@
 	margin-bottom: $site-margins-large;
 }
 
-
-
-
-
-
-
-.bbg__contact-label{
-	display: inline;
-	margin-right: $site-margins-small;
-
-	@include media($medium-large-screen) {
-		display: block;
-	}
-}
-
-.bbg__contact-label:after{
-	@include media($medium-screen) {
-		content: ": ";
-	}
-	@include media($medium-large-screen) {
-		content: "";
-	}
-}
-
-
-
 .category-board-meeting {
 	.bbg__article-header {
 		margin-bottom: 0;
@@ -206,19 +162,6 @@
 	max-width: 100%;
 }
 
-/* not sure we're using this anymore */
-/*
-.bbg__profile-excerpt__photo-container {
-	float: left;
-	margin: {
-		top: $site-margins-small;
-		right: $site-margins-small;
-	}
-	max-width: 150px;
-	width: 30%;
-}
-*/
-
 .bbg__profile-excerpt__photo {
 	border: $border-solid;
 	float: left;
@@ -229,7 +172,6 @@
 	max-width: 150px;
 	width: 30%;
 }
-
 
 .bbg__former-member {
 	-webkit-filter: grayscale(1);
@@ -255,7 +197,6 @@
 	}
 	margin-bottom: $site-margins-small;
 }
-
 
 .page-template-page-board .content-area .usa-grid > p:first-of-type {
 	@extend .readin;

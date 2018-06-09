@@ -3,29 +3,6 @@ a:focus .bbg__article-share__icon {
 }
 
 /** ARTICLE SHARE AREA */
-.bbg__article-share {
-	margin: {
-		top: 0;
-		bottom: 1rem;
-	}
-
-	@include media ($medium-screen) {
-		margin: {
-			top: 0;
-			bottom: 0;
-		}
-	}
-	@include media($medium-large-screen) {
-		float: none;
-		margin: {
-			top: -1%;
-			right: auto;
-			left: auto;
-		}
-		/* Added to overwrite the existing margin-top applied to all UL tags by USDS :: GIGI */
-	}
-}
-
 .bbg__article-sidebar {
 	.bbg__article-share {
 		@include media($medium-large-screen) {
@@ -35,21 +12,6 @@ a:focus .bbg__article-share__icon {
 }
 
 /* Article share links */
-.bbg__article-share__link {
-	display: inline-block;
-	margin-right: 3px;
-
-	a:hover,
-	a:focus {
-		background: none;
-		text-decoration: none;
-	}
-
-	@include media($medium-large-screen) {
-		display: block;
-	}
-}
-
 .bbg__article-sidebar.large {
 	.bbg__article-share__link {
 		@include media($medium-large-screen) {
@@ -61,7 +23,6 @@ a:focus .bbg__article-share__icon {
 .bbg__article-share__link:before {
 	content: "";
 }
-
 
 /* Article share links: icons */
 .bbg__article-share__icon {
@@ -114,7 +75,6 @@ a:focus .bbg__article-share__icon {
 		image: url(img/social-icons/png-white/social-icons_instagram.png);
 	}
 }
-
 
 /* Article share links: text */
 .bbg__article-share__text {

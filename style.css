@@ -2845,7 +2845,11 @@ h2 {
   text-transform: uppercase;
   color: #b2201c; }
 
-h3, .bbg__sidebar__table caption, h4, .bbg__board__committee-list li a {
+h3, .bbg__sidebar__table caption {
+  font-weight: 300;
+  color: #284f91; }
+
+h4, .bbg__board__committee-list li a {
   font-weight: 400;
   color: #284f91; }
 
@@ -2859,7 +2863,7 @@ h6 {
 
 p {
   font-family: "Alegreya Sans", sans-serif;
-  margin-bottom: 3rem; }
+  margin: 0 0 3rem 0; }
 
 p.lead-in {
   font-size: 2rem;
@@ -3077,37 +3081,11 @@ a:focus .bbg__article-share__icon {
   background-color: #757575; }
 
 /** ARTICLE SHARE AREA */
-.bbg__article-share {
-  margin-top: 0;
-  margin-bottom: 1rem; }
-  @media screen and (min-width: 600px) {
-    .bbg__article-share {
-      margin-top: 0;
-      margin-bottom: 0; } }
-  @media screen and (min-width: 900px) {
-    .bbg__article-share {
-      float: none;
-      margin-top: -1%;
-      margin-right: auto;
-      margin-left: auto;
-      /* Added to overwrite the existing margin-top applied to all UL tags by USDS :: GIGI */ } }
-
 @media screen and (min-width: 900px) {
   .bbg__article-sidebar .bbg__article-share {
     margin-left: initial; } }
 
 /* Article share links */
-.bbg__article-share__link {
-  display: inline-block;
-  margin-right: 3px; }
-  .bbg__article-share__link a:hover,
-  .bbg__article-share__link a:focus {
-    background: none;
-    text-decoration: none; }
-  @media screen and (min-width: 900px) {
-    .bbg__article-share__link {
-      display: block; } }
-
 @media screen and (min-width: 900px) {
   .bbg__article-sidebar.large .bbg__article-share__link {
     display: block; } }
@@ -4501,13 +4479,6 @@ e.g. on the intern testimonial page */
   font-transform: uppercase;
   margin-left: 1rem; }
 
-.container {
-  max-width: 1140px; }
-  .container::after {
-    clear: both;
-    content: "";
-    display: block; }
-
 .full-grid {
   width: calc(100% - 40px);
   float: left;
@@ -4810,6 +4781,33 @@ ol li:before {
   .bbg-header__site-title--breakline {
     display: inline-block; } }
 
+.outer-container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; }
+  .outer-container::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .outer-container .nested-grid::after {
+    clear: both;
+    content: "";
+    display: block; }
+
+.page-post-main-content {
+  width: calc(75% - 35px);
+  float: left;
+  margin-left: 20px; }
+  .page-post-main-content .page-post-featured-image {
+    margin-bottom: 1em; }
+
+.page-sidebar {
+  width: calc(25% - 25px);
+  float: left;
+  margin-left: 20px;
+  padding-left: 1.5rem;
+  border-left: 1px solid #e6e6e6; }
+
 .soapbox-side {
   padding: 1.5rem;
   margin-bottom: 3rem; }
@@ -4873,6 +4871,17 @@ ol li:before {
     width: calc(75% - 35px);
     float: left;
     margin-left: 20px; }
+
+.sidebar-paragraph-head {
+  font-family: "Alegreya Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #8b8278;
+  margin-bottom: 1.5rem; }
+
+.sidebar-paragraph-head a {
+  color: inherit; }
 
 .red-special {
   font-family: "Carrara-Regular", serif;
@@ -5056,32 +5065,25 @@ img,
     font-weight: bold; }
 
 @media screen and (min-width: 900px) {
-  .bbg__article-content {
-    float: left;
-    margin-top: 0;
-    margin-right: auto;
-    margin-bottom: 3rem;
-    margin-left: auto;
-    width: 56%; }
-    .bbg__article-content > * {
-      max-width: none; }
-    .bbg__article-content p {
-      margin-right: 0;
-      margin-left: 0; }
-      .bbg__article-content p strong {
-        font-family: "Alegreya Sans", sans-serif; }
-    .bbg__article-content.large {
-      border-right: 1px dotted #CCC;
-      margin-left: 0;
-      padding-right: 2%;
-      width: 65%;
-      /* Make the first paragraph larger */ }
-      .bbg__article-content.large .bbg__profile__content p:first-child {
-        font-size: 1.7rem;
-        font-weight: 100;
-        line-height: 2.5;
-        margin-top: -.8rem;
-        margin-bottom: 3rem; }
+  .bbg__article-content > * {
+    max-width: none; }
+  .bbg__article-content p {
+    margin-right: 0;
+    margin-left: 0; }
+    .bbg__article-content p strong {
+      font-family: "Alegreya Sans", sans-serif; }
+  .bbg__article-content.large {
+    border-right: 1px dotted #CCC;
+    margin-left: 0;
+    padding-right: 2%;
+    width: 65%;
+    /* Make the first paragraph larger */ }
+    .bbg__article-content.large .bbg__profile__content p:first-child {
+      font-size: 1.7rem;
+      font-weight: 100;
+      line-height: 2.5;
+      margin-top: -.8rem;
+      margin-bottom: 3rem; }
   .bbg__article-sidebar {
     float: right;
     font-family: "Alegreya Sans", sans-serif;
@@ -6425,18 +6427,6 @@ section.usa-section.bbg-banner__section {
     .bbg__article--no-featured-image .bbg__profile-photo {
       margin: 0 1rem auto 0; } }
 
-/*
-.bbg__profile,
-.category-profile {
-	@include media($medium-large-screen) {
-		.bbg__article-content.bbg__article--no-featured-image{
-			//this causes problems on post pages with no featured image.
-			//only needed for profile pages.
-			margin-top: $profile-photo-margin-large;
-		}
-	}
-}
-*/
 .bbg__profile-photo {
   margin: -60px auto 0;
   position: relative;
@@ -6531,21 +6521,6 @@ section.usa-section.bbg-banner__section {
 .bbg__article-sidebar__aside {
   margin-bottom: 6rem; }
 
-.bbg__contact-label {
-  display: inline;
-  margin-right: 1rem; }
-  @media screen and (min-width: 900px) {
-    .bbg__contact-label {
-      display: block; } }
-
-@media screen and (min-width: 600px) {
-  .bbg__contact-label:after {
-    content: ": "; } }
-
-@media screen and (min-width: 900px) {
-  .bbg__contact-label:after {
-    content: ""; } }
-
 .category-board-meeting .bbg__article-header {
   margin-bottom: 0; }
 
@@ -6577,18 +6552,6 @@ section.usa-section.bbg-banner__section {
   margin-bottom: 0 !important;
   max-width: 100%; }
 
-/* not sure we're using this anymore */
-/*
-.bbg__profile-excerpt__photo-container {
-	float: left;
-	margin: {
-		top: $site-margins-small;
-		right: $site-margins-small;
-	}
-	max-width: 150px;
-	width: 30%;
-}
-*/
 .bbg__profile-excerpt__photo {
   border: 1px solid #CCC;
   float: left;

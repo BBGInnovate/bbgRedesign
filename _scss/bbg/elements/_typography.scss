@@ -19,7 +19,11 @@ h2 {
     text-transform: uppercase;
     color: $color-red;
 }
-h3, h4 {
+h3 {
+    font-weight: $font-light;
+    color: $color-blue-darker;
+}
+h4 {
     font-weight: $font-normal;
     color: $color-blue-darker;
 }
@@ -35,7 +39,7 @@ h6 {
 
 p {
     font-family: $font-sans;
-    margin-bottom: 3rem;
+    margin: 0 0 3rem 0;
 }
 
 p.lead-in {

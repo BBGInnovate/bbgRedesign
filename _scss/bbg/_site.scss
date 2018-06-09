@@ -207,14 +207,14 @@
 
 @include media($medium-large-screen) {
     .bbg__article-content {
-        float: left;
-        margin: {
-            top: 0;
-            right: auto;
-            bottom: $site-margins;
-            left: auto;
-        }
-        width: 56%;
+        // float: left;
+        // margin: {
+        //     top: 0;
+        //     right: auto;
+        //     bottom: $site-margins;
+        //     left: auto;
+        // }
+        // width: 56%;
 
         >* {
             max-width: none;
