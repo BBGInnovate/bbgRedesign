@@ -224,7 +224,8 @@ function display_featured_post() {
 			$counter++;
 			$postIDsUsed[] = get_the_ID();
 			// return get_post_format();
-			get_template_part('template-parts/content-excerpt-featured', get_post_format());
+			$featured_post_data = get_template_part('template-parts/content-excerpt-featured', get_post_format());
+			build_featured_post($featured_post_data);
 		}
 	}
 	wp_reset_query();
@@ -438,6 +439,33 @@ function get_corner_hero_data() {
 }
 
 // BUILDIND BLOCKS
+function build_featured_post($feat_post_data) {
+	$featured_post = '<article id="' . get_the_ID() . '">';
+	$featuredImageClass = "";
+	$featuredImageCutline = "";
+	$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
+
+	if ($thumbnail_image && isset($thumbnail_image[0])) {
+		$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
+	}
+	$featured_post .= '<a href="' . $postPermalink . '" rel="bookmark">';
+	$featured_post .= 		get_the_post_thumbnail();
+	$featured_post .= '</a>';
+	$featured_post .= '<h4><a href="' . $postPermalink . '" rel="bookmark">';
+	$featured_post .= 	get_the_title();
+	$featured_post .= '</a></h4>';
+	if ($includeMetaFeatured) {
+		$featured_post .= bbginnovate_posted_on();
+	}
+	$featured_post .= '<p>' . get_the_excerpt() . '</p>';
+						wp_link_pages(array(
+							'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'bbginnovate' ),
+							'after'  => '</div>',
+						));
+	$featured_post .= '</article>';
+	echo $featured_post;
+}
+
 function build_soapbox_pieces($soap_data) {
 	$toggle = $soap_data['toggle'];
 	$article_class = $soap_data['article_class'];

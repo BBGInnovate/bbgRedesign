@@ -12,8 +12,6 @@
  * @package bbgRedesign
  */
 
-require 'template-parts/content-excerpt-featured.php';
-
 get_header();
 ?>
 
@@ -28,7 +26,6 @@ get_header();
 					$counter++;
 					// ADD CHECK TO ONLY SHOW FEATURED IF IT'S NOT PAGINATED
 					if ( (!is_paged() && $counter==1)) {
-						echo 'should show featured post';
 						get_template_part('template-parts/content-excerpt-featured', get_post_format());
 					}
 					else {
