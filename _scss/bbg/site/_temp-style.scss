@@ -3,13 +3,12 @@
 	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
-
-	.nested-grid {@include grid-container;;}
 }
+.container {@include grid-container;}
 
 .page-post-main-content {
 	@include grid-column(9);
-	.page-post-featured-image {margin-bottom: 1em;}
+	.page-post-featured-graphic {margin-bottom: 1em;}
 }
 .page-sidebar {
 	@include grid-column(3);

@@ -15,6 +15,7 @@
 // error_reporting(E_ALL);
 
 // REMOVE P TAGS FROM CONTENT TO PUT IN YOUR OWN PARAGRAPHY STYLES
+// THIS CAN BE DONE IN RESPECTIVE CUSTOM FIELD
 remove_filter ('the_content', 'wpautop');
 
 function isOdd( $pageTotal ) {
@@ -97,10 +98,6 @@ function showUmbrellaArea($atts) {
 
 $templateName = "about";
 
-$bannerPosition = get_field( 'adjust_the_banner_image', '', true);
-$videoUrl = get_field( 'featured_video_url', '', true );
-$addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
-
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
 		$pageContent = get_the_content();
@@ -111,9 +108,7 @@ endif;
 wp_reset_postdata();
 wp_reset_query();
 
-
 get_header();
-
 ?>
 
 <div id="main" class="site-main">
@@ -135,7 +130,11 @@ get_header();
 			// 	$hideFeaturedImage = true;
 			// }
 
-			display_feature_media_type();
+			$featured_media_result = get_feature_media_data();
+			if ($featured_media_result != "") {
+				echo $featured_media_result;
+			}
+
 
 			$page_content  = '<div class="usa-grid page-content">';
 			$page_content .= 	'<p class="lead-in">' . $pageContent . '</p>';

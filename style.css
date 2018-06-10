@@ -4789,16 +4789,17 @@ ol li:before {
     clear: both;
     content: "";
     display: block; }
-  .outer-container .nested-grid::after {
-    clear: both;
-    content: "";
-    display: block; }
+
+.container::after {
+  clear: both;
+  content: "";
+  display: block; }
 
 .page-post-main-content {
   width: calc(75% - 35px);
   float: left;
   margin-left: 20px; }
-  .page-post-main-content .page-post-featured-image {
+  .page-post-main-content .page-post-featured-graphic {
     margin-bottom: 1em; }
 
 .page-sidebar {

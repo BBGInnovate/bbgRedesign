@@ -1,12 +1,12 @@
 <?php
-function display_feature_media_type() {
-	global $videoUrl;
-	global $addFeaturedGallery;
 
+function get_feature_media_data() {
+	$addFeaturedGallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
 	$bannerPosition = get_field('adjust_the_banner_image', '', true);
-	$videoUrl = get_field('featured_video_url', '', true);
+	$videoUrl = get_field( 'featured_video_url', '', true );
 
 	if ($videoUrl != "") {
+		$featured_data = "";
 		$hideFeaturedImage = true;
 		$video_data = featured_video($videoUrl);
 
@@ -15,7 +15,7 @@ function display_feature_media_type() {
 		$video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
 		$video_markup .= '</iframe>';
 		$featured_data = $video_markup;
-	} 
+	}
 	elseif (has_post_thumbnail()) {
 		$featuredImageClass = "";
 		$featuredImageCutline = "";
@@ -26,26 +26,13 @@ function display_feature_media_type() {
 			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
 		}
 
-		$post_featured_image  = '<div class="feature-image">';
-		$post_featured_image .= 	'<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" ';
-		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
-		$post_featured_image .= 	'</div>';
+		$post_featured_image  = '<div class="bbg__article-header__banner" ';
+		$post_featured_image .= 	'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
 		$post_featured_image .= '</div>';
 
-		$featured_data =  $post_featured_image;
+		$featured_data = $post_featured_image;
 	}
-
-	// ACTUAL BANNER MARKUP
-	if ($videoURL != "" || has_post_thumbnail()) {
-		$featured_markup  = '<div class="container">';
-		$featured_markup  = 	'<div class="full-grid">';
-		$featured_markup .= 		'<div class="feature-element">';
-		$featured_markup .= 		$featured_data;
-		$featured_markup .= 		'</div>';
-		$featured_markup .= 	'</div>';
-		$featured_markup .= '</div>';
-		echo $featured_markup;
-	}
+	return $featured_data;
 }
 
 function get_flexible_row_data($str) {

@@ -14,11 +14,10 @@ if (have_posts()) {
 	the_post();
 
 	// GATHER FIELD DATA
-	$metaAuthor = get_the_author();
-	$metaKeywords = strip_tags(get_the_tag_list('',', ',''));
-	$ogTitle = get_the_title();
-	$ogDescription = get_the_excerpt();
-	$meetingTime = get_post_meta( get_the_ID(), 'board_meeting_time', true );
+	// $metaAuthor = get_the_author();
+	// $metaKeywords = strip_tags(get_the_tag_list('',', ',''));
+	// $ogTitle = get_the_title();
+	// $ogDescription = get_the_excerpt();
 
 	// SET PAGE TYPE VARS
 	$eventPageHeader = "Event";
@@ -32,7 +31,7 @@ if (have_posts()) {
 		$isPressRelease = true;
 	}
 
-	// CREATE OG:IMAGE
+	// GET POST THUMBNAIL
 	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'Full' );
 	$ogImage = $thumb['0'];
 	$socialImageID = get_post_meta( $post->ID, 'social_image',true );
@@ -56,11 +55,9 @@ if (have_posts()) {
 
 	$meetingRegistrationCloseTime = get_post_meta( get_the_ID(), 'board_meeting_registration_close_time', true );
 	$commentFormCloseTime = get_post_meta( get_the_ID(), 'board_meeting_comment_form_close_time', true );
-
 	$registrationIsClosed = false;
 	if ($meetingRegistrationCloseTime) {
 		$registrationIsClosed = ($meetingRegistrationCloseTime <  $todayStr);
-
 		//get a display friendly version of this date for later
 		$meetingRegistrationCloseDateObj = DateTime::createFromFormat('Y-m-d H:i:s', $meetingRegistrationCloseTime);
 		$meetingRegistrationCloseDateStr = $meetingRegistrationCloseDateObj->format("F j, Y");
@@ -70,14 +67,15 @@ if (have_posts()) {
 	if ($commentFormCloseTime) {
 		$commentFormIsClosed = ($commentFormCloseTime <  $todayStr);
 		$commentFormCloseDateObj = DateTime::createFromFormat('Y-m-d H:i:s', $commentFormCloseTime);
-
 		//get a display friendly version of this date for later
 		$commentFormCloseStr = $commentFormCloseDateObj->format("F j, Y");
 	}
 
-	$meetingLocation = get_post_meta( get_the_ID(), 'board_meeting_location', true );
-	$meetingSummary = get_post_meta( get_the_ID(), 'board_meeting_summary', true );
-	$meetingContactTagline = get_post_meta( get_the_ID(), 'board_meeting_contact_tagline', true );
+	// GET MEETING DATA
+	$meetingLocation = get_post_meta(get_the_ID(), 'board_meeting_location', true);
+	$meetingTime = get_post_meta(get_the_ID(), 'board_meeting_time', true);
+	$meetingSummary = get_post_meta(get_the_ID(), 'board_meeting_summary', true);
+	$meetingContactTagline = get_post_meta(get_the_ID(), 'board_meeting_contact_tagline', true);
 	if (!$meetingContactTagline || $meetingContactTagline == "") {
 		$meetingContactTagline = "For more information, please contact BBG Public Affairs at (202) 203-4400 or by e-mail at pubaff@bbg.gov.";
 	}
@@ -96,7 +94,6 @@ if (have_posts()) {
 			$eventBriteButtonStr = "<p style='font-style:italic;' class='registrationClosed'>Registration for this event has closed.</p>";
 		}
 	}
-
 	rewind_posts();
 }
 
@@ -146,12 +143,10 @@ get_header();
 			<div class="outer-container">
 				<div class="page-post-main-content">
 					<?php
-						// if () {
-							$post_featured_image  = '<div class="page-post-featured-image">';
-							$post_featured_image .= 	get_the_post_thumbnail();
-							$post_featured_image .= '</div>';
-							echo $post_featured_image;
-						// }
+						$featured_media_result = get_feature_media_data();
+						if ($featured_media_result != "") {
+							echo $featured_media_result;
+						}
 					?>
 					<div class="bbg__article-content">
 					<?php
@@ -225,18 +220,18 @@ get_header();
 								$speakersLabel = get_field('board_meeting_speaker_label');
 								
 								echo '<h6>' . $speakersLabel . '</h6>';
-							    while ( have_rows('board_meeting_speakers') ) : the_row();
+								while ( have_rows('board_meeting_speakers') ) : the_row();
 
-							        // SHOW INTERNAL SPEAKER LIST
-							        if (get_row_layout() == 'board_meeting_speakers_internal') {
-						        		if (get_sub_field('bbg_speaker_name')) {
-						        			$profiles = get_sub_field('bbg_speaker_name');
+									// SHOW INTERNAL SPEAKER LIST
+									if (get_row_layout() == 'board_meeting_speakers_internal') {
+										if (get_sub_field('bbg_speaker_name')) {
+											$profiles = get_sub_field('bbg_speaker_name');
 
-					        				echo "<ul class='usa-unstyled-list'>";
+											echo "<ul class='usa-unstyled-list'>";
 
-					        				foreach ($profiles as $profile) {
-					        					$pID = $profile->ID;
-					        					$profile_id = get_post_meta($pID);
+											foreach ($profiles as $profile) {
+												$pID = $profile->ID;
+												$profile_id = get_post_meta($pID);
 												$includeProfile = false;
 
 												if ($profile_id) {
@@ -258,19 +253,19 @@ get_header();
 												if ($includeProfile) {
 													echo $profile_list;
 												}
-					        				}
-					        				echo "</ul>";
-						        		}
-							        } else if (get_row_layout() == 'board_meeting_speakers_external') {
-						        		if (get_sub_field('meeting_speaker')) {
-						        			$profiles = get_sub_field('meeting_speaker');
+											}
+											echo "</ul>";
+										}
+									} else if (get_row_layout() == 'board_meeting_speakers_external') {
+										if (get_sub_field('meeting_speaker')) {
+											$profiles = get_sub_field('meeting_speaker');
 
-					        				echo "<ul class='usa-unstyled-list'>";
+											echo "<ul class='usa-unstyled-list'>";
 
-					        				foreach ($profiles as $profile) {
-					        					$speakerName = $profile["meeting_speaker_name"];
-					        					$speakerTitle = $profile["meeting_speaker_title"];
-					        					$speakerLink = $profile["meeting_speaker_url"];
+											foreach ($profiles as $profile) {
+												$speakerName = $profile["meeting_speaker_name"];
+												$speakerTitle = $profile["meeting_speaker_title"];
+												$speakerLink = $profile["meeting_speaker_url"];
 
 												$external_speaker_list  = '<li>';
 												$external_speaker_list .= 	'<h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name">';
@@ -284,27 +279,27 @@ get_header();
 												$external_speaker_list .= '</li>';
 
 												echo $external_speaker_list;
-					        				}
-					        				echo "</ul>";
-						        		}
-							        }
-							    endwhile;
+											}
+											echo "</ul>";
+										}
+									}
+								endwhile;
 							}
 						?>
 
 						<!-- RELATED DOCUMENTS -->
 						<?php
 							if ( have_rows('board_meeting_related_documents') ) {
-							 	echo '<h3 class="bbg__sidebar-label">Meeting documents</h3>';
-							 	echo '<ul class="bbg__profile__related-link__list">';
-							    while ( have_rows('board_meeting_related_documents') ) { 
-							    	the_row();
-							        echo '<li class="bbg__profile__related-link">';
-							        $dl = get_sub_field('board_meeting_related_document');
-							        echo "<a href='" . $dl['url'] . "'>" . $dl['title'] . "</a>";
-							        echo '</li>';
-							    }
-							    echo '</ul>';
+								echo '<h3 class="bbg__sidebar-label">Meeting documents</h3>';
+								echo '<ul class="bbg__profile__related-link__list">';
+								while ( have_rows('board_meeting_related_documents') ) { 
+									the_row();
+									echo '<li class="bbg__profile__related-link">';
+									$dl = get_sub_field('board_meeting_related_document');
+									echo "<a href='" . $dl['url'] . "'>" . $dl['title'] . "</a>";
+									echo '</li>';
+								}
+								echo '</ul>';
 							}
 
 							echo "<!-- Additional Sidebar Content -->";
