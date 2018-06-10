@@ -8,18 +8,26 @@
    template name: 2-column
  */
 
-require 'inc/custom_field_data_retriever.php';
-require 'inc/bbg-functions-assemble.php';
+// $bannerPosition = get_field( 'adjust_the_banner_image', '', true);
+// $bannerPositionCSS = get_field( 'adjust_the_banner_image_css', '', true);
+// $bannerAdjustStr="";
+// if ($bannerPositionCSS) {
+// 	$bannerAdjustStr = $bannerPositionCSS;
+// } elseif ($bannerPosition) {
+// 	$bannerAdjustStr = $bannerPosition;
+// }
 
+// $videoUrl = get_field( 'featured_video_url', '', true );
+$addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
 $secondaryColumnLabel = get_field( 'secondary_column_label', '', true );
-$secondaryColumnContent = get_field('secondary_column_content', '', true);
+$secondaryColumnContent = get_field( 'secondary_column_content', '', true );
 
 $headline = get_field( 'headline', '', true );
 $headlineStr = "";
 
 $listsInclude = get_field( 'sidebar_dropdown_include', '', true);
 
-include get_template_directory() . "/inc/shared_sidebar.php";
+include "inc/shared_sidebar.php";
 
 function display_foia_reports() {
 	// $foia_url = WP_CONTENT_URL . '/uploads/foia-reports/'; // LOCAL
@@ -79,29 +87,78 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main bbg__2-column" role="main">
-			<?php display_feature_media_type(); ?>
 			<div class="usa-grid-full">
+
 				<?php while ( have_posts() ) : the_post();
 					//$videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
 				?>
+					<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
+
+						<div class="usa-grid">
+							<header class="page-header">
+
+								<?php if( $post->post_parent ) {
+									//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
+									$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+									$parent_link = get_permalink( $post->post_parent );
+									?>
+									<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5>
+								<?php } else { ?>
+									<h5 class="bbg__label--mobile large"><?php the_title(); ?></h5>
+								<?php } ?>
+
+							</header><!-- .page-header -->
+						</div>
+
+						<?php 
+							if ($addFeaturedGallery) {
+								echo "<div class='usa-grid-full'><div class='usa-grid-full bbg__article-featured__gallery' >";
+								$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
+								putUniteGallery($featuredGalleryID);
+								echo "</div>";
+							}
+						?>
+						</div>
+
+						<?php
+							$hideFeaturedImage = FALSE;
+							if ( $videoUrl != "" ) {
+								echo featured_video($videoUrl);
+								$hideFeaturedImage = TRUE;
+							} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
+								echo '<div class="usa-grid-full">';
+									$featuredImageClass = "";
+									$featuredImageCutline = "";
+									$thumbnail_image = get_posts( array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment') );
+									if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
+										$featuredImageCutline = $thumbnail_image[0]->post_excerpt;
+									}
+
+									$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 700,450 ), false, '' );
+
+									echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerAdjustStr . '">';
+									echo '</div>';
+								echo '</div> <!-- usa-grid-full -->';
+							}
+						?><!-- .bbg__article-header__thumbnail -->
+
 						<div class="usa-grid">
 
 							<header class="entry-header">
 								<!-- .bbg__label -->
-								<?php 
-									if ( $post->post_parent ) {
-										// GET RID OF THIS SQL CALL
-										//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-										$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
-										$parent_link = get_permalink($post->post_parent);
-										the_title( '<h1 class="entry-title">', '</h1>' );
-										echo "KR - Fix SQL Call";
-										// THOSE VARS ARENT EVEN USED ANYWHERE ELSE
-									}
-									else {
-										$headlineStr = "<h2>" . $headline . "</h2>";
-									}
-								?>
+								<?php if ( $post->post_parent ) {
+									//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
+									$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+									$parent_link = get_permalink($post->post_parent);
+									?>
+									<!--<h5 class="entry-category bbg__label"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5>-->
+									<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+
+								<?php } else { ?>
+									<!--<h5 class="entry-category bbg__label"><?php the_title(); ?></h5>-->
+									<?php $headlineStr = "<h1 class='bbg__entry__secondary-title'>" . $headline . "</h1>"; ?>
+								<?php } ?>
+
 							</header><!-- .entry-header -->
 
 							<div class="entry-content bbg__article-content large <?php echo $featuredImageClass; ?>">
@@ -117,7 +174,7 @@ get_header(); ?>
 
 								<?php
 									//Add blog posts below the main content
-									$relatedCategory = get_field('related_category_posts', $id);
+									$relatedCategory=get_field('related_category_posts', $id);
 
 									if ( $relatedCategory != "" ) {
 										$qParams2 = array(
@@ -145,20 +202,28 @@ get_header(); ?>
 							</div><!-- .entry-content -->
 
 							<div class="bbg__article-sidebar large">
+
 								<?php
-									if ($secondaryColumnContent != "") {
-										if ($secondaryColumnLabel != "") {
-											echo '<h6>' . $secondaryColumnLabel . '</h6>';
+									if ( $secondaryColumnContent != "" ) {
+
+										if ( $secondaryColumnLabel != "" ) {
+											echo '<h5 class="bbg__label small">' . $secondaryColumnLabel . '</h5>';
 										}
+
 										echo $secondaryColumnContent;
+										
 									}
-									if ($includeSidebar) {
+
+									if ( $includeSidebar ) {
 										echo $sidebar;
 									}
-									if ($listsInclude) {
+
+									if ( $listsInclude ) {
 										echo $sidebarDownloads;
 									}
+
 								?>
+
 							</div><!-- .bbg__article-sidebar -->
 						</div>
 

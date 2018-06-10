@@ -1,17 +1,19 @@
 (function($) {
 $('document').ready(function() {
 
-function setBannerHeight() {
+function scaleHDvideo() {
 	// HD PROPORTIONS
-	var winW = $(window).width();
-	var dynHeight = winW / 1.77778;
+	var containerW = $('.page-post-featured-graphic').width();
+	// var winW = $(window).width();
+	var dynHeight = containerW / 1.77778;
+	$('.bbg-banner').width(containerW);
 	$('.bbg-banner').height(dynHeight);
 	// $('#masthead').height($('.bbg-banner__section').outerHeight());
 }
-setBannerHeight();
+scaleHDvideo();
 
 $(window).on('resize', function() {
-	setBannerHeight();
+	scaleHDvideo();
 });
 
 }); // END READY

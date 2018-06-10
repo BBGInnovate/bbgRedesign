@@ -10,10 +10,12 @@ function get_feature_media_data() {
 		$hideFeaturedImage = true;
 		$video_data = featured_video($videoUrl);
 
-		$video_markup  = '<iframe scrolling="no" src="';
-		$video_markup .= 	$video_data['url'];
-		$video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
-		$video_markup .= '</iframe>';
+		$video_markup  = '<div class="page-post-featured-graphic">';
+		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
+		$video_markup .= 		$video_data['url'];
+		$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+		$video_markup .= 	'</iframe>';
+		$video_markup .= '</div>';
 		$featured_data = $video_markup;
 	}
 	elseif (has_post_thumbnail()) {
@@ -26,8 +28,10 @@ function get_feature_media_data() {
 			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
 		}
 
-		$post_featured_image  = '<div class="bbg__article-header__banner" ';
-		$post_featured_image .= 	'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
+		$post_featured_image  = '<div class="page-post-featured-graphic">';
+		$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
+		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
+		$post_featured_image .= 	'</div>';
 		$post_featured_image .= '</div>';
 
 		$featured_data = $post_featured_image;
