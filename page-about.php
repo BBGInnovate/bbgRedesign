@@ -111,478 +111,472 @@ wp_reset_query();
 get_header();
 ?>
 
-<div id="main" class="site-main">
+<main id="main" class="site-main" role="main">
+<?php
+	// NOT SURE WHERE THIS IS USED?
+	if ($addFeaturedGallery) {
+		$featuredGalleryID = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
+		$gallery_build  = '<div class="usa-grid">';
+		$gallery_build .= 	'<div class="usa-grid bbg__article-featured__gallery">';
+		$gallery_build .= 		putUniteGallery($featuredGalleryID);
+		$gallery_build .= '</div>';
+		// echo $gallery_build;
+	}
+	// $hideFeaturedImage = false;
+	// if ($addFeaturedGallery) {
+	// 	$hideFeaturedImage = true;
+	// }
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-		<?php
-			// NOT SURE WHERE THIS IS USED?
-			if ($addFeaturedGallery) {
-				$featuredGalleryID = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
-				$gallery_build  = '<div class="usa-grid">';
-				$gallery_build .= 	'<div class="usa-grid bbg__article-featured__gallery">';
-				$gallery_build .= 		putUniteGallery($featuredGalleryID);
-				$gallery_build .= '</div>';
-				// echo $gallery_build;
-			}
-			// $hideFeaturedImage = false;
-			// if ($addFeaturedGallery) {
-			// 	$hideFeaturedImage = true;
-			// }
-
-			$featured_media_result = get_feature_media_data();
-			if ($featured_media_result != "") {
-				echo $featured_media_result;
-			}
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
 
 
-			$page_content  = '<div class="usa-grid page-content">';
-			$page_content .= 	'<p class="lead-in">' . $pageContent . '</p>';
-			$page_content .= '</div>';
-			echo $page_content;
-		?>
-			<!-- Child pages -->
-			<div id="page-children" class="usa-section usa-grid bbg__about__children">
-			<?php
-				if (have_rows('about_flexible_page_rows')):
-					$counter = 0;
-					$pageTotal = 1;
-					$containerClass = 'bbg__about__child ';
+	$page_content  = '<div class="usa-grid page-content">';
+	$page_content .= 	'<p class="lead-in">' . $pageContent . '</p>';
+	$page_content .= '</div>';
+	echo $page_content;
+?>
+	<!-- Child pages -->
+	<div id="page-children" class="usa-section usa-grid bbg__about__children">
+	<?php
+		if (have_rows('about_flexible_page_rows')):
+			$counter = 0;
+			$pageTotal = 1;
+			$containerClass = 'bbg__about__child ';
 
-					while ( have_rows('about_flexible_page_rows') ) : the_row();
-						$counter++;
+			while ( have_rows('about_flexible_page_rows') ) : the_row();
+				$counter++;
 
-						if (get_row_layout() != 'about_ribbon_page') { // Check if row is a ribbon
-							echo '<!-- ROW ' . $counter . '-->'; // Add row counter
-							echo '<section class="usa-grid-full bbg__about__children--row">'; // Open row
-						} else {
-							echo '<!-- ROW ' . $counter . '-->'; // Add row counter
-							echo '<section class="usa-grid-full bbg__about__children--row bbg__ribbon--thin">'; // Open row and add ribbon class
-						}
-
-						if (get_row_layout() == 'marquee'):
-							$marquee_result = get_marquee_data();
-							// $umbrella_result = get_umbrella_main_data();
-
-							if ($umbrella_result['section_header'] == 'History') {
-								// echo 'dont cache';
-								// $umbrella_content = get_umbrella_content_data();
-								// echo $umbrella_content_package['column_title'];
-							}
-
-							$marquee_markup  = '<div class="container">';
-							$marquee_markup .= 		'<div class="full-grid">';
-							$marquee_markup .= 			'<p class="red-special">' . $marquee_result['content'] . '</p>';
-							$marquee_markup .= 		'</div>';
-							$marquee_markup .= '</div>';
-							echo $marquee_markup;
-
-						elseif ( get_row_layout() == 'umbrella' ): 
-							/*** BEGIN DISPLAY OF ENTIRE UMBRELLA ROW ***/
-							$umbrella_result = get_umbrella_main_data();
-
-							if ($umbrella_result['header'] != "") {
-								if ($umbrella_result['header_link']) { // if the label has a URL add link and right arrow
-									$sectionHeading = '<a href="' . $umbrella_result['header_link'] . '">' . $umbrella_result['header_link'] . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
-								} 
-								echo '<h2>' . $umbrella_result['header'] . '</h2>';	
-							} 
-							//output intro section text if it exists
-							if ($umbrella_result['intro_text'] != "") {
-								if ($umbrella_result['intro_text']) { 
-									echo '<div class="bbg__about__child__intro">' . $umbrella_result['intro_text'] . '</div>';
-								}
-							}
-
-							$numRows = count(get_sub_field('umbrella_content'));
-							$containerClass = 'bbg-grid--1-2-2';
-							if (isOdd($numRows)) {
-								$containerClass = 'bbg-grid--1-3-3'; // add 3-col grid class
-							}
-
-							echo '<div class="usa-grid-full bbg__about__grandchildren">'; // open grandchildren container
-							while (have_rows('umbrella_content')) : the_row();
-								if (get_row_layout() == 'umbrella_content_external') {
-									$thumbnail = get_sub_field('umbrella_content_external_thumbnail');
-									$thumbnailID = $thumbnail['ID'];
-									$thumbSrc = wp_get_attachment_image_src( $thumbnailID , 'medium-thumb' );
-									if ($thumbSrc) {
-										$thumbSrc = $thumbSrc[0];
-									} 
-									showUmbrellaArea(array(
-										'columnTitle' => get_sub_field('umbrella_content_external_column_title'),
-										'itemTitle' => get_sub_field('umbrella_content_external_item_title'),
-										'description' => get_sub_field('umbrella_content_external_description'),
-										'link' => get_sub_field('umbrella_content_external_link'),
-										'thumbSrc' => $thumbSrc,
-										'gridClass' => $containerClass,
-										'forceContentLabels' => $forceContentLabels,
-										'columnType' => 'external',
-										'layout' => get_sub_field('umbrella_content_external_layout'),
-										'subTitle' => ''
-									));
-								} elseif (get_row_layout() == 'umbrella_content_internal') {
-
-									$pageObj = get_sub_field('umbrella_content_internal_link');
-									$id = $pageObj[0]->ID;
-									$link = get_the_permalink($id);
-									$title = "";
-									$includeTitle = get_sub_field('umbrella_content_internal_include_item_title');
-									$titleOverride = get_sub_field('umbrella_content_internal_title');
-									$secondaryHeadline = get_post_meta( $id, 'headline', true );
-									$lawName = get_post_meta( $id, 'law_name', true );
- 
-									if ( $includeTitle ) {
-										$titleOverride = get_sub_field('umbrella_content_internal_item_title');
-										if ($titleOverride != "" ) {
-											$title = $titleOverride;
-										} else {
-											if ($secondaryHeadline) {
-												$title = $secondaryHeadline;	
-											} else {
-												$title = $pageObj[0]->post_title;	
-											}
-										}
-									}
-									
-									$showFeaturedImage = get_sub_field('umbrella_content_internal_include_featured_image');
-									$thumbSrc = "";
-									if ($showFeaturedImage) {
-										$thumbSrc = wp_get_attachment_image_src( get_post_thumbnail_id($id) , 'medium-thumb' );
-										if ($thumbSrc) {
-											$thumbSrc = $thumbSrc[0];
-										}
-									}
-									
-									$showExcerpt = get_sub_field('umbrella_content_internal_include_excerpt');
-									$description = "";
-									if ($showExcerpt) {
-										$description = my_excerpt( $id );
-										$description = apply_filters( 'the_content', $description );
-										$description = str_replace( ']]>', ']]&gt;', $description );
-
-									}
-
-									showUmbrellaArea(array(
-										'columnTitle' => get_sub_field('umbrella_content_internal_column_title'),
-										'itemTitle' => $title,
-										'description' => $description,
-										'link' => $link, 
-										'thumbSrc' => $thumbSrc,
-										'gridClass' => $containerClass,
-										'forceContentLabels' => $forceContentLabels,
-										'columnType' => 'internal',
-										'layout' => get_sub_field('umbrella_content_internal_layout'),
-										'subTitle' => $lawName
-									));
-
-								} elseif (get_row_layout() == 'umbrella_content_file') {
-
-									$fileObj = get_sub_field('umbrella_content_file_file');
-									$description = get_sub_field('umbrella_content_file_description');
-									$layout = get_sub_field('umbrella_content_file_layout');
-
-									$thumbnail = get_sub_field('umbrella_content_file_thumbnail');
-									$thumbnailID = $thumbnail['ID'];
-									$thumbSrc = wp_get_attachment_image_src( $thumbnailID , 'medium-thumb' );
-									if ($thumbSrc) {
-										$thumbSrc = $thumbSrc[0];
-									}
-									
-									$description = get_sub_field('umbrella_content_file_description');
-									$description = apply_filters( 'the_content', $description );
-									$description = str_replace( ']]>', ']]&gt;', $description );
-									
-									$fileTitle = get_sub_field('umbrella_content_file_item_title');
-									//parse information about the file so we can append file sizeto append to our file title
-									$fileID = $fileObj['ID'];
-									$fileURL = $fileObj['url'];
-									$file = get_attached_file( $fileID );
-									$fileExt = strtoupper( pathinfo( $file, PATHINFO_EXTENSION ) ); // set extension to uppercase
-									$fileSize = formatBytes( filesize( $file ) ); // file size
- 
-									showUmbrellaArea(array(
-										'columnTitle' => get_sub_field('umbrella_content_file_column_title'),
-										'itemTitle' => $fileTitle,
-										'description' => $description,
-										'link' => $fileURL, 
-										'thumbSrc' => $thumbSrc,
-										'gridClass' => $containerClass,
-										'forceContentLabels' => $forceContentLabels,
-										'columnType' => 'file',
-										'layout' => $layout,
-										'fileExt' => $fileExt,
-										'fileSize' => $fileSize,
-										'subTitle' => ''
-									));
-								}
-							endwhile;
-							echo '</div>';
-							echo '</section>'; // close row
-						/*** END DISPLAY OF ENTIRE UMBRELLA ROW ***/
-
-						elseif( get_row_layout() == 'about_ribbon_page' ):
-							/*** BEGIN DISPLAY OF ENTIRE RIBBON ROW ***/
-							// Set variables
-							$labelText = get_sub_field( 'about_ribbon_label' );
-							$labelLink = get_sub_field( 'about_ribbon_label_link' );
-							$headlineText = get_sub_field( 'about_ribbon_headline' );
-							$headlineLink = get_sub_field( 'about_ribbon_headline_link' );
-							$summary = get_sub_field( 'about_ribbon_summary' );
-							$imageURL = get_sub_field( 'about_ribbon_image' );
-
-							// allow shortcodes in intro text
-							$summary = apply_filters( 'the_content', $summary );
-							$summary = str_replace( ']]>', ']]&gt;', $summary );
-
-							echo '<div class="usa-grid">';
-								echo '<div class="bbg__announcement__flexbox" name="' . $labelText . '">'; // open ribbon container and set div name to $labelText
-
-									if ( $imageURL ) { // Output image thumbnail if set
-										echo '<div class="bbg__announcement__photo" style="background-image: url(' . $imageURL . ');"></div>';
-									}
-
-									echo '<div>'; // Open ribbon text container
-										if ( $labelLink ) { // Output label with link if set
-											echo '<h6 class="bbg__label"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h6>';
-										} else { // Else output link only
-											echo '<h6 class="bbg__label">' . $labelText . '</h6>';
-										}
-
-										if ( $headlineLink ) { // Output headline with link if set
-											echo '<h2 class="bbg__announcement__headline"><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h2>';
-										} else { // Else output headline only
-											echo '<h2 class="bbg__announcement__headline">' . $headlineText . '</h2>';
-										}
-
-										echo $summary;
-									echo '</div>'; // close ribbon text container
-								echo '</div><!-- .bbg__announcement__flexbox -->'; // close ribbon container
-							echo '</div><!-- .usa-grid -->';
-						echo '</section>';
-						/*** END DISPLAY OF ENTIRE RIBBON ROW ***/
-
-						elseif ( get_row_layout() == 'about_office' ):
-							/*** BEGIN DISPLAY OF OFFICE ROW ***/
-							$officeTag = get_sub_field( 'office_tag' );
-							$officeTagBoolean = get_sub_field('office_tags_boolean_operator');
-							$officeTitle = get_sub_field( 'office_title' );
-							$officeEmail = get_sub_field( 'office_email' );
-							$officeEmail = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $officeEmail . '" title="Contact us">' . $officeEmail . '</a></li>';
-							$officePhone = get_sub_field( 'office_phone' );
-							$officePhone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $officePhone . '">' . $officePhone . '</a></li>';
-							$officeFacebook = get_sub_field( 'office_facebook' );
-							$officeTwitter = get_sub_field( 'office_twitter' );
-							$officeYoutube = get_sub_field( 'office_youtube' );
-							$officeEvent = false;
-							$postIDsUsed = [];
-
-							// set upcoming events query parameters
-							$qParamsUpcoming = array(
-								'post_type' => array( 'post' )
-								,'cat' => get_cat_id( 'Event' )
-								,'post_status' => array( 'future' )
-								,'order' => 'ASC'
-								,'posts_per_page' => 1
-							);
-							$tagIDs = array();
-							foreach($officeTag as $term) {
-								$tagIDs []= $term->term_id;
-							}
-							if (count($officeTag)) {
-								if ($officeTagBoolean == "AND") {
-									$qParamsUpcoming['tag__and'] = $tagIDs;
-								} else {
-									$qParamsUpcoming['tag__in'] = $tagIDs;
-								}
-							}
-
-							// execute upcoming events query
-							$future_events_query = new WP_Query( $qParamsUpcoming );
-							$eventDetail = [];
-
-							// if upcoming events query has posts
-							if ( $future_events_query -> have_posts() ) {
-								$officeEvent = true; // set events variable to true
-
-								// Loop through all event posts
-								while ( $future_events_query -> have_posts() ) {
-									$future_events_query -> the_post();
-									// set variables from post array
-									$id = get_the_ID();
-									$eventDetail['url'] = get_the_permalink();
-									$eventDetail['title'] = get_the_title();
-									$eventDetail['thumb'] = get_the_post_thumbnail( $id, 'medium-thumb' );
-									$eventDetail['excerpt'] = my_excerpt( $id );
-									$eventDetail['id'] = $id;
-									$postIDsUsed[] = $id;
-								}
-							}
-							$maxPosts = 4; // set max number of events
-
-							// define office query parameters
-							$qParamsOffice = array(
-								'post_type' => array( 'post' ),
-								'posts_per_page' => $maxPosts,
-								'orderby' => 'date',
-								'order' => 'DESC',
-								'post__not_in' => $postIDsUsed
-							);
-							if (count($officeTag)) {
-								if ($officeTagBoolean == "AND") {
-									$qParamsOffice['tag__and'] = $tagIDs;
-								} else {
-									$qParamsOffice['tag__in'] = $tagIDs;
-								}
-							}
-
-							// set address variables
-							$street = get_field( 'agency_street', 'options', 'false' );
-							$city = get_field( 'agency_city', 'options', 'false' );
-							$state = get_field( 'agency_state', 'options', 'false' );
-							$zip = get_field( 'agency_zip', 'options', 'false' );
-							$address = ""; // create full address variable
-
-							// If all the address variables exists
-							if ( $street != "" && $city != "" && $state != "" && $zip != "" ) {
-								// concatenate all address variables
-								$address = $street . '<br/>' . $city . ', ' . $state . ' ' . $zip;
-
-								// Strip spaces for url-encoding.
-								$street = str_replace( " ", "+", $street );
-								$city = str_replace( " ", "+", $city );
-								$state = str_replace( " ", "+", $state );
-								$mapLink = 'https://www.google.com/maps/place/' . $street . ',+' . $city . ',+' . $state . '+' . $zip . '/';
-
-								// set full address variable
-								$address = '<p itemprop="address" aria-label="address"><a href="'. $mapLink . '">' . $address . '</a></p>';
-							}
-							$tagLink = get_tag_link( $officeTag[0] -> term_id );
-			// temporarily close PHP 
-			?>
-			<style>
-				.bbg-blog__officeEvent-label {margin-top: 15px !important;}
-			</style>
-
-			<article class="bbg__article bbg__kits__section">
-				<div class="usa-grid-full">
-					<?php if ( $officeEvent ): ; ?>
-						<section class="usa-section">
-							<div class="usa-alert usa-alert-info">
-							    <div class="usa-alert-body">
-							      <h3 class="usa-alert-heading"><?php echo '<a href="' . $eventDetail['url'] . '">' . $eventDetail['title'] . '</a>'; ?></h3>
-							      <p class="usa-alert-text"><?php echo $eventDetail['excerpt']; ?></p>
-							    </div>
-							</div>
-						</section>
-					<?php endif; ?>
-
-					<div class="entry-content bbg__article-content large">
-						<!-- Highlights section -->
-						<section id="recent-posts" class="usa-section bbg__home__recent-posts">
-							<h2>Recent Highlights</h2>
-
-							<div class="bbg__kits__recent-posts">
-								<div class="usa-width-one-half bbg__secondary-stories">
-									<?php
-										/* BEWARE: sticky posts add a record */
-										/**** START FETCH related highlights ****/
-
-										// Run press releases query
-										query_posts( $qParamsOffice );
-
-										if ( have_posts() ) {
-											$counter = 0;
-											$includeImage = TRUE;
-
-											while ( have_posts() ) : the_post();
-												$counter++;
-												$includeMeta = false;
-												$gridClass = 'bbg-grid--full-width';
-												$includeExcerpt = false;
-
-												if ( $counter > 1 ) {
-													$includeImage = false;
-													$includeMeta = false;
-													if ( $counter == 2 ) {
-														echo '</div><div class="usa-width-one-half tertiary-stories">';
-													}
-												}
-												if ( $counter == 1 ) {
-													$includePortfolioDescription = false;
-													get_template_part( 'template-parts/content-portfolio', get_post_format() );
-												} else {
-													get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
-												}
-											endwhile;
-
-											echo '<br/><a href="' . $tagLink . '" class="bbg__kits__intro__more--link">View all highlights »</a>';
-										}
-										wp_reset_query();
-									?>
-								</div>
-							</div>
-						</section><!-- .BBG News -->
-					</div>
-
-					<!-- Contact card (tailored to audience) -->
-					<div class="bbg__article-sidebar large">
-						<aside>
-							<div class="bbg__contact-card">
-								<div class="bbg__contact-card__text">
-									<?php
-										echo '<h3>' . $officeTitle . '</h3>';
-										echo $address;
-										echo '<ul class="usa-unstyled-list">';
-											echo $officePhone;
-											echo $officeEmail;
-										echo '</ul>';
-
-										echo '<!-- Social media profiles -->';
-										echo '<div class="bbg__kits__social">';
-											$officeFacebook = get_sub_field( 'office_facebook' );
-											$officeTwitter = get_sub_field( 'office_twitter' );
-											$officeYoutube = get_sub_field( 'office_youtube' );
-
-											if ( $officeFacebook ) {
-												echo '<a class="bbg__kits__social-link usa-link-facebook" href="' . $officeFacebook . '" role="img" aria-label="facebook"></a>';
-											}
-											if ( $officeTwitter ) {
-												echo '<a class="bbg__kits__social-link usa-link-twitter" href="' . $officeTwitter . '" role="img" aria-label="twitter"></a>';
-											}
-											if ( $officeYoutube ) {
-												echo '<a class="bbg__kits__social-link usa-link-youtube" href="' . $officeYoutube . '" role="img" aria-label="youtube"></a>';
-											}
-										echo '</div>';
-
-									?>
-								</div>
-							</div>
-						</aside>
-					</div>
-				</div>
-			</article>
-		<?php // reopen PHP
-			echo '</section>'; // close row
-			/*** END DISPLAY OF OFFICE ROW ***/
-				endif;
-					endwhile;
-					echo '<!-- END ROWS -->';
-				endif;
-			?>
-			</div> <!-- End id="page-children" -->
-
-			<!-- NETWORKS -->
-			<?php
-				$showNetworks = get_field('about_networks_row');
-				if ($showNetworks) {
-					echo get_entity_data();
+				if (get_row_layout() != 'about_ribbon_page') { // Check if row is a ribbon
+					echo '<!-- ROW ' . $counter . '-->'; // Add row counter
+					echo '<section class="usa-grid-full bbg__about__children--row">'; // Open row
+				} else {
+					echo '<!-- ROW ' . $counter . '-->'; // Add row counter
+					echo '<section class="usa-grid-full bbg__about__children--row bbg__ribbon--thin">'; // Open row and add ribbon class
 				}
-				wp_reset_postdata();
-			?>
 
-		</main>
-	</div><!-- #primary .content-area -->
-</div><!-- #main .site-main -->
+				if (get_row_layout() == 'marquee'):
+					$marquee_result = get_marquee_data();
+					// $umbrella_result = get_umbrella_main_data();
+
+					if ($umbrella_result['section_header'] == 'History') {
+						// echo 'dont cache';
+						// $umbrella_content = get_umbrella_content_data();
+						// echo $umbrella_content_package['column_title'];
+					}
+
+					$marquee_markup  = '<div class="container">';
+					$marquee_markup .= 		'<div class="full-grid">';
+					$marquee_markup .= 			'<p class="red-special">' . $marquee_result['content'] . '</p>';
+					$marquee_markup .= 		'</div>';
+					$marquee_markup .= '</div>';
+					echo $marquee_markup;
+
+				elseif ( get_row_layout() == 'umbrella' ): 
+					/*** BEGIN DISPLAY OF ENTIRE UMBRELLA ROW ***/
+					$umbrella_result = get_umbrella_main_data();
+
+					if ($umbrella_result['header'] != "") {
+						if ($umbrella_result['header_link']) { // if the label has a URL add link and right arrow
+							$sectionHeading = '<a href="' . $umbrella_result['header_link'] . '">' . $umbrella_result['header_link'] . '</a> <span class="bbg__links--right-angle-quote" aria-hidden="true">&raquo;</span>';
+						} 
+						echo '<h2>' . $umbrella_result['header'] . '</h2>';	
+					} 
+					//output intro section text if it exists
+					if ($umbrella_result['intro_text'] != "") {
+						if ($umbrella_result['intro_text']) { 
+							echo '<div class="bbg__about__child__intro">' . $umbrella_result['intro_text'] . '</div>';
+						}
+					}
+
+					$numRows = count(get_sub_field('umbrella_content'));
+					$containerClass = 'bbg-grid--1-2-2';
+					if (isOdd($numRows)) {
+						$containerClass = 'bbg-grid--1-3-3'; // add 3-col grid class
+					}
+
+					echo '<div class="usa-grid-full bbg__about__grandchildren">'; // open grandchildren container
+					while (have_rows('umbrella_content')) : the_row();
+						if (get_row_layout() == 'umbrella_content_external') {
+							$thumbnail = get_sub_field('umbrella_content_external_thumbnail');
+							$thumbnailID = $thumbnail['ID'];
+							$thumbSrc = wp_get_attachment_image_src( $thumbnailID , 'medium-thumb' );
+							if ($thumbSrc) {
+								$thumbSrc = $thumbSrc[0];
+							} 
+							showUmbrellaArea(array(
+								'columnTitle' => get_sub_field('umbrella_content_external_column_title'),
+								'itemTitle' => get_sub_field('umbrella_content_external_item_title'),
+								'description' => get_sub_field('umbrella_content_external_description'),
+								'link' => get_sub_field('umbrella_content_external_link'),
+								'thumbSrc' => $thumbSrc,
+								'gridClass' => $containerClass,
+								'forceContentLabels' => $forceContentLabels,
+								'columnType' => 'external',
+								'layout' => get_sub_field('umbrella_content_external_layout'),
+								'subTitle' => ''
+							));
+						} elseif (get_row_layout() == 'umbrella_content_internal') {
+
+							$pageObj = get_sub_field('umbrella_content_internal_link');
+							$id = $pageObj[0]->ID;
+							$link = get_the_permalink($id);
+							$title = "";
+							$includeTitle = get_sub_field('umbrella_content_internal_include_item_title');
+							$titleOverride = get_sub_field('umbrella_content_internal_title');
+							$secondaryHeadline = get_post_meta( $id, 'headline', true );
+							$lawName = get_post_meta( $id, 'law_name', true );
+
+							if ( $includeTitle ) {
+								$titleOverride = get_sub_field('umbrella_content_internal_item_title');
+								if ($titleOverride != "" ) {
+									$title = $titleOverride;
+								} else {
+									if ($secondaryHeadline) {
+										$title = $secondaryHeadline;	
+									} else {
+										$title = $pageObj[0]->post_title;	
+									}
+								}
+							}
+							
+							$showFeaturedImage = get_sub_field('umbrella_content_internal_include_featured_image');
+							$thumbSrc = "";
+							if ($showFeaturedImage) {
+								$thumbSrc = wp_get_attachment_image_src( get_post_thumbnail_id($id) , 'medium-thumb' );
+								if ($thumbSrc) {
+									$thumbSrc = $thumbSrc[0];
+								}
+							}
+							
+							$showExcerpt = get_sub_field('umbrella_content_internal_include_excerpt');
+							$description = "";
+							if ($showExcerpt) {
+								$description = my_excerpt( $id );
+								$description = apply_filters( 'the_content', $description );
+								$description = str_replace( ']]>', ']]&gt;', $description );
+
+							}
+
+							showUmbrellaArea(array(
+								'columnTitle' => get_sub_field('umbrella_content_internal_column_title'),
+								'itemTitle' => $title,
+								'description' => $description,
+								'link' => $link, 
+								'thumbSrc' => $thumbSrc,
+								'gridClass' => $containerClass,
+								'forceContentLabels' => $forceContentLabels,
+								'columnType' => 'internal',
+								'layout' => get_sub_field('umbrella_content_internal_layout'),
+								'subTitle' => $lawName
+							));
+
+						} elseif (get_row_layout() == 'umbrella_content_file') {
+
+							$fileObj = get_sub_field('umbrella_content_file_file');
+							$description = get_sub_field('umbrella_content_file_description');
+							$layout = get_sub_field('umbrella_content_file_layout');
+
+							$thumbnail = get_sub_field('umbrella_content_file_thumbnail');
+							$thumbnailID = $thumbnail['ID'];
+							$thumbSrc = wp_get_attachment_image_src( $thumbnailID , 'medium-thumb' );
+							if ($thumbSrc) {
+								$thumbSrc = $thumbSrc[0];
+							}
+							
+							$description = get_sub_field('umbrella_content_file_description');
+							$description = apply_filters( 'the_content', $description );
+							$description = str_replace( ']]>', ']]&gt;', $description );
+							
+							$fileTitle = get_sub_field('umbrella_content_file_item_title');
+							//parse information about the file so we can append file sizeto append to our file title
+							$fileID = $fileObj['ID'];
+							$fileURL = $fileObj['url'];
+							$file = get_attached_file( $fileID );
+							$fileExt = strtoupper( pathinfo( $file, PATHINFO_EXTENSION ) ); // set extension to uppercase
+							$fileSize = formatBytes( filesize( $file ) ); // file size
+
+							showUmbrellaArea(array(
+								'columnTitle' => get_sub_field('umbrella_content_file_column_title'),
+								'itemTitle' => $fileTitle,
+								'description' => $description,
+								'link' => $fileURL, 
+								'thumbSrc' => $thumbSrc,
+								'gridClass' => $containerClass,
+								'forceContentLabels' => $forceContentLabels,
+								'columnType' => 'file',
+								'layout' => $layout,
+								'fileExt' => $fileExt,
+								'fileSize' => $fileSize,
+								'subTitle' => ''
+							));
+						}
+					endwhile;
+					echo '</div>';
+					echo '</section>'; // close row
+				/*** END DISPLAY OF ENTIRE UMBRELLA ROW ***/
+
+				elseif( get_row_layout() == 'about_ribbon_page' ):
+					/*** BEGIN DISPLAY OF ENTIRE RIBBON ROW ***/
+					// Set variables
+					$labelText = get_sub_field( 'about_ribbon_label' );
+					$labelLink = get_sub_field( 'about_ribbon_label_link' );
+					$headlineText = get_sub_field( 'about_ribbon_headline' );
+					$headlineLink = get_sub_field( 'about_ribbon_headline_link' );
+					$summary = get_sub_field( 'about_ribbon_summary' );
+					$imageURL = get_sub_field( 'about_ribbon_image' );
+
+					// allow shortcodes in intro text
+					$summary = apply_filters( 'the_content', $summary );
+					$summary = str_replace( ']]>', ']]&gt;', $summary );
+
+					echo '<div class="usa-grid">';
+						echo '<div class="bbg__announcement__flexbox" name="' . $labelText . '">'; // open ribbon container and set div name to $labelText
+
+							if ( $imageURL ) { // Output image thumbnail if set
+								echo '<div class="bbg__announcement__photo" style="background-image: url(' . $imageURL . ');"></div>';
+							}
+
+							echo '<div>'; // Open ribbon text container
+								if ( $labelLink ) { // Output label with link if set
+									echo '<h6 class="bbg__label"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h6>';
+								} else { // Else output link only
+									echo '<h6 class="bbg__label">' . $labelText . '</h6>';
+								}
+
+								if ( $headlineLink ) { // Output headline with link if set
+									echo '<h2 class="bbg__announcement__headline"><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h2>';
+								} else { // Else output headline only
+									echo '<h2 class="bbg__announcement__headline">' . $headlineText . '</h2>';
+								}
+
+								echo $summary;
+							echo '</div>'; // close ribbon text container
+						echo '</div><!-- .bbg__announcement__flexbox -->'; // close ribbon container
+					echo '</div><!-- .usa-grid -->';
+				echo '</section>';
+				/*** END DISPLAY OF ENTIRE RIBBON ROW ***/
+
+				elseif ( get_row_layout() == 'about_office' ):
+					/*** BEGIN DISPLAY OF OFFICE ROW ***/
+					$officeTag = get_sub_field( 'office_tag' );
+					$officeTagBoolean = get_sub_field('office_tags_boolean_operator');
+					$officeTitle = get_sub_field( 'office_title' );
+					$officeEmail = get_sub_field( 'office_email' );
+					$officeEmail = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $officeEmail . '" title="Contact us">' . $officeEmail . '</a></li>';
+					$officePhone = get_sub_field( 'office_phone' );
+					$officePhone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $officePhone . '">' . $officePhone . '</a></li>';
+					$officeFacebook = get_sub_field( 'office_facebook' );
+					$officeTwitter = get_sub_field( 'office_twitter' );
+					$officeYoutube = get_sub_field( 'office_youtube' );
+					$officeEvent = false;
+					$postIDsUsed = [];
+
+					// set upcoming events query parameters
+					$qParamsUpcoming = array(
+						'post_type' => array( 'post' )
+						,'cat' => get_cat_id( 'Event' )
+						,'post_status' => array( 'future' )
+						,'order' => 'ASC'
+						,'posts_per_page' => 1
+					);
+					$tagIDs = array();
+					foreach($officeTag as $term) {
+						$tagIDs []= $term->term_id;
+					}
+					if (count($officeTag)) {
+						if ($officeTagBoolean == "AND") {
+							$qParamsUpcoming['tag__and'] = $tagIDs;
+						} else {
+							$qParamsUpcoming['tag__in'] = $tagIDs;
+						}
+					}
+
+					// execute upcoming events query
+					$future_events_query = new WP_Query( $qParamsUpcoming );
+					$eventDetail = [];
+
+					// if upcoming events query has posts
+					if ( $future_events_query -> have_posts() ) {
+						$officeEvent = true; // set events variable to true
+
+						// Loop through all event posts
+						while ( $future_events_query -> have_posts() ) {
+							$future_events_query -> the_post();
+							// set variables from post array
+							$id = get_the_ID();
+							$eventDetail['url'] = get_the_permalink();
+							$eventDetail['title'] = get_the_title();
+							$eventDetail['thumb'] = get_the_post_thumbnail( $id, 'medium-thumb' );
+							$eventDetail['excerpt'] = my_excerpt( $id );
+							$eventDetail['id'] = $id;
+							$postIDsUsed[] = $id;
+						}
+					}
+					$maxPosts = 4; // set max number of events
+
+					// define office query parameters
+					$qParamsOffice = array(
+						'post_type' => array( 'post' ),
+						'posts_per_page' => $maxPosts,
+						'orderby' => 'date',
+						'order' => 'DESC',
+						'post__not_in' => $postIDsUsed
+					);
+					if (count($officeTag)) {
+						if ($officeTagBoolean == "AND") {
+							$qParamsOffice['tag__and'] = $tagIDs;
+						} else {
+							$qParamsOffice['tag__in'] = $tagIDs;
+						}
+					}
+
+					// set address variables
+					$street = get_field( 'agency_street', 'options', 'false' );
+					$city = get_field( 'agency_city', 'options', 'false' );
+					$state = get_field( 'agency_state', 'options', 'false' );
+					$zip = get_field( 'agency_zip', 'options', 'false' );
+					$address = ""; // create full address variable
+
+					// If all the address variables exists
+					if ( $street != "" && $city != "" && $state != "" && $zip != "" ) {
+						// concatenate all address variables
+						$address = $street . '<br/>' . $city . ', ' . $state . ' ' . $zip;
+
+						// Strip spaces for url-encoding.
+						$street = str_replace( " ", "+", $street );
+						$city = str_replace( " ", "+", $city );
+						$state = str_replace( " ", "+", $state );
+						$mapLink = 'https://www.google.com/maps/place/' . $street . ',+' . $city . ',+' . $state . '+' . $zip . '/';
+
+						// set full address variable
+						$address = '<p itemprop="address" aria-label="address"><a href="'. $mapLink . '">' . $address . '</a></p>';
+					}
+					$tagLink = get_tag_link( $officeTag[0] -> term_id );
+	// temporarily close PHP 
+	?>
+	<style>
+		.bbg-blog__officeEvent-label {margin-top: 15px !important;}
+	</style>
+
+	<article class="bbg__article bbg__kits__section">
+		<div class="usa-grid-full">
+			<?php if ( $officeEvent ): ; ?>
+				<section class="usa-section">
+					<div class="usa-alert usa-alert-info">
+					    <div class="usa-alert-body">
+					      <h3 class="usa-alert-heading"><?php echo '<a href="' . $eventDetail['url'] . '">' . $eventDetail['title'] . '</a>'; ?></h3>
+					      <p class="usa-alert-text"><?php echo $eventDetail['excerpt']; ?></p>
+					    </div>
+					</div>
+				</section>
+			<?php endif; ?>
+
+			<div class="entry-content bbg__article-content large">
+				<!-- Highlights section -->
+				<section id="recent-posts" class="usa-section bbg__home__recent-posts">
+					<h2>Recent Highlights</h2>
+
+					<div class="bbg__kits__recent-posts">
+						<div class="usa-width-one-half bbg__secondary-stories">
+							<?php
+								/* BEWARE: sticky posts add a record */
+								/**** START FETCH related highlights ****/
+
+								// Run press releases query
+								query_posts( $qParamsOffice );
+
+								if ( have_posts() ) {
+									$counter = 0;
+									$includeImage = TRUE;
+
+									while ( have_posts() ) : the_post();
+										$counter++;
+										$includeMeta = false;
+										$gridClass = 'bbg-grid--full-width';
+										$includeExcerpt = false;
+
+										if ( $counter > 1 ) {
+											$includeImage = false;
+											$includeMeta = false;
+											if ( $counter == 2 ) {
+												echo '</div><div class="usa-width-one-half tertiary-stories">';
+											}
+										}
+										if ( $counter == 1 ) {
+											$includePortfolioDescription = false;
+											get_template_part( 'template-parts/content-portfolio', get_post_format() );
+										} else {
+											get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
+										}
+									endwhile;
+
+									echo '<br/><a href="' . $tagLink . '" class="bbg__kits__intro__more--link">View all highlights »</a>';
+								}
+								wp_reset_query();
+							?>
+						</div>
+					</div>
+				</section><!-- .BBG News -->
+			</div>
+
+			<!-- Contact card (tailored to audience) -->
+			<div class="bbg__article-sidebar large">
+				<aside>
+					<div class="bbg__contact-card">
+						<div class="bbg__contact-card__text">
+							<?php
+								echo '<h3>' . $officeTitle . '</h3>';
+								echo $address;
+								echo '<ul class="usa-unstyled-list">';
+									echo $officePhone;
+									echo $officeEmail;
+								echo '</ul>';
+
+								echo '<!-- Social media profiles -->';
+								echo '<div class="bbg__kits__social">';
+									$officeFacebook = get_sub_field( 'office_facebook' );
+									$officeTwitter = get_sub_field( 'office_twitter' );
+									$officeYoutube = get_sub_field( 'office_youtube' );
+
+									if ( $officeFacebook ) {
+										echo '<a class="bbg__kits__social-link usa-link-facebook" href="' . $officeFacebook . '" role="img" aria-label="facebook"></a>';
+									}
+									if ( $officeTwitter ) {
+										echo '<a class="bbg__kits__social-link usa-link-twitter" href="' . $officeTwitter . '" role="img" aria-label="twitter"></a>';
+									}
+									if ( $officeYoutube ) {
+										echo '<a class="bbg__kits__social-link usa-link-youtube" href="' . $officeYoutube . '" role="img" aria-label="youtube"></a>';
+									}
+								echo '</div>';
+
+							?>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</article>
+<?php // reopen PHP
+	echo '</section>'; // close row
+	/*** END DISPLAY OF OFFICE ROW ***/
+		endif;
+			endwhile;
+			echo '<!-- END ROWS -->';
+		endif;
+	?>
+	</div> <!-- End id="page-children" -->
+
+	<!-- NETWORKS -->
+	<?php
+		$showNetworks = get_field('about_networks_row');
+		if ($showNetworks) {
+			echo get_entity_data();
+		}
+		wp_reset_postdata();
+	?>
+</main>
 
 <?php get_footer(); ?>

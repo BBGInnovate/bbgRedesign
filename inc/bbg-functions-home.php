@@ -111,59 +111,40 @@ function get_homepage_banner_data() {
 			}
 		}
 
-		// deilibarately didn't do an 'else' here in case they checked 'specific_image' without actually selecting one
+		// NO 'else' IN CASE USER CHECKED 'specific_image' WITHOUT SELECTING ONE
 		if ($useRandomImage) {
-			$randomImg= getRandomEntityImage();
+			$randomImg = getRandomEntityImage();
 			$attachment_id = $randomImg['imageID'];
 			$bannerCutline = $randomImg['imageCutline'];
 			$bannerAdjustStr = $randomImg['bannerAdjustStr'];
 		}
 
-		$tempSources= bbgredesign_get_image_size_links( $attachment_id );
-		//sources aren't automatically in numeric order.  ksort does the trick.
+		$tempSources = bbgredesign_get_image_size_links( $attachment_id );
+
+		// SORT SOURCES IN NUMERIC ORDER
 		ksort( $tempSources );
 		$prevWidth=0;
 
-		// Let's prevent any images with width > 1200px from being an output as part of responsive banner
+		// NO IMAGE LARGER THAN 1200px WIDE??
 		foreach( $tempSources as $key => $tempSource ) {
 			if ( $key > 1900 ) {
 				unset( $tempSources[$key] );
 			}
 		}
 
-		echo "<style>";
-		if ( $bannerAdjustStr != "" ) {
-			echo "\t.bbg-banner { background-position: $bannerAdjustStr; }";
-		}
-		$counter = 0;
 		foreach( $tempSources as $key => $tempSourceObj ) {
-			$counter++;
-			$tempSource=$tempSourceObj['src'];
-			if ( $counter == 1 ) {
-				echo "\t.bbg-banner { background-image: url($tempSource) !important; }\n";
-			} elseif ( $counter < count($tempSources) ) {
-				echo "\t@media (min-width: " . ($prevWidth+1) . "px) and (max-width: " . $key . "px) {\n";
-				echo "\t\t.bbg-banner { background-image: url($tempSource) !important; }\n";
-				echo "\t}\n";
-			} else {
-				echo "\t@media (min-width: " . ($prevWidth+1) . "px) {\n";
-				echo "\t\t.bbg-banner { background-image: url($tempSource) !important; }\n";
-				echo "\t}\n";
-			}
-			$prevWidth = $key;
+			$tempSource = $tempSourceObj['src'];
 		}
-		echo "</style>";
 
-		$banner_markup  = '<div class="usa-section bbg-banner__section" style="position: relative; z-index:9990;">';
-		$banner_markup .=		'<div class="bbg-banner">';
-		$banner_markup .=			'<div class="bbg-banner__gradient"></div>';
-		$banner_markup .=			'<div class="usa-grid bbg-banner__container--home">';
-		$banner_markup .=				'<div class="bbg-social__container">';
-		$banner_markup .=					'<div class="bbg-social">';
-		$banner_markup .=		'</div></div></div></div>';
-		$banner_markup .=		'<div class="bbg-banner__cutline usa-grid">';
-		$banner_markup .=			$bannerCutline;
-		$banner_markup .=	'</div></div>';
+		$banner_markup  = '<div class="page-post-featured-graphic">';
+		$banner_markup .= 	'<div class="bbg-banner" ';
+		$banner_markup .= 		'style="background-image: url(' . $tempSource . ') !important; background-position: ' . $bannerAdjustStr . '">';
+		$banner_markup .= 	'</div>';
+		$banner_markup .=	'<div class="bbg-banner__cutline usa-grid">';
+		$banner_markup .=		$bannerCutline;
+		$banner_markup .=	'</div>';
+		$banner_markup .= '</div>';
+
 		echo $banner_markup;
 	}
 }

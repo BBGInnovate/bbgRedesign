@@ -43,6 +43,7 @@ get_header();
 <div id="main" class="site-main">
 	<div id="primary" class="content-area">
 		<main id="bbg-home" class="site-content bbg-home-main" role="main">
+			
 			<?php get_homepage_banner_data(); ?>
 
 			<!-- MISSION -->

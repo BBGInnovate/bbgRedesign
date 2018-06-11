@@ -6000,21 +6000,19 @@ section.usa-section.bbg-banner__section {
   margin-left: 20px; }
 
 @media screen and (min-width: 600px) {
-  .bbg-banner {
-    max-height: 50vh; }
-    .bbg-banner .bbg-banner__container.usa-grid {
-      padding-right: 0; }
-    .bbg-banner .bbg-banner-box {
-      padding-right: 3rem; }
-      .bbg-banner .bbg-banner-box .bbg-banner-site-title {
-        font-size: 2.4rem; }
-    .bbg-banner .bbg-banner__gradient {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 75%;
-      background-image: linear-gradient(to bottom, white, rgba(255, 255, 255, 0)); }
+  .bbg-banner .bbg-banner__container.usa-grid {
+    padding-right: 0; }
+  .bbg-banner .bbg-banner-box {
+    padding-right: 3rem; }
+    .bbg-banner .bbg-banner-box .bbg-banner-site-title {
+      font-size: 2.4rem; }
+  .bbg-banner .bbg-banner__gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75%;
+    background-image: linear-gradient(to bottom, white, rgba(255, 255, 255, 0)); }
   .bbg-banner__cutline {
     text-align: right !important; }
   .bbg__event-announcement .bbg__event-announcement__excerpt,
@@ -6026,12 +6024,10 @@ section.usa-section.bbg-banner__section {
     font-size: 2.5rem; } }
 
 @media screen and (min-width: 900px) {
-  .bbg-banner {
-    max-height: 60vh; }
-    .bbg-banner .bbg-banner__container {
-      border-left: 1px solid rgba(240, 240, 240, 0.4);
-      border-right: 1px solid rgba(240, 240, 240, 0.4);
-      height: 100%; }
+  .bbg-banner .bbg-banner__container {
+    border-left: 1px solid rgba(240, 240, 240, 0.4);
+    border-right: 1px solid rgba(240, 240, 240, 0.4);
+    height: 100%; }
   /*
 	.bbg__voice {
 		$voiceTypes: ceo, guest, featured;

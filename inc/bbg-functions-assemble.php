@@ -2,7 +2,7 @@
 
 function get_feature_media_data() {
 	$addFeaturedGallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
-	$bannerPosition = get_field('adjust_the_banner_image', '', true);
+	$banner_position = get_field('adjust_the_banner_image', '', true);
 	$videoUrl = get_field( 'featured_video_url', '', true );
 
 	if ($videoUrl != "") {
@@ -30,7 +30,7 @@ function get_feature_media_data() {
 
 		$post_featured_image  = '<div class="page-post-featured-graphic">';
 		$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
-		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $bannerPosition . '">';
+		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
 		$post_featured_image .= 	'</div>';
 		$post_featured_image .= '</div>';
 
