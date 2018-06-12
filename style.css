@@ -2853,7 +2853,8 @@ h3 a:link,
 h3 a:visited,
 .bbg__sidebar__table caption a:visited {
   font-weight: 300;
-  color: #284f91; }
+  color: #284f91;
+  margin-bottom: 0.25em; }
 
 h4, .bbg__board__committee-list li a,
 h4 a:link,
@@ -4815,7 +4816,7 @@ ol li:before {
   float: left;
   margin-left: 20px; }
 
-.page-post-featured-graphic {
+.page-post-featured-graphic:not(div.home-featured-primary-post) {
   margin-bottom: 3em; }
 
 .page-post-main-content {
@@ -4829,14 +4830,34 @@ ol li:before {
   width: calc(100% + 40px); }
 
 .home-feature-primary-post {
-  width: calc(66.66667% - 33.33333px);
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+  .home-feature-primary-post .page-post-featured-graphic {
+    margin-bottom: 1.5rem; }
+
+.home-recent-posts {
+  width: calc(100% - 40px);
   float: left;
   margin-left: 20px; }
 
-.home-feature-secondary-post {
-  width: calc(33.33333% - 26.66667px);
-  float: left;
-  margin-left: 20px; }
+@media screen and (min-width: 900px) {
+  .home-feature-primary-post {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; }
+    .home-feature-primary-post .page-post-featured-graphic {
+      margin-bottom: 1.5rem; }
+  .home-recent-posts {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px; } }
+
+.post-date {
+  font-family: "Carrara-Regular", serif;
+  font-size: 0.9em;
+  color: #666666;
+  margin-bottom: 0.25em; }
 
 .page-sidebar {
   width: calc(25% - 25px);

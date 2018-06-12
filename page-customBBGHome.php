@@ -44,21 +44,33 @@ get_header();
 	<div id="primary" class="content-area">
 		<main id="bbg-home" class="site-content bbg-home-main" role="main">
 			
-			<?php get_homepage_banner_data(); ?>
+			<?php
+				$banner_result = get_homepage_banner_data();
 
-			<!-- MISSION -->
+				$banner_markup  = '<div class="page-post-featured-graphic">';
+				$banner_markup .= 	'<div class="bbg-banner" ';
+				$banner_markup .= 		'style="background-image: url(' . $banner_result['image_source'] . ') !important; background-position: ' . $banner_result['position'] . '">';
+				$banner_markup .= 	'</div>';
+				$banner_markup .=	'<div class="bbg-banner__cutline usa-grid">';
+				$banner_markup .=		$banner_result['caption'];
+				$banner_markup .=	'</div>';
+				$banner_markup .= '</div>';
+				echo $banner_markup;
+			?>
+
 			<section id="mission" class="outer-container">
 				<h1 class="header-outliner">About the BBG</h1>
 				<div class="container-grid">
 				<?php
 					$settings_result = get_site_settings_data();
-					$site_introduction  = '<p class="lead-in">';
-					$site_introduction .= 	$settings_result['intro_content'];
-					$site_introduction .= 	'<a href="';
-					$site_introduction .= 		$settings_result['intro_link'];
-					$site_introduction .= 		'" class="bbg__read-more">LEARN MORE »</a>';
-					$site_introduction .= '</p>';
-					echo $site_introduction;
+
+					$mission  = '<p class="lead-in">';
+					$mission .= 	$settings_result['intro_content'];
+					$mission .= 	'<a href="';
+					$mission .= 		$settings_result['intro_link'];
+					$mission .= 		'" class="bbg__read-more">LEARN MORE »</a>';
+					$mission .= '</p>';
+					echo $mission;
 				?>
 				</div>
 			</section>
@@ -71,6 +83,7 @@ get_header();
 				</div>
 				<?php
 					$featured_post = get_featured_post_data();
+
 					$main_featured_post  = '<div class="home-feature-primary-post">';
 					$main_featured_post .= 		'<a href="' . get_the_permalink() . '">';
 					$main_featured_post .= 			$featured_post['media'];
@@ -78,25 +91,38 @@ get_header();
 					$main_featured_post .= 		'<h3>';
 					$main_featured_post .= 			'<a href="' . get_the_permalink() . '">' . $featured_post['title'] . '</a>';
 					$main_featured_post .= 		'</h3>';
-					$main_featured_post .= 		'<p>' . get_the_date() . '</p>';
+					$main_featured_post .= 		'<p class="post-date">' . get_the_date() . '</p>';
 					$main_featured_post .= 		'<p>' . get_the_excerpt() . '</p>';
 					$main_featured_post .= '</div>';
 					echo $main_featured_post;
 				?>
-				<div class="home-feature-secondary-post">
 				<?php
 					$post_qty = 2;
-					display_additional_recent_posts($post_qty);
+					$recent_result = get_recent_post_data($post_qty);
+					if (have_posts()) {
+						while (have_posts()) {
+							the_post();
+							$recent_post  = '<div class="home-recent-posts">';
+							$recent_post .= 	'<h4>';
+							$recent_post .= 		'<a href="' . get_the_permalink() . '">';
+							$recent_post .= 			get_the_title();
+							$recent_post .= 		'</a>';
+							$recent_post .= 	'</h4>';
+							$recent_post .= 	'<p class="post-date">' . get_the_date() . '</p>';
+							$recent_post .= 	'<p>' . wp_trim_words(get_the_content(), 50) . '</p>';
+							$recent_post .= '</div>';
+							echo $recent_post;
+						}
+					}
 				?>
-					<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
+					<!-- <nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
 						<h2 class="screen-reader-text">Recent Posts Navigation</h2>
 						<div class="nav-links">
 							<div class="nav-previous">
-								<a href="<?php echo get_permalink( get_page_by_path('news') ); ?>" >Previous posts</a>
+								<a href="<?php //echo get_permalink( get_page_by_path('news') ); ?>" >Previous posts</a>
 							</div>
 						</div>
-					</nav>
-				</div>
+					</nav> -->
 			</section>
 			
 			<!-- SOAPBOX, CORNER HERO  -->

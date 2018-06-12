@@ -29,28 +29,6 @@ function select_impact_story_id_at_random($used) {
 	return $ids;
 }
 
-function select_recent_post_query_params($numPosts, $used, $catExclude) {
-	$qParams = array(
-		'post_type' => array('post'),
-		'posts_per_page' => $numPosts,
-		'orderby' => 'post_date',
-		'order' => 'desc',
-		'category__not_in' => $catExclude,
-		'post__not_in' => $used,
-		/*** NOTE - we could have also done this by requiring quotation category, but if we're using post formats, this is another way */
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'post_format',
-				'field' => 'slug',
-				'terms' => 'post-format-quote',
-				'operator' => 'NOT IN'
-			)
-		)
-	);
-	$recent_post_package = array('params' => $qParams, 'used_posts' => $used);
-	return $qParams;
-}
-
 function create_threats_post_query_params($numPosts, $used) {
 	$qParams = array(
 		'post_type' => array('post'),
@@ -136,16 +114,12 @@ function get_homepage_banner_data() {
 			$tempSource = $tempSourceObj['src'];
 		}
 
-		$banner_markup  = '<div class="page-post-featured-graphic">';
-		$banner_markup .= 	'<div class="bbg-banner" ';
-		$banner_markup .= 		'style="background-image: url(' . $tempSource . ') !important; background-position: ' . $bannerAdjustStr . '">';
-		$banner_markup .= 	'</div>';
-		$banner_markup .=	'<div class="bbg-banner__cutline usa-grid">';
-		$banner_markup .=		$bannerCutline;
-		$banner_markup .=	'</div>';
-		$banner_markup .= '</div>';
-
-		echo $banner_markup;
+		$banner_data = array(
+			'image_source' => $tempSource,
+			'position' => $bannerAdjustStr,
+			'caption' => $bannerCutline
+		);
+		return $banner_data;
 	}
 }
 
@@ -215,36 +189,24 @@ function get_featured_post_data() {
 	wp_reset_query();
 }
 
-function display_additional_recent_posts($maxPostsToShow) {
-	global $used;
-	global $catExclude;
-	// $maxPostsToShow = 2;
-	$qParams = select_recent_post_query_params($maxPostsToShow, $used, $catExclude);
-	query_posts($qParams);
-
-	if (have_posts()) {
-		$counter = 0;
-		while (have_posts()) {
-			the_post();
-			$counter++;
-			$postIDsUsed[] = get_the_ID();
-			$gridClass = "bbg-grid--full-width";
-			if ($counter > 2) {
-				$includeImage = false;
-				$includeMeta = false;
-				$includeExcerpt = false;
-				if ($counter == 3) {
-					$read_more  = '</div>';
-					$read_more .= '<div class="usa-width-one-half">';
-					$read_more .= 		'<header class="page-header">';
-					$read_more .= 			'<h6 class="page-title bbg__label small">More news</h6>';
-					$read_more .= 		'</header>';
-				}
-			}
-			get_template_part('template-parts/content-excerpt-list', get_post_format());
-		}
-	}
-	wp_reset_query();
+function get_recent_post_data($maxPostsToShow) {
+	$qParams = array(
+		'post_type' => array('post'),
+		'posts_per_page' => $maxPostsToShow,
+		'orderby' => 'post_date',
+		'order' => 'desc',
+		'category__not_in' => $catExclude,
+		'post__not_in' => $used,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'post_format',
+				'field' => 'slug',
+				'terms' => 'post-format-quote',
+				'operator' => 'NOT IN'
+			)
+		)
+	);
+	return query_posts($qParams);
 }
 
 function get_soapbox_data() {
