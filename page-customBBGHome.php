@@ -47,11 +47,12 @@ get_header();
 			<?php get_homepage_banner_data(); ?>
 
 			<!-- MISSION -->
-			<section id="mission" class="usa-section usa-grid">
+			<section id="mission" class="outer-container">
 				<h1 class="header-outliner">About the BBG</h1>
+				<div class="container-grid">
 				<?php
 					$settings_result = get_site_settings_data();
-					$site_introduction  = '<p class="usa-font-lead">';
+					$site_introduction  = '<p class="lead-in">';
 					$site_introduction .= 	$settings_result['intro_content'];
 					$site_introduction .= 	'<a href="';
 					$site_introduction .= 		$settings_result['intro_link'];
@@ -59,24 +60,34 @@ get_header();
 					$site_introduction .= '</p>';
 					echo $site_introduction;
 				?>
+				</div>
 			</section>
 
 			<!-- BBG NEWS -->
-			<section id="recent-posts" class="usa-section usa-grid bbg__home__recent-posts">
+			<section id="recent-posts" class="outer-container">
 				<h1 class="header-outliner">BBG News</h1>
-				<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">BBG News</a></h2>
-				<div class="usa-width-two-thirds">
-				<?php
-					// FEATURED POST FROM HOMEPAGE SETTINGS OR MOST RECENT POST
-					$featured_post = display_featured_post();
-				?>
+				<div class="container-grid">
+					<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">BBG News</a></h2>
 				</div>
-
-				<div class="usa-width-one-third">
-					<?php
-						$post_qty = 2;
-						display_additional_recent_posts($post_qty );
-					?>
+				<?php
+					$featured_post = get_featured_post_data();
+					$main_featured_post  = '<div class="home-feature-primary-post">';
+					$main_featured_post .= 		'<a href="' . get_the_permalink() . '">';
+					$main_featured_post .= 			$featured_post['media'];
+					$main_featured_post .= 		'</a>';
+					$main_featured_post .= 		'<h3>';
+					$main_featured_post .= 			'<a href="' . get_the_permalink() . '">' . $featured_post['title'] . '</a>';
+					$main_featured_post .= 		'</h3>';
+					$main_featured_post .= 		'<p>' . get_the_date() . '</p>';
+					$main_featured_post .= 		'<p>' . get_the_excerpt() . '</p>';
+					$main_featured_post .= '</div>';
+					echo $main_featured_post;
+				?>
+				<div class="home-feature-secondary-post">
+				<?php
+					$post_qty = 2;
+					display_additional_recent_posts($post_qty);
+				?>
 					<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
 						<h2 class="screen-reader-text">Recent Posts Navigation</h2>
 						<div class="nav-links">

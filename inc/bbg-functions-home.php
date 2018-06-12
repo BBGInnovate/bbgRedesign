@@ -181,7 +181,7 @@ function get_impact_stories_data($numPosts) {
 	wp_reset_query();
 }
 
-function display_featured_post() {
+function get_featured_post_data() {
 	$featuredPost = get_field('homepage_featured_post', 'option');
 	if ($featuredPost) {
 		$featuredPost = $featuredPost[0];
@@ -204,9 +204,12 @@ function display_featured_post() {
 			the_post();
 			$counter++;
 			$postIDsUsed[] = get_the_ID();
-			// return get_post_format();
-			$featured_post_data = get_template_part('template-parts/content-excerpt-featured', get_post_format());
-			build_featured_post($featured_post_data);
+
+			$feature_post_data = array(
+				'title' => get_the_title(),
+				'media' => get_feature_media_data()
+			);
+			return $feature_post_data;
 		}
 	}
 	wp_reset_query();

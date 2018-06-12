@@ -1,13 +1,19 @@
 .outer-container {
 	@include grid-container;
 	max-width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto 3em auto;
 }
-.container {@include grid-container;}
+.container-nest {@include grid-container;}
+.container-grid {@include grid-column(12);}
 .page-post-featured-graphic {margin-bottom: 3em;}
 // COLUMNS MAIN, SIDEBAR
 .page-post-main-content {@include grid-column(9);}
+
+
+// HOMEPAGE
+.feature-posts {@include grid-collapse;}
+.home-feature-primary-post {@include grid-column(8)}
+.home-feature-secondary-post {@include grid-column(4)}
 
 
 .page-sidebar {

@@ -15,24 +15,35 @@ h4 a {
     font-size: inherit;
     color: inherit;
 }
-h2 {
+h2,
+h2 a:link,
+h2 a:visited {
     text-transform: uppercase;
     color: $color-red;
 }
-h3 {
+
+h3,
+h3 a:link,
+h3 a:visited {
     font-weight: $font-light;
     color: $color-blue-darker;
 }
-h4 {
+h4,
+h4 a:link,
+h4 a:visited {
     font-weight: $font-normal;
     color: $color-blue-darker;
 }
-h5 {
+h5,
+h5 a:link,
+h5 a:visited {
     font-weight: $font-bold;
     color: $color-blue-darkest;
 }
 
-h6 {
+h6,
+h6 a:link,
+h6 a:visited {
     font-weight: $font-bold;
     color: $color-taupe-dark;
 }

@@ -171,6 +171,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 	<!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
 	<script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=BBG&pua=ua-33523145-2" id="_fed_an_ua_tag" ></script>
 	<?php endif; ?>
+	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
 </head>
 
 

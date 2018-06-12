@@ -2841,23 +2841,39 @@ h4 a,
   font-size: inherit;
   color: inherit; }
 
-h2 {
+h2,
+h2 a:link,
+h2 a:visited {
   text-transform: uppercase;
   color: #b2201c; }
 
-h3, .bbg__sidebar__table caption {
+h3, .bbg__sidebar__table caption,
+h3 a:link,
+.bbg__sidebar__table caption a:link,
+h3 a:visited,
+.bbg__sidebar__table caption a:visited {
   font-weight: 300;
   color: #284f91; }
 
-h4, .bbg__board__committee-list li a {
+h4, .bbg__board__committee-list li a,
+h4 a:link,
+.bbg__board__committee-list li a a:link,
+h4 a:visited,
+.bbg__board__committee-list li a a:visited {
   font-weight: 400;
   color: #284f91; }
 
-h5, .bbg__sidebar__table th {
+h5, .bbg__sidebar__table th,
+h5 a:link,
+.bbg__sidebar__table th a:link,
+h5 a:visited,
+.bbg__sidebar__table th a:visited {
   font-weight: 700;
   color: #283166; }
 
-h6 {
+h6,
+h6 a:link,
+h6 a:visited {
   font-weight: 700;
   color: #8b8278; }
 
@@ -4783,23 +4799,42 @@ ol li:before {
 
 .outer-container {
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto; }
+  margin: 0 auto 3em auto; }
   .outer-container::after {
     clear: both;
     content: "";
     display: block; }
 
-.container::after {
+.container-nest::after {
   clear: both;
   content: "";
   display: block; }
+
+.container-grid {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
 
 .page-post-featured-graphic {
   margin-bottom: 3em; }
 
 .page-post-main-content {
   width: calc(75% - 35px);
+  float: left;
+  margin-left: 20px; }
+
+.feature-posts {
+  margin-left: -20px;
+  margin-right: -20px;
+  width: calc(100% + 40px); }
+
+.home-feature-primary-post {
+  width: calc(66.66667% - 33.33333px);
+  float: left;
+  margin-left: 20px; }
+
+.home-feature-secondary-post {
+  width: calc(33.33333% - 26.66667px);
   float: left;
   margin-left: 20px; }
 
