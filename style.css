@@ -4795,12 +4795,13 @@ ol li:before {
   content: "";
   display: block; }
 
+.page-post-featured-graphic {
+  margin-bottom: 3em; }
+
 .page-post-main-content {
   width: calc(75% - 35px);
   float: left;
   margin-left: 20px; }
-  .page-post-main-content .page-post-featured-graphic {
-    margin-bottom: 1em; }
 
 .page-sidebar {
   width: calc(25% - 25px);

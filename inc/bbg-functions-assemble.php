@@ -1,11 +1,18 @@
 <?php
 
 function get_feature_media_data() {
-	$addFeaturedGallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
+	$feature_gallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
 	$banner_position = get_field('adjust_the_banner_image', '', true);
 	$videoUrl = get_field( 'featured_video_url', '', true );
 
-	if ($videoUrl != "") {
+	if (!empty($feature_gallery)) {
+		$gallery_id = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
+		echo "<div class='outer-container'>";
+		putUniteGallery($gallery_id);
+		echo "</div>";
+		$hideFeaturedImage = true;
+	}
+	elseif ($videoUrl != "") {
 		$featured_data = "";
 		$hideFeaturedImage = true;
 		$video_data = featured_video($videoUrl);

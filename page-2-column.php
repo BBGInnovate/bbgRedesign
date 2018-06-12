@@ -8,15 +8,15 @@
    template name: 2-column
  */
 
-$secondaryColumnLabel = get_field( 'secondary_column_label', '', true );
-$secondaryColumnContent = get_field( 'secondary_column_content', '', true );
-
-$headline = get_field( 'headline', '', true );
-
-$listsInclude = get_field( 'sidebar_dropdown_include', '', true);
-
 require 'inc/bbg-functions-assemble.php';
 include "inc/shared_sidebar.php";
+
+$secondaryColumnLabel = get_field( 'secondary_column_label', '', true );
+$secondaryColumnContent = get_field( 'secondary_column_content', '', true );
+$addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
+
+$headline = get_field( 'headline', '', true );
+$listsInclude = get_field( 'sidebar_dropdown_include', '', true);
 
 // THIS COULD BELONG IN A BUILD INCLUDE FILE
 function display_foia_reports() {
@@ -83,6 +83,19 @@ get_header(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 
 			<?php
+				// THIS COULD BELONG IN A BUILD INCLUDE FILE
+				if ($addFeaturedGallery) {
+					$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
+					echo "<div class='usa-grid-full bbg__article-featured__gallery'>";
+					// WHERE IS THIS FUNCTION?
+					putUniteGallery($featuredGalleryID);
+					echo "</div>";
+				}
+				$hideFeaturedImage = false;
+				if ( $addFeaturedGallery ) {
+					$hideFeaturedImage = true;
+				}
+
 				$featured_media_result = get_feature_media_data();
 				if ($featured_media_result != "") {
 					echo $featured_media_result;
