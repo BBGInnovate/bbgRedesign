@@ -100,9 +100,10 @@ get_header();
 					$post_qty = 2;
 					$recent_result = get_recent_post_data($post_qty);
 					if (have_posts()) {
+						echo '<div class="home-recent-posts">';
 						while (have_posts()) {
 							the_post();
-							$recent_post  = '<div class="home-recent-posts">';
+							$recent_post  = '<div>';
 							$recent_post .= 	'<h4>';
 							$recent_post .= 		'<a href="' . get_the_permalink() . '">';
 							$recent_post .= 			get_the_title();
@@ -113,117 +114,68 @@ get_header();
 							$recent_post .= '</div>';
 							echo $recent_post;
 						}
+						$news_page_link  = 	'<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">';
+						$news_page_link .= 		'<h2 class="screen-reader-text">Recent Posts Navigation</h2>';
+						$news_page_link .= 			'<div class="nav-links">';
+						$news_page_link .= 			'<div class="nav-previous">';
+						$news_page_link .= 				'<a href="' . get_permalink(get_page_by_path('news-and-information')) .'" >Previous posts</a>';
+						$news_page_link .= 			'</div>';
+						$news_page_link .= 		'</div>';
+						$news_page_link .= 	'</nav>';
+						echo $news_page_link;
+						echo '</div>'; // END .home-recent-posts
 					}
 				?>
-					<!-- <nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
-						<h2 class="screen-reader-text">Recent Posts Navigation</h2>
-						<div class="nav-links">
-							<div class="nav-previous">
-								<a href="<?php //echo get_permalink( get_page_by_path('news') ); ?>" >Previous posts</a>
-							</div>
-						</div>
-					</nav> -->
 			</section>
+			<!-- END BBG NEWS -->
 			
-			<!-- SOAPBOX, CORNER HERO  -->
-			<section class="usa-grid">
+			<!-- SOAPBOX, CORNER HERO, IMPACT STORIES -->
+			<!-- <section class="outer-container mentions" style="border: 1px solid red;"> -->
+				<!-- SOAPBOX, CORNER HERO -->
+				<!-- <div class="container-grid" style="border: 1px solid blue;"> -->
 				<?php
 					$soap_result = get_soapbox_data();
 					$corner_hero_result = get_corner_hero_data();
 
-					// OPEN DIV FOR SOAPBOX AND CORNER HERO ON SIDE
-					// OR JUST ONE OVER TOP
+					$mention_begin  = '<section class="outer-container mentions" style="border: 1px solid red;">';
+					$mention_begin .= 	'<div class="container-grid" style="border: 1px solid blue;">';
 					if (($soap_result['toggle'] == 'on') && !empty($corner_hero_result)) {
-					// if (!empty($soap_result) && !empty($corner_hero_result)) {
 						$layout = 'side';
-						echo '<div class="kr-five-twelfths">';
+						$mentions = array($soap_result, $corner_hero_result);
+						$mention_inner = '<div class="split-mentions" style="border: 1px solid orange;">';
 					} else {
+						$sb = ($soap_result['toggle'] == 'on') ? true : false;
+						$ch = (!empty($corner_hero_result)) ? true : false;
+						if ($sb) {
+							$mentions = array($soap_result);
+						} elseif ($ch) {
+							$mentions = array($corner_hero_result);
+						}
 						$layout = 'full';
-						echo '<div class="soapbox container">';
+						$mention_inner = '<div class="container-grid" style="border: 1px solid purple;">';
 					}
-					if ($soap_result['toggle'] == 'on') {
-						if ($layout == 'side') {
-							$soapbox_side  = '<article class="' . $soap_result['class'] . ' soapbox-side">';
-							$soapbox_side .= 	'<div class="usa-grid-full">';
-							$soapbox_side .= 		'<div class="usa-width-two-thirds">';
-							$soapbox_side .= 			$soap_result['content'];
-							$soapbox_side .= 		'</div>';
-							$soapbox_side .= 		'<div class="usa-width-one-third">';
-							$soapbox_side .= 			$soap_result['image'];
-							$soapbox_side .= 		'</div>';
-							$soapbox_side .= 	'</div>';
-							$soapbox_side .= '</article>';
-							echo $soapbox_side;
-						} else if ($layout == 'full') {
-							$soapbox_full  = '<article class="' . $soap_result['class'] . ' soapbox-full">';
-							$soapbox_full .= 	'<div class="full-width">';
-							$soapbox_full .= 		'<div class="soapbox-image">';
-							$soapbox_full .= 			$soap_result['image'];
-							$soapbox_full .= 		'</div>';
-							$soapbox_full .= 		'<div class="soapbox-content">';
-							$soapbox_full .= 			$soap_result['content'];
-							$soapbox_full .= 		'</div>';
-							$soapbox_full .= 	'</div>';
-							$soapbox_full .= '</article>';
-							echo $soapbox_full;
+					if (!empty($mentions)) {
+						foreach ($mentions as $mention) {
+							$mention_inner .= '<div class="container-grid" style="border: 1px solid #00ffff;">';
+							if (($mention['type'] == 'soapbox') && ($layout == 'side')) {
+								$mention_inner .= 	'<div class="mention-large-side">' . $mention['content'] . '</div>';
+								$mention_inner .= 	'<div class="mention-small-side">' . $mention['image'] . '</div>';
+							} else {
+								$mention_inner .= 	'<div class="mention-small-side">' . $mention['image'] . '</div>';
+								$mention_inner .= 	'<div class="mention-large-side">' . $mention['content'] . '</div>';
+							}
+							$mention_inner .= '</div>';
 						}
 					}
-
-					if ($corner_hero_result != "") {
-						if ($layout == 'side') {
-							$corner_hero_side  = '<article class="' . $corner_hero_result['class'] . ' corner-hero-side">';
-							$corner_hero_side .= 	'<div class="usa-grid-full">';
-							$corner_hero_side .= 		'<div class="usa-width-one-third">';
-							$corner_hero_side .= 			$corner_hero_result['image'];
-							$corner_hero_side .= 		'</div>';
-							$corner_hero_side .= 		'<div class="usa-width-two-thirds">';
-							$corner_hero_side .= 			$corner_hero_result['content'];
-							$corner_hero_side .= 		'</div>';
-							$corner_hero_side .= 	'</div>';
-							$corner_hero_side .= '</article>';
-							echo $corner_hero_side;
-						} 
-						else if ($layout == 'full') {
-							$corner_hero_full  = '<article class="' . $corner_hero_result['class'] . ' corner-hero-full">';
-							$corner_hero_full .= 	'<div class="full-width">';
-							$corner_hero_full .= 		'<div class="corner-hero-image">';
-							$corner_hero_full .= 			$corner_hero_result['image'];
-							$corner_hero_full .= 		'</div>';
-							$corner_hero_full .= 		'<div class="corner-hero-content">';
-							$corner_hero_full .= 			$corner_hero_result['content'];
-							$corner_hero_full .= 		'</div>';
-							$corner_hero_full .= 	'</div>';
-							$corner_hero_full .= '</article>';
-							echo $corner_hero_full;
-						}
-						// echo $corner_hero_result;
-					}
-					echo '</div>';
-
-					$impact_post_qty = '';
-					if (($soap_result['toggle'] == 'on') && !empty($corner_hero_result)) {
-						$impact_post_qty = 1;
-						echo '<div class="kr-seven-twelfths">';
-					}
-					else {
-						$impact_post_qty = 2;
-						echo '<div class="usa-width-one-whole">';
-					}
+					$mention_end = '</div>';
+					echo $mention_begin . $mention_inner . $mention_end;
 				?>
-					<article id="impact-stories">
-						<h2>
-							<a href="<?php echo $impactPortfolioPermalink; ?>">Impact stories</a>
-						</h2>
-						<div class="usa-grid-full" style="margin-bottom: 1.5rem;">
-							<?php get_impact_stories_data($impact_post_qty); ?>
-
-							<div class="usa-width-one-whole u--space-below-mobile--large">
-								<a href="<?php echo $impactPermalink; ?>">Find out how the BBG defines and measures impact »</a>
-							</div>
-						</div>
-					</article>
 				</div>
+				<!-- END SOAPBOX, CORNER HERO -->
+				<!-- IMPACT STORIES -->
+				<!-- END IMPACT STORIES -->
 			</section>
+			<!-- END SOAPBOX, CORNER HERO, IMPACT STORIES -->
 
 			<!-- THREATS TO PRESS  -->
 			<section id="threats-to-journalism" class="usa-section bbg__ribbon">

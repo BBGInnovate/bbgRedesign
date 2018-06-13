@@ -1,3 +1,53 @@
+// 1. GLOBAL
+// 2. MEDIUM SCREEN
+// 3. MEDIUM LARGE SCREEN
+// 4. LARGE SCREEN
+
+.corner-hero {
+	.corner-hero-side {
+		padding: 1.5rem;
+		margin-bottom: 3rem;
+		@include grid-collapse;
+		p {margin-bottom: 0;}
+		p.profile-name {font-size: 0.9em;}
+	}
+	.corner-hero-full {
+		margin-bottom: 3rem;
+		.corner-hero-image {display: none}
+	}
+}
+
+
+//work
+.soapbox-side {
+	padding: 1.5rem;
+	margin-bottom: 3rem;
+	p {margin-bottom: 0;}
+	p.profile-name {font-size: 0.9em;}
+}
+.soapbox-full {
+	@include grid-container;
+	padding: 1.5rem;
+	margin-bottom: 6rem;
+
+	p {margin: 0;}
+	p.profile-name {font-size: 0.9em;}
+
+	.soapbox-image {
+		@include grid-column(1);
+		margin: 0;
+
+		img {
+			max-width: 100%;
+			margin-bottom: 0;
+		}
+	}
+	.soapbox-content {@include grid-column(9);}
+}
+//end work
+
+
+// 1. GLOBAL
 .bbg-banner {
 	background-color: $color-gray-lightest;
 	@include backgroundCover();
@@ -192,7 +242,7 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 	}
 }
 
-// MEDIA QUERIES
+// 2. MEDIUM SCREEN
 @include media($medium-screen) {
 	.bbg-banner {
 		.bbg-banner__container {
@@ -223,7 +273,18 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 			.bbg-blog__excerpt-title--list {font-size: 2.5rem;}
 		}
 	}
+	.corner-hero {
+		.corner-hero-full {
+			.corner-hero-image {
+				display: block;
+				@include grid-column(3);
+			}
+			.corner-hero-content {@include grid-column(9);}
+		}
+	}
 }
+
+// 3. MEDIUM LARGE SCREEN
 @include media($medium-large-screen) {
 	.bbg-banner {
 		.bbg-banner__container {
@@ -232,24 +293,20 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 			height: 100%;
 		}
 	}
-	/*
-	.bbg__voice {
-		$voiceTypes: ceo, guest, featured;
-		@for $i from 1 through length( $voiceTypes ) {
-			// remove the double slashe below if uncommenting block
-			&--#//{ nth( $voiceTypes, $i ) } {
-				padding: $site-margins-small;
-				// p {line-height: 2.2;}
-			}
-		}
-	}
-	*/
 	.bbg__event-announcement, 
 	.bbg__advisory-announcement {
 		.bbg__event-announcement__excerpt {display: block;}
 		.bbg__event-announcement__title {font-size: 2rem;}
 	}
+	.corner-hero {
+		.corner-hero-full {
+			.corner-hero-image {@include grid-column(2);}
+			.corner-hero-content {@include grid-column(10);}
+		}
+	}
 }
+
+// 4. LARGE SCREEN
 @include media($large-screen) {
 	.bbg-banner {
 		height: $banner-image-height * 1.25;

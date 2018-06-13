@@ -1,14 +1,5 @@
-.outer-container {
-	@include grid-container;
-	max-width: 1200px;
-	margin: 0 auto 3em auto;
-}
-.container-nest {@include grid-container;}
-.container-grid {@include grid-column(12);}
-.page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}
 // COLUMNS MAIN, SIDEBAR
 .page-post-main-content {@include grid-column(9);}
-
 
 // HOMEPAGE
 .feature-posts {@include grid-collapse;}
@@ -41,55 +32,6 @@
 	@include grid-column(3);
 	padding-left: 1.5rem;
 	border-left: 1px solid $black-faint;
-}
-
-$home-soap-corner-grid: (
-	columns: 10,
-	gutter: 1.5rem,
-);
-
-.soapbox-side {
-	padding: 1.5rem;
-	margin-bottom: 3rem;
-	p {margin-bottom: 0;}
-	p.profile-name {font-size: 0.9em;}
-}
-.soapbox-full {
-	@include grid-container;
-	padding: 1.5rem;
-	margin-bottom: 6rem;
-
-	p {margin: 0;}
-	p.profile-name {font-size: 0.9em;}
-	.full-width {@include grid-column(12, $home-soap-corner-grid);}
-	.soapbox-image {
-		@include grid-column(1);
-		margin: 0;
-
-		img {
-			max-width: 100%;
-			margin-bottom: 0;
-		}
-	}
-	.soapbox-content {
-		@include grid-column(9);
-	}
-}
-
-.corner-hero-side {
-	padding: 1.5rem;
-	margin-bottom: 3rem;
-	p {margin-bottom: 0;}
-	p.profile-name {font-size: 0.9em;}
-}
-.corner-hero-full {
-	padding: 1.5rem;
-	margin-bottom: 3rem;
-	@include grid-container;
-
-	.full-width {@include grid-column(12, $home-soap-corner-grid);}
-	.corner-hero-image {@include grid-column(1);}
-	.corner-hero-content {@include grid-column(9);}
 }
 
 @include media($medium-screen) {

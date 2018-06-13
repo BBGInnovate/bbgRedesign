@@ -324,17 +324,19 @@ function get_soapbox_data() {
 
 function get_corner_hero_data() {
 	//What will go in the corner hero? off (gives random quote), event, callout, advisory
-	$homepage_hero_corner = get_field( 'homepage_hero_corner', 'option' );
+	$homepage_hero_corner = get_field( 'homepage_hero_corner', 'option');
 
-	if ( $homepage_hero_corner  == 'event' ) {
-		$featuredEvent = get_field( 'homepage_featured_event', 'option' );
-	} else if ( $homepage_hero_corner == 'advisory' ) {
-		$featuredAdvisory = get_field( 'homepage_featured_advisory', 'option' );
-	} else if ( $homepage_hero_corner == "callout" ) {
+	if ($homepage_hero_corner  == 'event') {
+		$featuredEvent = get_field( 'homepage_featured_event', 'option');
+	}
+	else if ($homepage_hero_corner == 'advisory') {
+		$featuredAdvisory = get_field( 'homepage_featured_advisory', 'option');
+	}
+	else if ($homepage_hero_corner == "callout") {
 		$featuredCallout = get_field('homepage_featured_callout', 'option');
 	}
 
-	$cornerHeroLabel = get_field( 'corner_hero_label', 'option' );
+	$cornerHeroLabel = get_field('corner_hero_label', 'option');
 	if ( $cornerHeroLabel == '' ) {
 		$cornerHeroLabel = 'This week';
 	}
@@ -369,7 +371,7 @@ function get_corner_hero_data() {
 		$excerpt = my_excerpt($id);
 		$corner_hero_package = array('class' => $cornerHeroClass, 'p_link' => $cornerHeroPermalink, 'label' => $cornerHeroLabel, 'title' => $cornerHeroTitle, 'excerpt' => $excerpt);
 
-		return build_corner_hero($corner_hero_package);
+		return build_corner_hero_blocks($corner_hero_package);
 	}
 	// CONTINUE WORKING ON STATEMENTS BELOW
 	else if ( $homepage_hero_corner == 'callout' && $featuredCallout ) {
@@ -421,40 +423,41 @@ function build_soapbox_pieces($soap_data) {
 	} else if (!empty($soap_data['header_text'])) {
 		$soapbox_content .= '<h2>' . $soap_data['header_text'] . '</h2>';
 	}
-	$soapbox_content .= '</header>';
-	$soapbox_content .= '<h5>';
-	$soapbox_content .= 	'<a href="' . $soap_data['header_link'] . '">';
-	$soapbox_content .= 		$soap_data['title'];
-	$soapbox_content .= 	'</a>';
-	$soapbox_content .= '</h5>';
-	$soapbox_content .= '<p>';
-	$soapbox_content .= 	my_excerpt($soap_data['post_id']);
-	$soapbox_content .= 	' <a href="' . $soap_data['post_link'] . '" class="bbg__read-more">' . $soap_data['read_more'] . ' »</a>';
-	$soapbox_content .= '</p>';
+	$content .= '</header>';
+	$content .= '<h5>';
+	$content .= 	'<a href="' . $soap_data['header_link'] . '">';
+	$content .= 		$soap_data['title'];
+	$content .= 	'</a>';
+	$content .= '</h5>';
+	$content .= '<p>';
+	$content .= 	my_excerpt($soap_data['post_id']);
+	$content .= 	' <a href="' . $soap_data['post_link'] . '" class="bbg__read-more">' . $soap_data['read_more'] . ' »</a>';
+	$content .= '</p>';
 
 	if (!empty($soap_data['profile_image'])) {
-		$soapbox_image = '<img src="' . $soap_data['profile_image'] . '">';
+		$image = '<img src="' . $soap_data['profile_image'] . '">';
 		if ($soap_data['profile_name'] != "") {
-			$soapbox_image .= '<p class="profile-name">' . $soap_data['profile_name'] . '</p>';
+			$image .= '<p class="profile-name">' . $soap_data['profile_name'] . '</p>';
 		}
 	}
-	$soapbox_pieces = array('toggle' => $toggle, 'class' => $article_class, 'content' => $soapbox_content, 'image' => $soapbox_image);
+	$soapbox_pieces = array('type' => 'soapbox', 'toggle' => $toggle, 'class' => $article_class, 'content' => $content, 'image' => $image);
 	return $soapbox_pieces;
 }
 
-function build_corner_hero($corner_hero_data) {
-	$corner_hero_image = 		'<img src="' . content_url( $path = '/uploads/2018/06/usagm-touch-image.png' ) . '">';
+function build_corner_hero_blocks($corner_hero_data) {
+	$image = '<img src="' . content_url($path = '/uploads/2018/06/usagm-touch-image.png') . '">';
 
-	$corner_hero_content  = 		'<div class="bbg__article-icons-container">';
-	$corner_hero_content .= 			'<h2 class="bbg__label bbg__label--outside">' . $corner_hero_data['label'] . '</h2>';
-	$corner_hero_content .= 			'<div class="bbg__article-icon"></div>';
-	$corner_hero_content .= 		'</div>';
-	$corner_hero_content .= 		'<h5>';
-	$corner_hero_content .= 			'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
-	$corner_hero_content .= 		'</h5>';
-	$corner_hero_content .= 		'<p>' . $corner_hero_data['excerpt'] . '</p>';
+	$content  = '<div class="bbg__article-icons-container">';
+	$content .= 	'<h2 class="bbg__label bbg__label--outside">' . $corner_hero_data['label'] . '</h2>';
+	$content .= 	'<div class="bbg__article-icon"></div>';
+	$content .= '</div>';
+	$content .= '<h5>';
+	$content .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
+	$content .= '</h5>';
+	$content .= '<p>' . $corner_hero_data['excerpt'] . '</p>';
 
-	$corner_hero_pieces = array('image' => $corner_hero_image, 'content' => $corner_hero_content);
+
+	$corner_hero_pieces = array('type' => 'corner hero', 'image' => $image, 'content' => $content);
 	return $corner_hero_pieces;
 }
 
