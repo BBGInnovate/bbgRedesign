@@ -3,7 +3,8 @@
 	max-width: 1200px;
 	margin: 0 auto 3em auto;
 }
-.container-grid {@include grid-container;}
+.nest-container {@include grid-container;}
+.grid-container {@include grid-column(12);}
 .page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}
 
 

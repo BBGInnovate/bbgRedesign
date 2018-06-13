@@ -14,8 +14,8 @@
  */
 
 // FUNCTION THAT BUILD SECTIONS
-require get_template_directory() . '/inc/bbg-functions-home.php';
-require get_template_directory() . '/inc/bbg-functions-assemble.php';
+require 'inc/bbg-functions-home.php';
+require 'inc/bbg-functions-assemble.php';
 
 $templateName = 'customBBGHome';
 
@@ -60,7 +60,7 @@ get_header();
 
 			<section id="mission" class="outer-container">
 				<h1 class="header-outliner">About the BBG</h1>
-				<div class="container-grid">
+				<div class="grid-container">
 				<?php
 					$settings_result = get_site_settings_data();
 
@@ -68,7 +68,8 @@ get_header();
 					$mission .= 	$settings_result['intro_content'];
 					$mission .= 	'<a href="';
 					$mission .= 		$settings_result['intro_link'];
-					$mission .= 		'" class="bbg__read-more">LEARN MORE »</a>';
+					$mission .= 		'" class="bbg__read-more">LEARN MORE »';
+					$mission .= 	'</a>';
 					$mission .= '</p>';
 					echo $mission;
 				?>
@@ -84,6 +85,7 @@ get_header();
 				<?php
 					$featured_post = get_featured_post_data();
 
+					// $main_featured_post  = '<div class="home-feature-primary-post">';
 					$main_featured_post  = '<div class="home-feature-primary-post">';
 					$main_featured_post .= 		'<a href="' . get_the_permalink() . '">';
 					$main_featured_post .= 			$featured_post['media'];

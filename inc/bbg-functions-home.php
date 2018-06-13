@@ -157,12 +157,11 @@ function get_impact_stories_data($numPosts) {
 
 function get_featured_post_data() {
 	$featuredPost = get_field('homepage_featured_post', 'option');
+
 	if ($featuredPost) {
 		$featuredPost = $featuredPost[0];
 		$postIDsUsed[] = $featuredPost -> ID;
-	}
 
-	if ($featuredPost) {
 		$qParams = array(
 			'post__in' => array($featuredPost -> ID),
 			'post_status' => array('publish', 'future')
@@ -172,19 +171,13 @@ function get_featured_post_data() {
 	}
 	query_posts($qParams);
 
-	$counter = 0;
 	if (have_posts()) {
-		while (have_posts()) {
-			the_post();
-			$counter++;
-			$postIDsUsed[] = get_the_ID();
-
-			$feature_post_data = array(
-				'title' => get_the_title(),
-				'media' => get_feature_media_data()
-			);
-			return $feature_post_data;
-		}
+		the_post();
+		$feature_post_data = array(
+			'title' => get_the_title(),
+			'media' => get_feature_media_data()
+		);
+		return $feature_post_data;
 	}
 	wp_reset_query();
 }
@@ -411,7 +404,7 @@ function build_featured_post($feat_post_data) {
 							'after'  => '</div>',
 						));
 	$featured_post .= '</article>';
-	echo $featured_post;
+	// echo $featured_post;
 }
 
 function build_soapbox_pieces($soap_data) {

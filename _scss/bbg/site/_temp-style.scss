@@ -2,30 +2,21 @@
 .page-post-main-content {@include grid-column(9);}
 
 // HOMEPAGE
-.feature-posts {@include grid-collapse;}
+// .feature-posts {@include grid-collapse;}
 
-.home-feature-primary-post {
-	@include grid-column(12);
-	.page-post-featured-graphic {margin-bottom: 1.5rem;}
-}
+.page-post-featured-graphic {margin-bottom: 1.5rem;}
+.home-feature-primary-post {@include grid-column(12);}
 .home-recent-posts {@include grid-column(12)}
 
-@include media($medium-large-screen) {
-	.home-feature-primary-post {
-		@include grid-column(8);
-		.page-post-featured-graphic {margin-bottom: 1.5rem;}
-	}
+@include media($medium-screen) {
+	.page-post-featured-graphic {margin-bottom: 3rem;}
+	.home-feature-primary-post {@include grid-column(8);}
 	.home-recent-posts {@include grid-column(4)}
 }
-
-// ELEMENTS
-.post-date {
-	font-family: $font-serif;
-	font-size: 0.9em;
-	color: $black6;
-	margin-bottom: 0.25em;
+@include media($medium-large-screen) {
+	.home-feature-primary-post {@include grid-column(8);}
+	.home-recent-posts {@include grid-column(4)}
 }
-
 
 // GRID
 .page-sidebar {
