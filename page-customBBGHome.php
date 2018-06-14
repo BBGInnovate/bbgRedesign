@@ -14,17 +14,15 @@
  */
 
 // FUNCTION THAT BUILD SECTIONS
+require 'inc/usagm-home.php';
 require 'inc/bbg-functions-home.php';
 require 'inc/bbg-functions-assemble.php';
 
 $templateName = 'customBBGHome';
 
-// GET CUSTOM FIELDS
-
 /*** store a handful of page links that we'll use in a few places ***/
 $impactPermalink = get_permalink( get_page_by_path('our-work/impact-and-results'));
 $impactPortfolioPermalink = get_permalink( get_page_by_path('our-work/impact-and-results/impact-portfolio'));
-
 
 /*** add any posts from custom fields to our array that tracks post IDs that have already been used on the page ***/
 $postIDsUsed = array();
@@ -77,105 +75,93 @@ get_header();
 			</section>
 
 			<!-- BBG NEWS -->
-			<section id="recent-posts" class="outer-container">
+			<section class="outer-container">
 				<h1 class="header-outliner">BBG News</h1>
-				<div class="container-grid">
+				<div class="grid-container">
 					<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">BBG News</a></h2>
 				</div>
-				<?php
-					$featured_post = get_featured_post_data();
+				<div class="grid-container">
+					<div class="nest-container">
+						<div class="home-feature-primary-post">
+						<?php
+							$featured_post_result = get_field_post_data('featured', 1);
 
-					// $main_featured_post  = '<div class="home-feature-primary-post">';
-					$main_featured_post  = '<div class="home-feature-primary-post">';
-					$main_featured_post .= 		'<a href="' . get_the_permalink() . '">';
-					$main_featured_post .= 			$featured_post['media'];
-					$main_featured_post .= 		'</a>';
-					$main_featured_post .= 		'<h3>';
-					$main_featured_post .= 			'<a href="' . get_the_permalink() . '">' . $featured_post['title'] . '</a>';
-					$main_featured_post .= 		'</h3>';
-					$main_featured_post .= 		'<p class="post-date">' . get_the_date() . '</p>';
-					$main_featured_post .= 		'<p>' . get_the_excerpt() . '</p>';
-					$main_featured_post .= '</div>';
-					echo $main_featured_post;
-				?>
-				<?php
-					$post_qty = 2;
-					$recent_result = get_recent_post_data($post_qty);
-					if (have_posts()) {
-						echo '<div class="home-recent-posts">';
-						while (have_posts()) {
-							the_post();
-							$recent_post  = '<div>';
-							$recent_post .= 	'<h4>';
-							$recent_post .= 		'<a href="' . get_the_permalink() . '">';
-							$recent_post .= 			get_the_title();
-							$recent_post .= 		'</a>';
-							$recent_post .= 	'</h4>';
-							$recent_post .= 	'<p class="post-date">' . get_the_date() . '</p>';
-							$recent_post .= 	'<p>' . wp_trim_words(get_the_content(), 50) . '</p>';
-							$recent_post .= '</div>';
-							echo $recent_post;
-						}
-						$news_page_link  = 	'<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">';
-						$news_page_link .= 		'<h2 class="screen-reader-text">Recent Posts Navigation</h2>';
-						$news_page_link .= 			'<div class="nav-links">';
-						$news_page_link .= 			'<div class="nav-previous">';
-						$news_page_link .= 				'<a href="' . get_permalink(get_page_by_path('news-and-information')) .'" >Previous posts</a>';
-						$news_page_link .= 			'</div>';
-						$news_page_link .= 		'</div>';
-						$news_page_link .= 	'</nav>';
-						echo $news_page_link;
-						echo '</div>'; // END .home-recent-posts
-					}
-				?>
+							$main_featured_post .= 	$featured_post_result['linked_media'];
+							$main_featured_post .= 	'<h3>' . $featured_post_result['linked_title'] . '</h3>';
+							$main_featured_post .= 	'<p class="post-date">' . $featured_post_result['date'] . '</p>';
+							$main_featured_post .= 	'<p>' . $featured_post_result['excerpt'] . '</p>';
+							echo $main_featured_post;
+						?>
+						</div>
+						<div class="home-recent-posts">
+						<?php
+							$recent_result = get_recent_post_data(2);
+							// var_dump($recent_result);
+							if (have_posts()) {
+								while (have_posts()) {
+									the_post();
+									$recent_post  = '<div class="inner-container">';
+									$recent_post .= 	'<h4>';
+									$recent_post .= 		'<a href="' . get_the_permalink() . '">';
+									$recent_post .= 			get_the_title();
+									$recent_post .= 		'</a>';
+									$recent_post .= 	'</h4>';
+									$recent_post .= 	'<p class="post-date">' . get_the_date() . '</p>';
+									$recent_post .= 	'<p>';
+									$recent_post .= 		wp_trim_words(get_the_content(), 50);
+									$recent_post .= 		' <a href="' . get_the_permalink() . '">READ MORE</a>';
+									$recent_post .= 	'</p>';
+									$recent_post .= '</div>';
+									echo $recent_post;
+								}
+							}
+						?>
+							<!-- NEWS PAGE LINK -->
+							<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
+								<h2 class="screen-reader-text">Recent Posts Navigation</h2>
+								<div class="nav-links">
+									<div class="nav-previous">
+										<a href="<?php get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
+									</div>
+								</div>
+							</nav>
+
+						</div>
+					</div><!--end nest-->
+				</div><!--end grid-->
 			</section>
 			<!-- END BBG NEWS -->
 			
 			<!-- SOAPBOX, CORNER HERO, IMPACT STORIES -->
-			<!-- <section class="outer-container mentions" style="border: 1px solid red;"> -->
-				<!-- SOAPBOX, CORNER HERO -->
-				<!-- <div class="container-grid" style="border: 1px solid blue;"> -->
-				<?php
-					$soap_result = get_soapbox_data();
-					$corner_hero_result = get_corner_hero_data();
+			<?php
+				$mentions_group = array();
 
-					$mention_begin  = '<section class="outer-container mentions" style="border: 1px solid red;">';
-					$mention_begin .= 	'<div class="container-grid" style="border: 1px solid blue;">';
-					if (($soap_result['toggle'] == 'on') && !empty($corner_hero_result)) {
-						$layout = 'side';
-						$mentions = array($soap_result, $corner_hero_result);
-						$mention_inner = '<div class="split-mentions" style="border: 1px solid orange;">';
-					} else {
-						$sb = ($soap_result['toggle'] == 'on') ? true : false;
-						$ch = (!empty($corner_hero_result)) ? true : false;
-						if ($sb) {
-							$mentions = array($soap_result);
-						} elseif ($ch) {
-							$mentions = array($corner_hero_result);
-						}
-						$layout = 'full';
-						$mention_inner = '<div class="container-grid" style="border: 1px solid purple;">';
-					}
-					if (!empty($mentions)) {
-						foreach ($mentions as $mention) {
-							$mention_inner .= '<div class="container-grid" style="border: 1px solid #00ffff;">';
-							if (($mention['type'] == 'soapbox') && ($layout == 'side')) {
-								$mention_inner .= 	'<div class="mention-large-side">' . $mention['content'] . '</div>';
-								$mention_inner .= 	'<div class="mention-small-side">' . $mention['image'] . '</div>';
-							} else {
-								$mention_inner .= 	'<div class="mention-small-side">' . $mention['image'] . '</div>';
-								$mention_inner .= 	'<div class="mention-large-side">' . $mention['content'] . '</div>';
-							}
-							$mention_inner .= '</div>';
-						}
-					}
-					$mention_end = '</div>';
-					echo $mention_begin . $mention_inner . $mention_end;
-				?>
-				</div>
-				<!-- END SOAPBOX, CORNER HERO -->
-				<!-- IMPACT STORIES -->
-				<!-- END IMPACT STORIES -->
+				$soap_result = get_soapbox_data();
+				$corner_hero_result = get_corner_hero_data();
+
+				if ($soap_result['toggle'] == 'on') {
+					$show_soap = true;
+					$soap_layout = (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) ? 'image-right' : 'image-left';
+					$soap_parts = build_soapbox_parts($soap_result, $soap_layout);
+					array_push($mentions_group, $soap_parts);
+				}
+
+				if ($corner_hero_result['toggle'] == 'on') {
+					$show_corner = true;
+					$corner_hero_parts = build_corner_hero_parts($corner_hero_result);
+					array_push($mentions_group, $corner_hero_parts);
+				}
+
+			?>
+			<!-- SOAPBOX, CORNER HERO, IMPACT STORIES -->
+			<section class="outer-container mentions" style="border: 1px solid red;">
+			<?php
+				if ($show_soap && $show_corner) {
+					assemble_mentions_share_space($mentions_group);
+				} else {
+					assemble_mentions_full_width($mentions_group);
+				}
+			?>
 			</section>
 			<!-- END SOAPBOX, CORNER HERO, IMPACT STORIES -->
 
