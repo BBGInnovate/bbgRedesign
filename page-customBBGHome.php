@@ -165,7 +165,7 @@ get_header();
 				$impact_markup = build_impact_markup($impact_result);
 
 				// MARKUP: SOAPBOX, CORNER HERO, IMPACT STORIES
-				echo '<section class="outer-container mentions" style="border: 1px solid red;">';
+				echo '<section class="outer-container mentions">';
 				if ($show_soap && $show_corner) {
 					assemble_mentions_share_space($mentions_group, $impact_markup);
 				} else {

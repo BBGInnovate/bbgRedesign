@@ -5,7 +5,7 @@
 //    Take data and build module. Other div of module has fluid width so it will adjust to parent size
 // 3. INSERT MODULE IN GRID ARCHITECTURE
 //    Insert parts into div architecture
-// * INCLUDE A NOTE AS TO WHERE THE STYLES ARE LOCATED
+// * INCLUDE A NOTE AS TO WHERE THE STYLES ARE LOCATED (AFTER PROPERLY PLACED)
 
 
 // 1. COLLECT DATA
@@ -130,7 +130,6 @@ function get_soapbox_data() {
 		'read_more' => $readMoreLabel
 	);
 	return $soapbox_data;
-	// return build_soapbox_parts($soapbox_data);
 }
 
 function get_corner_hero_data() {
@@ -239,9 +238,9 @@ function build_soapbox_parts($soap_data, $layout) {
 	// BUILD PARTS
 	$soap_heading = '<header class="entry-header bbg__article-icons-container">';
 	if (!empty($soap_data['post_link'])) {
-		$soap_heading .= '<h2><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
+		$soap_heading .= '<h2 class="mention-header"><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
 	} else if (!empty($soap_data['header_text'])) {
-		$soap_heading .= '<h2>' . $soap_data['header_text'] . '</h2>';
+		$soap_heading .= '<h2 class="mention-header">' . $soap_data['header_text'] . '</h2>';
 	}
 	$soap_heading .= '</header>';
 
@@ -253,7 +252,7 @@ function build_soapbox_parts($soap_data, $layout) {
 
 	$soap_content .= '<p>';
 	$soap_content .= 	my_excerpt($soap_data['post_id']);
-	$soap_content .= 	' <a href="' . $soap_data['post_link'] . '" class="bbg__read-more">' . $soap_data['read_more'] . ' »</a>';
+	// $soap_content .= 	' <a href="' . $soap_data['post_link'] . '" class="bbg__read-more">' . $soap_data['read_more'] . ' »</a>';
 	$soap_content .= '</p>';
 
 	if (!empty($soap_data['profile_image'])) {
@@ -265,22 +264,24 @@ function build_soapbox_parts($soap_data, $layout) {
 
 	// INSERT PART INTO GRID
 	// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
-	$soapbox_markup  = '<div class="inner-container soap-corner ' . $article_class . '" style="border: 1px solid blue;">';
+	$soapbox_markup  = '<div class="inner-container soap-corner ' . $article_class . '">';
+	// $soapbox_markup .= 	'<div class="nest-container">';
 	if ($layout == 'image-left') {
 		$soapbox_markup .= 	'<div class="small-side">';
 		$soapbox_markup .= 		$soap_image;
 		$soapbox_markup .= 	'</div>';
 	}
-	$soapbox_markup .= 	'<div class="large-side">';
-	$soapbox_markup .= 		$soap_heading;
-	$soapbox_markup .= 		$soap_title;
-	$soapbox_markup .= 		$soap_content;
-	$soapbox_markup .= 	'</div>';
+	$soapbox_markup .= 		'<div class="large-side">';
+	$soapbox_markup .= 			$soap_heading;
+	$soapbox_markup .= 			$soap_title;
+	$soapbox_markup .= 			$soap_content;
+	$soapbox_markup .= 		'</div>';
 	if ($layout == 'image-right') {
 		$soapbox_markup .= 	'<div class="small-side">';
 		$soapbox_markup .= 		$soap_image;
 		$soapbox_markup .= 	'</div>';
 	}
+	// $soapbox_markup .= 	'</div>';
 	$soapbox_markup .= '</div>';
 
 	return $soapbox_markup;
@@ -306,7 +307,7 @@ function build_corner_hero_parts($corner_hero_data) {
 
 		// INSERT PART INTO GRID
 		// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
-		$corner_hero_markup  = '<div class="inner-container soap-corner" style="border: 1px solid blue;">';
+		$corner_hero_markup  = '<div class="inner-container soap-corner">';
 		$corner_hero_markup .= 	'<div class="small-side">';
 		$corner_hero_markup .= 		$corner_hero_image;
 		$corner_hero_markup .= 	'</div>';
@@ -336,7 +337,7 @@ function build_impact_markup($impact_data) {
 		$impact_linked_image .= 	'</a>';
 
 		$impact_header = 	'<h5><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h5>';
-		$impact_content = 	'<p>' . $cur_post->post_content . '</p>';
+		$impact_content = 	'<p>' . wp_trim_words($cur_post->post_content, 70) . '</p>';
 
 		$impact_markup  = '<div>';
 		$impact_markup .= 	$impact_linked_image;
@@ -344,7 +345,7 @@ function build_impact_markup($impact_data) {
 		$impact_markup .= 	$impact_content;
 		$impact_markup .= '</div>';
 
-		// DYNAMIC VARIABLE NAME 
+		// DYNAMIC VARIABLE NAME FOR UNIQUE NAME TO POPULATE ARRAY
 		${"impact_block" . $i} = $impact_markup;
 
 		array_push($impact_markup_set, ${"impact_block" . $i});
@@ -354,8 +355,9 @@ function build_impact_markup($impact_data) {
 }
 
 // 3. INSERT MODULE IN GRID ARCHITECTURE
+//    This is the sections outer grid with slots for modules
+// Mention(a): BOTH SOAPBOX AND CORNER HERO
 function assemble_mentions_full_width($mention_data, $impact_group) {
-	// echo 'i ' . $impact_group;
 	$mention_full  = 			'<div class="inner-container">';
 	$mention_full .= 				'<div class="grid-container soap-corner-full">';
 	// SOAPBOX AND/OR CORNER HERO
@@ -364,25 +366,27 @@ function assemble_mentions_full_width($mention_data, $impact_group) {
 	}
 	$mention_full .= 				'</div>';
 	$mention_full .= 			'</div>';
-	$mention_full .= 			'<div class="inner-container " style="border: 1px solid green;">';
+	$mention_full .= 			'<div class="inner-container ">';
+	// IMPACT STORIES
 	foreach($impact_group as $impact) {
-		$mention_full .= 				'<div class="split-grid" style="border: 1px solid orange;">';
+		$mention_full .= 				'<div class="split-grid">';
 		$mention_full .= 					$impact;
 		$mention_full .= 				'</div>';
 	}
 	$mention_full .= 			'</div>';
 	echo $mention_full;
 }
-
+// Mention(b): EITHER SOAPBOX OR CORNER HERO 
 function assemble_mentions_share_space($mention_data, $impact_group) {
-	$mention_share  = '<div class="inner-container" style="border: 1px solid blue;">';
-	$mention_share .= 	'<div class="soap-corner-share-grid" style="border: 1px solid green;">';
+	$mention_share  = '<div class="inner-container">';
+	$mention_share .= 	'<div class="soap-corner-share-grid">';
 	// SOAPBOX AND/OR CORNER HERO
 	foreach($mention_data as $data) { 
 		$mention_share .= 				$data;
 	}
 	$mention_share .= 	'</div>';
-	$mention_share .= 	'<div class="impacts-share" style="border: 1px solid orange;">';
+	$mention_share .= 	'<div class="impacts-share">';
+	// IMPACT STORY (ONLY ONE FOR THIS LAYOUT)
 	$mention_share .= 		$impact_group[0];
 	$mention_share .= 	'</div>';
 	$mention_share .= '</div>';
