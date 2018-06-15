@@ -95,8 +95,9 @@ get_header();
 						</div>
 						<div class="home-recent-posts">
 						<?php
-							$recent_result = get_recent_post_data(2);
-							// var_dump($recent_result);
+							$recent_post_quantity = 2;
+							$recent_result = get_recent_post_data($recent_post_quantity);
+
 							if (have_posts()) {
 								while (have_posts()) {
 									the_post();
@@ -127,43 +128,51 @@ get_header();
 							</nav>
 
 						</div>
-					</div><!--end nest-->
-				</div><!--end grid-->
-			</section>
-			<!-- END BBG NEWS -->
+					</div><!-- end nest -->
+				</div><!-- end grid -->
+			</section><!-- END BBG NEWS -->
 			
-			<!-- SOAPBOX, CORNER HERO, IMPACT STORIES -->
 			<?php
-				$mentions_group = array();
-
+				// PREP: SOAPBOX, CORNER HERO, IMPACT STORIES
 				$soap_result = get_soapbox_data();
 				$corner_hero_result = get_corner_hero_data();
 
+				$soap_layout = "";
+				$impact_quantity = "";
+				if (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) {
+					$soap_layout = 'image-right';
+					$impact_quantity = 1;
+				} else {
+					$soap_layout = 'image-left';
+					$impact_quantity = 2;
+				}
+
+				$impact_result = get_impact_stories_data($impact_quantity);
+
+				$mentions_group = array();
 				if ($soap_result['toggle'] == 'on') {
 					$show_soap = true;
 					$soap_layout = (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) ? 'image-right' : 'image-left';
 					$soap_parts = build_soapbox_parts($soap_result, $soap_layout);
 					array_push($mentions_group, $soap_parts);
 				}
-
 				if ($corner_hero_result['toggle'] == 'on') {
 					$show_corner = true;
 					$corner_hero_parts = build_corner_hero_parts($corner_hero_result);
 					array_push($mentions_group, $corner_hero_parts);
 				}
+				
+				$impact_markup = build_impact_markup($impact_result);
 
-			?>
-			<!-- SOAPBOX, CORNER HERO, IMPACT STORIES -->
-			<section class="outer-container mentions" style="border: 1px solid red;">
-			<?php
+				// MARKUP: SOAPBOX, CORNER HERO, IMPACT STORIES
+				echo '<section class="outer-container mentions" style="border: 1px solid red;">';
 				if ($show_soap && $show_corner) {
-					assemble_mentions_share_space($mentions_group);
+					assemble_mentions_share_space($mentions_group, $impact_markup);
 				} else {
-					assemble_mentions_full_width($mentions_group);
+					assemble_mentions_full_width($mentions_group, $impact_markup);
 				}
+				echo '</section>';
 			?>
-			</section>
-			<!-- END SOAPBOX, CORNER HERO, IMPACT STORIES -->
 
 			<!-- THREATS TO PRESS  -->
 			<section id="threats-to-journalism" class="usa-section bbg__ribbon">

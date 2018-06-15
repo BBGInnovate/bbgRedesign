@@ -204,6 +204,33 @@ function get_corner_hero_data() {
 	}
 }
 
+function get_impact_stories_data($qty) {
+	global $includePortfolioDescription;
+	global $postIDsUsed;
+
+	$impactPostIDs = select_impact_story_id_at_random($postIDsUsed);
+	$qParams = array(
+		'post_type' => array('post'),
+		'posts_per_page' => $qty,
+		'orderby' => 'post_date',
+		'order' => 'desc',
+		'post__in' => $impactPostIDs
+	);
+	query_posts($qParams);
+
+	$post_id_group = array();
+	if (have_posts()) {
+		while (have_posts()) { 
+			the_post();
+			$includePortfolioDescription = false;
+			$postIDsUsed[] = get_the_ID();
+			array_push($post_id_group, get_the_ID());
+		}
+	}
+	wp_reset_query();
+	return $post_id_group;
+}
+
 // 2. BUILD MODULES
 //    Make parts (complete tags, logic, etc) then assemble module
 function build_soapbox_parts($soap_data, $layout) {
@@ -294,27 +321,60 @@ function build_corner_hero_parts($corner_hero_data) {
 	}
 }
 
+function build_impact_markup($impact_data) {
+	$impact_markup_set = array();
+	$i = 0;
+	foreach($impact_data as $impact_id) {
+		$cur_post = get_post($impact_id);
+
+		$impact_linked_image =  	'<a href="' . get_permalink($impact_id) . '">';
+		if (get_permalink($impact_id)) {
+			$impact_linked_image .= 		get_the_post_thumbnail($impact_id);
+		} else {
+			$impact_linked_image .= 		'<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="BBG Placeholder Image" />';
+		}
+		$impact_linked_image .= 	'</a>';
+
+		$impact_header = 	'<h5><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h5>';
+		$impact_content = 	'<p>' . $cur_post->post_content . '</p>';
+
+		$impact_markup  = '<div>';
+		$impact_markup .= 	$impact_linked_image;
+		$impact_markup .= 	$impact_header;
+		$impact_markup .= 	$impact_content;
+		$impact_markup .= '</div>';
+
+		// DYNAMIC VARIABLE NAME 
+		${"impact_block" . $i} = $impact_markup;
+
+		array_push($impact_markup_set, ${"impact_block" . $i});
+		$i++;
+	}
+	return $impact_markup_set;
+}
+
 // 3. INSERT MODULE IN GRID ARCHITECTURE
-function assemble_mentions_full_width($mention_data) {
+function assemble_mentions_full_width($mention_data, $impact_group) {
+	// echo 'i ' . $impact_group;
 	$mention_full  = 			'<div class="inner-container">';
 	$mention_full .= 				'<div class="grid-container soap-corner-full">';
 	// SOAPBOX AND/OR CORNER HERO
 	foreach($mention_data as $data) { 
-		// VERY NEXT DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
 		$mention_full .= 				$data;
 	}
 	$mention_full .= 				'</div>';
 	$mention_full .= 			'</div>';
 	$mention_full .= 			'<div class="inner-container " style="border: 1px solid green;">';
-	// IMPACT STORIES
-						// loop impact storie
-	$mention_full .= 				'<div class="split-grid" style="border: 1px solid orange;">impact stories</div>';
-						// end loop impact storie
+	foreach($impact_group as $impact) {
+		$mention_full .= 				'<div class="split-grid" style="border: 1px solid orange;">';
+		$mention_full .= 					$impact;
+		$mention_full .= 				'</div>';
+	}
 	$mention_full .= 			'</div>';
 	echo $mention_full;
 }
 
-function assemble_mentions_share_space($mention_data) {
+function assemble_mentions_share_space($mention_data, $impact_group) {
 	$mention_share  = '<div class="inner-container" style="border: 1px solid blue;">';
 	$mention_share .= 	'<div class="soap-corner-share-grid" style="border: 1px solid green;">';
 	// SOAPBOX AND/OR CORNER HERO
@@ -323,7 +383,7 @@ function assemble_mentions_share_space($mention_data) {
 	}
 	$mention_share .= 	'</div>';
 	$mention_share .= 	'<div class="impacts-share" style="border: 1px solid orange;">';
-	$mention_share .= 		'<div>impact stories</div>';
+	$mention_share .= 		$impact_group[0];
 	$mention_share .= 	'</div>';
 	$mention_share .= '</div>';
 	echo $mention_share;

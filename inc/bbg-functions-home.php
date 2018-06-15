@@ -123,34 +123,6 @@ function get_homepage_banner_data() {
 	}
 }
 
-function get_impact_stories_data($numPosts) {
-	global $includePortfolioDescription;
-	global $postIDsUsed;
-
-	$impactPostIDs = select_impact_story_id_at_random($postIDsUsed);
-	$qParams = array(
-		'post_type' => array('post'),
-		'posts_per_page' => $numPosts,
-		'orderby' => 'post_date',
-		'order' => 'desc',
-		'post__in' => $impactPostIDs
-	);
-	// return query_posts($qParams);
-	$impact_data = new WP_Query($qParams);
-	return $impact_data;
-
-	if (have_posts()) {
-		while (have_posts()) { 
-			the_post();
-			$includePortfolioDescription = false;
-			$postIDsUsed[] = get_the_ID();
-
-			//build_impact_markup();
-		}
-	}
-	wp_reset_query();
-}
-
 function get_field_post_data($type, $qty) {
 	if ($type == "featured") {
 		$post_data = get_field('homepage_featured_post', 'option');
@@ -223,23 +195,6 @@ function build_featured_post_blocks($feat_post_data) {
 		'excerpt' => get_the_excerpt()
 	);
 	return $feature_blocks;
-}
-
-function build_impact_markup() {
-	$impact_markup  = '<div>';
-	$impact_markup .=  	'<a href="' . get_the_permalink() . '">';
-	if (get_the_post_thumbnail()) {
-		$impact_markup .= 		get_the_post_thumbnail();
-	} else {
-		$impact_markup .= 		'<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
-	}
-	$impact_markup .= 	'</a>';
-	$impact_markup .= 	'<h5><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h5>';
-	$impact_markup .= 	'<p>';
-	$impact_markup .= 		get_the_excerpt();
-	$impact_markup .= 	'</p>';
-	$impact_markup .= '</div>';
-	echo $impact_markup;
 }
 
 ?>
