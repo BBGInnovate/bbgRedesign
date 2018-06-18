@@ -12,34 +12,22 @@ function select_impact_story_id_at_random($used) {
 
 	$custom_query = new WP_Query( $qParams );
 	$allIDs = [];
-	if ( $custom_query -> have_posts() ) :
-		while ( $custom_query -> have_posts() ) : $custom_query -> the_post();
+	if ($custom_query -> have_posts()) {
+		while ( $custom_query -> have_posts() ) {
+			$custom_query -> the_post();
 			$allIDs[] = get_the_ID();
-		endwhile;
-	endif;
+		}
+	}
 
-	if ( count( $allIDs ) > 2 ) {
+	if (count( $allIDs ) > 2) {
 		shuffle( $allIDs );
 		$ids = [];
-		$ids[] = array_pop( $allIDs );
-		$ids[] = array_pop( $allIDs );
+		$ids[] = array_pop($allIDs);
+		$ids[] = array_pop($allIDs);
 	} else {
 		$ids = $allIDs;
 	}
 	return $ids;
-}
-
-function create_threats_post_query_params($numPosts, $used) {
-	$qParams = array(
-		'post_type' => array('post'),
-		'posts_per_page' => $numPosts,
-		'orderby' => 'post_date',
-		'order' => 'desc',
-		'cat' => get_cat_id('Threats to Press'),
-		'post__not_in' => $used
-	);
-	$threats_package = array('params' => $qParams);
-	// return $threats_package;
 }
 
 // CUSTOM FIELD DATA

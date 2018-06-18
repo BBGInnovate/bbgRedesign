@@ -75,7 +75,7 @@ get_header();
 			</section>
 
 			<!-- BBG NEWS -->
-			<section class="outer-container">
+			<section class="outer-container featured-row">
 				<h1 class="header-outliner">BBG News</h1>
 				<div class="grid-container">
 					<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">BBG News</a></h2>
@@ -174,78 +174,12 @@ get_header();
 				echo '</section>';
 			?>
 
-			<!-- THREATS TO PRESS  -->
-			<section id="threats-to-journalism" class="usa-section bbg__ribbon">
-				<div class="usa-grid">
-					<h2 class="bbg__label small"><a href="<?php echo $threatsPermalink; ?>">Threats to Press</a></h2>
-				</div>
-
-				<div class="usa-grid">
-					<div class="threats-box">
-					<?php
-$randomFeaturedThreatsID = false;
-function get_threats_post_data() {
-	$threatsToPressPost = get_field('homepage_threats_to_press_post', 'option');
-	$threatsPermalink = get_permalink(get_page_by_path('threats-to-press'));
-	$randomFeaturedThreatsID = false;
-	
-	if ($threatsToPressPost) {
-		$randKey = array_rand($threatsToPressPost);
-		$randomFeaturedThreatsID = $threatsToPressPost[$randKey];
-	}
-	build_threat_params();
-}
-get_threats_post_data();
-						$threatsUsedPosts = array();
-						$counter = 0;
-						$threat_post_qty = 2;
-
-						function build_threat_params() {
-							if ($randomFeaturedThreatsID) {
-								$qParams = array(
-									'post__in' => array($randomFeaturedThreatsID),
-								);
-							} else {
-								$qParams = array(
-									'post_type' => array('post'),
-									'posts_per_page' => 2,
-									'orderby' => 'post_date',
-									'order' => 'desc',
-									'cat' => get_cat_id('Threats to Press'),
-									'post__not_in' => $threatsUsedPosts
-								);
-							}
-							query_posts($qParams);
-							while (have_posts()) : the_post();
-								$counter++;
-								$id = get_the_ID();
-								$threatsUsedPosts[] = $id;
-								$postIDsUsed[] = $id;
-								$permalink = get_the_permalink();
-
-								$threat_markup  = '<article id="post-' . $id . '">';
-								$threat_markup .= 	'<div class="image-block">';
-								$threat_markup .= 		'<a href="' . $permalink . '" rel="bookmark" tabindex="-1">';
-								$threat_markup .= 			get_the_post_thumbnail();
-								$threat_markup .= 		'</a>';
-								$threat_markup .= 	'</div>';
-								$threat_markup .= 	'<div class="threat-copy">';
-								$threat_markup .= 		'<header>';
-								$threat_markup .= 			'<h5><a href="'.get_the_permalink().'">' . get_the_title() . '</a></h5>';
-								$threat_markup .= 		'</header>';
-								$threat_markup .= 		'<p>' . get_the_excerpt() . '</p>';
-								$threat_markup .= 	'</div>';
-								$threat_markup .= '</article>';
-								echo $threat_markup;
-							endwhile;
-						}
-						if ($counter > $threat_post_qty) {
-							get_threats_post_data();
-						}
-					?>
-					</div>
-				</div>
-			</section>
+			<!-- THREATS TO PRESS RIBBON -->
+			<?php
+				$threats_result = get_threats_to_press_data();
+				$threats_parts = build_threat_parts($threats_result);
+				assemble_threats_to_press_ribbon($threats_parts);
+			?>
 
 			<!-- ENTITY LIST -->
 			<?php echo get_entity_data(); ?>

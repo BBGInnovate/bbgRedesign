@@ -4774,49 +4774,42 @@ ol li:before {
   .bbg-header__site-title--breakline {
     display: inline-block; } }
 
-.page-post-main-content {
-  width: calc(75% - 35px);
-  float: left;
-  margin-left: 20px; }
-
-.page-post-featured-graphic {
-  margin-bottom: 1.5rem; }
-
-.home-feature-primary-post {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-
-.home-recent-posts {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-  .home-recent-posts div:nth-child(2) {
-    display: none; }
+.threats-ribbon {
+  margin-bottom: 6rem;
+  background-image: url("/wp-content/themes/bbgRedesign/img/site-icons/USAGM_tourch.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain; }
+  .threats-ribbon h5, .threats-ribbon .bbg__sidebar__table th, .bbg__sidebar__table .threats-ribbon th {
+    color: #5b8cd3; }
+    .threats-ribbon h5 a:link, .threats-ribbon .bbg__sidebar__table th a:link, .bbg__sidebar__table .threats-ribbon th a:link, .threats-ribbon h5 a:visited, .threats-ribbon .bbg__sidebar__table th a:visited, .bbg__sidebar__table .threats-ribbon th a:visited {
+      color: inherit; }
 
 @media screen and (min-width: 600px) {
-  .page-post-featured-graphic {
-    margin-bottom: 3rem; }
-  .home-feature-primary-post {
-    width: calc(66.66667% - 33.33333px);
+  .threats-ribbon .threat-container .threat-article {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px); }
+  .threats-ribbon .threat-container .threat-image {
+    width: calc(33.33333% - 26.66667px);
     float: left;
     margin-left: 20px; }
-  .home-recent-posts {
-    width: calc(33.33333% - 26.66667px);
+  .threats-ribbon .threat-container .threat-content {
+    width: calc(66.66667% - 33.33333px);
     float: left;
     margin-left: 20px; } }
 
 @media screen and (min-width: 900px) {
-  .home-feature-primary-post {
-    width: calc(66.66667% - 33.33333px);
-    float: left;
-    margin-left: 20px; }
-  .home-recent-posts {
-    width: calc(33.33333% - 26.66667px);
-    float: left;
-    margin-left: 20px; }
-    .home-recent-posts div:nth-child(2) {
-      display: block; } }
+  .threats-ribbon .threat-container {
+    margin-left: calc(8.33333% - 21.66667px + 40px); }
+    .threats-ribbon .threat-container .threat-image {
+      width: calc(25% - 25px);
+      float: left;
+      margin-left: 20px; }
+    .threats-ribbon .threat-container .threat-content {
+      width: calc(75% - 35px);
+      float: left;
+      margin-left: 20px; } }
 
 .page-sidebar {
   width: calc(25% - 25px);
@@ -5805,6 +5798,21 @@ div.banner_readmore h6 a:visited {
   .bbg__infobox article {
     margin-bottom: 1rem; }
 
+.page-post-featured-graphic {
+  margin-bottom: 3rem; }
+
+.featured-row .home-feature-primary-post {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+.featured-row .home-recent-posts {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+  .featured-row .home-recent-posts div:nth-child(2) {
+    display: none; }
+
 .mentions .soap-corner-full {
   width: calc(100% - 40px);
   float: left;
@@ -6092,24 +6100,38 @@ section.usa-section.bbg-banner__section {
     background-image: linear-gradient(to bottom, white, rgba(255, 255, 255, 0)); }
   .bbg-banner__cutline {
     text-align: right !important; }
+  .featured-row .home-feature-primary-post {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; }
+  .featured-row .home-recent-posts {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px; }
   .bbg__event-announcement .bbg__event-announcement__excerpt,
   .bbg__advisory-announcement .bbg__event-announcement__excerpt {
     display: none; }
   .bbg__event-announcement .bbg__event-announcement__title, .bbg__advisory-announcement .bbg__event-announcement__title {
-    font-size: 2.4rem; }
-  .bbg__home__recent-posts .bbg__secondary-stories .bbg-blog__excerpt-title--list {
-    font-size: 2.5rem; } }
+    font-size: 2.4rem; } }
 
 @media screen and (min-width: 900px) {
-  .bbg-banner .bbg-banner__container {
-    border-left: 1px solid rgba(240, 240, 240, 0.4);
-    border-right: 1px solid rgba(240, 240, 240, 0.4);
-    height: 100%; }
+  .page-post-featured-graphic {
+    margin-bottom: 6rem; }
   .bbg__event-announcement .bbg__event-announcement__excerpt,
   .bbg__advisory-announcement .bbg__event-announcement__excerpt {
     display: block; }
   .bbg__event-announcement .bbg__event-announcement__title, .bbg__advisory-announcement .bbg__event-announcement__title {
-    font-size: 2rem; } }
+    font-size: 2rem; }
+  .featured-row .home-feature-primary-post {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; }
+  .featured-row .home-recent-posts {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px; }
+    .featured-row .home-recent-posts div:nth-child(2) {
+      display: block; } }
 
 @media screen and (min-width: 1201px) {
   .bbg-banner {

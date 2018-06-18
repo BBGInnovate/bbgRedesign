@@ -4,6 +4,17 @@
 // 3. MEDIUM LARGE SCREEN
 // 4. LARGE SCREEN
 
+
+.page-post-featured-graphic {margin-bottom: 3rem;}
+
+.featured-row {
+	.home-feature-primary-post {@include grid-column(12);}
+	.home-recent-posts {
+		@include grid-column(12);
+		div:nth-child(2) {display: none;}
+	}
+}
+
 // MENTIONS SECTION (SOAPBOX, CORNER HERO, IMPACT STORIES)
 // STRUCTURE
 .mentions {
@@ -294,31 +305,32 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 	}
 	.bbg-banner__cutline {text-align: right !important;}
 
+	.featured-row {
+		.home-feature-primary-post {@include grid-column(8);}
+		.home-recent-posts {@include grid-column(4);}
+	}
+
 	.bbg__event-announcement, 
 	.bbg__advisory-announcement {
 		.bbg__event-announcement__excerpt {display: none;}
 		.bbg__event-announcement__title {font-size: 2.4rem;}
 	}
-	.bbg__home__recent-posts {
-		.bbg__secondary-stories {
-			.bbg-blog__excerpt-title--list {font-size: 2.5rem;}
-		}
-	}
 }
 
 // 3. MEDIUM LARGE SCREEN
 @include media($medium-large-screen) {
-	.bbg-banner {
-		.bbg-banner__container {
-			border-left: 1px solid rgba(240, 240, 240, .4);
-			border-right: 1px solid rgba(240, 240, 240, .4);
-			height: 100%;
-		}
-	}
+	.page-post-featured-graphic {margin-bottom: 6rem;}
 	.bbg__event-announcement, 
 	.bbg__advisory-announcement {
 		.bbg__event-announcement__excerpt {display: block;}
 		.bbg__event-announcement__title {font-size: 2rem;}
+	}
+	.featured-row {
+		.home-feature-primary-post {@include grid-column(8);}
+		.home-recent-posts {
+			@include grid-column(4);
+			div:nth-child(2) {display: block;}
+		}
 	}
 }
 

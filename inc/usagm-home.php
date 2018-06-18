@@ -230,6 +230,66 @@ function get_impact_stories_data($qty) {
 	return $post_id_group;
 }
 
+function getThreatsPostQueryParams($numPosts, $used) {
+	$qParams = array(
+		'post_type' => array('post'),
+		'posts_per_page' => $numPosts,
+		'orderby' => 'post_date',
+		'order' => 'desc',
+		'cat' => get_cat_id('Threats to Press'),
+		'post__not_in' => $used
+	);
+	return $qParams;
+}
+
+function get_threats_to_press_data() {
+	$threat_query_id_set = array();
+	$threatsToPressPost = get_field('homepage_threats_to_press_post', 'option');
+	$randomFeaturedThreatsID = false;
+
+	if ($threatsToPressPost) {
+		$randKey = array_rand($threatsToPressPost);
+		$randomFeaturedThreatsID = $threatsToPressPost[$randKey];
+	}
+
+	$threatsUsedPosts = array();
+	if ($randomFeaturedThreatsID) {
+		$qParams = array(
+			'post__in' => array(1, $randomFeaturedThreatsID)
+		);
+	} else {
+		$qParams = getThreatsPostQueryParams($threatsUsedPosts);
+	}
+	query_posts($qParams);
+
+	if (have_posts()) {
+		while (have_posts()) {
+			the_post();
+			$id = get_the_ID();
+			$threatsUsedPosts[] = $id;
+			$postIDsUsed[] = $id;
+			array_push($threat_query_id_set, $id);
+		}
+	}
+	wp_reset_query();
+
+	// ADDITIONAL THREAT POSTS
+	$maxPostsToShow = 1;
+	$qParams = getThreatsPostQueryParams($maxPostsToShow, $threatsUsedPosts);
+	query_posts($qParams);
+
+	if (have_posts()) {
+		$counter = 0;
+		while (have_posts()) : the_post();
+			$counter++;
+			$postIDsUsed[] = get_the_ID();
+			array_push($threat_query_id_set, get_the_ID());
+		endwhile;
+	}
+	wp_reset_query();
+
+	return $threat_query_id_set;
+}
 // 2. BUILD MODULES
 //    Make parts (complete tags, logic, etc) then assemble module
 function build_soapbox_parts($soap_data, $layout) {
@@ -354,6 +414,36 @@ function build_impact_markup($impact_data) {
 	return $impact_markup_set;
 }
 
+function build_threat_parts($threat_data) {
+	$threat_markup_set = array();
+	$i = 0;
+	foreach($threat_data as $threat_id) {
+		$cur_threat = get_post($threat_id);
+		$threat_image  = '<a href="' . get_the_permalink($threat_id) . '" rel="bookmark" tabindex="-1">';
+		$threat_image .= 	get_the_post_thumbnail($threat_id);
+		$threat_image .= '</a>';
+
+		$threat_content  = '<h5><a href="' . get_the_permalink($threat_id) . '">' . $cur_threat->post_title . '</a></h5>';
+		$threat_content .= '<p>' . wp_trim_words($cur_threat->post_content, 40) . '</p>';
+
+		$threat_markup  = '<div class="threat-article">';
+		$threat_markup .= 	'<div class="inner-container">';
+		$threat_markup .= 		'<div class="threat-image">';
+		$threat_markup .= 			$threat_image;
+		$threat_markup .= 		'</div>';
+		$threat_markup .= 		'<div class="threat-content">';
+		$threat_markup .= 			$threat_content;
+		$threat_markup .= 		'</div>';
+		$threat_markup .= 	'</div>';
+		$threat_markup .= '</div>';
+
+		${"threat_block" . $i} = $threat_markup;
+		array_push($threat_markup_set, ${"threat_block" . $i});
+		$i++;
+	}
+	return $threat_markup_set;
+}
+
 // 3. INSERT MODULE IN GRID ARCHITECTURE
 //    This is the sections outer grid with slots for modules
 // Mention(a): BOTH SOAPBOX AND CORNER HERO
@@ -391,4 +481,20 @@ function assemble_mentions_share_space($mention_data, $impact_group) {
 	$mention_share .= 	'</div>';
 	$mention_share .= '</div>';
 	echo $mention_share;
+}
+
+function assemble_threats_to_press_ribbon($threat_data) {
+	$theat_ribbon  = '<div class="bbg__ribbon threats-ribbon">';
+	$theat_ribbon .= 	'<div class="outer-container">';
+	$theat_ribbon .= 		'<div class="grid-container">';
+	$theat_ribbon .= 			'<h2>Threats to Press</h2>';
+	$theat_ribbon .= 			'<div class="threat-container">';
+	foreach ($threat_data as $data) {
+		$theat_ribbon .= 			$data;
+	}
+	$theat_ribbon .= 			'</div>';
+	$theat_ribbon .= 		'</div>';
+	$theat_ribbon .= 	'</div>';
+	$theat_ribbon .= '</div>';
+	echo $theat_ribbon;
 }
