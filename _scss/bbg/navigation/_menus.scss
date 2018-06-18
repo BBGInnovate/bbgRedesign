@@ -1,3 +1,6 @@
+// 2. SMALL SCREEN
+// 3. MEDIUM-LARGE SCREEN
+
 // TOP NAV
 .menu-all-pages-container {
 	margin: 0 auto;
@@ -18,7 +21,7 @@ body:not(.home) {
 	display: block;
 	width: 100%;
 
-	#nav-logo {width: 20rem;}
+	#nav-logo {width: 32rem;}
 
 	ul {
 		@include unstyled-list;
@@ -62,8 +65,6 @@ body:not(.home) {
 		box-shadow: none;
 		margin: 0;
 	}
-
-	.bbg__top-nav__link-text {width: calc(100% - 5rem);}
 }
 
 .menu-toggle {
@@ -238,7 +239,7 @@ body:not(.home) {
 }
 
 
-// MEDIA QUERIES
+// 2. SMALL SCREEN
 @include media($small-screen) {
 	.menu-toggle {
 		padding: {
@@ -251,10 +252,9 @@ body:not(.home) {
 		display: block;
 		color: $color-tan-light
 	}
-
 }
 
-
+// 3. MEDIUM-LARGE SCREEN
 @include media($medium-large-screen) {
 	.bbg__main-navigation {
 		ul {font-size: 0.9em;}
@@ -330,7 +330,7 @@ body:not(.home) {
 					float: none;
 					padding-left: 0;
 
-					a {padding-left: 2.2rem;}
+					a {padding: 0 2.5rem;}
 					a:before {content: "";}
 				}
 			}
