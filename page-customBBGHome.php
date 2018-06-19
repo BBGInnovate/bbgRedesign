@@ -186,11 +186,11 @@ get_header();
 				// ["entity-main" | "entity-side"]
 				$entity_placement = "entity-main";
 				$entity_data = get_entity_data($entity_placement);
-				echo '<div class="outer-container">';
-				foreach($entity_data as $entity) {
-					echo $entity;
-				}
-				echo '</div>';
+				// echo '<div class="outer-container">';
+				// foreach($entity_data as $entity) {
+				// 	echo $entity;
+				// }
+				// echo '</div>';
 			?>
 
 			<!-- Quotation -->

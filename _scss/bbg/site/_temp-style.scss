@@ -1,6 +1,17 @@
 // COLUMNS MAIN, SIDEBAR
 // .page-post-main-content {@include grid-column(9);}
 
+// RIBBONS
+.bbg__ribbon {
+	h2 {
+		position: absolute;
+		color: $white;
+		padding: 1rem;
+		margin: 0 0 1.5rem 0;
+		background-color: $color-red;
+	}
+}
+
 // HOMEPAGE
 .contain-entity {
 	@include grid-column(12);
@@ -38,17 +49,11 @@
 			@include grid-column(12);
 			img {width: 50%;}
 		}
-		.entity-desc {
-			@include grid-column(12);
-		}
+		.entity-desc {@include grid-column(12);}
 	}
 	.entity-side {
-		.entity-icon {
-			@include grid-column(1);
-		}
-		.entity-desc {
-			@include grid-column(11);
-		}
+		.entity-icon {@include grid-column(1);}
+		.entity-desc {@include grid-column(11);}
 	}
 }
 

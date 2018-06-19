@@ -224,7 +224,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 		<!-- NAVIGATION BAR -->
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
 			<h1 class="header-outliner">Navigation</h1>
-			<a id="nav-logo" href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/usagm-interim-logo.png"></a>
+			<a id="nav-logo" href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/USAMG-temp-logo.jpg"></a>
 			<?php
 				$btnSearch = "<input alt='Search' type='image' class='bbg__main-navigation__search-toggle' src='" . get_template_directory_uri() . "/img/search.png'>";
 				$btnSearch = "";
