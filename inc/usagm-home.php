@@ -290,6 +290,31 @@ function get_threats_to_press_data() {
 
 	return $threat_query_id_set;
 }
+
+function get_entity_data($grid_class) {
+	$entityParentPage = get_page_by_path('networks');
+	$entity_id_group = array();
+	$qParams = array(
+		'post_type' => array('page'),
+		'posts_per_page' => -1,
+		'post_parent' => $entityParentPage->ID,
+		'orderby' => 'meta_value_num',
+		'meta_key' => 'entity_year_established',
+		'order' => 'ASC'
+	);
+	$custom_query = new WP_Query($qParams);
+
+	if ($custom_query -> have_posts()) {
+		while($custom_query -> have_posts()) {
+			$custom_query -> the_post();
+			array_push($entity_id_group, get_the_ID());
+		}
+
+	}
+	array_push($entity_id_group, $grid_class);
+	$entity_package = array('id_group' => $entity_id_group, 'placement' => $grid_class);
+	return build_entity_parts($entity_package);
+}
 // 2. BUILD MODULES
 //    Make parts (complete tags, logic, etc) then assemble module
 function build_soapbox_parts($soap_data, $layout) {
@@ -444,6 +469,51 @@ function build_threat_parts($threat_data) {
 	return $threat_markup_set;
 }
 
+function build_entity_parts($entity_data) {
+	$placement_class = $entity_data['placement'];
+	$entity_set = array();
+	$i = 0;
+	foreach($entity_data['id_group'] as $entity_id) {
+		$id = $entity_id;
+		$fullName = get_post_meta($id, 'entity_full_name', true);
+		$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
+		$abbreviation = str_replace("/", "",$abbreviation);
+
+		$description = get_post_meta($id, 'entity_description', true);
+		$description = apply_filters('the_content', $description);
+		
+		$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
+		$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
+
+		if (!empty($fullName)) {
+			$entity_image  = '<a href="' . $link . '" tabindex="-1">';
+			$entity_image .= 	'<img src="' . $imgSrc . '">';
+			$entity_image .= '</a>';
+
+			$entity_content  = 	'<h5><a href="' . $link . '">' . $fullName . '</a></h5>';
+			$entity_content .= 	'<p class="">' . $description . '</p>';
+
+			$entity_markup  = '<div class="contain-entity ' . $placement_class . '">';
+			$entity_markup .= 	'<div class="nest-container">';
+			$entity_markup .= 		'<div class="inner-container">';
+			$entity_markup .= 			'<div class="entity-icon">';
+			$entity_markup .= 				$entity_image;
+			$entity_markup .= 			'</div>';
+			$entity_markup .= 			'<div class="entity-desc">';
+			$entity_markup .= 				$entity_content;
+			$entity_markup .= 			'</div>';
+			$entity_markup .= 		'</div>';
+			$entity_markup .= 	'</div>';
+			$entity_markup .= '</div>';
+
+			${"entity_block" . $i} = $entity_markup;
+			array_push($entity_set, ${"entity_block" . $i});
+			$i++;
+		}
+	}
+	return $entity_set;
+}
+
 // 3. INSERT MODULE IN GRID ARCHITECTURE
 //    This is the sections outer grid with slots for modules
 // Mention(a): BOTH SOAPBOX AND CORNER HERO
@@ -498,3 +568,47 @@ function assemble_threats_to_press_ribbon($threat_data) {
 	$theat_ribbon .= '</div>';
 	echo $theat_ribbon;
 }
+
+// function entity_entity($data) {
+// 	$entity_markup  = '<section id="entities" class="">';
+// 	$entity_markup .= 	'<h1 class="header-outliner">Entities</h1>';
+// 	$entity_markup .= 	'<div class="usa-grid">';
+// 	$entity_markup .= 		'<h2><a href="' . get_permalink(get_page_by_path('networks')) . '">Our Networks</a></h2>';
+// 	$entity_markup .= 		'<div class="usa-intro bbg__broadcasters__intro">';
+// 	$entity_markup .= 			'<h3 class="usa-font-lead">Every week, more than ' . do_shortcode('[audience]') . ' listeners, viewers and internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</h3>';
+// 	$entity_markup .= 		'</div>';
+// 	$entity_markup .= 		'<div id="home-entities">';
+
+// 	if ($data -> have_posts()) {
+// 		$entity_markup .= '<div id="entity-grid">';
+
+// 		while ($data -> have_posts())  {
+// 			$data -> the_post();
+// 			$id = get_the_ID();
+// 			$fullName = get_post_meta($id, 'entity_full_name', true);
+// 			if ($fullName != "") {
+// 				$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
+// 				$abbreviation = str_replace("/", "",$abbreviation);
+// 				$description = get_post_meta($id, 'entity_description', true);
+// 				$description = apply_filters('the_content', $description);
+// 				$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
+// 				$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
+
+// 				$entity_markup .= '<article class="home_entity">';
+// 				$entity_markup .= 	'<div class="bbg__entity__icon" >';
+// 				$entity_markup .= 		'<a href="' . $link . '" tabindex="-1">';
+// 				$entity_markup .= 			'<div class="bbg__entity__icon__image" style="background-image: url(' . $imgSrc . ');"></div>';
+// 				$entity_markup .= 		'</a>';
+// 				$entity_markup .= 	'</div>';
+// 				$entity_markup .= 	'<div>';
+// 				$entity_markup .= 		'<h5><a href="' . $link . '">' . $fullName . '</a></h5>';
+// 				$entity_markup .= 			'<p class="">' . $description . '</p>';
+// 				$entity_markup .= 	'</div>';
+// 				$entity_markup .= '</article>';
+// 			}
+// 		}
+// 		$entity_markup .= 	'</div>'; // END HOME ENTITIES
+// 		$entity_markup .= '</div></section>';
+// 		// return $entity_markup;
+// 	}
+// }

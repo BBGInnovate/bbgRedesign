@@ -182,7 +182,16 @@ get_header();
 			?>
 
 			<!-- ENTITY LIST -->
-			<?php echo get_entity_data(); ?>
+			<?php
+				// ["entity-main" | "entity-side"]
+				$entity_placement = "entity-main";
+				$entity_data = get_entity_data($entity_placement);
+				echo '<div class="outer-container">';
+				foreach($entity_data as $entity) {
+					echo $entity;
+				}
+				echo '</div>';
+			?>
 
 			<!-- Quotation -->
 			<section class="usa-section ">

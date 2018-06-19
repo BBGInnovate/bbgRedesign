@@ -94,6 +94,18 @@
 		.soap-corner {padding: 1.5rem 0;}
 	}
 }
+
+.threats-ribbon {
+	h5 {
+		color: $color-light-blue;
+		a:link, a:visited {color: inherit;}
+	}
+	margin-bottom: 6rem;
+	background-image: url('/wp-content/themes/bbgRedesign/img/site-icons/USAGM_tourch.png');
+	background-repeat: no-repeat;
+	background-position: left;
+	background-size: contain;
+}
 // END MENTIONS SECTION
 
 
@@ -310,6 +322,14 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 		.home-recent-posts {@include grid-column(4);}
 	}
 
+	.threats-ribbon {
+		.threat-container {
+			.threat-article {@include grid-collapse;}
+			.threat-image {@include grid-column(4);}
+			.threat-content {@include grid-column(8);}
+		}
+	}
+
 	.bbg__event-announcement, 
 	.bbg__advisory-announcement {
 		.bbg__event-announcement__excerpt {display: none;}
@@ -330,6 +350,14 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 		.home-recent-posts {
 			@include grid-column(4);
 			div:nth-child(2) {display: block;}
+		}
+	}
+
+	.threats-ribbon {
+		.threat-container {
+			@include grid-push(1);
+			.threat-image {@include grid-column(3);}
+			.threat-content {@include grid-column(9);}
 		}
 	}
 }
