@@ -72,14 +72,10 @@ function get_umbrella_content_data($raw_umbrella_content) {
 // BUILD PARTS
 function build_umbrella_main_parts($umbrella_main_data) {
 	if ($umbrella_main_data['header'] != "") {
-		$header  = '<h2>';
-		$header .= 	$umbrella_main_data['header'];
-		$header .= '</h2>';
+		$header  = '<h2>' . $umbrella_main_data['header'] . '</h2>';
 	}
 	if ($umbrella_main_data['intro_text'] != "") {
-		$overhead_text  = '<p class="lead-in">';
-		$overhead_text .= 	$umbrella_main_data['intro_text'];
-		$overhead_text .= '</p>';
+		$overhead_text  = '<p class="lead-in">' . $umbrella_main_data['intro_text'] . '</p>';
 	}
 	$umbrella_main_package = array('main_header' => $header, 'intro_text' => $overhead_text);
 	return $umbrella_main_package;
@@ -90,35 +86,27 @@ function build_umbrella_content_parts($umbrella_content_data, $grid) {
 	$post_title = $umbrella_content_data['link'][0]->post_title;
 	$post_excerpt = $umbrella_content_data['link'][0]->post_excerpt;
 
-	$header  = '<h2>';
-	$header .= 	$umbrella_content_data['column_title'];
-	$header .= '</h2>';
+	$header  = '<h2>' . $umbrella_content_data['column_title'] . '</h2>';
 
 	// IMAGES TAKING TOO LONG TO LOAD
 	// LOAD OTHER CROP SIZE?
 	$post_image  = 	'<a href="' . get_the_permalink($post_id) . '" rel="bookmark" tabindex="-1">';
-	$post_image .= 		'<div class="umbrella-bg-image" style="background-image: url(\'';
-	$post_image .= 			wp_get_attachment_url(get_post_thumbnail_id($post_id));
-	$post_image .= 		'\')"></div>';
+	$post_image .= 		'<div class="umbrella-bg-image" ';
+	$post_image .= 			'style="background-image: url(\'' .wp_get_attachment_url(get_post_thumbnail_id($post_id)) . '\')">';
+	$post_image .= 		'</div>';
 	$post_image .= 	'</a>';
 
 	if (!empty($umbrella_content_data['item_title'])) {
-		$title  = '<h4>';
-		$title .= 	$umbrella_content_data['item_title'];
-		$title .= '</h4>';
+		$title  = '<h4>' . $umbrella_content_data['item_title'] . '</h4>';
 	}
 	
 	if ($umbrella_content_data['include_title']) {
 		$header = "";
+		$title  = '<h4>' . $post_title . '</h4>';
 
-		$title  = '<h4>';
-		$title .= 	$post_title;
-		$title .= '</h4>';
 	}
 	if ($umbrella_content_data['include_excerpt']) {
-		$excerpt  = '<p>';
-		$excerpt .= 	$post_excerpt;
-		$excerpt .= '</p>';
+		$excerpt  = '<p>' . $post_excerpt . '</p>';
 	}
 
 	// MARKUP
@@ -137,21 +125,17 @@ function build_umbrella_content_parts($umbrella_content_data, $grid) {
 
 // INSERT PARTS INTO GRID
 function assemble_umbrella_content_section($umbrella_main_parts, $umbrella_content_chunks) {
-	$umbrella_content_markup  = '<div class="outer-container"">';
+	$umbrella_content_markup  = '<div class="outer-container">';
 	$umbrella_content_markup .= 	'<div class="inner-container">';
-	$umbrella_content_markup .= 		'<div class="grid-container">';
-	if (!empty($umbrella_main_parts)) {
-		$umbrella_content_markup .= 	'<div class="inner-container">';
-		$umbrella_content_markup .= 		'<div class="grid-container">';
-		$umbrella_content_markup .= 			$umbrella_main_parts['main_header'];
-		$umbrella_content_markup .= 			$umbrella_main_parts['intro_text'];
-		$umbrella_content_markup .= 		'</div>';
+	if (!empty($umbrella_main_parts['intro_text'])) {
+		$umbrella_content_markup .= 	'<div class="grid-container">';
+		$umbrella_content_markup .= 		$umbrella_main_parts['main_header'];
+		$umbrella_content_markup .= 		$umbrella_main_parts['intro_text'];
 		$umbrella_content_markup .= 	'</div>';
 	}
 	foreach($umbrella_content_chunks as $umbrella_block) {
 		$umbrella_content_markup .= 	$umbrella_block['markup'];
 	}
-	$umbrella_content_markup .= 		'</div>';
 	$umbrella_content_markup .= 	'</div>';
 	$umbrella_content_markup .= '</div>';
 
