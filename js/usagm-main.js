@@ -10,8 +10,23 @@ function featuredMediaHD() {
 	$('.bbg-banner').height(dynHeight);
 }
 featuredMediaHD();
+$(window).on('resize', function() {
+	featuredMediaHD();
+});
 
-// KEEP PROFILE LIST FROM CHANGING SIDES ON RESIZE
+// KEEPS BACKGROUND IMAGES AND A CONSITENTS SIZE
+function sizeBGimages() {
+	var img_scale = 1.75;
+	var containerW = $('.umbrella-bg-image').width();
+	var dynHeight = containerW / img_scale;
+	$('.umbrella-bg-image').height(dynHeight);
+}
+sizeBGimages();
+$(window).on('resize', function() {
+	sizeBGimages();
+});
+
+// KEEPS PROFILE LIST DIVS FROM CHANGING SIDES ON RESIZE
 function mgmtProfileSizing() {
 	if ($('.mgmt-profile').length > 0) {
 		var seniorProfile = $('.mgmt-profile');
@@ -23,15 +38,10 @@ function mgmtProfileSizing() {
 		});
 		var tallestProfileHeight = Math.max.apply(Math, profileHeights);
 		seniorProfile.css('height', tallestProfileHeight);
-		console.log(tallestProfileHeight);
 	}
 }
 mgmtProfileSizing();
-
-
-
 $(window).on('resize', function() {
-	featuredMediaHD();
 	mgmtProfileSizing();
 });
 
