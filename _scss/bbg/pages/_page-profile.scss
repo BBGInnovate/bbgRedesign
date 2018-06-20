@@ -165,10 +165,7 @@
 .bbg__profile-excerpt__photo {
 	border: $border-solid;
 	float: left;
-	margin: {
-		top: $site-margins-small;
-		right: $site-margins-small;
-	}
+	margin-right: $site-margins-small;
 	max-width: 150px;
 	width: 30%;
 }

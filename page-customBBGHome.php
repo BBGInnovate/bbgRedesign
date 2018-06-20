@@ -181,16 +181,11 @@ get_header();
 				assemble_threats_to_press_ribbon($threats_parts);
 			?>
 
-			<!-- ENTITY LIST -->
+			<!-- NETWORK ENTITY LIST -->
 			<?php
 				// ["entity-main" | "entity-side"]
 				$entity_placement = "entity-main";
 				$entity_data = get_entity_data($entity_placement);
-				// echo '<div class="outer-container">';
-				// foreach($entity_data as $entity) {
-				// 	echo $entity;
-				// }
-				// echo '</div>';
 			?>
 
 			<!-- Quotation -->

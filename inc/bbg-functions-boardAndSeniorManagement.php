@@ -1,211 +1,220 @@
 <?php
+function outputBoardMembers($showActive) {
+	// $showActive SHOULD BE A 0 or 1 PASSED IN 'active' IN THE SHORTCODE
+	$board_page = get_page_by_title('The Board');
+	$the_post_id = $board_page -> ID;
 
-	function outputBoardMembers( $showActive ) {
-		//$showActive should be a 0 or 1 passed in a 'active' in the shortcode
-		$boardPage = get_page_by_title( 'The Board' );
-		$thePostID = $boardPage -> ID;
+	$former_css = "";
+	$former_governors_link = "";
 
-		$formerCSS = "";
-		$formerGovernorsLink = "";
+	if ($showActive == 0) {
+		$former_css = " bbg__former-member";
+	}
 
-		if ( $showActive == 0 ) {
-			$formerCSS = " bbg__former-member";
+	$qParams = array(
+		'post_type' => array('page'),
+		'post_status' => array('publish'),
+		'post_parent' => $the_post_id,
+		'order' => 'ASC',
+		'orderby' => 'meta_value',
+		'meta_key' => 'last_name',
+		'posts_per_page' => 100
+	);
+	$custom_query = new WP_Query($qParams);
+
+	// DEFAULT ADDS SPACE ABOVE HEADER IF NO NO IMAGE SET
+	$featuredImageClass = " bbg__article--no-featured-image";
+
+	$boardStr = "";
+	$chairpersonStr = "";
+	$secretaryStr = "";
+	$underSecretaryStr = "";
+	$actingStr = "";
+
+	while ($custom_query -> have_posts())  {
+		$custom_query -> the_post();
+		$id = get_the_ID();
+		$active = get_post_meta($id, 'active', true);
+		if (!isset($active) || $active == "" || !$active) {
+			$active = 0;
 		}
+		if ((get_the_title() != "Special Committees") && ($showActive == $active)) {
+			$isChairperson = get_post_meta($id, 'chairperson', true);
+			$isSecretary = get_post_meta($id, 'secretary_of_state', true);
+			$isUnderSecretary = get_post_meta($id, 'under_secretary_of_state', true);
+			$isActing = get_post_meta($id, 'acting', true);
 
-		$qParams = array(
-			'post_type' => array( 'page' )
-			,'post_status' => array( 'publish' )
-			,'post_parent' => $thePostID
-			,'order' => 'ASC'
-			,'orderby' => 'meta_value'
-			,'meta_key' => 'last_name'
-			,'posts_per_page' => 100
-		);
-		$custom_query = new WP_Query( $qParams );
+			$email = get_post_meta($id, 'email', true);
+			$phone = get_post_meta($id, 'phone', true);
+			$twitterProfileHandle = get_post_meta($id, 'twitter_handle', true);
+			$profilePhotoID = get_post_meta($id, 'profile_photo', true);
+			$profilePhoto = "";
 
-		//Default adds a space above header if there's no image set
-		$featuredImageClass = " bbg__article--no-featured-image";
-
-		$boardStr = "";
-		$chairpersonStr = "";
-		$secretaryStr = "";
-		$underSecretaryStr = "";
-		$actingStr = "";
-
-		while ( $custom_query -> have_posts() )  {
-			$custom_query -> the_post();
-			$id = get_the_ID();
-			$active = get_post_meta( $id, 'active', true );
-			if ( !isset($active) || $active == "" || !$active ) {
-				$active = 0;
+			if ($profilePhotoID) {
+				$profilePhoto = wp_get_attachment_image_src($profilePhotoID , 'mugshot');
+				$profilePhoto = $profilePhoto[0];
 			}
-			if ( ( get_the_title() != "Special Committees" ) && ( $showActive == $active ) ) {
-				$isChairperson = get_post_meta( $id, 'chairperson', true );
-				$isSecretary = get_post_meta( $id, 'secretary_of_state', true );
-				$isUnderSecretary = get_post_meta( $id, 'under_secretary_of_state', true );
-				$isActing = get_post_meta( $id, 'acting', true );
+			$profileName = get_the_title();
 
-				$email = get_post_meta( $id, 'email', true );
-				$phone = get_post_meta( $id, 'phone', true );
-				$twitterProfileHandle = get_post_meta( $id, 'twitter_handle', true );
-				$profilePhotoID = get_post_meta( $id, 'profile_photo', true );
-				$profilePhoto = "";
+			$occupation = '<span class="bbg__profile-excerpt__occupation">';
 
-				if ( $profilePhotoID ) {
-					$profilePhoto = wp_get_attachment_image_src( $profilePhotoID , 'mugshot' );
-					$profilePhoto = $profilePhoto[0];
+			if ($isActing && !$isUnderSecretary && !$isSecretary) {
+				$occupation .= 'Acting ';
+			} else if ($isActing && $isUnderSecretary) {
+				$occupation .= 'Acting ';
+				$occupation .= get_field('occupation', $id);
+			}
+
+			if ($isChairperson) {
+				$occupation .= 'Chairman of the Board';
+			} else if ($isSecretary) {
+				$occupation .= 'Ex officio board member';
+			}
+			$occupation .= '</span>';
+
+			$b  = '<div class="mgmt-profile grid-half"';
+			if ($isUnderSecretary) {
+				$b .= ' style="clear: both; border-top: 1px solid #f1f1f1; padding-top: 1.5em"';
+			}
+			$b .= '>';
+
+			if (!$isUnderSecretary) {
+				$member_name  = '<h4 class="bbg__profile-excerpt__name">';
+				$member_name .= 	'<a href="' . get_the_permalink() . '">';
+				if ($isSecretary && $isActing) {
+					$member_name .= 	'Acting ';
 				}
-				$profileName = get_the_title();
+				$member_name .= 		$profileName;
+				$member_name .= 	'</a>';
+				$member_name .= '</h4>';
+				$b .= $member_name;
+			}
 
-				$occupation = '<span class="bbg__profile-excerpt__occupation">';
-
-				if ($isActing && !$isUnderSecretary && !$isSecretary) {
-					$occupation .= 'Acting ';
-				} else if ($isActing && $isUnderSecretary) {
-					$occupation .= 'Acting ';
-					$occupation .= get_field('occupation', $id);
-				}
-
-				if ($isChairperson) {
-					$occupation .= 'Chairman of the Board';
-				} else if ($isSecretary) {
-					$occupation .= 'Ex officio board member';
-				}
-				$occupation .= '</span>';
-
-				$b  = '<div class="bbg__profile-excerpt bbg-grid--1-2-2"';
+			if ($profilePhoto != "") {
+				$member_photo  = '<a href="' . get_the_permalink() . '">';
+				$member_photo .= 	'<img src="';
+				$member_photo .= 		$profilePhoto;
+				$member_photo .= 		'" class="bbg__profile-excerpt__photo';
+				$member_photo .= 		$former_css;
+				$member_photo .= 		'" alt="Photo of BBG Governor ';
+				$member_photo .= 		get_the_title();
+				$member_photo .= 		'"';
 				if ($isUnderSecretary) {
-					$b .= ' style="clear: both; border-top: 1px solid #f1f1f1; margin-top: -1.5em"';
+					$member_photo .= ' style="width: 18%"';
 				}
-				$b .= '>';
-				if (!$isUnderSecretary) {
-					$b .= 	'<h3 class="bbg__profile-excerpt__name">';
-					$b .= 		'<a href="';
-					$b .= 			get_the_permalink();
-					$b .= 			'">';
-					if ($isSecretary && $isActing) {
-						$b .= 		'Acting ';
-					}
-					$b .= 			$profileName;
-					$b .= 		'</a>';
-					$b .= 	'</h3>';
-				}
+				$member_photo .= 	' />';
+				$member_photo .= '</a>';
+				$b .= $member_photo;
+			}
+			if (!$isUnderSecretary) {
+				$member_position = '<p>' . $occupation . get_the_excerpt() . '</p>';
+				$b .= $member_position;
+			} else {
+				$memeber_content .= '<h4 class="bbg__profile-excerpt__name" style="clear: none;">';
+				$memeber_content .= 	'<a href="' . get_the_permalink() . '">' . $profileName . '</a>';
+				$memeber_content .= '</h4>';
+				$memeber_content .= '<p style="margin-top: 0;">' . get_the_excerpt() . '</p>';
+				$b .= $memeber_content;
+			}
+			$b .= '</div><!-- .bbg__profile-excerpt -->';
 
-				//Only show a profile photo if it's set.
-				if ($profilePhoto != "") {
-					$b .= '<a href="' . get_the_permalink() . '">';
-					$b .= 	'<img src="';
-					$b .= 		$profilePhoto;
-					$b .= 		'" class="bbg__profile-excerpt__photo';
-					$b .= 		$formerCSS;
-					$b .= 		'" alt="Photo of BBG Governor ';
-					$b .= 		get_the_title();
-					$b .= 		'"';
-					if ($isUnderSecretary) {
-						$b .= ' style="width: 18%"';
-					}
-					$b .= 	' />';
-					$b .= '</a>';
-				}
-				if (!$isUnderSecretary) {
-					$b .= 	'<p>' . $occupation . get_the_excerpt() . '</p>';
-				} else {
-					$b .= 	'<h3 class="bbg__profile-excerpt__name" style="clear: none;">';
-					$b .= 		'<a href="' . get_the_permalink() . '">' . $profileName . '</a>';
-					$b .= 	'</h3>';
-					$b .= 	'<p style="margin-top: 0;">' . get_the_excerpt() . '</p>';
-				}
-				$b .= '</div><!-- .bbg__profile-excerpt -->';
-
-				if ( $isChairperson ) {
-					$chairpersonStr = $b;
-				} else if ( $isSecretary ) {
-					$secretaryStr = $b;
-				} else if ($isUnderSecretary) {
-					$underSecretaryStr = $b;
-				} else {
-					$boardStr .= $b;
-				}
+			if ( $isChairperson ) {
+				$chairpersonStr = $b;
+			} else if ( $isSecretary ) {
+				$secretaryStr = $b;
+			} else if ($isUnderSecretary) {
+				$underSecretaryStr = $b;
+			} else {
+				$boardStr .= $b;
 			}
 		}
-		$boardStr = '<div class="usa-grid-full">' . $chairpersonStr . $boardStr . $secretaryStr . $underSecretaryStr . '</div>' . $formerGovernorsLink;
-
-		return $boardStr;
 	}
-	function board_member_list_shortcode( $atts ) {
-		return outputBoardMembers( $atts['active'] );
+
+	$board_members_markup  = '<div class="nest-container">';
+	$board_members_markup .= 	'<div class="inner-container">';
+	$board_members_markup .= 		$chairpersonStr;
+	$board_members_markup .= 		$boardStr;
+	$board_members_markup .= 		$secretaryStr;
+	$board_members_markup .= 		$underSecretaryStr;
+	$board_members_markup .= 	'</div>';
+	$board_members_markup .= '</div>';
+	$board_members_markup .= $former_governors_link;
+
+	return $board_members_markup;
+}
+function board_member_list_shortcode($atts) {
+	return outputBoardMembers($atts['active']);
+}
+add_shortcode('board_member_list', 'board_member_list_shortcode');
+
+
+
+function outputSeniorManagement($type) {
+	$board_page = get_page_by_title('Management Team');
+	$the_post_id = $board_page -> ID;
+
+	if ($type == 'ibb') {
+		$ids = get_field("senior_management_management_team_ordered", $the_post_id, true);
+	} else if ( $type == 'broadcast' ) {
+		$ids = get_field("senior_management_network_leaders_ordered", $the_post_id, true);
 	}
-	add_shortcode( 'board_member_list', 'board_member_list_shortcode' );
+	$peopleStr = "";
 
-	function outputSeniorManagement( $type ) {
-		$boardPage = get_page_by_title( 'Management Team' );
-		$thePostID = $boardPage -> ID;
+	foreach ($ids as $id) {
+		$active = get_post_meta($id, 'active', true);
 
-		if ( $type == 'ibb' ) {
-			$ids = get_field( "senior_management_management_team_ordered", $thePostID, true );
-		} else if ( $type == 'broadcast' ) {
-			$ids = get_field( "senior_management_network_leaders_ordered", $thePostID, true );
-		}
+		if ($active) {
+			$isGrantee = get_post_meta($id, 'grantee_leadership', true);
+			$occupation = get_post_meta($id, 'occupation', true);
+			$isActing = get_post_meta($id, 'acting', true);
+			$email = get_post_meta($id, 'email', true);
+			$phone = get_post_meta($id, 'phone', true);
+			$twitterProfileHandle = get_post_meta($id, 'twitter_handle', true);
+			$profilePhotoID = get_post_meta($id, 'profile_photo', true);
 
-		$peopleStr = "";
+			$profilePhoto = "";
+			$actingTitle = "";
 
-		foreach ( $ids as $id ) {
-			$active = get_post_meta( $id, 'active', true );
-
-			if ( $active ){
-				$isGrantee = get_post_meta( $id, 'grantee_leadership', true );
-				$occupation = get_post_meta( $id, 'occupation', true );
-				$isActing = get_post_meta( $id, 'acting', true );
-				$email = get_post_meta( $id, 'email', true );
-				$phone = get_post_meta( $id, 'phone', true );
-				$twitterProfileHandle = get_post_meta( $id, 'twitter_handle', true );
-				$profilePhotoID = get_post_meta( $id, 'profile_photo', true );
-				$profilePhoto = "";
-				$actingTitle = "";
-
-				if ( $isActing ) {
-					$actingTitle = 'Acting ';
-				}
-
-				if ( $profilePhotoID ) {
-					$profilePhoto = wp_get_attachment_image_src( $profilePhotoID , 'mugshot');
-					$profilePhoto = $profilePhoto[0];
-				}
-
-				$profileName = get_the_title($id);
-
-				$b  = '<div class="bbg__profile-excerpt bbg-grid--1-2-2">';
-				$b .= 	'<h3 class="bbg__profile-excerpt__name">';
-				$b .= 		'<a href="' . get_the_permalink($id) . '" title="Read a full profile of ' . $profileName . '">' . $profileName . '</a>';
-				$b .= 	'</h3>';
-
-				//Only show a profile photo if it's set.
-				if ( $profilePhoto != "" ){
-					$b .= 	'<a href="' . get_the_permalink($id) . '" title="Read a full profile of ' . $profileName . '">';
-					$b .= 		'<img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo" alt="Photo of ' . $profileName . ', ' . $occupation . '"/>';
-					$b .= 	'</a>';
-				}
-
-				$b .= 	'<p class="bbg__profile-excerpt__text">';
-				$b .= 		'<span class="bbg__profile-excerpt__occupation">' . $actingTitle . $occupation . '</span>';
-				$b .= 		my_excerpt($id);
-				$b .= 	'</p>';
-				$b .= '</div><!-- .bbg__profile-excerpt__profile -->';
-
-				$peopleStr .= $b;
+			if ($isActing) {
+				$actingTitle = 'Acting ';
 			}
+
+			if  ($profilePhotoID) {
+				$profilePhoto = wp_get_attachment_image_src($profilePhotoID , 'mugshot');
+				$profilePhoto = $profilePhoto[0];
+			}
+
+			$profileName = get_the_title($id);
+			// .senior-profile is tracked in js/usagm-main.js 
+			$b  = '<div class="mgmt-profile grid-half">';
+			$b .= 	'<h4>';
+			$b .= 		'<a href="' . get_the_permalink($id) . '">' . $profileName . '</a>';
+			$b .= 	'</h4>';
+
+			if ($profilePhoto != "") {
+				$b .= 	'<a href="' . get_the_permalink($id) . '">';
+				$b .= 		'<img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo" alt="Photo of ' . $profileName . ', ' . $occupation . '"/>';
+				$b .= 	'</a>';
+			}
+
+			$b .= 	'<p class="bbg__profile-excerpt__text">';
+			$b .= 		'<span class="bbg__profile-excerpt__occupation">' . $actingTitle . $occupation . '</span>';
+			$b .= 		my_excerpt($id);
+			$b .= 	'</p>';
+			$b .= '</div>';
+
+			$peopleStr .= $b;
 		}
-		$s  = '';
-		$s .= '<div class="usa-grid-full">';
-		$s .= 	$peopleStr;
-		$s .= '</div>';
-
-		return $s;
 	}
+	
+	$s .= '<div class="nest-container">';
+	$s .= 	$peopleStr;
+	$s .= '</div>';
 
-	function senior_management_list_shortcode( $atts ) {
-		return outputSeniorManagement( $atts['type'] );
-	}
-
-	add_shortcode( 'senior_management_list', 'senior_management_list_shortcode' );
+	return $s;
+}
+function senior_management_list_shortcode($atts) {
+	return outputSeniorManagement($atts['type']);
+}
+add_shortcode('senior_management_list', 'senior_management_list_shortcode');
 ?>

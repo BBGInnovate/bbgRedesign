@@ -436,41 +436,32 @@
 			$date = get_field('transcript_appearance_date', get_the_ID(), true);
 			$relatedPost = get_field('transcript_related_post', get_the_ID(), true);
 			$p = false;
+
 			if ( $relatedPost ) {
 				$p = $relatedPost;
 			}
+
 			$str .= '<article class="bbg-blog__excerpt--list">';
-			$str .= '<header class="entry-header bbg-blog__excerpt-header">';
-			$str .= '<h3 class="entry-title bbg-blog__excerpt-title--list  selectionShareable"><a target="_blank" href="' . $link . '" rel="bookmark">' . $title . '</a></h3>';
-			$str .= '</header><!-- .bbg-blog__excerpt-header -->';
-			$str .= '<div class="entry-content bbg-blog__excerpt-content">';
+			$str .= 	'<header class="entry-header bbg-blog__excerpt-header">';
+			$str .= 		'<h3 class="entry-title bbg-blog__excerpt-title--list  selectionShareable">';
+			$str .= 			'<a target="_blank" href="' . $link . '" rel="bookmark">' . $title . '</a>';
+			$str .= 		'</h3>';
+			$str .= 	'</header>';
+			$str .= 	'<div class="entry-content bbg-blog__excerpt-content">';
 			if ($p) {
-				$str .= '<div style="margin-bottom: 1rem;" ><a href="' . get_permalink( $p -> ID ) . '">' . $p->post_title .'</a></div>';	
+				$str .= 	'<div style="margin-bottom: 1rem;" >';
+				$str .= 		'<a href="' . get_permalink( $p -> ID ) . '">' . $p->post_title .'</a>';
+				$str .= 	'</div>';
 			}
-			$str .= '<div class="posted-on bbg__excerpt-meta" ><time class="entry-date published updated">' . $date . '</time></div>';
-			$str .= '<p>' . $excerpt . '</p>';
-			$str .='</div><!-- .bbg-blog__excerpt-content -->';		
+			$str .= 		'<div class="posted-on bbg__excerpt-meta" >';
+			$str .= 			'<time class="entry-date published updated">' . $date . '</time>';
+			$str .= 		'</div>';
+			$str .= 		'<p>' . $excerpt . '</p>';
+			$str .= 	'</div>';		
 			$str .= '</article>';
 		endwhile;
 
 		if ( $showPagination ) {
-			// $paginationStr = paginate_links( array(
-			//     'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-			//     'total'        => $the_query->max_num_pages,
-			//     'current'      => max( 1, get_query_var( 'paged' ) ),
-			//     'format'       => '?paged=%#%',
-			//     'show_all'     => true,
-			//     'type'         => 'plain',
-			//     'prev_next'    => true,
-			// 	'prev_text'    => sprintf( '%1$s', __( '<span style="margin-right:3rem;">« Newer</span>', 'text-domain' ) ),
-			// 	'next_text'    => sprintf( '%1$s', __( '<span style="margin-left:3rem;">Older »</span>', 'text-domain' ) ),
-            
-			// ) );
-			
-			// if ($paginationStr != "") {
-			// 	$str .= '<BR><nav class="navigation posts-navigation" role="navigation">' . $paginationStr . '</nav>';
-			// }
-
 			$temp = $GLOBALS['wp_query'];
 			$GLOBALS['wp_query'] = NULL;
 			$GLOBALS['wp_query'] = $the_query;
@@ -527,8 +518,8 @@
 		
 		$qParams = array (
 			'posts_per_page' => 1,
-			'orderby'			=> 'post_date',
-			'order'				=> 'DESC'
+			'orderby' => 'post_date',
+			'order'	=> 'DESC'
 		);
 
 		if ( $tax_query ) {
@@ -551,26 +542,25 @@
 			$url = get_the_permalink();
 			$title = get_the_title();
 			$excerpt = my_excerpt($id);
-
-			
 		endwhile;
 
 		$classes = 'bbg__infobox ';
 		
 		if ( $width == 'half' ) {
-			$classes .= ' bbg-grid--1-2-2 usa-width-one-half ';
+			$classes .= 'grid-half';
 		} else if ($width == 'third') {
 			$classes .= ' bbg-grid--1-3-3 usa-width-one-third ';
 		}
-		//style="margin-right:2.35765%; " 
 		
-
-		$str = '';
-		$str .= '<div class="' . $classes . '">';
-			$str .= '<h2 class="entry-title">' . $boxTitle . '</h2>';
-			$str .= '<h3 class="bbg__award-excerpt__title"><a href="' . $url . '">' . $title . '</a></h3>';
-			$str .= '<p>' . $excerpt . '</p>';
-			$str .= '<div style="text-align:right;"><a href="' . $categoryLink . '" class="bbg__kits__intro__more--link">' . $archiveLinkText . '</a></div>';
+		$str  = '<div class="' . $classes . '">';
+		$str .= 	'<h2>' . $boxTitle . '</h2>';
+		$str .= 	'<h4>';
+		$str .= 		'<a href="' . $url . '">' . $title . '</a>';
+		$str .= 	'</h4>';
+		$str .= 	'<p>' . $excerpt . '</p>';
+		$str .= 	'<div style="text-align:right;">';
+		$str .= 		'<a href="' . $categoryLink . '" class="bbg__kits__intro__more--link">' . $archiveLinkText . '</a>';
+		$str .= 	'</div>';
 		$str .= '</div>';
 		
 		return $str;

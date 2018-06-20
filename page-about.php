@@ -11,6 +11,7 @@
 /* @Check if number of pages is odd or even
 *  Return BOOL (true/false) */
 
+require 'inc/usagm-home.php';
 require 'inc/custom_field_data_retriever.php';
 require 'inc/bbg-functions-assemble.php';
 
@@ -396,13 +397,11 @@ get_header();
 	?>
 	</div> <!-- End id="page-children" -->
 
-	<!-- NETWORKS -->
+	<!-- NETWORK ENTITY LIST -->
 	<?php
-		$showNetworks = get_field('about_networks_row');
-		if ($showNetworks) {
-			echo get_entity_data();
-		}
-		wp_reset_postdata();
+		// ["entity-main" | "entity-side"]
+		$entity_placement = "entity-main";
+		$entity_data = get_entity_data($entity_placement);
 	?>
 </main>
 
