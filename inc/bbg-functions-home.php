@@ -31,13 +31,6 @@ function select_impact_story_id_at_random($used) {
 }
 
 // CUSTOM FIELD DATA
-function get_site_settings_data() {
-	$intro_content = get_field('site_setting_mission_statement','options','false');
-	$intro_link = get_field('site_setting_mission_statement_link', 'options', 'false');
-	$site_setting_package = array('intro_content' => $intro_content, 'intro_link' => $intro_link);
-	return $site_setting_package;
-}
-
 function get_homepage_banner_data() {
 	$homepageBannerType = get_field('homepage_banner_type', 'option');
 
