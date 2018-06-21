@@ -118,7 +118,7 @@
 	@include backgroundCover();
 	// HEIGHT DETERMING BY WIDTH BY usagm-main.js
 	max-height: 675px;
-	margin-bottom: .5rem;
+	margin-bottom: 1.5rem;
 	max-width: 9999px;
 	position: relative;
 	width: 100%;
@@ -342,7 +342,7 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 
 // 3. MEDIUM LARGE SCREEN
 @include media($medium-large-screen) {
-	.page-post-featured-graphic {margin-bottom: 6rem;}
+	// .page-post-featured-graphic {margin-bottom: 1.5rem;}
 	.bbg__event-announcement, 
 	.bbg__advisory-announcement {
 		.bbg__event-announcement__excerpt {display: block;}

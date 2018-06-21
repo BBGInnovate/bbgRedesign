@@ -8,6 +8,11 @@
    template name: 2-column
  */
 
+// FUNCTION THAT BUILD SECTIONS
+require 'inc/custom-field-data.php';
+require 'inc/custom-field-parts.php';
+require 'inc/custom-field-modules.php';
+
 require 'inc/bbg-functions-assemble.php';
 include "inc/shared_sidebar.php";
 
@@ -65,56 +70,39 @@ function display_foia_reports() {
 	echo '</ul><p style="text-align: right;"><a href="https://www.bbg.gov/foia/">Visit the main FOIA page</a></p>';
 }
 
-if ( have_posts() ) :
-	while ( have_posts() ) : the_post();
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
+		$id = get_the_id();
 		$ogDescription = get_the_excerpt();
-	endwhile;
-endif;
+		$pageContent = do_shortcode(get_the_content());
+	}
+}
 wp_reset_postdata();
 wp_reset_query();
 
 get_header(); ?>
 
 <main id="main" class="site-main bbg__2-column" role="main">
-	<!-- <div class="usa-grid-full"> -->
-	<?php while ( have_posts() ) : the_post();
-		//$videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
-	?>
-		<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 
+		<!-- <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>> -->
 			<?php
-				// THIS COULD BELONG IN A BUILD INCLUDE FILE
-				if ($addFeaturedGallery) {
-					$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
-					echo "<div class='usa-grid-full bbg__article-featured__gallery'>";
-					// WHERE IS THIS FUNCTION?
-					putUniteGallery($featuredGalleryID);
-					echo "</div>";
-				}
-				$hideFeaturedImage = false;
-				if ( $addFeaturedGallery ) {
-					$hideFeaturedImage = true;
-				}
-
 				$featured_media_result = get_feature_media_data();
 				if ($featured_media_result != "") {
 					echo $featured_media_result;
 				}
 			?>
 
-			<div class="usa-grid">
-
+			<!-- <div class="usa-grid"> -->
 				<header class="entry-header">
 					<!-- .bbg__label -->
 					<?php
-						if ($post->post_parent) {
-							// borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-							// UNDERSTAND THIS SQL QUERY AND DO IT THE RIGHT WAY
-							$parent = $wpdb->get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
+						if($post->post_parent) {
 							$parent_link = get_permalink($post->post_parent);
-							the_title('<h1 class="entry-title">', '</h1>');
-						} else {
-							$headline_string  = '<h2>' .$headline . '</h2>';
+							echo '<a href="' . $parent_link . '">Link to parent page</a>';
+						}
+						else {
+							$headline_string  = '<h2>' . $headline . '</h2>';
 						}
 					?>
 				</header><!-- .entry-header -->
@@ -123,7 +111,7 @@ get_header(); ?>
 					<div class="bbg__profile__content">
 						<?php
 							echo $headline_string;
-							the_content();
+							echo $pageContent;
 							if (is_page('foia-reports')) {
 								display_foia_reports();
 							}
@@ -175,7 +163,7 @@ get_header(); ?>
 						}
 					?>
 				</div><!-- .bbg__article-sidebar -->
-			</div>
+			<!-- </div> -->
 
 			<div class="usa-grid">
 				<footer class="entry-footer bbg-post-footer 1234">
@@ -192,7 +180,7 @@ get_header(); ?>
 					?>
 				</footer><!-- .entry-footer -->
 			</div><!-- .usa-grid -->
-		</article><!-- #post-## -->
+		<!-- </article> --><!-- #post-## -->
 
 		<div class="bbg-post-footer">
 		<?php
@@ -202,8 +190,6 @@ get_header(); ?>
 			endif;
 		?>
 		</div>
-	<?php endwhile; // End of the loop. ?>
-	<!-- </div> --><!-- .usa-grid-full -->
 </main><!-- #main -->
 
 <?php /*get_sidebar();*/ ?>

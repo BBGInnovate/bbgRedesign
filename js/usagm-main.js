@@ -4,7 +4,7 @@ $('document').ready(function() {
 // KEEPS FEATURED MEDIA SCALED AT HD PROPORTIONS
 function featuredMediaHD() {
 	var hd_scale = 1.77778;
-	var containerW = $('.page-post-featured-graphic').width();
+	var containerW = $('.page-featured-media').width();
 	var dynHeight = containerW / hd_scale;
 	$('.bbg-banner').width(containerW);
 	$('.bbg-banner').height(dynHeight);

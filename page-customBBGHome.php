@@ -14,7 +14,10 @@
  */
 
 // FUNCTION THAT BUILD SECTIONS
-require 'inc/usagm-home.php';
+require 'inc/custom-field-data.php';
+require 'inc/custom-field-parts.php';
+require 'inc/custom-field-modules.php';
+
 require 'inc/bbg-functions-home.php';
 require 'inc/bbg-functions-assemble.php';
 
@@ -45,12 +48,14 @@ get_header();
 			<?php
 				$banner_result = get_homepage_banner_data();
 
-				$banner_markup  = '<div class="page-post-featured-graphic">';
+				$banner_markup  = '<div class="page-featured-media">';
 				$banner_markup .= 	'<div class="bbg-banner" ';
 				$banner_markup .= 		'style="background-image: url(' . $banner_result['image_source'] . ') !important; background-position: ' . $banner_result['position'] . '">';
 				$banner_markup .= 	'</div>';
-				$banner_markup .=	'<div class="bbg-banner__cutline usa-grid">';
-				$banner_markup .=		$banner_result['caption'];
+				$banner_markup .= 	'<div class="outer-container">';
+				$banner_markup .= 		'<p class="graphic-caption">';
+				$banner_markup .= 			$banner_result['caption'];
+				$banner_markup .= 		'</p>';
 				$banner_markup .=	'</div>';
 				$banner_markup .= '</div>';
 				echo $banner_markup;
@@ -102,11 +107,11 @@ get_header();
 								while (have_posts()) {
 									the_post();
 									$recent_post  = '<div class="inner-container">';
-									$recent_post .= 	'<h4>';
+									$recent_post .= 	'<h3>';
 									$recent_post .= 		'<a href="' . get_the_permalink() . '">';
 									$recent_post .= 			get_the_title();
 									$recent_post .= 		'</a>';
-									$recent_post .= 	'</h4>';
+									$recent_post .= 	'</h3>';
 									$recent_post .= 	'<p class="post-date">' . get_the_date() . '</p>';
 									$recent_post .= 	'<p>';
 									$recent_post .= 		wp_trim_words(get_the_content(), 50);

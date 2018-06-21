@@ -18,6 +18,8 @@ h4 a {
 h2,
 h2 a:link,
 h2 a:visited {
+    font-size: 1.8rem;
+    letter-spacing: 0.1rem;
     text-transform: uppercase;
     color: $color-red;
 }
@@ -25,28 +27,28 @@ h2 a:visited {
 h3,
 h3 a:link,
 h3 a:visited {
-    font-weight: $font-light;
+    font-size: 2.2rem;
+    font-weight: $font-normal;
     color: $color-blue-darker;
-    margin-bottom: 0.25em;
 }
 h4,
 h4 a:link,
 h4 a:visited {
-    font-weight: $font-normal;
+    font-weight: $font-bold;
     color: $color-blue-darker;
 }
 h5,
 h5 a:link,
 h5 a:visited {
     font-weight: $font-bold;
-    color: $color-blue-darkest;
+    color: $color-taupe-dark;
 }
 
 h6,
 h6 a:link,
 h6 a:visited {
     font-weight: $font-bold;
-    color: $color-taupe-dark;
+    color: #ff00ff;
 }
 
 p {
@@ -56,7 +58,7 @@ p {
 
 p.lead-in {
     font-size: 2rem;
-    line-height: 2em;
+    line-height: 3.5rem;
     font-family: $font-serif;
     color: $black9;
 }

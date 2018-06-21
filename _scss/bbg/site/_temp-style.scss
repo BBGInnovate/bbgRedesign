@@ -1,6 +1,14 @@
 // COLUMNS MAIN, SIDEBAR
 // .page-post-main-content {@include grid-column(9);}
 
+// FEATURED MEDIA 
+.page-featured-media {margin-bottom: 6rem;}
+.graphic-caption {
+	text-align: right;
+	font-size: 1.4rem;
+	font-style: italic;
+	color: $color-taupe-light;
+}
 // RIBBONS
 .bbg__ribbon {
 	h2 {

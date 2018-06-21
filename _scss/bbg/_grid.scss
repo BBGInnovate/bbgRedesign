@@ -1,7 +1,7 @@
 .outer-container {
 	@include grid-container;
 	max-width: 1200px;
-	margin: 0 auto 3em auto;
+	margin: 0 auto 6em auto;
 }
 .inner-container {@include grid-container;}
 .nest-container {@include grid-collapse;}

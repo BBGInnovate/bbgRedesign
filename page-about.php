@@ -11,8 +11,11 @@
 /* @Check if number of pages is odd or even
 *  Return BOOL (true/false) */
 
-require 'inc/usagm-home.php';
-require 'inc/custom_field_data_retriever.php';
+// FUNCTION THAT BUILD SECTIONS
+require 'inc/custom-field-data.php';
+require 'inc/custom-field-parts.php';
+require 'inc/custom-field-modules.php';
+
 require 'inc/bbg-functions-assemble.php';
 
 function isOdd($pageTotal) {
@@ -49,25 +52,25 @@ get_header();
 ?>
 	<?php
 		$rows = get_field('about_flexible_page_rows', $id);
-		if ($rows) {
-			$umbrella_rows = array();
-			foreach ($rows as $row) {
-				if ($row['acf_fc_layout'] == 'umbrella') {
-					array_push($umbrella_rows, $row);
-				}
+// echo '<pre>';
+// print_r($row);
+// echo '</pre>';
+		foreach ($rows as $row) {
+			if ($row['acf_fc_layout'] == 'about_ribbon_page') {
+				echo 'ribbon';
 			}
-			$umbrella_counter = 0;
-			$umbrella_count = count($umbrella_rows);
-			// EACH UMBRELLA ROW
-			while ($umbrella_counter < count($umbrella_rows)) {
-				$cur_umbrella_row = $umbrella_rows[$umbrella_counter];
+			elseif ($row['acf_fc_layout'] == 'about_office') {
+				echo 'got a office';
+			}
+			elseif ($row['acf_fc_layout'] == 'umbrella') {
+				$umbrella_row = $row;
 
 				// GATHER UMBERLLA'S MAIN DATA
-				$main_umbrella_data = get_umbrella_main_data($cur_umbrella_row);
+				$main_umbrella_data = get_umbrella_main_data($umbrella_row);
 				$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
 
-				// COUNT BLOCKS TO MAKE GRID CLASS
-				$cur_umbrella_content = $cur_umbrella_row['umbrella_content'];
+				// COUNT BLOCKS TO MAKE GRID CLASS (put this in function to lessen clutter here)
+				$cur_umbrella_content = $umbrella_row['umbrella_content'];
 				$content_count = count($cur_umbrella_content);
 				$content_counter = 0;
 				$containerClass = 'grid-half';
@@ -87,16 +90,28 @@ get_header();
 				if (!empty($umbrella_markup)) {
 					echo $umbrella_markup;
 				}
-				$umbrella_counter++;
+			}
+			elseif($row['acf_fc_layout'] == 'marquee') {
+				$marquee_row = $row;
+				$marquee_data = get_marquee_data($marquee_row);
+				$marquee_parts = build_marquee_parts($marquee_data);
+				$marquee_module = assemble_umbrella_marquee($marquee_parts);
+
+				if (!empty($marquee_module)) {
+					echo $marquee_module;
+				}
 			}
 		}
 	?>
 
 	<!-- NETWORK ENTITY LIST -->
 	<?php
-		// ["entity-main" | "entity-side"]
-		$entity_placement = "entity-main";
-		$entity_data = get_entity_data($entity_placement);
+		$show_networks = get_field('about_networks_row', $id);
+		if (!empty($show_networks)) {
+			// ["entity-main" | "entity-side"]
+			$entity_placement = "entity-main";
+			$entity_data = get_entity_data($entity_placement);
+		}
 	?>
 </main>
 
