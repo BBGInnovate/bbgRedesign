@@ -188,9 +188,8 @@ get_header();
 
 			<!-- NETWORK ENTITY LIST -->
 			<?php
-				// ["entity-main" | "entity-side"]
-				$entity_placement = "entity-main";
-				$entity_data = get_entity_data($entity_placement);
+				// $entity_placement can be ["entity-main" | "entity-side"]
+				$entity_data = get_entity_data("entity-main");
 			?>
 
 			<!-- Quotation -->

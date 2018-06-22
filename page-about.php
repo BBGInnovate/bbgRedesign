@@ -52,9 +52,6 @@ get_header();
 ?>
 	<?php
 		$rows = get_field('about_flexible_page_rows', $id);
-// echo '<pre>';
-// print_r($row);
-// echo '</pre>';
 		foreach ($rows as $row) {
 			if ($row['acf_fc_layout'] == 'about_ribbon_page') {
 				echo 'ribbon';
@@ -108,9 +105,8 @@ get_header();
 	<?php
 		$show_networks = get_field('about_networks_row', $id);
 		if (!empty($show_networks)) {
-			// ["entity-main" | "entity-side"]
-			$entity_placement = "entity-main";
-			$entity_data = get_entity_data($entity_placement);
+			// $entity_placement can be ["entity-main" | "entity-side"]
+			$entity_data = get_entity_data("entity-main");
 		}
 	?>
 </main>

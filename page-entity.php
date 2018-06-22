@@ -12,12 +12,13 @@
    template name: Entity
  */
 
+
+require 'inc/bbg-functions-assemble.php';
+
 $pageContent = "";
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
-		$pageContent = get_the_content();
-		$pageContent = apply_filters('the_content', $pageContent);
-		$pageContent = str_replace(']]>', ']]&gt;', $pageContent);
+		$pageContent = do_shortcode(get_the_content());
 		$ogDescription = get_the_excerpt(); //get_the_excerpt()
 	endwhile;
 endif;
@@ -26,48 +27,48 @@ wp_reset_query();
 
 $id = $post->ID;
 
-$fullName = get_post_meta( $id, 'entity_full_name', true );
-$abbreviation = get_post_meta( $id, 'entity_abbreviation', true );
-$description = get_post_meta( $id, 'entity_description', true );
-$siteUrl = get_post_meta( $id, 'entity_site_url', true );
-$rssFeed = get_post_meta( $id, 'entity_rss_feed', true );
-$entityLogoID = get_post_meta( $id, 'entity_logo',true );
-$websiteName = get_post_meta( $id, 'entity_website_name', true );
+$fullName = get_post_meta($id, 'entity_full_name', true);
+$abbreviation = get_post_meta($id, 'entity_abbreviation', true);
+$description = get_post_meta($id, 'entity_description', true);
+$siteUrl = get_post_meta($id, 'entity_site_url', true);
+$rssFeed = get_post_meta($id, 'entity_rss_feed', true);
+$entityLogoID = get_post_meta($id, 'entity_logo',true);
+$websiteName = get_post_meta($id, 'entity_website_name', true);
 $entityLogo = "";
 if ($entityLogoID) {
 	$entityLogoObj = wp_get_attachment_image_src( $entityLogoID , 'Full');
 	$entityLogo = $entityLogoObj[0];
 }
 
-$awardSlug = get_post_meta( $id, 'entity_award_recipient_taxonomy_slug', true );
-$entityApiID = get_post_meta( $id, 'entity_api_id', true );
-$entityCategorySlug = get_post_meta( $id, 'entity_category_slug', true );
+$awardSlug = get_post_meta($id, 'entity_award_recipient_taxonomy_slug', true);
+$entityApiID = get_post_meta($id, 'entity_api_id', true);
+$entityCategorySlug = get_post_meta($id, 'entity_category_slug', true);
 $entityCategoryObj = get_category_by_slug($entityCategorySlug);
-$entityAwardsPageLink = get_permalink( get_page_by_path( 'awards' ) );
+$entityAwardsPageLink = get_permalink( get_page_by_path('awards'));
 $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPageLink);
 
-$entityMission = get_post_meta( $id, 'entity_mission', true );
+$entityMission = get_post_meta($id, 'entity_mission', true);
 //$subgroups = getEntityLinks($entityApiID);
 $subgroups = getEntityLinks_taxonomy($entityCategorySlug);
 
-$siteSelect = "<h3 class='bbg__article-sidebar__list-label'>Explore the $abbreviation websites</h3>";
+$site_select = "<h6 class='bbg__article-sidebar__list-label'>Explore the $abbreviation websites</h6>";
 if (count($subgroups) < 4) {
-	$siteSelect .= "<ul class='bbg__rss__list'>";
+	$site_select .= "<ul class='bbg__rss__list'>";
 	foreach ($subgroups as $s) {
 		if ($s->website_url != "") { // EX: mbn digital
-			$siteSelect .= "<li class='bbg__rss__list-link'><a target='_blank' href='" . $s->website_url . "'>" . $s->name . "</a></li>";
+			$site_select .= "<li class='bbg__rss__list-link'><a target='_blank' href='" . $s->website_url . "'>" . $s->name . "</a></li>";
 		}
 	}
-	$siteSelect .= "</ul>";
+	$site_select .= "</ul>";
 } else {
-	$siteSelect .= "<select name='entity_sites' id='entity_sites'>";
-	$siteSelect .= "<option>Select a service</option>";
+	$site_select .= "<select name='entity_sites' id='entity_sites'>";
+	$site_select .= "<option>Select a service</option>";
 	foreach ( $subgroups as $s ) {
 		if ( $s->website_url != "" ) { // EX: mbn digital
-			$siteSelect .= "<option value='" . $s->website_url . "'>" . $s->name . "</option>";
+			$site_select .= "<option value='" . $s->website_url . "'>" . $s->name . "</option>";
 		}
 	}
-	$siteSelect .= "</select><button class='usa-button' id='entityUrlGo'>Go</button>";
+	$site_select .= "</select><button class='usa-button' id='entityUrlGo'>Go</button>";
 }
 
 //Entity fast facts / by-the-numbers
@@ -96,69 +97,79 @@ if ( $audience != "" ) {
 	$audience = '<li><span class="bbg__article-sidebar__list-label">Audience estimate: </span>' . $audience . '</li>';
 }
 if ( $appLink != "" ) {
-	$appLink = '<h3><a href="https://www.bbg.gov/apps/" class="bbg__article-sidebar__list-label">Download the apps </a></h3><p style="font-family: sans-serif; margin-top: 0;">' . $appLink . '</p>';
+	$app_link_markup  = '<h6>';
+	$app_link_markup .= 	'<a href="https://www.bbg.gov/apps/" class="bbg__article-sidebar__list-label">Download the apps</a>';
+	$app_link_markup .= '</h6>';
+	$app_link_markup .= '<p style="font-family: sans-serif; margin-top: 0;">' . $appLink . '</p>';
 }
 
-//Social + contact links
+// SOCIAL, CONTACT LINKS
 $twitterProfileHandle = get_post_meta( $id, 'entity_twitter_handle', true );
 $facebook = get_post_meta( $id, 'entity_facebook', true );
 $instagram = get_post_meta( $id, 'entity_instagram', true );
 
 
-//Contact information
-$email = get_post_meta( $id, 'entity_email', true );
-$phone = get_post_meta( $id, 'entity_phone', true );
-$street = get_post_meta( $id, 'entity_street', true );
-$city = get_post_meta( $id, 'entity_city', true );
-$state = get_post_meta( $id, 'entity_state', true );
-$zip = get_post_meta( $id, 'entity_zip', true );
-$learnMore = get_post_meta( $id, 'entity_learn_more', true );
+// CONTACT INFORMATION
+$email = get_post_meta($id, 'entity_email', true);
+$phone = get_post_meta($id, 'entity_phone', true);
+$street = get_post_meta($id, 'entity_street', true);
+$city = get_post_meta($id, 'entity_city', true);
+$state = get_post_meta($id, 'entity_state', true);
+$zip = get_post_meta($id, 'entity_zip', true);
+$learnMore = get_post_meta($id, 'entity_learn_more', true);
 $address = "";
 $map = "";
 $mapLink = "";
 $includeContactBox = FALSE;
 
-if ( $email != "" ) {
-	$email = '<li><span class="bbg__list-label">Email: </span><a href="mailto:' . $email . '" title="Email ' . $abbreviation . '">' . $email . '</a></li>';
+if ($email != "") {
+	$email_li  = '<li>';
+	$email_li .= 	'<span class="bbg__list-label">Email: </span>';
+	$email_li .= 	'<a href="mailto:' . $email . '" title="Email ' . $abbreviation . '">';
+	$email_li .= 		$email;
+	$email_li .= 	'</a>';
+	$email_li .= '</li>';
+}
+if (!empty($phone)) {
+	$phone_li  = '<li>';
+	$phone_li .= 	'<span class="bbg__list-label">Tel: </span>';
+	$phone_li .= 	$phone;
+	$phone_li .= '</li>';
+}
+if (!empty($learnMore)) {
+	$learnMore  = '<li>';
+	$learnMore .= 	'<a href="'. $learnMore . '">Learn more</a> about ' . $abbreviation;
+	$learnMore .= '</li>';
+	$learnMore .= '';
 }
 
-if ( $phone != "" ) {
-	$phone = '<li><span class="bbg__list-label">Tel: </span>' . $phone . '</li>';
-}
 
-if ( $learnMore != "" ) {
-	$learnMore = '<li><a href="'. $learnMore . '">Learn more</a> about ' . $abbreviation . '</li>';
-}
-
-
-if ( $street != "" && $city!= "" && $state != "" && $zip != "" ) {
+if (!empty($street) && !empty($city) && !empty($state) && !empty($zip)) {
 	$address = $street . '<br/>' . $city . ', ' . $state . ' ' . $zip;
 
-	//Strip spaces for url-encoding.
-	$street = str_replace( " ", "+", $street );
-	$city = str_replace( " ", "+", $city );
-	$state = str_replace( " ", "+", $state );
+	// STRIP SPACES FOR URL ENCODING
+	$street = str_replace(" ", "+", $street);
+	$city = str_replace(" ", "+", $city);
+	$state = str_replace(" ", "+", $state);
 	$size = 400;
 	$zoom = 14;
 	$map = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $street . ',+' . $city . ',+' . $state . '+' . $zip . "&zoom=" . $zoom . "&scale=false&size=" . $size . "x" . $size . "&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C".$street.',+'.$city.',+'.$state . ');';
 	$mapLink = 'https://www.google.com/maps/place/' . $street . ',+' . $city . ',+' . $state . '+' . $zip . '/';
-	//$includeMap = "bbg__contact-card--include-map";
-
 	$address = '<p><a href="'. $mapLink . '">' . $address . '</a></p>';
 }
 
-/* Add a map */
-$includeMap = get_post_meta( get_the_ID(), 'map_include', true );
-if ( $includeMap ) {
-	$mapLocation = get_post_meta( get_the_ID(), 'map_location', true );
-	$mapHeadline = get_post_meta( get_the_ID(), 'map_headline', true );
-	$mapDescription = get_post_meta( get_the_ID(), 'map_description', true );
-	$mapPin = get_post_meta( get_the_ID(), 'map_pin', true );
-	$mapZoom = get_post_meta( get_the_ID(), 'map_zoom', true );
+// ADD A MAP
+$includeMap = get_post_meta(get_the_ID(), 'map_include', true);
+if ($includeMap) {
+	$mapLocation = get_post_meta(get_the_ID(), 'map_location', true);
+	$mapHeadline = get_post_meta(get_the_ID(), 'map_headline', true);
+	$mapDescription = get_post_meta(get_the_ID(), 'map_description', true);
+	$mapPin = get_post_meta(get_the_ID(), 'map_pin', true);
+	$mapZoom = get_post_meta(get_the_ID(), 'map_zoom', true);
 
 	$key = '<?php echo MAPBOX_API_KEY; ?>';
 	$zoom = 8;
-	if ( $mapZoom > 0 && $mapZoom < 20 ) {
+	if ($mapZoom > 0 && $mapZoom < 20) {
 		$zoom = $mapZoom;
 	}
 
@@ -166,24 +177,24 @@ if ( $includeMap ) {
 	$lng = $mapLocation['lng'];
 	$pin = "";
 
-	if ( $mapPin ){
+	if ($mapPin) {
 		$pin = "pin-s+990000(" . $lng .",". $lat .")/";
 	}
 	//Static map like this:
 	//$map = "https://api.mapbox.com/v4/mapbox.emerald/" . $pin . $lng . ",". $lat . "," . $zoom . "/170x300.png?access_token=" . $key;
 }
 
-if ( $address != "" || $phone != "" || $email != "" ){
-	$includeContactBox = TRUE;
+if ($address != "" || $phone_li != "" || $email_li != "") {
+	$includeContactBox = true;
 }
 
-//Default adds a space above header if there's no image set
+// Default adds a space above header if there's no image set
 $featuredImageClass = " bbg__article--no-featured-image";
-$bannerPosition = get_post_meta( $id, 'adjust_the_banner_image', true );
+$bannerPosition = get_post_meta($id, 'adjust_the_banner_image', true);
 $videoUrl = "";
 
 /**** BEGIN CREATING rssItems array *****/
-$entityJson = getFeed($rssFeed,$id);
+$entityJson = getFeed($rssFeed, $id);
 $rssItems = array();
 $itemContainer = false;
 $languageDirection = "";
@@ -210,6 +221,7 @@ if ($itemContainer) {
 		$rssItems[] = array( 'title' => $title, 'url' => $url, 'description' => $description, 'image' => $enclosureUrl );
 	}
 }
+
 /**** DONE CREATING rssItems array *****/
 
 /**** START FETCH related press releases ****/
@@ -362,267 +374,219 @@ if ($entity_category_slug != "") {
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
 
-			<div class="usa-grid-full">
-
-				<?php while ( have_posts() ) : the_post();
-					//$videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
+		<div class="outer-grid">
+			<?php if($post->post_parent) {
+				//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
+				// $parent = $wpdb->get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
+				// $parent_link = get_permalink($post->post_parent);
 				?>
-					<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
-						<div class="usa-grid">
-						<?php if($post->post_parent) {
-							//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-							$parent = $wpdb->get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
-							$parent_link = get_permalink($post->post_parent);
-							?>
-							<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5>
-						<?php } ?>
-						</div>
+				<!-- <h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5> -->
+			<?php } ?>
+		</div>
 
-						<?php
-							$hideFeaturedImage = FALSE;
-							if ($videoUrl != "") {
-								echo featured_video($videoUrl);
-								$hideFeaturedImage = TRUE;
-							} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-								echo '<div class="usa-grid-full">';
-								$featuredImageClass = "";
-								$featuredImageCutline = "";
-								$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
-								if ($thumbnail_image && isset($thumbnail_image[0])) {
-									$featuredImageCutline = $thumbnail_image[0]->post_excerpt;
-								}
+		<?php
+			$featured_media_result = get_feature_media_data();
+			if ($featured_media_result != "") {
+				echo $featured_media_result;
+			}
+		?>
 
-								$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 700,450 ), false, '' );
+		<div class="outer-container profile-header">
+			<div class="inner-container">
+				<div class="image-container">
+					<img src="<?php echo $entityLogo; ?>">
+				</div>
 
-								echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner--profile" style="background-image: url('.$src[0].'); background-position: '.$bannerPosition.'">';
-								echo '</div>';
-								echo '</div> <!-- usa-grid-full -->';
-							}
-						?><!-- .bbg__article-header__thumbnail -->
-
-
-
-
-
-						<div class="usa-grid">
-
-							<?php echo '<header class="entry-header bbg__article-header'.$featuredImageClass.'">'; ?>
-
-								<div class="bbg__profile-photo">
-									<img src="<?php echo $entityLogo; ?>" class="bbg__profile-photo__image"/>
-								</div>
-								<div class="bbg__profile-title">
-
-									<?php echo '<h1 class="entry-title bbg__article-header__title">' . $fullName . '</h1>'; ?>
-
-									<h5 class="entry-category bbg__profile-tagline">
-										<?php echo $websiteName; ?>
-									</h5><!-- .bbg__label -->
-
-								</div>
-
-							</header><!-- .entry-header ------------------------------------------------- -->
-
-
-
-							<div class="bbg__article-sidebar--left">
-
-								<h3 class="bbg__sidebar-label bbg__contact-label">Share </h3>
-								<ul class="bbg__article-share">
-									<li class="bbg__article-share__link facebook">
-										<a href="<?php echo $fbUrl; ?>">
-											<span class="bbg__article-share__icon facebook"></span>
-										</a>
-									</li>
-									<li class="bbg__article-share__link twitter">
-										<a href="<?php echo $twitterURL; ?>">
-											<span class="bbg__article-share__icon twitter"></span>
-										</a>
-									</li>
-								</ul>
-
-							</div>
-
-
-
-
-							<div class="entry-content bbg__article-content largeXXX <?php echo $featuredImageClass; ?>">
-								<div class="bbg__profile__content">
-								<?php /*echo $headlineStr;*/ ?>
-
-								<?php /*the_content();*/ ?>
-								<?php echo $pageContent; ?>
-
-								</div>
-
-							</div><!-- .entry-content -->
-
-							<div class="bbg__article-sidebar large">
-									<?php if ($entityMission!=""){ ?>
-									<aside class="bbg__article-sidebar__aside">
-										<!--<h3 class="bbg__sidebar-label"><?php echo $abbreviation; ?> Mission</h3>-->
-										<p><?php echo $entityMission; ?></p>
-									</aside>
-									<?php } ?>
-
-									<aside class="bbg__article-sidebar__aside">
-										<?php
-										if ($budget != "" || $employees != "" || $languages != "" || $audience != "" || $appLink != "") {
-											echo '<h3 class="bbg__sidebar-label">Fast facts</h3>';
-										} ?>
-
-										<ul class="bbg__article-sidebar__list--labeled">
-											<?php
-												echo $budget;
-												echo $employees;
-												echo $languages;
-												echo $audience;
-											?>
-										</ul>
-									</aside>
-
-									<?php
-									if ($facebook!="" || $twitterProfileHandle!="" || $instagram!=""){
-									?>
-										<aside class="bbg__article-sidebar__aside">
-											<h3 class="bbg__sidebar-label bbg__contact-label"><?php echo $abbreviation; ?> social media </h3>
-											<ul class="bbg__article-share">
-												<?php
-													if ($facebook!=""){
-														echo '<li class="bbg__article-share__link facebook"><a href="'.$facebook.'" title="Like '.get_the_title().' on Facebook"><span class="bbg__article-share__icon facebook"></span><span class="bbg__article-share__text">Facebook</span></a></li>';
-													}
-													if ($twitterProfileHandle!=""){
-														echo '<li class="bbg__article-share__link twitter"><a href="https://twitter.com/'.$twitterProfileHandle.'" title="Follow '.get_the_title().' on Twitter"><span class="bbg__article-share__icon twitter"></span><span class="bbg__article-share__text">@'.$twitterProfileHandle.'</span></a></li>';
-													}
-													if ($instagram!=""){
-														echo '<li class="bbg__article-share__link instagram"><a href="https://instagram.com/'.$instagram.'" title="Follow '.get_the_title().' on Instagram"><span class="bbg__article-share__icon instagram"></span><span class="bbg__article-share__text">Instagram</span></a></li>';
-													}
-												?>
-											</ul>
-										</aside>
-									<?php } ?>
-
-									<aside class="bbg__article-sidebar__aside">
-										<?php
-											echo $appLink;
-										?>
-									</aside>
-
-									<?php
-										if (count($rssItems)) {
-											echo '<aside class="bbg__article-sidebar__aside">';
-											echo '<h3 class="bbg__sidebar-label">Recent stories from ' . $websiteName . '</h3>';
-											echo '<ul class="bbg__rss__list'. $languageDirection .'">';
-											$maxRelatedStories=3;
-											for ( $i = 0; $i < min( $maxRelatedStories, count($rssItems) ); $i++) {
-												$o = $rssItems[$i];
-												echo '<li class="bbg__rss__list-link">';
-												echo '<a href="' . $o['url'] . '">';
-												if ($o['image'] != "") {
-													echo "<img src='". $o['image'] . "'/>";
-												}
-												echo $o['title'] . '</a>';
-												echo '</li>';
-											}
-											echo '</ul><!-- rss feed -->';
-											echo '</aside>';
-
-											if (count($threats)) {
-												$maxThreatsStories=3;
-												echo '<aside class="bbg__article-sidebar__aside">';
-												echo '<h6 class="bbg__label small"><a href="/threats-to-press/">Threats to Press</a></h6>';
-												echo '<ul class="bbg__rss__list">';
-												for ( $i = 0; $i <min( $maxRelatedStories, count($threats) ); $i++) {
-													$o = $threats[$i];
-													echo '<li class="bbg__rss__list-link">';
-													echo '<a href="' . $o['url'] . '">';
-													/*
-													if ($o['thumb'] != "") {
-														echo $o['thumb'];
-													//	echo "<img src='". $o['image'] . "'/>";
-													}
-													*/
-													echo $o['title'] . '</a>';
-													echo '</li>';
-												}
-												echo '</ul></aside>';
-											}
-										}
-										echo '<aside class="bbg__article-sidebar__aside">';
-										echo $siteSelect;
-										echo '</aside>';
-									?>
-
-								<?php if ($includeContactBox){ ?>
-									<aside class="bbg__article-sidebar__aside">
-										<div class="bbg__contact-card <?php if ($includeMap){echo 'bbg__contact-card--include-map';} ?>">
-											<?php if ($includeMap){ ?>
-												<div id='map' class='bbg__contact-card__map'></div>
-											<?php } ?>
-
-											<div class="bbg__contact-card__text">
-											<h3>Contact information</h3>
-											<?php
-											echo $address;
-											echo '<ul class="usa-unstyled-list">';
-											echo $phone;
-											echo $email;
-											echo $learnMore;
-											echo '</ul>';
-											?>
-											</div>
-										</div>
-									</aside>
-								<?php } ?>
-
-							</div><!-- .bbg__article-sidebar -->
-
-						</div>
-
-						<div class="usa-grid">
-							<footer class="entry-footer bbg-post-footer 1234">
-								<?php
-									edit_post_link(
-										sprintf(
-											/* translators: %s: Name of current post */
-											esc_html__( 'Edit %s', 'bbginnovate' ),
-											the_title( '<span class="screen-reader-text">"', '"</span>', false )
-										),
-										'<span class="edit-link">',
-										'</span>'
-									);
-								?>
-							</footer><!-- .entry-footer -->
-
-							<?php
-								$q=getRandomQuote($entityCategorySlug, array());
-								if ($q) {
-									echo '<div class="bbg__entity__pullquote">';
-									outputQuote($q);
-									echo '</div>';
-								}
-							?>
-
-						</div><!-- .usa-grid -->
-
-
-					</article><!-- #post-## -->
-
-
-					<div class="bbg-post-footer">
+				<div class="content-column">
+					<div class="content">
+						<?php echo '<h2>' . $fullName . '</h2>'; ?>
+						<p><?php echo $websiteName; ?></p>
 					</div>
+				</div>
+			</div>
+		</div>
 
-				<?php endwhile; // End of the loop. ?>
-			</div><!-- .usa-grid-full -->
-		</main><!-- #main -->
-	</div><!-- #primary -->
+		<div class="outer-container">
+			<!-- BEGIN MAIN CONTENT -->
+			<div class="main-content-container">
+				<div class="entry-content bbg__article-content largeXXX <?php echo $featuredImageClass; ?>">
+					<div class="bbg__profile__content">
+						<?php echo $pageContent; ?>
+					</div>
+				</div>
+			</div>
+			<!-- BEGIN SIDEBAR -->
+			<div class="sidebar-content-container">
+				<div id="social-share">
+					<h6 class="bbg__sidebar-label bbg__contact-label">Share </h6>
+					<a href="<?php echo $fbUrl; ?>">
+						<span class="bbg__article-share__icon facebook"></span>
+					</a>
+					<a href="<?php echo $twitterURL; ?>">
+						<span class="bbg__article-share__icon twitter"></span>
+					</a>
+				</div>
+				<!-- end #social-share -->
+
+				<?php
+					if ($entityMission!="") { 
+						echo '<aside class="bbg__article-sidebar__aside">';
+						echo 	'<p>' . $entityMission . '</p>';
+						echo '</aside>';
+					}
+				?>
+				<aside class="bbg__article-sidebar__aside">
+				<?php
+					if ($budget != "" || $employees != "" || $languages != "" || $audience != "" || $app_link_markup != "") {
+						echo '<h6 class="bbg__sidebar-label">Fast facts</h6>';
+					}
+				?>
+
+				<!-- FAST FACTS -->
+				<ul class="bbg__article-sidebar__list--labeled">
+					<?php
+						echo $budget;
+						echo $employees;
+						echo $languages;
+						echo $audience;
+					?>
+				</ul>
+
+				<?php
+					if (!empty($facebook) || !empty($twitterProfileHandle) || !empty($instagram)) {
+						echo '<aside class="bbg__article-sidebar__aside">';
+						echo 	'<h6 class="bbg__sidebar-label bbg__contact-label">';
+						echo 		$abbreviation . ' social media ';
+						echo 	'</h6>';
+						if (!empty($facebook)) {
+							echo 	'<a href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
+							echo 		'<span class="bbg__article-share__icon facebook"></span>';
+							echo 	'</a>';
+						}
+						if (!empty($twitterProfileHandle)) {
+							echo 	'<a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . get_the_title() . ' on Twitter">';
+							echo 		'<span class="bbg__article-share__icon twitter"></span>';
+							echo 	'</a>';
+						}
+						if (!empty($instagram)) {
+							echo 	'<a href="https://instagram.com/' . $instagram . '" title="Follow ' . get_the_title() . ' on Instagram">';
+							echo 		'<span class="bbg__article-share__icon instagram"></span>';
+							echo 	'</a>';
+						}
+						echo '</aside>';
+					}
+					echo '<aside class="bbg__article-sidebar__aside">';
+					echo 	$app_link_markup;
+					echo '</aside>';
+
+					if (count($rssItems)) {
+						$rss_markup  = '<aside>';
+						$rss_markup .= 	'<h6>Recent stories from ' . $websiteName . '</h6>';
+						$maxRelatedStories = 3;
+						for ($i = 0; $i < min($maxRelatedStories, count($rssItems)); $i++) {
+							$o = $rssItems[$i];
+							$rss_markup .= 	'<div class="bbg__rss__list-link">';
+							if ($o['image'] != "") {
+								$rss_markup .= 		'<a href="' . $o['url'] . '">';
+								$rss_markup .= 			'<img src="' . $o['image'] . '" />';
+								$rss_markup .= 		'</a>';
+							}
+							$rss_markup .= 		'<h4>';
+							$rss_markup .= 			'<a href="' . $o['url'] . '">' . $o['title'] . '</a>';
+							$rss_markup .= 		'</h4>';
+							$rss_markup .= 	'</div>';
+						}
+						$rss_markup .= '</aside>';
+						echo $rss_markup;
+
+						if (count($threats)) {
+							$maxThreatsStories = 3;
+
+							$threats_markup  = '<aside class="bbg__article-sidebar__aside">';
+							$threats_markup .= '<h6 class="bbg__label small"><a href="/threats-to-press/">Threats to Press</a></h6>';
+							$threats_markup .= '<ul class="bbg__rss__list">';
+							for ($i = 0; $i < min($maxRelatedStories, count($threats)); $i++) {
+								$o = $threats[$i];
+								$threats_markup .= '<li class="bbg__rss__list-link">';
+								$threats_markup .= '<a href="' . $o['url'] . '">';
+								$threats_markup .= $o['title'] . '</a>';
+								$threats_markup .= '</li>';
+							}
+							$threats_markup .= '</ul></aside>';
+							echo $threats_markup;
+						}
+					}
+					echo '<aside class="bbg__article-sidebar__aside">';
+					echo $site_select;
+					echo '</aside>';
+
+					// CONTACT INFORMATION
+					if ($includeContactBox) {
+						$contact_box  = '<aside>';
+						$contact_box .= 	'<div class="bbg__contact-card';
+						if ($includeMap) {
+							$contact_box .= ' bbg__contact-card--include-map';
+						}
+						$contact_box .= 	'">';
+						if ($includeMap) {
+							$contact_box .= 	'<div id="map" class="bbg__contact-card__map"></div>';
+						}
+						$contact_box .= 		'<div class="bbg__contact-card__text">';
+						$contact_box .= 			'<h4>Contact information</h4>';
+						$contact_box .= 			$address;
+						$contact_box .= 			'<ul class="usa-unstyled-list">';
+						$contact_box .= 				$phone_li;
+						$contact_box .= 				$email_li;
+						$contact_box .= 				$learnMore;
+						$contact_box .= 			'</ul>';
+						$contact_box .= 		'</div>';
+						$contact_box .= 	'</div>';
+						$contact_box .= '</aside>';
+						echo $contact_box;
+					}
+				?>
+			</div>
+			<!-- END SIDEBAR -->
+		</div>
+		<!-- END .outer-container -->
+
+		<div class="usa-grid">
+			<footer class="entry-footer bbg-post-footer 1234">
+				<?php
+					edit_post_link(
+						sprintf(
+							/* translators: %s: Name of current post */
+							esc_html__('Edit %s', 'bbginnovate'),
+							the_title('<span class="screen-reader-text">"', '"</span>', false)
+						),
+						'<span class="edit-link">',
+						'</span>'
+					);
+				?>
+			</footer><!-- .entry-footer -->
+
+			<?php
+				$quote_result = getRandomQuote($entityCategorySlug, array());
+				if ($quote_result) {
+					echo '<div class="bbg__entity__pullquote">';
+					outputQuote($quote_result);
+					echo '</div>';
+				}
+			?>
+		</div>
+
+		<div class="bbg-post-footer">
+		</div>
+
+	</main><!-- #main -->
+</div><!-- #primary -->
 
 <?php
 /* if the map is set, then load the necessary JS and CSS files */
-if ( $includeMap ){
+if ($includeMap) {
 ?>
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
@@ -662,7 +626,6 @@ if ( $includeMap ){
 
 	</script>
 <?php } ?>
-
 
 <?php /*get_sidebar();*/ ?>
 <?php get_footer(); ?>

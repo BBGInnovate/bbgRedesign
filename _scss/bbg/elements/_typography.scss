@@ -36,6 +36,7 @@ h4 a:link,
 h4 a:visited {
     font-weight: $font-bold;
     color: $color-blue-darker;
+    margin-bottom: 1.5rem;
 }
 h5,
 h5 a:link,
@@ -67,6 +68,9 @@ p.post-date {
     font-size: 0.9em;
     color: $black6;
     margin-bottom: 0.25em;
+}
+ul li, ol li {
+    line-height: 1.8rem;
 }
 
 // a:visited {color: inherit;}

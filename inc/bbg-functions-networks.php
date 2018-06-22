@@ -68,37 +68,37 @@ function outputBroadcasters($cols) {
 		$columnsClass = " bbg-grid--1-1-1-2";
 	}
 
-	$entity_markup  = '<div class="usa-grid-full">';
+	$entity_markup  = '<div>';
 	$custom_query = new WP_Query($qParams);
-
 	if ($custom_query -> have_posts()) {
 		while ( $custom_query -> have_posts() )  {
 			$custom_query->the_post();
-			$id=get_the_ID();
-			$fullName=get_post_meta( $id, 'entity_full_name', true );
-
+			$id = get_the_ID();
+			$fullName=  get_post_meta($id, 'entity_full_name', true);
 			if ($fullName != "") {
 				$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
-				$abbreviation = str_replace("/", "", $abbreviation);
+				$abbreviation = str_replace("/", "",$abbreviation);
 				$description = get_post_meta($id, 'entity_description', true);
 				$description = apply_filters('the_content', $description);
 				$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
-				$imgSrc = get_template_directory_uri() .'/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
+				$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
 
-				$entity_markup .= '<article class="bbg__entity'. $columnsClass .'">';
-				$entity_markup .= 	'<div class="bbg__entity__icon">';
-				$entity_markup .= 		'<a href="'. $link .'" tabindex="-1">';
-				$entity_markup .= 			'<div class="bbg__entity__icon__image" style="background-image: url(' . $imgSrc . ');"></div>';
-				$entity_markup .= 		'</a>';
+				$entity_markup .= '<article class="network-container '. $columnsClass .'">';
+				$entity_markup .= 	'<div class="network-icon bbg__entity__icon">';
+				$entity_markup .=  		'<a href="' . $link . '" tabindex="-1">';
+				// $entity_markup .=  			'<div class="bbg__avatar bbg__entity__icon__image" style="background-image: url(' . $imgSrc . ');"></div>';
+				$entity_markup .= 			'<img src="' . $imgSrc . '">';
+				$entity_markup .=  		'</a>';
 				$entity_markup .= 	'</div>';
-				$entity_markup .= 	'<div class="bbg__entity__text">';
-				$entity_markup .= 		'<h5><a href="' . $link . '">' . $fullName . '</a></h5>';
-				$entity_markup .= 		'<p class="bbg__entity__text-description">' . $description . '</p>';
+				$entity_markup .= 	'<div class="network-blurb bbg__entity__text">';
+				$entity_markup .= 		'<h4><a href="' . $link . '">' . $fullName . '</a></h4>';
+				// // $entity_markup .= 		'<p>' . $description . '</p>';
 				$entity_markup .= 	'</div>';
 				$entity_markup .= '</article>';
 			}
 		}
 	}
+	$entity_markup .= '</div>';
 
 	
 	wp_reset_postdata();
@@ -106,7 +106,7 @@ function outputBroadcasters($cols) {
 }
 
 function broadcasters_list_shortcode($atts) {
-	return outputBroadcasters($atts['cols']);
+	return outputBroadcasters($atts['placement']);
 }
 add_shortcode('broadcasters_list', 'broadcasters_list_shortcode');
 

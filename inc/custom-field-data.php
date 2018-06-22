@@ -360,6 +360,7 @@ function get_umbrella_content_data($raw_umbrella_content) {
 }
 
 function get_entity_data($grid_class) {
+	// $grid_class can be ["entity-main" | "entity-side"]
 	$entityParentPage = get_page_by_path('networks');
 	$entity_id_group = array();
 	$qParams = array(

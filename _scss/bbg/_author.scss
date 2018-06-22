@@ -72,13 +72,6 @@
 	}
 }
 
-.bbg__entity__text,
-.bbg__team__text {
-	@include media($small-screen) {
-		padding-left: $bbg__team__icon-width + 10px;
-	}
-}
-
 .bbg__entity__icon__image,
 .bbg__team__icon__image {
 	@include backgroundCover;

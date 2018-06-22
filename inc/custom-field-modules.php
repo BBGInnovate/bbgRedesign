@@ -3,6 +3,36 @@
 // Insert parts into div architecture
 // * INCLUDE A NOTE AS TO WHERE THE STYLES ARE LOCATED (AFTER PROPERLY PLACED)
 
+// GLOBAL
+function assemble_entity_section($entity_data) {
+	$entity_class = $entity_data['class'];
+	$entity_chuncks = $entity_data['parts'];
+
+	$entity_markup  = 	'<section class="outer-container" id="entities">';
+	$entity_markup .= 		'<div class="grid-container">';
+	$entity_markup .= 			'<h1 class="header-outliner">Entities</h1>';
+	$entity_markup .= 			'<h2><a href="' . get_permalink(get_page_by_path('networks')) . '">Our Networks</a></h2>';
+	$entity_markup .= 			'<p class="lead-in">Every week, more than ' . do_shortcode('[audience]') . ' listeners, viewers and internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</p>';
+	$entity_markup .= 		'</div>';
+	$entity_markup .= 	'<div class="outer-container">';
+	foreach ($entity_chuncks as $entity_part) {
+		$entity_markup .= '<div class="contain-entity ' . $entity_class . '">';
+		$entity_markup .= 	'<div class="nest-container">';
+		$entity_markup .= 		'<div class="inner-container">';
+		$entity_markup .= 			'<div class="entity-icon">';
+		$entity_markup .= 				$entity_part['image'];
+		$entity_markup .= 			'</div>';
+		$entity_markup .= 			'<div class="entity-desc">';
+		$entity_markup .= 				$entity_part['content'];
+		$entity_markup .= 			'</div>';
+		$entity_markup .= 		'</div>';
+		$entity_markup .= 	'</div>';
+		$entity_markup .= '</div>';
+	}
+		$entity_markup .= 	'</div>';
+		$entity_markup .= '</section>';
+	echo $entity_markup;
+}
 
 // HOMEPAGE OPTIONS
 function assemble_mentions_full_width($mention_data, $impact_group) {
@@ -60,36 +90,6 @@ function assemble_threats_to_press_ribbon($threat_data) {
 	$theat_ribbon .= 	'</div>';
 	$theat_ribbon .= '</div>';
 	echo $theat_ribbon;
-}
-
-function assemble_entity_section($entity_data) {
-	$entity_class = $entity_data['class'];
-	$entity_chuncks = $entity_data['parts'];
-
-	$entity_markup  = 	'<section class="outer-container" id="entities">';
-	$entity_markup .= 		'<div class="grid-container">';
-	$entity_markup .= 			'<h1 class="header-outliner">Entities</h1>';
-	$entity_markup .= 			'<h2><a href="' . get_permalink(get_page_by_path('networks')) . '">Our Networks</a></h2>';
-	$entity_markup .= 			'<p class="lead-in">Every week, more than ' . do_shortcode('[audience]') . ' listeners, viewers and internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</p>';
-	$entity_markup .= 		'</div>';
-	$entity_markup .= 	'<div class="outer-container">';
-	foreach ($entity_chuncks as $entity_part) {
-		$entity_markup .= '<div class="contain-entity ' . $entity_class . '">';
-		$entity_markup .= 	'<div class="nest-container">';
-		$entity_markup .= 		'<div class="inner-container">';
-		$entity_markup .= 			'<div class="entity-icon">';
-		$entity_markup .= 				$entity_part['image'];
-		$entity_markup .= 			'</div>';
-		$entity_markup .= 			'<div class="entity-desc">';
-		$entity_markup .= 				$entity_part['content'];
-		$entity_markup .= 			'</div>';
-		$entity_markup .= 		'</div>';
-		$entity_markup .= 	'</div>';
-		$entity_markup .= '</div>';
-	}
-		$entity_markup .= 	'</div>';
-		$entity_markup .= '</section>';
-	echo $entity_markup;
 }
 
 // ABOUT FLEXIBLE ROWS

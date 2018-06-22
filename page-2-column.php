@@ -16,11 +16,9 @@ require 'inc/custom-field-modules.php';
 require 'inc/bbg-functions-assemble.php';
 include "inc/shared_sidebar.php";
 
-$secondaryColumnLabel = get_field( 'secondary_column_label', '', true );
-$secondaryColumnContent = get_field( 'secondary_column_content', '', true );
 $addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
 
-$headline = get_field( 'headline', '', true );
+$headline = get_field('headline', '', true);
 $listsInclude = get_field( 'sidebar_dropdown_include', '', true);
 
 // THIS COULD BELONG IN A BUILD INCLUDE FILE
@@ -73,7 +71,7 @@ function display_foia_reports() {
 if (have_posts()) {
 	while (have_posts()) {
 		the_post();
-		$id = get_the_id();
+		$id = get_the_ID();
 		$ogDescription = get_the_excerpt();
 		$pageContent = do_shortcode(get_the_content());
 	}
@@ -85,111 +83,106 @@ get_header(); ?>
 
 <main id="main" class="site-main bbg__2-column" role="main">
 
-		<!-- <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>> -->
-			<?php
-				$featured_media_result = get_feature_media_data();
-				if ($featured_media_result != "") {
-					echo $featured_media_result;
+	<?php
+		$featured_media_result = get_feature_media_data();
+		if ($featured_media_result != "") {
+			echo $featured_media_result;
+		}
+	?>
+
+<div class="outer-container">
+	<div class="grid-container">
+		<div class="nest-container">
+			<div class="inner-container">
+				<div class="main-content-container">
+<?php
+	if($post->post_parent) {
+		$parent_link = get_permalink($post->post_parent);
+		echo '<a href="' . $parent_link . '">Link to parent page</a>';
+	}
+	else {
+		$headline_string  = '<h2>' . $headline . '</h2>';
+	}
+	echo $headline_string;
+	echo $pageContent;
+	if (is_page('foia-reports')) {
+		display_foia_reports();
+	}
+
+	//Add blog posts below the main content
+	$relatedCategory=get_field('related_category_posts', $id);
+
+	if ($relatedCategory != "") {
+		$qParams2 = array(
+			'post_type' => array('post'),
+			'posts_per_page' => 2,
+			'cat' => $relatedCategory->term_id,
+			'orderby' => 'date',
+			'order' => 'DESC'
+		);
+		$categoryUrl = get_category_link($relatedCategory->term_id);
+		$custom_query = new WP_Query($qParams2);
+
+		if ( $custom_query -> have_posts() ) {
+			echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
+			echo '<div class="usa-grid-full">';
+				while ($custom_query -> have_posts())  {
+					$custom_query->the_post();
+					get_template_part('template-parts/content-portfolio', get_post_format());
 				}
-			?>
-
-			<!-- <div class="usa-grid"> -->
-				<header class="entry-header">
-					<!-- .bbg__label -->
-					<?php
-						if($post->post_parent) {
-							$parent_link = get_permalink($post->post_parent);
-							echo '<a href="' . $parent_link . '">Link to parent page</a>';
-						}
-						else {
-							$headline_string  = '<h2>' . $headline . '</h2>';
-						}
-					?>
-				</header><!-- .entry-header -->
-
-				<div class="entry-content bbg__article-content large <?php echo $featuredImageClass; ?>">
-					<div class="bbg__profile__content">
-						<?php
-							echo $headline_string;
-							echo $pageContent;
-							if (is_page('foia-reports')) {
-								display_foia_reports();
-							}
-						?>
-					</div>
-
-					<?php
-						//Add blog posts below the main content
-						$relatedCategory=get_field('related_category_posts', $id);
-
-						if ($relatedCategory != "") {
-							$qParams2 = array(
-								'post_type' => array('post'),
-								'posts_per_page' => 2,
-								'cat' => $relatedCategory->term_id,
-								'orderby' => 'date',
-								'order' => 'DESC'
-							);
-							$categoryUrl = get_category_link($relatedCategory->term_id);
-							$custom_query = new WP_Query($qParams2);
-
-							if ( $custom_query -> have_posts() ) {
-								echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
-								echo '<div class="usa-grid-full">';
-									while ($custom_query -> have_posts())  {
-										$custom_query->the_post();
-										get_template_part('template-parts/content-portfolio', get_post_format());
-									}
-								echo '</div>';
-							}
-							wp_reset_postdata();
-						}
-					?>
-				</div><!-- .entry-content -->
-
-				<div class="bbg__article-sidebar large">
-					<?php
-						if ($secondaryColumnContent != "") {
-							if ($secondaryColumnLabel != "") {
-								echo '<h5 class="bbg__label small">' . $secondaryColumnLabel . '</h5>';
-							}
-							echo $secondaryColumnContent;
-						}
-						if ( $includeSidebar ) {
-							echo $sidebar;
-						}
-						if ( $listsInclude ) {
-							echo $sidebarDownloads;
-						}
-					?>
-				</div><!-- .bbg__article-sidebar -->
-			<!-- </div> -->
-
-			<div class="usa-grid">
-				<footer class="entry-footer bbg-post-footer 1234">
-					<?php
-						edit_post_link(
-							sprintf(
-								/* translators: %s: Name of current post */
-								esc_html__('Edit %s', 'bbginnovate'),
-								the_title('<span class="screen-reader-text">"', '"</span>', false)
-							),
-							'<span class="edit-link">',
-							'</span>'
-						);
-					?>
-				</footer><!-- .entry-footer -->
-			</div><!-- .usa-grid -->
-		<!-- </article> --><!-- #post-## -->
-
-		<div class="bbg-post-footer">
-		<?php
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-		?>
+			echo '</div>';
+		}
+		wp_reset_postdata();
+	}
+?>
+				</div>
+				<div class="sidebar-content-container">
+<?php
+	$secondaryColumnLabel = get_field('secondary_column_label');
+	$secondaryColumnContent = get_field('secondary_column_content');
+	if ($secondaryColumnContent != "") {
+		if ($secondaryColumnLabel != "") {
+			echo '<h2>' . $secondaryColumnLabel . '</h2>';
+		}
+		echo $secondaryColumnContent;
+	}
+	if ( $includeSidebar ) {
+		echo $sidebar;
+	}
+	if ( $listsInclude ) {
+		echo $sidebarDownloads;
+	}
+?>
+				</div>
+			</div>
 		</div>
+	</div>
+</div>
+
+	<div class="outer-container">
+		<footer class="entry-footer bbg-post-footer 1234">
+			<?php
+				edit_post_link(
+					sprintf(
+						/* translators: %s: Name of current post */
+						esc_html__('Edit %s', 'bbginnovate'),
+						the_title('<span class="screen-reader-text">"', '"</span>', false)
+					),
+					'<span class="edit-link">',
+					'</span>'
+				);
+			?>
+		</footer><!-- .entry-footer -->
+	</div><!-- .usa-grid -->
+
+	<div class="bbg-post-footer">
+	<?php
+		// If comments are open or we have at least one comment, load up the comment template.
+		if ( comments_open() || get_comments_number() ) :
+			comments_template();
+		endif;
+	?>
+	</div>
 </main><!-- #main -->
 
 <?php /*get_sidebar();*/ ?>

@@ -2864,7 +2864,8 @@ h4 a:link,
 h4 a:visited,
 .bbg__board__committee-list li a a:visited {
   font-weight: 700;
-  color: #284f91; }
+  color: #284f91;
+  margin-bottom: 1.5rem; }
 
 h5, .bbg__sidebar__table th,
 h5 a:link,
@@ -2895,6 +2896,9 @@ p.post-date {
   font-size: 0.9em;
   color: #666666;
   margin-bottom: 0.25em; }
+
+ul li, ol li {
+  line-height: 1.8rem; }
 
 a:not(.bbg__article-share__icon):focus {
   background-color: #dce4ef; }
@@ -3947,11 +3951,6 @@ body:not(.home) .bbg__main-navigation {
     .bbg__team__icon {
       margin-bottom: 3rem; } }
 
-@media screen and (min-width: 481px) {
-  .bbg__entity__text,
-  .bbg__team__text {
-    padding-left: 110px; } }
-
 .bbg__entity__icon__image,
 .bbg__team__icon__image {
   background-size: cover;
@@ -4799,6 +4798,49 @@ ol li:before {
     padding-top: 1.5rem; }
   .bbg-header__site-title--breakline {
     display: inline-block; } }
+
+.profile-header {
+  position: relative;
+  margin-top: -10rem; }
+  .profile-header .image-container {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
+    .profile-header .image-container img {
+      min-width: 100%;
+      box-sizing: border-box;
+      border: 10px solid #ffffff; }
+  .profile-header .content-column {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; }
+    .profile-header .content-column .content {
+      position: absolute;
+      bottom: 10px; }
+      .profile-header .content-column .content p {
+        margin-bottom: 0; }
+
+.main-content-container {
+  width: calc(66.66667% - 33.33333px);
+  float: left;
+  margin-left: 20px; }
+
+.sidebar-content-container {
+  width: calc(33.33333% - 26.66667px);
+  float: left;
+  margin-left: 20px; }
+  .sidebar-content-container .network-container::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .sidebar-content-container .network-container .network-icon {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
+  .sidebar-content-container .network-container .network-blurb {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; }
 
 .page-featured-media {
   margin-bottom: 6rem; }

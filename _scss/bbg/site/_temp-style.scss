@@ -1,6 +1,49 @@
 // COLUMNS MAIN, SIDEBAR
 // .page-post-main-content {@include grid-column(9);}
 
+// ENTITY, PROFILE
+.profile-header {
+	position: relative;
+	margin-top: -10rem;
+
+	.image-container {
+		@include grid-column(3);
+		img {
+			min-width: 100%;
+			box-sizing: border-box;
+			border: 10px solid $white;
+		}
+	}
+	.content-column {
+		@include grid-column(9);
+		.content {
+			position: absolute;
+			bottom: 10px;
+			p {margin-bottom: 0;}
+		}
+	}
+}
+
+// MAIN, SIDEBAR
+.main-content-container {
+	@include grid-column(8);
+}
+.sidebar-content-container {
+	@include grid-column(4);
+	.network-container {
+		@include grid-container;
+		.network-icon {
+			@include grid-column(3);
+			img {
+				// width: 25%;
+				// height: auto;
+			}
+		}
+		.network-blurb {@include grid-column(9);}
+	}
+}
+
+
 // FEATURED MEDIA 
 .page-featured-media {margin-bottom: 6rem;}
 .graphic-caption {
