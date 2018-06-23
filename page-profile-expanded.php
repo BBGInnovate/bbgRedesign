@@ -8,6 +8,9 @@
   template name: Profile
 
  */
+
+require 'inc/bbg-functions-assemble.php';
+
 /* we go through the loop once and reset it in order to get some vars for our og tags */
 if ( have_posts() ) {
 	the_post();
@@ -28,19 +31,6 @@ if ( have_posts() ) {
 		$socialImage = wp_get_attachment_image_src( $socialImageID , 'Full' );
 		$ogImage = $socialImage[0];
 	}
-
-	/**** CREATE $bannerAdjustStr *****/
-	$bannerPosition = get_post_meta( $id, 'adjust_the_banner_image', true );
-	$bannerPositionCSS = get_field( 'adjust_the_banner_image_css', '', true );
-	$bannerAdjustStr = "";
-	if ( $bannerPositionCSS ) {
-		$bannerAdjustStr = $bannerPositionCSS;
-	} else if ( $bannerPosition ) {
-		$bannerAdjustStr = $bannerPosition;
-	}
-
-	// Grab a featured video, which will replace featured image, if we have it.
-	$videoUrl = get_field( 'featured_video_url', '', true );
 
 	/**** Get profile fields *****/
 	$isActing = get_post_meta( $id, 'acting', true );
@@ -88,11 +78,6 @@ get_header(); ?>
 
 		<?php while ( have_posts() ) : the_post();
 
-			/*$projectCategoryID = get_cat_id( 'Project' );
-			$isProject = has_category($projectCategoryID);
-			$prevLink = "";
-			$nextLink = "";*/
-
 			//Default adds a space above header if there's no image set
 			$featuredImageClass = " bbg__article--no-featured-image";
 
@@ -107,8 +92,8 @@ get_header(); ?>
 
 			?>
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class( "bbg__article" ); ?>>
-				<div class="usa-grid">
+<!-- 				<div class="outer-container">
+					<div class="grid-container">
 					<?php if( $post -> post_parent ) {
 						//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
 						$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
@@ -116,236 +101,203 @@ get_header(); ?>
 						?>
 						<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>"><?php echo $parent -> post_title; ?></a></h5>
 					<?php } ?>
-				</div>
+					</div>
+				</div> -->
 
 				<?php
-					// $hideFeaturedImage = get_post_meta( $id, "hide_featured_image", true );
-					$hideFeaturedImage = FALSE;
-
-					if ($videoUrl != "") {
-						echo featured_video( $videoUrl );
-						$hideFeaturedImage = TRUE;
-					} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-						echo '<div class="usa-grid-full">';
-							$featuredImageClass = "";
-							$featuredImageCutline = "";
-							$thumbnail_image = get_posts( array( 'p' => get_post_thumbnail_id( $id ), 'post_type' => 'attachment' ) );
-							if ( $thumbnail_image && isset( $thumbnail_image[0] ) ) {
-								$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-							}
-
-							$src = wp_get_attachment_image_src( get_post_thumbnail_id( $post -> ID ), array( 700,450 ), false, '' );
-
-							echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner--profile" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerAdjustStr . '"></div>';
-						echo '</div> <!-- usa-grid-full -->';
+					$featured_media_result = get_feature_media_data();
+					if ($featured_media_result != "") {
+						echo $featured_media_result;
 					}
-				?><!-- .bbg__article-header__thumbnail -->
+				?>
 
-				<!-- <div class="bbg__article__nav">
-					<?php echo $prevLink; ?>
-					<?php echo $nextLink; ?>
-				</div> --><!-- .bbg__article__nav -->
+		<div class="outer-container profile-header">
+			<div class="inner-container">
+				<div class="image-container">
+					<img src="<?php echo $profilePhoto; ?>">
+				</div>
 
-				<div class="usa-grid">
-					<?php echo '<header class="entry-header bbg__article-header' . $featuredImageClass . '">'; ?>
-
-						<div class="bbg__profile-photo">
-							<img src="<?php echo $profilePhoto; ?>" class="bbg__profile-photo__image<?php echo $formerCSS; ?>"/>
-						</div>
-
-						<div class="bbg__profile-title">
-
-							<?php the_title( '<h1 class="entry-title bbg__article-header__title">', '</h1>' ); ?>
-
-							<!-- .bbg__article-header__title -->
-							<h5 class="entry-category bbg__profile-tagline">
-								<?php echo $occupation; ?>
-							</h5><!-- .bbg__label -->
-
-						</div>
-					</header><!-- .bbg__article-header -->
-
-					<div class="bbg__article-sidebar--left">
-						<h3 class="bbg__sidebar-label bbg__contact-label">Share </h3>
-						<ul class="bbg__article-share">
-							<li class="bbg__article-share__link facebook">
-								<a href="<?php echo $fbUrl; ?>">
-									<span class="bbg__article-share__icon facebook"></span>
-								</a>
-							</li>
-							<li class="bbg__article-share__link twitter">
-								<a href="<?php echo $twitterURL; ?>">
-									<span class="bbg__article-share__icon twitter"></span>
-								</a>
-							</li>
-						</ul>
+				<div class="content-column">
+					<div class="content">
+						<?php the_title( '<h1 class="entry-title bbg__article-header__title">', '</h1>' ); ?>
+						<h5 class="entry-category bbg__profile-tagline">
+							<?php echo $occupation; ?>
+						</h5>
 					</div>
+				</div>
+			</div>
+		</div>
 
-					<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
+<div class="outer-container">
+	<!-- BEGIN MAIN CONTENT -->
+	<div class="main-content-container">
+		<div class="bbg__profile__content__section">
+			<?php the_content(); ?>
+			<p class="bbg-tagline" style="text-align: right;">Last modified: <?php the_modified_date('F d, Y'); ?></p>
+		</div>
+		<!-- section for content below biography -->
+		<?php
+			$contentBelowBio = get_field( 'profile_content_below_biography', $id );
+			if ( $contentBelowBio != "" ) {
+				echo "<div class='bbg__profile__content__section' >$contentBelowBio</div>";
+			}
+		?>
 
-						<!-- section for biography -->
-						<div class="bbg__profile__content__section">
-							<?php the_content(); ?>
-							<p class="bbg-tagline" style="text-align: right;">Last modified: <?php the_modified_date('F d, Y'); ?></p>
-						</div>
+		<!-- section for CEO -->
+		<?php
+			$ceo = get_post_meta( $id, 'ceo', true );
+			if ( $ceo ) {
 
-						<!-- section for content below biography -->
-						<?php
-							$contentBelowBio = get_field( 'profile_content_below_biography', $id );
-							if ( $contentBelowBio != "" ) {
-								echo "<div class='bbg__profile__content__section' >$contentBelowBio</div>";
-							}
-						?>
+				$tax_query = array(
+					'relation' => 'AND',
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'john-lansing' ),
+						'operator' => 'IN'
+					),
+					array(
+						'taxonomy' => 'category',
+						'field' => 'slug',
+						'terms' => array( 'appearance','bbg-in-the-news' ),
+						'operator' => 'IN'
+					)
+				);
 
-						<!-- section for CEO -->
-						<?php
-							$ceo = get_post_meta( $id, 'ceo', true );
-							if ( $ceo ) {
+				$qParams2 = array(
+					'post_type' => array( 'post' ),
+					'posts_per_page' => 2,
+					'tax_query' => $tax_query,
+					'orderby' => 'date',
+					'order' => 'DESC'
+				);
 
-								$tax_query = array(
-									'relation' => 'AND',
-									array(
-										'taxonomy' => 'post_tag',
-										'field' => 'slug',
-										'terms' => array( 'john-lansing' ),
-										'operator' => 'IN'
-									),
-									array(
-										'taxonomy' => 'category',
-										'field' => 'slug',
-										'terms' => array( 'appearance','bbg-in-the-news' ),
-										'operator' => 'IN'
-									)
-								);
+				$categoryUrl = "https://www.bbg.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news";
+				$categoryLabel = "News & Appearances";
+				$custom_query = new WP_Query( $qParams2 );
+				if ( $custom_query -> have_posts() ) {
+					echo '<div class="bbg__profile__content__section" >';
+						echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $categoryLabel . '</a></h6>';
+						echo '<div class="usa-grid-full">';
+						while ( $custom_query -> have_posts() )  {
+							$custom_query -> the_post();
+							get_template_part( 'template-parts/content-portfolio', get_post_format() );
+						}
+						echo '</div>';
+					echo '</div>';
+				}
+				wp_reset_postdata();
+			}
+		?>
 
-								$qParams2 = array(
-									'post_type' => array( 'post' ),
-									'posts_per_page' => 2,
-									'tax_query' => $tax_query,
-									'orderby' => 'date',
-									'order' => 'DESC'
-								);
+		<!-- section for related blog posts. Previously was used for "from the ceo". Currently not used on any profiles. -->
+		<?php
+			//Add blog posts below the main content
+			$relatedCategory = get_field( 'profile_related_category', $id );
 
-								$categoryUrl = "https://www.bbg.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news";
-								$categoryLabel = "News & Appearances";
-								$custom_query = new WP_Query( $qParams2 );
-								if ( $custom_query -> have_posts() ) {
-									echo '<div class="bbg__profile__content__section" >';
-										echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $categoryLabel . '</a></h6>';
-										echo '<div class="usa-grid-full">';
-										while ( $custom_query -> have_posts() )  {
-											$custom_query -> the_post();
-											get_template_part( 'template-parts/content-portfolio', get_post_format() );
-										}
-										echo '</div>';
-									echo '</div>';
-								}
-								wp_reset_postdata();
-							}
-						?>
+			if ( $relatedCategory != "" ) {
+				$qParams2 = array(
+					'post_type' => array( 'post' ),
+					'posts_per_page' => 2,
+					'cat' => $relatedCategory -> term_id,
+					'orderby' => 'date',
+					'order' => 'DESC'
+				);
+				$categoryUrl = get_category_link( $relatedCategory -> term_id );
+				$custom_query = new WP_Query( $qParams2 );
+				if ( $custom_query -> have_posts() ) {
+					echo '<div class="bbg__profile__content__section" >';
+						echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory -> name . '</a></h6>';
+						echo '<div class="usa-grid-full">';
+						while ( $custom_query -> have_posts() )  {
+							$custom_query -> the_post();
+							get_template_part( 'template-parts/content-portfolio', get_post_format() );
+						}
+						echo '</div>';
+					echo '</div>';
+				}
+				wp_reset_postdata();
+			}
+		?>
+	</div>
+	<!-- BEGIN SIDEBAR -->
+	<div class="sidebar-content-container">
+		<div class="social-share">
+			<h6 class="bbg__sidebar-label bbg__contact-label">Share </h6>
+			<a href="<?php echo $fbUrl; ?>">
+				<span class="bbg__article-share__icon facebook"></span>
+			</a>
+			<a href="<?php echo $twitterURL; ?>">
+				<span class="bbg__article-share__icon twitter"></span>
+			</a>
+		</div>
 
-						<!-- section for related blog posts. Previously was used for "from the ceo". Currently not used on any profiles. -->
-						<?php
-							//Add blog posts below the main content
-							$relatedCategory = get_field( 'profile_related_category', $id );
+		<?php
+			// EMAIL ex. Nasserie Carew
+			// CURRENTLY NO PHONE NUMBERS USED ON PROFILES
+			if ( $email != "" || $phone != "" ) {
+				echo '<h6 class="bbg__sidebar-label bbg__contact-label">Contact </h6>';
+				echo '<ul class="bbg__article-share">';
+				if ( $email != "" ) {
+					echo '<li class="bbg__article-share__link email"><a href="mailto:' . $email . '" title="Email ' . get_the_title() . '"><span class="bbg__article-share__icon email"></span><span class="bbg__article-share__text">' . $email . '</span></a></li>';
+				}
+				if ( $phone != "" ){
+					echo '<li class="bbg__article-share__link phone"><span class="bbg__article-share__icon phone"></span><span class="bbg__article-share__text">' . $phone . '</span></li>';
+				}
+				echo '</ul>';
+			}
 
-							if ( $relatedCategory != "" ) {
-								$qParams2 = array(
-									'post_type' => array( 'post' ),
-									'posts_per_page' => 2,
-									'cat' => $relatedCategory -> term_id,
-									'orderby' => 'date',
-									'order' => 'DESC'
-								);
-								$categoryUrl = get_category_link( $relatedCategory -> term_id );
-								$custom_query = new WP_Query( $qParams2 );
-								if ( $custom_query -> have_posts() ) {
-									echo '<div class="bbg__profile__content__section" >';
-										echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory -> name . '</a></h6>';
-										echo '<div class="usa-grid-full">';
-										while ( $custom_query -> have_posts() )  {
-											$custom_query -> the_post();
-											get_template_part( 'template-parts/content-portfolio', get_post_format() );
-										}
-										echo '</div>';
-									echo '</div>';
-								}
-								wp_reset_postdata();
-							}
-						?>
-					</div><!-- .entry-content -->
+			// IF TWITTER HANDLE, SHOW IT, SHOW RECENT TWEETS IF ENABLED ON PAGE
+			// LATEST TWEETS ex. CEO John Lansing, Amanda Bennet
+			if ($twitterProfileHandle != "") {
+				echo '<h6 class="bbg__sidebar-label bbg__contact-label">Follow on Twitter</h6>';
+				echo '<li class="bbg__article-share__link twitter"><a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . get_the_title() . ' on Twitter"><i class="fa fa-twitter"></i> <span class="bbg__article-share__text">@' . $twitterProfileHandle . '</span></a></li>';
+				echo $latestTweetsStr;	//see top of this page template for definition of this string
+			}
 
-					<div class="bbg__article-sidebar">
-						<?php
-							//Nasserie Carew is an example that has an email. Currently, phone number is not used on any profiles
-							if ( $email != "" || $phone != "" ) {
+			// STANDARD SIDEBAR CONTENT ex. Rex Tillerson
+			echo "<!-- Sidebar content -->";
+			if ( $includeSidebar ) {
+				echo $sidebar;
+			}
 
-								echo '<h3 class="bbg__sidebar-label bbg__contact-label">Contact </h3>';
-								echo '<ul class="bbg__article-share">';
+			// RESOLUTION OF HONOR ex. Victor Ashe
+			if ( $resolution ) {
+				echo '<h3 class="bbg__sidebar-label">Resolution of Honor</h3>';
+				echo "<p><a href='" . $resolution['url'] ."'>" . $resolution['title'] .'</a></p>';
+			}
 
-								if ( $email != "" ) {
-									echo '<li class="bbg__article-share__link email"><a href="mailto:' . $email . '" title="Email ' . get_the_title() . '"><span class="bbg__article-share__icon email"></span><span class="bbg__article-share__text">' . $email . '</span></a></li>';
-								}
+			if ( $relatedLinksTag != "" ) {
+				$qParams2 = array(
+					'post_type' => array( 'post' ),
+					'posts_per_page' => 4,
+					'tag' => $relatedLinksTag,
+					'orderby' => 'date',
+					'order' => 'DESC'
+				);
+				$custom_query = new WP_Query( $qParams2 );
+				if ( $custom_query -> have_posts() ) {
+					echo '<h3 class="bbg__sidebar-label">Related posts  <!--(tag "$relatedLinksTag")--></h3>';
+					echo '<ul class="bbg__profile__related-link__list">';
+					while ( $custom_query -> have_posts() )  {
+						$custom_query -> the_post();
+						$link = get_the_permalink();
+						$title = get_the_title();
+						echo '<li class="bbg__profile__related-link"><a href="' . $link . '">' . $title . '</a></li>';
+					}
+					echo "</ul>";
+					$viewAllLink = get_term_link( $relatedLinksTag, 'post_tag' );
+					echo "<a class='bbg__read-more' href='" . $viewAllLink . "'>VIEW ALL »</a>";
+				}
+				wp_reset_postdata();
+			}
+		?>
+	</div>
+</div>
 
-								if ( $phone != "" ){
-									echo '<li class="bbg__article-share__link phone"><span class="bbg__article-share__icon phone"></span><span class="bbg__article-share__text">' . $phone . '</span></li>';
-								}
-								echo '</ul>';
-							}
-
-							//If a twitter handle is filled out, we always show it. We only show recent tweets if it's enabled in the profile page.
-							//Examples including latest tweets are CEO Lansing and Director Amanda Bennett
-							if ($twitterProfileHandle != "") {
-								echo '<h3 class="bbg__sidebar-label bbg__contact-label">Follow on Twitter</h3>';
-								echo '<li class="bbg__article-share__link twitter"><a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . get_the_title() . ' on Twitter"><i class="fa fa-twitter"></i> <span class="bbg__article-share__text">@' . $twitterProfileHandle . '</span></a></li>';
-								echo $latestTweetsStr;	//see top of this page template for definition of this string
-							}
-
-							// Insert standard sidebar content
-							// See Secretary of State Rex Tillerson for  an example
-							echo "<!-- Sidebar content -->";
-							if ( $includeSidebar ) {
-								echo $sidebar;
-							}
-
-							//Some board members were given a resolution of honor. For example, see Victor Ashe
-							if ( $resolution ) {
-								echo '<h3 class="bbg__sidebar-label">Resolution of Honor</h3>';
-								echo "<p><a href='" . $resolution['url'] ."'>" . $resolution['title'] .'</a></p>';
-							}
-
-							if ( $relatedLinksTag != "" ) {
-								$qParams2 = array(
-									'post_type' => array( 'post' ),
-									'posts_per_page' => 4,
-									'tag' => $relatedLinksTag,
-									'orderby' => 'date',
-									'order' => 'DESC'
-								);
-								$custom_query = new WP_Query( $qParams2 );
-								if ( $custom_query -> have_posts() ) {
-									echo '<h3 class="bbg__sidebar-label">Related posts  <!--(tag "$relatedLinksTag")--></h3>';
-									echo '<ul class="bbg__profile__related-link__list">';
-									while ( $custom_query -> have_posts() )  {
-										$custom_query -> the_post();
-										$link = get_the_permalink();
-										$title = get_the_title();
-										echo '<li class="bbg__profile__related-link"><a href="' . $link . '">' . $title . '</a></li>';
-									}
-									echo "</ul>";
-									$viewAllLink = get_term_link( $relatedLinksTag, 'post_tag' );
-									echo "<a class='bbg__read-more' href='" . $viewAllLink . "'>VIEW ALL »</a>";
-
-								}
-								wp_reset_postdata();
-							}
-						?>
-					</div><!-- .bbg__article-sidebar -->
-				</div><!-- .usa-grid -->
-			</article><!-- #post-## -->
 		<?php endwhile; // End of the loop. ?>
-		</main><!-- #main -->
-	</div><!-- #primary -->
+	</main><!-- #main -->
+</div><!-- #primary -->
 
 	<section class="usa-grid">
 		<?php get_sidebar(); ?>
