@@ -8,69 +8,78 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0rem;
 }
 
-h1 a,
-h2 a,
-h3 a,
-h4 a {
-    font-size: inherit;
-    color: inherit;
-}
 h2,
 h2 a:link,
 h2 a:visited {
     font-size: 1.8rem;
+    line-height: 2rem;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
     color: $color-red;
+    margin-bottom: 3rem;
 }
-
 h3,
 h3 a:link,
 h3 a:visited {
-    font-size: 2.2rem;
+    font-size: 2.6rem;
+    line-height: 3.2rem;
     font-weight: $font-normal;
-    color: $color-blue-darker;
+    color: $color-blue-darkest;
+    margin-bottom: 1.5rem;
 }
 h4,
 h4 a:link,
 h4 a:visited {
-    font-weight: $font-bold;
+    font-size: 2.2rem;
+    line-height: 2.6rem;
+    font-weight: $font-normal;
     color: $color-blue-darker;
     margin-bottom: 1.5rem;
 }
 h5,
 h5 a:link,
 h5 a:visited {
+    font-size: 1.8rem;
+    line-height: 2.1rem;
     font-weight: $font-bold;
-    color: $color-taupe-dark;
+    color: $color-blue-darker;
+    margin-bottom: 1rem;
 }
 
 h6,
 h6 a:link,
 h6 a:visited {
+    font-size: 1.4rem;
+    line-height: 1.7rem;
     font-weight: $font-bold;
-    color: #ff00ff;
+    color: $color-taupe-dark;
+    margin-bottom: 1.5rem;
 }
 
 p {
-    font-family: $font-sans;
-    margin: 0 0 3rem 0;
+    font-family: $font-serif;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    margin-bottom: 1.5rem;
 }
 
 p.lead-in {
-    font-size: 2rem;
-    line-height: 3.5rem;
+    font-size: 2.2rem;
+    line-height: 3.2rem;
     font-family: $font-serif;
     color: $black9;
 }
-p.post-date {
+p.aside {
     font-family: $font-serif;
-    font-size: 0.9em;
-    color: $black6;
-    margin-bottom: 0.25em;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    color: $black3;
 }
 ul li, ol li {
-    line-height: 1.8rem;
+    font-family: $font-serif;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+    margin-bottom: 1.5rem;
 }
 
 // a:visited {color: inherit;}

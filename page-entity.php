@@ -592,7 +592,7 @@ if ($includeMap) {
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 
 	<script type="text/javascript">
-	L.mapbox.accessToken = '<?php echo MAPBOX_API_KEY; ?>';
+	L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 	var map = L.mapbox.map('map', 'mapbox.streets')
 		//.setView([38.91338, -77.03236], 16);
 		<?php echo '.setView(['. $lat . ', ' . $lng . '], ' . $zoom . ');'; ?>

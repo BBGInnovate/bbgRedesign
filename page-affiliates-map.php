@@ -24,10 +24,10 @@ wp_reset_query();
 
 $pageTagline = get_post_meta(get_the_ID(), 'page_tagline', true);
 if ($pageTagline && $pageTagline != "") {
-	$pageTagline = '<h6 class="bbg__page-header__tagline">' . $pageTagline . '</h6>';
+	$pageTagline = '<h6>' . $pageTagline . '</h6>';
 }
-$secondaryColumnLabel = get_field( 'secondary_column_label', '', true );
-$secondaryColumnContent = get_field( 'secondary_column_content', '', true );
+$secondaryColumnLabel = get_field('secondary_column_label', '', true);
+$secondaryColumnContent = get_field('secondary_column_content', '', true);
 
 $fullPath = get_template_directory() . "/external-feed-cache/affiliates.json";
 
@@ -112,15 +112,15 @@ get_header();
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
 
-			<div class="usa-grid">
-				<header class="page-header">
-					<h5 class="bbg__label--mobile large"><?php echo $pageTitle; ?></h5>
-					<?php echo $pageTagline; ?>
+			<!-- <div class="outer-container">
+				<header class="grid-container page-header">
+					<h5 class="bbg__label--mobile large"><?php //echo $pageTitle; ?></h5>
+					<?php //echo $pageTagline; ?>
 				</header>
-			</div>
+			</div> -->
 
 			<!-- this section holds the map and is populated later in the page by javascript -->
-			<section class="usa-section" style="position: relative;">
+			<section class="map-banner" style="position: relative;">
 				<div id="map" class="bbg__map--banner"></div>
 
 				<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button"/>
@@ -144,27 +144,30 @@ get_header();
 				</div>
 			</section>
 
-			<div class="usa-grid">
-				<div class="entry-content bbg__article-content large <?php echo $featuredImageClass; ?>">
-					<div class="bbg__profile__content">
+			<div class="sidebar-architecture">
+				<div class="inner-container">
+					<div class="main-content-container">
+						<?php echo '<h2>' . $pageTitle . '</h2>'; ?>
+					</div>
+					<div class="main-content-container">
 						<?php
 							echo $pageContent;
 						?>
 					</div>
-				</div>
-
-				<div class="bbg__article-sidebar large">
-					<?php
-						if ( $secondaryColumnContent != "" ) {
-							if ( $secondaryColumnLabel != "" ) {
-								echo '<h5 class="bbg__label small">' . $secondaryColumnLabel . '</h5>';
+					<div class="sidebar-content-container">
+						<?php
+							if ($secondaryColumnContent != "") {
+								if ($secondaryColumnLabel != "") {
+									echo '<h6>' . $secondaryColumnLabel . '</h6>';
+								}
+								echo $secondaryColumnContent;
 							}
-							echo $secondaryColumnContent;
-						}
-					?>
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</main><!-- #main -->
 </div><!-- #primary -->
 
@@ -208,7 +211,7 @@ get_header();
 	//var tilesetUrl = 'https://api.mapbox.com/styles/v1/mapbox/emerald-v8/tiles/{z}/{x}/{y}?access_token=<?php //echo MAPBOX_API_KEY; ?>';
 	selectedPlatform = "all";
 	// var mbToken = '<?php //echo MAPBOX_API_KEY; ?>'
-	var mbToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';;
+	var mbToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 	console.log('xxx: ' + mbToken);
 	var tilesetUrl = 'https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}@2x.png?access_token='+mbToken;
 	var attribStr = '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';

@@ -16,9 +16,8 @@
 
 ?>
 
-	</div><!-- #content -->
 
-	<div class="usa-grid bbg__footer__return-to-top__container">
+	<div class="bbg__footer__return-to-top__container">
 		<div class="usa-footer-return-to-top bbg__footer__return-to-top">
 			<a href="#">Return to top</a>
 		</div>
