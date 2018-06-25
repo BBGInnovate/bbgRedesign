@@ -3,85 +3,100 @@
 .testing_staging {color: green;}
 .header-outliner {display: none;}
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: $font-sans;
-    margin-top: 0rem;
-}
-
 h2,
 h2 a:link,
 h2 a:visited {
-    font-size: 1.8rem;
+    font-family: $font-sans;
+    font-size: 3.4rem;
+    font-weight: 300;
+    // font-size: 1.9rem;
     line-height: 2rem;
     letter-spacing: 0.1rem;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     color: $color-red;
-    margin-bottom: 3rem;
+    margin: 0 0 3rem 0;
 }
+h2.na {
+    font-size: 1.8em;
+    text-transform: uppercase;
+}
+
 h3,
 h3 a:link,
 h3 a:visited {
+    font-family: $font-sans;
     font-size: 2.6rem;
     line-height: 3.2rem;
     font-weight: $font-normal;
     color: $color-blue-darkest;
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem 0;
 }
 h4,
 h4 a:link,
 h4 a:visited {
+    font-family: $font-sans;
     font-size: 2.2rem;
     line-height: 2.6rem;
     font-weight: $font-normal;
     color: $color-blue-darker;
-    margin-bottom: 1.5rem;
+    margin: 0 0 1.5rem 0;
 }
 h5,
 h5 a:link,
 h5 a:visited {
-    font-size: 1.8rem;
-    line-height: 2.1rem;
+    font-family: $font-sans;
+    font-size: 1.5rem;
+    line-height: 1.7rem;
     font-weight: $font-bold;
-    color: $color-blue-darker;
-    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: $color-taupe-dark;
+    margin: 0 0 1.5rem 0;
 }
 
 h6,
 h6 a:link,
-h6 a:visited {
-    font-size: 1.4rem;
-    line-height: 1.7rem;
+h6 a:visited,
+.paragraph-header {
+    font-family: $font-sans;
+    font-size: 1.6rem;
+    line-height: 2.1rem;
     font-weight: $font-bold;
-    color: $color-taupe-dark;
-    margin-bottom: 1.5rem;
+    text-transform: none;
+    color: $color-blue-darker;
+    margin: 0 0 1rem 0;
 }
 
 p {
     font-family: $font-serif;
     font-size: 1.8rem;
     line-height: 2.8rem;
-    margin-bottom: 1.5rem;
+    margin: 0 0 3rem 0;
+    color: #545454;
 }
-
 p.lead-in {
     font-size: 2.2rem;
-    line-height: 3.2rem;
+    line-height: 4.2rem;
     font-family: $font-serif;
     color: $black9;
 }
-p.aside {
-    font-family: $font-serif;
-    font-size: 1.6rem;
-    line-height: 2rem;
-    color: $black3;
-}
-ul li, ol li {
+
+ul li:not(.menu-item),
+ol li {
     font-family: $font-serif;
     font-size: 1.8rem;
     line-height: 2.8rem;
     margin-bottom: 1.5rem;
 }
 
+.side-content-container ul li, 
+.side-content-container ol li, 
+p.aside {
+    font-family: $font-sans;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.bbg__contact-card > ul li {list-style-type: none;}
 // a:visited {color: inherit;}
 
 a:not(.bbg__article-share__icon) {
@@ -230,27 +245,5 @@ a:not(.bbg__article-share__icon) {
 
     @include media($medium-large-screen) {
         font-size: 1.7rem;
-    }
-}
-
-section.usa-section {
-    margin-bottom: $site-margins-large;
-}
-
-.bbg__section--medium {
-    margin-bottom: 4rem;
-}
-
-article {
-    margin-bottom: $site-margins;
-
-    @include media($medium-screen) {
-        margin-bottom: 0;
-    }
-
-    &.bbg-grid--1-2-3 {
-        @include media($medium-screen) {
-            margin-bottom: $site-margins;
-        }
     }
 }

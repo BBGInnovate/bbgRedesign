@@ -7,18 +7,53 @@ $sidebar-grid: (
 	columns: 12,
 	gutter: 30px,
 	media: 1200px,
+	direction: ltr,
 );
-.sidebar-architecture {
-	max-width: 1200px;
-	margin: 0 auto 6em auto;
+$icon-content-grid: (
+	columns: 6,
+);
 
-	.main-content-container {@include grid-column(8, $sidebar-grid);}
-	.sidebar-content-container {
-		@include grid-column(4, $sidebar-grid);
-		padding-left: 3rem;
-		border-left: 1px solid #e6e6e6;
+// ENTITY GRID
+.icon-content-small-container {
+	@include grid-column(1, $icon-content-grid);
+	img {margin-bottom: 3rem;}
+}
+.icon-content-main-container {@include grid-column(5, $icon-content-grid);}
+
+
+// GLOBAL SIDEBAR RULES
+.main-content-container {@include grid-column(8);}
+.side-content-container {
+	@include grid-column(4);
+	padding-left: 3rem;
+	border-left: 1px solid #e6e6e6;
+
+	// UNDO FOR NESTED GRIDS
+	.side-content-container {
+		border-left: none;
+		padding-left: 0;
+	}
+	article {
+		margin-bottom: 3rem;
+		.grid-container {margin-top: 1.5rem;}
 	}
 }
+
+
+
+.custom-grid-container {
+	// MUST USE THIS PARENT FOR OUTER CUSTOM GRIDS
+	max-width: 1200px;
+	margin: 0 auto 6em auto;
+	
+	// SIDEBAR GRID
+	.main-content-container {@include grid-column(8, $sidebar-grid);}
+	.side-content-container {
+		@include grid-column(4, $sidebar-grid);
+	}
+}
+
+
 
 // ENTITY, PROFILE
 .profile-header {

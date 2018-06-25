@@ -144,7 +144,7 @@ get_header();
 				</div>
 			</section>
 
-			<div class="sidebar-architecture">
+			<div class="custom-grid-container">
 				<div class="inner-container">
 					<div class="main-content-container">
 						<?php echo '<h2>' . $pageTitle . '</h2>'; ?>
@@ -158,7 +158,7 @@ get_header();
 						<?php
 							if ($secondaryColumnContent != "") {
 								if ($secondaryColumnLabel != "") {
-									echo '<h6>' . $secondaryColumnLabel . '</h6>';
+									echo '<h5>' . $secondaryColumnLabel . '</h5>';
 								}
 								echo $secondaryColumnContent;
 							}
