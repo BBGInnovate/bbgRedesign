@@ -36,26 +36,26 @@ function assemble_entity_section($entity_data) {
 
 // HOMEPAGE OPTIONS
 function assemble_mentions_full_width($mention_data, $impact_group) {
-	$mention_full  = 			'<div class="inner-container">';
-	$mention_full .= 				'<div class="grid-container soap-corner-full">';
+	$mention_full  = '<div class="inner-container">';
+	$mention_full .= 	'<div class="grid-container soap-corner-full">';
 	// SOAPBOX AND/OR CORNER HERO
 	foreach($mention_data as $mention) { 
-		$mention_full .= 				$mention;
+		$mention_full .= 	$mention;
 	}
-	$mention_full .= 				'</div>';
-	$mention_full .= 			'</div>';
+	$mention_full .= 	'</div>';
+	$mention_full .= '</div>';
 
-	$mention_full .= 			'<div class="grid-container">';
-	$mention_full .= 				'<h2>Impact Stories</h2>';
-	$mention_full .= 			'</div>';
-	$mention_full .= 			'<div class="inner-container ">';
+	$mention_full .= '<div class="grid-container">';
+	$mention_full .= 	'<h2>Impact Stories</h2>';
+	$mention_full .= '</div>';
+	$mention_full .= '<div class="inner-container ">';
 	// IMPACT STORIES
 	foreach($impact_group as $impact) {
-		$mention_full .= 			'<div class="split-grid">';
-		$mention_full .= 				$impact;
-		$mention_full .= 			'</div>';
+		$mention_full .= '<div class="split-grid">';
+		$mention_full .= 	$impact;
+		$mention_full .= '</div>';
 	}
-	$mention_full .= 			'</div>';
+	$mention_full .= '</div>';
 	echo $mention_full;
 }
 

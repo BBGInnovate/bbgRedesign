@@ -92,8 +92,8 @@ get_header();
 							$featured_post_result = get_field_post_data('featured', 1);
 
 							$main_featured_post .= 	$featured_post_result['linked_media'];
-							$main_featured_post .= 	'<h3>' . $featured_post_result['linked_title'] . '</h3>';
-							$main_featured_post .= 	'<p class="post-date">' . $featured_post_result['date'] . '</p>';
+							$main_featured_post .= 	'<h4>' . $featured_post_result['linked_title'] . '</h4>';
+							$main_featured_post .= 	'<p class="aside">' . $featured_post_result['date'] . '</p>';
 							$main_featured_post .= 	'<p>' . $featured_post_result['excerpt'] . '</p>';
 							echo $main_featured_post;
 						?>
@@ -107,12 +107,12 @@ get_header();
 								while (have_posts()) {
 									the_post();
 									$recent_post  = '<div class="inner-container">';
-									$recent_post .= 	'<h3>';
+									$recent_post .= 	'<h4>';
 									$recent_post .= 		'<a href="' . get_the_permalink() . '">';
 									$recent_post .= 			get_the_title();
 									$recent_post .= 		'</a>';
-									$recent_post .= 	'</h3>';
-									$recent_post .= 	'<p class="post-date">' . get_the_date() . '</p>';
+									$recent_post .= 	'</h4>';
+									$recent_post .= 	'<p class="aside">' . get_the_date() . '</p>';
 									$recent_post .= 	'<p>';
 									$recent_post .= 		wp_trim_words(get_the_content(), 50);
 									$recent_post .= 		' <a href="' . get_the_permalink() . '">READ MORE</a>';
@@ -211,24 +211,18 @@ get_header();
 	</div><!-- #secondary .widget-area -->
 </div><!-- #main .site-main -->
 
-<?php //get_sidebar(); ?>
 <?php get_footer(); ?>
 
 
 <script type="text/javascript">
 function navSlide(){
 	var currentScroll = jQuery( "html" );
-	//console.log("Currently scrolled to: " + currentScroll.scrollTop());
-
 	var p = jQuery( "#threats-to-journalism" );
 	var offset = p.offset();
-	//console.log("#threats-to-journalism position: " + offset.top);
 
 	if (currentScroll.scrollTop() > offset.top){
-		//console.log("the Threats-to-press section should be at the top of the page");
 		jQuery(".bbg__social__container").hide();
 	} else {
-		//console.log("the Threats-to-press section is below the top of the page");
 		jQuery(".bbg__social__container").show();
 	}
 }

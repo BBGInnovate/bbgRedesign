@@ -13,21 +13,21 @@ function build_soapbox_parts($soap_data, $layout) {
 	$article_class = $soap_data['article_class'];
 
 	// BUILD PARTS
-	$soap_heading = '<header class="entry-header bbg__article-icons-container">';
+	// $soap_heading = '<header class="entry-header bbg__article-icons-container">';
 	if (!empty($soap_data['post_link'])) {
-		$soap_heading .= '<h2 class="mention-header"><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
+		$soap_heading = '<h2><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
 	} else if (!empty($soap_data['header_text'])) {
-		$soap_heading .= '<h2 class="mention-header">' . $soap_data['header_text'] . '</h2>';
+		$soap_heading = '<h2>' . $soap_data['header_text'] . '</h2>';
 	}
-	$soap_heading .= '</header>';
+	// $soap_heading .= '</header>';
 
-	$soap_title .= '<h3>';
+	$soap_title .= '<h4>';
 	$soap_title .= 	'<a href="' . $soap_data['header_link'] . '">';
 	$soap_title .= 		$soap_data['title'];
 	$soap_title .= 	'</a>';
-	$soap_title .= '</h3>';
+	$soap_title .= '</h4>';
 
-	$soap_content .= '<p>';
+	$soap_content .= '<p class="aside">';
 	$soap_content .= 	my_excerpt($soap_data['post_id']);
 	// $soap_content .= 	' <a href="' . $soap_data['post_link'] . '" class="bbg__read-more">' . $soap_data['read_more'] . ' »</a>';
 	$soap_content .= '</p>';
@@ -35,13 +35,13 @@ function build_soapbox_parts($soap_data, $layout) {
 	if (!empty($soap_data['profile_image'])) {
 		$soap_image  = '<div><img src="' . $soap_data['profile_image'] . '"></div>';
 		if ($soap_data['profile_name'] != "") {
-			$soap_image .= '<p class="profile-name">' . $soap_data['profile_name'] . '</p>';
+			$soap_image .= '<p class="aside">' . $soap_data['profile_name'] . '</p>';
 		}
 	}
 
 	// INSERT PART INTO GRID
 	// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
-	$soapbox_markup  = '<div class="inner-container soap-corner ' . $article_class . '">';
+	$soapbox_markup  = '<div class="inner-container soap-corner special-block ' . $article_class . '">';
 	// $soapbox_markup .= 	'<div class="nest-container">';
 	if ($layout == 'image-left') {
 		$soapbox_markup .= 	'<div class="small-side">';
@@ -72,19 +72,19 @@ function build_corner_hero_parts($corner_hero_data) {
 		$corner_hero_image = '<img src="' . content_url($path = '/uploads/2018/06/usagm-touch-image.png') . '">';
 
 		$corner_hero_header  = '<div class="bbg__article-icons-container">';
-		$corner_hero_header .= 	'<h2 class="bbg__label bbg__label--outside">' . $corner_hero_data['label'] . '</h2>';
+		$corner_hero_header .= 	'<h2>' . $corner_hero_data['label'] . '</h2>';
 		$corner_hero_header .= 	'<div class="bbg__article-icon"></div>';
 		$corner_hero_header .= '</div>';
 
-		$corner_hero_title  = '<h3>';
+		$corner_hero_title  = '<h4>';
 		$corner_hero_title .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
-		$corner_hero_title .= '</h3>';
+		$corner_hero_title .= '</h4>';
 
 		$corner_hero_content = '<p>' . $corner_hero_data['excerpt'] . '</p>';
 
 		// INSERT PART INTO GRID
 		// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
-		$corner_hero_markup  = '<div class="inner-container soap-corner">';
+		$corner_hero_markup  = '<div class="inner-container soap-corner special-block">';
 		$corner_hero_markup .= 	'<div class="small-side">';
 		$corner_hero_markup .= 		$corner_hero_image;
 		$corner_hero_markup .= 	'</div>';
@@ -140,7 +140,7 @@ function build_threat_parts($threat_data) {
 		$threat_image .= 	get_the_post_thumbnail($threat_id);
 		$threat_image .= '</a>';
 
-		$threat_content  = '<h5><a href="' . get_the_permalink($threat_id) . '">' . $cur_threat->post_title . '</a></h5>';
+		$threat_content  = '<h4><a href="' . get_the_permalink($threat_id) . '">' . $cur_threat->post_title . '</a></h4>';
 		$threat_content .= '<p>' . wp_trim_words($cur_threat->post_content, 40) . '</p>';
 
 		$threat_markup  = '<div class="threat-article">';

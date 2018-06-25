@@ -11,6 +11,7 @@ $sidebar-grid: (
 );
 $icon-content-grid: (
 	columns: 6,
+	gutter: 30px,
 );
 
 // ENTITY GRID
@@ -102,11 +103,16 @@ $icon-content-grid: (
 .bbg__ribbon {
 	h2 {
 		position: absolute;
+		font-weight: 300;
 		color: $white;
 		padding: 1rem;
-		margin: 0 0 1.5rem 0;
 		background-color: $color-red;
 	}
+	h4,
+	h4 a:link,
+	h4 a:visited {color: $color-light-blue;}
+
+	// p {font-weight: 300;} // NOT WORKING
 }
 
 .umbrella-bg-image {

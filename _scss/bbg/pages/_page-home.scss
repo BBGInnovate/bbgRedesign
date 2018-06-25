@@ -6,6 +6,9 @@
 
 
 .page-post-featured-graphic {margin-bottom: 8rem;}
+.home-feature-primary-post {
+	.page-post-featured-graphic {margin-bottom: 1.5rem;}
+}
 
 .featured-row {
 	.home-feature-primary-post {@include grid-column(12);}

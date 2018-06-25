@@ -2832,16 +2832,22 @@ h2,
 h2 a:link,
 h2 a:visited {
   font-family: "Alegreya Sans", sans-serif;
-  font-size: 3.4rem;
-  font-weight: 300;
+  font-size: 2.2rem;
+  font-weight: 400;
   line-height: 2rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
   color: #b2201c;
   margin: 0 0 3rem 0; }
 
-h2.na {
-  font-size: 1.8em;
-  text-transform: uppercase; }
+.special-block h2,
+.special-block h2 a:link,
+.special-block h2 a:visited {
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem; }
 
 h3, .bbg__sidebar__table caption,
 h3 a:link,
@@ -4810,16 +4816,16 @@ ol li:before {
   margin-bottom: 8rem; }
 
 .icon-content-small-container {
-  width: calc(16.66667% - 23.33333px);
+  width: calc(16.66667% - 35px);
   float: left;
-  margin-left: 20px; }
+  margin-left: 30px; }
   .icon-content-small-container img {
     margin-bottom: 3rem; }
 
 .icon-content-main-container {
-  width: calc(83.33333% - 36.66667px);
+  width: calc(83.33333% - 55px);
   float: left;
-  margin-left: 20px; }
+  margin-left: 30px; }
 
 .main-content-container {
   width: calc(66.66667% - 33.33333px);
@@ -4906,10 +4912,19 @@ ol li:before {
 
 .bbg__ribbon h2 {
   position: absolute;
+  font-weight: 300;
   color: #ffffff;
   padding: 1rem;
-  margin: 0 0 1.5rem 0;
   background-color: #b2201c; }
+
+.bbg__ribbon h4, .bbg__ribbon .bbg__board__committee-list li a, .bbg__board__committee-list li .bbg__ribbon a,
+.bbg__ribbon h4 a:link,
+.bbg__ribbon .bbg__board__committee-list li a a:link,
+.bbg__board__committee-list li .bbg__ribbon a a:link,
+.bbg__ribbon h4 a:visited,
+.bbg__ribbon .bbg__board__committee-list li a a:visited,
+.bbg__board__committee-list li .bbg__ribbon a a:visited {
+  color: #5b8cd3; }
 
 .umbrella-bg-image {
   background-position: center center;
@@ -5961,6 +5976,9 @@ div.banner_readmore h6 a:visited {
 
 .page-post-featured-graphic {
   margin-bottom: 8rem; }
+
+.home-feature-primary-post .page-post-featured-graphic {
+  margin-bottom: 1.5rem; }
 
 .featured-row .home-feature-primary-post {
   width: calc(100% - 40px);
