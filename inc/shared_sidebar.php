@@ -31,10 +31,10 @@ if ($includeSidebar) {
 		while (have_rows('sidebar_items')) : the_row();
 			if (get_row_layout() == 'sidebar_download_file') {
 				// DOWNLOAD FILES
-				$sidebarDownloadTitle = get_sub_field( 'sidebar_download_title' );
-				$sidebarDownloadThumbnail = get_sub_field( 'sidebar_download_thumbnail' );
-				$sidebarDownloadLinkObj = get_sub_field( 'sidebar_download_link' );
-				$sidebarDownloadDescription = get_sub_field( 'sidebar_download_description', false);
+				$sidebarDownloadTitle = get_sub_field('sidebar_download_title');
+				$sidebarDownloadThumbnail = get_sub_field('sidebar_download_thumbnail');
+				$sidebarDownloadLinkObj = get_sub_field('sidebar_download_link');
+				$sidebarDownloadDescription = get_sub_field('sidebar_download_description', false);
 
 				$fileID = $sidebarDownloadLinkObj['ID'];
 				$sidebarDownloadLink = $sidebarDownloadLinkObj['url'];
@@ -95,12 +95,12 @@ if ($includeSidebar) {
 					$external_links .= 		'<img class="bbg__sidebar__primary-image" src="' . $sidebarLinkImage['sizes']['medium'] . '">';
 					$external_links .= '</a>';
 				}
-				$external_links .= 		'<h5>';
+				$external_links .= 		'<h6>';
 				$external_links .= 			'<a target="blank" href="' . $sidebarLinkLink . '">' . $sidebarLinkTitle . '</a>';
-				$external_links .= 		'</h5>';
+				$external_links .= 		'</h6>';
 
 				if ($sidebarLinkDescription && $sidebarLinkDescription != ""){
-					$external_links .= '<p>';
+					$external_links .= '<p class="aside">';
 					$external_links .= 		$sidebarLinkDescription;
 					$external_links .= '</p>';
 				}
@@ -114,7 +114,7 @@ if ($includeSidebar) {
 				$sidebarInternalDescription = get_sub_field('sidebar_internal_description', false);
 
 				$internal_links  = '<div>';
-				$internal_links .= 	'<h5 class="bbg__sidebar__primary-headline">';
+				$internal_links .= 	'<h6 class="bbg__sidebar__primary-headline">';
 				$internal_links .= 		'<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
 				if ($sidebarInternalTitle && $sidebarInternalTitle != "") {
 					$internal_links .= $sidebarInternalTitle;
@@ -122,7 +122,7 @@ if ($includeSidebar) {
 					$internal_links .= $sidebarInternalLocation -> post_title;
 				}
 				$internal_links .= 		'</a>';
-				$internal_links .= 	'</h5>';
+				$internal_links .= 	'</h6>';
 				if ($sidebarInternalDescription && $sidebarInternalDescription != "") {
 					$internal_links .= 	$sidebarDescription;
 				}

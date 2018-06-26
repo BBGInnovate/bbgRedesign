@@ -270,11 +270,9 @@ function build_ethics_file_parts($raw_ethics_data) {
 	$ethics_package = array();
 	$i++;
 	foreach($raw_ethics_data as $ethics_data) {
-		// $anchor_tag  = '<p>';
 		$anchor_tag  = 	'<a href="' . $ethics_data['url'] . '" target="_blank">';
 		$anchor_tag .= 		$ethics_data['title'];
 		$anchor_tag .= 	'</a>';
-		// $anchor_tag .= '</p>';
 
 		$description  = '<p class="aside">';
 		$description .= 	$ethics_data['description'];

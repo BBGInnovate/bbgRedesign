@@ -199,7 +199,7 @@ get_header();
 									if ($custom_query -> have_posts()) {
 										echo '<div>';
 										echo 	'<h3><a href="' . $categoryUrl . '">' . $relatedCategory -> name . '</a></h3>';
-										echo 	'<div class="inner-container" style="border: 1px solid blue">';
+										echo 	'<div class="inner-container">';
 										while ($custom_query -> have_posts())  {
 											$custom_query -> the_post();
 											get_template_part('template-parts/content-portfolio', get_post_format());
@@ -305,7 +305,7 @@ get_header();
 								echo '</li>';
 							}
 							echo '</ul>';
-							$viewAllLink = get_term_link( $relatedLinksTag, 'post_tag' );
+							$viewAllLink = get_term_link($relatedLinksTag, 'post_tag');
 							echo "<a class='bbg__read-more' href='" . $viewAllLink . "'>VIEW ALL »</a>";
 						}
 						wp_reset_postdata();
