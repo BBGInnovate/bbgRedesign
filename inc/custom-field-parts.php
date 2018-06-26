@@ -267,15 +267,21 @@ function build_umbrella_content_parts($umbrella_content_data, $grid) {
 
 // ENTITY FIELDS
 function build_ethics_file_parts($raw_ethics_data) {
-	$ethic_buttons = array();
+	$ethics_package = array();
 	$i++;
 	foreach($raw_ethics_data as $ethics_data) {
-		$anchor_tag  = '<p>';
-		$anchor_tag .= 	'<a href="' . $ethics_data['url'] . '" target="_blank">';
+		// $anchor_tag  = '<p>';
+		$anchor_tag  = 	'<a href="' . $ethics_data['url'] . '" target="_blank">';
 		$anchor_tag .= 		$ethics_data['title'];
 		$anchor_tag .= 	'</a>';
-		$anchor_tag .= '</p>';
-		array_push($ethic_buttons, $anchor_tag);
+		// $anchor_tag .= '</p>';
+
+		$description  = '<p class="aside">';
+		$description .= 	$ethics_data['description'];
+		$description .= '</p>';
+
+		$ethics_markup = $anchor_tag . $description;
+		array_push($ethics_package, $ethics_markup);
 	}
-	return $ethic_buttons;
+	return $ethics_package;
 }

@@ -399,14 +399,14 @@ function get_journalistic_code_of_ethics_data() {
 	foreach($file_contents as $item) {
 		$url = $item['ethics_file']['url'];
 		$title = $item['ethics_file']['title'];
+		$description = $item['ethics_file_description'];
 
 		foreach ($ethics_regx as $regx) {
 			$file_name = preg_replace($regx, ' ', $title);
 			$title = $file_name;
 		}
-		$title = ucwords(strtolower($title));
 
-		$file_info = array('title' => $title, 'url' => $url);
+		$file_info = array('title' => $title, 'url' => $url, 'description' => $description);
 		${"ethics_file" + $i} = $file_info;
 		array_push($ethics_file_set, ${"ethics_file" + $i});
 		$i++;

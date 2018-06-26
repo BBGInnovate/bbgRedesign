@@ -472,7 +472,7 @@ get_header(); ?>
 				$ethics_parts = build_ethics_file_parts($ethics_data);
 				if (!empty($ethics_parts)) {
 					echo '<aside>';
-					echo '<h5>Journalistic Standarts</h5>';
+					echo '<h5>Journalistic Standards</h5>';
 					foreach($ethics_parts as $ethic) {
 						echo $ethic;
 					}
