@@ -154,7 +154,7 @@ get_header();
 							echo $pageContent;
 						?>
 					</div>
-					<div class="sidebar-content-container">
+					<div class="side-content-container">
 						<?php
 							if ($secondaryColumnContent != "") {
 								if ($secondaryColumnLabel != "") {

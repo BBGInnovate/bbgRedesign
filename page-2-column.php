@@ -91,8 +91,7 @@ get_header(); ?>
 	?>
 
 <div class="outer-container">
-	<div class="grid-container">
-		<div class="nest-container">
+		<div class="custom-grid-container">
 			<div class="inner-container">
 				<div class="main-content-container">
 <?php
@@ -101,7 +100,7 @@ get_header(); ?>
 		echo '<a href="' . $parent_link . '">Link to parent page</a>';
 	}
 	else {
-		$headline_string  = '<h2>' . $headline . '</h2>';
+		$headline_string  = '<h3>' . $headline . '</h3>';
 	}
 	echo $headline_string;
 	echo $pageContent;
@@ -110,7 +109,7 @@ get_header(); ?>
 	}
 
 	//Add blog posts below the main content
-	$relatedCategory=get_field('related_category_posts', $id);
+	$relatedCategory = get_field('related_category_posts', $id);
 
 	if ($relatedCategory != "") {
 		$qParams2 = array(
@@ -123,7 +122,7 @@ get_header(); ?>
 		$categoryUrl = get_category_link($relatedCategory->term_id);
 		$custom_query = new WP_Query($qParams2);
 
-		if ( $custom_query -> have_posts() ) {
+		if ($custom_query -> have_posts()) {
 			echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
 			echo '<div class="usa-grid-full">';
 				while ($custom_query -> have_posts())  {
@@ -136,27 +135,27 @@ get_header(); ?>
 	}
 ?>
 				</div>
-				<div class="sidebar-content-container">
+				<div class="side-content-container">
 <?php
 	$secondaryColumnLabel = get_field('secondary_column_label');
 	$secondaryColumnContent = get_field('secondary_column_content');
+
 	if ($secondaryColumnContent != "") {
 		if ($secondaryColumnLabel != "") {
-			echo '<h2>' . $secondaryColumnLabel . '</h2>';
+			echo '<h5>' . $secondaryColumnLabel . '</h5>';
 		}
 		echo $secondaryColumnContent;
 	}
-	if ( $includeSidebar ) {
+	if ($includeSidebar) {
 		echo $sidebar;
 	}
-	if ( $listsInclude ) {
+	if ($listsInclude) {
 		echo $sidebarDownloads;
 	}
 ?>
 				</div>
 			</div>
 		</div>
-	</div>
 </div>
 
 	<div class="outer-container">

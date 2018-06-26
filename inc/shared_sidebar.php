@@ -16,7 +16,7 @@ if ($includeSidebar) {
 
 	$sidebarTitle = get_post_meta(get_the_ID(), 'sidebar_title', true);
 	if ($sidebarTitle != "") {
-		$sidebar_markup .= "<h6>" . $sidebarTitle . "</h6>";
+		$sidebar_markup .= "<h5>" . $sidebarTitle . "</h5>";
 	}
 
 	$sidebarDescription = get_post_meta( get_the_ID(), 'sidebar_description', true);

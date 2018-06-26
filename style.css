@@ -4815,6 +4815,12 @@ ol li:before {
 .map-banner {
   margin-bottom: 8rem; }
 
+.profile-name {
+  margin-bottom: 1.5rem; }
+
+.profile-occupation {
+  margin-bottom: 3rem; }
+
 .icon-content-small-container {
   width: calc(16.66667% - 35px);
   float: left;
