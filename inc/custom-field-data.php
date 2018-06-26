@@ -386,4 +386,32 @@ function get_entity_data($grid_class) {
 	return build_entity_parts($entity_data_package);
 }
 
+// ENTITY FIELDS
+function get_journalistic_code_of_ethics_data() {
+	$ethics_file_set = array();
+	$file_contents = get_field('journalistic_code_of_ethics');
+	$ethics_file = $file_contents['ethics_file'];
+
+	// REG EXP TO REMOVE DATE, DASHES, EXTENSION FROM FILE NAME
+	$ethics_regx = ['/\d+/', '/\- /', '/\-/', '/\_/', '/\.pdf/'];
+
+	$i = 0;
+	foreach($file_contents as $item) {
+		$url = $item['ethics_file']['url'];
+		$title = $item['ethics_file']['title'];
+
+		foreach ($ethics_regx as $regx) {
+			$file_name = preg_replace($regx, ' ', $title);
+			$title = $file_name;
+		}
+		$title = ucwords(strtolower($title));
+
+		$file_info = array('title' => $title, 'url' => $url);
+		${"ethics_file" + $i} = $file_info;
+		array_push($ethics_file_set, ${"ethics_file" + $i});
+		$i++;
+	}
+	return $ethics_file_set;
+}
+
 ?>

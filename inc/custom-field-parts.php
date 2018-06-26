@@ -209,6 +209,7 @@ function build_marquee_parts($marquee_data) {
 	);
 	return $marquee_parts_package;
 }
+
 function build_umbrella_main_parts($umbrella_main_data) {
 	if ($umbrella_main_data['header'] != "") {
 		$header  = '<h2>' . $umbrella_main_data['header'] . '</h2>';
@@ -262,4 +263,19 @@ function build_umbrella_content_parts($umbrella_content_data, $grid) {
 
 	${"content_parts_package" . $i} = array('markup' => $umbrella_content_markup);
 	return $content_parts_package;
+}
+
+// ENTITY FIELDS
+function build_ethics_file_parts($raw_ethics_data) {
+	$ethic_buttons = array();
+	$i++;
+	foreach($raw_ethics_data as $ethics_data) {
+		$anchor_tag  = '<p>';
+		$anchor_tag .= 	'<a href="' . $ethics_data['url'] . '" target="_blank">';
+		$anchor_tag .= 		$ethics_data['title'];
+		$anchor_tag .= 	'</a>';
+		$anchor_tag .= '</p>';
+		array_push($ethic_buttons, $anchor_tag);
+	}
+	return $ethic_buttons;
 }

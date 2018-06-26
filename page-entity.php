@@ -13,6 +13,9 @@
  */
 
 
+require 'inc/custom-field-data.php';
+require 'inc/custom-field-parts.php';
+
 require 'inc/bbg-functions-assemble.php';
 
 if (have_posts()) {
@@ -464,6 +467,17 @@ get_header(); ?>
 				echo 		$audience;
 				echo 	'</ul>';
 				echo '</article>';
+
+				$ethics_data = get_journalistic_code_of_ethics_data();
+				$ethics_parts = build_ethics_file_parts($ethics_data);
+				if (!empty($ethics_parts)) {
+					echo '<aside>';
+					echo '<h5>Journalistic Standarts</h5>';
+					foreach($ethics_parts as $ethic) {
+						echo $ethic;
+					}
+					echo '</aside>';
+				}
 
 
 				echo '<article>';
