@@ -17,6 +17,7 @@ if (have_posts()) {
 
 	$id = get_the_ID();
 	$page_content = do_shortcode(get_the_content());
+	$page_content = apply_filters('the_content', $page_content);
 
 	$metaAuthor = get_the_author();
 	$metaKeywords = strip_tags( get_the_tag_list('',', ',''));
@@ -118,7 +119,10 @@ get_header();
 								$profile_occupation .= '</h6>';
 								echo $profile_occupation;
 
-								echo $page_content;
+								$main_content  = '<div class="page-content">';
+								$main_content .= 	$page_content;
+								$main_content .= '</div>';
+								echo $main_content;
 
 								$modification_date  = '<p class="bbg-tagline" style="text-align: right;">';
 								$modification_date .= 	'Last modified: ' . get_the_modified_date('F d, Y');
@@ -130,7 +134,7 @@ get_header();
 
 							<!-- section for content below biography -->
 							<?php
-								$content_below_bio = get_field( 'profile_content_below_biography', $id );
+								$content_below_bio = get_field('profile_content_below_biography', $id);
 								if ($content_below_bio != "") {
 									echo '<div class="bbg__profile__content__section">';
 									echo 	$content_below_bio;
@@ -140,7 +144,7 @@ get_header();
 
 							<!-- section for CEO -->
 							<?php
-								$ceo = get_post_meta( $id, 'ceo', true );
+								$ceo = get_post_meta($id, 'ceo', true);
 								if  ($ceo) {
 									$tax_query = array(
 										'relation' => 'AND',

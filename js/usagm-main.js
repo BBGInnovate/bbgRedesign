@@ -45,5 +45,8 @@ $(window).on('resize', function() {
 	mgmtProfileSizing();
 });
 
+
+$('.page-content p').first().attr('class', 'lead-in');
+
 }); // END READY
 })(jQuery);
