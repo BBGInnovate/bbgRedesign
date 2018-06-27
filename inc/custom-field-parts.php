@@ -197,6 +197,25 @@ function build_entity_parts($entity_data) {
 }
 
 // ABOUT FLEXIBLE ROWS
+function build_office_parts($office_data) {
+	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';
+
+	$office_contact  = '<p>';
+	$office_contact .= 	$office_data['office_street'];
+	$office_contact .= 	$office_data['office_city'] . ', ';
+	$office_contact .= 	$office_data['office_state'];
+	$office_contact .= 	$office_data['office_zip'];
+	$office_contact .= '<br>';
+	$office_contact .= 	'Tel: ';
+	$office_contact .= 		'<a href="tel:' . $office_data['office_phone'] . '">' . $office_data['office_phone'] . '</a>&nbsp;&nbsp;';
+	$office_contact .= 	'Email: ';
+	$office_contact .= 		'<a href="mailto:' . $office_data['office_email'] . '">' . $office_data['office_email'] . '</a>';
+	$office_contact .= '</p>';
+
+	$office_package = array('header' => $office_header, 'contact' => $office_contact);
+	return $office_package;
+}
+
 function build_marquee_parts($marquee_data) {
 	$marquee_content  = '<p class="red-special">';
 	$marquee_content .= 	$marquee_data['content'];

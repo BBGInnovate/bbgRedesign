@@ -93,6 +93,15 @@ function assemble_threats_to_press_ribbon($threat_data) {
 }
 
 // ABOUT FLEXIBLE ROWS
+function assemble_office_module($office_parts) {
+	$office_module  = 	'<div class="inner-container">';
+	// $office_module .= 		$office_parts['header'];
+	$office_module .= 		$office_parts['contact'];
+	$office_module .= 	'</div>';
+
+	return $office_module;
+}
+
 function assemble_umbrella_marquee($umbrella_parts) {
 	$marquee  = '<div class="outer-container">';
 	$marquee .= 	'<div class="grid-container">';

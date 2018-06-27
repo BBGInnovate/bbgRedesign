@@ -300,6 +300,57 @@ function get_threats_to_press_data() {
 }
 
 // FLEXIBLE ROWS
+function get_office_data($raw_office_row) {
+	$office_tag = $raw_office_row['office_tag'];
+	$office_tag_bool = $raw_office_row['office_tags_boolean_operator'];
+	$office_title = $raw_office_row['office_title'];
+	$office_email = $raw_office_row['office_email'];
+	$office_phone = $raw_office_row['office_phone'];
+	$office_youtube = $raw_office_row['office_youtube'];
+	$office_twitter = $raw_office_row['office_twitter'];
+	$office_facebook = $raw_office_row['office_facebook'];
+	$street = get_field('agency_street', 'options', 'false');
+	$city = get_field('agency_city', 'options', 'false');
+	$state = get_field('agency_state', 'options', 'false');
+	$zip = get_field('agency_zip', 'options', 'false');
+
+	$office_data = array(
+		'office_tag' => $office_tag,
+		'office_tag_bool' => $office_tag_bool,
+		'office_title' => $office_title,
+		'office_email' => $office_email,
+		'office_phone' => $office_phone,
+		'office_youtube' => $office_youtube,
+		'office_twitter' => $office_twitter,
+		'office_facebook' => $office_facebook,
+		'office_street' => $street,
+		'office_city' => $city,
+		'office_state' => $state,
+		'office_zip' => $zip
+	);
+
+	return $office_data;
+
+	// $contact_card  = 				'<h3>' . $office_title . '</h3>';
+	// $contact_card .= 				$address;
+	// $contact_card .= 				'Tel: ';
+	// $contact_card .= 				'<a href="tel:' . $office_phone . '">' . $office_phone . '</a>';
+	// $contact_card .= 				'Email: ';
+	// $contact_card .= 				'<a itemprop="email" aria-label="email" href="mailto:' . $office_email . '" title="Contact us">' . $office_email . '</a>';
+	// echo $contact_card;
+
+// END OFFICE ROW IF STATEMENT
+}
+
+function get_marquee_data($raw_marquee_row) {
+	$marquee_data = array(
+		'heading' => $raw_marquee_row['marquee_heading'], 
+		'link' => $raw_marquee_row['marquee_link'], 
+		'content' => $raw_marquee_row['marquee_content']
+	);
+	return $marquee_data;
+}
+
 function get_ribbon_data() {
 	$label_text = get_sub_field('about_ribbon_label');
 	$label_link = get_sub_field('about_ribbon_label_link');
@@ -316,19 +367,6 @@ function get_ribbon_data() {
 		'image_url' => $image_url,
 		'summary' => $summary
 	);
-}
-
-function get_marquee_data($raw_marquee_row) {
-	$marquee_heading = $raw_marquee_row['marquee_heading'];
-	$marquee_link = $raw_marquee_row['marquee_link'];
-	$marquee_content = $raw_marquee_row['marquee_content'];
-
-	$marquee_data = array(
-		'heading' => $marquee_heading, 
-		'link' => $marquee_link, 
-		'content' => $marquee_content
-	);
-	return $marquee_data;
 }
 
 function get_umbrella_main_data($raw_umbrella_main) {

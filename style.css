@@ -4520,7 +4520,7 @@ e.g. on the intern testimonial page */
 
 .outer-container {
   max-width: 1200px;
-  margin: 0 auto 6em auto; }
+  margin: 0 auto 3rem auto; }
   .outer-container::after {
     clear: both;
     content: "";
