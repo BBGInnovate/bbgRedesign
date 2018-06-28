@@ -30,51 +30,36 @@ if (have_posts()) :
 	endwhile;
 endif;
 
-// GET ELEMENTS FOR FLEXIBLE ROWS SECTION
-$flexible_rows = get_field('about_flexible_page_rows', $id);
+// TEST
 $umbrella_rows = array();
-foreach ($flexible_rows as $flex_row) {
-	if ($flex_row['acf_fc_layout'] == 'about_ribbon_page') {
-		echo 'ribbon';
-	}
-	elseif ($flex_row['acf_fc_layout'] == 'about_office') {
-		$offic_row = $flex_row;
-		$office_data = get_office_data($offic_row);
-		$office_parts = build_office_parts($office_data);
-		$office_module = assemble_office_module($office_parts);
-	}
-	elseif ($flex_row['acf_fc_layout'] == 'umbrella') {
-		$umbrella_row = $flex_row;
-		$main_umbrella_data = get_umbrella_main_data($umbrella_row);
-		$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
-
-		// COUNT BLOCKS TO MAKE GRID CLASS (put this in function to lessen clutter here)
-		$cur_umbrella_content = $umbrella_row['umbrella_content'];
-		$content_count = count($cur_umbrella_content);
-		$content_counter = 0;
-		$containerClass = 'grid-half';
-		if (isOdd($content_count)) {
-			$containerClass = 'grid-third';
+$content_blocks = array();
+$umbrella_group = array();
+if (have_rows('about_flexible_page_rows')) {
+	while (have_rows('about_flexible_page_rows')) {
+		the_row();
+		if (get_row_layout() == 'umbrella') {
+			// GET MAIN
+			$main_umbrella_data = get_umbrella_main_data();
+			$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
+			
+			$content_counter = count(get_sub_field('umbrella_content'));
+			$grid_class = 'grid-half';
+			if (isOdd($content_counter)) {
+				$grid_class = 'grid-third';
+			}
+			$umbrella_mains = assemble_umbrella_main($main_umbrella_parts);
+			array_push($umbrella_group, $umbrella_mains);
+			// GET CONTENT
+			while (have_rows('umbrella_content')) {
+				the_row();
+				if (get_row_layout() == 'umbrella_content_internal') {
+					$content_data_result = get_umbrella_content_data('internal', $grid_class);
+					$content_parts_result = build_umbrella_content_parts($content_data_result);
+					$content_mains_markup = assemble_umbrella_content_section($content_parts_result);
+					array_push($umbrella_group, $content_mains_markup);
+				}
+			}
 		}
-		// EACH UMBRELLA ROW'S CONTENT
-		$content_blocks = array();
-		while ($content_counter < $content_count) {
-			$umbrella_content_result = get_umbrella_content_data($cur_umbrella_content[$content_counter]);
-			$umbrella_content_chunks = build_umbrella_content_parts($umbrella_content_result, $containerClass);
-			array_push($content_blocks, $umbrella_content_chunks);
-			$content_counter++;
-		}
-
-		$umbrella_markup = assemble_umbrella_content_section($main_umbrella_parts, $content_blocks);
-		if (!empty($umbrella_markup)) {
-			array_push($umbrella_rows, $umbrella_markup);
-		}
-	}
-	elseif($flex_row['acf_fc_layout'] == 'marquee') {
-		$marquee_row = $flex_row;
-		$marquee_data = get_marquee_data($marquee_row);
-		$marquee_parts = build_marquee_parts($marquee_data);
-		$marquee_module = assemble_umbrella_marquee($marquee_parts);
 	}
 }
 
@@ -108,12 +93,11 @@ get_header();
 	$body_copy .= '</div>';
 	echo $body_copy;
 
-	// FLEXIBLE ROWS: UMBRELLA
-	if (count($umbrella_rows)) {
-		foreach ($umbrella_rows as $umbrella) {
-			echo $umbrella;
-		}
+	echo '<div class="outer-container">';
+	foreach($umbrella_group as $umbrella) {
+		echo 	$umbrella;
 	}
+	echo '</div>';
 
 	// NETWORKS
 	$show_networks = get_field('about_networks_row', $id);

@@ -3,6 +3,18 @@
 
 .map-banner {margin-bottom: 8rem;}
 
+
+
+// UMBRELLA TEST
+.program-text-side {
+	@include grid-column(5);
+}
+.program-content-side {
+	@include grid-column(7);
+}
+
+
+
 //PROFILE
 .profile-name {margin-bottom: 1.5rem;}
 .profile-occupation {margin-bottom: 3rem;}

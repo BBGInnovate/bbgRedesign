@@ -161,41 +161,6 @@ function build_threat_parts($threat_data) {
 	return $threat_markup_set;
 }
 
-function build_entity_parts($entity_data) {
-	$placement_class = $entity_data['placement'];
-	$entity_set = array();
-	$i = 0;
-	foreach($entity_data['id_group'] as $entity_id) {
-		$id = $entity_id;
-		$fullName = get_post_meta($id, 'entity_full_name', true);
-		$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
-		$abbreviation = str_replace("/", "",$abbreviation);
-
-		$description = get_post_meta($id, 'entity_description', true);
-		$description = apply_filters('the_content', $description);
-		
-		$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
-		$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
-
-		if (!empty($fullName)) {
-			$entity_image  = '<a href="' . $link . '" tabindex="-1">';
-			$entity_image .= 	'<img src="' . $imgSrc . '">';
-			$entity_image .= '</a>';
-
-			$entity_content  = 	'<h4><a href="' . $link . '">' . $fullName . '</a></h4>';
-			$entity_content .= 	'<p class="">' . $description . '</p>';
-			
-			$entity_pieces = array('image' => $entity_image, 'content' => $entity_content);
-			${"entity_block" . $i} = $entity_pieces;
-
-			array_push($entity_set, ${"entity_block" . $i});
-			$i++;
-		}
-	}
-	$entity_parts_package = array('class' => $placement_class, 'parts' => $entity_set);
-	assemble_entity_section($entity_parts_package);
-}
-
 // ABOUT FLEXIBLE ROWS
 function build_office_parts($office_data) {
 	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';
@@ -231,60 +196,70 @@ function build_marquee_parts($marquee_data) {
 
 function build_umbrella_main_parts($umbrella_main_data) {
 	if ($umbrella_main_data['header'] != "") {
-		$header  = '<h2>' . $umbrella_main_data['header'] . '</h2>';
+		$header  = '<h3>' . $umbrella_main_data['header'] . '</h3>';
 	}
 	if ($umbrella_main_data['intro_text'] != "") {
-		$overhead_text  = '<p class="lead-in">' . $umbrella_main_data['intro_text'] . '</p>';
+		$overhead_text  = '<p>' . $umbrella_main_data['intro_text'] . '</p>';
 	}
-	$umbrella_main_package = array('main_header' => $header, 'intro_text' => $overhead_text);
+	$umbrella_main_package = array(
+		'section_header' => $header, 
+		'intro_text' => $overhead_text
+	);
 	return $umbrella_main_package;
 }
 
-function build_umbrella_content_parts($umbrella_content_data, $grid) {
-	$post_id = $umbrella_content_data['link'][0]->ID;
-	$post_title = $umbrella_content_data['link'][0]->post_title;
-	$post_excerpt = $umbrella_content_data['link'][0]->post_excerpt;
-
-	$header  = '<h2>' . $umbrella_content_data['column_title'] . '</h2>';
-
-	// IMAGES TAKING TOO LONG TO LOAD
-	// LOAD OTHER CROP SIZE?
-	if (!empty($umbrella_content_data['image'])) {
-		$post_image  = 	'<a href="' . get_the_permalink($post_id) . '" rel="bookmark" tabindex="-1">';
-		$post_image .= 		'<div class="umbrella-bg-image" ';
-		$post_image .= 			'style="background-image: url(\'' .wp_get_attachment_url(get_post_thumbnail_id($post_id)) . '\')">';
-		$post_image .= 		'</div>';
-		$post_image .= 	'</a>';
-	}
-
-	if (!empty($umbrella_content_data['item_title'])) {
-		$title  = '<h3>' . $umbrella_content_data['item_title'] . '</h3>';
-	}
+function build_umbrella_content_parts($content_data) {
+	$content_title = '<h2>' . $content_data['column_title'] . '</h2>';
+	$item_title = '<h4><a href="' . $content_data['link'] . '">' . $content_data['item_title'] . '</a></h4>';
+	$image = '<img src="' . $content_data['thumb_src'] . '">';
+	$description  = '<p class="aside">' . $content_data['description'] . '</p>';
 	
-	if ($umbrella_content_data['include_title']) {
-		$header = "";
-		$title  = '<h3>' . $post_title . '</h3>';
-
-	}
-	if ($umbrella_content_data['include_excerpt']) {
-		$excerpt  = '<p>' . $post_excerpt . '</p>';
-	}
-
-	// MARKUP
-	$umbrella_content_markup  = '<div class=' . $grid . '>';
-	if (!empty($header)) {
-		$umbrella_content_markup .= 	$header;
-	}
-	$umbrella_content_markup .= 	$post_image;
-	$umbrella_content_markup .= 	$title;
-	$umbrella_content_markup .= 	$excerpt;
-	$umbrella_content_markup .= '</div>';
-
-	${"content_parts_package" . $i} = array('markup' => $umbrella_content_markup);
-	return $content_parts_package;
+	$content_parts = array(
+		'grid' => $content_data['grid_class'],
+		'content_title' => $content_title,
+		'item_title' => $item_title,
+		'image' => $image,
+		'description' => $description
+	);
+	return $content_parts;
 }
 
 // ENTITY FIELDS
+function build_entity_parts($entity_data) {
+	$placement_class = $entity_data['placement'];
+	$entity_set = array();
+	$i = 0;
+	foreach($entity_data['id_group'] as $entity_id) {
+		$id = $entity_id;
+		$fullName = get_post_meta($id, 'entity_full_name', true);
+		$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
+		$abbreviation = str_replace("/", "",$abbreviation);
+
+		$description = get_post_meta($id, 'entity_description', true);
+		$description = apply_filters('the_content', $description);
+		
+		$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
+		$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
+
+		if (!empty($fullName)) {
+			$entity_image  = '<a href="' . $link . '" tabindex="-1">';
+			$entity_image .= 	'<img src="' . $imgSrc . '">';
+			$entity_image .= '</a>';
+
+			$entity_content  = 	'<h4><a href="' . $link . '">' . $fullName . '</a></h4>';
+			$entity_content .= 	'<p class="">' . $description . '</p>';
+			
+			$entity_pieces = array('image' => $entity_image, 'content' => $entity_content);
+			${"entity_block" . $i} = $entity_pieces;
+
+			array_push($entity_set, ${"entity_block" . $i});
+			$i++;
+		}
+	}
+	$entity_parts_package = array('class' => $placement_class, 'parts' => $entity_set);
+	assemble_entity_section($entity_parts_package);
+}
+
 function build_ethics_file_parts($raw_ethics_data) {
 	$ethics_package = array();
 	$i++;

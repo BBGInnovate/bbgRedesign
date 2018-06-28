@@ -4815,6 +4815,16 @@ ol li:before {
 .map-banner {
   margin-bottom: 8rem; }
 
+.program-text-side {
+  width: calc(41.66667% - 28.33333px);
+  float: left;
+  margin-left: 20px; }
+
+.program-content-side {
+  width: calc(58.33333% - 31.66667px);
+  float: left;
+  margin-left: 20px; }
+
 .profile-name {
   margin-bottom: 1.5rem; }
 

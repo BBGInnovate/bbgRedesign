@@ -330,16 +330,6 @@ function get_office_data($raw_office_row) {
 	);
 
 	return $office_data;
-
-	// $contact_card  = 				'<h3>' . $office_title . '</h3>';
-	// $contact_card .= 				$address;
-	// $contact_card .= 				'Tel: ';
-	// $contact_card .= 				'<a href="tel:' . $office_phone . '">' . $office_phone . '</a>';
-	// $contact_card .= 				'Email: ';
-	// $contact_card .= 				'<a itemprop="email" aria-label="email" href="mailto:' . $office_email . '" title="Contact us">' . $office_email . '</a>';
-	// echo $contact_card;
-
-// END OFFICE ROW IF STATEMENT
 }
 
 function get_marquee_data($raw_marquee_row) {
@@ -369,34 +359,73 @@ function get_ribbon_data() {
 	);
 }
 
-function get_umbrella_main_data($raw_umbrella_main) {
-	$section_heading = $raw_umbrella_main['umbrella_section_heading'];
-	$section_heading_link = $raw_umbrella_main['umbrella_section_heading_link'];
-	$section_intro_text = $raw_umbrella_main['umbrella_section_intro_text'];
-	$force_content_labels = $raw_umbrella_main['umbrella_force_content_labels'];
-
+function get_umbrella_main_data() {
 	$umbrella_data = array(
-		'header' => $section_heading,
-		'header_link' => $section_heading_link,
-		'intro_text' => $section_intro_text,
-		'forced_label' => $force_content_labels,
+		'header' => get_sub_field('umbrella_section_heading'),
+		'header_link' => get_sub_field('umbrella_section_heading_link'),
+		'intro_text' => get_sub_field('umbrella_section_intro_text'),
+		'forced_label' => get_sub_field('umbrella_force_content_labels'),
 	);
 	return $umbrella_data;
 }
 
-function get_umbrella_content_data($raw_umbrella_content) {
-	$column_title = $raw_umbrella_content['umbrella_content_internal_column_title'];
-	$item_title_query = $raw_umbrella_content['umbrella_content_internal_include_item_title'];
-	$item_title = $raw_umbrella_content['umbrella_content_internal_item_title'];
-	$excerpt_query = $raw_umbrella_content['umbrella_content_internal_include_excerpt'];
-	$include_featrued_image = $raw_umbrella_content['umbrella_content_internal_include_featured_image'];
-	$link = $raw_umbrella_content['umbrella_content_internal_link'];
-	$layout = $raw_umbrella_content['umbrella_content_internal_layout'];;
+function get_umbrella_content_data($umbrella_content_type, $grid_class) {
+	if ($umbrella_content_type == 'internal') {
+		$page_object = get_sub_field('umbrella_content_internal_link');
+		$id = $page_object[0]->ID;
+		$link = get_the_permalink($id);
+		$include_title = get_sub_field('umbrella_content_internal_include_item_title');
+		$title_override = get_sub_field('umbrella_content_internal_title');
+		$secondary_headline = get_post_meta($id, 'headline', true);
+		$law_name = get_post_meta($id, 'law_name', true);
+		$show_featured_image = get_sub_field('umbrella_content_internal_include_featured_image');
+		$show_excerpt = get_sub_field('umbrella_content_internal_include_excerpt');
+		$show_excerpt = get_sub_field('umbrella_content_internal_include_excerpt');
 
-	$content_pacakge = array('column_title' => $column_title, 'include_title' => $item_title_query, 'item_title' => $item_title, 'include_excerpt' => $excerpt_query, 'image' => $include_featrued_image, 'link' => $link, 'layout' => $layout);
-	return $content_pacakge;
+		$title = "";
+		if ($include_title) {
+			$title_override = get_sub_field('umbrella_content_internal_item_title');
+			if ($title_override != "") {
+				$title = $title_override;
+			} else {
+				if ($secondary_headline) {
+					$title = $secondary_headline;	
+				} else {
+					$title = $page_object[0]->post_title;	
+				}
+			}
+		}
+
+		$thumb_src = "";
+		if ($show_featured_image) {
+			$thumb_src = wp_get_attachment_image_src(get_post_thumbnail_id($id) , 'medium-thumb');
+			if ($thumb_src) {
+				$thumb_src = $thumb_src[0];
+			}
+		}
+
+		$description = "";
+		if ($show_excerpt) {
+			$description = my_excerpt($id);
+		}
+
+		$internal_data = array (
+			'column_title' => get_sub_field('umbrella_content_internal_column_title'),
+			'item_title' => $title,
+			'description' => $description,
+			'link' => $link, 
+			'thumb_src' => $thumb_src,
+			'grid_class' => $grid_class,
+			'force_content_labels' => $force_content_labels,
+			'column_type' => 'internal',
+			'layout' => get_sub_field('umbrella_content_internal_layout'),
+			'sub_title' => $law_name
+		);
+	} // internal check
+	return $internal_data;
 }
 
+// ENTITY FIELDS
 function get_entity_data($grid_class) {
 	// $grid_class can be ["entity-main" | "entity-side"]
 	$entityParentPage = get_page_by_path('networks');
@@ -424,7 +453,6 @@ function get_entity_data($grid_class) {
 	return build_entity_parts($entity_data_package);
 }
 
-// ENTITY FIELDS
 function get_journalistic_code_of_ethics_data() {
 	$ethics_file_set = array();
 	$file_contents = get_field('journalistic_code_of_ethics');
