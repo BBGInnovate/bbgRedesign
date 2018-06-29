@@ -4557,6 +4557,16 @@ e.g. on the intern testimonial page */
   float: left;
   margin-left: 20px; }
 
+.small-main-content-container {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+.small-side-content-container {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
 .page-post-featured-graphic:not(div.home-featured-primary-post) {
   margin-bottom: 3em; }
 
@@ -4636,6 +4646,14 @@ e.g. on the intern testimonial page */
     margin-left: 20px; } }
 
 @media screen and (min-width: 900px) {
+  .small-main-content-container {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; }
+  .small-side-content-container {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
   .bbg-grid--1-1-1-2 {
     float: left;
     display: block;
@@ -5038,11 +5056,22 @@ ol li:before {
 .sidebar-paragraph-head a {
   color: inherit; }
 
-.red-special {
-  font-family: "Carrara-Regular", serif;
-  font-size: 3.2rem;
-  font-style: italic;
-  color: #b2201c; }
+.box-special {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #eaebf0; }
+  .box-special p {
+    font-family: "Carrara-Regular", serif;
+    font-size: 2.5rem;
+    line-height: 4rem;
+    font-style: italic;
+    color: #b2201c;
+    margin-bottom: 0; }
+
+@media screen and (min-width: 1201px) {
+  .box-special p {
+    font-size: 2.5rem;
+    line-height: 4.5rem; } }
 
 img,
 *[class*="avatar"],

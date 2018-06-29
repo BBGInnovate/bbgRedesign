@@ -1,5 +1,4 @@
 <?php
-// BUILD PARTS
 // This file takes custom field data and build parts 
 // (headings, links, images, tags, etc).
 // Prepares elements for grid
@@ -7,19 +6,18 @@
 // CONTENTS:
 // HOMEPACE OPTIONS
 // ABOUT FLEXIBLE ROWS
+// ENTITY FIELDS
 
 // HOMEPACE OPTIONS
 function build_soapbox_parts($soap_data, $layout) {
 	$article_class = $soap_data['article_class'];
 
 	// BUILD PARTS
-	// $soap_heading = '<header class="entry-header bbg__article-icons-container">';
 	if (!empty($soap_data['post_link'])) {
 		$soap_heading = '<h2><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
 	} else if (!empty($soap_data['header_text'])) {
 		$soap_heading = '<h2>' . $soap_data['header_text'] . '</h2>';
 	}
-	// $soap_heading .= '</header>';
 
 	$soap_title .= '<h4>';
 	$soap_title .= 	'<a href="' . $soap_data['header_link'] . '">';
@@ -29,7 +27,6 @@ function build_soapbox_parts($soap_data, $layout) {
 
 	$soap_content .= '<p class="aside">';
 	$soap_content .= 	my_excerpt($soap_data['post_id']);
-	// $soap_content .= 	' <a href="' . $soap_data['post_link'] . '" class="bbg__read-more">' . $soap_data['read_more'] . ' »</a>';
 	$soap_content .= '</p>';
 
 	if (!empty($soap_data['profile_image'])) {
@@ -42,7 +39,6 @@ function build_soapbox_parts($soap_data, $layout) {
 	// INSERT PART INTO GRID
 	// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
 	$soapbox_markup  = '<div class="inner-container soap-corner special-block ' . $article_class . '">';
-	// $soapbox_markup .= 	'<div class="nest-container">';
 	if ($layout == 'image-left') {
 		$soapbox_markup .= 	'<div class="small-side">';
 		$soapbox_markup .= 		$soap_image;
@@ -58,7 +54,6 @@ function build_soapbox_parts($soap_data, $layout) {
 		$soapbox_markup .= 		$soap_image;
 		$soapbox_markup .= 	'</div>';
 	}
-	// $soapbox_markup .= 	'</div>';
 	$soapbox_markup .= '</div>';
 
 	return $soapbox_markup;
@@ -200,9 +195,7 @@ function build_office_parts($office_data) {
 }
 
 function build_marquee_parts($marquee_data) {
-	$marquee_content  = '<p class="red-special">';
-	$marquee_content .= 	$marquee_data['content'];
-	$marquee_content .= '</p>';
+	$marquee_content = '<p>' . $marquee_data['content'] . '</p>';
 
 	$marquee_parts_package = array(
 		'header' => $header,

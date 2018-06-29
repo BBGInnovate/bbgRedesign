@@ -37,7 +37,6 @@ $icon-content-grid: (
 }
 .icon-content-main-container {@include grid-column(5, $icon-content-grid);}
 
-
 // GLOBAL SIDEBAR RULES
 .main-content-container {@include grid-column(8);}
 .side-content-container {
@@ -208,11 +207,26 @@ $icon-content-grid: (
 }
 .sidebar-paragraph-head a {color: inherit;}
 
-.red-special {
-	font-family: $font-serif;
-	font-size: 3.2rem;
-	font-style: italic;
-	color: $color-red;
+.box-special {
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+	background-color: $faint-blue;
+	p {
+		font-family: $font-serif;
+		font-size: 2.5rem;
+		line-height: 4rem;
+		font-style: italic;
+		color: $color-red;
+		margin-bottom: 0;
+	}
+}
+@include media($large-screen) {
+	.box-special {
+		p {
+			font-size: 2.5rem;
+			line-height: 4.5rem;
+		}
+	}
 }
 
 

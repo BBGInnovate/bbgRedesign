@@ -1,7 +1,10 @@
 <?php
-// INSERT PARTS INTO MODULE
-// Insert parts into div architecture
-// * INCLUDE A NOTE AS TO WHERE THE STYLES ARE LOCATED (AFTER PROPERLY PLACED)
+// Insert parts into grid architecture
+
+// CONTENTS:
+// HOMEPACE OPTIONS
+// ABOUT FLEXIBLE ROWS
+// ENTITY FIELDS
 
 // HOMEPAGE OPTIONS
 function assemble_mentions_full_width($mention_data, $impact_group) {
@@ -76,18 +79,14 @@ function assemble_umbrella_main($main) {
 
 function assemble_office_module($office_parts) {
 	$office_module  = 	'<div class="inner-container">';
-	// $office_module .= 		$office_parts['header'];
 	$office_module .= 		$office_parts['contact'];
 	$office_module .= 	'</div>';
-
 	return $office_module;
 }
 
 function assemble_umbrella_marquee($umbrella_parts) {
-	$marquee  = '<div class="outer-container">';
-	$marquee .= 	'<div class="grid-container">';
-	$marquee .= 		$umbrella_parts['content'];
-	$marquee .= 	'</div>';
+	$marquee  = '<div class="inner-container">';
+	$marquee .= 	$umbrella_parts['content'];
 	$marquee .= '</div>';
 
 	return $marquee;
@@ -95,7 +94,7 @@ function assemble_umbrella_marquee($umbrella_parts) {
 
 function assemble_umbrella_content_section($umbrella_parts) {
 	if (!empty($umbrella_parts)) {
-		$umbrella_content_block = '<div class="outer-container" id="in-build-function">';
+		$umbrella_content_block = '<div class="inner-container">';
 		foreach($umbrella_parts as $umbrella_chunk) {
 			$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
 			$umbrella_content_block .= $umbrella_chunk['column_title'];

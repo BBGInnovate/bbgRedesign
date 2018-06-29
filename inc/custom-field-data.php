@@ -300,43 +300,29 @@ function get_threats_to_press_data() {
 }
 
 // FLEXIBLE ROWS
-function get_office_data($raw_office_row) {
-	$office_tag = $raw_office_row['office_tag'];
-	$office_tag_bool = $raw_office_row['office_tags_boolean_operator'];
-	$office_title = $raw_office_row['office_title'];
-	$office_email = $raw_office_row['office_email'];
-	$office_phone = $raw_office_row['office_phone'];
-	$office_youtube = $raw_office_row['office_youtube'];
-	$office_twitter = $raw_office_row['office_twitter'];
-	$office_facebook = $raw_office_row['office_facebook'];
-	$street = get_field('agency_street', 'options', 'false');
-	$city = get_field('agency_city', 'options', 'false');
-	$state = get_field('agency_state', 'options', 'false');
-	$zip = get_field('agency_zip', 'options', 'false');
-
+function get_office_data() {
 	$office_data = array(
-		'office_tag' => $office_tag,
-		'office_tag_bool' => $office_tag_bool,
-		'office_title' => $office_title,
-		'office_email' => $office_email,
-		'office_phone' => $office_phone,
-		'office_youtube' => $office_youtube,
-		'office_twitter' => $office_twitter,
-		'office_facebook' => $office_facebook,
-		'office_street' => $street,
-		'office_city' => $city,
-		'office_state' => $state,
-		'office_zip' => $zip
+		'office_tag' => get_sub_field('office_tag'),
+		'office_tag_bool' => get_sub_field('office_tags_boolean_operator'),
+		'office_title' => get_sub_field('office_title'),
+		'office_email' => get_sub_field('office_email'),
+		'office_phone' => get_sub_field('office_phone'),
+		'office_youtube' => get_sub_field('office_youtube'),
+		'office_twitter' => get_sub_field('office_twitter'),
+		'office_facebook' => get_sub_field('office_facebook'),
+		'office_street' => get_field('agency_street', 'options', 'false'),
+		'office_city' => get_field('agency_city', 'options', 'false'),
+		'office_state' => get_field('agency_state', 'options', 'false'),
+		'office_zip' => get_field('agency_zip', 'options', 'false')
 	);
-
 	return $office_data;
 }
 
-function get_marquee_data($raw_marquee_row) {
+function get_marquee_data() {
 	$marquee_data = array(
-		'heading' => $raw_marquee_row['marquee_heading'], 
-		'link' => $raw_marquee_row['marquee_link'], 
-		'content' => $raw_marquee_row['marquee_content']
+		'heading' => get_sub_field('marquee_heading'),
+		'link' => get_sub_field('marquee_link'),
+		'content' => get_sub_field('marquee_content')
 	);
 	return $marquee_data;
 }

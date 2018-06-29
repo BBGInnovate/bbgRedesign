@@ -30,8 +30,8 @@ if (have_posts()) :
 	endwhile;
 endif;
 
-$umbrella_group = array();
 if (have_rows('about_flexible_page_rows')) {
+	$umbrella_group = array();
 	while (have_rows('about_flexible_page_rows')) {
 		the_row();
 		if (get_row_layout() == 'umbrella') {
@@ -56,8 +56,18 @@ if (have_rows('about_flexible_page_rows')) {
 				array_push($content_parts_group, $content_parts_result);
 			}
 			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group);
+			array_push($umbrella_group, $umbrella_content_markup);
 		}
-		array_push($umbrella_group, $umbrella_content_markup);
+		elseif (get_row_layout() == 'about_office') {
+			$office_data_result = get_office_data();
+			$office_parts_result = build_office_parts($office_data_result);
+			$office_module = assemble_office_module($office_parts_result);
+		}
+		elseif (get_row_layout() == 'marquee') {
+			$marquee_data_result = get_marquee_data();
+			$marquee_parts_result = build_marquee_parts($marquee_data_result);
+			$marquee_module = assemble_umbrella_marquee($marquee_parts_result);
+		}
 	}
 }
 
@@ -76,7 +86,6 @@ get_header();
 	$page_header  = '<div class="outer-container">';
 	$page_header .= 	'<div class="grid-container">';
 	$page_header .= 		'<h2>' . get_the_title() . '</h2>';
-	// FLEXIBLE ROWS: OFFICE
 	if (!empty($office_module)) {
 		$page_header .= 	$office_module;
 	}
@@ -84,15 +93,44 @@ get_header();
 	$page_header .= '</div>';
 	echo $page_header;
 
-	$body_copy  = '<div class="outer-container" id="outside-build-function">';
+	$body_copy  = '<div class="outer-container">';
 	$body_copy .= 	'<div class="grid-container page-content">';
 	$body_copy .= 		$page_content;
 	$body_copy .= 	'</div>';
 	$body_copy .= '</div>';
 	echo $body_copy;
 
-	foreach($umbrella_group as $umbrella) {
-		echo $umbrella;
+	if (is_page('who-we-are')) {
+		$first_umbrella = array_slice($umbrella_group, 1, 1);
+		$umbrella_end = array_splice($umbrella_group, 2);
+
+		echo '<div class="outer-container">';
+		echo 	'<div class="small-side-content-container box-special">';
+		echo 		$marquee_module;
+		echo 	'</div>';
+		echo 	'<div class="small-main-content-container">';
+		foreach ($umbrella_group as $umbrella_array_bit) {
+			echo $umbrella_array_bit;
+		}
+		echo 	'</div>';
+		echo '</div>';
+
+		echo '<div class="outer-container">';
+		foreach ($umbrella_end as $rest_of_umbrella) {
+			echo $rest_of_umbrella;
+		}
+		echo '</div>';
+	}
+	else {
+		echo '<div class="outer-container">';
+		echo 	$marquee_module;
+		echo '</div>';
+
+		echo '<div class="outer-container">';
+		foreach($umbrella_group as $umbrella) {
+			echo $umbrella;
+		}
+		echo '</div>';
 	}
 
 	// NETWORKS
