@@ -411,10 +411,22 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 			$description = my_excerpt($id);
 		}
 	}
+	elseif ($umbrella_content_type == 'umbrella_content_external') {
+		$column_title = get_sub_field('umbrella_content_external_column_title');
+		$itemTitle = get_sub_field('umbrella_content_external_item_title');
+		$description = get_sub_field('umbrella_content_external_description');
+		$link = get_sub_field('umbrella_content_external_link');
+		$thumbnail = get_sub_field('umbrella_content_external_thumbnail');
+		$thumbnail_id = $thumbnail['ID'];
+		$thumb_src = wp_get_attachment_image_src($thumbnail_id , 'medium-thumb');
+		if ($thumb_src) {
+			$thumb_src = $thumb_src[0];
+		} 
+	}
 	elseif ($umbrella_content_type == 'umbrella_content_file') {
 		$column_title = get_sub_field('umbrella_content_file_column_title');
 		$file_object = get_sub_field('umbrella_content_file_file');
-		$title = get_sub_field('umbrella_content_file_item_title');
+		$title = get_sub_field('umbrella_content_file_item_title'); // FILENAME
 		$description = get_sub_field('umbrella_content_file_description');
 		$layout = get_sub_field('umbrella_content_file_layout');
 
@@ -427,11 +439,12 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 
 		$file_id = $file_object['ID'];
 		$fileURL = $file_object['url'];
+		$link = $fileURL;
 		$file = get_attached_file($file_id);
 		$file_ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
 		$file_size = formatBytes(filesize($file));
 	}
-
+	// TRY DELETING 'force_content_labels'
 	$data_package = array (
 		'column_title' => $column_title,
 		'item_title' => $title,

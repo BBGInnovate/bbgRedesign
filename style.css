@@ -2872,6 +2872,12 @@ h4 a:visited,
   font-weight: 300;
   color: #3f7ad1;
   margin: 0 0 1.5rem 0; }
+  h4 .aside, .bbg__board__committee-list li a .aside,
+  h4 a:link .aside,
+  .bbg__board__committee-list li a a:link .aside,
+  h4 a:visited .aside,
+  .bbg__board__committee-list li a a:visited .aside {
+    display: inline; }
 
 h5, .bbg__sidebar__table th,
 h5 a:link,
@@ -4823,6 +4829,9 @@ ol li:before {
 
 .map-banner {
   margin-bottom: 8rem; }
+
+.no-margin-bottom {
+  margin: 0; }
 
 .program-text-side {
   width: calc(41.66667% - 28.33333px);

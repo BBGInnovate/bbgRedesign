@@ -30,7 +30,6 @@ if (have_posts()) :
 	endwhile;
 endif;
 
-// TEST
 $umbrella_group = array();
 if (have_rows('about_flexible_page_rows')) {
 	while (have_rows('about_flexible_page_rows')) {
