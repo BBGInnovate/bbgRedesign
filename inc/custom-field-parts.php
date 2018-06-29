@@ -246,17 +246,24 @@ function build_entity_parts($entity_data) {
 			$entity_image .= 	'<img src="' . $imgSrc . '">';
 			$entity_image .= '</a>';
 
-			$entity_content  = 	'<h4><a href="' . $link . '">' . $fullName . '</a></h4>';
-			$entity_content .= 	'<p class="">' . $description . '</p>';
+			$entity_title = 	'<h3><a href="' . $link . '">' . $fullName . '</a></h3>';
+			$entity_content = 	'<p class="">' . $description . '</p>';
 			
-			$entity_pieces = array('image' => $entity_image, 'content' => $entity_content);
+			$entity_pieces = array(
+				'image' => $entity_image, 
+				'title' => $entity_title,
+				'content' => $entity_content
+			);
 			${"entity_block" . $i} = $entity_pieces;
 
 			array_push($entity_set, ${"entity_block" . $i});
 			$i++;
 		}
 	}
-	$entity_parts_package = array('class' => $placement_class, 'parts' => $entity_set);
+	$entity_parts_package = array(
+		'class' => $placement_class, 
+		'parts' => $entity_set
+	);
 	assemble_entity_section($entity_parts_package);
 }
 

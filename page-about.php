@@ -36,31 +36,27 @@ if (have_rows('about_flexible_page_rows')) {
 	while (have_rows('about_flexible_page_rows')) {
 		the_row();
 		if (get_row_layout() == 'umbrella') {
-			// GET MAIN
+			// GET UMBRELLA'S MAIN DATA
 			$main_umbrella_data = get_umbrella_main_data();
 			$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
-			
+			// DETERMINE GRID
 			$content_counter = count(get_sub_field('umbrella_content'));
 			$grid_class = 'grid-half';
 			if (isOdd($content_counter)) {
 				$grid_class = 'grid-third';
 			}
-			$umbrella_mains = assemble_umbrella_main($main_umbrella_parts);
-			array_push($umbrella_group, $umbrella_mains);
-			// GET CONTENT
+			$umbrella_main_data_group = assemble_umbrella_main($main_umbrella_parts);
+			array_push($umbrella_group, $umbrella_main_data_group);
+			// GET UMBRELLA'S CONTENT DATA
 			$content_parts_group = array();
 			while (have_rows('umbrella_content')) {
 				the_row();
-				if (get_row_layout() == 'umbrella_content_internal') {
-					$content_data_result = get_umbrella_content_data('internal', $grid_class);
-					$content_parts_result = build_umbrella_content_parts($content_data_result);
-					// PACKAGE ALL PARTS, THEN BUILD CHUNKS IN OUTER DIV
-					array_push($content_parts_group, $content_parts_result);
-				}
+				$umbrella_content_type = get_row_layout();
+				$content_data_result = get_umbrella_content_data($umbrella_content_type, $grid_class);
+				$content_parts_result = build_umbrella_content_parts($content_data_result);
+				array_push($content_parts_group, $content_parts_result);
 			}
-			// var_dump($content_parts_group); // array(3)
 			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group);
-			// echo count($content_parts_group); // 30
 		}
 		array_push($umbrella_group, $umbrella_content_markup);
 	}
@@ -89,25 +85,21 @@ get_header();
 	$page_header .= '</div>';
 	echo $page_header;
 
-	$body_copy  = '<div class="outer-container">';
+	$body_copy  = '<div class="outer-container" id="outside-build-function">';
 	$body_copy .= 	'<div class="grid-container page-content">';
 	$body_copy .= 		$page_content;
 	$body_copy .= 	'</div>';
 	$body_copy .= '</div>';
 	echo $body_copy;
 
-	// echo '<div class="outer-container">';
 	foreach($umbrella_group as $umbrella) {
-		echo '<div class="flex-rows">';
-		echo 	$umbrella;
-		echo '<div>';
+		echo $umbrella;
 	}
-	// echo '</div>';
 
 	// NETWORKS
 	$show_networks = get_field('about_networks_row', $id);
 	if (!empty($show_networks)) {
-		// $entity_placement arguments ["entity-main" | "entity-side"]
+		// OPTIONS: $entity_placement arguments ["entity-main" | "entity-side"]
 		$entity_data = get_entity_data("entity-main");
 	}
 ?>

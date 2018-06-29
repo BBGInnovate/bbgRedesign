@@ -8,8 +8,9 @@
 .grid-container {@include grid-column(12);}
 .grid-half {@include grid-column(12);}
 .grid-third {@include grid-column(12);}
-
+ 
 .page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}
+.hide-small {display: none;}
 
 @include media($small-screen) {
 	
@@ -17,8 +18,10 @@
 
 @include media($medium-screen) {
 	.grid-half {@include grid-column(12);}
-	.grid-third {@include grid-column(4);}
-
+	.grid-third {@include grid-column(12);}
+	.hide-small {display: block;}
+	
+	// DELETE ALL THIS LATER
 	.bbg-grid--1-2-2 {@include span-columns(6); margin-right: 0;}
 	.bbg-grid--1-2-2:nth-child(2n+1) {clear: left; margin-right: $bbg-grid-gutter;}
 
@@ -36,6 +39,7 @@
 
 @include media($medium-medium-screen) {
 	.grid-half {@include grid-column(6);}
+	.grid-third {@include grid-column(4);}
 }
 
 @include media($medium-large-screen) {

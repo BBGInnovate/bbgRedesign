@@ -63,7 +63,7 @@ function assemble_threats_to_press_ribbon($threat_data) {
 
 // ABOUT FLEXIBLE ROWS
 function assemble_umbrella_main($main) {
-	if (!empty($main)) {
+	if (!empty($main['section_header']) || !empty($main['intro_text'])) {
 		$umbrella_main  = '<div class="outer-container">';
 		$umbrella_main .= 	'<div class="grid-container">';
 		$umbrella_main .= 		$main['section_header'];
@@ -94,16 +94,19 @@ function assemble_umbrella_marquee($umbrella_parts) {
 }
 
 function assemble_umbrella_content_section($umbrella_parts) {
-	$umbrella_content_block = '<div class="outer-container">';
-	foreach($umbrella_parts as $umbrella_chunk) {
-		$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
-		$umbrella_content_block .= $umbrella_chunk['image'];
-		$umbrella_content_block .= $umbrella_chunk['item_title'];
-		$umbrella_content_block .= $umbrella_chunk['description'];
+	if (!empty($umbrella_parts)) {
+		$umbrella_content_block = '<div class="outer-container" id="in-build-function">';
+		foreach($umbrella_parts as $umbrella_chunk) {
+			$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
+			$umbrella_content_block .= $umbrella_chunk['column_title'];
+			$umbrella_content_block .= $umbrella_chunk['image'];
+			$umbrella_content_block .= $umbrella_chunk['item_title'];
+			$umbrella_content_block .= $umbrella_chunk['description'];
+			$umbrella_content_block .= '</div>';
+		}
 		$umbrella_content_block .= '</div>';
+		return $umbrella_content_block;
 	}
-	$umbrella_content_block .= '</div>';
-	return $umbrella_content_block;
 }
 
 // ENTITY
@@ -126,6 +129,9 @@ function assemble_entity_section($entity_data) {
 		$entity_markup .= 				$entity_part['image'];
 		$entity_markup .= 			'</div>';
 		$entity_markup .= 			'<div class="entity-desc">';
+		$entity_markup .= 				$entity_part['title'];
+		$entity_markup .= 			'</div>';
+		$entity_markup .= 			'<div class="entity-desc hide-small">';
 		$entity_markup .= 				$entity_part['content'];
 		$entity_markup .= 			'</div>';
 		$entity_markup .= 		'</div>';
