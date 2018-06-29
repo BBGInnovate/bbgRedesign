@@ -31,8 +31,6 @@ if (have_posts()) :
 endif;
 
 // TEST
-$umbrella_rows = array();
-$content_blocks = array();
 $umbrella_group = array();
 if (have_rows('about_flexible_page_rows')) {
 	while (have_rows('about_flexible_page_rows')) {
@@ -50,16 +48,21 @@ if (have_rows('about_flexible_page_rows')) {
 			$umbrella_mains = assemble_umbrella_main($main_umbrella_parts);
 			array_push($umbrella_group, $umbrella_mains);
 			// GET CONTENT
+			$content_parts_group = array();
 			while (have_rows('umbrella_content')) {
 				the_row();
 				if (get_row_layout() == 'umbrella_content_internal') {
 					$content_data_result = get_umbrella_content_data('internal', $grid_class);
 					$content_parts_result = build_umbrella_content_parts($content_data_result);
-					$content_mains_markup = assemble_umbrella_content_section($content_parts_result);
-					array_push($umbrella_group, $content_mains_markup);
+					// PACKAGE ALL PARTS, THEN BUILD CHUNKS IN OUTER DIV
+					array_push($content_parts_group, $content_parts_result);
 				}
 			}
+			// var_dump($content_parts_group); // array(3)
+			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group);
+			// echo count($content_parts_group); // 30
 		}
+		array_push($umbrella_group, $umbrella_content_markup);
 	}
 }
 
@@ -93,11 +96,13 @@ get_header();
 	$body_copy .= '</div>';
 	echo $body_copy;
 
-	echo '<div class="outer-container">';
+	// echo '<div class="outer-container">';
 	foreach($umbrella_group as $umbrella) {
+		echo '<div class="flex-rows">';
 		echo 	$umbrella;
+		echo '<div>';
 	}
-	echo '</div>';
+	// echo '</div>';
 
 	// NETWORKS
 	$show_networks = get_field('about_networks_row', $id);

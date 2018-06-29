@@ -63,14 +63,17 @@ function assemble_threats_to_press_ribbon($threat_data) {
 
 // ABOUT FLEXIBLE ROWS
 function assemble_umbrella_main($main) {
-	// $umbrella_main .= '<div class="outer-container">';
-	$umbrella_main  = 	'<div class="grid-container">';
-	$umbrella_main .= 		$main['section_header'];
-	$umbrella_main .= 		$main['intro_text'];
-	$umbrella_main .= 	'</div>';
-	// $umbrella_main .= '</div>';
-	return $umbrella_main;
+	if (!empty($main)) {
+		$umbrella_main  = '<div class="outer-container">';
+		$umbrella_main .= 	'<div class="grid-container">';
+		$umbrella_main .= 		$main['section_header'];
+		$umbrella_main .= 		$main['intro_text'];
+		$umbrella_main .= 	'</div>';
+		$umbrella_main .= '</div>';
+		return $umbrella_main;
+	}
 }
+
 function assemble_office_module($office_parts) {
 	$office_module  = 	'<div class="inner-container">';
 	// $office_module .= 		$office_parts['header'];
@@ -91,14 +94,16 @@ function assemble_umbrella_marquee($umbrella_parts) {
 }
 
 function assemble_umbrella_content_section($umbrella_parts) {
-	// $umbrella_contents  = '<div class="outer-container">';
-	$umbrella_contents  = 	'<div class="' . $umbrella_parts['grid'] . '">';
-	$umbrella_contents .= 		$umbrella_parts['image'];
-	$umbrella_contents .= 		$umbrella_parts['item_title'];
-	$umbrella_contents .= 		$umbrella_parts['description'];
-	$umbrella_contents .= 	'</div>';
-	// $umbrella_contents .= '</div>';
-	return $umbrella_contents;
+	$umbrella_content_block = '<div class="outer-container">';
+	foreach($umbrella_parts as $umbrella_chunk) {
+		$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
+		$umbrella_content_block .= $umbrella_chunk['image'];
+		$umbrella_content_block .= $umbrella_chunk['item_title'];
+		$umbrella_content_block .= $umbrella_chunk['description'];
+		$umbrella_content_block .= '</div>';
+	}
+	$umbrella_content_block .= '</div>';
+	return $umbrella_content_block;
 }
 
 // ENTITY

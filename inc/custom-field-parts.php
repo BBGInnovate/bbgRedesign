@@ -162,6 +162,20 @@ function build_threat_parts($threat_data) {
 }
 
 // ABOUT FLEXIBLE ROWS
+function build_umbrella_main_parts($umbrella_main_data) {
+	if ($umbrella_main_data['header'] != "") {
+		$header  = '<h3>' . $umbrella_main_data['header'] . '</h3>';
+	}
+	if ($umbrella_main_data['intro_text'] != "") {
+		$overhead_text  = '<p>' . $umbrella_main_data['intro_text'] . '</p>';
+	}
+	$umbrella_main_package = array(
+		'section_header' => $header, 
+		'intro_text' => $overhead_text
+	);
+	return $umbrella_main_package;
+}
+
 function build_office_parts($office_data) {
 	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';
 
@@ -194,22 +208,8 @@ function build_marquee_parts($marquee_data) {
 	return $marquee_parts_package;
 }
 
-function build_umbrella_main_parts($umbrella_main_data) {
-	if ($umbrella_main_data['header'] != "") {
-		$header  = '<h3>' . $umbrella_main_data['header'] . '</h3>';
-	}
-	if ($umbrella_main_data['intro_text'] != "") {
-		$overhead_text  = '<p>' . $umbrella_main_data['intro_text'] . '</p>';
-	}
-	$umbrella_main_package = array(
-		'section_header' => $header, 
-		'intro_text' => $overhead_text
-	);
-	return $umbrella_main_package;
-}
-
 function build_umbrella_content_parts($content_data) {
-	$content_title = '<h2>' . $content_data['column_title'] . '</h2>';
+	$content_title = '<h3>' . $content_data['column_title'] . '</h3>';
 	$item_title = '<h4><a href="' . $content_data['link'] . '">' . $content_data['item_title'] . '</a></h4>';
 	$image = '<img src="' . $content_data['thumb_src'] . '">';
 	$description  = '<p class="aside">' . $content_data['description'] . '</p>';
