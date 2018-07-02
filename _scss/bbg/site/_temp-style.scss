@@ -1,59 +1,17 @@
-// COLUMNS MAIN, SIDEBAR
-// .page-post-main-content {@include grid-column(9);}
+.page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}
+.hide-small {display: none;}
+@include media($medium-screen) {
+	.hide-small {display: block;}
+}
 
 .map-banner {margin-bottom: 8rem;}
 .no-margin-bottom {margin: 0;}
 
 
-// UMBRELLA TEST
-.program-text-side {
-	@include grid-column(5);
-}
-.program-content-side {
-	@include grid-column(7);
-}
-
-
-
 //PROFILE
 .profile-name {margin-bottom: 1.5rem;}
 .profile-occupation {margin-bottom: 3rem;}
-// CUSTOM SIDEBAR GRID
-$sidebar-grid: (
-	columns: 12,
-	gutter: 30px,
-	media: 1200px,
-	direction: ltr,
-);
-$icon-content-grid: (
-	columns: 6,
-	gutter: 30px,
-);
 
-// ENTITY GRID
-.icon-content-small-container {
-	@include grid-column(1, $icon-content-grid);
-	img {margin-bottom: 3rem;}
-}
-.icon-content-main-container {@include grid-column(5, $icon-content-grid);}
-
-// GLOBAL SIDEBAR RULES
-.main-content-container {@include grid-column(8);}
-.side-content-container {
-	@include grid-column(4);
-	padding-left: 3rem;
-	border-left: 1px solid #e6e6e6;
-
-	// UNDO FOR NESTED GRIDS
-	.side-content-container {
-		border-left: none;
-		padding-left: 0;
-	}
-	article {
-		margin-bottom: 3rem;
-		.grid-container {margin-top: 1.5rem;}
-	}
-}
 
 
 
@@ -63,10 +21,10 @@ $icon-content-grid: (
 	margin: 0 auto 6em auto;
 	
 	// SIDEBAR GRID
-	.main-content-container {@include grid-column(8, $sidebar-grid);}
-	.side-content-container {
-		@include grid-column(4, $sidebar-grid);
-	}
+	// .main-content-container {@include grid-column(8, $sidebar-grid);}
+	// .side-content-container {
+		// @include grid-column(4, $sidebar-grid);
+	// }
 }
 
 
@@ -95,7 +53,7 @@ $icon-content-grid: (
 }
 
 // MAIN, SIDEBAR
-.main-content-container {@include grid-column(8);}
+// .main-content-container {@include grid-column(8);}
 .sidebar-content-container {
 	@include grid-column(4);
 	.network-container {
@@ -150,20 +108,12 @@ $icon-content-grid: (
 
 @include media($medium-screen) {
 	.entity-main {
-		.entity-icon {
-			@include grid-column(2);
-		}
-		.entity-desc {
-			@include grid-column(10);
-		}
+		.entity-icon {@include grid-column(2);}
+		.entity-desc {@include grid-column(10);}
 	}
 	.entity-side {
-		.entity-icon {
-			@include grid-column(1);
-		}
-		.entity-desc {
-			@include grid-column(11);
-		}
+		.entity-icon {@include grid-column(1);}
+		.entity-desc {@include grid-column(11);}
 	}
 }
 @include media($medium-large-screen) {

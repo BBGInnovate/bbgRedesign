@@ -1,30 +1,105 @@
+// GRID CONTAINERS AND NESTING STRUCTURES
 .outer-container {
 	@include grid-container;
 	max-width: 1200px;
 	margin: 0 auto 3rem auto;
 }
-.inner-container {@include grid-container;}
 .nest-container {@include grid-collapse;}
+.inner-container {@include grid-container;}
 .grid-container {@include grid-column(12);}
+
+
+// EVENT BLOCKS
 .grid-half {@include grid-column(12);}
 .grid-third {@include grid-column(12);}
-
-// SIDEBAR GRIDS
-.small-main-content-container {@include grid-column(12);}
-.small-side-content-container {@include grid-column(12);}
- 
-.page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}
-.hide-small {display: none;}
-
-@include media($small-screen) {
-	
-}
-
 @include media($medium-screen) {
 	.grid-half {@include grid-column(12);}
 	.grid-third {@include grid-column(12);}
-	.hide-small {display: block;}
-	
+}
+@include media($medium-medium-screen) {
+	.grid-half {@include grid-column(6);}
+	.grid-third {@include grid-column(4);}
+}
+
+// CUSTOM SIDEBAR GRID
+$sidebar-grid: (
+	columns: 12,
+	gutter: 30px,
+	media: 1200px,
+);
+$icon-content-grid: (
+	columns: 6,
+	gutter: 30px,
+);
+
+// SIDEBAR GRIDS
+.main-content-container {@include grid-column(12);}
+.side-content-container {@include grid-column(12);}
+
+.medium-main-content-container {@include grid-column(12);}
+.medium-side-content-container {@include grid-column(12);}
+
+.small-main-content-container {@include grid-column(6);}
+.small-side-content-container {@include grid-column(6);}
+
+.icon-side-content-container {
+	@include grid-column(12);
+	img {width: 25%;}
+}
+.icon-main-content-container {@include grid-column(12);}
+
+@include media($small-screen) {
+	.small-main-content-container {@include grid-column(9);}
+	.small-side-content-container {@include grid-column(3);}
+}
+
+// @include media($medium-medium-screen) {
+// 	.icon-side-content-container {
+// 		@include grid-column(1, $icon-content-grid);
+// 		img {width: auto; margin-bottom: 3rem;}
+// 	}
+// 	.icon-main-content-container {@include grid-column(5, $icon-content-grid);}
+// }
+
+@include media($medium-large-screen) {
+	.main-content-container {@include grid-column(8);}
+	.side-content-container {
+		@include grid-column(4);
+		padding-left: 3rem;
+		border-left: 1px solid #e6e6e6;
+
+		.side-content-container {
+			border-left: none;
+			padding-left: 0;
+		}
+		article {
+			margin-bottom: 3rem;
+			.grid-container {margin-top: 1.5rem;}
+		}
+	}
+	.medium-main-content-container {@include grid-column(9);}
+	.medium-side-content-container {@include grid-column(3);}
+
+	.small-side-content-container {@include grid-column(5);}
+	.small-main-content-container {@include grid-column(7);}
+
+	.icon-side-content-container {
+		@include grid-column(1, $icon-content-grid);
+		img {width: auto; margin-bottom: 3rem;}
+	}
+	.icon-main-content-container {@include grid-column(5, $icon-content-grid);}
+}
+
+
+
+
+
+
+
+
+
+
+@include media($medium-screen) {
 	// DELETE ALL THIS LATER
 	.bbg-grid--1-2-2 {@include span-columns(6); margin-right: 0;}
 	.bbg-grid--1-2-2:nth-child(2n+1) {clear: left; margin-right: $bbg-grid-gutter;}
@@ -40,17 +115,7 @@
 	.bbg-grid--2-3-3:nth-child(2n) {margin-right: $bbg-grid-gutter;}
 	.bbg-grid--2-3-3:nth-child(3n) {clear: right; margin-right: 0;}
 }
-
-@include media($medium-medium-screen) {
-	.grid-half {@include grid-column(6);}
-	.grid-third {@include grid-column(4);}
-}
-
 @include media($medium-large-screen) {
-	// SIDEBAR GRIDS
-	.small-main-content-container {@include grid-column(9);}
-	.small-side-content-container {@include grid-column(3);}
-	
 	.bbg-grid--1-1-1-2 {@include span-columns(6); clear: none; margin-right: 0;}
 	.bbg-grid--1-1-1-2:nth-child(2n+1) {clear: left; margin-right: $bbg-grid-gutter;}
 
