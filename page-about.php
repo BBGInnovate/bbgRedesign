@@ -112,10 +112,10 @@ get_header();
 		$umbrella_end = array_splice($umbrella_group, 2);
 
 		echo '<div class="outer-container">';
-		echo 	'<div class="small-side-content-container box-special">';
+		echo 	'<div class="medium-side-content-container box-special">';
 		echo 		$marquee_module;
 		echo 	'</div>';
-		echo 	'<div class="small-main-content-container">';
+		echo 	'<div class="medium-main-content-container">';
 		foreach ($umbrella_group as $umbrella_array_bit) {
 			echo $umbrella_array_bit;
 		}

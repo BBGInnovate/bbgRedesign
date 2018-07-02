@@ -90,73 +90,73 @@ get_header(); ?>
 		}
 	?>
 
-<div class="outer-container">
+	<div class="outer-container">
 		<div class="custom-grid-container">
 			<div class="inner-container">
 				<div class="main-content-container">
-<?php
-	if($post->post_parent) {
-		$parent_link = get_permalink($post->post_parent);
-		echo '<a href="' . $parent_link . '">Link to parent page</a>';
-	}
-	else {
-		$headline_string  = '<h3>' . $headline . '</h3>';
-	}
-	echo $headline_string;
-	echo $pageContent;
-	if (is_page('foia-reports')) {
-		display_foia_reports();
-	}
+					<?php
+						if($post->post_parent) {
+							$parent_link = get_permalink($post->post_parent);
+							echo '<a href="' . $parent_link . '">Link to parent page</a>';
+						}
+						else {
+							$headline_string  = '<h3>' . $headline . '</h3>';
+						}
+						echo $headline_string;
+						echo $pageContent;
+						if (is_page('foia-reports')) {
+							display_foia_reports();
+						}
 
-	//Add blog posts below the main content
-	$relatedCategory = get_field('related_category_posts', $id);
+						//Add blog posts below the main content
+						$relatedCategory = get_field('related_category_posts', $id);
 
-	if ($relatedCategory != "") {
-		$qParams2 = array(
-			'post_type' => array('post'),
-			'posts_per_page' => 2,
-			'cat' => $relatedCategory->term_id,
-			'orderby' => 'date',
-			'order' => 'DESC'
-		);
-		$categoryUrl = get_category_link($relatedCategory->term_id);
-		$custom_query = new WP_Query($qParams2);
+						if ($relatedCategory != "") {
+							$qParams2 = array(
+								'post_type' => array('post'),
+								'posts_per_page' => 2,
+								'cat' => $relatedCategory->term_id,
+								'orderby' => 'date',
+								'order' => 'DESC'
+							);
+							$categoryUrl = get_category_link($relatedCategory->term_id);
+							$custom_query = new WP_Query($qParams2);
 
-		if ($custom_query -> have_posts()) {
-			echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
-			echo '<div class="usa-grid-full">';
-				while ($custom_query -> have_posts())  {
-					$custom_query->the_post();
-					get_template_part('template-parts/content-portfolio', get_post_format());
-				}
-			echo '</div>';
-		}
-		wp_reset_postdata();
-	}
-?>
+							if ($custom_query -> have_posts()) {
+								echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
+								echo '<div class="usa-grid-full">';
+									while ($custom_query -> have_posts())  {
+										$custom_query->the_post();
+										get_template_part('template-parts/content-portfolio', get_post_format());
+									}
+								echo '</div>';
+							}
+							wp_reset_postdata();
+						}
+					?>
 				</div>
 				<div class="side-content-container">
-<?php
-	$secondaryColumnLabel = get_field('secondary_column_label');
-	$secondaryColumnContent = get_field('secondary_column_content');
+					<?php
+						$secondaryColumnLabel = get_field('secondary_column_label');
+						$secondaryColumnContent = get_field('secondary_column_content');
 
-	if ($secondaryColumnContent != "") {
-		if ($secondaryColumnLabel != "") {
-			echo '<h5>' . $secondaryColumnLabel . '</h5>';
-		}
-		echo $secondaryColumnContent;
-	}
-	if ($includeSidebar) {
-		echo $sidebar;
-	}
-	if ($listsInclude) {
-		echo $sidebarDownloads;
-	}
-?>
+						if ($secondaryColumnContent != "") {
+							if ($secondaryColumnLabel != "") {
+								echo '<h5>' . $secondaryColumnLabel . '</h5>';
+							}
+							echo $secondaryColumnContent;
+						}
+						if ($includeSidebar) {
+							echo $sidebar;
+						}
+						if ($listsInclude) {
+							echo $sidebarDownloads;
+						}
+					?>
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
 
 	<div class="outer-container">
 		<footer class="entry-footer bbg-post-footer 1234">

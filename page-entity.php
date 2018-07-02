@@ -392,7 +392,7 @@ get_header(); ?>
 			<div class="main-content-container">
 				<div class="nest-container">
 					<div class="inner-container">
-						<div class="icon-content-small-container">
+						<div class="icon-side-content-container">
 							<img src="<?php echo $network_logo; ?>">
 							
 							<h5>Website</h5>
@@ -421,7 +421,7 @@ get_header(); ?>
 								}
 							?>
 						</div>
-						<div class="icon-content-main-container">
+						<div class="icon-main-content-container">
 							<?php echo '<h2>' . $fullName . '</h2>'; ?>
 							<div class="bbg__profile__content">
 								<?php echo $pageContent; ?>

@@ -104,10 +104,10 @@ get_header();
 			<div class="main-content-container">
 				<div class="nest-container">
 					<div class="inner-container">
-						<div class="icon-content-small-container">
+						<div class="icon-side-content-container">
 							<img src="<?php echo $profilePhoto; ?>">
 						</div>
-						<div class="icon-content-main-container">
+						<div class="icon-main-content-container">
 							<?php
 								$profile_head  = '<h2 class="profile-name">';
 								$profile_head .= 	get_the_title();

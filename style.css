@@ -4675,6 +4675,23 @@ e.g. on the intern testimonial page */
     float: left;
     margin-left: 30px; } }
 
+.sidebar-content-container {
+  width: calc(33.33333% - 26.66667px);
+  float: left;
+  margin-left: 20px; }
+  .sidebar-content-container .network-container::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .sidebar-content-container .network-container .network-icon {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
+  .sidebar-content-container .network-container .network-blurb {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; }
+
 @media screen and (min-width: 600px) {
   .bbg-grid--1-2-2 {
     float: left;
@@ -4965,23 +4982,6 @@ ol li:before {
       bottom: 10px; }
       .profile-header .content-column .content p {
         margin-bottom: 0; }
-
-.sidebar-content-container {
-  width: calc(33.33333% - 26.66667px);
-  float: left;
-  margin-left: 20px; }
-  .sidebar-content-container .network-container::after {
-    clear: both;
-    content: "";
-    display: block; }
-  .sidebar-content-container .network-container .network-icon {
-    width: calc(25% - 25px);
-    float: left;
-    margin-left: 20px; }
-  .sidebar-content-container .network-container .network-blurb {
-    width: calc(75% - 35px);
-    float: left;
-    margin-left: 20px; }
 
 .page-featured-media {
   margin-bottom: 6rem; }

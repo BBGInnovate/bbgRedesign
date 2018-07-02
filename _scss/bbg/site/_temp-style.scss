@@ -12,19 +12,9 @@
 .profile-name {margin-bottom: 1.5rem;}
 .profile-occupation {margin-bottom: 3rem;}
 
-
-
-
 .custom-grid-container {
-	// MUST USE THIS PARENT FOR OUTER CUSTOM GRIDS
 	max-width: 1200px;
 	margin: 0 auto 6em auto;
-	
-	// SIDEBAR GRID
-	// .main-content-container {@include grid-column(8, $sidebar-grid);}
-	// .side-content-container {
-		// @include grid-column(4, $sidebar-grid);
-	// }
 }
 
 
@@ -51,18 +41,6 @@
 		}
 	}
 }
-
-// MAIN, SIDEBAR
-// .main-content-container {@include grid-column(8);}
-.sidebar-content-container {
-	@include grid-column(4);
-	.network-container {
-		@include grid-container;
-		.network-icon {@include grid-column(3); }
-		.network-blurb {@include grid-column(9);}
-	}
-}
-
 
 // FEATURED MEDIA 
 .page-featured-media {margin-bottom: 6rem;}
