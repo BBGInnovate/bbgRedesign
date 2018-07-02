@@ -73,7 +73,8 @@ if (have_posts()) {
 		the_post();
 		$id = get_the_ID();
 		$ogDescription = get_the_excerpt();
-		$pageContent = do_shortcode(get_the_content());
+		$page_content = do_shortcode(get_the_content());
+		$page_content = apply_filters('the_content', $page_content);
 	}
 }
 wp_reset_postdata();
@@ -97,13 +98,17 @@ get_header(); ?>
 					<?php
 						if($post->post_parent) {
 							$parent_link = get_permalink($post->post_parent);
-							echo '<a href="' . $parent_link . '">Link to parent page</a>';
+							echo '<h2><a href="' . $parent_link . '">' . get_the_title($post->post_parent) . '</a></h2>';
 						}
 						else {
 							$headline_string  = '<h3>' . $headline . '</h3>';
+							echo $headline_string;
 						}
-						echo $headline_string;
-						echo $pageContent;
+
+						echo '<div class="page-content">';
+						echo $page_content;
+						echo '</div>';
+
 						if (is_page('foia-reports')) {
 							display_foia_reports();
 						}

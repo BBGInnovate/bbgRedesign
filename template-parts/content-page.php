@@ -7,7 +7,7 @@
  * @package bbginnovate
  */
 
-
+// require '../inc/bbg-functions-assemble.php';
 require get_template_directory() . '/inc/bbg-functions-assemble.php';
 
 $videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
@@ -55,7 +55,6 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 
 	<?php
 		$featured_media_result = get_feature_media_data();
@@ -64,91 +63,74 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 		}
 	?>
 
-	<div class="usa-grid">
-	<?php
-		$page_header = '<header class="entry-header">';
-		if($post -> post_parent) {
-			// REFERENCE: https://wordpress.org/support/topic/link-to-parent-page
-			$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
-			$parent_link_data = get_permalink($post -> post_parent) ;
+	<div class="outer-container">
+		<div class="main-content-container">
+			<?php
+				if($post -> post_parent) {
+					// REFERENCE: https://wordpress.org/support/topic/link-to-parent-page
+					$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+					$parent_link_data = get_permalink($post -> post_parent) ;
 
-			$parent_link_markup  = '<h2>';
-			$parent_link_markup .= 	'<a href"' . $parent_link_data . '">';
-			$parent_link_markup .= 		$parent -> post_title;
-			$parent_link_markup .= 	'</a>';
-			$parent_link_markup .= '</h2>';
+					$parent_link_markup  = '<h2>';
+					$parent_link_markup .= 	'<a href"' . $parent_link_data . '">' . $parent -> post_title . '</a>';
+					$parent_link_markup .= '</h2>';
 
-			$page_header .= $parent_link_markup;
-		}
+					$page_header .= $parent_link_markup;
+				}
 
-		$page_header  = 	'<h1 class="entry-title">';
-		$page_header .= 		get_the_title();
-		$page_header .= 	'</h1>';
-		$page_header .= '</header>';
-		echo $page_header;
-	?>
+				$page_header  = 	'<h2>' . get_the_title() . '</h2>';
+				echo $page_header;
+			?>
 
-		<!-- <div class="bbg__article-sidebar--left"> -->
-		<div class="">
-			<h6>Share </h6>
-					<a href="<?php echo $fbUrl; ?>">
-						<span class="bbg__article-share__icon facebook"></span>
-					</a>
-					<a href="<?php echo $twitterURL; ?>">
-						<span class="bbg__article-share__icon twitter"></span>
-					</a>
+			<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
+				<?php
+				$pageTagline = get_field('page_tagline');
+				if ( $pageTagline ) {
+					echo "<h3>" . $pageTagline . "</h3>";
+				}
+				the_content();
+				?>
+			</div><!-- .entry-content -->
+
+			<footer class="entry-footer bbg-post-footer 1234">
+				<?php
+					edit_post_link(
+						sprintf(
+							/* translators: %s: Name of current post */
+							esc_html__( 'Edit %s', 'bbginnovate' ),
+							the_title( '<span class="screen-reader-text">"', '"</span>', false )
+						),
+						'<span class="edit-link">',
+						'</span>'
+					);
+				?>
+			</footer><!-- .entry-footer -->
 		</div>
+		<div class="side-content-container">
+			<article>
+				<h5>Share</h5>
+				<a href="<?php echo $fbUrl; ?>">
+					<span class="bbg__article-share__icon facebook"></span>
+				</a>
+				<a href="<?php echo $twitterURL; ?>">
+					<span class="bbg__article-share__icon twitter"></span>
+				</a>
+			</article>
 
-		<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
-
-			<?php
-
-			$pageTagline = get_field('page_tagline');
-
-			if ( $pageTagline ) {
-				echo "<h2>" . $pageTagline . "</h2>";
-			}
-
-			the_content();
-
-			?>
-		</div><!-- .entry-content -->
-
-
-		<div class="">
-			<?php
-				// Right sidebar
-				echo "<!-- Sidebar content -->";
-				if ( $includeSidebar && $sidebarTitle != "" ) {
-					echo $sidebar;
-				}
-
-				if ( $secondaryColumnContent != "" ) {
-					echo $secondaryColumnContent;
-				}
-
-				echo $sidebarDownloads;
-
-				echo $teamRoster;
-				echo "Roster";
-			?>
-		</div><!-- .bbg__article-sidebar -->
-
-
-
-		<footer class="entry-footer bbg-post-footer 1234">
-			<?php
-				edit_post_link(
-					sprintf(
-						/* translators: %s: Name of current post */
-						esc_html__( 'Edit %s', 'bbginnovate' ),
-						the_title( '<span class="screen-reader-text">"', '"</span>', false )
-					),
-					'<span class="edit-link">',
-					'</span>'
-				);
-			?>
-		</footer><!-- .entry-footer -->
+			<article>
+				<?php
+					echo "<!-- Sidebar content -->";
+					if ( $includeSidebar && $sidebarTitle != "" ) {
+						echo $sidebar;
+					}
+					if ( $secondaryColumnContent != "" ) {
+						echo $secondaryColumnContent;
+					}
+					echo $sidebarDownloads;
+					echo $teamRoster;
+				?>
+			</article>
+		</div>
 	</div><!-- .usa-grid -->
 
 	<?php if ( $timelineUrl != "" ) {
@@ -162,6 +144,3 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 		echo featured_timeline($timelineUrl);
 		$hideFeaturedImage = TRUE;
 	} ?>
-
-
-</article><!-- #post-## -->
