@@ -67,27 +67,38 @@ if (count($threatsToPress) > 0) {
 }
 $threats_shortcode_result = $threat_article;
 
-// CREARE NEWS FROM NETWORKS ARRAY
-$network_news_args = array(
-	'post_type' => array('post'),
-	'posts_per_page' => 3,
-	'tag' => $tag -> slug,
-	'orderby' => 'date',
-	'order' => 'DESC',
-	'post__not_in' => $used_post_id_group
-);
-$news_from_networks = array();
 
-$custom_query = new WP_Query($network_news_args);
-if ($custom_query -> have_posts()) {
-	while ($custom_query -> have_posts())  {
-		$custom_query -> the_post();
-		$news_from_networks[] = array(
-			'url' => get_the_permalink(),
-			'title' => get_the_title(),
-			'id' => get_the_ID(),
-			'thumb' => get_the_post_thumbnail($id, 'small-thumb')
-		);
+function network_news_posts() {
+	// INITIATED EARLIER IN THIS FILE
+	global $used_post_id_group;
+
+	$network_news_args = array(
+		'post_type' => array('post'),
+		'posts_per_page' => 3,
+		'tag' => $tag -> slug,
+		'orderby' => 'date',
+		'order' => 'DESC',
+		'post__not_in' => $used_post_id_group
+	);
+
+	$news_from_networks = array();
+	$i = 0;
+	$custom_query = new WP_Query($network_news_args);
+	if ($custom_query -> have_posts()) {
+		while ($custom_query -> have_posts())  {
+			$custom_query -> the_post();
+
+			$network_news_item = array(
+				'url' => get_the_permalink(),
+				'title' => get_the_title(),
+				'id' => get_the_ID(),
+				'thumb' => get_the_post_thumbnail($id)
+			);
+			${"network_news_block" . $i} = $network_news_item;
+			array_push($news_from_networks, ${"network_news_block" . $i});
+			$i++;
+		}
+		return $news_from_networks;
 	}
 }
 
@@ -175,48 +186,51 @@ get_header();
 			</div>
 			<div class="side-content-container">
 
-				<aside class="nest-container">
-					<div class="inner-container">
-						<div class="grid-container">
-							<h3>Languages Served</h3>
-						</div>
-
-						<?php while(have_rows('hot_spot_languages')): the_row(); ?>
+				<article>
+					<div class="nest-container">
+						<div class="inner-container">
 							<div class="grid-container">
-								<h4><?php the_sub_field('hot_spot_language_name'); ?></h4>
+								<h5>Languages Served</h5>
 							</div>
-							<?php 
-								if( have_rows('hot_spot_language_sites') ): 
-							?>
-								<?php 
-									while( have_rows('hot_spot_language_sites') ): 
-										the_row();
-										$link = get_sub_field('hot_spot_site_url');
-										$serviceInLanguage = get_sub_field('hot_spot_language_site_name_in_language');
-										$serviceInEnglish = get_sub_field('hot_spot_site_name_in_english');
-										$hotSpotNetwork = get_sub_field('hot_spot_site_network');
-										$serviceName = $serviceInLanguage;
-										$entityLogo = getTinyEntityLogo($hotSpotNetwork);
-								?>
-								<div class="inner-container">
-									<div class="small-side-content-container">
-										<img width="20" height="20" style='height:20px !important; width:20px !important; max-width:none;' src="<?php if ($entityLogo) { echo $entityLogo; } ?>" />
-										<a title="<?php echo $serviceInEnglish; ?>"  target="_blank" href="<?php echo $link; ?>" class="bbg__jobs-list__title"><?php echo $serviceName; ?></a>
-									</div>
-									<div class="small-main-content-container">
-										<?php echo str_replace("http://", "", $link); ?>
-									</div>
+
+							<?php while(have_rows('hot_spot_languages')): the_row(); ?>
+								<div class="grid-container">
+									<h4><?php the_sub_field('hot_spot_language_name'); ?></h4>
 								</div>
-								<?php endwhile; ?>
-							<?php endif; ?>
-						<?php endwhile; ?>
+								<?php 
+									if( have_rows('hot_spot_language_sites') ): 
+								?>
+									<?php 
+										while(have_rows('hot_spot_language_sites')): 
+											the_row();
+											$link = get_sub_field('hot_spot_site_url');
+											$serviceInLanguage = get_sub_field('hot_spot_language_site_name_in_language');
+											$serviceInEnglish = get_sub_field('hot_spot_site_name_in_english');
+											$hotSpotNetwork = get_sub_field('hot_spot_site_network');
+											$serviceName = $serviceInLanguage;
+											$entityLogo = getTinyEntityLogo($hotSpotNetwork);
+									?>
+									<div class="inner-container">
+										<div class="small-side-content-container">
+											<img width="20" height="20" style='height:20px !important; width:20px !important; max-width:none;' src="<?php if ($entityLogo) { echo $entityLogo; } ?>" />
+											<a title="<?php echo $serviceInEnglish; ?>"  target="_blank" href="<?php echo $link; ?>" class="bbg__jobs-list__title"><?php echo $serviceName; ?></a>
+										</div>
+										<div class="small-main-content-container">
+											<?php echo str_replace("http://", "", $link); ?>
+										</div>
+									</div>
+
+									<?php endwhile; ?>
+								<?php endif; ?>
+							<?php endwhile; ?>
+						</div>
 					</div>
-				</aside>
+				</article>
 
 				<?php 
 					if (have_rows('hot_spot_press_freedom_numbers')):
 						echo '<article>';
-						echo '<h5 class="bbg__label small">Press Freedom</h5>';
+						echo '<h5>Press Freedom</h5>';
 						echo $pressFreedomIntro;
 						echo '<ul>';
 						while ( have_rows('hot_spot_press_freedom_numbers') ) : the_row();
@@ -229,21 +243,23 @@ get_header();
 					endif;
 				?>
 
-				<?php 
-					if (count($news_from_networks) > 0) {
-						echo '<article>';
-						echo 	'<h5 class="bbg__label small">News from our Networks</h5>';
-						foreach ($news_from_networks as $n) {
-							$s  = ''; 
-							$s .= '<article class="' . implode(" ", get_post_class( "bbg__article" )) . '"">';
-							$s .=	'<header class="entry-header bbg-portfolio__excerpt-header">';
-							$s .=		'<div class="single-post-thumbnail clear bbg__excerpt-header__thumbnail--medium">';
-							$s .=			'<a tabindex="-1" href="' . $n['url'] . '">' . $n['thumb'] . '</a>';
-							$s .=		'</div>';
-							$s .=		'<p class=""><a href="'.$n['url'] . '">' . $n['title'] . '</a></p><BR>';
-							$s .=	'</header><!-- .entry-header -->';
-							$s .= '</article><!-- .bbg-portfolio__excerpt -->';
-							echo $s;
+				<?php
+					$xxx = network_news_posts();
+					if (count($xxx) > 0) {
+						echo '<article class="inner-container">';
+						echo 	'<h5>News from our Networks</h5>';
+						foreach ($xxx as $news_post) {
+							$network_article  = '<div class="nest-container">';
+							$network_article .= 	'<div class="inner-container">';
+							$network_article .= 		'<div class="side-content-container">';
+							$network_article .=				'<a tabindex="-1" href="' . $news_post['url'] . '">' . $news_post['thumb'] . '</a>';
+							$network_article .=			'</div>';
+							$network_article .=			'<div class="main-content-container">';
+							$network_article .=				'<h6><a href="' . $news_post['url'] . '">' . $news_post['title'] . '</a></h6>';
+							$network_article .= 		'</div>';
+							$network_article .= 	'</div>';
+							$network_article .= '</div>';
+							echo $network_article;
 						}
 						echo '</article>';
 					}

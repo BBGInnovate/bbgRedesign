@@ -480,22 +480,24 @@ function get_journalistic_code_of_ethics_data() {
 	$ethics_regx = ['/\d+/', '/\- /', '/\-/', '/\_/', '/\.pdf/'];
 
 	$i = 0;
-	foreach($file_contents as $item) {
-		$url = $item['ethics_file']['url'];
-		$title = $item['ethics_file']['title'];
-		$description = $item['ethics_file_description'];
+	if (!empty($file_contents)) {
+		foreach($file_contents as $item) {
+			$url = $item['ethics_file']['url'];
+			$title = $item['ethics_file']['title'];
+			$description = $item['ethics_file_description'];
 
-		foreach ($ethics_regx as $regx) {
-			$file_name = preg_replace($regx, ' ', $title);
-			$title = $file_name;
+			foreach ($ethics_regx as $regx) {
+				$file_name = preg_replace($regx, ' ', $title);
+				$title = $file_name;
+			}
+
+			$file_info = array('title' => $title, 'url' => $url, 'description' => $description);
+			${"ethics_file" + $i} = $file_info;
+			array_push($ethics_file_set, ${"ethics_file" + $i});
+			$i++;
 		}
-
-		$file_info = array('title' => $title, 'url' => $url, 'description' => $description);
-		${"ethics_file" + $i} = $file_info;
-		array_push($ethics_file_set, ${"ethics_file" + $i});
-		$i++;
+		return $ethics_file_set;
 	}
-	return $ethics_file_set;
 }
 
 ?>

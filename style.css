@@ -4532,6 +4532,10 @@ e.g. on the intern testimonial page */
     content: "";
     display: block; }
 
+.custom-grid-container {
+  max-width: 1200px;
+  margin: 0 auto 6em auto; }
+
 .nest-container {
   margin-left: -20px;
   margin-right: -20px;
@@ -4628,6 +4632,10 @@ e.g. on the intern testimonial page */
     width: calc(25% - 25px);
     float: left;
     margin-left: 20px; } }
+
+@media screen and (min-width: 600px) {
+  .icon-side-content-container img {
+    width: 25%; } }
 
 @media screen and (min-width: 900px) {
   .main-content-container {
@@ -4952,15 +4960,16 @@ ol li:before {
 .no-margin-bottom {
   margin: 0; }
 
+.bottom-divider {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #8b8278; }
+
 .profile-name {
   margin-bottom: 1.5rem; }
 
 .profile-occupation {
   margin-bottom: 3rem; }
-
-.custom-grid-container {
-  max-width: 1200px;
-  margin: 0 auto 6em auto; }
 
 .profile-header {
   position: relative;

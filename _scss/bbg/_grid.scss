@@ -11,6 +11,10 @@
 	max-width: 1200px;
 	margin: 0 auto 3rem auto;
 }
+.custom-grid-container {
+	max-width: 1200px;
+	margin: 0 auto 6em auto;
+}
 .nest-container {@include grid-collapse;}
 .inner-container {@include grid-container;}
 .grid-container {@include grid-column(12);}
@@ -40,6 +44,7 @@ $icon-content-grid: (
 	gutter: 30px,
 );
 
+
 .main-content-container {@include grid-column(12);}
 .side-content-container {@include grid-column(12);}
 
@@ -58,6 +63,12 @@ $icon-content-grid: (
 @include media($small-screen) {
 	.small-main-content-container {@include grid-column(9);}
 	.small-side-content-container {@include grid-column(3);}
+}
+
+@include media($medium-screen) {
+	.icon-side-content-container {
+		img {width: 25%;}
+	}
 }
 
 @include media($medium-large-screen) {
