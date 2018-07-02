@@ -5002,7 +5002,7 @@ ol li:before {
   color: #aca299; }
 
 .bbg__ribbon h2 {
-  position: absolute;
+  float: left;
   font-weight: 300;
   color: #ffffff;
   padding: 1rem;
@@ -6033,6 +6033,16 @@ div.banner_readmore h6 a:visited {
     .bbg__banner--thin .bbg__announcement__flexbox .bbg__announcement__photo {
       min-width: 33%; } }
 
+.bbg__ribbon.inner-ribbon {
+  padding-bottom: 0; }
+  .bbg__ribbon.inner-ribbon img {
+    object-fit: cover;
+    margin-bottom: 0; }
+  .bbg__ribbon.inner-ribbon .side-content-container {
+    padding-left: 0; }
+  .bbg__ribbon.inner-ribbon .label-contaner {
+    position: relative; }
+
 .bbg__ribbon {
   background-color: #283166;
   padding-bottom: 3rem;
@@ -6041,6 +6051,10 @@ div.banner_readmore h6 a:visited {
     color: #9bdaf1; }
   .bbg__ribbon p {
     color: #FFF; }
+  .bbg__ribbon .outer-container {
+    margin-bottom: 0; }
+  .bbg__ribbon .side-content-container {
+    border-left: none; }
   .bbg__ribbon .bbg__label {
     background-color: #981b1e;
     color: #FFF;

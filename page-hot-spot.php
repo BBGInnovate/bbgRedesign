@@ -195,7 +195,7 @@ get_header();
 
 							<?php while(have_rows('hot_spot_languages')): the_row(); ?>
 								<div class="grid-container">
-									<h4><?php the_sub_field('hot_spot_language_name'); ?></h4>
+									<h6><?php the_sub_field('hot_spot_language_name'); ?></h6>
 								</div>
 								<?php 
 									if( have_rows('hot_spot_language_sites') ): 

@@ -1284,7 +1284,16 @@ div.banner_readmore h6 a:visited {
         }
     }
 }
-
+.bbg__ribbon.inner-ribbon {
+    padding-bottom: 0;
+    img {
+        object-fit: cover;
+        margin-bottom: 0;}
+    .side-content-container {
+        padding-left: 0;
+    }
+    .label-contaner {position: relative;}
+}
 .bbg__ribbon {
     background-color: $color-blue-darkest;
     padding-bottom: $site-margins;
@@ -1292,7 +1301,8 @@ div.banner_readmore h6 a:visited {
 
     a {color: $color-primary-alt-light;}
     p {color: #FFF;}
-
+    .outer-container {margin-bottom: 0;}
+    .side-content-container {border-left: none;}
     .bbg__label {
         background-color: $color-secondary-darkest;
         color: #FFF;

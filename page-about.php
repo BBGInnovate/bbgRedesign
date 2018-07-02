@@ -71,7 +71,7 @@ if (have_rows('about_flexible_page_rows')) {
 		elseif (get_row_layout() == 'about_ribbon_page') {
 			$ribbon_data_result = get_ribbon_data();
 			$ribbon_parts_result = build_ribbon_parts($ribbon_data_result);
-			// $ribbon_module = assemble_ribbon_module($ribbon_parts_result);
+			$ribbon_module = assemble_ribbon_module($ribbon_parts_result);
 		}
 	}
 }
@@ -129,15 +129,21 @@ get_header();
 		echo '</div>';
 	}
 	else {
-		echo '<div class="outer-container">';
-		echo 	$marquee_module;
-		echo '</div>';
-
-		echo '<div class="outer-container">';
-		foreach($umbrella_group as $umbrella) {
-			echo $umbrella;
+		if (!empty($marquee_module)) {
+			echo '<div class="outer-container">';
+			echo 	$marquee_module;
+			echo '</div>';
 		}
-		echo '</div>';
+		if (!empty($umbrella_group)) {
+			echo '<div class="outer-container">';
+			foreach($umbrella_group as $umbrella) {
+				echo $umbrella;
+			}
+			echo '</div>';
+		}
+		if (!empty($ribbon_module)) {
+			echo $ribbon_module;
+		}
 	}
 
 	// FLEXIBLE ROWS: NETWORKS

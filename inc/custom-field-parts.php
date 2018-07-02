@@ -158,7 +158,30 @@ function build_threat_parts($threat_data) {
 
 // ABOUT FLEXIBLE ROWS
 function build_ribbon_parts($ribbon_data) {
-	
+	if ($ribbon_data['label_link'] != "") {
+		$ribbon_label  = '<h2>';
+		$ribbon_label .= 	'<a href="'. get_permalink($ribbon_data['label_link']) . '">' . $ribbon_data['label'] . '</a>';
+		$ribbon_label .= '</h2>';
+	} else {
+		$ribbon_label = '<h2>' . $ribbon_data['label'] . '</h2>';
+	}
+	if ($ribbon_data['headline_link'] != "") {
+		$ribbon_headline  = '<h4>';
+		$ribbon_headline .= 	'<a href="' . get_permalink($ribbon_data['headline_link']) . '">' . $ribbon_data['headline'] . '</a>';
+		$ribbon_headline .= '</h4>';
+	} else {
+		$ribbon_headline = '<h4>' . $ribbon_data['headline'] . '</h4>';
+	}
+	$ribbon_summary = $ribbon_data['summary'];
+	$ribbon_image = '<img src="' . $ribbon_data['image_url'] . '">';
+
+	$ribbon_package = array(
+		'label' => $ribbon_label,
+		'headline' => $ribbon_headline,
+		'summary' => $ribbon_summary,
+		'image' => $ribbon_image
+	);
+	return $ribbon_package;
 }
 function build_office_parts($office_data) {
 	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';

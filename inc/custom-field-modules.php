@@ -108,6 +108,24 @@ function assemble_umbrella_content_section($umbrella_parts) {
 	}
 }
 
+function assemble_ribbon_module($ribbon_parts) {
+	if (!empty($ribbon_parts)) {
+		$ribbon_box  = '<div class="bbg__ribbon inner-ribbon">';
+		$ribbon_box .= 	'<div class="outer-container">';
+		$ribbon_box .= 		'<div class="side-content-container">';
+		$ribbon_box .= 			$ribbon_parts['image'];
+		$ribbon_box .= 		'</div>';
+		$ribbon_box .= 		'<div class="main-content-container">';
+		$ribbon_box .= 			$ribbon_parts['label'];
+		$ribbon_box .= 			$ribbon_parts['headline'];
+		$ribbon_box .= 			$ribbon_parts['summary'];
+		$ribbon_box .= 		'</div>';
+		$ribbon_box .= 	'</div>';
+		$ribbon_box .= '</div>';
+		return $ribbon_box;
+	}
+}
+
 // ENTITY
 function assemble_entity_section($entity_data) {
 	$entity_class = $entity_data['class'];
