@@ -157,24 +157,9 @@ function build_threat_parts($threat_data) {
 }
 
 // ABOUT FLEXIBLE ROWS
-function build_umbrella_main_parts($umbrella_main_data) {
-	if ($umbrella_main_data['header'] != "") {
-		if (!empty($umbrella_main_data['intro_text'])) {
-			$header  = '<h3>' . 	$umbrella_main_data['header'] . '</h3>';
-		} else {
-			$header  = '<h3 class="no-margin-bottom">' . 	$umbrella_main_data['header'] . '</h3>';
-		}
-	}
-	if ($umbrella_main_data['intro_text'] != "") {
-		$overhead_text  = '<p>' . $umbrella_main_data['intro_text'] . '</p>';
-	}
-	$umbrella_main_package = array(
-		'section_header' => $header, 
-		'intro_text' => $overhead_text
-	);
-	return $umbrella_main_package;
+function build_ribbon_parts($ribbon_data) {
+	
 }
-
 function build_office_parts($office_data) {
 	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';
 
@@ -205,24 +190,52 @@ function build_marquee_parts($marquee_data) {
 	return $marquee_parts_package;
 }
 
+function build_umbrella_main_parts($umbrella_main_data) {
+	if ($umbrella_main_data['header'] != "") {
+		if (!empty($umbrella_main_data['intro_text'])) {
+			$header  = '<h3>' . 	$umbrella_main_data['header'] . '</h3>';
+		} else {
+			$header  = '<h3 class="no-margin-bottom">' . 	$umbrella_main_data['header'] . '</h3>';
+		}
+	}
+	if ($umbrella_main_data['intro_text'] != "") {
+		$overhead_text  = '<p>' . $umbrella_main_data['intro_text'] . '</p>';
+	}
+	$umbrella_main_package = array(
+		'section_header' => $header, 
+		'intro_text' => $overhead_text
+	);
+	return $umbrella_main_package;
+}
+
 function build_umbrella_content_parts($content_data) {
 	$blank_target = '';
 	if ($content_data['column_type'] == 'umbrella_content_external') {
 		$blank_target = ' target="_blank"';
 	}
-	$column_title = '<h3>' . $content_data['column_title'] . '</h3>';
 
-	$item_title  = '<h4>';
-	$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $blank_target . '>';
-	$item_title .= 		$content_data['item_title'];
-	$item_title .= 	'</a>';
-	if ($content_data['column_type'] == 'umbrella_content_file') {
-		$item_title .= ' <p class="aside">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
+	if ($content_data['column_title']) {
+		$column_title = '<h3>' . $content_data['column_title'] . '</h3>';
 	}
-	$item_title .= '</h4>';
 
-	$image = '<img src="' . $content_data['thumb_src'] . '">';
-	$description  = '<p class="aside">' . $content_data['description'] . '</p>';
+	if ($content_data['item_title']) {
+		$item_title  = '<h4>';
+		$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $blank_target . '>';
+		$item_title .= 		$content_data['item_title'];
+		$item_title .= 	'</a>';
+		if ($content_data['column_type'] == 'umbrella_content_file') {
+			$item_title .= ' <p class="aside">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
+		}
+		$item_title .= '</h4>';
+	}
+
+	if ($content_data['thumb_src']) {
+		$image = '<img src="' . $content_data['thumb_src'] . '">';
+	}
+
+	if ($content_data['description']) {
+		$description  = '<p class="aside">' . $content_data['description'] . '</p>';
+	}
 	
 	$content_parts = array(
 		'grid' => $content_data['grid_class'],

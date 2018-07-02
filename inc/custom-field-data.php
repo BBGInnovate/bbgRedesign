@@ -10,9 +10,10 @@
 
 // BBG SETTINGS
 function get_site_settings_data() {
-	$intro_content = get_field('site_setting_mission_statement','options','false');
-	$intro_link = get_field('site_setting_mission_statement_link', 'options', 'false');
-	$site_setting_package = array('intro_content' => $intro_content, 'intro_link' => $intro_link);
+	$site_setting_package = array(
+		'intro_content' => get_field('site_setting_mission_statement','options','false'),
+		'intro_link' => get_field('site_setting_mission_statement_link', 'options', 'false')
+	);
 	return $site_setting_package;
 }
 
@@ -328,21 +329,15 @@ function get_marquee_data() {
 }
 
 function get_ribbon_data() {
-	$label_text = get_sub_field('about_ribbon_label');
-	$label_link = get_sub_field('about_ribbon_label_link');
-	$headline_text = get_sub_field('about_ribbon_headline');
-	$headline_link = get_sub_field('about_ribbon_headline_link');
-	$image_url = get_sub_field('about_ribbon_image');
-	$summary = get_sub_field('about_ribbon_summary');
-
-	$ribbon_data = array(
-		'label' => $label_text,
-		'label_link' => $label_link,
-		'headline' => $headline_text,
-		'headline_link' => $headline_link,
-		'image_url' => $image_url,
-		'summary' => $summary
+	$ribbon_data_package = array(
+		'label' => get_sub_field('about_ribbon_label'),
+		'label_link' => get_sub_field('about_ribbon_label_link'),
+		'headline' => get_sub_field('about_ribbon_headline'),
+		'headline_link' => get_sub_field('about_ribbon_headline_link'),
+		'summary' => get_sub_field('about_ribbon_summary'),
+		'image_url' => get_sub_field('about_ribbon_image')
 	);
+	return $ribbon_data_package;
 }
 
 function get_umbrella_main_data() {

@@ -84,7 +84,7 @@ function assemble_office_module($office_parts) {
 	return $office_module;
 }
 
-function assemble_umbrella_marquee($umbrella_parts) {
+function assemble_marquee_module($umbrella_parts) {
 	$marquee  = '<div class="inner-container">';
 	$marquee .= 	$umbrella_parts['content'];
 	$marquee .= '</div>';
@@ -94,7 +94,7 @@ function assemble_umbrella_marquee($umbrella_parts) {
 
 function assemble_umbrella_content_section($umbrella_parts) {
 	if (!empty($umbrella_parts)) {
-		$umbrella_content_block = '<div class="inner-container">';
+		$umbrella_content_block = '<div class="outer-container">';
 		foreach($umbrella_parts as $umbrella_chunk) {
 			$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
 			$umbrella_content_block .= $umbrella_chunk['column_title'];

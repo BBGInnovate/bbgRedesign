@@ -66,7 +66,12 @@ if (have_rows('about_flexible_page_rows')) {
 		elseif (get_row_layout() == 'marquee') {
 			$marquee_data_result = get_marquee_data();
 			$marquee_parts_result = build_marquee_parts($marquee_data_result);
-			$marquee_module = assemble_umbrella_marquee($marquee_parts_result);
+			$marquee_module = assemble_marquee_module($marquee_parts_result);
+		}
+		elseif (get_row_layout() == 'about_ribbon_page') {
+			$ribbon_data_result = get_ribbon_data();
+			$ribbon_parts_result = build_ribbon_parts($ribbon_data_result);
+			// $ribbon_module = assemble_ribbon_module($ribbon_parts_result);
 		}
 	}
 }
@@ -93,6 +98,7 @@ get_header();
 	$page_header .= '</div>';
 	echo $page_header;
 
+	// PAGE CONTENT
 	$body_copy  = '<div class="outer-container">';
 	$body_copy .= 	'<div class="grid-container page-content">';
 	$body_copy .= 		$page_content;
@@ -100,6 +106,7 @@ get_header();
 	$body_copy .= '</div>';
 	echo $body_copy;
 
+	// FLEXIBLE ROWS
 	if (is_page('who-we-are')) {
 		$first_umbrella = array_slice($umbrella_group, 1, 1);
 		$umbrella_end = array_splice($umbrella_group, 2);
@@ -133,7 +140,7 @@ get_header();
 		echo '</div>';
 	}
 
-	// NETWORKS
+	// FLEXIBLE ROWS: NETWORKS
 	$show_networks = get_field('about_networks_row', $id);
 	if (!empty($show_networks)) {
 		// OPTIONS: $entity_placement arguments ["entity-main" | "entity-side"]
