@@ -239,7 +239,7 @@ endif;
 </style>
 
 <script type="text/javascript">
-L.mapbox.accessToken = '<?php echo MAPBOX_API_KEY; ?>';
+L.mapbox.accessToken = '<?php echo 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw'; ?>';
 
 //console.log(geojson[0].features[0].properties);
 //console.log('description: '+ geojson[0].features[0].properties['description'])
