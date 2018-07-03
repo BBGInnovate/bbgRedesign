@@ -10,12 +10,13 @@
   template name: Network Highlights
  */
 
-$pageTitle="";
-if ( have_posts() ) :
-	while ( have_posts() ) : the_post();
-		$pageTitle = get_the_title();
-	endwhile;
-endif;
+$page_title = "";
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
+		$page_title = get_the_title();
+	}
+}
 wp_reset_postdata();
 wp_reset_query();
 
@@ -32,7 +33,7 @@ get_header(); ?>
 
 			<div class="usa-grid">
 				<header class="page-header">
-					<h5 class="bbg__label--mobile large"><?php echo $pageTitle; ?></h5>
+					<h5 class="bbg__label--mobile large"><?php echo $page_title; ?></h5>
 					<?php echo $pageTagline; ?>
 				</header><!-- .page-header -->
 			</div>
@@ -169,7 +170,6 @@ if ( $custom_query->have_posts() ) :
 			$location = get_post_meta( $id, 'map_location', true );
 			$storyLink = get_permalink();
 			$mapHeadline = get_post_meta( $id, 'map_headline', true );
-			//$mapHeadline = "<a href='". $storyLink ."'>" . $mapHeadline . '</a>';
 
 			$mapDescription = get_the_title();
 			$mapDate = get_the_date();
@@ -210,9 +210,8 @@ if ( $custom_query->have_posts() ) :
 		$geojsonStr=json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
 		echo "<script type='text/javascript'>\n";
-		echo "geojson = $geojsonStr";
+		echo 	"geojson = $geojsonStr";
 		echo "</script>";
-		//echo $geojsonStr;
 
 endif;
 
@@ -285,23 +284,6 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
 	function centerMap(){
 		map.fitBounds(markers.getBounds());
 	}
-
-
-//console.log(geojson[0].features.length);
-
-/*
-var map = L.mapbox.map('map', 'mapbox.emerald');
-
-var myLayer = L.mapbox.featureLayer().addTo(map);
-	myLayer.setGeoJSON(geojson);
-
-	//Disable the map scroll/zoom so that you can scroll the page.
-	map.scrollWheelZoom.disable();
-
-	function centerMap(){
-		map.fitBounds(myLayer.getBounds());
-	}
-*/
 	centerMap();
 
 
@@ -332,8 +314,6 @@ var myLayer = L.mapbox.featureLayer().addTo(map);
 
 	resizeStuffOnResize();
 </script>
-
-
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
