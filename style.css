@@ -3588,11 +3588,12 @@ body:not(.home) .bbg__main-navigation {
   margin-bottom: 1.5rem; }
 
 .bbg__main-navigation {
-  clear: both;
   display: block;
-  width: 100%; }
+  width: 100%;
+  padding: 1.5rem;
+  clear: both; }
   .bbg__main-navigation #nav-logo {
-    width: 32rem; }
+    width: 27rem; }
   .bbg__main-navigation ul {
     display: block;
     list-style-type: none;

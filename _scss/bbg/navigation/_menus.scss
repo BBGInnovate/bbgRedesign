@@ -17,11 +17,12 @@ body:not(.home) {
 }
 
 .bbg__main-navigation {
-	clear: both;
 	display: block;
 	width: 100%;
+	padding: 1.5rem;
+	clear: both;
 
-	#nav-logo {width: 32rem;}
+	#nav-logo {width: 27rem;}
 
 	ul {
 		@include unstyled-list;

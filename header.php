@@ -66,6 +66,9 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 <html <?php language_attributes(); ?>>
 
 	<head>
+<!-- BLOCK SEARCH ENGINES FROM CRAWLING FOR NOW -->
+<meta name="robots" content="noindex">
+<meta name="googlebot" content="noindex">
 
 <!-- Basic Page Needs
 ================================================== -->
