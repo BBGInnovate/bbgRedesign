@@ -2,6 +2,7 @@
 .bbg__locator-map {
 	width: 100%;
 	min-height: 300px;
+	margin-bottom: 3rem;
 
 	@include media($medium-large-screen) {
 		a.leaflet-control-zoom-out,

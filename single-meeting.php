@@ -131,7 +131,7 @@ get_header();
 
 		<article id="post-<?php the_ID(); ?>" <?php post_class( "bbg__article" ); ?>>
 			<div class="outer-container">
-				<div class="page-post-main-content">
+				<div class="grid-container">
 					<?php
 						$post_header  = '<header>';
 						$post_header .= 	'<h3>' . get_the_title() . '</h3>';
@@ -140,32 +140,34 @@ get_header();
 					?>
 				</div>
 			</div>
-			<div class="outer-container">
-				<div class="page-post-main-content">
-					<?php
-						$featured_media_result = get_feature_media_data();
-						if ($featured_media_result != "") {
-							echo $featured_media_result;
-						}
-					?>
-					<div class="bbg__article-content">
-					<?php
-						if (isset($_GET['success'])) {
-							$success_alert  = '<div class="usa-alert usa-alert-success">';
-							$success_alert .= 	'<div class="usa-alert-body">';
-							$success_alert .= 		'<h3 class="usa-alert-heading">Submission Successful</h3>';
-							$success_alert .= 		'<p class="usa-alert-text">Your comment was successfully submitted.</p>';
-							$success_alert .= 	'</div>';
-							$success_alert .= '</div>';
-							echo $success_alert;
-						}
-						the_content();
 
-						if (!$isPressRelease && $isBoardMeeting && !isset($_GET['success'])):
-					 		if ($commentFormIsClosed):
-					 			echo "<p>The deadline for public comments for this meeting has passed.</p>";
-					 		else:
-					?>
+			<div class="outer-container">
+				<div class="custom-grid-container">
+					<div class="inner-container">
+						<div class="main-content-container page-content">
+						<?php
+							$featured_media_result = get_feature_media_data();
+							if ($featured_media_result != "") {
+								echo $featured_media_result;
+							}
+						?>
+						<?php
+							if (isset($_GET['success'])) {
+								$success_alert  = '<div class="usa-alert usa-alert-success">';
+								$success_alert .= 	'<div class="usa-alert-body">';
+								$success_alert .= 		'<h3 class="usa-alert-heading">Submission Successful</h3>';
+								$success_alert .= 		'<p class="usa-alert-text">Your comment was successfully submitted.</p>';
+								$success_alert .= 	'</div>';
+								$success_alert .= '</div>';
+								echo $success_alert;
+							}
+							the_content();
+
+							if (!$isPressRelease && $isBoardMeeting && !isset($_GET['success'])):
+								if ($commentFormIsClosed):
+									echo "<p>The deadline for public comments for this meeting has passed.</p>";
+								else:
+						?>
 								<h3>Public Comments Form</h3>
 								<p>Public comments related to U.S. international media are now being accepted for review by the board. Comments intended for the <?php echo $postDate; ?> meeting of the board must be submitted by <b><?php echo $commentFormCloseStr; ?></b>.</p>
 								<p>Comments received after that date will be forwarded to the board for the following meeting.</p>
@@ -173,7 +175,7 @@ get_header();
 								<p>The public comments you provide to the Broadcasting Board of Governors are collected by the agency voluntarily and may be publicly disclosed on the Internet and/or via requests submitted to the BBG under the Freedom of Information Act.</p>
 
 								<p>By providing public comments, you are consenting to their use and consideration by the Board and to their possible public dissemination. Personal contact information will not be made available to the public and will only be used by agency staff to engage with submitters regarding their own comments.</p>
-					<?php
+						<?php
 								$redirectLink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 								if (strpos($redirectLink, "?")) {
@@ -184,15 +186,13 @@ get_header();
 								$redirectLink .= "success = true";
 								echo do_shortcode("[si-contact-form form ='2' redirect = '$redirectLink']");
 								echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/js/meeting-comment-form.js"></script>';
+								endif;
 							endif;
-						endif;
-					?>
-					</div><!-- END .bbg__article-content -->
-				</div><!-- END .page-post-main-content -->
+						?>
+						</div>
 				
 				<!-- SIDEBAR -->
-				<div class="page-sidebar">
-					<div class="post-additional-information">
+				<div class="side-content-container">
 						<?php
 							$event_info  = '<p class="sidebar-paragraph-head">';
 							$event_info .= 		'<a href="/news/events/">' . $eventPageHeader . ':</a>';
@@ -309,7 +309,6 @@ get_header();
 							echo $sidebarDownloads;
 						?>
 
-					</div><!-- .post-additional-information -->
 				</div>
 		</article><!-- #post-## -->
 	<?php endwhile; // END POST LOOP ?>

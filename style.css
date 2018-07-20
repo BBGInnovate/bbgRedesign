@@ -3549,7 +3549,8 @@ object {
 /* locator map */
 .bbg__locator-map {
   width: 100%;
-  min-height: 300px; }
+  min-height: 300px;
+  margin-bottom: 3rem; }
   @media screen and (min-width: 900px) {
     .bbg__locator-map a.leaflet-control-zoom-out,
     .bbg__locator-map a.leaflet-control-zoom-in {

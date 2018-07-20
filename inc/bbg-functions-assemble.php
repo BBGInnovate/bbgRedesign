@@ -1,21 +1,15 @@
 <?php
-
+// test function, original is underneath
 function get_feature_media_data() {
 	$feature_gallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
 	$banner_position = get_field('adjust_the_banner_image', '', true);
-	$videoUrl = get_field( 'featured_video_url', '', true );
+	$video_url = get_field('featured_video_url', '', true);
+	$addFeaturedMap = get_post_meta(get_the_ID(), 'featured_map_add', true);
+	$media_dev_map = get_field('media_dev_coordinates');
 
-	if (!empty($feature_gallery)) {
-		$gallery_id = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
-		echo "<div class='outer-container'>";
-		putUniteGallery($gallery_id);
-		echo "</div>";
-		$hideFeaturedImage = true;
-	}
-	elseif ($videoUrl != "") {
+	if ($video_url != "") {
 		$featured_data = "";
-		$hideFeaturedImage = true;
-		$video_data = featured_video($videoUrl);
+		$video_data = featured_video($video_url);
 
 		$video_markup  = '<div class="page-featured-media">';
 		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
@@ -25,13 +19,19 @@ function get_feature_media_data() {
 		$video_markup .= '</div>';
 		$featured_data = $video_markup;
 	}
+	elseif (!empty($feature_gallery)) {
+		$gallery_id = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
+		echo "<div class='outer-container'>";
+		putUniteGallery($gallery_id);
+		echo "</div>";
+	}
 	elseif (has_post_thumbnail()) {
-		$featuredImageClass = "";
-		$featuredImageCutline = "";
 		$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
 		$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+		$featuredImageClass = "";
+		$featuredImageCutline = "";
 
-		if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
+		if ($thumbnail_image && isset($thumbnail_image[0])) {
 			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
 		}
 
@@ -43,8 +43,63 @@ function get_feature_media_data() {
 
 		$featured_data = $post_featured_image;
 	}
+	elseif ($addFeaturedMap || $media_dev_map) {
+		$featuredMapCaption = get_post_meta(get_the_ID(), 'featured_map_caption', true);
+		$featured_map  = 	'<div id="map-featured" class="bbg__map--banner"></div>';
+		if ($featuredMapCaption != "") {
+			$featured_map .= '<p class="bbg__article-header__caption">';
+			$featured_map .= 	$featuredMapCaption;
+			$featured_map .= '</p>';
+		}
+		$featured_data = $featured_map;
+	}
 	return $featured_data;
 }
+// function get_feature_media_data() {
+// 	$feature_gallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
+// 	$banner_position = get_field('adjust_the_banner_image', '', true);
+// 	$videoUrl = get_field( 'featured_video_url', '', true );
+
+// 	if (!empty($feature_gallery)) {
+// 		$gallery_id = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
+// 		echo "<div class='outer-container'>";
+// 		putUniteGallery($gallery_id);
+// 		echo "</div>";
+// 		$hideFeaturedImage = true;
+// 	}
+// 	elseif ($videoUrl != "") {
+// 		$featured_data = "";
+// 		$hideFeaturedImage = true;
+// 		$video_data = featured_video($videoUrl);
+
+// 		$video_markup  = '<div class="page-featured-media">';
+// 		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
+// 		$video_markup .= 		$video_data['url'];
+// 		$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+// 		$video_markup .= 	'</iframe>';
+// 		$video_markup .= '</div>';
+// 		$featured_data = $video_markup;
+// 	}
+// 	elseif (has_post_thumbnail()) {
+// 		$featuredImageClass = "";
+// 		$featuredImageCutline = "";
+// 		$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
+// 		$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+
+// 		if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
+// 			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
+// 		}
+
+// 		$post_featured_image  = '<div class="page-post-featured-graphic">';
+// 		$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
+// 		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
+// 		$post_featured_image .= 	'</div>';
+// 		$post_featured_image .= '</div>';
+
+// 		$featured_data = $post_featured_image;
+// 	}
+// 	return $featured_data;
+// }
 
 function get_flexible_row_data($str) {
 	if ($str == 'marquee') {
