@@ -257,6 +257,15 @@ body:not(.home) {
 
 // 3. MEDIUM-LARGE SCREEN
 @include media($medium-large-screen) {
+	.menu-item {
+		.nav-icon {
+			font-size: 1.8rem;
+			margin: 3px 0  0 -2rem;
+			cursor: pointer;
+		}
+		.displayed-dropdown {color: $color-taupe-dark;}
+	}
+
 	.bbg__main-navigation {
 		ul {font-size: 0.9em;}
 	}
@@ -268,21 +277,13 @@ body:not(.home) {
 	}
 	li.subnav-open {
 		// OK FOR IMPORTANT BECAUSE IT'S ONLY TEMPORARY
-		a:link, a:visited {color: $color-blue-darker !important;}
+		a:link, a:visited {color: $color-tan-light !important;}
 		ul {
 			a:link, a:visited {color: $color-blue-darker !important;}
 			a:hover, a:active {color: $color-tan-light !important;}
 		}
 	}
 
-	body:not(.home) {
-		.menu-all-pages-container {
-			min-height: 5rem;
-			margin-bottom: 2rem;
-			background-color: #F1F1F1;
-		}
-		.bbg__main-navigation__search {margin: .8rem $site-margins-medium 0 0;}
-	}
 	.usa-search.usa-search-small [type="submit"], 
 	.usa-search.usa-search-small .usa-search-submit {
 		width: 2.5rem;
@@ -291,9 +292,8 @@ body:not(.home) {
 	.menu-toggle {display: none;}
 	.bbg__main-navigation {
 		position: relative;
-		:not(#nav-logo) {text-align: right;}
+		:not(#nav-logo):not(.mag-search) {text-align: right;}
 
-		// #nav-logo {width: 19rem;}
 		nav-bu
 		.bbg__top-nav__link-text {width: auto;}
 		a {padding: 0;}
@@ -316,7 +316,7 @@ body:not(.home) {
 			
 			li {
 				margin: 0;
-				padding: 0;
+				padding: 0 1.5rem;
 				background-color: #ffffff;
 				:after {display: none}
 			}
@@ -325,13 +325,14 @@ body:not(.home) {
 				position: absolute;
 				right: 0;
 				width: 90rem;
+				margin-right: 5.5rem;
 
 				li {
 					display: inline-block;
 					float: none;
-					padding-left: 0;
+					padding: 0;
 
-					a {padding: 0 2.5rem;}
+					a {padding: 0 0 0 2.5rem;}
 					a:before {content: "";}
 				}
 			}
@@ -361,19 +362,30 @@ body:not(.home) {
 			right: 0;
 			padding: 1rem;
 		}
-		.usa-search [type="search"] {
-			float: right;
+		.usa-search [type="search"]{
+			position: absolute;
+			top: -3rem;
+			right: 0;
 			width: 3.5rem;
-			height: 4rem;
+			height: 3rem;
+			text-transform: uppercase;
+			text-align: left;
+			font-weight: 300;
+			font-size: 14px;
 			border-top: none;
 			border-left: none;
+		}
+		.search-icon-close {
+			position: absolute;
+			top: -2.3rem;
+			right: 3px;
+			cursor: pointer;
+			color: $color-tan-light;
 		}
 	}
 
 	.bbg__main-navigation__toggler {
 		display: inline-block !important;
-		width: auto;
-		height: 1.3rem;
 		vertical-align: bottom;
 		padding: 0;
 		margin: 0 0.5rem 0.5rem 0;

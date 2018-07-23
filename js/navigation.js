@@ -63,39 +63,22 @@
 		//TODO: check if Android works by default
 		/iP/i.test(navigator.userAgent) && jQuery('*').css('cursor', 'pointer');
 
-		// see http://stackoverflow.com/questions/7394796/jquery-click-event-how-to-tell-if-mouse-was-clicked-or-enter-key-was-pressed
-		/* don't enable hover on mobile breakpoints */
-		// jQuery("li.menu-item-has-children").hover(function(e) {
+		// jQuery("li.menu-item-has-children input.bbg__main-navigation__toggler").on('click', function(e) {
 		// 	if (window.innerWidth >= 900) {
-		// 		jQuery(this).find("ul.sub-menu").css('display','block');	
-		// 		e.stopPropagation();
-		// 		e.preventDefault();
-		// 	}
-		// }, function(e) {
-		// 	if (window.innerWidth >=900) {
-		// 		jQuery(this).find("ul.sub-menu").hide();
+		// 		if (!jQuery(this).parent().hasClass('subnav-open')) {
+		// 			jQuery("li.menu-item-has-children").removeClass('subnav-open');
+		// 			jQuery("ul.sub-menu").css('display', 'none');
+		// 			jQuery(this).parent().addClass('subnav-open');
+		// 			jQuery(this).parent().find("ul.sub-menu").css('display', 'block');
+		// 		}
+		// 		else {
+		// 			jQuery(this).parent().find("ul.sub-menu").css('display', 'block');
+		// 			jQuery(this).parent().removeClass('subnav-open');
+		// 		}
 		// 		e.stopPropagation();
 		// 		e.preventDefault();
 		// 	}
 		// });
-		jQuery("li.menu-item-has-children input.bbg__main-navigation__toggler").on('click', function(e) {
-			if (window.innerWidth >= 900) {
-				if (!jQuery(this).parent().hasClass('subnav-open')) {
-					console.log('show');
-					jQuery("li.menu-item-has-children").removeClass('subnav-open');
-					jQuery("ul.sub-menu").css('display', 'none');
-					jQuery(this).parent().addClass('subnav-open');
-					jQuery(this).parent().find("ul.sub-menu").css('display', 'block');
-				}
-				else {
-					console.log('hide');
-					jQuery(this).parent().find("ul.sub-menu").css('display', 'none');
-					jQuery(this).parent().removeClass('subnav-open');
-				}
-				e.stopPropagation();
-				e.preventDefault();
-			}
-		});
 
 		/* enable the carat with the keyboard */
 		jQuery("li.menu-item-has-children input[type='image']").keydown(function(e) {
@@ -120,38 +103,46 @@
 			}
 		});
 
-		jQuery("li.menu-item-has-children input[type='image']").click(function(e) {
-			//the image should be clickable on mobile at all widths (so, even at desktop width for instance iPad, because there is now hover)
-			//on a desktop, it should only be clickable at < 900 so the narrow menu version works
-			if( window.innerWidth  < 900 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-				var displayVal = jQuery(this).parent().find(".sub-menu").css('display');
-				if (displayVal != 'none') {
-					jQuery(this).parent().find("ul.sub-menu").hide();
-				} else {
-					jQuery("ul.sub-menu").hide();
-					jQuery(this).parent().find("ul.sub-menu").css('display','block');
-				}
-				e.stopPropagation();
-				e.preventDefault();
+		// DROPDOWN NAV HOVER
+		var navHasChild = $('li.menu-item-has-children');
+		$.each(navHasChild, function() {
+			$(this).prepend($('<span class="nav-icon dashicons dashicons-arrow-down-alt2"></span>'));
+			$('.nav-icon').hide();
+		});
+
+		var navIcon = $('.nav-icon');
+		navHasChild.hover(function() {
+			$(this).children('.nav-icon').show();
+		}, function() {
+			if (!$(this).hasClass('subnav-open')) {
+				$(this).children('.nav-icon').hide();
 			}
 		});
-		
-		// CLICKING OUTSIDE OF NAV HIDES SUBNAV ITEMS
-		jQuery(document).on('click', function(e){
-			if (jQuery(this).parents('#site-navigation').length == 0) {
-				jQuery(this).find("ul.sub-menu").hide();
-				jQuery("li.menu-item-has-children").removeClass('subnav-open');
+
+		navHasChild.on('click', function() {
+			if ($('.subnav-open').length > 0) {
+				navHasChild.not(this).each(function() {
+					$(this).removeClass('subnav-open');
+					$(this).children('.nav-icon').removeClass('dashicons-arrow-up-alt2');
+					$(this).children('.nav-icon').addClass('dashicons-arrow-down-alt2');
+					$(this).children('.nav-icon').hide();
+					$(this).children('ul.sub-menu').css('display', 'none');
+					$(this).children('.nav-icon').removeClass('displayed-dropdown');
+				});
 			}
-		});
-	
-		// TABBING OFF LAST CHILD HIDES IT
-		jQuery('li.menu-item-has-children ul li:last-child').keydown(function (e) {
-		    if (window.innerWidth >= 900) {
-				if (e.which == 9 && e.shiftKey) {
-					// they are going backwards from the last item in the list up. ... keep it.
-				} else if (e.which == 9) {
-					jQuery('ul.sub-menu').hide();
-				}
+			if ($(this).hasClass('subnav-open')) {
+				$(this).removeClass('subnav-open');
+				$(this).children('.nav-icon').removeClass('dashicons-arrow-up-alt2');
+				$(this).children('.nav-icon').addClass('dashicons-arrow-down-alt2');
+				$(this).children('ul.sub-menu').css('display', 'none');
+				$(this).children('.nav-icon').removeClass('displayed-dropdown');
+			}
+			else {
+				$(this).addClass('subnav-open');
+				$(this).children('.nav-icon').removeClass('dashicons-arrow-down-alt2');
+				$(this).children('.nav-icon').addClass('dashicons-arrow-up-alt2');
+				$(this).children('ul.sub-menu').css('display', 'block');
+				$(this).children('.nav-icon').addClass('displayed-dropdown');
 			}
 		});
 	}
@@ -189,14 +180,35 @@
 		}
 	}
 
+	// NAV SEARCH
 	var searchField = $('#search-field-small');
 	var searchBu = $('#nav-search-bu');
+	var closeSearchIcon = $('.search-icon-close');
 	searchField.width('0px');
 	searchField.hide();
-	$('#top-nav-search-form').hover(function() {
-		searchField.show().animate({'width':'50rem'}, 100);
-	}, function() {
-		searchField.hide().animate({'width':'0px'});
+	closeSearchIcon.hide();
+	$('#top-nav-search-form').on('click', function(e) {
+		if (searchField.hasClass('search-open')) {
+			searchField.removeClass('search-open');
+			return true;
+		}
+		else {
+			searchField.addClass('search-open');
+			closeSearchIcon.show();
+			searchField.show().animate({'width':'50rem'}, 100);
+			e.preventDefault();
+		}
+	});
+	searchField.keypress(function(e) {
+		if (e.which == 13) {
+			$('#top-nav-search-form').submit();
+			return false;
+		}
+	});
+	closeSearchIcon.on('click', function() {
+		console.log('x');
+		searchField.hide();
+		$(this).hide();
 	});
 
 })(jQuery);

@@ -8,13 +8,7 @@
  */
 
 require get_template_directory() . '/inc/bbg-functions-assemble.php';
-include get_template_directory() . "/inc/shared_sidebar.php";
-
-
-// ADDS HEAD SPACE IF NO IMAGE IS SET
-// $featuredImageClass = " bbg__article--no-featured-image";
-
-// $videoUrl = get_post_meta(get_the_ID(), 'featured_video_url', true);
+include get_template_directory() . '/inc/shared_sidebar.php';
 
 $dateline = "";
 $includeDateline = get_post_meta(get_the_ID(), 'include_dateline', true);
@@ -217,8 +211,8 @@ if($journos) {
 		if ($featuredJournalistsObj) {
 			$featuredJournalists .= '<div class="usa-grid-full">';
 			$featuredJournalists .= 	'<header class="page-header">';
-			$featuredJournalists .= 	'<h5 class="bbg__label">' . $featuredJournalistsSectionLabel . '</h5>';
-			$featuredJournalists .= '</header>';
+			$featuredJournalists .= 		'<h5 class="bbg__label">' . $featuredJournalistsSectionLabel . '</h5>';
+			$featuredJournalists .= 	'</header>';
 
 			foreach ($featuredJournalistsObj as $journalists) {
 				foreach ($journalists as $journalist) {
@@ -422,7 +416,6 @@ if ($numLogos > 0 && $numLogos < 3) {
 <style>
 .leaflet-popup-pane {min-width: 300px !important;}
 </style>
-
 
 <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 	<?php

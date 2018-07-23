@@ -212,20 +212,3 @@ get_header();
 </div><!-- #main .site-main -->
 
 <?php get_footer(); ?>
-
-
-<script type="text/javascript">
-function navSlide(){
-	var currentScroll = jQuery( "html" );
-	var p = jQuery( "#threats-to-journalism" );
-	var offset = p.offset();
-
-	if (currentScroll.scrollTop() > offset.top){
-		jQuery(".bbg__social__container").hide();
-	} else {
-		jQuery(".bbg__social__container").show();
-	}
-}
-
-jQuery(window).scroll(navSlide);
-</script>

@@ -198,13 +198,16 @@ function bbginnovate_scripts() {
 	}
  	add_action( 'wp_enqueue_scripts', 'custom_add_google_fonts' );
 
+ 	//Enqueue the Dashicons script
+	add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );
+	function load_dashicons_front_end() {
+		wp_enqueue_style( 'dashicons' );
+	}
+
 	wp_enqueue_script( 'bbginnovate-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 	wp_enqueue_script( 'usag-main', get_template_directory_uri() . '/js/usagm-main.js', array(), '20151215', true );
-
 	wp_enqueue_script( 'bbginnovate-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
-
 	//wp_enqueue_script( 'usa-web-design-standards', get_template_directory_uri() . '/js/start.js', array(), '20130115', true );
-
 	//wp_enqueue_script( 'bbgWPtheme', get_template_directory_uri() . '/js/bbgWPtheme.js', array( 'jquery' ));
 	wp_enqueue_script( 'bbginnovate-bbgredesign', get_template_directory_uri() . '/js/bbgredesign.js', array('jquery'), '20160223', true );
 
@@ -1176,5 +1179,63 @@ function foia_upload($file) {
 	return $file;
 }
 // END FOIA GROUP
+
+// OVERRIDING ORIGINAL FROM WP-INCLUDES/MEDIA.PHP
+// function overwrite_caption() {
+// 	function new_caption_shortcode( $attr, $content = null ) {
+// 		if ( ! isset( $attr['caption'] ) ) {
+// 			if ( preg_match( '#((?:<a [^>]+>\s*)?<img [^>]+>(?:\s*</a>)?)(.*)#is', $content, $matches ) ) {
+// 				$content = $matches[1];
+// 				$attr['caption'] = trim( $matches[2] );
+// 			}
+// 		} elseif ( strpos( $attr['caption'], '<' ) !== false ) {
+// 			$attr['caption'] = wp_kses( $attr['caption'], 'post' );
+// 		}
+// 		// $output = apply_filters( 'img_caption_shortcode', '', $attr, $content );
+// 		if ( $output != '' )
+// 			return $output;
+
+// 		$atts = shortcode_atts( array(
+// 			'id'      => '',
+// 			'align'   => 'alignnone',
+// 			'width'   => '',
+// 			'caption' => '',
+// 			'class'   => '',
+// 		), $attr, 'caption' );
+
+// 		$atts['width'] = (int) $atts['width'];
+// 		if ( $atts['width'] < 1 || empty( $atts['caption'] ) )
+// 			return $content;
+
+// 		if ( ! empty( $atts['id'] ) )
+// 			$atts['id'] = 'id="' . esc_attr( sanitize_html_class( $atts['id'] ) ) . '" ';
+
+// 		$class = trim( 'wp-caption ' . $atts['align'] . ' ' . $atts['class'] );
+
+// 		$html5 = current_theme_supports( 'html5', 'caption' );
+// 		// HTML5 captions never added the extra 10px to the image width
+// 		$width = $html5 ? $atts['width'] : ( 10 + $atts['width'] );
+
+// 		$caption_width = apply_filters( 'img_caption_shortcode_width', $width, $atts, $content );
+
+// 		$style = '';
+// 		if ( $caption_width ) {
+// 			$style = 'style="width: ' . (int) $caption_width . 'px" ';
+// 		}
+
+// 		if ( $html5 ) {
+// 			$html = '<figure ' . $atts['id'] . $style . 'class="' . esc_attr( $class ) . '">'
+// 			 . do_shortcode( $content ) . '<figcaption class="wp-caption-text">' . $atts['caption'] . '</figcaption></figure>';
+// 		} else {
+// 			$html = '<div ' . $atts['id'] . $style . 'class="' . esc_attr( $class ) . '">'
+// 			. do_shortcode( $content ) . '<p class="wp-caption-text">' . $atts['caption'] . '</p></div>';
+// 		}
+// 		return $html;
+// 	}
+//     remove_shortcode('caption');
+//     add_shortcode( 'caption', 'new_caption_shortcode' );
+//  } 
+// add_action( 'wp_loaded', 'overwrite_caption' );
+
 
 ?>

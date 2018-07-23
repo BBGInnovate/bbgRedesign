@@ -114,8 +114,9 @@ class bbginnovate_walker_header_usa_menu extends Walker_Nav_Menu {
 		if( in_array('menu-item-has-children', $classes)) {
 			//var_dump($item); die();
 			//$output .= "<a tabindex='0' title='Expand " . $title . " menu' class='bbg__main-navigation__toggler'></a>";
-			$arrowPath = get_template_directory_uri() . '/img/arrow-down.png';
-			$output .= "<input tabindex='0' height='15' class='bbg__main-navigation__toggler' type='image' src='$arrowPath' title='Toggle menu $title' alt='Toggle menu $title'>";
+			// $nav_icon = '\f343';
+			// $output .= '<input tabindex="0" class="bbg__main-navigation__toggler" style="content: "\f343";">';
+			// $output .= '<span class="dashicons dashicons-arrow-down-alt2"></span>';
 		}
 
 		$item_output = $args->before;
