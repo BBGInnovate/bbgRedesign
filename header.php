@@ -148,8 +148,8 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 	<script src="https://use.fortawesome.com/e3cb8134.js"></script>
 
 	<!-- Original FULL FontAwesome embed -->
-	<script src="https://use.fontawesome.com/41d1f06a97.js"></script>
-
+	<!-- <script src="https://use.fontawesome.com/41d1f06a97.js"></script> -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 <!-- Favicons
 ================================================== -->
 	<!-- 128x128 -->
@@ -227,7 +227,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 		<!-- NAVIGATION BAR -->
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
 			<h1 class="header-outliner">Navigation</h1>
-			<a id="nav-logo" href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/USAMG-temp-logo.jpg"></a>
+			<a class="site-brand" href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-RGB-hires.png"></a>
 			<?php
 				$btnSearch = "<input alt='Search' type='image' class='bbg__main-navigation__search-toggle' src='" . get_template_directory_uri() . "/img/search.png'>";
 				$btnSearch = "";

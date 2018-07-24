@@ -1,3 +1,7 @@
+.site-brand {
+	img {width: 270px;}
+}
+
 .page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}
 .hide-small {display: none;}
 @include media($medium-screen) {

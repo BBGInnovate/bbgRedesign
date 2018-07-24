@@ -44,7 +44,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 
 // Elements -------------- //
 // Styles basic HTML elements
-
 @import 'elements/buttons';
 @import 'elements/figure';
 @import 'elements/inputs';
@@ -76,6 +75,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 // BBG -------------- //
 
 /*@import 'bbg/variables-bbg'; MOVED ABOVE TO UPDATE FONTS */
+@import 'bbg/site/footer';
 @import 'bbg/elements/typography';
 @import 'bbg/components/comments';
 @import 'bbg/components/sharing';

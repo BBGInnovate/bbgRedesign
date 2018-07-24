@@ -292,7 +292,7 @@ body:not(.home) {
 	.menu-toggle {display: none;}
 	.bbg__main-navigation {
 		position: relative;
-		:not(#nav-logo):not(.mag-search) {text-align: right;}
+		:not(a.site-logo):not(.mag-search) {text-align: right;}
 
 		nav-bu
 		.bbg__top-nav__link-text {width: auto;}
