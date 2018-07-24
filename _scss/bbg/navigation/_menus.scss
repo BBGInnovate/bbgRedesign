@@ -2,31 +2,30 @@
 // 3. MEDIUM-LARGE SCREEN
 
 // TOP NAV
-.menu-all-pages-container {
-	margin: 0 auto;
-	max-width: $site-max-width;
-	position: relative;
-}
+// .menu-all-pages-container {
+// 	margin: 0 auto;
+// 	max-width: $site-max-width;
+// 	position: relative;
+// }
 
-.bbg__main-navigation__search {padding: $site-margins-medium;}
+// .bbg__main-navigation__search {padding: $site-margins-medium;}
 
-body:not(.home) {
-	.bbg__main-navigation {
-		margin-bottom: $site-margins-medium;
-	}
-}
+// body:not(.home) {
+// 	.bbg__main-navigation {
+// 		margin-bottom: $site-margins-medium;
+// 	}
+// }
 
 .bbg__main-navigation {
 	display: block;
 	width: 100%;
-	padding: 1.5rem;
-	clear: both;
-
-	#nav-logo {width: 27rem;}
+	padding: 1.5rem 0 1rem 0;
+	
+	.site-brand {margin-left: 1.5rem;}
 
 	ul {
 		@include unstyled-list;
-		border-top:1px solid #f1f1f1;
+		border-top: 1px solid #f1f1f1;
 		font-size: 1em;
 		display: none;
 
@@ -49,23 +48,14 @@ body:not(.home) {
 	li {
 		display: block;
 		text-transform: uppercase;
+		padding: 1rem 0;
 		margin: 0;
 	}
 	li:before {content: none;}
 	li:after {display: none;}
-	a {
-		display: block;
-		padding: 1rem 1.5rem 0 0;
-		text-decoration: none;
-	}
-	a:hover {
-		background-color: $color-light-gray;
-		text-decoration: underline;
-	}
-	a:focus {
-		box-shadow: none;
-		margin: 0;
-	}
+
+	a {display: block; padding: 0 1.5rem 0 0; text-decoration: none;}
+
 }
 
 .menu-toggle {
@@ -76,7 +66,7 @@ body:not(.home) {
 	min-width: 4.5rem;
 	min-height: 4.5rem;
 	padding-right: 0;
-	margin-top: 33px;
+	margin-top: 38px;
 	border-radius: $border-radius;
 	background: {
 		image: url(img/menu-tan.png);
@@ -95,7 +85,6 @@ body:not(.home) {
 		border: none;
 		.menu-toggle-label {color: $color-white;}
 	}
-	// &:focus {background-color: $color-cool-blue;}
 }
 
 .menu-toggle-label {display: none;}
@@ -118,8 +107,7 @@ body:not(.home) {
 
 .menu-item-has-children > a.bbg__main-navigation__link-text {width: calc(100% - 5rem);}
 
-.bbg__main-navigation.toggled ul.sub-menu {display:none;
-}
+.bbg__main-navigation.toggled ul.sub-menu {display:none;}
 .bbg__main-navigation__toggler {
 	background: none;
 	background-color: transparent;
@@ -135,6 +123,12 @@ body:not(.home) {
 	&:hover {background-color: transparent;}
 	&:focus {background-color: $color-cool-blue-lightest; }
 }
+
+
+
+
+
+
 
 // PAGINATION STYLES
 .bbg__navigation__pagination {@include clearfix();}

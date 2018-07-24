@@ -3649,24 +3649,12 @@ object {
     cursor: pointer;
     cursor: hand; }
 
-.menu-all-pages-container {
-  margin: 0 auto;
-  max-width: 1040px;
-  position: relative; }
-
-.bbg__main-navigation__search {
-  padding: 1.5rem; }
-
-body:not(.home) .bbg__main-navigation {
-  margin-bottom: 1.5rem; }
-
 .bbg__main-navigation {
   display: block;
   width: 100%;
-  padding: 1.5rem;
-  clear: both; }
-  .bbg__main-navigation #nav-logo {
-    width: 27rem; }
+  padding: 1.5rem 0 1rem 0; }
+  .bbg__main-navigation .site-brand {
+    margin-left: 1.5rem; }
   .bbg__main-navigation ul {
     display: block;
     list-style-type: none;
@@ -3698,6 +3686,7 @@ body:not(.home) .bbg__main-navigation {
   .bbg__main-navigation li {
     display: block;
     text-transform: uppercase;
+    padding: 1rem 0;
     margin: 0; }
   .bbg__main-navigation li:before {
     content: none; }
@@ -3705,14 +3694,8 @@ body:not(.home) .bbg__main-navigation {
     display: none; }
   .bbg__main-navigation a {
     display: block;
-    padding: 1rem 1.5rem 0 0;
+    padding: 0 1.5rem 0 0;
     text-decoration: none; }
-  .bbg__main-navigation a:hover {
-    background-color: #ECECEC;
-    text-decoration: underline; }
-  .bbg__main-navigation a:focus {
-    box-shadow: none;
-    margin: 0; }
 
 .menu-toggle {
   position: absolute;
@@ -3722,7 +3705,7 @@ body:not(.home) .bbg__main-navigation {
   min-width: 4.5rem;
   min-height: 4.5rem;
   padding-right: 0;
-  margin-top: 33px;
+  margin-top: 38px;
   border-radius: 0.3rem;
   background-image: url(img/menu-tan.png);
   background-position: center center;

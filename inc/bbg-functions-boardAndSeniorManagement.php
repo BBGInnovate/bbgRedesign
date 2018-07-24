@@ -158,6 +158,9 @@ function outputSeniorManagement($type) {
 	} else if ( $type == 'broadcast' ) {
 		$ids = get_field("senior_management_network_leaders_ordered", $the_post_id, true);
 	}
+	else if ($type == 'experts') {
+		$ids = get_field("senior_management_senior_experts", $the_post_id, true);
+	}
 	$peopleStr = "";
 
 	foreach ($ids as $id) {

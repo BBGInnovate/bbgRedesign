@@ -63,23 +63,6 @@
 		//TODO: check if Android works by default
 		/iP/i.test(navigator.userAgent) && jQuery('*').css('cursor', 'pointer');
 
-		// jQuery("li.menu-item-has-children input.bbg__main-navigation__toggler").on('click', function(e) {
-		// 	if (window.innerWidth >= 900) {
-		// 		if (!jQuery(this).parent().hasClass('subnav-open')) {
-		// 			jQuery("li.menu-item-has-children").removeClass('subnav-open');
-		// 			jQuery("ul.sub-menu").css('display', 'none');
-		// 			jQuery(this).parent().addClass('subnav-open');
-		// 			jQuery(this).parent().find("ul.sub-menu").css('display', 'block');
-		// 		}
-		// 		else {
-		// 			jQuery(this).parent().find("ul.sub-menu").css('display', 'block');
-		// 			jQuery(this).parent().removeClass('subnav-open');
-		// 		}
-		// 		e.stopPropagation();
-		// 		e.preventDefault();
-		// 	}
-		// });
-
 		/* enable the carat with the keyboard */
 		jQuery("li.menu-item-has-children input[type='image']").keydown(function(e) {
 			/**** enter key on caret toggles the menu at all viewports.  this should only fire on a desktop ****/
@@ -104,47 +87,49 @@
 		});
 
 		// DROPDOWN NAV HOVER
-		var navHasChild = $('li.menu-item-has-children');
-		$.each(navHasChild, function() {
-			$(this).prepend($('<span class="nav-icon dashicons dashicons-arrow-down-alt2"></span>'));
-			$('.nav-icon').hide();
-		});
+		if (window.innerWidth >= 900) {
+			var navHasChild = $('li.menu-item-has-children');
+			$.each(navHasChild, function() {
+				$(this).prepend($('<span class="nav-icon dashicons dashicons-arrow-down-alt2"></span>'));
+				$('.nav-icon').hide();
+			});
 
-		var navIcon = $('.nav-icon');
-		navHasChild.hover(function() {
-			$(this).children('.nav-icon').show();
-		}, function() {
-			if (!$(this).hasClass('subnav-open')) {
-				$(this).children('.nav-icon').hide();
-			}
-		});
+			var navIcon = $('.nav-icon');
+			navHasChild.hover(function() {
+				$(this).children('.nav-icon').show();
+			}, function() {
+				if (!$(this).hasClass('subnav-open')) {
+					$(this).children('.nav-icon').hide();
+				}
+			});
 
-		navHasChild.on('click', function() {
-			if ($('.subnav-open').length > 0) {
-				navHasChild.not(this).each(function() {
+			navHasChild.on('click', function() {
+				if ($('.subnav-open').length > 0) {
+					navHasChild.not(this).each(function() {
+						$(this).removeClass('subnav-open');
+						$(this).children('.nav-icon').removeClass('dashicons-arrow-up-alt2');
+						$(this).children('.nav-icon').addClass('dashicons-arrow-down-alt2');
+						$(this).children('.nav-icon').hide();
+						$(this).children('ul.sub-menu').css('display', 'none');
+						$(this).children('.nav-icon').removeClass('displayed-dropdown');
+					});
+				}
+				if ($(this).hasClass('subnav-open')) {
 					$(this).removeClass('subnav-open');
 					$(this).children('.nav-icon').removeClass('dashicons-arrow-up-alt2');
 					$(this).children('.nav-icon').addClass('dashicons-arrow-down-alt2');
-					$(this).children('.nav-icon').hide();
 					$(this).children('ul.sub-menu').css('display', 'none');
 					$(this).children('.nav-icon').removeClass('displayed-dropdown');
-				});
-			}
-			if ($(this).hasClass('subnav-open')) {
-				$(this).removeClass('subnav-open');
-				$(this).children('.nav-icon').removeClass('dashicons-arrow-up-alt2');
-				$(this).children('.nav-icon').addClass('dashicons-arrow-down-alt2');
-				$(this).children('ul.sub-menu').css('display', 'none');
-				$(this).children('.nav-icon').removeClass('displayed-dropdown');
-			}
-			else {
-				$(this).addClass('subnav-open');
-				$(this).children('.nav-icon').removeClass('dashicons-arrow-down-alt2');
-				$(this).children('.nav-icon').addClass('dashicons-arrow-up-alt2');
-				$(this).children('ul.sub-menu').css('display', 'block');
-				$(this).children('.nav-icon').addClass('displayed-dropdown');
-			}
-		});
+				}
+				else {
+					$(this).addClass('subnav-open');
+					$(this).children('.nav-icon').removeClass('dashicons-arrow-down-alt2');
+					$(this).children('.nav-icon').addClass('dashicons-arrow-up-alt2');
+					$(this).children('ul.sub-menu').css('display', 'block');
+					$(this).children('.nav-icon').addClass('displayed-dropdown');
+				}
+			});
+		}
 	}
 	levelTwoNav();
 	/**
