@@ -3671,6 +3671,7 @@ body:not(.home) .bbg__main-navigation {
   width: 100%;
   padding: 1.5rem 0 1rem 0; }
   .bbg__main-navigation .site-brand {
+    display: inline;
     margin-left: 1.5rem; }
   .bbg__main-navigation ul {
     width: 100%;
@@ -3680,12 +3681,12 @@ body:not(.home) .bbg__main-navigation {
       display: block;
       margin-top: 0;
       margin-bottom: 0;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 500;
       text-transform: uppercase; }
       .bbg__main-navigation ul li a {
         width: 100%;
-        padding: 3rem 1.5rem;
+        padding: 1.5rem;
         background-color: rgba(232, 229, 226, 0.95); }
       .bbg__main-navigation ul li a:link, .bbg__main-navigation ul li a:visited {
         color: #323a45; }
@@ -3694,12 +3695,12 @@ body:not(.home) .bbg__main-navigation {
         padding: 0 1.5rem;
         background-color: rgba(241, 241, 241, 0.95); }
         .bbg__main-navigation ul li ul li {
-          font-size: 2rem;
+          font-size: 1.5rem;
           font-weight: 400;
           text-transform: none; }
           .bbg__main-navigation ul li ul li a {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
             background-color: transparent;
             border-bottom: 1px solid #d6d1c4; }
         .bbg__main-navigation ul li ul li:last-of-type a {
@@ -3877,9 +3878,13 @@ body:not(.home) .bbg__main-navigation {
     width: auto;
     margin-top: 0; }
   .menu-item .nav-icon {
-    font-size: 1.8rem;
-    margin: 9px 0  0 -2rem;
-    cursor: pointer; }
+    position: absolute;
+    font-size: 1.5rem;
+    margin: 6px 0  0 -1.3rem;
+    cursor: pointer;
+    color: #8b8278; }
+  .menu-item .nav-icon:hover {
+    color: #3f7ad1; }
   .menu-item .displayed-dropdown {
     color: #8b8278; }
   .bbg__main-navigation ul {
@@ -3922,7 +3927,7 @@ body:not(.home) .bbg__main-navigation {
     .bbg__main-navigation ul {
       border-top: none;
       display: block;
-      margin: 0.8rem 4rem 0 0; }
+      margin: 1.4rem 4rem 0 0; }
       .bbg__main-navigation ul li {
         margin: 0;
         padding: 0 1.5rem;
@@ -3930,11 +3935,10 @@ body:not(.home) .bbg__main-navigation {
         .bbg__main-navigation ul li :after {
           display: none; }
         .bbg__main-navigation ul li a {
+          font-size: 1.4rem;
+          font-weight: 400;
           padding: 0;
           background-color: transparent; }
-        .bbg__main-navigation ul li a:link, .bbg__main-navigation ul li a:visited {
-          font-size: 1.6rem;
-          font-weight: 400; }
         .bbg__main-navigation ul li ul {
           position: absolute;
           right: 0;
@@ -3947,10 +3951,9 @@ body:not(.home) .bbg__main-navigation {
             float: none;
             padding: 0; }
             .bbg__main-navigation ul li ul li a {
+              font-size: 1.4rem;
               padding: 0 0 0 2.5rem;
               border-bottom: none; }
-            .bbg__main-navigation ul li ul li a:before {
-              content: ""; }
     .bbg__main-navigation .menu-item-has-children > a {
       width: auto;
       padding-right: 0;
@@ -3987,8 +3990,9 @@ body:not(.home) .bbg__main-navigation {
       border-left: none; }
     .bbg__main-navigation .search-icon-close {
       position: absolute;
-      top: -2.3rem;
-      right: 3px;
+      top: -2rem;
+      right: 8px;
+      font-size: 13px;
       cursor: pointer;
       color: #d5d1c4; }
   .bbg__main-navigation__toggler {

@@ -90,7 +90,7 @@
 		if (window.innerWidth >= 900) {
 			var navHasChild = $('li.menu-item-has-children');
 			$.each(navHasChild, function() {
-				$(this).prepend($('<span class="nav-icon dashicons dashicons-arrow-down-alt2"></span>'));
+				$(this).prepend($('<i class="nav-icon fas fa-angle-down"></i>'));
 				$('.nav-icon').hide();
 			});
 
@@ -107,8 +107,8 @@
 				if ($('.subnav-open').length > 0) {
 					navHasChild.not(this).each(function() {
 						$(this).removeClass('subnav-open');
-						$(this).children('.nav-icon').removeClass('dashicons-arrow-up-alt2');
-						$(this).children('.nav-icon').addClass('dashicons-arrow-down-alt2');
+						$(this).children('.nav-icon').removeClass('fa-angle-up');
+						$(this).children('.nav-icon').addClass('fa-angle-down');
 						$(this).children('.nav-icon').hide();
 						$(this).children('ul.sub-menu').css('display', 'none');
 						$(this).children('.nav-icon').removeClass('displayed-dropdown');
@@ -116,15 +116,15 @@
 				}
 				if ($(this).hasClass('subnav-open')) {
 					$(this).removeClass('subnav-open');
-					$(this).children('.nav-icon').removeClass('dashicons-arrow-up-alt2');
-					$(this).children('.nav-icon').addClass('dashicons-arrow-down-alt2');
+					$(this).children('.nav-icon').removeClass('fa-angle-up');
+					$(this).children('.nav-icon').addClass('fa-angle-down');
 					$(this).children('ul.sub-menu').css('display', 'none');
 					$(this).children('.nav-icon').removeClass('displayed-dropdown');
 				}
 				else {
 					$(this).addClass('subnav-open');
-					$(this).children('.nav-icon').removeClass('dashicons-arrow-down-alt2');
-					$(this).children('.nav-icon').addClass('dashicons-arrow-up-alt2');
+					$(this).children('.nav-icon').removeClass('fa-angle-down');
+					$(this).children('.nav-icon').addClass('fa-angle-up');
 					$(this).children('ul.sub-menu').css('display', 'block');
 					$(this).children('.nav-icon').addClass('displayed-dropdown');
 				}

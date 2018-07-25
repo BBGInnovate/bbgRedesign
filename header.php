@@ -239,7 +239,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 				$searchBox .= 	'<div role="search">';
 				$searchBox .= 		'<label class="usa-sr-only" for="search-field-small">Search small</label>';
 				$searchBox .= 		'<input class="mag-search" id="search-field-small" type="search" name="s" placeholder="Search ...">';
-				$searchBox .= 		'<span class="search-icon-close dashicons dashicons-no"></span>';
+				$searchBox .= 		'<i class="search-icon-close fas fa-times"></i>';
 				$searchBox .= 	'</div>';
 				$searchBox .= '</form>';
 
