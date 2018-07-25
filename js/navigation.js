@@ -103,9 +103,11 @@
 				}
 			});
 
-			navHasChild.on('click', function() {
+			navIcon.on('click', function(e) {
+				var icon = $(this);
+				var curNavItem = $(this).parents('.menu-item-has-children');
 				if ($('.subnav-open').length > 0) {
-					navHasChild.not(this).each(function() {
+					navHasChild.not(curNavItem).each(function() {
 						$(this).removeClass('subnav-open');
 						$(this).children('.nav-icon').removeClass('fa-angle-up');
 						$(this).children('.nav-icon').addClass('fa-angle-down');
@@ -114,19 +116,19 @@
 						$(this).children('.nav-icon').removeClass('displayed-dropdown');
 					});
 				}
-				if ($(this).hasClass('subnav-open')) {
-					$(this).removeClass('subnav-open');
-					$(this).children('.nav-icon').removeClass('fa-angle-up');
-					$(this).children('.nav-icon').addClass('fa-angle-down');
-					$(this).children('ul.sub-menu').css('display', 'none');
-					$(this).children('.nav-icon').removeClass('displayed-dropdown');
+				if (curNavItem.hasClass('subnav-open')) {
+					curNavItem.removeClass('subnav-open');
+					icon.removeClass('fa-angle-up');
+					icon.addClass('fa-angle-down');
+					curNavItem.children('ul.sub-menu').css('display', 'none');
+					icon.removeClass('displayed-dropdown');
 				}
 				else {
-					$(this).addClass('subnav-open');
-					$(this).children('.nav-icon').removeClass('fa-angle-down');
-					$(this).children('.nav-icon').addClass('fa-angle-up');
-					$(this).children('ul.sub-menu').css('display', 'block');
-					$(this).children('.nav-icon').addClass('displayed-dropdown');
+					curNavItem.addClass('subnav-open');
+					icon.removeClass('fa-angle-down');
+					icon.addClass('fa-angle-up');
+					curNavItem.children('ul.sub-menu').css('display', 'block');
+					icon.addClass('displayed-dropdown');
 				}
 			});
 		}

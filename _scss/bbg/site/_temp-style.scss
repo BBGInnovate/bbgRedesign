@@ -1,6 +1,17 @@
 .site-brand {
 	img {width: 270px;}
 }
+.date-meta {
+	color: $color-taupe-light;
+	margin-bottom: 0.5rem;
+}
+.post-image {margin-bottom: 3rem;}
+.read-more {
+	font-family: $font-sans;
+	font-size: 0.8em;
+	color: $color-cool-blue;
+	text-decoration: none;
+}
 
 .page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}
 .hide-small {display: none;}
@@ -45,10 +56,11 @@
 }
 
 // FEATURED MEDIA 
-.page-featured-media {margin-bottom: 6rem;}
+.feautre-banner {margin-bottom: 6rem;}
 .graphic-caption {
 	text-align: right;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
+	line-height: 2rem;
 	font-style: italic;
 	color: $color-taupe-light;
 }

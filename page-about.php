@@ -22,13 +22,14 @@ function isOdd($pageTotal) {
 	return ($pageTotal % 2) ? true : false;
 }
 
-if (have_posts()) :
-	while (have_posts()) : the_post();
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
 		$id = get_the_id();
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
-	endwhile;
-endif;
+	}
+}
 
 if (have_rows('about_flexible_page_rows')) {
 	$umbrella_group = array();
@@ -86,7 +87,9 @@ get_header();
 <?php
 	$featured_media_result = get_feature_media_data();
 	if ($featured_media_result != "") {
-		echo $featured_media_result;
+		echo '<div class="feautre-banner">';
+		echo 	$featured_media_result;
+		echo '</div>';
 	}
 	$page_header  = '<div class="outer-container">';
 	$page_header .= 	'<div class="grid-container">';

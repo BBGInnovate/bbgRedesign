@@ -4734,6 +4734,8 @@ e.g. on the intern testimonial page */
     width: 25%; } }
 
 @media screen and (min-width: 900px) {
+  .custom-grid-container > .inner-container > div:nth-child(2) {
+    padding-left: 3rem; }
   .main-content-container {
     width: calc(66.66667% - 33.33333px);
     float: left;
@@ -4741,9 +4743,7 @@ e.g. on the intern testimonial page */
   .side-content-container {
     width: calc(33.33333% - 26.66667px);
     float: left;
-    margin-left: 20px;
-    padding-left: 3rem;
-    border-left: 1px solid #e6e6e6; }
+    margin-left: 20px; }
     .side-content-container .side-content-container {
       border-left: none;
       padding-left: 0; }
@@ -5043,6 +5043,19 @@ ol li:before {
 .site-brand img {
   width: 270px; }
 
+.date-meta {
+  color: #aca299;
+  margin-bottom: 0.5rem; }
+
+.post-image {
+  margin-bottom: 3rem; }
+
+.read-more {
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 0.8em;
+  color: #82afd2;
+  text-decoration: none; }
+
 .page-post-featured-graphic:not(div.home-featured-primary-post) {
   margin-bottom: 3em; }
 
@@ -5091,12 +5104,13 @@ ol li:before {
       .profile-header .content-column .content p {
         margin-bottom: 0; }
 
-.page-featured-media {
+.feautre-banner {
   margin-bottom: 6rem; }
 
 .graphic-caption {
   text-align: right;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  line-height: 2rem;
   font-style: italic;
   color: #aca299; }
 
@@ -6083,13 +6097,11 @@ div.banner_readmore h6 a:visited {
     position: relative; }
 
 .bbg__ribbon {
-  background-color: #283166;
+  background-color: #e9e9e9;
   padding-bottom: 3rem;
   margin-bottom: 6rem; }
   .bbg__ribbon a {
     color: #9bdaf1; }
-  .bbg__ribbon p {
-    color: #FFF; }
   .bbg__ribbon .outer-container {
     margin-bottom: 0; }
   .bbg__ribbon .side-content-container {
@@ -6130,7 +6142,7 @@ div.banner_readmore h6 a:visited {
     margin-bottom: 1rem; }
 
 .page-post-featured-graphic {
-  margin-bottom: 8rem; }
+  margin-bottom: 3rem; }
 
 .home-feature-primary-post .page-post-featured-graphic {
   margin-bottom: 1.5rem; }
@@ -6221,30 +6233,25 @@ div.banner_readmore h6 a:visited {
     display: block; } }
 
 @media screen and (min-width: 900px) {
-  .mentions .soap-corner-share-grid {
-    width: calc(41.66667% - 28.33333px);
+  .mentions .soap-corner-share-grid .small-side {
+    width: calc(33.33333% - 26.66667px);
     float: left;
     margin-left: 20px; }
-    .mentions .soap-corner-share-grid .small-side {
-      width: calc(33.33333% - 26.66667px);
-      float: left;
-      margin-left: 20px; }
-    .mentions .soap-corner-share-grid .large-side {
-      width: calc(66.66667% - 33.33333px);
-      float: left;
-      margin-left: 20px; }
+  .mentions .soap-corner-share-grid .large-side {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; }
   .mentions .impacts-share {
     width: calc(58.33333% - 31.66667px);
     float: left;
     margin-left: 20px; } }
 
-.mentions .inner-container div {
+.mentions .inner-container div:nt-child(1) {
   margin-bottom: 3rem; }
-  .mentions .inner-container div div > div {
-    margin-bottom: 0; }
 
 .mentions .soap-corner {
-  padding: 1.5rem; }
+  padding: 1.5rem;
+  margin-bottom: 3rem; }
   .mentions .soap-corner .mention-header {
     margin-bottom: 2rem; }
   .mentions .soap-corner p {

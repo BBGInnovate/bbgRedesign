@@ -104,11 +104,11 @@ function build_impact_markup($impact_data) {
 		if (get_permalink($impact_id)) {
 			$impact_linked_image .= 		get_the_post_thumbnail($impact_id);
 		} else {
-			$impact_linked_image .= 		'<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="BBG Placeholder Image" />';
+			$impact_linked_image .= 		'<img class="post-image" src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="BBG Placeholder Image" />';
 		}
 		$impact_linked_image .= 	'</a>';
 
-		$impact_header = 	'<h3><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h3>';
+		$impact_header = 	'<h4><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h4>';
 		$impact_content = 	'<p>' . wp_trim_words($cur_post->post_content, 70) . '</p>';
 
 		$impact_markup  = '<div>';
@@ -138,14 +138,12 @@ function build_threat_parts($threat_data) {
 		$threat_content  = '<h4><a href="' . get_the_permalink($threat_id) . '">' . $cur_threat->post_title . '</a></h4>';
 		$threat_content .= '<p>' . wp_trim_words($cur_threat->post_content, 40) . '</p>';
 
-		$threat_markup  = '<div class="threat-article">';
-		$threat_markup .= 	'<div class="inner-container">';
-		$threat_markup .= 		'<div class="threat-image">';
-		$threat_markup .= 			$threat_image;
-		$threat_markup .= 		'</div>';
-		$threat_markup .= 		'<div class="threat-content">';
-		$threat_markup .= 			$threat_content;
-		$threat_markup .= 		'</div>';
+		$threat_markup  = '<div class="inner-container threat-article">';
+		$threat_markup .= 	'<div class="medium-side-content-container">';
+		$threat_markup .= 		$threat_image;
+		$threat_markup .= 	'</div>';
+		$threat_markup .= 	'<div class="medium-main-content-container">';
+		$threat_markup .= 		$threat_content;
 		$threat_markup .= 	'</div>';
 		$threat_markup .= '</div>';
 

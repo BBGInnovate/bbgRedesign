@@ -32,17 +32,20 @@ function assemble_mentions_full_width($mention_data, $impact_group) {
 }
 
 function assemble_mentions_share_space($mention_data, $impact_group) {
-	$mention_share  = '<div class="inner-container">';
-	$mention_share .= 	'<div class="soap-corner-share-grid">';
+	$mention_share  = '<div class="custom-grid-container">';
+	$mention_share .= 	'<div class="inner-container">';
+	$mention_share .= 		'<div class="side-content-container">';
+	$mention_share .= 			'<div class="soap-corner-share-grid">';
 	// SOAPBOX AND/OR CORNER HERO
-	foreach($mention_data as $data) { 
-		$mention_share .= 				$data;
+	foreach($mention_data as $data) {
+		$mention_share .= 		$data;
 	}
-	$mention_share .= 	'</div>';
-	$mention_share .= 	'<div class="impacts-share">';
-	$mention_share .= 		'<h2>Impact Stories</h2>';
+	$mention_share .= 			'</div>';
+	$mention_share .= 		'</div>';
+	$mention_share .= 		'<div class="main-content-container impact-share">';
 	// IMPACT STORY (ONLY ONE FOR THIS LAYOUT)
-	$mention_share .= 		$impact_group[0];
+	$mention_share .= 			$impact_group[0];
+	$mention_share .= 		'</div>';
 	$mention_share .= 	'</div>';
 	$mention_share .= '</div>';
 	echo $mention_share;
@@ -53,12 +56,10 @@ function assemble_threats_to_press_ribbon($threat_data) {
 	$theat_ribbon .= 	'<div class="outer-container">';
 	$theat_ribbon .= 		'<div class="grid-container">';
 	$theat_ribbon .= 			'<h2>Threats to Press</h2>';
-	$theat_ribbon .= 			'<div class="threat-container">';
+	$theat_ribbon .= 		'</div>';
 	foreach ($threat_data as $data) {
 		$theat_ribbon .= 			$data;
 	}
-	$theat_ribbon .= 			'</div>';
-	$theat_ribbon .= 		'</div>';
 	$theat_ribbon .= 	'</div>';
 	$theat_ribbon .= '</div>';
 	echo $theat_ribbon;

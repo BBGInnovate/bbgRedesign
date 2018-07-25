@@ -53,9 +53,11 @@ get_header();
 				$banner_markup .= 		'style="background-image: url(' . $banner_result['image_source'] . ') !important; background-position: ' . $banner_result['position'] . '">';
 				$banner_markup .= 	'</div>';
 				$banner_markup .= 	'<div class="outer-container">';
-				$banner_markup .= 		'<p class="graphic-caption">';
-				$banner_markup .= 			$banner_result['caption'];
-				$banner_markup .= 		'</p>';
+				$banner_markup .= 		'<div class="grid-container">';
+				$banner_markup .= 			'<p class="graphic-caption">';
+				$banner_markup .= 				$banner_result['caption'];
+				$banner_markup .= 			'</p>';
+				$banner_markup .= 		'</div>';
 				$banner_markup .=	'</div>';
 				$banner_markup .= '</div>';
 				echo $banner_markup;
@@ -85,20 +87,20 @@ get_header();
 				<div class="grid-container">
 					<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">BBG News</a></h2>
 				</div>
-				<div class="grid-container">
-					<div class="nest-container">
-						<div class="home-feature-primary-post">
+				<div class="custom-grid-container">
+					<div class="inner-container">
+						<div class="main-content-container">
 						<?php
 							$featured_post_result = get_field_post_data('featured', 1);
 
 							$main_featured_post .= 	$featured_post_result['linked_media'];
 							$main_featured_post .= 	'<h4>' . $featured_post_result['linked_title'] . '</h4>';
-							$main_featured_post .= 	'<p class="aside">' . $featured_post_result['date'] . '</p>';
+							$main_featured_post .= 	'<p class="aside date-meta">' . $featured_post_result['date'] . '</p>';
 							$main_featured_post .= 	'<p>' . $featured_post_result['excerpt'] . '</p>';
 							echo $main_featured_post;
 						?>
 						</div>
-						<div class="home-recent-posts">
+						<div class="side-content-container">
 						<?php
 							$recent_post_quantity = 2;
 							$recent_result = get_recent_post_data($recent_post_quantity);
@@ -112,10 +114,10 @@ get_header();
 									$recent_post .= 			get_the_title();
 									$recent_post .= 		'</a>';
 									$recent_post .= 	'</h4>';
-									$recent_post .= 	'<p class="aside">' . get_the_date() . '</p>';
+									$recent_post .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
 									$recent_post .= 	'<p>';
 									$recent_post .= 		wp_trim_words(get_the_content(), 50);
-									$recent_post .= 		' <a href="' . get_the_permalink() . '">READ MORE</a>';
+									$recent_post .= 		' <a class="read-more" href="' . get_the_permalink() . '">READ MORE</a>';
 									$recent_post .= 	'</p>';
 									$recent_post .= '</div>';
 									echo $recent_post;
@@ -193,17 +195,17 @@ get_header();
 			?>
 
 			<!-- Quotation -->
-			<section class="usa-section ">
-				<div class="usa-grid">
+			<div class="outer-container">
+				<div class="grid-container">
 					<?php
-						$q = getRandomQuote( 'allEntities', $postIDsUsed );
+						$q = getRandomQuote('allEntities', $postIDsUsed);
 						if ($q) {
 							$postIDsUsed[] = $q["ID"];
 							outputQuote($q);
 						}
 					?>
 				</div>
-			</section><!-- Quotation -->
+			</div><!-- Quotation -->
 
 		</main>
 	</div><!-- #primary .content-area -->
