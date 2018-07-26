@@ -88,6 +88,22 @@
 
 		// DROPDOWN NAV HOVER
 		if (window.innerWidth >= 900) {
+
+			function showSubMenu(menuItem) {
+				menuItem.addClass('subnav-open');
+				menuItem.children('.nav-icon').show();
+				menuItem.children('.nav-icon').addClass('fa-angle-up');
+				menuItem.children('ul.sub-menu').css('display', 'block');
+				menuItem.children('.nav-icon').addClass('displayed-dropdown');
+			}
+			function hideSubMenu(menuItem) {
+				menuItem.removeClass('subnav-open');
+				menuItem.children('.nav-icon').removeClass('fa-angle-up');
+				menuItem.children('.nav-icon').addClass('fa-angle-down');
+				menuItem.children('.nav-icon').hide();
+				menuItem.children('ul.sub-menu').css('display', 'none');
+				menuItem.children('.nav-icon').removeClass('displayed-dropdown');
+			}
 			var navHasChild = $('li.menu-item-has-children');
 			$.each(navHasChild, function() {
 				$(this).prepend($('<i class="nav-icon fas fa-angle-down"></i>'));
@@ -103,32 +119,34 @@
 				}
 			});
 
+			// SHOW SUB MENU IF ON CHILD PAGE
+			var urlPath = window.location.pathname;
+			urlPath = urlPath.replace('"', '');
+			urlPath = urlPath.slice(1);
+			urlPath = urlPath.slice(0, -1);
+			urlPath = urlPath.split("/");
+
+			if (urlPath != "") {
+				$.each(navHasChild, function() {
+					if ($(this).children('a').attr('href').indexOf(urlPath[0]) != -1) {
+						showSubMenu($(this));
+					}
+				})
+			}
+
 			navIcon.on('click', function(e) {
 				var icon = $(this);
 				var curNavItem = $(this).parents('.menu-item-has-children');
 				if ($('.subnav-open').length > 0) {
 					navHasChild.not(curNavItem).each(function() {
-						$(this).removeClass('subnav-open');
-						$(this).children('.nav-icon').removeClass('fa-angle-up');
-						$(this).children('.nav-icon').addClass('fa-angle-down');
-						$(this).children('.nav-icon').hide();
-						$(this).children('ul.sub-menu').css('display', 'none');
-						$(this).children('.nav-icon').removeClass('displayed-dropdown');
+						hideSubMenu($(this));
 					});
 				}
 				if (curNavItem.hasClass('subnav-open')) {
-					curNavItem.removeClass('subnav-open');
-					icon.removeClass('fa-angle-up');
-					icon.addClass('fa-angle-down');
-					curNavItem.children('ul.sub-menu').css('display', 'none');
-					icon.removeClass('displayed-dropdown');
+					hideSubMenu(curNavItem);
 				}
 				else {
-					curNavItem.addClass('subnav-open');
-					icon.removeClass('fa-angle-down');
-					icon.addClass('fa-angle-up');
-					curNavItem.children('ul.sub-menu').css('display', 'block');
-					icon.addClass('displayed-dropdown');
+					showSubMenu(curNavItem);
 				}
 			});
 		}

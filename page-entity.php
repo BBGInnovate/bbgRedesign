@@ -35,7 +35,6 @@ $abbreviation = get_post_meta($id, 'entity_abbreviation', true);
 $description = get_post_meta($id, 'entity_description', true);
 $siteUrl = get_post_meta($id, 'entity_site_url', true);
 $rssFeed = get_post_meta($id, 'entity_rss_feed', true);
-echo $rssFeed;
 $entityLogoID = get_post_meta($id, 'entity_logo',true);
 $websiteName = get_post_meta($id, 'entity_website_name', true);
 
@@ -197,7 +196,6 @@ $videoUrl = "";
 
 /**** BEGIN CREATING rssItems array *****/
 $entityJson = getFeed($rssFeed, $id);
-echo $entityJson;
 $rssItems = array();
 $itemContainer = false;
 $languageDirection = "";

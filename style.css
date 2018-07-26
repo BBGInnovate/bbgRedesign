@@ -5092,6 +5092,11 @@ ol li:before {
 .profile-occupation {
   margin-bottom: 3rem; }
 
+.side-content-container.bbg__entity__icon {
+  text-align: center; }
+  .side-content-container.bbg__entity__icon img {
+    width: 50%; }
+
 .profile-header {
   position: relative;
   margin-top: -10rem; }
