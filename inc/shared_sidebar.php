@@ -50,19 +50,19 @@ if ($includeSidebar) {
 					$sidebarImage = "<img src='" . $sidebarDownloadThumbnail . "' class='bbg__sidebar__download__thumbnail' alt='Thumbnail image for download' />";
 				}
 
-				$sidebar_download  = '<div class="bbg__sidebar__download">';
-				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
+				$sidebar_download  = '<article>';
 				$sidebar_download .= 	'<h6>';
 				$sidebar_download .= 		'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
 				$sidebar_download .= 		'<span class="bbg__file-size"><br>(' . $ext . ', ' . $filesize . ')</span>';
 				$sidebar_download .= 	'</h6>';
+				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
 				
 				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
 					$sidebar_download .= '<p class="aside">';
 					$sidebar_download .= 	$sidebarDownloadDescription;
 					$sidebar_download .= '</p>';
 				}
-				$sidebar_download .= '</div>';
+				$sidebar_download .= '</article>';
 
 				$sidebar_markup .= $sidebar_download;
 			
@@ -477,36 +477,39 @@ if ( $listsInclude ) {
 					// $s .= "<h5 class='bbg_label'>" . $sidebarDownloadsTitle . "</h5>" ;
 
 					if ( $sidebarDownloadsTotal >= 4 ) {
-						$s .= '<form>';
-							$s .= '<label for="options" style="display: inline-block; font-size: 2rem; font-weight: bold; margin-top: 0;">' . $sidebarDownloadsTitle . '</label>';
-							$s .= '<select name="file_download_list" id="file_download_list" style="display: inline-block;">';
-								$s .= '<option>' . $sidebarDownloadsDefault . '</option>';
+						$s .= '<form style="max-width: 100%;">';
+						$s .= 	'<h6>' . $sidebarDownloadsTitle . '</h6>';
+						$s .= 	'<select name="file_download_list" id="file_download_list" style="display: inline-block; max-width: 100%;">';
+						$s .= 		'<option>' . $sidebarDownloadsDefault . '</option>';
 
-								foreach( $sidebarDownloadsRows as $row ) {
-									// Download option name
-									$sidebarDownloadsLinkName = $row['sidebar_download_title'];
-									// Download file info
-									$sidebarDownloadsLinkObj = $row['sidebar_download_file'];
-										// file details
-										$fileLink = $sidebarDownloadsLinkObj['url'];
-										$fileID = $sidebarDownloadsLinkObj['ID'];
-										$file = get_attached_file( $fileID );
-										$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
-										$size = formatBytes(filesize($file));
+						foreach ($sidebarDownloadsRows as $row) {
+							// Download option name
+							$sidebarDownloadsLinkName = $row['sidebar_download_title'];
+							// Download file info
+							$sidebarDownloadsLinkObj = $row['sidebar_download_file'];
+							// file details
+							$fileLink = $sidebarDownloadsLinkObj['url'];
+							$fileID = $sidebarDownloadsLinkObj['ID'];
+							$file = get_attached_file( $fileID );
+							$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+							$size = formatBytes(filesize($file));
 
-										if ( $sidebarDownloadsLinkName == "" | !$sidebarDownloadsLinkName ) {
-											$name = $sidebarDownloadsLinkObj['title'];
-											$sidebarDownloadsLinkName = $name;
-										}
+							if ($sidebarDownloadsLinkName == "" | !$sidebarDownloadsLinkName) {
+								$name = $sidebarDownloadsLinkObj['title'];
+								$sidebarDownloadsLinkName = $name;
+							}
 
-									$s .= '<option value="' . $fileLink . '">' . $sidebarDownloadsLinkName . ' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>' . '</option>';
-								}
+							$s .= '<option value="' . $fileLink . '">';
+							$s .= 	$sidebarDownloadsLinkName;
+							$s .= 	' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
+							$s .= '</option>';
+						}
 
-							$s .= '</select>';
+						$s .= 	'</select>';
 						$s .= '</form>';
-
 						$s .= '<button class="usa-button downloadFile" id="downloadFile" style="width: 100%;">Download</button>';
-					} else {
+					}
+					else {
 						$sidebarDownloadsTitle = get_sub_field( 'sidebar_download_title' );
 						$sidebarDownloadsRows = get_sub_field( 'sidebar_downloads' );
 

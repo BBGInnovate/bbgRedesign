@@ -201,6 +201,7 @@
 			searchField.addClass('search-open');
 			closeSearchIcon.show();
 			searchField.show().animate({'width':'50rem'}, 100);
+			searchField.focus();
 			e.preventDefault();
 		}
 	});

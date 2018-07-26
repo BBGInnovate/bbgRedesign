@@ -4656,6 +4656,9 @@ e.g. on the intern testimonial page */
   float: left;
   margin-left: 20px; }
 
+.side-content-container article.full-width-block {
+  width: 100%; }
+
 .grid-half {
   width: calc(100% - 40px);
   float: left;
@@ -4695,6 +4698,11 @@ e.g. on the intern testimonial page */
   width: calc(100% - 40px);
   float: left;
   margin-left: 20px; }
+  .side-content-container article {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    padding: 0 1.5rem; }
 
 .medium-main-content-container {
   width: calc(100% - 40px);
@@ -4740,6 +4748,8 @@ e.g. on the intern testimonial page */
 
 @media screen and (min-width: 600px) {
   .icon-side-content-container img {
+    width: 25%; }
+  .side-content-container article {
     width: 25%; } }
 
 @media screen and (min-width: 900px) {
@@ -4757,6 +4767,9 @@ e.g. on the intern testimonial page */
       border-left: none;
       padding-left: 0; }
     .side-content-container article {
+      display: block;
+      width: 100%;
+      padding: 0;
       margin-bottom: 3rem; }
       .side-content-container article .grid-container {
         margin-top: 1.5rem; }
@@ -5092,11 +5105,6 @@ ol li:before {
 .profile-occupation {
   margin-bottom: 3rem; }
 
-.side-content-container.bbg__entity__icon {
-  text-align: center; }
-  .side-content-container.bbg__entity__icon img {
-    width: 50%; }
-
 .profile-header {
   position: relative;
   margin-top: -10rem; }
@@ -5161,6 +5169,9 @@ ol li:before {
     width: calc(75% - 35px);
     float: left;
     margin-left: 20px; }
+
+.contain-entity.side-bar-entity {
+  margin-left: 0; }
 
 @media screen and (min-width: 600px) {
   .entity-main .entity-icon {

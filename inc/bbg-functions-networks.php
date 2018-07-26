@@ -68,7 +68,7 @@ function outputBroadcasters($cols) {
 		$columnsClass = " bbg-grid--1-1-1-2";
 	}
 
-	$entity_markup  = '<div>';
+	$entity_markup  = '<article class="contain-entity side-bar-entity full-width-block">';
 	$custom_query = new WP_Query($qParams);
 	if ($custom_query -> have_posts()) {
 		while ( $custom_query -> have_posts() )  {
@@ -85,12 +85,12 @@ function outputBroadcasters($cols) {
 
 				$entity_markup .= '<div class="nest-container">';
 				$entity_markup .= 	'<div class="inner-container">';
-				$entity_markup .= 		'<div class="side-content-container bbg__entity__icon">';
+				$entity_markup .= 		'<div class="entity-icon">';
 				$entity_markup .=  			'<a href="' . $link . '" tabindex="-1">';
 				$entity_markup .= 				'<img src="' . $imgSrc . '">';
 				$entity_markup .=  			'</a>';
 				$entity_markup .= 		'</div>';
-				$entity_markup .= 		'<div class="main-content-container">';
+				$entity_markup .= 		'<div class="entity-desc">';
 				$entity_markup .= 			'<h4><a href="' . $link . '">' . $fullName . '</a></h4>';
 				$entity_markup .= 		'</div>';
 				$entity_markup .= 	'</div>';

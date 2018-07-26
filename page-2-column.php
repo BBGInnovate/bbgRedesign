@@ -14,13 +14,13 @@ require 'inc/custom-field-parts.php';
 require 'inc/custom-field-modules.php';
 
 require 'inc/bbg-functions-assemble.php';
-include "inc/shared_sidebar.php";
+include 'inc/shared_sidebar.php';
 
 $addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
-
+// 
 $headline = get_field('headline', '', true);
-$listsInclude = get_field( 'sidebar_dropdown_include', '', true);
-
+$listsInclude = get_field('sidebar_dropdown_include', '', true);
+// 
 // THIS COULD BELONG IN A BUILD INCLUDE FILE
 function display_foia_reports() {
 	// $foia_url = WP_CONTENT_URL . '/uploads/foia-reports/'; // LOCAL
@@ -72,9 +72,9 @@ if (have_posts()) {
 	while (have_posts()) {
 		the_post();
 		$id = get_the_ID();
-		$ogDescription = get_the_excerpt();
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
+		$ogDescription = get_the_excerpt();
 	}
 }
 wp_reset_postdata();
@@ -106,16 +106,14 @@ get_header(); ?>
 						}
 
 						echo '<div class="page-content">';
-						echo $page_content;
+						echo 	$page_content;
 						echo '</div>';
 
 						if (is_page('foia-reports')) {
 							display_foia_reports();
 						}
 
-						//Add blog posts below the main content
 						$relatedCategory = get_field('related_category_posts', $id);
-
 						if ($relatedCategory != "") {
 							$qParams2 = array(
 								'post_type' => array('post'),
@@ -127,10 +125,10 @@ get_header(); ?>
 							$categoryUrl = get_category_link($relatedCategory->term_id);
 							$custom_query = new WP_Query($qParams2);
 
-							if ($custom_query -> have_posts()) {
+							if ($custom_query->have_posts()) {
 								echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
 								echo '<div class="usa-grid-full">';
-									while ($custom_query -> have_posts())  {
+									while ($custom_query->have_posts())  {
 										$custom_query->the_post();
 										get_template_part('template-parts/content-portfolio', get_post_format());
 									}

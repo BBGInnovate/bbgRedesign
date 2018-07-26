@@ -18,7 +18,9 @@
 .nest-container {@include grid-collapse;}
 .inner-container {@include grid-container;}
 .grid-container {@include grid-column(12);}
-
+.side-content-container {
+	article.full-width-block {width: 100%;}
+}
 
 // 2. EVEN BLOCKS
 .grid-half {@include grid-column(12);}
@@ -46,7 +48,15 @@ $icon-content-grid: (
 
 
 .main-content-container {@include grid-column(12);}
-.side-content-container {@include grid-column(12);}
+.side-content-container {
+	@include grid-column(12);
+	article {
+		display: inline-block;
+		vertical-align: top;
+		width: 50%;
+		padding: 0 1.5rem;
+	}
+}
 
 .medium-main-content-container {@include grid-column(12);}
 .medium-side-content-container {@include grid-column(12);}
@@ -69,6 +79,9 @@ $icon-content-grid: (
 	.icon-side-content-container {
 		img {width: 25%;}
 	}
+	.side-content-container {
+		article {width: 25%;}
+	}
 }
 
 @include media($medium-large-screen) {
@@ -83,6 +96,9 @@ $icon-content-grid: (
 			padding-left: 0;
 		}
 		article {
+			display: block;
+			width: 100%;
+			padding: 0;
 			margin-bottom: 3rem;
 			.grid-container {margin-top: 1.5rem;}
 		}
@@ -109,6 +125,7 @@ $icon-content-grid: (
 		.network-blurb {@include grid-column(9);}
 	}
 }
+
 
 
 
