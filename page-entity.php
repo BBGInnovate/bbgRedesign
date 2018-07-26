@@ -22,7 +22,8 @@ if (have_posts()) {
 	while (have_posts()) {
 		the_post();
 		$id = get_the_ID();
-		$pageContent = do_shortcode(get_the_content());
+		$page_content = do_shortcode(get_the_content());
+		$page_content = apply_filters('the_content', $page_content);
 		$ogDescription = get_the_excerpt(); //get_the_excerpt()
 	}
 }
@@ -34,6 +35,7 @@ $abbreviation = get_post_meta($id, 'entity_abbreviation', true);
 $description = get_post_meta($id, 'entity_description', true);
 $siteUrl = get_post_meta($id, 'entity_site_url', true);
 $rssFeed = get_post_meta($id, 'entity_rss_feed', true);
+echo $rssFeed;
 $entityLogoID = get_post_meta($id, 'entity_logo',true);
 $websiteName = get_post_meta($id, 'entity_website_name', true);
 
@@ -195,11 +197,12 @@ $videoUrl = "";
 
 /**** BEGIN CREATING rssItems array *****/
 $entityJson = getFeed($rssFeed, $id);
+echo $entityJson;
 $rssItems = array();
 $itemContainer = false;
 $languageDirection = "";
 
-if ( property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item') ) {
+if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
 	$itemContainer = $entityJson->channel;
 } else {
 	$itemContainer = $entityJson;
@@ -267,7 +270,7 @@ if (count($pressReleases)) {
 	$press_markup .= 	'</p>';
 	$press_markup .= "</div>";
 }
-$pageContent = str_replace("[press releases]", $press_markup, $pageContent);
+$page_content = str_replace("[press releases]", $press_markup, $page_content);
 /**** END FETCH related press releases ****/
 
 /**** START FETCH AWARDS ****/
@@ -331,7 +334,7 @@ if ( count($awards) ) {
 	$awards_markup .= 	'<a href="' . $entityAwardsLinkFiltered . '">View all ' . $abbreviation . ' awards »</a>';
 	$awards_markup .= '</div>';
 }
-$pageContent = str_replace("[awards]", $awards_markup, $pageContent);
+$page_content = str_replace("[awards]", $awards_markup, $page_content);
 /**** END FETCH AWARDS ****/
 
 /**** START FETCH threats to press ****/
@@ -423,8 +426,8 @@ get_header(); ?>
 						</div>
 						<div class="icon-main-content-container">
 							<?php echo '<h2>' . $fullName . '</h2>'; ?>
-							<div class="bbg__profile__content">
-								<?php echo $pageContent; ?>
+							<div class="page-content">
+								<?php echo $page_content; ?>
 							</div>
 						</div>
 					</div>
@@ -447,9 +450,7 @@ get_header(); ?>
 				<article>
 				<?php
 					if ($entityMission!="") { 
-						echo '<article>';
-						echo 	$entityMission;
-						echo '</article>';
+						echo $entityMission;
 					}
 				?>
 				</article>

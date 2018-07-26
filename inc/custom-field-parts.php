@@ -220,7 +220,7 @@ function build_umbrella_main_parts($umbrella_main_data) {
 		}
 	}
 	if ($umbrella_main_data['intro_text'] != "") {
-		$overhead_text  = '<p>' . $umbrella_main_data['intro_text'] . '</p>';
+		$overhead_text  = '<p class="lead-in">' . $umbrella_main_data['intro_text'] . '</p>';
 	}
 	$umbrella_main_package = array(
 		'section_header' => $header, 
@@ -255,7 +255,7 @@ function build_umbrella_content_parts($content_data) {
 	}
 
 	if ($content_data['description']) {
-		$description  = '<p class="aside">' . $content_data['description'] . '</p>';
+		$description  = '<p>' . $content_data['description'] . '</p>';
 	}
 	
 	$content_parts = array(
@@ -310,26 +310,6 @@ function build_entity_parts($entity_data) {
 	);
 	assemble_entity_section($entity_parts_package);
 }
-
-// function build_ethics_file_parts($raw_ethics_data) {
-// 	if (!empty($raw_ethics_data)) {
-// 		$ethics_package = array();
-// 		$i++;
-// 		foreach($raw_ethics_data as $ethics_data) {
-// 			$anchor_tag  = 	'<a href="' . $ethics_data['url'] . '" target="_blank">';
-// 			$anchor_tag .= 		$ethics_data['title'];
-// 			$anchor_tag .= 	'</a>';
-
-// 			$description  = '<p class="aside">';
-// 			$description .= 	$ethics_data['description'];
-// 			$description .= '</p>';
-
-// 			$ethics_markup = $anchor_tag . $description;
-// 			array_push($ethics_package, $ethics_markup);
-// 		}
-// 		return $ethics_package;
-// 	}
-// }
 
 function build_ethics_file_parts($raw_ethics_data) {
 	if (!empty($raw_ethics_data)) {

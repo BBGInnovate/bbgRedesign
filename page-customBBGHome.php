@@ -71,10 +71,7 @@ get_header();
 
 					$mission  = '<p class="lead-in">';
 					$mission .= 	$settings_result['intro_content'];
-					$mission .= 	'<a href="';
-					$mission .= 		$settings_result['intro_link'];
-					$mission .= 		'" class="bbg__read-more">LEARN MORE »';
-					$mission .= 	'</a>';
+					// $mission .= 	'<a href="' . $settings_result['intro_link'] . '" class="read-more">LEARN MORE</a>';
 					$mission .= '</p>';
 					echo $mission;
 				?>

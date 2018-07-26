@@ -98,10 +98,10 @@ function assemble_umbrella_content_section($umbrella_parts) {
 		$umbrella_content_block = '<div class="outer-container">';
 		foreach($umbrella_parts as $umbrella_chunk) {
 			$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
-			$umbrella_content_block .= $umbrella_chunk['column_title'];
-			$umbrella_content_block .= $umbrella_chunk['image'];
-			$umbrella_content_block .= $umbrella_chunk['item_title'];
-			$umbrella_content_block .= $umbrella_chunk['description'];
+			$umbrella_content_block .= 	$umbrella_chunk['column_title'];
+			$umbrella_content_block .= 	$umbrella_chunk['image'];
+			$umbrella_content_block .= 	$umbrella_chunk['item_title'];
+			$umbrella_content_block .= 	$umbrella_chunk['description'];
 			$umbrella_content_block .= '</div>';
 		}
 		$umbrella_content_block .= '</div>';

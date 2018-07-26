@@ -10,24 +10,24 @@
 
 .bbg__main-navigation__search {padding: $site-margins-medium;}
 
-body:not(.home) {
-	.bbg__main-navigation {
-		margin-bottom: $site-margins-medium;
-	}
-}
 .menu-usagm-container {
 	position: absolute;
 	z-index: 1000;
 	width: 100%;
 	margin-top: 10px;
 }
+.site-brand {
+	img {width: 290px;}
+}
 .bbg__main-navigation {
 	display: block;
 	width: 100%;
 	padding: 1.5rem 0 1rem 0;
 	
-	.site-brand {display: inline; margin-left: 1.5rem;}
-	
+	.site-brand {
+		display: inline;
+		margin-left: 1.5rem;
+	}
 	ul {
 		width: 100%;
 		margin-top: 0;

@@ -1,15 +1,15 @@
-.site-brand {
-	img {width: 270px;}
-}
 .date-meta {
-	color: $color-taupe-light;
-	margin-bottom: 0.5rem;
+	font-size: 0.9em;
+	font-width: $font-normal;
+	color: $black6;
+	margin-bottom: 1rem;
 }
 .post-image {margin-bottom: 3rem;}
 .read-more {
 	font-family: $font-sans;
 	font-size: 0.8em;
-	color: $color-cool-blue;
+	font-weight: $font-medium;
+	color: $color-taupe-light;
 	text-decoration: none;
 }
 

@@ -53,53 +53,11 @@ function get_feature_media_data() {
 		}
 		$featured_data = $featured_map;
 	}
-	return $featured_data;
+	$featured_setup  = '<div class="feautre-banner">';
+	$featured_setup .= 		$featured_data;
+	$featured_setup .= '</div>';
+	return $featured_setup;
 }
-// function get_feature_media_data() {
-// 	$feature_gallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
-// 	$banner_position = get_field('adjust_the_banner_image', '', true);
-// 	$videoUrl = get_field( 'featured_video_url', '', true );
-
-// 	if (!empty($feature_gallery)) {
-// 		$gallery_id = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
-// 		echo "<div class='outer-container'>";
-// 		putUniteGallery($gallery_id);
-// 		echo "</div>";
-// 		$hideFeaturedImage = true;
-// 	}
-// 	elseif ($videoUrl != "") {
-// 		$featured_data = "";
-// 		$hideFeaturedImage = true;
-// 		$video_data = featured_video($videoUrl);
-
-// 		$video_markup  = '<div class="page-featured-media">';
-// 		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
-// 		$video_markup .= 		$video_data['url'];
-// 		$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
-// 		$video_markup .= 	'</iframe>';
-// 		$video_markup .= '</div>';
-// 		$featured_data = $video_markup;
-// 	}
-// 	elseif (has_post_thumbnail()) {
-// 		$featuredImageClass = "";
-// 		$featuredImageCutline = "";
-// 		$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
-// 		$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
-
-// 		if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
-// 			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-// 		}
-
-// 		$post_featured_image  = '<div class="page-post-featured-graphic">';
-// 		$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
-// 		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
-// 		$post_featured_image .= 	'</div>';
-// 		$post_featured_image .= '</div>';
-
-// 		$featured_data = $post_featured_image;
-// 	}
-// 	return $featured_data;
-// }
 
 function get_flexible_row_data($str) {
 	if ($str == 'marquee') {

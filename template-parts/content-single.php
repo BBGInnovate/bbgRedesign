@@ -102,7 +102,7 @@ if ($includeMap && $mapLocation) {
 
 // SIDEBAR: LIST OF PROJECT WORKERS
 $team_roster = "";
-if(have_rows('project_team_members')) {
+if (have_rows('project_team_members')) {
 	$single_roster  = '<div class="bbg__project-team">';
 	$single_roster .= 	'<h5 class="bbg__project-team__header">Project team</h5>';
 	while (have_rows('project_team_members')) {
@@ -441,7 +441,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 				$header_markup .= bbginnovate_post_categories();
 			}
 			$header_markup .= '<h3>' . get_the_title() . '</h3>';
-			$header_markup .= 	'<div class="entry-meta bbg__article-meta">';
+			$header_markup .= 	'<div class="date-meta">';
 			$header_markup .= 		bbginnovate_posted_on();
 			$header_markup .= 	'</div>';
 			$header_markup .= '</header>';
@@ -556,13 +556,13 @@ if ($numLogos > 0 && $numLogos < 3) {
 				if ($includeSidebar) {
 					echo $sidebar;
 				}
-				if ($listsInclude) {
-					echo $sidebarDownloads;
-				}
-				echo $media_dev_sponsors;
-				echo $media_dev_presenters;
-				echo $team_roster;
-				echo getAccordion();
+				// if ($listsInclude) {
+				// 	echo $sidebarDownloads;
+				// }
+				// echo $media_dev_sponsors;
+				// echo $media_dev_presenters;
+				// echo $team_roster;
+				// echo getAccordion();
 			?>
 
 			<h5>Share </h5>

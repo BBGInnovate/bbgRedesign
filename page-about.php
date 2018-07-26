@@ -87,9 +87,7 @@ get_header();
 <?php
 	$featured_media_result = get_feature_media_data();
 	if ($featured_media_result != "") {
-		echo '<div class="feautre-banner">';
-		echo 	$featured_media_result;
-		echo '</div>';
+		echo $featured_media_result;
 	}
 	$page_header  = '<div class="outer-container">';
 	$page_header .= 	'<div class="grid-container">';

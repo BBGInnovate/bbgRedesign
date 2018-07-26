@@ -7,60 +7,47 @@
  * @package bbginnovate
  */
 
-if ( ! function_exists( 'bbginnovate_posted_on' ) ) :
-/**
- * Prints HTML with meta information for the current post-date/time and author.
- */
-function bbginnovate_posted_on() {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>';
-	}
-
-	$time_string = sprintf( $time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() )
-	);
-
-
-	if (in_category('Media Development Map')) {
-		$posted_on = get_post_meta( get_the_ID(), 'media_dev_date', true );
-	} else {
-		$posted_on = sprintf(
-			esc_html_x( '%s', 'post date', 'bbginnovate' ),
-			$time_string
-			//'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-		);
-	}
-
-	/*
-	possible add: show datelines as X days ago, would use a permutation of this.
-	$posted_on = human_time_diff( get_the_time('U'), current_time('timestamp')) . " ago";
-	*/
-
-
-
-	$byline = "";
-	$includeByline = get_post_meta( get_the_ID(), 'include_byline', true );
-	if ( $includeByline ){
-		$bylineOverride = get_post_meta( get_the_ID(), 'byline_override', true );
-		if ($bylineOverride == "") {
-			$byline = sprintf(
-				esc_html_x( 'by %s', 'post author', 'bbginnovate' ),
-				'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-			);
-		} else {
-			$byline = '<span class="bbg__article-byline">by ' . $bylineOverride . "</span>";
+if (!function_exists( 'bbginnovate_posted_on' )) {
+	function bbginnovate_posted_on() {
+		$time_string = '<time datetime="%1$s">%2$s</time>';
+		if (get_the_time('U') !== get_the_modified_time('U')) {
+			$time_string = '<time datetime="%1$s">%2$s</time>';
 		}
-		$byline = '<span class="byline"> ' . $byline . '</span> <span class="u--seperator"> </span><span class="posted-on">' . $posted_on . '</span>'; 
-	} else {
-		$byline = '<span class="posted-on">' . $posted_on . '</span>'; 
+
+		$time_string = sprintf( $time_string,
+			esc_attr(get_the_date( 'c' )),
+			esc_html(get_the_date())
+		);
+
+
+		if (in_category('Media Development Map')) {
+			$posted_on = get_post_meta(get_the_ID(), 'media_dev_date', true);
+		} else {
+			$posted_on = sprintf(
+				esc_html_x('%s', 'post date', 'bbginnovate'),
+				$time_string
+			);
+		}
+
+		$byline = "";
+		$includeByline = get_post_meta(get_the_ID(), 'include_byline', true);
+		if ($includeByline) {
+			$bylineOverride = get_post_meta(get_the_ID(), 'byline_override', true);
+			if ($bylineOverride == "") {
+				$byline = sprintf(
+					esc_html_x('by %s', 'post author', 'bbginnovate'),
+					'<span class="author vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta( 'ID' ))) . '">' . esc_html(get_the_author()) . '</a></span>'
+				);
+			} else {
+				$byline = '<span class="bbg__article-byline">by ' . $bylineOverride . "</span>";
+			}
+			$byline = '<span class="byline"> ' . $byline . '</span> <span class="u--seperator"> </span><span class="posted-on">' . $posted_on . '</span>'; 
+		} else {
+			$byline = $posted_on; 
+		}
+		return $byline;
 	}
-	return $byline;
-
-
 }
-endif;
 
 if ( ! function_exists( 'bbginnovate_entry_footer' ) ) :
 /**

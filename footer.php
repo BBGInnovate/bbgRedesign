@@ -33,8 +33,8 @@
 			</div>
 
 			<div class="footer-nav">
-				<a href="/press-room">Press Room</a>
-				<a href="/news/network-highlights/newsletter-archives/signup/">Sign Up</a>
+				<h5><a href="/press-room">Press Room</a></h5>
+				<h5><a href="/news/network-highlights/newsletter-archives/signup/">Sign Up</a></h5>
 			</div>
 
 			<div class="footer-contact">

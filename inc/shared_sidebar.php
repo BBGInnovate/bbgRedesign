@@ -10,10 +10,8 @@ $sidebar = "";
 $sidebarDownloads = "";
 
 if ($includeSidebar) {
-
 	// DOES FLEXIBLE CONTENT FIELD HAVE ROWS OF DATA
 	$sidebar_markup = "";
-
 	$sidebarTitle = get_post_meta(get_the_ID(), 'sidebar_title', true);
 	if ($sidebarTitle != "") {
 		$sidebar_markup .= "<h5>" . $sidebarTitle . "</h5>";
@@ -43,7 +41,7 @@ if ($includeSidebar) {
 				$filesize = formatBytes(filesize($file));
 
 				// ADD FALLBACK TO FETCH FILE NAME IF NOT ENTERED IN CUSTOM FIELD
-				if ( $sidebarDownloadTitle == "" ) {
+				if ($sidebarDownloadTitle == "") {
 					$sidebarDownloadTitle = $sidebarDownloadLinkObj['post_title'];
 				}
 
@@ -54,13 +52,13 @@ if ($includeSidebar) {
 
 				$sidebar_download  = '<div class="bbg__sidebar__download">';
 				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
-				$sidebar_download .= 	'<h5 class="bbg__sidebar__download__title">';
+				$sidebar_download .= 	'<h6>';
 				$sidebar_download .= 		'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
-				$sidebar_download .= 		'<span class="bbg__file-size">($ext, $filesize)</span>';
-				$sidebar_download .= 	'</h5>';
+				$sidebar_download .= 		'<span class="bbg__file-size"><br>(' . $ext . ', ' . $filesize . ')</span>';
+				$sidebar_download .= 	'</h6>';
 				
 				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
-					$sidebar_download .= '<p class="bbg__sidebar__download__description">';
+					$sidebar_download .= '<p class="aside">';
 					$sidebar_download .= 	$sidebarDownloadDescription;
 					$sidebar_download .= '</p>';
 				}

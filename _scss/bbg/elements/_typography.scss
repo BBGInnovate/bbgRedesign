@@ -33,7 +33,7 @@ h3 a:visited {
     line-height: 3.2rem;
     font-weight: $font-normal;
     color: $color-blue-darkest;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 1rem 0;
 }
 h4,
 h4 a:link,
@@ -43,7 +43,7 @@ h4 a:visited {
     line-height: 2.6rem;
     font-weight: $font-light;
     color: $color-blue;
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 0.5rem 0;
     .aside {display: inline;}
 }
 h5,
@@ -51,7 +51,7 @@ h5 a:link,
 h5 a:visited {
     font-family: $font-sans;
     font-size: 1.5rem;
-    line-height: 1.7rem;
+    line-height: 1.8rem;
     font-weight: $font-bold;
     text-transform: uppercase;
     color: $color-taupe-dark;
@@ -63,26 +63,28 @@ h6 a:link,
 h6 a:visited,
 .paragraph-header {
     font-family: $font-sans;
-    font-size: 1.6rem;
-    line-height: 2.1rem;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
     font-weight: $font-bold;
     text-transform: none;
     color: $color-blue-darker;
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.5rem 0;
 }
 
 p {
     font-family: $font-serif;
     font-size: 1.8rem;
-    line-height: 2.8rem;
+    line-height: 2.6rem;
     margin: 0 0 3rem 0;
     color: #545454;
 }
 p.lead-in {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     line-height: 4.2rem;
     font-family: $font-serif;
     color: $black9;
+    a:link, a:visited {color: $black6;}
+    a:hover, a:active {color: $color-cool-blue;}
 }
 
 ul li:not(.menu-item),
