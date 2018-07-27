@@ -7765,6 +7765,65 @@ a.bbg__kits__intro__more--link {
     color: #ffffff;
     cursor: pointer; }
 
+#usagm-splash-wrapper {
+  height: 100%;
+  font-size: 10px; }
+  #usagm-splash-wrapper .outer-container {
+    margin: 0; }
+  #usagm-splash-wrapper p {
+    font-family: "Alegreya Sans", sans-serif; }
+  #usagm-splash-wrapper img {
+    margin: 0; }
+  #usagm-splash-wrapper .logo-fader-up,
+  #usagm-splash-wrapper .logo-fader-down {
+    position: absolute;
+    width: 100%;
+    height: 20rem;
+    background: linear-gradient(rgba(255, 255, 255, 0), white); }
+  #usagm-splash-wrapper .logo-fader-up {
+    top: -20rem;
+    background: linear-gradient(rgba(255, 255, 255, 0), white); }
+  #usagm-splash-wrapper .logo-fader-down {
+    bottom: -20rem;
+    background: linear-gradient(white, rgba(255, 255, 255, 0)); }
+  #usagm-splash-wrapper .logo-board {
+    position: relative;
+    height: 55vh;
+    background-color: #ffffff; }
+    #usagm-splash-wrapper .logo-board img.logo {
+      position: fixed;
+      top: 34%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%; }
+  #usagm-splash-wrapper .logo-copy {
+    position: relative;
+    text-align: center;
+    height: 45vh;
+    background-color: #989898; }
+    #usagm-splash-wrapper .logo-copy p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      font-size: 3rem;
+      line-height: 5rem;
+      font-weight: 700;
+      color: #ffffff; }
+  #usagm-splash-wrapper #bbg-copy {
+    margin-bottom: 55vh; }
+
+@media screen and (min-width: 481px) {
+  #usagm-splash-wrapper {
+    font-size: 12px; }
+    #usagm-splash-wrapper .logo-board {
+      height: 58vh; }
+    #usagm-splash-wrapper .logo-copy {
+      height: 42vh; }
+      #usagm-splash-wrapper .logo-copy p {
+        font-size: 4rem; } }
+
 @media print {
   /* @page :first {
 		margin-left: 2.5in;

@@ -45,8 +45,15 @@ $(window).on('resize', function() {
 	mgmtProfileSizing();
 });
 
-
-$('.page-content p').first().attr('class', 'lead-in');
+if ($('.page-content').first().tagName == 'P') {
+	console.log('paragraph');
+	$('.page-content p').first().attr('class', 'lead-in');
+}
+$('.page-content').first().on('click', function() {
+	if(this.tagName == 'p'){
+		alert("It's a p!");
+	}
+})
 
 }); // END READY
 })(jQuery);

@@ -180,7 +180,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 
 <body <?php body_class(); ?>>
 
-<h1 class="header-outliner">Broadcasting Board of Governors</h1>
+<h1 class="header-outliner">United States Agency for Global Media</h1>
 <div id="page" class="site main-content" role="main">
 	<a class="skipnav skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bbginnovate' ); ?></a>
 
@@ -191,6 +191,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 		}
 	?>
 
+<?php if (!is_page_template('usagm-intro.php')) { ?>
 	<header id="masthead" class="site-header bbg-header" role="banner">
 		<?php
 			// SITE WIDE NOTIFICATIONS
@@ -252,5 +253,5 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 			?>
 		</nav>
 	</header>
-
+<?php } ?>
 	<!-- <div id="content" class="site-content"> -->

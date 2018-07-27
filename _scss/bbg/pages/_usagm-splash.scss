@@ -1,0 +1,66 @@
+#usagm-splash-wrapper {
+	height: 100%;
+	font-size: 10px;
+	.outer-container {margin: 0;}
+	p {font-family: $font-sans;}
+	img {margin: 0;}
+
+	.logo-fader-up,
+	.logo-fader-down {
+		position: absolute;
+		width: 100%;
+		height: 20rem;
+		background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+	}
+	.logo-fader-up {
+		top: -20rem;
+		background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+	}
+	.logo-fader-down {
+		bottom: -20rem;
+		background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+	}
+
+	.logo-board {
+		position: relative;
+		height: 55vh;
+		background-color: $white;
+		img.logo {
+			position: fixed;
+			top: 34%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 70%;
+		}
+	}
+	.logo-copy {
+		position: relative;
+		text-align: center;
+		height: 45vh;
+		background-color: #989898;
+		p {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 60%;
+			font-size: 3rem;
+			line-height: 5rem;
+			font-weight: 700;
+			color: $white;
+		}
+	}
+	#bbg-copy {margin-bottom: 55vh}
+}
+
+@include media($small-screen) {
+	#usagm-splash-wrapper {
+		font-size: 12px;
+		
+		.logo-board {height: 58vh;}
+		.logo-copy {
+			height: 42vh;
+			p {font-size: 4rem;}
+		}
+	}
+}
