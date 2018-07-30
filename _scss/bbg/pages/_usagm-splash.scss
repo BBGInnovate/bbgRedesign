@@ -1,7 +1,7 @@
+html, body {height: 100%;}
 #usagm-splash-wrapper {
 	height: 100%;
 	font-size: 10px;
-	.outer-container {margin: 0;}
 	p {font-family: $font-sans;}
 	img {margin: 0;}
 
@@ -25,12 +25,18 @@
 		position: relative;
 		height: 55vh;
 		background-color: $white;
+		.logo-container {
+			position: fixed;
+			height: 55vh;
+			top: 0;
+			left: 50%;
+			width: 70%;
+			transform: translateX(-50%);
+		}
 		img.logo {
 			position: fixed;
-			top: 34%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 70%;
+			top: 50%;
+			transform: translateY(-50%);
 		}
 	}
 	.logo-copy {
@@ -45,12 +51,56 @@
 			transform: translate(-50%, -50%);
 			width: 60%;
 			font-size: 3rem;
-			line-height: 5rem;
+			line-height: 3.5rem;
 			font-weight: 700;
 			color: $white;
+			.splash-down {cursor: pointer;}
 		}
 	}
 	#bbg-copy {margin-bottom: 55vh}
+
+	.messaging-section {
+		padding: 6rem 0;
+		background-color: $black3;
+		.message {
+			margin-bottom: 3rem;
+			.message-image {
+				width: 50%;
+				margin: 0 auto 1.5rem auto;
+				img {
+					border: 3px solid $color-red;
+					border-radius: 50%;
+				}
+			}
+			.message-text {
+				h4, p {
+					text-align: center;
+					color: $white;
+				}
+				.fas {font-size: 0.6em;}
+			}
+		}
+	}
+
+	#murrow-quote {
+		background-color: #33669a;
+		.ed-quote {padding: 6rem 0;}
+		p {
+			color: $white;
+			margin: 0;
+		}
+		.splash-quote {
+			font-size: 3.3rem;
+			line-height: 4rem;
+			font-weight: $font-medium;
+			margin-bottom: 1.5rem;
+		}
+		.splash-quote-by {
+			font-size: 1.4rem;
+			line-height: 2rem
+		}
+		.ed-img {display: none;}
+	}
 }
 
 @include media($small-screen) {
@@ -61,6 +111,31 @@
 		.logo-copy {
 			height: 42vh;
 			p {font-size: 4rem;}
+		}
+		.messaging-section {
+			.message {
+				@include grid-column(4)
+				margin-bottom: 0;
+			}
+		}
+		#murrow-quote {
+			.outer-container {
+				background-image: url('http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow.png');
+				background-repeat: no-repeat;
+				background-size: auto 100%;
+				background-position: right top;
+			}
+			.ed-quote {@include grid-column(6)}
+		}
+	}
+}
+
+@include media($medium-large-screen) {
+	#usagm-splash-wrapper {
+		.logo-board {
+			.logo-container {
+				width: 50%;
+			}
 		}
 	}
 }
