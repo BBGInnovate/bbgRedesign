@@ -21,71 +21,69 @@
 }
 
 #footer {
-	text-align: center;
-	background-color: #d4d6d9;
+	padding-top: 1.5rem;
+	background-color: $black3;
 	.outer-container {margin-bottom: 0;}
 
 	#footer-wrapper {padding: 1.5rem 1.5rem 3rem 1.5rem;}
-	.footer-nav {
-		margin-bottom: 3rem;
-		h5 {display: inline-block;}
-		a:link, a:visited {
-			color: #323a45;
-			font-weight: 500;
-			padding: 0 1.5rem 0 0;
+	.footer-brand {text-align: center;}
+	.menu-usagm-container {
+		position: static;
+		ul {
+			text-align: center;
+			width: 100%;
+			margin: 0;
+			li {
+				font-size: 1.6rem;
+				font-width: $font-medium;
+				a {padding: 0.5rem 0;}
+				a:link {color: $white;}
+			}
+			.sub-menu {display: none;}
 		}
-	}
-	.footer-contact {
-		margin-bottom: 2rem;
-		p {
-			font-size: 1.5rem;
-			display: inline-block;
-			margin-bottom: 0;
-			a {text-decoration: none; color: inherit;}
-		}
-		p#footer-address {display: block;}
-	}
-	.footer-social {
-		a:link, a:visited {color: $color-red; padding: 0 1rem;}
-		a:hover, a:active {color: $color-taupe-dark;}
-		a:last-of-type {padding-right: 0;}
-	}
-	.footer-sub-nav {
-		font-size: 1.4rem;
-		font-weight: 300;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-		background-color: $color-gray-dark;
-		padding: 5px;
-
-		.bbg__footer__sub__required-link {
-			display: inline-block;
-
-			&:first-of-type a {padding: 0 .5rem 0 0;}
-		}
-
-		.bbg__footer__sub__required-link a {
-			color: $color-primary-alt-light;
-			padding: 0 1.5rem;
-		}
+		li:before {content: none;}
+		li:after {display: none;}
+		.bbg__main-navigation__search {display: none;}
 	}
 }
 
 @include media($medium-screen) {
 	#footer {
-		text-align: initial;
-		#footer-wrapper {
-			.footer-contact, 
-			.footer-social {text-align: right;}
-			.footer-sub-nav {text-align: center;}
-		}
-		.footer-sub-nav {
-			text-align: center;
-			a {padding: 0 3rem;}
+		.footer-brand {text-align: left;}
+		.menu-usagm-container {
+			ul {text-align: right}
 		}
 	}
 }
 
-@include media($medium-large-screen) {
-
+@include media($medium-medium-screen) {
+	#footer {
+		.menu-item-has-children > a {width: auto;}
+		.menu-usagm-container {
+			ul {
+				text-align: left;
+				li {
+					display: inline-block;
+					vertical-align: top;
+					line-height: 2rem;
+					width: 20%;
+				}
+				.sub-menu {
+					display: block;
+					li {
+						display: block;
+						font-weight: 300;
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+@include media($large-screen) {
+	#footer {
+		.menu-usagm-container {
+			margin-left: 19%;
+		}
+	}
 }

@@ -37,7 +37,7 @@ get_header();
 			<div class="inner-container message">
 				<div class="grid-container">
 					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/john_lansing_ceo-sq-200x200.jpg" alt="">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/sf.jpg" alt="">
 					</div>
 					<div class="message-text">
 						<h4>What We Do</h4>
@@ -48,7 +48,7 @@ get_header();
 			<div class="inner-container message">
 				<div class="grid-container">
 					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/john_lansing_ceo-sq-200x200.jpg" alt="">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/sf.jpg" alt="">
 					</div>
 					<div class="message-text">
 						<h4>Who We Are</h4>
@@ -59,7 +59,7 @@ get_header();
 			<div class="inner-container message">
 				<div class="grid-container">
 					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/john_lansing_ceo-sq-200x200.jpg" alt="">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/sf.jpg" alt="">
 					</div>
 					<div class="message-text">
 						<h4>Where We Are Going</h4>

@@ -2836,65 +2836,62 @@ form[id^=fscf_form] {
       padding: 0; }
 
 #footer {
-  text-align: center;
-  background-color: #d4d6d9; }
+  padding-top: 1.5rem;
+  background-color: #333333; }
   #footer .outer-container {
     margin-bottom: 0; }
   #footer #footer-wrapper {
     padding: 1.5rem 1.5rem 3rem 1.5rem; }
-  #footer .footer-nav {
-    margin-bottom: 3rem; }
-    #footer .footer-nav h5, #footer .footer-nav .bbg__sidebar__table th, .bbg__sidebar__table #footer .footer-nav th {
-      display: inline-block; }
-    #footer .footer-nav a:link, #footer .footer-nav a:visited {
-      color: #323a45;
-      font-weight: 500;
-      padding: 0 1.5rem 0 0; }
-  #footer .footer-contact {
-    margin-bottom: 2rem; }
-    #footer .footer-contact p {
-      font-size: 1.5rem;
-      display: inline-block;
-      margin-bottom: 0; }
-      #footer .footer-contact p a {
-        text-decoration: none;
-        color: inherit; }
-    #footer .footer-contact p#footer-address {
-      display: block; }
-  #footer .footer-social a:link, #footer .footer-social a:visited {
-    color: #b2201c;
-    padding: 0 1rem; }
-  #footer .footer-social a:hover, #footer .footer-social a:active {
-    color: #8b8278; }
-  #footer .footer-social a:last-of-type {
-    padding-right: 0; }
-  #footer .footer-sub-nav {
-    font-size: 1.4rem;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    background-color: #323a45;
-    padding: 5px; }
-    #footer .footer-sub-nav .bbg__footer__sub__required-link {
-      display: inline-block; }
-      #footer .footer-sub-nav .bbg__footer__sub__required-link:first-of-type a {
-        padding: 0 .5rem 0 0; }
-    #footer .footer-sub-nav .bbg__footer__sub__required-link a {
-      color: #9bdaf1;
-      padding: 0 1.5rem; }
+  #footer .footer-brand {
+    text-align: center; }
+  #footer .menu-usagm-container {
+    position: static; }
+    #footer .menu-usagm-container ul {
+      text-align: center;
+      width: 100%;
+      margin: 0; }
+      #footer .menu-usagm-container ul li {
+        font-size: 1.6rem;
+        font-width: 500; }
+        #footer .menu-usagm-container ul li a {
+          padding: 0.5rem 0; }
+        #footer .menu-usagm-container ul li a:link {
+          color: #ffffff; }
+      #footer .menu-usagm-container ul .sub-menu {
+        display: none; }
+    #footer .menu-usagm-container li:before {
+      content: none; }
+    #footer .menu-usagm-container li:after {
+      display: none; }
+    #footer .menu-usagm-container .bbg__main-navigation__search {
+      display: none; }
 
 @media screen and (min-width: 600px) {
-  #footer {
-    text-align: initial; }
-    #footer #footer-wrapper .footer-contact,
-    #footer #footer-wrapper .footer-social {
-      text-align: right; }
-    #footer #footer-wrapper .footer-sub-nav {
-      text-align: center; }
-    #footer .footer-sub-nav {
-      text-align: center; }
-      #footer .footer-sub-nav a {
-        padding: 0 3rem; } }
+  #footer .footer-brand {
+    text-align: left; }
+  #footer .menu-usagm-container ul {
+    text-align: right; } }
+
+@media screen and (min-width: 700px) {
+  #footer .menu-item-has-children > a {
+    width: auto; }
+  #footer .menu-usagm-container ul {
+    text-align: left; }
+    #footer .menu-usagm-container ul li {
+      display: inline-block;
+      vertical-align: top;
+      line-height: 2rem;
+      width: 20%; }
+    #footer .menu-usagm-container ul .sub-menu {
+      display: block; }
+      #footer .menu-usagm-container ul .sub-menu li {
+        display: block;
+        font-weight: 300;
+        width: 100%; } }
+
+@media screen and (min-width: 1201px) {
+  #footer .menu-usagm-container {
+    margin-left: 19%; } }
 
 .feature-spot {
   margin-left: calc(25% - 25px + 40px); }
@@ -7839,6 +7836,8 @@ html, body {
         font-size: 0.6em; }
   #usagm-splash-wrapper #murrow-quote {
     background-color: #33669a; }
+    #usagm-splash-wrapper #murrow-quote .outer-container {
+      margin-bottom: 0; }
     #usagm-splash-wrapper #murrow-quote .ed-quote {
       padding: 6rem 0; }
     #usagm-splash-wrapper #murrow-quote p {
@@ -7863,21 +7862,23 @@ html, body {
     #usagm-splash-wrapper .logo-copy {
       height: 42vh; }
       #usagm-splash-wrapper .logo-copy p {
-        font-size: 4rem; }
-    #usagm-splash-wrapper .messaging-section .message {
-      width: calc(33.33333% - 26.66667px);
-      float: left;
-      margin-left: 20px;
-      margin-bottom: 0; }
-    #usagm-splash-wrapper #murrow-quote .outer-container {
-      background-image: url("http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow.png");
-      background-repeat: no-repeat;
-      background-size: auto 100%;
-      background-position: right top; }
-    #usagm-splash-wrapper #murrow-quote .ed-quote {
-      width: calc(50% - 30px);
-      float: left;
-      margin-left: 20px; } }
+        font-size: 4rem; } }
+
+@media screen and (min-width: 600px) {
+  #usagm-splash-wrapper .messaging-section .message {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 0; }
+  #usagm-splash-wrapper #murrow-quote .outer-container {
+    background-image: url("http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow.png");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: right top; }
+  #usagm-splash-wrapper #murrow-quote .ed-quote {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px; } }
 
 @media screen and (min-width: 900px) {
   #usagm-splash-wrapper .logo-board .logo-container {

@@ -72,17 +72,20 @@ function checkUSAGMCopyPos() {
 }
 
 var logoPageScroller = $('.splash-down');
-var i = 0;
 logoPageScroller.on('click', function() {
-	var bbgCopyBottom = $('.logo-copy').offset().top + $('.logo-copy').outerHeight();
-	if (i > 0) {
-		bbgCopyBottom = bbgCopyBottom * 2;
+	var bbgCopyBottom = $('#bbg-copy').offset().top + $('#bbg-copy').outerHeight();
+	var usagmCopyBottom = $('#usagm-copy').offset().top + $('#usagm-copy').outerHeight();
+	var shifter;
+	if ($(window).scrollTop() < $('#bbg-copy').offset().top) {
+		shifter = bbgCopyBottom;
+	}
+	else {
+		shifter = usagmCopyBottom;
 	}
 	$('html, body').animate({
-		scrollTop: bbgCopyBottom
+		scrollTop: shifter
 	}, 700);
-	i++;
-	console.log('x: ' + bbgCopyBottom);
+	console.log('x: ' + shifter);
 });
 
 $(window).on('resize scroll', function() {
