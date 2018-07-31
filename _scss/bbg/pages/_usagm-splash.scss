@@ -2,22 +2,25 @@ html, body {height: 100%;}
 #usagm-splash-wrapper {
 	height: 100%;
 	font-size: 10px;
-	p {font-family: $font-sans;}
+	p {
+		font-family: $font-sans;
+		margin: 1.3rem 0 0 0;
+	}
 	img {margin: 0;}
 
 	.logo-fader-up,
 	.logo-fader-down {
 		position: absolute;
 		width: 100%;
-		height: 20rem;
+		height: 25rem;
 		background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 	}
 	.logo-fader-up {
-		top: -20rem;
+		top: -25rem;
 		background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 	}
 	.logo-fader-down {
-		bottom: -20rem;
+		bottom: -25rem;
 		background: linear-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
 	}
 
@@ -51,7 +54,7 @@ html, body {height: 100%;}
 			transform: translate(-50%, -50%);
 			width: 60%;
 			font-size: 3rem;
-			line-height: 3.5rem;
+			line-height: 3.7rem;
 			font-weight: 700;
 			color: $white;
 			.splash-down {cursor: pointer;}
@@ -83,22 +86,36 @@ html, body {height: 100%;}
 	}
 
 	#murrow-quote {
-		background-color: #33669a;
+		background-color: $color-blue;
 		.outer-container {margin-bottom: 0;}
 		.ed-quote {padding: 6rem 0;}
 		p {
 			color: $white;
 			margin: 0;
 		}
+		.splash-quote::before {
+			content: "\201C";font-size: 3rem;
+			position: absolute;
+			top: 6rem;
+			font-family: $font-serif;
+			font-style: normal;
+			font-size: 20rem;
+			margin-left: -1.5rem;
+			color: rgba(255, 255, 255, 0.5);
+		}
 		.splash-quote {
+			position: relative;
+			font-family: $font-serif;
+			font-style: italic;
 			font-size: 3.3rem;
 			line-height: 4rem;
 			font-weight: $font-medium;
-			margin-bottom: 1.5rem;
+			margin: 0 0.5rem 1.5rem 0.5rem;
 		}
 		.splash-quote-by {
 			font-size: 1.4rem;
-			line-height: 2rem
+			line-height: 2rem;
+			text-align: right;
 		}
 		.ed-img {display: none;}
 	}
@@ -108,11 +125,18 @@ html, body {height: 100%;}
 	#usagm-splash-wrapper {
 		font-size: 12px;
 		
-		.logo-board {height: 58vh;}
+		.logo-board {
+			height: 58vh;
+			.logo-container {height: 58vh;}
+		}
 		.logo-copy {
 			height: 42vh;
-			p {font-size: 4rem;}
+			p {
+				font-size: 4rem;
+				line-height: 4.3rem
+			}
 		}
+		#bbg-copy {margin-bottom: 58.2vh}
 	}
 }
 
@@ -124,15 +148,6 @@ html, body {height: 100%;}
 				margin-bottom: 0;
 			}
 		}
-		#murrow-quote {
-			.outer-container {
-				background-image: url('http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow.png');
-				background-repeat: no-repeat;
-				background-size: auto 100%;
-				background-position: right top;
-			}
-			.ed-quote {@include grid-column(6)}
-		}
 	}
 }
 
@@ -141,6 +156,30 @@ html, body {height: 100%;}
 		.logo-board {
 			.logo-container {
 				width: 50%;
+			}
+		}
+		#murrow-quote {
+			.outer-container {
+				background-image: url('http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png');
+				background-repeat: no-repeat;
+				background-size: auto 100%;
+				background-position: -10% top;
+			}
+			.ed-quote {
+				@include grid-push(6);
+			}
+		}
+	}
+}
+
+@include media($medium-large-screen) {
+	#usagm-splash-wrapper {
+		#murrow-quote {
+			.outer-container {
+				background-position: left top;
+			}
+			.ed-quote {
+				@include grid-push(5);
 			}
 		}
 	}

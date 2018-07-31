@@ -15,11 +15,7 @@ get_header();
 
 <div class="logo-copy" id="bbg-copy">
 	<div class="logo-fader-up"></div>
-	<div class="outer-container">
-		<div class="grid-container">
-			<p>For 75 years we've been telling the truth. And the truth is, our name was outdated.<br><i class="splash-down fas fa-angle-down"></i></p>
-		</div>
-	</div>
+	<p>For 75 years we've been telling the truth. And the truth is, our name was outdated.<br><i class="splash-down fas fa-angle-down"></i></p>
 	<div class="logo-fader-down"></div>
 </div>
 
@@ -75,7 +71,8 @@ get_header();
 	<div class="outer-container">
 		<div class="grid-container">
 			<div class="ed-quote">
-				<p class="splash-quote">“To be persuasive we must be believable; to be believable we must be credible, to be credible we must be truthful. It is as simple as that.”</p>
+				<!-- OPENING QUOTE IN CSS TO BE PUSHED OUTSIDE OF TEXT BOX -->
+				<p class="splash-quote">To be persuasive we must be believable; to be believable we must be credible, to be credible we must be truthful. It is as simple as that.”</p>
 				<p class="splash-quote-by">&mdash;Edward R. Murrow</p>
 				<p class="splash-quote-by">Director, US Information Agency <br>(precursor to USAGM) 1961&ndash;1964)</p>
 			</div>

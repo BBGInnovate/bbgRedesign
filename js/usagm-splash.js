@@ -1,97 +1,101 @@
 (function($) {
 $('document').ready(function() {
-window.scrollTo(0,1)
-var logoSrc = $('.logo-board img.logo').attr('src');
-var imgFromPath = logoSrc.split("/");
-var imgFile = imgFromPath[imgFromPath.length - 1];
-var bbgLogoFileName = imgFromPath[imgFromPath.length - 1];
-var usagmLogoFileName = "usagm-splash-logo.png";
-var usagmLogoPath = logoSrc.replace(imgFromPath[imgFromPath.length - 1], usagmLogoFileName);
-var bbgLogoFilepath = logoSrc.replace(imgFromPath[imgFromPath.length - 1], bbgLogoFileName);
 
-function getImgFiles() {
+if ($('#usagm-splash-wrapper').length != 0) {
 	var logoSrc = $('.logo-board img.logo').attr('src');
 	var imgFromPath = logoSrc.split("/");
-	var imgFileName = imgFromPath[imgFromPath.length - 1];
-	return imgFileName;
-}
+	var imgFile = imgFromPath[imgFromPath.length - 1];
+	var bbgLogoFileName = imgFromPath[imgFromPath.length - 1];
+	var usagmLogoFileName = "usagm-splash-logo.png";
+	var usagmLogoPath = logoSrc.replace(imgFromPath[imgFromPath.length - 1], usagmLogoFileName);
+	var bbgLogoFilepath = logoSrc.replace(imgFromPath[imgFromPath.length - 1], bbgLogoFileName);
 
-var bbgLogo = true;
-function checkLogoCopyPos() {
-	var textDivTop = $('.logo-copy').offset().top;
-	var logoTop = $('.logo-board img.logo').offset().top;
-	var curImage = getImgFiles();
-
-	if (curImage == bbgLogoFileName) {
-		bbgLogo = true;
-	} else {
-		bbgLogo = false;
+	function getImgFiles() {
+		var logoSrc = $('.logo-board img.logo').attr('src');
+		var imgFromPath = logoSrc.split("/");
+		var imgFileName = imgFromPath[imgFromPath.length - 1];
+		return imgFileName;
 	}
-	// SCROLL INCREMENTS ODDLY, ALLOW A FEW PIXELS TO CATCH EQUAL POSITIONIONING
-	if ((textDivTop < logoTop)) {
+
+	var bbgLogo = true;
+	function checkLogoCopyPos() {
+		var textDivTop = $('.logo-copy').offset().top;
+		var logoTop = $('.logo-board img.logo').offset().top;
+		var curImage = getImgFiles();
+
 		if (curImage == bbgLogoFileName) {
-			if (bbgLogo = true) {
-				$('.logo-board img.logo').attr('src', usagmLogoPath);
-				console.log('usagm');
-				bbgLogo = false;
+			bbgLogo = true;
+		} else {
+			bbgLogo = false;
+		}
+		// SCROLL INCREMENTS ODDLY, ALLOW A FEW PIXELS TO CATCH EQUAL POSITIONIONING
+		if ((textDivTop < logoTop)) {
+			if (curImage == bbgLogoFileName) {
+				if (bbgLogo = true) {
+					$('.logo-board img.logo').attr('src', usagmLogoPath);
+					bbgLogo = false;
+				}
 			}
 		}
+		else if ((textDivTop > logoTop) && bbgLogo == false) {
+			$('.logo-board img.logo').attr('src', bbgLogoFilepath);
+		}
 	}
-	else if ((textDivTop > logoTop) && bbgLogo == false) {
-		$('.logo-board img.logo').attr('src', bbgLogoFilepath);
-	}
-}
 
-var fixedLogo = true;
-function checkUSAGMCopyPos() {
-	var divBottom = $('#usagm-copy').offset().top + $('#usagm-copy').outerHeight();
-	var windowBottom = $(window).scrollTop() + $(window).height();
-	var logoTopPad = ($('.logo-container').outerHeight() - $('.logo').outerHeight()) / 2;
-	var logoDivTop = ($('#usagm-copy').offset().top - $('.logo-container').outerHeight() + logoTopPad) + ($('.logo').outerHeight() / 2);
+	var fixedLogo = true;
+	function checkUSAGMCopyPos() {
+		var divBottom = $('#usagm-copy').offset().top + $('#usagm-copy').outerHeight();
+		var windowBottom = $(window).scrollTop() + $(window).height();
+		var logoTopPad = ($('.logo-container').outerHeight() - $('.logo').outerHeight()) / 2;
+		var logoDivTop = ($('#usagm-copy').offset().top - $('.logo-container').outerHeight() + logoTopPad) + ($('.logo').outerHeight() / 2);
 
-	if (divBottom < windowBottom) {
-		$('.logo-container').css({
-			'position': 'absolute'
-		});
-		$('.logo').css({
-			'position': 'absolute',
-			'top': logoDivTop
-		});
-		fixedLogo = false;
+		if (divBottom < windowBottom) {
+			$('.logo-container').css({
+				'position': 'absolute'
+			});
+			$('.logo').css({
+				'position': 'absolute',
+				'top': logoDivTop
+			});
+			fixedLogo = false;
+		}
+		else if (divBottom > windowBottom && fixedLogo == false) {
+			$('.logo-container').css({
+				'position': 'fixed'
+			});
+			$('.logo').css({
+				'position': 'fixed',
+				'top': '50%'
+			});
+			fixedLogo = true;
+		}
 	}
-	else if (divBottom > windowBottom && fixedLogo == false) {
-		$('.logo-container').css({
-			'position': 'fixed'
-		});
-		$('.logo').css({
-			'position': 'fixed',
-			'top': '50%'
-		});
-		fixedLogo = true;
-	}
-}
 
-var logoPageScroller = $('.splash-down');
-logoPageScroller.on('click', function() {
-	var bbgCopyBottom = $('#bbg-copy').offset().top + $('#bbg-copy').outerHeight();
-	var usagmCopyBottom = $('#usagm-copy').offset().top + $('#usagm-copy').outerHeight();
-	var shifter;
-	if ($(window).scrollTop() < $('#bbg-copy').offset().top) {
-		shifter = bbgCopyBottom;
+	function slideScroll() {
+		var bbgCopyBottom = $('#bbg-copy').offset().top + $('#bbg-copy').outerHeight();
+		var usagmCopyBottom = $('#usagm-copy').offset().top + $('#usagm-copy').outerHeight();
+		var shifter;
+		if ($(window).scrollTop() < $('#bbg-copy').offset().top) {
+			shifter = bbgCopyBottom;
+		}
+		else {
+			shifter = usagmCopyBottom;
+		}
+		$('html, body').animate({
+			scrollTop: shifter
+		}, 700);
 	}
-	else {
-		shifter = usagmCopyBottom;
-	}
-	$('html, body').animate({
-		scrollTop: shifter
-	}, 700);
-	console.log('x: ' + shifter);
-});
 
-$(window).on('resize scroll', function() {
-	checkLogoCopyPos();
-	checkUSAGMCopyPos();
-});
+	var logoPageScroller = $('.splash-down');
+	logoPageScroller.on('click', function() {
+		slideScroll();
+	});
+
+	$(window).on('resize scroll', function() {
+		checkLogoCopyPos();
+		checkUSAGMCopyPos();
+	});
+} // END #usagm-splash-wrapper CHECK
 
 }); // END READY
 })(jQuery);

@@ -7769,20 +7769,21 @@ html, body {
   height: 100%;
   font-size: 10px; }
   #usagm-splash-wrapper p {
-    font-family: "Alegreya Sans", sans-serif; }
+    font-family: "Alegreya Sans", sans-serif;
+    margin: 1.3rem 0 0 0; }
   #usagm-splash-wrapper img {
     margin: 0; }
   #usagm-splash-wrapper .logo-fader-up,
   #usagm-splash-wrapper .logo-fader-down {
     position: absolute;
     width: 100%;
-    height: 20rem;
+    height: 25rem;
     background: linear-gradient(rgba(255, 255, 255, 0), white); }
   #usagm-splash-wrapper .logo-fader-up {
-    top: -20rem;
+    top: -25rem;
     background: linear-gradient(rgba(255, 255, 255, 0), white); }
   #usagm-splash-wrapper .logo-fader-down {
-    bottom: -20rem;
+    bottom: -25rem;
     background: linear-gradient(white, rgba(255, 255, 255, 0)); }
   #usagm-splash-wrapper .logo-board {
     position: relative;
@@ -7811,7 +7812,7 @@ html, body {
       transform: translate(-50%, -50%);
       width: 60%;
       font-size: 3rem;
-      line-height: 3.5rem;
+      line-height: 3.7rem;
       font-weight: 700;
       color: #ffffff; }
       #usagm-splash-wrapper .logo-copy p .splash-down {
@@ -7835,7 +7836,7 @@ html, body {
       #usagm-splash-wrapper .messaging-section .message .message-text .fas {
         font-size: 0.6em; }
   #usagm-splash-wrapper #murrow-quote {
-    background-color: #33669a; }
+    background-color: #3f7ad1; }
     #usagm-splash-wrapper #murrow-quote .outer-container {
       margin-bottom: 0; }
     #usagm-splash-wrapper #murrow-quote .ed-quote {
@@ -7843,14 +7844,28 @@ html, body {
     #usagm-splash-wrapper #murrow-quote p {
       color: #ffffff;
       margin: 0; }
+    #usagm-splash-wrapper #murrow-quote .splash-quote::before {
+      content: "\201C";
+      font-size: 3rem;
+      position: absolute;
+      top: 6rem;
+      font-family: "Carrara-Regular", serif;
+      font-style: normal;
+      font-size: 20rem;
+      margin-left: -1.5rem;
+      color: rgba(255, 255, 255, 0.5); }
     #usagm-splash-wrapper #murrow-quote .splash-quote {
+      position: relative;
+      font-family: "Carrara-Regular", serif;
+      font-style: italic;
       font-size: 3.3rem;
       line-height: 4rem;
       font-weight: 500;
-      margin-bottom: 1.5rem; }
+      margin: 0 0.5rem 1.5rem 0.5rem; }
     #usagm-splash-wrapper #murrow-quote .splash-quote-by {
       font-size: 1.4rem;
-      line-height: 2rem; }
+      line-height: 2rem;
+      text-align: right; }
     #usagm-splash-wrapper #murrow-quote .ed-img {
       display: none; }
 
@@ -7859,30 +7874,39 @@ html, body {
     font-size: 12px; }
     #usagm-splash-wrapper .logo-board {
       height: 58vh; }
+      #usagm-splash-wrapper .logo-board .logo-container {
+        height: 58vh; }
     #usagm-splash-wrapper .logo-copy {
       height: 42vh; }
       #usagm-splash-wrapper .logo-copy p {
-        font-size: 4rem; } }
+        font-size: 4rem;
+        line-height: 4.3rem; }
+    #usagm-splash-wrapper #bbg-copy {
+      margin-bottom: 58.2vh; } }
 
 @media screen and (min-width: 600px) {
   #usagm-splash-wrapper .messaging-section .message {
     width: calc(33.33333% - 26.66667px);
     float: left;
     margin-left: 20px;
-    margin-bottom: 0; }
-  #usagm-splash-wrapper #murrow-quote .outer-container {
-    background-image: url("http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow.png");
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-    background-position: right top; }
-  #usagm-splash-wrapper #murrow-quote .ed-quote {
-    width: calc(50% - 30px);
-    float: left;
-    margin-left: 20px; } }
+    margin-bottom: 0; } }
 
 @media screen and (min-width: 900px) {
   #usagm-splash-wrapper .logo-board .logo-container {
-    width: 50%; } }
+    width: 50%; }
+  #usagm-splash-wrapper #murrow-quote .outer-container {
+    background-image: url("http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: -10% top; }
+  #usagm-splash-wrapper #murrow-quote .ed-quote {
+    margin-left: calc(50% - 30px + 40px); } }
+
+@media screen and (min-width: 900px) {
+  #usagm-splash-wrapper #murrow-quote .outer-container {
+    background-position: left top; }
+  #usagm-splash-wrapper #murrow-quote .ed-quote {
+    margin-left: calc(41.66667% - 28.33333px + 40px); } }
 
 @media print {
   /* @page :first {

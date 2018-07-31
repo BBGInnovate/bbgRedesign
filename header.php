@@ -254,4 +254,3 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 		</nav>
 	</header>
 <?php } ?>
-	<!-- <div id="content" class="site-content"> -->
