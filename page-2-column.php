@@ -54,11 +54,9 @@ function display_foia_reports() {
 		foreach($filenames as $file) {
 			$file_year = get_nums($file);
 			if ($file_year == $year) {
-				$dl_link  = '<li><a href="';
-				$dl_link .= 	$foia_url . $file;
-				$dl_link .= 	'">';
-				$dl_link .= 		$file;
-				$dl_link .= '</a></li>';
+				$dl_link  = '<li>';
+				$dl_link .= 	'<a href="' . $foia_url . $file . '">' . $file . '</a>';
+				$dl_link .= '</li>';
 				echo $dl_link;
 			}
 		}

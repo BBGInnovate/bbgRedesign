@@ -451,138 +451,137 @@ if ($includeSidebar) {
  * Sidebar drop-down for multiple downloads (2-col pages)
  * @var [boolean]
  */
+
 $listsInclude = get_field('sidebar_dropdown_include', '', true);
 
-if ( $listsInclude ) {
-
-	$dropdownTitle = get_field( 'sidebar_dropdown_title' );
+if ($listsInclude) {
+	$dropdownTitle = get_field('sidebar_dropdown_title');
 
 	if (have_rows('sidebar_dropdown_content')) {
 
-		$s = "";
+		$s = '';
 		if ($dropdownTitle && $dropdownTitle != "") {
-			$s = "<h5 class='bbg__label small bbg__sidebar__download__label'>" . $dropdownTitle ."</h5>";
+			$s = '<h5>' . $dropdownTitle . '</h5>';
 		}
 
+		while (have_rows('sidebar_dropdown_content')) : the_row();
+			if (get_row_layout() == 'file_downloads') {
+				$sidebarDownloadsTitle = get_sub_field('sidebar_downloads_title');
+				$sidebarDownloadsDefault = get_sub_field('sidebar_downloads_default');
+				$sidebarDownloadsRows = get_sub_field('sidebar_downloads' );
+				$sidebarDownloadsTotal = count( $sidebarDownloadsRows);
 
-		while ( have_rows('sidebar_dropdown_content') ) : the_row();
+				$s .= '<br><div>';
+				if ($sidebarDownloadsTotal >= 4) {
+					$download_select  = '<form style="max-width: 100%;">';
+					$download_select .= 	'<h5>' . $sidebarDownloadsTitle . '</h5>';
+					$download_select .= 	'<select name="file_download_list" id="file_download_list" style="display: inline-block; max-width: 100%;">';
+					$download_select .= 		'<option>' . $sidebarDownloadsDefault . '</option>';
 
-			if ( get_row_layout() == 'file_downloads' ){
-				$s .= "<div class='bbg__sidebar__download'>";
-					$sidebarDownloadsTitle = get_sub_field( 'sidebar_downloads_title' );
-					$sidebarDownloadsDefault = get_sub_field( 'sidebar_downloads_default' );
-					$sidebarDownloadsRows = get_sub_field( 'sidebar_downloads' );
-					$sidebarDownloadsTotal = count( $sidebarDownloadsRows );
+					foreach ($sidebarDownloadsRows as $row) {
+						$sidebarDownloadsLinkName = $row['sidebar_download_title'];
+						$sidebarDownloadsLinkObj = $row['sidebar_download_file'];
+						$fileLink = $sidebarDownloadsLinkObj['url'];
+						$fileID = $sidebarDownloadsLinkObj['ID'];
+						$file = get_attached_file( $fileID );
+						$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+						$size = formatBytes(filesize($file));
 
-					// $s .= "<h5 class='bbg_label'>" . $sidebarDownloadsTitle . "</h5>" ;
-
-					if ( $sidebarDownloadsTotal >= 4 ) {
-						$s .= '<form style="max-width: 100%;">';
-						$s .= 	'<h6>' . $sidebarDownloadsTitle . '</h6>';
-						$s .= 	'<select name="file_download_list" id="file_download_list" style="display: inline-block; max-width: 100%;">';
-						$s .= 		'<option>' . $sidebarDownloadsDefault . '</option>';
-
-						foreach ($sidebarDownloadsRows as $row) {
-							// Download option name
-							$sidebarDownloadsLinkName = $row['sidebar_download_title'];
-							// Download file info
-							$sidebarDownloadsLinkObj = $row['sidebar_download_file'];
-							// file details
-							$fileLink = $sidebarDownloadsLinkObj['url'];
-							$fileID = $sidebarDownloadsLinkObj['ID'];
-							$file = get_attached_file( $fileID );
-							$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
-							$size = formatBytes(filesize($file));
-
-							if ($sidebarDownloadsLinkName == "" | !$sidebarDownloadsLinkName) {
-								$name = $sidebarDownloadsLinkObj['title'];
-								$sidebarDownloadsLinkName = $name;
-							}
-
-							$s .= '<option value="' . $fileLink . '">';
-							$s .= 	$sidebarDownloadsLinkName;
-							$s .= 	' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
-							$s .= '</option>';
+						if ($sidebarDownloadsLinkName == "" | !$sidebarDownloadsLinkName) {
+							$name = $sidebarDownloadsLinkObj['title'];
+							$sidebarDownloadsLinkName = $name;
 						}
 
-						$s .= 	'</select>';
-						$s .= '</form>';
-						$s .= '<button class="usa-button downloadFile" id="downloadFile" style="width: 100%;">Download</button>';
+						$download_select .= '<option value="' . $fileLink . '">';
+						$download_select .= 	$sidebarDownloadsLinkName;
+						$download_select .= 	' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
+						$download_select .= '</option>';
 					}
-					else {
-						$sidebarDownloadsTitle = get_sub_field( 'sidebar_download_title' );
-						$sidebarDownloadsRows = get_sub_field( 'sidebar_downloads' );
 
-						$s .= "<ul class='bbg__article-sidebar__list--labeled'>";
-							foreach( $sidebarDownloadsRows as $row ) {
-								// Download option name
-								$sidebarDownloadsLinkName = $row['sidebar_download_title'];
-								// Download file info
-								$sidebarDownloadsLinkObj = $row['sidebar_download_file'];
-									// file details
-									$fileLink = $sidebarDownloadsLinkObj['url'];
-									$fileID = $sidebarDownloadsLinkObj['ID'];
-									$file = get_attached_file( $fileID );
-									$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
-									$size = formatBytes(filesize($file));
-
-									if ( $sidebarDownloadsLinkName == "" | !$sidebarDownloadsLinkName ) {
-										$name = $sidebarDownloadsLinkObj['title'];
-										$sidebarDownloadsLinkName = $name;
-									}
-
-								$s .= "<li><h5 class='bbg__sidebar__download__title'><a target='_blank' href='" . $fileLink . "'>" . $sidebarDownloadsLinkName . "</a> <span class='bbg__file-size'>(" . $ext . ", " . $size . ")</span>" . "</h5></li>";
-							}
-						$s .= "</ul>";
-					}
-				$s .= "</div>";
-			} elseif ( get_row_layout() == 'sidebar_dropdown_internal_links' ) {
-				$s .= "<div class='bbg__sidebar__download'>";
-				$sidebarInternalTitle = get_sub_field( 'sidebar_internal_title' );
-				$sidebarInternalDefault = get_sub_field( 'sidebar_internal_default' );
-				$sidebarInternalRows = get_sub_field( 'sidebar_internal_objects' );
-				if (count($sidebarInternalRows) < 5) {
-					$s .= "<h5 class='bbg_label'>" . $sidebarInternalTitle . "</h5>" ;
-					$s .= "<ul class='bbg__article-sidebar__list--labeled'>";
-					foreach( $sidebarInternalRows as $link ) {
-						$sidebarInternalLinkName = $link['internal_links_title'];
-						$sidebarInternalLinkObj = $link['internal_links_url'];
-						$url = get_permalink( $sidebarInternalLinkObj->ID );
-						if ( $sidebarInternalLinkName == "" | !$sidebarInternalLinkName ) {
-							$title = $sidebarInternalLinkObj->post_title; // WP object title
-							$sidebarInternalLinkName = $title;
-						}
-						$s .= "<li><h5 class='bbg__sidebar__download__title'><a href='" . $url . "'>" . $sidebarInternalLinkName . "</a></h5></li>";
-					}
-					$s .= "</ul>";
-				} else {
-					$s .= '<form >';
-					$s .= '<label for="options" style="display: inline-block; font-size: 2rem; font-weight: bold; margin-top: 0;">' . $sidebarInternalTitle . '</label>';
-					$s .= '<select name="internal_links_list" class="internal_links_list" style="display: inline-block;">';
-					$s .= '<option>Select a link</option>';
-					foreach( $sidebarInternalRows as $link ) {
-						$sidebarInternalLinkName = $link['internal_links_title'];
-						$sidebarInternalLinkObj = $link['internal_links_url'];
-						$url = get_permalink( $sidebarInternalLinkObj->ID );
-						if ( $sidebarInternalLinkName == "" | !$sidebarInternalLinkName ) {
-							$title = $sidebarInternalLinkObj->post_title; // WP object title
-							$sidebarInternalLinkName = $title;
-						}
-						$s .= '<option value="' . $url . '">' . $sidebarInternalLinkName . '</option>';
-					}
-					$s .= '</select>';
-					$s .= '</form>';
-					$s .= '<button class="usa-button internalLink" style="width: 100%;">Go</button>';
+					$download_select .= 	'</select>';
+					$download_select .= '</form>';
+					$download_select .= '<button class="usa-button downloadFile" id="downloadFile" style="width: 100%;">Download</button>';
+					$s .= $download_select;
 				}
-				$s .= "</div>";
+				else {
+					$sidebarDownloadsTitle = get_sub_field('sidebar_download_title');
+					$sidebarDownloadsRows = get_sub_field('sidebar_downloads');
+
+					$download_list = '';
+					foreach($sidebarDownloadsRows as $row) {
+						$sidebarDownloadsLinkName = $row['sidebar_download_title'];
+						$sidebarDownloadsLinkObj = $row['sidebar_download_file'];
+						$fileLink = $sidebarDownloadsLinkObj['url'];
+						$fileID = $sidebarDownloadsLinkObj['ID'];
+						$file = get_attached_file($fileID);
+						$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+						$size = formatBytes(filesize($file));
+
+						if ($sidebarDownloadsLinkName == "" | !$sidebarDownloadsLinkName) {
+							$name = $sidebarDownloadsLinkObj['title'];
+							$sidebarDownloadsLinkName = $name;
+						}
+
+						$download_list .= '<h6>';
+						$download_list .= 	'<a target="_blank" href="' . $fileLink . '">' . $sidebarDownloadsLinkName . '</a>';
+						$download_list .= 	'<span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
+						$download_list .= '<h6>';
+					}
+				}
+				$download_list .= '</div>';
+				$s .= $download_list;
+			}
+			elseif (get_row_layout() == 'sidebar_dropdown_internal_links') {
+				$sidebarInternalTitle = get_sub_field('sidebar_internal_title');
+				$sidebarInternalDefault = get_sub_field('sidebar_internal_default');
+				$sidebarInternalRows = get_sub_field('sidebar_internal_objects');
+
+				$sidebar_internal_links  = '<div class="bbg__sidebar__download">';
+
+				if (count($sidebarInternalRows) < 5) {
+					$sidebar_internal_links .= '<h5>' . $sidebarInternalTitle . '</h5>';
+
+					foreach( $sidebarInternalRows as $link ) {
+						$sidebarInternalLinkName = $link['internal_links_title'];
+						$sidebarInternalLinkObj = $link['internal_links_url'];
+						$url = get_permalink($sidebarInternalLinkObj->ID);
+
+						if ( $sidebarInternalLinkName == "" | !$sidebarInternalLinkName ) {
+							$title = $sidebarInternalLinkObj->post_title;
+							$sidebarInternalLinkName = $title;
+						}
+						$sidebar_internal_links .= '<h6>';
+						$sidebar_internal_links .= 	'<a href="' . $url . '">' . $sidebarInternalLinkName . '</a>';
+						$sidebar_internal_links .= '</h6>';
+					}
+					$s .= $sidebar_internal_links;
+				} else {
+					$sidebar_form  = '<form>';
+					$sidebar_form .= 	'<label for="options" style="display: inline-block; font-size: 2rem; font-weight: bold; margin-top: 0;">' . $sidebarInternalTitle . '</label>';
+					$sidebar_form .= 	'<select name="internal_links_list" class="internal_links_list" style="display: inline-block;">';
+					$sidebar_form .= 		'<option>Select a link</option>';
+
+					foreach( $sidebarInternalRows as $link ) {
+						$sidebarInternalLinkName = $link['internal_links_title'];
+						$sidebarInternalLinkObj = $link['internal_links_url'];
+						$url = get_permalink($sidebarInternalLinkObj->ID);
+
+						if ($sidebarInternalLinkName == "" | !$sidebarInternalLinkName) {
+							$title = $sidebarInternalLinkObj->post_title;
+							$sidebarInternalLinkName = $title;
+						}
+						$sidebar_form .= 	'<option value="' . $url . '">' . $sidebarInternalLinkName . '</option>';
+					}
+					$sidebar_form .= 	'</select>';
+					$sidebar_form .= '</form>';
+					$sidebar_form .= '<button class="usa-button internalLink" style="width: 100%;">Go</button>';
+					$s .= $sidebar_form;
+				}
+				$s .= '</div>';
 			}
 		endwhile;
-		// Add all content types to the sidebar variable
 		$sidebarDownloads = $s;
 	}
-
-// echo $sidebar;
-
 }
 
 ?>
