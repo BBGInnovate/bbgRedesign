@@ -142,10 +142,12 @@ get_header(); ?>
 						$secondaryColumnContent = get_field('secondary_column_content');
 
 						if ($secondaryColumnContent != "") {
+							echo '<article>';
 							if ($secondaryColumnLabel != "") {
 								echo '<h5>' . $secondaryColumnLabel . '</h5>';
 							}
 							echo $secondaryColumnContent;
+							echo '</article>';
 						}
 						if ($includeSidebar) {
 							echo $sidebar;

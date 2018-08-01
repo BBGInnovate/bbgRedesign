@@ -3269,13 +3269,14 @@ a:focus .bbg__article-share__icon {
 
 .bbg__sidebar__table {
   font-size: 90%;
-  margin-top: 0;
-  margin-bottom: 6rem; }
-  .bbg__sidebar__table td,
-  .bbg__sidebar__table th {
+  margin: 0 0 6rem 0; }
+  .bbg__sidebar__table td, .bbg__sidebar__table th {
     padding-left: 0; }
   .bbg__sidebar__table td:nth-of-type(3) {
     padding-left: 3.5rem; }
+
+.side-content-container article {
+  border: 1px solid red; }
 
 /** ---------------
  * TABLES
