@@ -2,10 +2,7 @@ html, body {height: 100%;}
 #usagm-splash-wrapper {
 	height: 100%;
 	font-size: 10px;
-	p {
-		font-family: $font-sans;
-		margin: 1.3rem 0 0 0;
-	}
+	p {font-family: $font-sans;}
 	img {margin: 0;}
 
 	.logo-fader-up,
@@ -47,17 +44,26 @@ html, body {height: 100%;}
 		text-align: center;
 		height: 45vh;
 		background-color: #989898;
-		p {
+		.center-copy-block {
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
 			width: 60%;
-			font-size: 3rem;
-			line-height: 3.7rem;
-			font-weight: 700;
-			color: $white;
-			.splash-down {cursor: pointer;}
+			p {
+				font-size: 3rem;
+				line-height: 3.7rem;
+				font-weight: 700;
+				color: $white;
+				margin: 1.5rem 0 0 0;
+			}
+			.splash-down {
+				position: absolute;
+				left: 50%;
+				font-size: 4rem;
+				margin: 0;
+				cursor: pointer;
+			}
 		}
 	}
 	#bbg-copy {margin-bottom: 55vh}
@@ -65,6 +71,12 @@ html, body {height: 100%;}
 	.messaging-section {
 		padding: 6rem 0;
 		background-color: $black3;
+		img {
+			width: 100%;
+			margin: 0 auto;
+		}
+		a:link, a:visited {color: $white; text-decoration: none;}
+		a:hover, a:active {color: $color-cool-blue; text-decoration: none;}
 		.message {
 			margin-bottom: 3rem;
 			.message-image {

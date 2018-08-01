@@ -87,6 +87,11 @@ if ($('#usagm-splash-wrapper').length != 0) {
 	}
 
 	var logoPageScroller = $('.splash-down');
+	logoPageScroller.hover(function() {
+		$(this).animate({'padding-top': '5px'});
+	}, function() {
+		$(this).animate({'padding-top': '0'});
+	});
 	logoPageScroller.on('click', function() {
 		slideScroll();
 	});

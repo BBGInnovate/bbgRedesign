@@ -15,15 +15,17 @@ get_header();
 
 <div class="logo-copy" id="bbg-copy">
 	<div class="logo-fader-up"></div>
-	<p>For 75 years we've been telling the truth. And the truth is, our name was outdated.<br><i class="splash-down fas fa-angle-down"></i></p>
+	<div class="center-copy-block">
+		<p>For 75 years we've been telling the truth. And the truth is, our name was outdated.</p>
+		<p class="splash-down"><i class="fas fa-angle-down"></i></p>
+	</div>
 	<div class="logo-fader-down"></div>
 </div>
 
 <div class="logo-copy" id="usagm-copy">
-	<div class="outer-container">
-		<div class="grid-container">
-			<p>The Broadcasting Board of Governors is now the United States Agency for Global Media<br><i class="splash-down fas fa-angle-down"></i></p>
-		</div>
+	<div class="center-copy-block">
+		<p>The Broadcasting Board of Governors is now the United States Agency for Global Media</p>
+		<p class="splash-down"><i class="fas fa-angle-down"></i></p>
 	</div>
 </div>
 
@@ -33,7 +35,7 @@ get_header();
 			<div class="inner-container message">
 				<div class="grid-container">
 					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/sf.jpg" alt="">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/what-we-do-video-still.png" alt="">
 					</div>
 					<div class="message-text">
 						<h4>What We Do</h4>
@@ -43,19 +45,21 @@ get_header();
 			</div>
 			<div class="inner-container message">
 				<div class="grid-container">
-					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/sf.jpg" alt="">
-					</div>
-					<div class="message-text">
-						<h4>Who We Are</h4>
-						<p><i class="fas fa-arrow-right"></i> Video: 60 seconds</p>
-					</div>
+					<a class="messageing-link" href="http://dev.bbg.gov/who-we-are/">
+						<div class="message-image">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/who-we-are-video-still.png" alt="">
+						</div>
+						<div class="message-text">
+							<h4>Who We Are</h4>
+							<p><i class="fas fa-arrow-right"></i> Video: 60 seconds</p>
+						</div>
+					</a>
 				</div>
 			</div>
 			<div class="inner-container message">
 				<div class="grid-container">
 					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/sf.jpg" alt="">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/john_lansing_ceo-sq-200x200.jpg" alt="">
 					</div>
 					<div class="message-text">
 						<h4>Where We Are Going</h4>
