@@ -24,12 +24,7 @@
 				</a>
 			</div>
 			<?php
-				wp_nav_menu(array(
-					'theme_location' => 'primary',
-					'menu_id' => 'primary-menu',
-					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul><div class="bbg__main-navigation__search">' . $searchBox . '</div>',
-					'walker' => new bbginnovate_walker_header_usa_menu()
-				)); 
+				wp_nav_menu(); 
 			?>
 		</div>
 	</div>

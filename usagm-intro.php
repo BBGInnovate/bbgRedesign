@@ -24,7 +24,7 @@ get_header();
 
 <div class="logo-copy" id="usagm-copy">
 	<div class="center-copy-block">
-		<p>The Broadcasting Board of Governors is now the United States Agency for Global Media</p>
+		<p>The Broadcasting Board of Governors is now the United States Agency for Global Media. New name, staying true to mission.</p>
 		<p class="splash-down"><i class="fas fa-angle-down"></i></p>
 	</div>
 </div>

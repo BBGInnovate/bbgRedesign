@@ -3275,9 +3275,6 @@ a:focus .bbg__article-share__icon {
   .bbg__sidebar__table td:nth-of-type(3) {
     padding-left: 3.5rem; }
 
-.side-content-container article {
-  border: 1px solid red; }
-
 /** ---------------
  * TABLES
  ------------------ */
@@ -7814,7 +7811,8 @@ html, body {
       #usagm-splash-wrapper .logo-copy .center-copy-block p {
         font-size: 3rem;
         line-height: 3.7rem;
-        font-weight: 700;
+        font-weight: 500;
+        letter-spacing: 0.03rem;
         color: #ffffff;
         margin: 1.5rem 0 0 0; }
       #usagm-splash-wrapper .logo-copy .center-copy-block .splash-down {

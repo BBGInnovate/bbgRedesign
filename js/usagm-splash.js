@@ -86,6 +86,15 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		}, 700);
 	}
 
+	// CHECK PAGE POS, LOGO DISPLAY ON LOAD
+	if ($(window).scrollTop() > $('#bbg-copy').offset().top) {
+		$('.logo-board img.logo').attr('src', usagmLogoPath);
+	}
+	if ($(window).scrollTop() > $('#usagm-copy').offset().top) {
+		checkUSAGMCopyPos();
+	}
+
+	// MOVE DOWN ARROW ON HOVER
 	var logoPageScroller = $('.splash-down');
 	logoPageScroller.hover(function() {
 		$(this).animate({'padding-top': '5px'});

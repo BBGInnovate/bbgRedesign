@@ -104,7 +104,7 @@
 				menuItem.children('ul.sub-menu').css('display', 'none');
 				menuItem.children('.nav-icon').removeClass('displayed-dropdown');
 			}
-			var navHasChild = $('li.menu-item-has-children');
+			var navHasChild = $('ul#primary-menu li.menu-item-has-children');
 			$.each(navHasChild, function() {
 				$(this).prepend($('<i class="nav-icon fas fa-angle-down"></i>'));
 				$('.nav-icon').hide();
