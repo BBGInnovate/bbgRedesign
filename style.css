@@ -7809,16 +7809,15 @@ html, body {
       transform: translate(-50%, -50%);
       width: 60%; }
       #usagm-splash-wrapper .logo-copy .center-copy-block p {
-        font-size: 3rem;
-        line-height: 3.7rem;
+        font-size: 2rem;
+        line-height: 2.7rem;
         font-weight: 500;
         letter-spacing: 0.03rem;
         color: #ffffff;
-        margin: 1.5rem 0 0 0; }
+        margin: 0; }
       #usagm-splash-wrapper .logo-copy .center-copy-block .splash-down {
         position: absolute;
         left: 50%;
-        font-size: 4rem;
         margin: 0;
         cursor: pointer; }
   #usagm-splash-wrapper #bbg-copy {
@@ -7889,15 +7888,18 @@ html, body {
       height: 58vh; }
       #usagm-splash-wrapper .logo-board .logo-container {
         height: 58vh; }
+    #usagm-splash-wrapper #bbg-copy {
+      margin-bottom: 58.2vh; }
     #usagm-splash-wrapper .logo-copy {
       height: 42vh; }
-      #usagm-splash-wrapper .logo-copy p {
-        font-size: 4rem;
-        line-height: 4.3rem; }
-    #usagm-splash-wrapper #bbg-copy {
-      margin-bottom: 58.2vh; } }
+      #usagm-splash-wrapper .logo-copy .center-copy-block p {
+        font-size: 2.5rem;
+        line-height: 3.2rem; } }
 
 @media screen and (min-width: 600px) {
+  #usagm-splash-wrapper .logo-copy .center-copy-block p {
+    font-size: 3rem;
+    line-height: 3.7rem; }
   #usagm-splash-wrapper .messaging-section .message {
     width: calc(33.33333% - 26.66667px);
     float: left;
