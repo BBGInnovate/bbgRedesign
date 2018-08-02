@@ -184,16 +184,13 @@ function build_ribbon_parts($ribbon_data) {
 function build_office_parts($office_data) {
 	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';
 
-	$office_contact  = '<p>';
-	$office_contact .= 	$office_data['office_street'];
+	$office_contact  = '<p class="aside">';
+	$office_contact .= 	$office_data['office_street'] . '<br>';
 	$office_contact .= 	$office_data['office_city'] . ', ';
-	$office_contact .= 	$office_data['office_state'];
-	$office_contact .= 	$office_data['office_zip'];
-	$office_contact .= '<br>';
-	$office_contact .= 	'Tel: ';
-	$office_contact .= 		'<a href="tel:' . $office_data['office_phone'] . '">' . $office_data['office_phone'] . '</a>&nbsp;&nbsp;';
-	$office_contact .= 	'Email: ';
-	$office_contact .= 		'<a href="mailto:' . $office_data['office_email'] . '">' . $office_data['office_email'] . '</a>';
+	$office_contact .= 	$office_data['office_state'] . ', ';
+	$office_contact .= 	$office_data['office_zip'] . '<br><br>';
+	$office_contact .= 	'Tel: <a href="tel:' . $office_data['office_phone'] . '">' . $office_data['office_phone'] . '</a><br>';
+	$office_contact .= 	'Email: <a href="mailto:' . $office_data['office_email'] . '">' . $office_data['office_email'] . '</a>';
 	$office_contact .= '</p>';
 
 	$office_package = array('header' => $office_header, 'contact' => $office_contact);

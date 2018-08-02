@@ -63,6 +63,28 @@ if (have_rows('about_flexible_page_rows')) {
 			$office_data_result = get_office_data();
 			$office_parts_result = build_office_parts($office_data_result);
 			$office_module = assemble_office_module($office_parts_result);
+			$post_ids_used = [];
+			$tag_ids = array();
+
+			foreach($office_data_result['office_tag'] as $term) {
+				array_push($tag_ids, $term->term_id);
+			}
+
+			$qParamsOffice = array(
+				'post_type' => array('post'),
+				'posts_per_page' => 3,
+				'order_by' => 'date',
+				'order' => 'DESC',
+				'post__not_in' => $post_ids_used
+			);
+
+			if (count($office_data_result['office_tag'])) {
+				if ($office_data_result['office_tag_bool'] == "AND") {
+					$qParamsOffice['tag__and'] = $tag_ids;
+				} else {
+					$qParamsOffice['tag__in'] = $tag_ids;
+				}
+			}
 		}
 		elseif (get_row_layout() == 'marquee') {
 			$marquee_data_result = get_marquee_data();
@@ -92,20 +114,45 @@ get_header();
 	$page_header  = '<div class="outer-container">';
 	$page_header .= 	'<div class="grid-container">';
 	$page_header .= 		'<h2>' . get_the_title() . '</h2>';
-	if (!empty($office_module)) {
-		$page_header .= 	$office_module;
-	}
 	$page_header .= 	'</div>';
 	$page_header .= '</div>';
 	echo $page_header;
 
 	// PAGE CONTENT
-	$body_copy  = '<div class="outer-container">';
-	$body_copy .= 	'<div class="grid-container page-content">';
-	$body_copy .= 		$page_content;
-	$body_copy .= 	'</div>';
-	$body_copy .= '</div>';
-	echo $body_copy;
+	if ($page_content != "") {
+		$body_copy  = '<div class="outer-container">';
+		$body_copy .= 	'<div class="grid-container page-content">';
+		$body_copy .= 		$page_content;
+		$body_copy .= 	'</div>';
+		$body_copy .= '</div>';
+		echo $body_copy;
+	}
+
+	if (!empty($office_module)) {
+		echo '<div class="outer-container">';
+		echo 	'<div class="custom-grid-container related-divider">';
+		echo 		'<div class="inner-container">';
+		echo 			'<div class="main-content-container">';
+		$office_articles = new WP_Query($qParamsOffice);
+		if ($office_articles -> have_posts()) {
+			while ($office_articles -> have_posts()) {
+				$office_articles -> the_post();
+				echo 	'<article class="inner-container">';
+				echo 		'<h4>' . get_the_title() . '</h4>';
+				echo 		'<p class="aside">' . get_the_excerpt() . '</p>';
+				echo 	'</article>';
+			}
+		}
+		echo 			'</div>';
+		echo 			'<div class="side-content-container">';
+		// if (!empty($office_module)) {
+			echo 			$office_module;
+		// }
+		echo 			'</div>';
+		echo 		'</div>';
+		echo 	'</div>';
+		echo '</div>';
+	}
 
 	// FLEXIBLE ROWS
 	if (is_page('who-we-are')) {

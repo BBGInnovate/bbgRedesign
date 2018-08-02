@@ -1,9 +1,20 @@
 // GRIDS AND GRID STRUCTURES, USING NEAT BOUBON
 // https://neat.bourbon.io/docs/latest/
 
+// 0. CUSTOM GRID STYLES
 // 1. FULL, NESTED GRIDS
 // 2. EVEN BLOCKS
 // 3. SIDEBARS
+
+
+// 0. CUSTOM GRID STYLES
+.sidebar-divider {border-left: 1px solid #e6e6e6;}
+.related-divider {
+	padding-top: 1.5rem;
+	border-top: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
+}
+
 
 // 1. FULL, NESTED GRIDS
 .outer-container {
@@ -13,7 +24,7 @@
 }
 .custom-grid-container {
 	max-width: 1200px;
-	margin: 0 auto 6em auto;
+	margin: 0 auto 3em auto;
 }
 .nest-container {@include grid-collapse;}
 .inner-container {@include grid-container;}
