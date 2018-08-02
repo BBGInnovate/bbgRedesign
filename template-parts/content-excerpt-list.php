@@ -49,25 +49,13 @@ $linkImage = sprintf('<a href="%s" rel="bookmark" tabindex="-1">', esc_url(get_p
 
 // MARKUP
 $excerpt_list  = '<article id="'. get_the_ID() . '">';
-$excerpt_list .= 	'<header>';
 if ($includeDate) { // FOR EVENT PAGE EXCERPTS ONLY
-	$excerpt_list .= 	'<p class="bbg__excerpt__event-date">' . get_the_date() . '</p>';
+	$excerpt_list .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
 }
-$excerpt_list .= 		'<h4 class="';
-if ($includeDate) {
-	$excerpt_list .= 		'bbg__excerpt-title--showDate';
-}
-$excerpt_list .= 		'">';
+$excerpt_list .= 		'<h6>';
 $excerpt_list .= 			'<a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
-$excerpt_list .= 		'</h4>';
-$excerpt_list .= 	'</header>';
-// if ($includeImage && has_post_thumbnail()) {
-// 	$excerpt_list .= '<div class="single-post-thumbnail clear bbg__excerpt-header__thumbnail--small">';
-// 	$excerpt_list .= 	$linkImage;
-// 	$excerpt_list .= 		the_post_thumbnail('small-thumb');
-// 	$excerpt_list .= 	'</a>';
-// 	$excerpt_list .= '</div>';
-// }
+$excerpt_list .= 		'</h6>';
+
 if ('post' === get_post_type()) {
 	if ($includeMeta) {
 		$excerpt_list .= '<div class="entry-meta bbg__excerpt-meta">';
@@ -77,11 +65,7 @@ if ('post' === get_post_type()) {
 }
 if ($includeExcerpt) {
 	$excerpt_list .= '<div class="entry-content bbg-blog__excerpt-content">';
-	$excerpt_list .= 	'<p>' . get_the_excerpt() . '</p>';
-						// wp_link_pages(array(
-						// 	'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'bbginnovate' ),
-						// 	'after'  => '</div>',
-						// ));
+	$excerpt_list .= 	'<p class="aside">' . get_the_excerpt() . '</p>';
 	$excerpt_list .= '</div>';
 }
 $excerpt_list .= '</article>';
