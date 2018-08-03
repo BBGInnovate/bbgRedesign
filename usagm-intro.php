@@ -84,5 +84,13 @@ get_header();
 	</div>
 </div>
 
+<div class="messaging-section">
+	<div class="outer-container">
+		<div class="grid-container">
+			<a style="font-size: 2rem; font-weight: 300;" class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to Home Page</a>
+		</div>
+	</div>
+</div>
+
 </div> <!-- END #usagm-splash-wrapper -->
 <?php get_footer(); ?>

@@ -68,6 +68,7 @@ if (have_rows('about_flexible_page_rows')) {
 
 			foreach($office_data_result['office_tag'] as $term) {
 				array_push($tag_ids, $term->term_id);
+				var_dump($term);
 			}
 
 			$qParamsOffice = array(
@@ -103,6 +104,28 @@ wp_reset_postdata();
 wp_reset_query();
 
 get_header();
+
+$args = array(
+    'post_type' => 'page',
+    'posts_per_page' => -1,
+    'meta_query' => array(
+        array(
+            'key' => '_wp_page_template',
+            'value' => 'page.php'
+        )
+    )
+);
+$the_pages = new WP_Query( $args );
+
+if( $the_pages->have_posts() ){
+    while( $the_pages->have_posts() ){
+        $the_pages->the_post();
+        the_title();
+        echo '<br>';
+    }
+}
+wp_reset_postdata();
+
 ?>
 
 <main id="main" class="site-main" role="main">
@@ -133,14 +156,15 @@ get_header();
 		echo 	'<div class="custom-grid-container related-divider">';
 		echo 		'<div class="inner-container">';
 		echo 			'<div class="main-content-container">';
+		echo 				'<h5>Recent Highlights</h6>';
 		$office_articles = new WP_Query($qParamsOffice);
 		if ($office_articles -> have_posts()) {
 			while ($office_articles -> have_posts()) {
 				$office_articles -> the_post();
-				echo 	'<article class="inner-container">';
-				echo 		'<h4>' . get_the_title() . '</h4>';
-				echo 		'<p class="aside">' . get_the_excerpt() . '</p>';
-				echo 	'</article>';
+				echo 		'<article class="inner-container">';
+				echo 			'<h4>' . get_the_title() . '</h4>';
+				echo 			'<p class="aside">' . get_the_excerpt() . '</p>';
+				echo 		'</article>';
 			}
 		}
 		echo 			'</div>';

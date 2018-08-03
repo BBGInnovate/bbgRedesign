@@ -181,6 +181,7 @@ function build_ribbon_parts($ribbon_data) {
 	);
 	return $ribbon_package;
 }
+
 function build_office_parts($office_data) {
 	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';
 

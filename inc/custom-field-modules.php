@@ -79,7 +79,7 @@ function assemble_umbrella_main($main) {
 }
 
 function assemble_office_module($office_parts) {
-	$office_module  = 	'<div class="inner-container">';
+	$office_module  = 	'<div class="inner-container bbg__contact-card">';
 	$office_module .= 		$office_parts['contact'];
 	$office_module .= 	'</div>';
 	return $office_module;

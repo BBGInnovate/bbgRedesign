@@ -316,6 +316,7 @@ function get_office_data() {
 		'office_state' => get_field('agency_state', 'options', 'false'),
 		'office_zip' => get_field('agency_zip', 'options', 'false')
 	);
+	// var_dump($office_data);
 	return $office_data;
 }
 
@@ -470,35 +471,6 @@ function get_entity_data($grid_class) {
 	$entity_data_package = array('id_group' => $entity_id_group, 'placement' => $grid_class);
 	return build_entity_parts($entity_data_package);
 }
-
-// function get_journalistic_code_of_ethics_data() {
-// 	$ethics_file_set = array();
-// 	$file_contents = get_field('journalistic_code_of_ethics');
-// 	$ethics_file = $file_contents['ethics_file'];
-
-// 	// REG EXP TO REMOVE DATE, DASHES, EXTENSION FROM FILE NAME
-// 	$ethics_regx = ['/\d+/', '/\- /', '/\-/', '/\_/', '/\.pdf/'];
-
-// 	$i = 0;
-// 	if (!empty($file_contents)) {
-// 		foreach($file_contents as $item) {
-// 			$url = $item['ethics_file']['url'];
-// 			$title = $item['ethics_file']['title'];
-// 			$description = $item['ethics_file_description'];
-
-// 			foreach ($ethics_regx as $regx) {
-// 				$file_name = preg_replace($regx, ' ', $title);
-// 				$title = $file_name;
-// 			}
-
-// 			$file_info = array('title' => $title, 'url' => $url, 'description' => $description);
-// 			${"ethics_file" + $i} = $file_info;
-// 			array_push($ethics_file_set, ${"ethics_file" + $i});
-// 			$i++;
-// 		}
-// 		return $ethics_file_set;
-// 	}
-// }
 
 function get_journalistic_code_of_ethics_data() {
 	$ethics_set = array();

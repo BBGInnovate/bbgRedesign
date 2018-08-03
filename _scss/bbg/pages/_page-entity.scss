@@ -1,19 +1,15 @@
 .bbg__contact-card {
 	background-color: $color-gray-lightest;
 	border-radius: $border-radius;
-	margin: {
-		top: $site-margins;
-		bottom: $site-margins;
-	}
+	margin-bottom: $site-margins;
 	padding: $site-margins;
 
 	@include media($medium-screen) {
 		position: relative;
 	}
 
-	p, a, ul, li {
-		font-family: $font-sans;
-	}
+	p, a, ul, li {font-family: $font-sans;}
+	p {margin: 0;}
 
 	&.bbg__contact-card--include-map {
 		padding: 0;
