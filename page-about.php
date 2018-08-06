@@ -59,34 +59,6 @@ if (have_rows('about_flexible_page_rows')) {
 			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group);
 			array_push($umbrella_group, $umbrella_content_markup);
 		}
-		elseif (get_row_layout() == 'about_office') {
-			$office_data_result = get_office_data();
-			$office_parts_result = build_office_parts($office_data_result);
-			$office_module = assemble_office_module($office_parts_result);
-			$post_ids_used = [];
-			$tag_ids = array();
-
-			foreach($office_data_result['office_tag'] as $term) {
-				array_push($tag_ids, $term->term_id);
-				var_dump($term);
-			}
-
-			$qParamsOffice = array(
-				'post_type' => array('post'),
-				'posts_per_page' => 3,
-				'order_by' => 'date',
-				'order' => 'DESC',
-				'post__not_in' => $post_ids_used
-			);
-
-			if (count($office_data_result['office_tag'])) {
-				if ($office_data_result['office_tag_bool'] == "AND") {
-					$qParamsOffice['tag__and'] = $tag_ids;
-				} else {
-					$qParamsOffice['tag__in'] = $tag_ids;
-				}
-			}
-		}
 		elseif (get_row_layout() == 'marquee') {
 			$marquee_data_result = get_marquee_data();
 			$marquee_parts_result = build_marquee_parts($marquee_data_result);
@@ -104,28 +76,6 @@ wp_reset_postdata();
 wp_reset_query();
 
 get_header();
-
-$args = array(
-    'post_type' => 'page',
-    'posts_per_page' => -1,
-    'meta_query' => array(
-        array(
-            'key' => '_wp_page_template',
-            'value' => 'page.php'
-        )
-    )
-);
-$the_pages = new WP_Query( $args );
-
-if( $the_pages->have_posts() ){
-    while( $the_pages->have_posts() ){
-        $the_pages->the_post();
-        the_title();
-        echo '<br>';
-    }
-}
-wp_reset_postdata();
-
 ?>
 
 <main id="main" class="site-main" role="main">
@@ -151,32 +101,36 @@ wp_reset_postdata();
 		echo $body_copy;
 	}
 
-	if (!empty($office_module)) {
-		echo '<div class="outer-container">';
-		echo 	'<div class="custom-grid-container related-divider">';
-		echo 		'<div class="inner-container">';
-		echo 			'<div class="main-content-container">';
-		echo 				'<h5>Recent Highlights</h6>';
-		$office_articles = new WP_Query($qParamsOffice);
-		if ($office_articles -> have_posts()) {
-			while ($office_articles -> have_posts()) {
-				$office_articles -> the_post();
-				echo 		'<article class="inner-container">';
-				echo 			'<h4>' . get_the_title() . '</h4>';
-				echo 			'<p class="aside">' . get_the_excerpt() . '</p>';
-				echo 		'</article>';
-			}
-		}
-		echo 			'</div>';
-		echo 			'<div class="side-content-container">';
-		// if (!empty($office_module)) {
-			echo 			$office_module;
-		// }
-		echo 			'</div>';
-		echo 		'</div>';
-		echo 	'</div>';
-		echo '</div>';
-	}
+	// OFFICE PAGE OFFICE INFORMATION
+	$office_intro_result = get_office_intro_data();
+
+	$office_contact_data_results = get_office_contact_data();
+	$office_contact_parts_results = build_office_contact_parts($office_contact_data_results);
+	$office_contact_module = assemble_office_contact_module($office_contact_parts_results);
+
+	$office_highlights_data_result = get_office_highlights_data();
+	$office_highlights_parts_result = build_office_highlights_parts($office_highlights_data_result);
+	$office_highlights_module = build_office_highlights_module($office_highlights_parts_result);
+
+	$office_map_data = get_office_map_data($id);
+	// $office_map_parts = build_office_map_parts($office_map_data);
+	// $office_map_module = build_office_map_module($office_map_parts);
+
+	$office_information_chuncks  = '<div class="outer-container office-page">';
+	$office_information_chuncks .= 	'<div class="custom-grid-container">';
+	$office_information_chuncks .= 		'<div class="inner-container">';
+	$office_information_chuncks .= 			'<div class="main-content-container">';
+	$office_information_chuncks .= 				$office_intro_result;
+	$office_information_chuncks .= 				'<div id="map"></div>';
+	$office_information_chuncks .= 				$office_highlights_module;
+	$office_information_chuncks .= 			'</div>';
+	$office_information_chuncks .= 			'<div class="side-content-container">';
+	$office_information_chuncks .= 				$office_contact_module;
+	$office_information_chuncks .= 			'</div>';
+	$office_information_chuncks .= 		'</div>';
+	$office_information_chuncks .= 	'</div>';
+	$office_information_chuncks .= '</div>';
+	echo $office_information_chuncks;
 
 	// FLEXIBLE ROWS
 	if (is_page('who-we-are')) {
@@ -226,5 +180,37 @@ wp_reset_postdata();
 	}
 ?>
 </main>
+<?php
+// IF MAP, LOAD JS, CSS
+if (!empty($office_map_data)) {
+	echo 'look: ' . $office_map_data['lat'];
+?>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 
+	<script type="text/javascript">
+		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
+		var map = L.mapbox.map('map', 'mapbox.streets')
+		<?php echo '.setView(['. $office_map_data['lat'] . ', ' . $office_map_data['lng'] . '], ' . $office_map_data['zoom'] . ');'; ?>
+
+		map.scrollWheelZoom.disable();
+
+		L.mapbox.featureLayer({
+			type: 'Feature',
+			geometry: {
+				type: 'Point',
+				coordinates: [
+					<?php echo $office_map_data['lng'] . ', ' . $office_map_data['lat']; ?>
+				]
+			},
+			properties: {
+				title: '<?php echo $mapHeadline; ?>',
+				description: '<?php echo $mapDescription; ?>',
+				'marker-size': 'large',
+				'marker-color': '#981b1e',
+				'marker-symbol': ''
+			}
+		}).addTo(map);
+	</script>
+<?php } ?>
 <?php get_footer(); ?>

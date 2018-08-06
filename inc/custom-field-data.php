@@ -300,26 +300,6 @@ function get_threats_to_press_data() {
 	return $threat_query_id_set;
 }
 
-// FLEXIBLE ROWS
-function get_office_data() {
-	$office_data = array(
-		'office_tag' => get_sub_field('office_tag'),
-		'office_tag_bool' => get_sub_field('office_tags_boolean_operator'),
-		'office_title' => get_sub_field('office_title'),
-		'office_email' => get_sub_field('office_email'),
-		'office_phone' => get_sub_field('office_phone'),
-		'office_youtube' => get_sub_field('office_youtube'),
-		'office_twitter' => get_sub_field('office_twitter'),
-		'office_facebook' => get_sub_field('office_facebook'),
-		'office_street' => get_field('agency_street', 'options', 'false'),
-		'office_city' => get_field('agency_city', 'options', 'false'),
-		'office_state' => get_field('agency_state', 'options', 'false'),
-		'office_zip' => get_field('agency_zip', 'options', 'false')
-	);
-	// var_dump($office_data);
-	return $office_data;
-}
-
 function get_marquee_data() {
 	$marquee_data = array(
 		'heading' => get_sub_field('marquee_heading'),
@@ -502,6 +482,74 @@ function get_journalistic_code_of_ethics_data() {
 		}
 		return $ethics_set;
 	}
+}
+
+// ABOUT (OFFICE)
+function get_office_intro_data() {
+	$office_introduction = get_field('office_page_introduction');
+	return $office_introduction;
+}
+
+function get_office_contact_data() {
+	$contact_data = array();
+	if (have_rows('office_page_contact')) {
+		while (have_rows('office_page_contact')) {
+			the_row();
+			array_push($contact_data, array(
+				'name' => get_sub_field('office_contact_name'),
+				'title' => get_sub_field('office_contact_title'),
+				'phone' => get_sub_field('office_contact_phone'),
+				'email' => get_sub_field('office_contact_email')
+			));
+		}
+	}
+	return $contact_data;
+}
+
+function get_office_highlights_data() {
+	if (get_field('include_office_page_highlights') == 'yes') {
+		$highlight_tags = get_field('office_page_highlights');
+
+		$used_office_highlights = array();
+		$office_highlight_param = array(
+			'post_type' => array('post'),
+			'posts_per_page' => 3,
+			'order-by' => 'date',
+			'order' => 'ASC',
+			'posts__not_in' => $used_office_highlights
+		);
+
+		$office_tag_ids = array();
+		foreach($highlight_tags as $term) {
+			array_push($office_tag_ids, $term->term_id);
+		}
+
+		if (count($highlight_tags)) {
+			foreach ($office_tag_ids as $office_post) {
+				$office_highlight_param['tag__and'] = $office_post;
+			}
+		}
+		$office_highlights_query = new WP_Query($office_highlight_param);
+	}
+	return $office_highlights_query;
+}
+
+function get_office_map_data($id) {
+	wp_reset_query();
+	$office_map_coords = "";
+	if (get_field('include_office_page_map') == 'yes') {
+		$map_data = get_field('office_page_map');
+		$lat = $map_data['lat'];
+		$lng = $map_data['lng'];
+		$zoom = 4;
+
+		$office_map_coords = array(
+			'lat' => $map_data['lat'],
+			'lng' => $map_data['lng'],
+			'zoom' => $zoom
+		);
+	}
+	return $office_map_coords;
 }
 
 ?>

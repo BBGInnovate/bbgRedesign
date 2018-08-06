@@ -1856,7 +1856,7 @@ p a,
       font-size: 5.2rem;
       font-weight: 700; } }
 
-.usa-font-lead, .bbg__about__intro p:first-of-type, .bbg__about__child__intro p:first-of-type, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
+.usa-font-lead, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
   font-family: "Carrara-Regular", serif;
   font-size: 2rem;
   line-height: 1.7; }
@@ -3038,7 +3038,7 @@ a:not(.bbg__article-share__icon):focus *[class*="thumbnail"] {
   page-break-inside: avoid;
   word-break: keep-all; }
 
-.usa-font-lead, .bbg__about__intro p:first-of-type, .bbg__about__child__intro p:first-of-type, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
+.usa-font-lead, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
   color: #666666; }
 
 .usa-disclaimer {
@@ -4949,11 +4949,11 @@ li.usa-footer-primary-content {
     .usa-footer-big nav .usa-footer-primary-link {
       cursor: default; } }
 
-.usa-font-lead, .bbg__about__intro p:first-of-type, .bbg__about__child__intro p:first-of-type, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
+.usa-font-lead, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
   font-size: 1.6rem;
   font-weight: 300; }
   @media screen and (min-width: 600px) {
-    .usa-font-lead, .bbg__about__intro p:first-of-type, .bbg__about__child__intro p:first-of-type, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
+    .usa-font-lead, .bbg__kits__intro p, .bbg__kits__child__intro p:first-of-type {
       font-size: 2rem;
       line-height: 2.5; } }
 
@@ -5063,6 +5063,7 @@ ol li:before {
   .bbg-header__site-title--breakline {
     display: inline-block; } }
 
+/* FILE CONTENTS */
 .date-meta {
   font-size: 0.9em;
   font-width: 400;
@@ -6598,114 +6599,25 @@ section.usa-section.bbg-banner__section {
           background-image: url(img/social-icons/png/facebook25.png);
           background-image: url(img/social-icons/svg/facebook25.svg); } }
 
-/* Page content as introduction */
-.bbg__about__intro p:first-of-type {
-  line-height: 2.5; }
+.office-page .office-highlights {
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 1.5rem 0 0 0;
+  margin-bottom: 1.5rem; }
+  .office-page .office-highlights h4, .office-page .office-highlights .bbg__board__committee-list li a, .bbg__board__committee-list li .office-page .office-highlights a {
+    margin-bottom: 0.5rem; }
 
-.bbg__about__children--row {
-  margin-bottom: 6rem; }
+.office-page .office-side {
+  padding: 3rem !important;
+  background-color: #e6e6e6; }
 
-/*****
-	Multi-column child styles
-*****/
-@media screen and (min-width: 600px) {
-  .bbg__about__child .bbg__label {
-    font-size: 2rem; } }
-
-.bbg__about__excerpt {
-  margin-bottom: 3rem;
-  max-height: 350px; }
-  .bbg__about__excerpt .bbg__excerpt-header__thumbnail--medium {
-    max-height: 28.7rem;
-    overflow: hidden; }
-
-.bbg__about__child__second-headline {
-  margin-top: 1rem; }
-
-.bbg__about__child--mission .single-post-thumbnail, .bbg__about--marquee .single-post-thumbnail {
-  display: none;
-  height: 0; }
-
-.bbg__about__child--mission .bbg__about__excerpt-content, .bbg__about--marquee .bbg__about__excerpt-content {
-  display: block; }
-
-.bbg__about__child--mission p, .bbg__about--marquee p {
-  color: #000;
-  font-family: "Alegreya Sans", sans-serif;
-  font-size: 2.5rem;
-  font-weight: 300;
-  line-height: 1.7;
-  margin: 0; }
-
-@media screen and (min-width: 1201px) {
-  .bbg__about__child--mission p, .bbg__about--marquee p {
-    font-size: 3rem;
-    line-height: 1.9; } }
-
-@media screen and (min-width: 1201px) {
-  .bbg__about__excerpt-content--large {
-    height: 44.1rem;
-    max-height: 44.1rem; }
-    .bbg__about__excerpt-content--large p {
-      font-size: 2.5rem;
-      line-height: 2.2; } }
-
-/*****
-	Umbrella child styles
-*****/
-.bbg__about__child__intro p:first-of-type {
-  line-height: 2.5; }
-
-.bbg__about__grandchild .bbg__about__grandchild__title, .bbg__about__grandchild .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__title, .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__about__grandchild .bbg__kits__section--tile__title {
-  text-transform: capitalize; }
-
-.bbg__about__grandchild .bbg__about__grandchild__subtitle {
-  color: #757575;
-  font-family: "Carrara-Regular", serif;
-  font-weight: 700;
-  text-transform: capitalize; }
-
-.bbg__about__grandchild .bbg__about__grandchild__thumb {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  float: left;
-  margin-right: 1rem;
-  max-height: 40rem;
-  max-width: 40rem;
-  min-height: 10rem;
-  min-width: 10rem;
-  height: 100%;
-  width: 25%; }
-  @media screen and (min-width: 600px) {
-    .bbg__about__grandchild .bbg__about__grandchild__thumb {
-      max-width: 100%;
-      min-height: 15rem;
-      width: 100%;
-      margin-bottom: 1rem; } }
-  @media screen and (min-width: 900px) {
-    .bbg__about__grandchild .bbg__about__grandchild__thumb {
-      min-height: 20rem; } }
-  @media screen and (min-width: 1201px) {
-    .bbg__about__grandchild .bbg__about__grandchild__thumb {
-      max-width: 50%;
-      margin-bottom: 0;
-      min-height: 15rem; } }
-
-.bbg__about__grandchild p {
-  line-height: 2;
-  margin-top: 0;
-  /* Temporary edits from brian */
-  font-family: "Alegreya Sans", sans-serif;
-  font-size: 1.6rem;
-  line-height: 1.7; }
-
-.bbg__about__grandchild__link {
-  font-family: "Alegreya Sans", sans-serif;
-  margin-left: 1rem;
-  text-align: right;
-  text-decoration: none;
-  white-space: nowrap; }
+.office-page .office-contact {
+  margin-bottom: 1.5rem; }
+  .office-page .office-contact p {
+    font-family: "Alegreya Sans", sans-serif;
+    margin-bottom: 0; }
+  .office-page .office-contact p:first-of-type {
+    font-weight: 500; }
 
 .bbg__employee-profile__excerpt {
   /* Switching from floats to inline-block so that we don't get weird wrapping
@@ -7320,7 +7232,7 @@ div.appropriations-small > p.header {
 .bbg__impact-model p {
   font-family: "Alegreya Sans", sans-serif; }
 
-.bbg__impact-model p.usa-font-lead, .bbg__impact-model .bbg__about__intro p:first-of-type, .bbg__about__intro .bbg__impact-model p:first-of-type, .bbg__impact-model .bbg__about__child__intro p:first-of-type, .bbg__about__child__intro .bbg__impact-model p:first-of-type, .bbg__impact-model .bbg__kits__intro p, .bbg__kits__intro .bbg__impact-model p, .bbg__impact-model .bbg__kits__child__intro p:first-of-type, .bbg__kits__child__intro .bbg__impact-model p:first-of-type {
+.bbg__impact-model p.usa-font-lead, .bbg__impact-model .bbg__kits__intro p, .bbg__kits__intro .bbg__impact-model p, .bbg__impact-model .bbg__kits__child__intro p:first-of-type, .bbg__kits__child__intro .bbg__impact-model p:first-of-type {
   font-family: "Carrara-Regular", serif; }
 
 .bbg__impact-model p.bbg__infobox__tagline {

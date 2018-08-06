@@ -130,6 +130,8 @@
 				$.each(navHasChild, function() {
 					if ($(this).children('a').attr('href').indexOf(urlPath[0]) != -1) {
 						showSubMenu($(this));
+						// BREAK OUT OF LOOP ONCE CONDITION IS MET
+						return false;
 					}
 				})
 			}

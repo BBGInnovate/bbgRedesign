@@ -5,6 +5,7 @@
 // HOMEPACE OPTIONS
 // ABOUT FLEXIBLE ROWS
 // ENTITY FIELDS
+// ABOUT (OFFICE)
 
 // HOMEPAGE OPTIONS
 function assemble_mentions_full_width($mention_data, $impact_group) {
@@ -76,13 +77,6 @@ function assemble_umbrella_main($main) {
 		$umbrella_main .= '</div>';
 		return $umbrella_main;
 	}
-}
-
-function assemble_office_module($office_parts) {
-	$office_module  = 	'<div class="inner-container bbg__contact-card">';
-	$office_module .= 		$office_parts['contact'];
-	$office_module .= 	'</div>';
-	return $office_module;
 }
 
 function assemble_marquee_module($umbrella_parts) {
@@ -159,4 +153,29 @@ function assemble_entity_section($entity_data) {
 		$entity_markup .= 	'</div>';
 		$entity_markup .= '</section>';
 	echo $entity_markup;
+}
+
+// ABOUT (OFFICE)
+function assemble_office_contact_module($office_contact_parts) {
+	$office_contact_block  = '<article class="office-side">';
+	foreach ($office_contact_parts as $contact) {
+		$office_contact_block .= '<div class="office-contact">';
+		$office_contact_block .= 	$contact['office_name'];
+		$office_contact_block .= 	$contact['office_title'];
+		$office_contact_block .= 	$contact['office_phone'];
+		$office_contact_block .= 	$contact['office_email'];
+		$office_contact_block .= '</div>';
+	}
+	$office_contact_block .= '</article>';
+	return $office_contact_block;
+}
+
+function build_office_highlights_module($office_highlights_parts) {
+	$highlights_module = '<div class="office-highlights">';
+	$highlights_module .= 	'<h5>Recent Highlights</h5>';
+	foreach ($office_highlights_parts as $office_highlight) {
+		$highlights_module .= $office_highlight;
+	}
+	$highlights_module .= '</div>';
+	return $highlights_module;
 }

@@ -1,178 +1,23 @@
-/* Page content as introduction */
-.bbg__about__intro {
-
-	// First paragraph
-	p:first-of-type {
-		@extend .usa-font-lead;
-
-		//font-size: $read-in-font-size;
-		line-height: 2.5;
+.office-page {
+	.office-highlights {
+		border-top: 1px solid #e6e6e6;
+		border-bottom: 1px solid #e6e6e6;
+		padding: 1.5rem 0 0 0;
+		margin-bottom: 1.5rem;
+		h4 {margin-bottom: 0.5rem;}
 	}
-}
-
-// Child rows
-.bbg__about__children--row {
-	margin-bottom: $site-margins-large;
-}
-
-
-/*****
-	Multi-column child styles
-*****/
-
-.bbg__about__child {
-
-	@include media($medium-screen) {
-		.bbg__label {
-			font-size: 2rem;
-		}
+	.office-side {
+		padding: 3rem !important;
+		background-color: #e6e6e6;
 	}
-}
-
-.bbg__about__excerpt {
-	margin-bottom: 3rem;
-	max-height: 350px;
-
-	.bbg__excerpt-header__thumbnail--medium {
-		max-height: 28.7rem;
-		overflow: hidden;
-	}
-}
-
-.bbg__about__child__second-headline {
-	margin-top: 1rem;
-}
-
-
-// Style the mission differently
-.bbg__about__child--mission, .bbg__about--marquee  {
-
-	// Hide the post image
-	.single-post-thumbnail {
-		display: none;
-		height: 0;
-	}
-
-	// Show excerpt instead
-	.bbg__about__excerpt-content {
-		display: block;
-		// background-color: $color-gray-lightest;
-		// border-radius: $border-radius;
-		// padding: $site-margins;
-	}
-
-	p {
-		color: #000;
-		font: {
-			family: $font-sans;
-			size: 2.5rem;
-			weight: 300;
-		}
-		line-height: 1.7;
-		margin: 0;
-	}
-
-	@include media($large-screen) {
+	.office-contact {
+		margin-bottom: 1.5rem;
 		p {
-			font-size: 3rem;
-			line-height: 1.9;
-		}
-	}
-}
-
-// Add special excerpt class when there are exactly 5 pages including the Mission (not common but just in case!)
-.bbg__about__excerpt-content--large {
-	@include media($large-screen) {
-		height: 44.1rem;
-		max-height: 44.1rem;
-
-		p {
-			font-size: 2.5rem;
-			line-height: 2.2;
-		}
-	}
-}
-
-/*****
-	Umbrella child styles
-*****/
-.bbg__about__child__intro {
-
-	p:first-of-type {
-		@extend .usa-font-lead;
-		line-height: 2.5;
-	}
-}
-
-.bbg__about__grandchild {
-	.bbg__about__grandchild__title {
-		text-transform: capitalize;
-	}
-
-
-	.bbg__about__grandchild__subtitle {
-		color: $color-gray-medium;
-		font: {
-			family: $font-serif;
-			weight: 700;
-		}
-		text-transform: capitalize;
-	}
-
-	.bbg__about__grandchild__thumb {
-		@include backgroundCover;
-
-		float: left;
-		margin: {
-			// top:  $site-margins-small;
-			right: $site-margins-small;
-		}
-		max: {
-			height: 40rem;
-			width: 40rem;
-		}
-		min: {
-			height: 10rem;
-			width: 10rem;
-		}
-		height: 100%;
-		width: 25%;
-
-		@include media($medium-screen) {
-			max-width: 100%;
-			min-height: 15rem;
-			width: 100%;
-			margin-bottom: 1rem;
-		}
-
-		@include media($medium-large-screen) {
-			min-height: 20rem;
-		}
-
-		@include media($large-screen) {
-			max-width: 50%;
+			font-family: $font-sans;
 			margin-bottom: 0;
-			min-height: 15rem;
+		}
+		p:first-of-type {
+			font-weight: $font-medium;
 		}
 	}
-
-	p {
-		line-height: 2;
-		margin-top: 0;
-
-		/* Temporary edits from brian */
-		font-family: $font-sans;
-		font-size: 1.6rem;
-		line-height: 1.7;
-	}
-}
-
-.bbg__about__grandchild__link {
-	font-family: $font-sans;
-	margin-left: 1rem;
-	text: {
-		align: right;
-		decoration: none;
-	}
-	white-space: nowrap;
 }

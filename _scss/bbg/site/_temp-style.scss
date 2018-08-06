@@ -1,3 +1,14 @@
+/* FILE CONTENTS */
+//PROFILE
+// ENTITY, PROFILE
+// FEATURED MEDIA
+// RIBBONS
+// HOMEPAGE
+// GRID
+// TYPOGRAPHY
+// PAGE-EVENTS
+// IMAGES
+
 .date-meta {
 	font-size: 0.9em;
 	font-width: $font-normal;
@@ -33,10 +44,6 @@
 .profile-occupation {margin-bottom: 3rem;}
 
 // ENTITY, PROFILE
-.side-content-container.bbg__entity__icon {
-	// text-align: center;
-	// img {width: 50%;}
-}
 .profile-header {
 	position: relative;
 	margin-top: -10rem;
@@ -80,14 +87,11 @@
 	h4,
 	h4 a:link,
 	h4 a:visited {color: $color-blue;}
-
-	// p {font-weight: 300;} // NOT WORKING
 }
 
 .umbrella-bg-image {
 	background-position: center center;
 	background-repeat: no-repeat;
-	// width: 100%;
 	background-size: cover;
 }
 

@@ -182,22 +182,6 @@ function build_ribbon_parts($ribbon_data) {
 	return $ribbon_package;
 }
 
-function build_office_parts($office_data) {
-	$office_header = '<h3>' . $office_data['office_title'] . '</h3>';
-
-	$office_contact  = '<p class="aside">';
-	$office_contact .= 	$office_data['office_street'] . '<br>';
-	$office_contact .= 	$office_data['office_city'] . ', ';
-	$office_contact .= 	$office_data['office_state'] . ', ';
-	$office_contact .= 	$office_data['office_zip'] . '<br><br>';
-	$office_contact .= 	'Tel: <a href="tel:' . $office_data['office_phone'] . '">' . $office_data['office_phone'] . '</a><br>';
-	$office_contact .= 	'Email: <a href="mailto:' . $office_data['office_email'] . '">' . $office_data['office_email'] . '</a>';
-	$office_contact .= '</p>';
-
-	$office_package = array('header' => $office_header, 'contact' => $office_contact);
-	return $office_package;
-}
-
 function build_marquee_parts($marquee_data) {
 	$marquee_content = '<p>' . $marquee_data['content'] . '</p>';
 
@@ -326,4 +310,40 @@ function build_ethics_file_parts($raw_ethics_data) {
 		}
 		return $ethics_package;
 	}
+}
+
+// ABOUT (OFFICE)
+function build_office_contact_parts($office_contact_data) {
+	$contact_chunks = array();
+	foreach ($office_contact_data as $contact_chunk) {
+		$office_name = '<p>' . $contact_chunk['name'] . '</p>';
+		$office_title = '<p>' . $contact_chunk['title'] . '</p>';
+		$office_phone = '<p class="aside"><a href="tel:' . $contact_chunk['phone'] . '">' . $contact_chunk['phone'] . '</a></p>';
+		$office_email = '<p class="aside"><a href="tel:' . $contact_chunk['email'] . '">' . $contact_chunk['email'] . '</a></p>';
+
+		array_push($contact_chunks, array(
+			'office_name' => $office_name,
+			'office_title' => $office_title,
+			'office_phone' => $office_phone,
+			'office_email' => $office_email
+		));
+	}
+	return $contact_chunks;
+}
+
+function build_office_highlights_parts($office_highlights_data) {
+	$office_hightlight_post_group = "";
+
+	if ($office_highlights_data -> have_posts()) {
+		$office_hightlight_post_group = array();
+		while ($office_highlights_data -> have_posts()) {
+			$office_highlights_data -> the_post();
+			$office_hightlight_post  = '<article>';
+			$office_hightlight_post .= 	'<h4>' . get_the_title() . '</h4>';
+			$office_hightlight_post .= 	'<p class="aside">' . wp_trim_words(get_the_excerpt(), 50) . '</p>';
+			$office_hightlight_post .= '</article>';
+			array_push($office_hightlight_post_group, $office_hightlight_post);
+		}
+	}
+	return $office_hightlight_post_group;
 }
