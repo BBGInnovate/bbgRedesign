@@ -1,7 +1,9 @@
 <?php
 // Insert parts into grid architecture
 
+// ----------------
 // CONTENTS:
+// ----------------
 // HOMEPACE OPTIONS
 // ABOUT FLEXIBLE ROWS
 // ENTITY FIELDS
@@ -171,11 +173,14 @@ function assemble_office_contact_module($office_contact_parts) {
 }
 
 function build_office_highlights_module($office_highlights_parts) {
-	$highlights_module = '<div class="office-highlights">';
-	$highlights_module .= 	'<h5>Recent Highlights</h5>';
-	foreach ($office_highlights_parts as $office_highlight) {
-		$highlights_module .= $office_highlight;
+	$highlights_module = "";
+	if (!empty($office_highlights_parts)) {
+		$highlights_module  = '<div class="office-highlights">';
+		$highlights_module .= 	'<h5>Recent Highlights</h5>';
+		foreach ($office_highlights_parts as $office_highlight) {
+			$highlights_module .= $office_highlight;
+		}
+		$highlights_module .= '</div>';
 	}
-	$highlights_module .= '</div>';
 	return $highlights_module;
 }

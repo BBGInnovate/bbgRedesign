@@ -3,10 +3,14 @@
 // (headings, links, images, tags, etc).
 // Prepares elements for grid
 
+// ----------------
 // CONTENTS:
+// ----------------
 // HOMEPACE OPTIONS
 // ABOUT FLEXIBLE ROWS
 // ENTITY FIELDS
+// ABOUT (OFFICE)
+
 
 // HOMEPACE OPTIONS
 function build_soapbox_parts($soap_data, $layout) {
@@ -334,15 +338,17 @@ function build_office_contact_parts($office_contact_data) {
 function build_office_highlights_parts($office_highlights_data) {
 	$office_hightlight_post_group = "";
 
-	if ($office_highlights_data -> have_posts()) {
-		$office_hightlight_post_group = array();
-		while ($office_highlights_data -> have_posts()) {
-			$office_highlights_data -> the_post();
-			$office_hightlight_post  = '<article>';
-			$office_hightlight_post .= 	'<h4>' . get_the_title() . '</h4>';
-			$office_hightlight_post .= 	'<p class="aside">' . wp_trim_words(get_the_excerpt(), 50) . '</p>';
-			$office_hightlight_post .= '</article>';
-			array_push($office_hightlight_post_group, $office_hightlight_post);
+	if (!empty($office_highlights_data)) {
+		if ($office_highlights_data -> have_posts()) {
+			$office_hightlight_post_group = array();
+			while ($office_highlights_data -> have_posts()) {
+				$office_highlights_data -> the_post();
+				$office_hightlight_post  = '<article>';
+				$office_hightlight_post .= 	'<h4>' . get_the_title() . '</h4>';
+				$office_hightlight_post .= 	'<p class="aside">' . wp_trim_words(get_the_excerpt(), 50) . '</p>';
+				$office_hightlight_post .= '</article>';
+				array_push($office_hightlight_post_group, $office_hightlight_post);
+			}
 		}
 	}
 	return $office_hightlight_post_group;

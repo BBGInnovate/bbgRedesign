@@ -72,6 +72,149 @@ if (have_rows('about_flexible_page_rows')) {
 	}
 }
 
+if (is_page('media-development')) {
+	$qParams = array(
+		'post_type' => array('post'),
+		'cat' => get_cat_id('Media Development Map'),
+		'posts_per_page' => 999,
+		'post_status' => array('publish')
+	);
+	$custom_query_args= $qParams;
+	$custom_query = new WP_Query($custom_query_args);
+
+	$features = array();
+	$years = array();
+
+	if ($custom_query->have_posts()) {
+		$counter = 0;
+		$imgCounter = 0;
+		$trainingByYear = array();
+		$error_note = "";
+
+		while ($custom_query->have_posts()) {
+			$custom_query->the_post();
+
+			$id = get_the_ID();
+			$location = get_post_meta($id, 'media_dev_coordinates', true);
+			$story_link = get_permalink($id);
+			$training_name = get_post_meta($id, 'media_dev_name_of_training', true);
+			$training_year = get_post_meta($id, 'media_dev_years', true);
+			$country = get_post_meta( $id, 'media_dev_country', true);
+			$description = get_post_meta( $id, 'media_dev_description', true);
+			$participants = get_post_meta( $id, 'media_dev_number_of_participants', true);
+			$training_date = get_post_meta( $id, 'media_dev_date', true);
+			$training_photo = get_field( 'media_dev_photo', $id, true);
+			$mapDescription = get_post_meta( $id, 'media_dev_description', true);
+			$map_headline = "<h5><a target='blank' href='". $story_link ."'>" . $training_name . '</a></h5>';
+
+			$years = explode(",", $training_year);
+			for ($i = 0; $i < count($years); $i++) {
+				$year = $years[$i];
+				$o = array(
+					'title' => $training_name,
+					'country' => $country,
+					'trainingDate' => $training_date,
+					'storyLink' => $story_link
+				);
+				if (!isset($trainingByYear[$year])) {
+					$trainingByYear[$year] = array();
+				}
+				array_push($trainingByYear[$year],  $o);
+
+			}
+
+			$popupBody = '<span class="bbg__map__infobox__date" style="font-weight: bold;"">' . $training_date . ' in ' . $country . '</span>';
+			
+			if ($training_photo) {
+				$imgCounter++;
+				$training_photo_url = $training_photo['sizes']['medium'];
+				// ASSIGN WIDTH AND HEIGHT FOR PROPER SCROLLING
+				$w = $training_photo['sizes']['medium-width'];
+				$h = $training_photo['sizes']['medium-height'];
+				$popupBody .= '<div class="u--show-medium-large"><br><br><img src="' . $training_photo_url . '"></div>';
+			} else {
+				$mediumFeature = wp_get_attachment_image_src( get_post_thumbnail_id( $id), "medium" );
+				$training_photo_url = $mediumFeature[0];
+				$w = $training_photo = $mediumFeature[1];
+				$h = $training_photo = $mediumFeature[2];
+
+				$popupBody .= '<div class="u--show-medium-large"><br><br><img src="' . $training_photo_url . '"></div>';
+			}
+			$popupBody .= '<br><br>' . $mapDescription . ' &nbsp;&nbsp;<a style="font-weight: bold;" href="' . $story_link . '" target="_blank">Read More &gt; &gt;</a>';
+
+			$pinColor = '#ff0000';
+			if ( !isset($location['lng']) || !isset($location['lat'])) {
+				$error_note .= '<!-- check lat/lng for ' . $map_headline . ' -->\n';
+			}
+			$features[] = array(
+				'type' => 'Feature',
+				'geometry' => array( 
+					'type' => 'Point',
+					'coordinates' => array($location['lng'],$location['lat'])
+				),
+				'properties' => array(
+					'title' => $map_headline,
+					'description' => $popupBody,
+					'year' => $training_year,
+					'marker-color' => $pinColor,
+					'marker-size' => 'large', 
+					'marker-symbol' => ''
+				)
+			);
+		}
+
+		$post_accordion  = '';
+		$post_accordion .= '<h5>Trainings by year</h5>';
+		for ($i = 2030; $i >= 2000; $i--) {
+			if (isset($trainingByYear[$i])) {
+				$post_accordion .= '<div class="usa-accordion bbg__committee-list">';
+				$post_accordion .= 	'<ul class="usa-unstyled-list">';
+				$post_accordion .= 		'<li>';
+				$post_accordion .= 			'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-' . $i . '">';
+				$post_accordion .=  				$i . ' Trainings';
+				$post_accordion .= 			'</button>';
+				$post_accordion .= 			'<div id="collapsible-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
+				$yearContent = $trainingByYear[$i];
+				for ($j = 0; $j < count($yearContent); $j++) {
+					$o = $yearContent[$j];
+					$link = $o['storyLink'];
+					$title = $o['title'];
+					$training_date = $o['trainingDate'];
+					$country = $o['country'];
+					$story_link = $o['storyLink'];
+
+					$post_accordion .= 			'<h6><a href="' . $story_link . '">' . $title . '</a><h6>';
+					$post_accordion .= 			'<p class="aside">' . $country . '</p>';
+				}
+				$post_accordion .= 			'</div>';
+				$post_accordion .= 		'</li>';
+				$post_accordion .= 	'</ul>';
+				$post_accordion .= '</div>';
+			}
+		}
+		$training_posts_accordion  = $post_accordion;
+		$training_posts_accordion .= $error_note;
+
+		$geojsonObj = array(array(
+			'type' => 'FeatureCollection',
+			'features' => $features
+		));
+		$geojsonStr = json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
+
+		echo '<script type="text/javascript">';
+		echo 	'var geojson = ' . $geojsonStr;
+		echo '</script>';
+	}
+}
+?>
+<?php if (is_page('media-development')) { ?>
+	<style>
+		div.usa-accordion-content {padding: 1.5rem !important;}
+		div.usa-accordion-content a {font-weight : bold;}
+	</style>
+<?php } ?>
+
+<?php
 wp_reset_postdata();
 wp_reset_query();
 
@@ -112,20 +255,22 @@ get_header();
 	$office_highlights_parts_result = build_office_highlights_parts($office_highlights_data_result);
 	$office_highlights_module = build_office_highlights_module($office_highlights_parts_result);
 
-	$office_map_data = get_office_map_data($id);
-	// $office_map_parts = build_office_map_parts($office_map_data);
-	// $office_map_module = build_office_map_module($office_map_parts);
-
 	$office_information_chuncks  = '<div class="outer-container office-page">';
 	$office_information_chuncks .= 	'<div class="custom-grid-container">';
 	$office_information_chuncks .= 		'<div class="inner-container">';
 	$office_information_chuncks .= 			'<div class="main-content-container">';
 	$office_information_chuncks .= 				$office_intro_result;
-	$office_information_chuncks .= 				'<div id="map"></div>';
+	if (is_page('media-development')) {
+		$office_information_chuncks .= 				'<div id="map" class="bbg__map--banner"></div>';
+		$office_information_chuncks .= 				'<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>';
+	}
 	$office_information_chuncks .= 				$office_highlights_module;
 	$office_information_chuncks .= 			'</div>';
 	$office_information_chuncks .= 			'<div class="side-content-container">';
 	$office_information_chuncks .= 				$office_contact_module;
+	if (is_page('media-development')) {
+		$office_information_chuncks .= 			$training_posts_accordion;
+	}
 	$office_information_chuncks .= 			'</div>';
 	$office_information_chuncks .= 		'</div>';
 	$office_information_chuncks .= 	'</div>';
@@ -180,37 +325,163 @@ get_header();
 	}
 ?>
 </main>
-<?php
-// IF MAP, LOAD JS, CSS
-if (!empty($office_map_data)) {
-	echo 'look: ' . $office_map_data['lat'];
-?>
-	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
-	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
+
+<?php if (is_page('media-development')) { ?>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.js"></script>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/MarkerCluster.Default.css" />
+	<script src="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/leaflet.markercluster-src.js"></script>
+	<script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>
+	<script src="https://cdn.rawgit.com/jseppi/Leaflet.MakiMarkers/master/Leaflet.MakiMarkers.js"></script>
+
+	<style>
+		.marker-cluster-small {background-color: rgba(241, 211, 87, 0);}
+		.marker-cluster-small div {background-color: rgba(240, 194, 12, 1);}
+		.marker-cluster-medium {background-color: rgba(253, 156, 115, 0);}
+		.marker-cluster-medium div {background-color: rgba(241, 128, 23, 1);}
+		.marker-cluster-large { background-color: rgba(255, 0, 0, 0);}
+		.marker-cluster-large div {background-color: rgba(255, 0, 0, 1);}
+	</style>
 
 	<script type="text/javascript">
-		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
-		var map = L.mapbox.map('map', 'mapbox.streets')
-		<?php echo '.setView(['. $office_map_data['lat'] . ', ' . $office_map_data['lng'] . '], ' . $office_map_data['zoom'] . ');'; ?>
+	(function($) {
+		var mbToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
+		var tilesetUrl = 'https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}@2x.png?access_token=' + mbToken;
+		var attribStr = '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+		var tiles = L.tileLayer(tilesetUrl, {
+			maxZoom: 18,
+			attribution: attribStr
+		});
+		var latlng = L.latLng(-37.82, 175.24);
 
+		var map = L.map('map', {center: latlng, zoom: 13, layers: [tiles]});
+
+		var mcg = new L.MarkerClusterGroup({
+			maxClusterRadius:35,
+			iconCreateFunction: function (cluster) {
+				var childCount = cluster.getChildCount();
+				var c = ' marker-cluster-';
+				if (childCount < 10) {
+					c += 'small';
+				} else if (childCount < 100) {
+					c += 'medium';
+				} else {
+					c += 'large';
+				}
+				return new L.DivIcon({ html: '<div><span><b>' + childCount + '</b></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+			}
+		});
+
+		var maki = {};
+		maki["2016"] = {"name": "library", "color":"#f00"};
+		maki["2015"] = {"name": "library", "color":"#f00"};
+		maki["2014"] = {"name": "library", "color":"#b0b"};
+		maki["2013"] = {"name": "heliport", "color":"#ccc"};
+		maki["2012"] = {"name": "ferry", "color":"#ccc"};
+
+		var deliveryLayers={};    
+		for (var deliveryPlatform in maki) {
+			if (maki.hasOwnProperty(deliveryPlatform)) {
+				var newLayer = L.featureGroup.subGroup(mcg);
+				newLayer.addTo(map);
+				deliveryLayers[deliveryPlatform] = newLayer;
+			}
+		}
+
+		//First, specify your Mapbox API access token
+		L.MakiMarkers.accessToken = mbToken;
+
+		// An array of icon names can be found in L.MakiMarkers.icons or at https://www.mapbox.com/maki/
+		for (var i = 0; i < geojson[0].features.length; i++) {
+			var coords = geojson[0].features[i].geometry.coordinates;
+			var title = geojson[0].features[i].properties.title;
+			var description = geojson[0].features[i].properties['description'];
+			var year = geojson[0].features[i].properties['year'];
+			var icon = L.MakiMarkers.icon({icon: "circle", color: "#981b1e", size: "m"});
+
+			var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
+				icon:icon
+			});
+			var popupText = title + description;
+				
+			//rather than just use html, do this - http://stackoverflow.com/questions/10889954/images-size-in-leaflet-cloudmade-popups-dont-seem-to-count-to-determine-popu
+			var divNode = document.createElement('DIV');
+			divNode.innerHTML = popupText;
+			marker.bindPopup(divNode);
+
+			var targetLayer = deliveryLayers["2016"];
+			marker.addTo(targetLayer);
+		}
+		map.addLayer(mcg);
 		map.scrollWheelZoom.disable();
 
-		L.mapbox.featureLayer({
-			type: 'Feature',
-			geometry: {
-				type: 'Point',
-				coordinates: [
-					<?php echo $office_map_data['lng'] . ', ' . $office_map_data['lat']; ?>
-				]
-			},
-			properties: {
-				title: '<?php echo $mapHeadline; ?>',
-				description: '<?php echo $mapDescription; ?>',
-				'marker-size': 'large',
-				'marker-color': '#981b1e',
-				'marker-symbol': ''
+		function centerMap(){
+			map.fitBounds(mcg.getBounds());
+		}
+
+		centerMap();
+
+
+		//Recenter the map on resize
+		function resizeStuffOnResize() {
+			waitForFinalEvent(function() {
+				centerMap();
+			}, 500, "some unique string");
+		}
+		$("#resetZoom").click(function() {
+			centerMap();
+		});
+
+		// Wait for the window resize to 'end' before executing a function---------------
+		var waitForFinalEvent = (function () {
+			var timers = {};
+			return function (callback, ms, uniqueId) {
+				if (!uniqueId) {
+					uniqueId = "Don't call this twice without a uniqueId";
+				}
+				if (timers[uniqueId]) {
+					clearTimeout (timers[uniqueId]);
+				}
+				timers[uniqueId] = setTimeout(callback, ms);
+			};
+		})();
+
+		window.addEventListener('resize', function(event){
+			resizeStuffOnResize();
+		});
+
+		resizeStuffOnResize();
+		function setSelectedPlatform(platform, displayMode) {
+			for (var p in deliveryLayers) {
+				if (deliveryLayers.hasOwnProperty(p)) {
+					map.removeLayer(deliveryLayers[p]);
+				}
 			}
-		}).addTo(map);
+			if (platform == "all") {
+				for (var p in deliveryLayers) {
+					if (deliveryLayers.hasOwnProperty(p)) {
+						map.addLayer(deliveryLayers[p]);
+					}
+				}
+			} else {
+				map.addLayer(deliveryLayers[platform]);
+			}
+			// ON MOBILE, WITH SELECT BOXES, IT HELPS TO RECENTER MAP AFTER CHANGING PLATEFORMS
+			centerMap();
+			
+		}
+
+		$(document).ready(function() {
+			$('input[type=radio][name=trainingYear]').change(function() {
+				setSelectedPlatform(this.value, 'radio');
+			});
+			$('select[name=trainingSelect]').change(function() {
+				var selectedPlatform = $(this).val();
+				setSelectedPlatform(selectedPlatform,'select');
+			});
+		});
+	})(jQuery);
 	</script>
 <?php } ?>
 <?php get_footer(); ?>

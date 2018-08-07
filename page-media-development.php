@@ -317,11 +317,9 @@ div.usa-accordion-content a {
 </style>
 
 <script type="text/javascript">
-	//var tilesetUrl = 'https://api.mapbox.com/styles/v1/mapbox/emerald-v8/tiles/{z}/{x}/{y}?access_token=<?php echo MAPBOX_API_KEY; ?>';
-	var mbToken = '<?php echo MAPBOX_API_KEY; ?>';
-	var tilesetUrl = 'https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}@2x.png?access_token='+mbToken;
+	var mbToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
+	var tilesetUrl = 'https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}@2x.png?access_token=' + mbToken;
 	var attribStr = '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-	//https://b.tiles.mapbox.com/v4/mapbox.emerald/2/0/1.png
 	var tiles = L.tileLayer(tilesetUrl, {
 		maxZoom: 18,
 		attribution: attribStr
@@ -345,8 +343,6 @@ div.usa-accordion-content a {
 			return new L.DivIcon({ html: '<div><span><b>' + childCount + '</b></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
 		}
 	});
-
-//, 'marker-color': geojson[0].features[i].properties['marker-color']
             	
     var maki = {};
     maki["2016"] = {"name": "library", "color":"#f00"};
@@ -370,7 +366,7 @@ div.usa-accordion-content a {
 	// An array of icon names can be found in L.MakiMarkers.icons or at https://www.mapbox.com/maki/
     for (var i = 0; i < geojson[0].features.length; i++) {
         var coords = geojson[0].features[i].geometry.coordinates;
-        var title = geojson[0].features[i].properties.title; //a[2];
+        var title = geojson[0].features[i].properties.title;
         var description = geojson[0].features[i].properties['description'];
         var year = geojson[0].features[i].properties['year'];
         var icon = L.MakiMarkers.icon({icon: "circle", color: "#981b1e", size: "m"});
@@ -383,10 +379,9 @@ div.usa-accordion-content a {
        	
        	//rather than just use html, do this - http://stackoverflow.com/questions/10889954/images-size-in-leaflet-cloudmade-popups-dont-seem-to-count-to-determine-popu
        	var divNode = document.createElement('DIV');
-		divNode.innerHTML =popupText;
+		divNode.innerHTML = popupText;
         marker.bindPopup(divNode);
         
-        //var targetLayer = deliveryLayers[year];  LEFTOVER FROM WHEN WE FILTERED BY YEAR 
         var targetLayer = deliveryLayers["2016"];
         marker.addTo(targetLayer);
     }
@@ -403,16 +398,16 @@ div.usa-accordion-content a {
 
 
 	//Recenter the map on resize
-	function resizeStuffOnResize(){
-	  waitForFinalEvent(function(){
+	function resizeStuffOnResize() {
+	  waitForFinalEvent(function() {
 			centerMap();
 	  }, 500, "some unique string");
 	}
-	jQuery( "#resetZoom" ).click(function() {
+	jQuery("#resetZoom").click(function() {
 		centerMap();
 	});
 
-	//Wait for the window resize to 'end' before executing a function---------------
+	// Wait for the window resize to 'end' before executing a function---------------
 	var waitForFinalEvent = (function () {
 		var timers = {};
 		return function (callback, ms, uniqueId) {
@@ -446,10 +441,8 @@ div.usa-accordion-content a {
 		} else {
 			map.addLayer(deliveryLayers[platform]);
 		}
-		//at mobile (when we're showing a select box) it helps to recenter the map after changing platforms
-		//if (displayMode=='select') {
-			centerMap();	
-		//}
+		// ON MOBILE, WITH SELECT BOXES, IT HELPS TO RECENTER MAP AFTER CHANGING PLATEFORMS
+		centerMap();
 		
 	}
 
@@ -461,15 +454,8 @@ div.usa-accordion-content a {
 			var selectedPlatform = jQuery(this).val();
 			setSelectedPlatform(selectedPlatform,'select');
 		});
-
-		
- 
 	});
-
-
 </script>
-
-
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

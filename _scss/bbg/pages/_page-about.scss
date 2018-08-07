@@ -1,16 +1,14 @@
 .office-page {
 	.office-highlights {
-		border-top: 1px solid #e6e6e6;
-		border-bottom: 1px solid #e6e6e6;
+		border-top: 1px solid $black-faint;
+		border-bottom: 1px solid $black-faint;
 		padding: 1.5rem 0 0 0;
 		margin-bottom: 1.5rem;
 		h4 {margin-bottom: 0.5rem;}
 	}
-	.office-side {
-		padding: 3rem !important;
-		background-color: #e6e6e6;
-	}
 	.office-contact {
+		background-color: $black-faint;
+		padding: 2rem;
 		margin-bottom: 1.5rem;
 		p {
 			font-family: $font-sans;

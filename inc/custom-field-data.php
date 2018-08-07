@@ -1,11 +1,12 @@
 <?php
 // ----------------
-// CONTENT LIST:
-// Highlight and find next to jump to section
+// CONTENTS:
 // ----------------
 // BBG SETTINGS
 // HOMEPAGE OPTIONS
 // FLEXIBLE ROWS
+// ENTITY FIELDS
+// ABOUT (OFFICE)
 // ----------------
 
 // BBG SETTINGS
@@ -300,6 +301,7 @@ function get_threats_to_press_data() {
 	return $threat_query_id_set;
 }
 
+// FLEXIBLE ROWS
 function get_marquee_data() {
 	$marquee_data = array(
 		'heading' => get_sub_field('marquee_heading'),
@@ -532,24 +534,6 @@ function get_office_highlights_data() {
 		$office_highlights_query = new WP_Query($office_highlight_param);
 	}
 	return $office_highlights_query;
-}
-
-function get_office_map_data($id) {
-	wp_reset_query();
-	$office_map_coords = "";
-	if (get_field('include_office_page_map') == 'yes') {
-		$map_data = get_field('office_page_map');
-		$lat = $map_data['lat'];
-		$lng = $map_data['lng'];
-		$zoom = 4;
-
-		$office_map_coords = array(
-			'lat' => $map_data['lat'],
-			'lng' => $map_data['lng'],
-			'zoom' => $zoom
-		);
-	}
-	return $office_map_coords;
 }
 
 ?>

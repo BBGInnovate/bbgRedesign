@@ -6607,11 +6607,9 @@ section.usa-section.bbg-banner__section {
   .office-page .office-highlights h4, .office-page .office-highlights .bbg__board__committee-list li a, .bbg__board__committee-list li .office-page .office-highlights a {
     margin-bottom: 0.5rem; }
 
-.office-page .office-side {
-  padding: 3rem !important;
-  background-color: #e6e6e6; }
-
 .office-page .office-contact {
+  background-color: #e6e6e6;
+  padding: 2rem;
   margin-bottom: 1.5rem; }
   .office-page .office-contact p {
     font-family: "Alegreya Sans", sans-serif;
