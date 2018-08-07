@@ -4753,6 +4753,16 @@ e.g. on the intern testimonial page */
   .side-content-container article {
     width: 25%; } }
 
+@media screen and (min-width: 700px) {
+  .medium-main-content-container {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px; }
+  .medium-side-content-container {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px; } }
+
 @media screen and (min-width: 900px) {
   .custom-grid-container > .inner-container > div:nth-child(2) {
     padding-left: 3rem; }

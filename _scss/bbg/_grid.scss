@@ -95,12 +95,16 @@ $icon-content-grid: (
 	}
 }
 
+@include media($medium-medium-screen) {
+	.medium-main-content-container {@include grid-column(6);}
+	.medium-side-content-container {@include grid-column(6);}
+}
+
 @include media($medium-large-screen) {
 	.custom-grid-container > .inner-container > div:nth-child(2) {padding-left: 3rem;}
 	.main-content-container {@include grid-column(8);}
 	.side-content-container {
 		@include grid-column(4);
-		// border-left: 1px solid #e6e6e6;
 
 		.side-content-container {
 			border-left: none;

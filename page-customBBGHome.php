@@ -145,7 +145,7 @@ get_header();
 				$impact_quantity = "";
 				if (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) {
 					$soap_layout = 'image-right';
-					$impact_quantity = 1;
+					$impact_quantity = 2;
 				} else {
 					$soap_layout = 'image-left';
 					$impact_quantity = 2;
