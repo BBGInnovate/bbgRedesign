@@ -10,7 +10,6 @@ html, body {height: 100%;}
 		position: absolute;
 		width: 100%;
 		height: 25rem;
-		background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
 	}
 	.logo-fader-up {
 		top: -25rem;
@@ -23,11 +22,11 @@ html, body {height: 100%;}
 
 	.logo-board {
 		position: relative;
-		height: 55vh;
+		height: 75vh;
 		background-color: $white;
 		.logo-container {
 			position: fixed;
-			height: 55vh;
+			height: 75vh;
 			top: 0;
 			left: 50%;
 			width: 70%;
@@ -42,17 +41,18 @@ html, body {height: 100%;}
 	.logo-copy {
 		position: relative;
 		text-align: center;
-		height: 45vh;
+		height: 25vh;
 		background-color: #989898;
 		.center-copy-block {
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
+			width: 80%;
 			p {
 				font-size: 2rem;
 				line-height: 2.7rem;
-				font-weight: 500;
+				font-weight: 300;
 				letter-spacing: 0.03rem;
 				color: $white;
 				margin: 0;
@@ -65,7 +65,7 @@ html, body {height: 100%;}
 			}
 		}
 	}
-	#bbg-copy {margin-bottom: 55vh}
+	#bbg-copy {margin-bottom: 75vh}
 
 	.messaging-section {
 		padding: 6rem 0;
@@ -95,6 +95,7 @@ html, body {height: 100%;}
 			}
 		}
 	}
+	.messaging-section#site-link * {text-align: center; margin-bottom: 0;}
 
 	#murrow-quote {
 		background-color: $color-blue;
@@ -137,12 +138,12 @@ html, body {height: 100%;}
 		font-size: 12px;
 		
 		.logo-board {
-			height: 58vh;
-			.logo-container {height: 58vh;}
+			// height: 58vh;
+			// .logo-container {height: 58vh;}
 		}
-		#bbg-copy {margin-bottom: 58.2vh}
+		// #bbg-copy {margin-bottom: 58.2vh}
 		.logo-copy {
-			height: 42vh;
+			// height: 42vh;
 			.center-copy-block {
 				p {
 					font-size: 2.5rem;

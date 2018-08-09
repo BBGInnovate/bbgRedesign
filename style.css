@@ -7705,8 +7705,7 @@ html, body {
   #usagm-splash-wrapper .logo-fader-down {
     position: absolute;
     width: 100%;
-    height: 25rem;
-    background: linear-gradient(rgba(255, 255, 255, 0), white); }
+    height: 25rem; }
   #usagm-splash-wrapper .logo-fader-up {
     top: -25rem;
     background: linear-gradient(rgba(255, 255, 255, 0), white); }
@@ -7715,11 +7714,11 @@ html, body {
     background: linear-gradient(white, rgba(255, 255, 255, 0)); }
   #usagm-splash-wrapper .logo-board {
     position: relative;
-    height: 55vh;
+    height: 75vh;
     background-color: #ffffff; }
     #usagm-splash-wrapper .logo-board .logo-container {
       position: fixed;
-      height: 55vh;
+      height: 75vh;
       top: 0;
       left: 50%;
       width: 70%;
@@ -7731,17 +7730,18 @@ html, body {
   #usagm-splash-wrapper .logo-copy {
     position: relative;
     text-align: center;
-    height: 45vh;
+    height: 25vh;
     background-color: #989898; }
     #usagm-splash-wrapper .logo-copy .center-copy-block {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); }
+      transform: translate(-50%, -50%);
+      width: 80%; }
       #usagm-splash-wrapper .logo-copy .center-copy-block p {
         font-size: 2rem;
         line-height: 2.7rem;
-        font-weight: 500;
+        font-weight: 300;
         letter-spacing: 0.03rem;
         color: #ffffff;
         margin: 0; }
@@ -7751,7 +7751,7 @@ html, body {
         margin: 0;
         cursor: pointer; }
   #usagm-splash-wrapper #bbg-copy {
-    margin-bottom: 55vh; }
+    margin-bottom: 75vh; }
   #usagm-splash-wrapper .messaging-section {
     padding: 6rem 0;
     background-color: #333333; }
@@ -7777,6 +7777,9 @@ html, body {
         color: #ffffff; }
       #usagm-splash-wrapper .messaging-section .message .message-text .fas {
         font-size: 0.6em; }
+  #usagm-splash-wrapper .messaging-section#site-link * {
+    text-align: center;
+    margin-bottom: 0; }
   #usagm-splash-wrapper #murrow-quote {
     background-color: #3f7ad1; }
     #usagm-splash-wrapper #murrow-quote .outer-container {
@@ -7814,17 +7817,9 @@ html, body {
 @media screen and (min-width: 481px) {
   #usagm-splash-wrapper {
     font-size: 12px; }
-    #usagm-splash-wrapper .logo-board {
-      height: 58vh; }
-      #usagm-splash-wrapper .logo-board .logo-container {
-        height: 58vh; }
-    #usagm-splash-wrapper #bbg-copy {
-      margin-bottom: 58.2vh; }
-    #usagm-splash-wrapper .logo-copy {
-      height: 42vh; }
-      #usagm-splash-wrapper .logo-copy .center-copy-block p {
-        font-size: 2.5rem;
-        line-height: 3.2rem; } }
+    #usagm-splash-wrapper .logo-copy .center-copy-block p {
+      font-size: 2.5rem;
+      line-height: 3.2rem; } }
 
 @media screen and (min-width: 600px) {
   #usagm-splash-wrapper .logo-copy .center-copy-block p {

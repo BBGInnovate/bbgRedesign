@@ -35,7 +35,7 @@ get_header();
 			<div class="inner-container message">
 				<div class="grid-container">
 					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/what-we-do-video-still.png" alt="">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/steve-video-img-crop.png" alt="">
 					</div>
 					<div class="message-text">
 						<h4>What We Do</h4>
@@ -84,10 +84,10 @@ get_header();
 	</div>
 </div>
 
-<div class="messaging-section">
+<div class="messaging-section" id="site-link">
 	<div class="outer-container">
 		<div class="grid-container">
-			<a style="font-size: 2rem; font-weight: 300;" class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to Home Page</a>
+			<h2><a style="font-size: 2rem; font-weight: 300;" class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to Home Page</a></h2>
 		</div>
 	</div>
 </div>

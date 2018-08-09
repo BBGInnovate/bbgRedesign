@@ -8,7 +8,7 @@
  *
  * @package bbgRedesign
  */
-
+if (!is_page_template('usagm-intro.php')) {
 ?>
 
 <footer id="footer">
@@ -20,13 +20,13 @@
 				</a>
 			</div>
 			<?php
-				wp_nav_menu(); 
+				wp_nav_menu();
 			?>
 		</div>
 	</div>
 </footer>
+<?php } ?>
 
 <?php wp_footer(); ?>
-
 </body>
 </html>

@@ -109,6 +109,7 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		checkLogoCopyPos();
 		checkUSAGMCopyPos();
 	});
+
 } // END #usagm-splash-wrapper CHECK
 
 }); // END READY
