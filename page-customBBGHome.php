@@ -100,7 +100,9 @@ get_header();
 						<div class="side-content-container">
 						<?php
 							$recent_post_quantity = 2;
-							$recent_result = get_recent_post_data($recent_post_quantity);
+							$used_ids = array();
+							array_push($used_ids, $featured_post_result['id']);
+							$recent_result = get_recent_post_data($recent_post_quantity, $used_ids);
 
 							if (have_posts()) {
 								while (have_posts()) {

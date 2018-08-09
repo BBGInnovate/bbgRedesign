@@ -110,7 +110,6 @@ function get_field_post_data($type, $qty) {
 	}
 	if ($post_data) {
 		$post_data = $post_data[0];
-		$postIDsUsed[] = $post_data -> ID;
 
 		$qParams = array(
 			'posts_per_page' => $qty,
@@ -118,9 +117,23 @@ function get_field_post_data($type, $qty) {
 			'post_status' => array('publish', 'future')
 		);
 	} else {
-		$qParams = select_recent_post_query_params(1, $postIDsUsed, $STANDARD_POST_CATEGORY_EXCLUDES);
+		$qParams = array(
+			'post_type' => array('post'),
+			'posts_per_page' => 1,
+			'orderby' => 'post_date',
+			'order' => 'desc',
+			'category__not_in' => $catExclude,
+			'post__not_in' => $used_posts,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'post_format',
+					'field' => 'slug',
+					'terms' => 'post-format-quote',
+					'operator' => 'NOT IN'
+				)
+			)
+		);
 	}
-
 	if (!empty($qParams)) {
 		query_posts($qParams);
 
@@ -137,14 +150,14 @@ function get_field_post_data($type, $qty) {
 	wp_reset_query();
 }
 
-function get_recent_post_data($maxPostsToShow) {
+function get_recent_post_data($maxPostsToShow, $used_id) {
 	$qParams = array(
 		'post_type' => array('post'),
 		'posts_per_page' => $maxPostsToShow,
 		'orderby' => 'post_date',
 		'order' => 'desc',
 		'category__not_in' => $catExclude,
-		'post__not_in' => $used,
+		'post__not_in' => $used_id,
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'post_format',
@@ -170,6 +183,7 @@ function build_featured_post_blocks($feat_post_data) {
 	$post_title .= '</a>';
 
 	$feature_blocks = array(
+		'id' => get_the_ID(),
 		'linked_media' => $post_media,
 		'linked_title' => $post_title,
 		'date' => get_the_date(),
