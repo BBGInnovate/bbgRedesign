@@ -28,7 +28,7 @@ get_header();
 		<p class="splash-down"><i class="fas fa-angle-down"></i></p>
 	</div>
 </div>
-
+<!-- master -->
 <div class="messaging-section">
 	<div class="outer-container">
 		<div class="grid-container">
