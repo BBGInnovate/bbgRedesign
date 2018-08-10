@@ -7,25 +7,32 @@ get_header();
 ?>
 <div id="usagm-splash-wrapper">
 
-<div class="logo-board">
-	<div class="logo-container">
+<div class="logo-board locked" style="border: 1px solid red">
+	<div class="logo-container" id="bbg-logo-container">
 		<img class="logo" id="bbg-logo" src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/bbg-splash-logo.png">
 	</div>
 </div>
 
-<div class="logo-copy" id="bbg-copy">
-	<div class="logo-fader-up"></div>
-	<div class="center-copy-block">
-		<p>For 75 years we've been telling the truth. And the truth is, our name was outdated.</p>
-		<p class="splash-down"><i class="fas fa-angle-down"></i></p>
+<div id="page-mover">
+	<div class="logo-copy" id="bbg-copy">
+		<div class="logo-fader-up"></div>
+		<div class="center-copy-block">
+			<p>For 75 years we've been telling the truth. And the truth is, our name was outdated.</p>
+			<p class="splash-down"><i class="fas fa-angle-down"></i></p>
+		</div>
 	</div>
-	<div class="logo-fader-down"></div>
-</div>
 
-<div class="logo-copy" id="usagm-copy">
-	<div class="center-copy-block">
-		<p>The Broadcasting Board of Governors is now the United States Agency for Global Media. New name, staying true to mission.</p>
-		<p class="splash-down"><i class="fas fa-angle-down"></i></p>
+	<div class="logo-board">
+		<div class="logo-container">
+			<img class="logo" id="bbg-logo" src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/usagm-splash-logo.png">
+		</div>
+	</div>
+
+	<div class="logo-copy" id="usagm-copy">
+		<div class="center-copy-block">
+			<p>The Broadcasting Board of Governors is now the United States Agency for Global Media. New name, staying true to mission.</p>
+			<p class="splash-down"><i class="fas fa-angle-down"></i></p>
+		</div>
 	</div>
 </div>
 
@@ -75,7 +82,6 @@ get_header();
 	<div class="outer-container">
 		<div class="grid-container">
 			<div class="ed-quote">
-				<!-- OPENING QUOTE IN CSS TO BE PUSHED OUTSIDE OF TEXT BOX -->
 				<p class="splash-quote">To be persuasive we must be believable; to be believable we must be credible, to be credible we must be truthful. It is as simple as that.”</p>
 				<p class="splash-quote-by">&mdash;Edward R. Murrow</p>
 				<p class="splash-quote-by">Director, US Information Agency <br>(precursor to USAGM) 1961&ndash;1964)</p>

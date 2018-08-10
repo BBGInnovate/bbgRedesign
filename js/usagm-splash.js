@@ -17,60 +17,6 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		return imgFileName;
 	}
 
-	var bbgLogo = true;
-	function checkLogoCopyPos() {
-		var textDivTop = $('.logo-copy').offset().top;
-		var logoTop = $('.logo-board img.logo').offset().top;
-		var curImage = getImgFiles();
-
-		if (curImage == bbgLogoFileName) {
-			bbgLogo = true;
-		} else {
-			bbgLogo = false;
-		}
-		// SCROLL INCREMENTS ODDLY, ALLOW A FEW PIXELS TO CATCH EQUAL POSITIONIONING
-		if ((textDivTop < logoTop)) {
-			if (curImage == bbgLogoFileName) {
-				if (bbgLogo = true) {
-					$('.logo-board img.logo').attr('src', usagmLogoPath);
-					bbgLogo = false;
-				}
-			}
-		}
-		else if ((textDivTop > logoTop) && bbgLogo == false) {
-			$('.logo-board img.logo').attr('src', bbgLogoFilepath);
-		}
-	}
-
-	var fixedLogo = true;
-	function checkUSAGMCopyPos() {
-		var divBottom = $('#usagm-copy').offset().top + $('#usagm-copy').outerHeight();
-		var windowBottom = $(window).scrollTop() + $(window).height();
-		var logoTopPad = ($('.logo-container').outerHeight() - $('.logo').outerHeight()) / 2;
-		var logoDivTop = ($('#usagm-copy').offset().top - $('.logo-container').outerHeight() + logoTopPad) + ($('.logo').outerHeight() / 2);
-
-		if (divBottom < windowBottom) {
-			$('.logo-container').css({
-				'position': 'absolute'
-			});
-			$('.logo').css({
-				'position': 'absolute',
-				'top': logoDivTop
-			});
-			fixedLogo = false;
-		}
-		else if (divBottom > windowBottom && fixedLogo == false) {
-			$('.logo-container').css({
-				'position': 'fixed'
-			});
-			$('.logo').css({
-				'position': 'fixed',
-				'top': '50%'
-			});
-			fixedLogo = true;
-		}
-	}
-
 	function slideScroll() {
 		var bbgCopyBottom = $('#bbg-copy').offset().top + $('#bbg-copy').outerHeight();
 		var usagmCopyBottom = $('#usagm-copy').offset().top + $('#usagm-copy').outerHeight();
@@ -86,14 +32,6 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		}, 700);
 	}
 
-	// CHECK PAGE POS, LOGO DISPLAY ON LOAD
-	if ($(window).scrollTop() > $('#bbg-copy').offset().top) {
-		$('.logo-board img.logo').attr('src', usagmLogoPath);
-	}
-	if ($(window).scrollTop() > $('#usagm-copy').offset().top) {
-		checkUSAGMCopyPos();
-	}
-
 	// MOVE DOWN ARROW ON HOVER
 	var logoPageScroller = $('.splash-down');
 	logoPageScroller.hover(function() {
@@ -105,9 +43,26 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		slideScroll();
 	});
 
-	$(window).on('resize scroll', function() {
-		checkLogoCopyPos();
-		checkUSAGMCopyPos();
+	// PARALLAX BBG LOGO
+	var topPos = Number($('#bbg-logo-container').offset().top);
+	var maxPos = topPos + $('#bbg-logo-container').height();
+	var minPos = topPos;
+console.log(topPos);
+	var posGroup = (maxPos - minPos) * 100;
+	var newTopPos;
+
+	function scrollLogoTopPos(elem) {
+		topPos = Number(elem.offset().top);
+		var bodyPc = ($(this).scrollTop() / $('body').height());
+		newTopPos = ((bodyPc * posGroup) / 100) + minPos;
+console.log(newTopPos);
+		elem.css('top', newTopPos);
+		// UPDATE VALUES
+		topPos = elem.offset().top;
+	}
+
+	$(window).on('scroll', function() {
+		scrollLogoTopPos($('#bbg-logo-container'));
 	});
 
 } // END #usagm-splash-wrapper CHECK
