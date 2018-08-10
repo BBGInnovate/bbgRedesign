@@ -97,23 +97,24 @@
 			}
 		}
 
-		$quote = '';
+		$quote  = '';
 		$quote .= '<div class="bbg__quotation">';
-			if ( $quoteNetwork != '' ) {
-				$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkColor . '">' . $quoteNetwork . '</div>';
-			}
-			$quote .= '<h2 class="bbg__quotation-text--large">&ldquo;' . $quoteText . '&rdquo;</h2>';
-			$quote .= '<div class="bbg__quotation-attribution__container">';
-				$quote .= '<p class="bbg__quotation-attribution">';
+		if ($quoteNetwork != '') {
+			$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkColor . '">' . $quoteNetwork . '</div>';
+		}
+		$quote .= 	'<h4>&ldquo;' . $quoteText . '&rdquo;</h4>';
+		$quote .= 	'<div class="bbg__quotation-attribution__container">';
+		$quote .= 		'<p class="bbg__quotation-attribution">';
 
-				if ( $mugshot != '' ) {
-					$quote .= '<img src="' . $mugshot . '" class="bbg__quotation-attribution__mugshot"/>';
-				}
-				$quote .= '<span class="bbg__quotation-attribution__text">';
-				$quote .= '<span class="bbg__quotation-attribution__name">' . $speaker . '</span>';
-				$quote .= '<span class="bbg__quotation-attribution__credit">' . $tagline . '</span>';
-				$quote .= '</span></p>';
-			$quote .= '</div>';
+		if ( $mugshot != '' ) {
+			$quote .= 		'<img src="' . $mugshot . '" class="bbg__quotation-attribution__mugshot"/>';
+		}
+		$quote .= 			'<span class="bbg__quotation-attribution__text">';
+		$quote .= 				'<span class="bbg__quotation-attribution__name">' . $speaker . '</span>';
+		$quote .= 				'<span class="bbg__quotation-attribution__credit">' . $tagline . '</span>';
+		$quote .= 			'</span>';
+		$quote .= 		'</p>';
+		$quote .= 	'</div>';
 		$quote .= '</div>';
 		echo $quote;
 	}

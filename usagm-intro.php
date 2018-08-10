@@ -87,7 +87,7 @@ get_header();
 <div class="messaging-section" id="site-link">
 	<div class="outer-container">
 		<div class="grid-container">
-			<h2><a style="font-size: 2rem; font-weight: 300;" class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to Home Page</a></h2>
+			<h2><a style="font-size: 2rem; font-weight: 300;" class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to usagm.gov</a></h2>
 		</div>
 	</div>
 </div>
