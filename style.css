@@ -3910,84 +3910,65 @@ object {
   .menu-toggle {
     display: none; }
   .bbg__main-navigation {
-    position: relative; }
+    position: relative;
+    padding: 1.5rem 0 3.5rem 0; }
     .bbg__main-navigation :not(a.site-logo):not(.mag-search) {
       text-align: right; }
     .bbg__main-navigation .bbg__top-nav__link-text {
       width: auto; }
-    .bbg__main-navigation a {
-      padding: 0; }
+    .bbg__main-navigation ul li a {
+      padding: 0.5rem 1.5rem; }
     .bbg__main-navigation a:hover {
       text-decoration: underline;
       background-color: transparent; }
     .bbg__main-navigation .menu-usagm-container {
       position: absolute;
-      top: 3.5rem;
-      right: 0; }
-      .bbg__main-navigation .menu-usagm-container ul li {
-        display: inline-block; }
+      top: 11rem;
+      right: 0;
+      text-align: right;
+      margin: 0;
+      padding: 0 1.5rem;
+      width: 85rem; }
+      .bbg__main-navigation .menu-usagm-container a {
+        text-align: left;
+        width: 100%; }
+      .bbg__main-navigation .menu-usagm-container ul li.menu-item-has-children {
+        display: inline-block;
+        vertical-align: top;
+        width: 19%; }
+    .bbg__main-navigation .subnav-back {
+      position: absolute;
+      top: 14.5rem;
+      z-index: 1;
+      width: 100%;
+      background-color: rgba(241, 241, 241, 0.95); }
     .bbg__main-navigation ul {
       border-top: none;
-      display: block;
-      margin: 1.4rem 4rem 0 0; }
-      .bbg__main-navigation ul li {
-        margin: 0;
-        padding: 0 1.5rem;
+      display: block; }
+      .bbg__main-navigation ul li a {
         background-color: transparent; }
-        .bbg__main-navigation ul li :after {
-          display: none; }
-        .bbg__main-navigation ul li a {
-          font-size: 1.4rem;
-          font-weight: 400;
-          padding: 0;
-          background-color: transparent; }
-        .bbg__main-navigation ul li ul {
-          position: absolute;
-          right: 0;
-          text-align: right;
-          width: 90rem;
-          margin-top: 0;
-          background-color: transparent; }
-          .bbg__main-navigation ul li ul li {
-            display: inline-block;
-            float: none;
-            padding: 0; }
-            .bbg__main-navigation ul li ul li a {
-              font-size: 1.4rem;
-              padding: 0 0 0 2.5rem;
-              border-bottom: none; }
-    .bbg__main-navigation .menu-item-has-children > a {
-      width: auto;
-      padding-right: 0;
-      padding-left: 0;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 1.3rem;
-      border-left: none; }
-    .bbg__main-navigation .menu-item-has-children > ul {
-      display: none; }
-    .bbg__main-navigation .showChildren {
-      display: block !important;
-      left: auto !important; }
+      .bbg__main-navigation ul li ul {
+        padding-top: 1.5rem;
+        background-color: transparent; }
     .bbg__main-navigation button#nav-search-bu {
       float: right;
       background-color: transparent; }
     .bbg__main-navigation .bbg__main-navigation__search {
       position: absolute;
       display: block;
-      top: 0;
-      right: 0;
+      top: -7rem;
+      right: 1.5rem;
       padding: 1rem; }
     .bbg__main-navigation .usa-search [type="search"] {
       position: absolute;
-      top: -3rem;
+      top: 0;
       right: 0;
-      width: 3.5rem;
+      width: 35rem;
       height: 3rem;
-      text-transform: uppercase;
       text-align: left;
       font-weight: 300;
       font-size: 14px;
+      background-color: transparent;
       border-top: none;
       border-left: none; }
     .bbg__main-navigation .search-icon-close {
@@ -3996,17 +3977,7 @@ object {
       right: 8px;
       font-size: 13px;
       cursor: pointer;
-      color: #d5d1c4; }
-  .bbg__main-navigation__toggler {
-    display: inline-block !important;
-    vertical-align: bottom;
-    padding: 0;
-    margin: 0 0.5rem 0.5rem 0;
-    background: none;
-    background-color: transparent; }
-  .bbg__article__nav .bbg__article__nav-link {
-    width: 60px;
-    height: 90px; } }
+      color: #d5d1c4; } }
 
 .bbg__avatar__container {
   margin: 0 auto;

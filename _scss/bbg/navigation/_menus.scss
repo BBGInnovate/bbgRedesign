@@ -317,94 +317,100 @@
 
 	.bbg__main-navigation {
 		position: relative;
+		padding: 1.5rem 0 3.5rem 0;
+
 		:not(a.site-logo):not(.mag-search) {text-align: right;}
 
 		.bbg__top-nav__link-text {width: auto;}
-		a {padding: 0;}
+
+
+		ul li a {padding: 0.5rem 1.5rem;}
 		a:hover {text-decoration: underline; background-color: transparent;}
 
 		.menu-usagm-container {
 			position: absolute;
-			top: 3.5rem;
+			top: 11rem;
 			right: 0;
+			text-align: right;
+			margin: 0;
+			padding: 0 1.5rem;
+			width: 85rem;
+			
+			a {text-align: left; width: 100%;}
+			ul li.menu-item-has-children {
+				display: inline-block;
+				vertical-align: top;
+				width: 19%;
 
-			ul li {display: inline-block}
+			}
+		}
+		
+		.subnav-back {
+			position: absolute;
+			top: 14.5rem;
+			z-index: 1;
+			width: 100%;
+			background-color: rgba(241, 241, 241, 0.95);
 		}
 		ul {
 			border-top: none;
 			display: block;
-			margin: 1.4rem 4rem 0 0;
 			
 			li {
-				margin: 0;
-				padding: 0 1.5rem;
-				background-color: transparent;
-				:after {display: none}
+				// margin: 0;
+				// padding: 0 1.5rem;
+				// background-color: transparent;
+				// :after {display: none}
 				a {
-					font-size: 1.4rem;
-					font-weight: 400;
-					padding: 0;
+					// font-size: 1.4rem;
+					// font-weight: 400;
+					// padding: 0;
 					background-color: transparent;
 				}
 
 				// DROPDOWN NAV
 				ul {
-					position: absolute;
-					right: 0;
-					text-align: right;
-					width: 90rem;
-					margin-top: 0;
+					// position: absolute;
+					// right: 0;
+					// text-align: right;
+					// width: 90rem;
+					// margin-top: 0;
+					padding-top: 1.5rem;
 					background-color: transparent;
 
 					li {
-						display: inline-block;
-						float: none;
-						padding: 0;
+						// display: inline-block;
+						// float: none;
+						// padding: 0;
 
 						a {
-							font-size: 1.4rem;
-							padding: 0 0 0 2.5rem;
-							border-bottom: none;
+							// font-size: 1.4rem;
+							// padding: 0 0 0 2.5rem;
+							// border-bottom: none;
 						}
 					}
 				}
 			}
 		}
-		.menu-item-has-children > a {
-			width: auto;
-			padding-right: 0;
-			padding-left: 0;
-			background: {
-				position: center;
-				repeat: no-repeat;
-				size: 1.3rem;
-			}
-			border-left: none;
-		}
-		.menu-item-has-children > ul {display: none;}
-		.showChildren {
-			display: block !important;
-			left: auto !important;
-		}
-
 		button#nav-search-bu {float: right; background-color: transparent;}
 		.bbg__main-navigation__search {
 			position: absolute;
 			display: block;
-			top: 0;
-			right: 0;
+			top: -7rem;
+			right: 1.5rem;
 			padding: 1rem;
 		}
 		.usa-search [type="search"]{
 			position: absolute;
-			top: -3rem;
+			top: 0;
 			right: 0;
-			width: 3.5rem;
+			width: 35rem;
 			height: 3rem;
-			text-transform: uppercase;
+			// text-transform: uppercase;
 			text-align: left;
 			font-weight: 300;
 			font-size: 14px;
+			background-color: transparent;
 			border-top: none;
 			border-left: none;
 		}
@@ -415,22 +421,6 @@
 			font-size: 13px;
 			cursor: pointer;
 			color: $color-tan-light;
-		}
-	}
-
-	.bbg__main-navigation__toggler {
-		display: inline-block !important;
-		vertical-align: bottom;
-		padding: 0;
-		margin: 0 0.5rem 0.5rem 0;
-		background: none;
-		background-color: transparent;
-	}
-
-	.bbg__article__nav {
-		.bbg__article__nav-link {
-			width: 60px;
-			height: 90px;
 		}
 	}
 }
