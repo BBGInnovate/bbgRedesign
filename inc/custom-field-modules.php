@@ -47,7 +47,7 @@ function assemble_mentions_share_space($mention_data, $impact_group) {
 	$mention_share .= 		'</div>';
 	$mention_share .= 		'<div class="main-content-container impact-share">';
 	// IMPACT STORY (ONLY ONE FOR THIS LAYOUT)
-	$mention_share .= 			'<h2>Imapct Stories</h2>';
+	$mention_share .= 			'<h2>Impact Stories</h2>';
 	$mention_share .= 			$impact_group[0];
 	$mention_share .= 		'</div>';
 	$mention_share .= 	'</div>';

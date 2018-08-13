@@ -54,7 +54,7 @@ get_header();
 				<div class="grid-container">
 					<a class="messageing-link" href="http://dev.bbg.gov/who-we-are/">
 						<div class="message-image">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/who-we-are-video-still.png" alt="">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/who-we-are.png" alt="">
 						</div>
 						<div class="message-text">
 							<h4>Who We Are</h4>

@@ -394,7 +394,7 @@ get_header(); ?>
 				<div class="nest-container">
 					<div class="inner-container">
 						<div class="icon-side-content-container">
-							<img src="<?php echo $network_logo; ?>">
+							<img src="<?php echo $entityLogo; ?>">
 							
 							<h5>Website</h5>
 							<p class="aside"><?php echo strtolower($websiteName); ?></p>
