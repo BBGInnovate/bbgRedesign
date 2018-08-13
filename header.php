@@ -10,6 +10,8 @@
  * @package bbgRedesign
  */
 
+// test branch mega_nav
+
 /* ODDI CUSTOM: several variables can be passed into the header */
 global $ogImage, $ogTitle, $ogDescription, $ogUrl;
 global $pageBodyID, $metaAuthor, $metaAuthorTwitter, $metaKeywords;
