@@ -3920,7 +3920,7 @@ object {
     display: none; }
   .bbg__main-navigation {
     position: relative;
-    padding: 1.5rem 0 3.5rem 0; }
+    padding: 1.5rem 0; }
     .bbg__main-navigation :not(a.site-logo):not(.mag-search) {
       text-align: right; }
     .bbg__main-navigation .bbg__top-nav__link-text {
@@ -5134,6 +5134,10 @@ ol li:before {
   font-style: italic;
   color: #aca299; }
 
+.umbrella-bg-image {
+  overflow: hidden;
+  margin-bottom: 1.5rem; }
+
 .bbg__ribbon h2 {
   float: left;
   font-weight: 300;
@@ -5259,7 +5263,7 @@ img,
 *[class*="photo"],
 *[class*="thumbnail"],
 *[style*="background-image"] {
-  margin-bottom: 0.2em; }
+  margin-bottom: 1.5em; }
   img > a:hover,
   img > a:focus,
   *[class*="avatar"] > a:hover,

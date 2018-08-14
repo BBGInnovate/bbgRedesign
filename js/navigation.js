@@ -112,7 +112,6 @@ $('.subnav-back').hide();
 // DROPDOWN NAV HOVER
 function setMegaNav() {
 	if ($(window).width() >= 875) {
-		console.log('sup with nav?');
 		var subnavH;
 		$.each($('.sub-menu'), function() {
 			subnavH = subnavH > $(this).outerHeight() ? subnavH : $(this).outerHeight();
@@ -143,6 +142,5 @@ $(window).on('resize', function() {
 	setMegaNav();
 });
 
-console.log('sweet');
 }); // END READY
 })(jQuery);

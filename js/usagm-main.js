@@ -14,12 +14,14 @@ $(window).on('resize', function() {
 	featuredMediaHD();
 });
 
-// KEEPS BACKGROUND IMAGES AND A CONSITENTS SIZE
+// KEEPS BACKGROUND IMAGES A CONSISTENT SIZE
 function sizeBGimages() {
-	var img_scale = 1.75;
-	var containerW = $('.umbrella-bg-image').width();
-	var dynHeight = containerW / img_scale;
-	$('.umbrella-bg-image').height(dynHeight);
+	var img_scale = 1.77778;
+	$.each($('.umbrella-bg-image'), function() {
+		var containerW = $(this).width();
+		var dynHeight = containerW / img_scale;
+		$(this).height(dynHeight);
+	});
 }
 sizeBGimages();
 $(window).on('resize', function() {

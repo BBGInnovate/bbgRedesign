@@ -1,5 +1,5 @@
 /* FILE CONTENTS */
-//PROFILE
+// PROFILE
 // ENTITY, PROFILE
 // FEATURED MEDIA
 // RIBBONS
@@ -76,6 +76,11 @@
 	color: $color-taupe-light;
 }
 // RIBBONS
+.umbrella-bg-image {
+	overflow: hidden;
+	margin-bottom: 1.5rem;
+}
+
 .bbg__ribbon {
 	h2 {
 		float: left;
@@ -197,7 +202,7 @@ img,
 *[class*="photo"],
 *[class*="thumbnail"],
 *[style*="background-image"] {
-	margin-bottom: 0.2em;
+	margin-bottom: 1.5em;
 
 	>a:hover,
 	>a:focus {

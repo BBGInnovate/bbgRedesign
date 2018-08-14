@@ -219,6 +219,11 @@ wp_reset_postdata();
 wp_reset_query();
 
 get_header();
+
+// LET LAURIE DECIDE WHERE TO PUT EACH FLEXIBLE ROW 
+// BY READING AND DISPLAYING THE LOOP AND NOT JUST ECHOING EACH TYPE AS A SET
+// $page_rows = get_field('about_flexible_page_rows');
+// var_dump($page_rows);
 ?>
 
 <main id="main" class="site-main" role="main">

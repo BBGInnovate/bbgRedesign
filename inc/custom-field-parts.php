@@ -237,7 +237,9 @@ function build_umbrella_content_parts($content_data) {
 	}
 
 	if ($content_data['thumb_src']) {
-		$image = '<img src="' . $content_data['thumb_src'] . '">';
+		$image  = '<div class="umbrella-bg-image">';
+		$image .= 	'<img src="' . $content_data['thumb_src'] . '">';
+		$image .= '</div>';
 	}
 
 	if ($content_data['description']) {
