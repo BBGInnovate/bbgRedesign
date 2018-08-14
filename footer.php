@@ -19,9 +19,6 @@ if (!is_page_template('usagm-intro.php')) {
 					<img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-White-hires.png">
 				</a>
 			</div>
-			<?php
-				wp_nav_menu();
-			?>
 		</div>
 	</div>
 </footer>

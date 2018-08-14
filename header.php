@@ -1,4 +1,3 @@
-<?php header("Cache-Control: no-cache"); ?>
 <?php
 /**
  * The header for our theme.
@@ -248,7 +247,7 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 					'menu_id' => 'primary-menu',
 					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul><div class="bbg__main-navigation__search">' . $searchBox . '</div>',
 					'walker' => new bbginnovate_walker_header_usa_menu()
-				)); 
+				));
 			?>
 		</nav>
 	</header>

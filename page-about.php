@@ -202,7 +202,7 @@ if (is_page('media-development')) {
 		$geojsonStr = json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
 		echo '<script type="text/javascript">';
-		echo 	'var geojson = ' . $geojsonStr;
+		echo 	'var geojson = ' . $geojsonStr . ';';
 		echo '</script>';
 	}
 }

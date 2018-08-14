@@ -3684,6 +3684,7 @@ object {
       margin-top: 0;
       margin-bottom: 0;
       font-size: 1.5rem;
+      line-height: 1.8rem;
       font-weight: 500;
       text-transform: uppercase; }
       .bbg__main-navigation ul li a {
@@ -3692,19 +3693,27 @@ object {
         background-color: rgba(232, 229, 226, 0.95); }
       .bbg__main-navigation ul li a:link, .bbg__main-navigation ul li a:visited {
         color: #323a45; }
+      .bbg__main-navigation ul li a:hover {
+        color: #ffffff;
+        background-color: rgba(40, 79, 145, 0.95); }
       .bbg__main-navigation ul li ul {
         margin-bottom: 0;
-        padding: 0 1.5rem;
         background-color: rgba(241, 241, 241, 0.95); }
         .bbg__main-navigation ul li ul li {
           font-size: 1.5rem;
           font-weight: 400;
           text-transform: none; }
+          .bbg__main-navigation ul li ul li li:hover {
+            background-color: rgba(40, 79, 145, 0.5); }
           .bbg__main-navigation ul li ul li a {
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
             background-color: transparent;
             border-bottom: 1px solid #d6d1c4; }
+          .bbg__main-navigation ul li ul li a:link, .bbg__main-navigation ul li ul li a:visited {
+            color: #323a45; }
+          .bbg__main-navigation ul li ul li a:hover, .bbg__main-navigation ul li ul li a:active {
+            color: #ffffff; }
         .bbg__main-navigation ul li ul li:last-of-type a {
           border-bottom: none; }
   .bbg__main-navigation li:before {
@@ -3947,9 +3956,15 @@ object {
       display: block; }
       .bbg__main-navigation ul li a {
         background-color: transparent; }
-      .bbg__main-navigation ul li ul {
-        padding-top: 1.5rem;
+      .bbg__main-navigation ul li a:hover {
+        color: #8b8278;
         background-color: transparent; }
+      .bbg__main-navigation ul li ul {
+        padding: 0.7rem 0;
+        margin-right: 1.5rem;
+        background-color: transparent; }
+        .bbg__main-navigation ul li ul li:hover {
+          background-color: #aca299; }
     .bbg__main-navigation button#nav-search-bu {
       float: right;
       background-color: transparent; }
@@ -3962,7 +3977,7 @@ object {
     .bbg__main-navigation .usa-search [type="search"] {
       position: absolute;
       top: 0;
-      right: 0;
+      right: 3rem;
       width: 35rem;
       height: 3rem;
       text-align: left;
