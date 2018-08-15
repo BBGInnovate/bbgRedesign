@@ -4,32 +4,19 @@
 .page-id-37417 //full archive with every year
 {
     background-color: $color-burke-light;
-
-	.usa-disclaimer {
-		background-color: $color-burke-dark;
-	}
-
+	.usa-disclaimer {background-color: $color-burke-dark;}
 	a {
 		color: #112e51;
 		text-decoration: none;
-
-		&:hover {
-			text-decoration: underline;
-		}
-
-		&:visited {
-			color: #112e51;
-		}
+		&:hover {text-decoration: underline;}
+		&:visited {color: #112e51;}
 	}
 
 	.bbg__article-content a {
 		color: #112e51;
 		text-decoration: underline;
 
-		&:hover {
-			text-decoration: underline;
-		}
-
+		&:hover {text-decoration: underline;}
 		&:visited {
 			color: $color-burke-darker;
 			text-decoration: none;
@@ -43,39 +30,6 @@
 			image: url(img/burke_ribbon-bg-full.jpg);
 			size: cover;
 		}
-
-		h2,
-		.bbg__announcement__headline,
-		a.bbg__kits__intro__more--link {
-			color: #112e51;
-		}
-
-		/* @include media($medium-large-screen) {
-	        margin: 0 0 8rem;
-	    } */
 	}
-
-	.bbg__footer__return-to-top {
-		background-color: #fff;
-	}
-
-	/* h1, h2, h3, h4, h5, h6,
-	.bbg-header__site-title,
-	.bbg-header__link {
-		// color: #000;
-
-		&:hover,
-		&:visited {
-			// color: #000;
-		}
-	}
-
-    p, div {
-        // color: #eee;
-    }
-
-    a {
-    	// color: #b2ccd1;
-    } */
-
+	.bbg__footer__return-to-top {background-color: #fff;}
 }

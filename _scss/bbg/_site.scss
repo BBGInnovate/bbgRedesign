@@ -1189,6 +1189,9 @@ div.banner_readmore h6 a:visited {
 }
 .bbg__ribbon.inner-ribbon {
     padding-bottom: 0;
+    h2 {
+        a:link {font-weight: 400; color: $white;}
+    }
     img {
         object-fit: cover;
         margin-bottom: 0;}

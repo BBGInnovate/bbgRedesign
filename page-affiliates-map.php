@@ -15,7 +15,8 @@ if (have_posts()) {
 		the_post();
 		$pageTitle   = get_the_title();
 		$cur_page_id = get_the_ID();
-		$pageContent = do_shortcode(get_the_content());
+		$page_content = do_shortcode(get_the_content());
+		$page_content = apply_filters('the_content', $page_content);
 	}
 }
 wp_reset_postdata();
@@ -112,13 +113,6 @@ get_header();
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
 
-			<!-- <div class="outer-container">
-				<header class="grid-container page-header">
-					<h5 class="bbg__label--mobile large"><?php //echo $pageTitle; ?></h5>
-					<?php //echo $pageTagline; ?>
-				</header>
-			</div> -->
-
 			<!-- this section holds the map and is populated later in the page by javascript -->
 			<section class="map-banner" style="position: relative;">
 				<div id="map" class="bbg__map--banner"></div>
@@ -139,7 +133,6 @@ get_header();
 						<option value="radio">Radio</option>
 						<option value="tv">TV</option>
 						<option value="web">Digital</option>
-						
 					</select>
 				</div>
 			</section>
@@ -147,11 +140,9 @@ get_header();
 			<div class="custom-grid-container">
 				<div class="inner-container">
 					<div class="main-content-container">
-						<?php echo '<h2>' . $pageTitle . '</h2>'; ?>
-					</div>
-					<div class="main-content-container">
 						<?php
-							echo $pageContent;
+							echo '<h2>' . $pageTitle . '</h2>';
+							echo $page_content;
 						?>
 					</div>
 					<div class="side-content-container">
@@ -179,7 +170,7 @@ get_header();
 	//http://gis.stackexchange.com/questions/182442/whats-the-most-appropriate-way-to-load-mapbox-studio-tiles-in-leaflet
 ?>
 
-<?php /* include map stuff -------------------------------------------------- */ ?>
+<?php /* include map stuff */ ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.js"></script>
 <link rel="stylesheet" href="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/MarkerCluster.css" />
@@ -212,7 +203,6 @@ get_header();
 	selectedPlatform = "all";
 	// var mbToken = '<?php //echo MAPBOX_API_KEY; ?>'
 	var mbToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
-	console.log('xxx: ' + mbToken);
 	var tilesetUrl = 'https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}@2x.png?access_token='+mbToken;
 	var attribStr = '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 	<?php 
@@ -283,10 +273,7 @@ get_header();
         var description = geojson[0].features[i].properties['description'];
         var platform = geojson[0].features[i].properties['platform'].toLowerCase();
 
-
-
         var icon = L.MakiMarkers.icon({icon: "circle", color: maki[platform].color, size: "m"});
-
         var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
           icon:icon
         });
@@ -303,9 +290,7 @@ get_header();
 	function centerMap(){
 		map.fitBounds(mcg.getBounds());
 	}
-
 	centerMap();
-
 
 	//Recenter the map on resize
 	function resizeStuffOnResize(){
@@ -336,8 +321,6 @@ get_header();
 	});
 
 	resizeStuffOnResize();
-
-console.log('test');
 
 	function setSelectedPlatform(platform, displayMode) {
 		selectedPlatform = platform;
@@ -376,19 +359,3 @@ console.log('test');
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
-
-<?php
-// $pinColor = "#981b1e";
-// if (has_category('VOA')){
-// 	$pinColor = "#344998";
-// 	$mapHeadline = "<h5><a href='". $storyLink ."'>VOA | " . $mapHeadline . '</a></h5>';
-// } elseif (has_category('RFA')){
-// 	$pinColor = "#009c50";
-// 	$mapHeadline = "<h5><a href='". $storyLink ."'>RFA | " . $mapHeadline . '</a></h5>';
-// } elseif (has_category('RFE/RL')){
-// 	$pinColor = "#ea6828";
-// 	$mapHeadline = "<h5><a href='". $storyLink ."'>RFE/RL | " . $mapHeadline . '</a></h5>';
-// } else {
-// 	$mapHeadline = "<h5><a href='". $storyLink ."'>" . $mapHeadline . '</a></h5>';
-// }
-?>

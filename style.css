@@ -3002,6 +3002,11 @@ ol li {
   line-height: 2.8rem;
   margin-bottom: 1.5rem; }
 
+ul li {
+  list-style-type: none;
+  list-style: none;
+  list-style-image: none; }
+
 .side-content-container ul li,
 .side-content-container ol li,
 p.aside {
@@ -4618,7 +4623,7 @@ e.g. on the intern testimonial page */
 
 .outer-container {
   max-width: 1200px;
-  margin: 0 auto 3rem auto; }
+  margin: 0 auto 5rem auto; }
   .outer-container::after {
     clear: both;
     content: "";
@@ -6119,6 +6124,9 @@ div.banner_readmore h6 a:visited {
 
 .bbg__ribbon.inner-ribbon {
   padding-bottom: 0; }
+  .bbg__ribbon.inner-ribbon h2 a:link {
+    font-weight: 400;
+    color: #ffffff; }
   .bbg__ribbon.inner-ribbon img {
     object-fit: cover;
     margin-bottom: 0; }
@@ -6728,25 +6736,7 @@ section.usa-section.bbg-banner__section {
 .page-id-37373,
 .burke_candidate-template-default,
 .page-id-37417 {
-  background-color: #e4ebec;
-  /* h1, h2, h3, h4, h5, h6,
-	.bbg-header__site-title,
-	.bbg-header__link {
-		// color: #000;
-
-		&:hover,
-		&:visited {
-			// color: #000;
-		}
-	}
-
-    p, div {
-        // color: #eee;
-    }
-
-    a {
-    	// color: #b2ccd1;
-    } */ }
+  background-color: #e4ebec; }
   .page-template-page-burke .usa-disclaimer,
   .page-id-37373 .usa-disclaimer,
   .burke_candidate-template-default .usa-disclaimer,
@@ -6792,23 +6782,7 @@ section.usa-section.bbg-banner__section {
     background-blend-mode: soft-light;
     background-color: #999;
     background-image: url(img/burke_ribbon-bg-full.jpg);
-    background-size: cover;
-    /* @include media($medium-large-screen) {
-	        margin: 0 0 8rem;
-	    } */ }
-    .page-template-page-burke .bbg__ribbon--thin h2,
-    .page-template-page-burke .bbg__ribbon--thin .bbg__announcement__headline,
-    .page-template-page-burke .bbg__ribbon--thin a.bbg__kits__intro__more--link,
-    .page-id-37373 .bbg__ribbon--thin h2,
-    .page-id-37373 .bbg__ribbon--thin .bbg__announcement__headline,
-    .page-id-37373 .bbg__ribbon--thin a.bbg__kits__intro__more--link,
-    .burke_candidate-template-default .bbg__ribbon--thin h2,
-    .burke_candidate-template-default .bbg__ribbon--thin .bbg__announcement__headline,
-    .burke_candidate-template-default .bbg__ribbon--thin a.bbg__kits__intro__more--link,
-    .page-id-37417 .bbg__ribbon--thin h2,
-    .page-id-37417 .bbg__ribbon--thin .bbg__announcement__headline,
-    .page-id-37417 .bbg__ribbon--thin a.bbg__kits__intro__more--link {
-      color: #112e51; }
+    background-size: cover; }
   .page-template-page-burke .bbg__footer__return-to-top,
   .page-id-37373 .bbg__footer__return-to-top,
   .burke_candidate-template-default .bbg__footer__return-to-top,

@@ -253,36 +253,37 @@ get_header();
 
 	// OFFICE PAGE OFFICE INFORMATION
 	$office_intro_result = get_office_intro_data();
+	if (!empty($office_intro_result)) {
+		$office_contact_data_results = get_office_contact_data();
+		$office_contact_parts_results = build_office_contact_parts($office_contact_data_results);
+		$office_contact_module = assemble_office_contact_module($office_contact_parts_results);
 
-	$office_contact_data_results = get_office_contact_data();
-	$office_contact_parts_results = build_office_contact_parts($office_contact_data_results);
-	$office_contact_module = assemble_office_contact_module($office_contact_parts_results);
+		$office_highlights_data_result = get_office_highlights_data();
+		$office_highlights_parts_result = build_office_highlights_parts($office_highlights_data_result);
+		$office_highlights_module = build_office_highlights_module($office_highlights_parts_result);
 
-	$office_highlights_data_result = get_office_highlights_data();
-	$office_highlights_parts_result = build_office_highlights_parts($office_highlights_data_result);
-	$office_highlights_module = build_office_highlights_module($office_highlights_parts_result);
-
-	$office_information_chuncks  = '<div class="outer-container office-page">';
-	$office_information_chuncks .= 	'<div class="custom-grid-container">';
-	$office_information_chuncks .= 		'<div class="inner-container">';
-	$office_information_chuncks .= 			'<div class="main-content-container">';
-	$office_information_chuncks .= 				$office_intro_result;
-	if (is_page('media-development')) {
-		$office_information_chuncks .= 				'<div id="map" class="bbg__map--banner"></div>';
-		$office_information_chuncks .= 				'<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>';
+		$office_information_chuncks  = '<div class="outer-container office-page">';
+		$office_information_chuncks .= 	'<div class="custom-grid-container">';
+		$office_information_chuncks .= 		'<div class="inner-container">';
+		$office_information_chuncks .= 			'<div class="main-content-container">';
+		$office_information_chuncks .= 				$office_intro_result;
+		if (is_page('media-development')) {
+			$office_information_chuncks .= 				'<div id="map" class="bbg__map--banner"></div>';
+			$office_information_chuncks .= 				'<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>';
+		}
+		$office_information_chuncks .= 				$office_highlights_module;
+		$office_information_chuncks .= 			'</div>';
+		$office_information_chuncks .= 			'<div class="side-content-container">';
+		$office_information_chuncks .= 				$office_contact_module;
+		if (is_page('media-development')) {
+			$office_information_chuncks .= 			$training_posts_accordion;
+		}
+		$office_information_chuncks .= 			'</div>';
+		$office_information_chuncks .= 		'</div>';
+		$office_information_chuncks .= 	'</div>';
+		$office_information_chuncks .= '</div>';
+		echo $office_information_chuncks;
 	}
-	$office_information_chuncks .= 				$office_highlights_module;
-	$office_information_chuncks .= 			'</div>';
-	$office_information_chuncks .= 			'<div class="side-content-container">';
-	$office_information_chuncks .= 				$office_contact_module;
-	if (is_page('media-development')) {
-		$office_information_chuncks .= 			$training_posts_accordion;
-	}
-	$office_information_chuncks .= 			'</div>';
-	$office_information_chuncks .= 		'</div>';
-	$office_information_chuncks .= 	'</div>';
-	$office_information_chuncks .= '</div>';
-	echo $office_information_chuncks;
 
 	// FLEXIBLE ROWS
 	if (is_page('who-we-are')) {
