@@ -117,22 +117,19 @@ function setMegaNav() {
 			subnavH = subnavH > $(this).outerHeight() ? subnavH : $(this).outerHeight();
 		});
 		$('.bbg__main-navigation').append('<div class="subnav-back"></div>');
+		$('.subnav-back').css('height', subnavH);
+		$('.sub-menu, .subnav-back').hide();
 
-		function showSubMenu() {
-			$('.sub-menu').slideDown(200);
+		$('.nav-menu').mouseenter(function() {
+			clearTimeout($(this).data('timeoutId'));
 			$('.subnav-back').slideDown(200);
-			$('.subnav-back').css('height', subnavH);
-		}
-		function hideSubMenu() {
-			$('.sub-menu').slideUp(200);
-			$('.subnav-back').slideUp(200);
-		}
-
-		$('.sub-menu').hide();
-		$('.nav-menu').hover(function() {
-			showSubMenu();
-		}, function() {
-			hideSubMenu();
+			$('.sub-menu').slideDown(200);
+		}).mouseleave(function() {
+			timeoutId = setTimeout(function() {
+				$('.sub-menu').slideUp(200);
+				$('.subnav-back').slideUp(200);
+			}, 500);
+			$('.nav-menu').data('timeoutId', timeoutId);;
 		});
 	}
 }
