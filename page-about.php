@@ -31,7 +31,9 @@ if (have_posts()) {
 	}
 }
 
+
 if (have_rows('about_flexible_page_rows')) {
+	$all_flex_rows = array();
 	$umbrella_group = array();
 	while (have_rows('about_flexible_page_rows')) {
 		the_row();
@@ -47,6 +49,7 @@ if (have_rows('about_flexible_page_rows')) {
 			}
 			$umbrella_main_data_group = assemble_umbrella_main($main_umbrella_parts);
 			array_push($umbrella_group, $umbrella_main_data_group);
+			// echo $umbrella_main_data_group;
 			// GET UMBRELLA'S CONTENT DATA
 			$content_parts_group = array();
 			while (have_rows('umbrella_content')) {
@@ -58,16 +61,20 @@ if (have_rows('about_flexible_page_rows')) {
 			}
 			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group);
 			array_push($umbrella_group, $umbrella_content_markup);
+			array_push($all_flex_rows, $umbrella_group);
+			$umbrella_group = array();
 		}
 		elseif (get_row_layout() == 'marquee') {
 			$marquee_data_result = get_marquee_data();
 			$marquee_parts_result = build_marquee_parts($marquee_data_result);
 			$marquee_module = assemble_marquee_module($marquee_parts_result);
+			array_push($all_flex_rows, $marquee_module);
 		}
 		elseif (get_row_layout() == 'about_ribbon_page') {
 			$ribbon_data_result = get_ribbon_data();
 			$ribbon_parts_result = build_ribbon_parts($ribbon_data_result);
 			$ribbon_module = assemble_ribbon_module($ribbon_parts_result);
+			array_push($all_flex_rows, $ribbon_module);
 		}
 	}
 }
@@ -219,13 +226,6 @@ wp_reset_postdata();
 wp_reset_query();
 
 get_header();
-
-// LET LAURIE DECIDE WHERE TO PUT EACH FLEXIBLE ROW 
-// BY READING AND DISPLAYING THE LOOP AND NOT JUST ECHOING EACH TYPE AS A SET
-// $page_rows = get_field('about_flexible_page_rows');
-// echo '<pre>';
-// print_r($page_rows);
-// echo '</pre>';
 ?>
 
 <main id="main" class="site-main" role="main">
@@ -286,41 +286,39 @@ get_header();
 
 	// FLEXIBLE ROWS
 	if (is_page('who-we-are')) {
-		$first_umbrella = array_slice($umbrella_group, 1, 1);
-		$umbrella_end = array_splice($umbrella_group, 2);
+		$second_umbrella = array_slice($all_flex_rows, 1, 1);
+		$umbrella_end = array_splice($all_flex_rows, 2);
 
 		echo '<div class="outer-container">';
 		echo 	'<div class="medium-side-content-container box-special">';
 		echo 		$marquee_module;
 		echo 	'</div>';
 		echo 	'<div class="medium-main-content-container">';
-		foreach ($umbrella_group as $umbrella_array_bit) {
-			echo $umbrella_array_bit;
-		}
+		echo 		$second_umbrella[0][1];
 		echo 	'</div>';
 		echo '</div>';
 
 		echo '<div class="outer-container">';
+		$i = 0;
 		foreach ($umbrella_end as $rest_of_umbrella) {
-			echo $rest_of_umbrella;
+			echo $rest_of_umbrella[$i];
+			$i++;
 		}
 		echo '</div>';
 	}
 	else {
-		if (!empty($marquee_module)) {
-			echo '<div class="outer-container">';
-			echo 	$marquee_module;
-			echo '</div>';
-		}
-		if (!empty($umbrella_group)) {
-			echo '<div class="outer-container">';
-			foreach($umbrella_group as $umbrella) {
-				echo $umbrella;
+		// gather_flexible_rows();
+		foreach ($all_flex_rows as $flex_row) {
+			if (is_array($flex_row)) {
+				echo '<div class="outer-container">';
+				foreach ($flex_row as $row) {
+					echo $row;
+				}
+				echo '</div>';
 			}
-			echo '</div>';
-		}
-		if (!empty($ribbon_module)) {
-			echo $ribbon_module;
+			else {
+				echo $flex_row;
+			}
 		}
 	}
 
