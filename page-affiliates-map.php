@@ -114,7 +114,7 @@ get_header();
 	<main id="main" class="site-main" role="main">
 
 			<!-- this section holds the map and is populated later in the page by javascript -->
-			<section class="map-banner" style="position: relative;">
+			<section class="map-banner" style="position: relative; z-index: 0;">
 				<div id="map" class="bbg__map--banner"></div>
 
 				<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button"/>
