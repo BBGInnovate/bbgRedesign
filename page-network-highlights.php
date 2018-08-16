@@ -28,23 +28,25 @@ if ($pageTagline && $pageTagline!=""){
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		<!-- this section holds the map and is populated later in the page by javascript -->
+		<section class="usa-section">
+			<div id="map" class="bbg__map--banner"></div>
+		</section>
 
-			<div class="usa-grid">
+		<br><br>
+		<div class="outer-container">
+			<div class="grid-container">
 				<header class="page-header">
-					<h5 class="bbg__label--mobile large"><?php echo $page_title; ?></h5>
+					<h2><?php echo $page_title; ?></h2>
 					<?php echo $pageTagline; ?>
-				</header><!-- .page-header -->
+				</header>
 			</div>
+		</div>
 
-			<!-- this section holds the map and is populated later in the page by javascript -->
-			<section class="usa-section">
-				<div id="map" class="bbg__map--banner"></div>
-			</section>
-
-
-			<div class="usa-grid-full">
+		<div class="outer-container">
+			<div class="custom-grid-container">
 			<?php
 				$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn'];
 				foreach ($entities as $e) {
@@ -63,9 +65,9 @@ get_header(); ?>
 								'post_type' => array('post'),
 								'posts_per_page' => 5,
 								'category__and' => array(
-														$prCategoryID,
-														get_cat_ID('Press Release')
-												  ),
+										$prCategoryID,
+										get_cat_ID('Press Release')
+								),
 								'orderby', 'date',
 								'order', 'DESC',
 								'tax_query' => array(
@@ -79,24 +81,25 @@ get_header(); ?>
 							);
 							$custom_query = new WP_Query($qParams);
 							if ($custom_query -> have_posts()) {
-								while ( $custom_query -> have_posts() )  {
+								while ($custom_query -> have_posts()) {
 									$custom_query->the_post();
 									$id = get_the_ID();
-									$pressReleases[] = array('url'=>get_permalink($id), 'title'=> get_the_title($id), 'excerpt'=>get_the_excerpt(), 'thumb'=>get_the_post_thumbnail( $id, 'small-thumb' ));
+									$pressReleases[] = array(
+										'url' => get_permalink($id),
+										'title' => get_the_title($id),
+										'excerpt' => get_the_excerpt(),
+										'thumb' => get_the_post_thumbnail($id, 'small-thumb')
+									);
 								}
 							}
 							wp_reset_postdata();
 							wp_reset_query();
 						}
 					}
-					$s = '<section class="usa-section">';
-					$s .= '<div class="usa-grid">';
-					$entityPermalink = get_permalink( get_page_by_path( 'networks/' . $e ) );
-					$s .= '<h5 class="bbg__label small"><a href="' . $entityPermalink . '">'. $entityString .'</a></h5>';
-					$s .= '</div>';
-					$s .= '<div class="usa-grid">';
+					$s  = '<div class="inner-container">';
+					$entityPermalink = get_permalink(get_page_by_path('networks/' . $e));
+					$s .= 	'<h3><a href="' . $entityPermalink . '">'. $entityString .'</a></h3>';
 					if (count($pressReleases)) {
-						//$s.= '<h2>Recent '. $abbreviation .' press releases</h2>';
 						$counter = 0;
 						foreach ($pressReleases as $pr) {
 							$counter++;
@@ -104,89 +107,77 @@ get_header(); ?>
 							$title = $pr['title'];
 
 							if ($counter == 1) {
-								$s .= '<div class="bbg-grid--1-1-1-2 secondary-stories">';
+								$s .= '<div class="main-content-container">';
 							} else if ($counter == 2) {
-								$s .= '<div class="bbg-grid--1-1-1-2 tertiary-stories">';
+								$s .= '<div class="side-content-container">';
 							}
 
 
 							if ($counter == 1) {
-								$s .= '<article id="post-'. get_the_ID() . '" class="' . implode(" ", get_post_class( "bbg__article" )) . '">';
-									$s .= '<header class="entry-header bbg-blog__excerpt-header"><h2><a href="' . $url . '">' . $title . '</a></h2></header>';
-
-									$s .= '<div class="entry-content bbg-blog__excerpt-content">';
-										$s .= '<div class="single-post-thumbnail clear bbg__excerpt-header__thumbnail--small ">';
-											$s .= $pr['thumb'];
-										$s .= '</div>';
-										$s .= '<p>' . $pr['excerpt'] . '</p>';
-									$s .= '</div>';
+								$s .= '<h4><a href="' . $url . '">' . $title . '</a></h4>';
+								$s .= 	$pr['thumb'];
+								$s .= '<p>' . $pr['excerpt'] . '</p>';
 							} else {
-								$s .= '<article id="post-' . get_the_ID() . '" class="' . implode(" ", get_post_class( "bbg-blog__excerpt--list" )) . '">';
-								$s .= '<header class="entry-header bbg-blog__excerpt-header"><h3 class="entry-title bbg-blog__excerpt-title--list"><a href="' . $url . '">' . $title . '</a></h3></header>';
+								$s .= '<h6><a href="' . $url . '">' . $title . '</a></h6>';
 							}
-							$s .= '</article>';
 							if ($counter == 1 || $counter == 5) {
 								if ($counter == 5) {
 									$idObj = get_category_by_slug($entitySlug);
 				  					$id = $idObj->term_id;
-									$s .= '<article>' . '<a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></article>';
+									$s .= '<article><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></article>';
 								}
 								$s .= '</div>';
 							}
 						}
 
 					}
-					$s .= '</div></section>';
+					$s .= '</div>'; // END .inner-container
 					echo $s;
 				}
 			?>
-
-
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+			</div>
+		</div>
+	</main><!-- #main -->
+</div><!-- #primary -->
 
 <?php
-
 $postsPerPage = 50;
-
-$qParams=array(
-	'post_type' => array('post')
-	,'category__and' => array( get_cat_id('Map it'), get_cat_id('Press Release') )
-	,'posts_per_page' => $postsPerPage
-	,'post_status' => array('publish')
+$qParams = array(
+	'post_type' => array('post'),
+	'category__and' => array(get_cat_id('Map it'), get_cat_id('Press Release')),
+	'posts_per_page' => $postsPerPage,
+	'post_status' => array('publish')
 );
 
 /*** late in the game we ran into a pagination issue, so we're running a second query here ***/
-$custom_query_args= $qParams;
-$custom_query = new WP_Query( $custom_query_args );
-
+$custom_query_args = $qParams;
+$custom_query = new WP_Query($custom_query_args);
 $features = array();
 
-if ( $custom_query->have_posts() ) :
+if ($custom_query->have_posts()) :
 		$counter = 0;
-		while ( $custom_query->have_posts() ) : $custom_query->the_post();
+		while ($custom_query->have_posts()) : $custom_query->the_post();
 			$id = get_the_ID();
 			$location = get_post_meta( $id, 'map_location', true );
 			$storyLink = get_permalink();
 			$mapHeadline = get_post_meta( $id, 'map_headline', true );
-
 			$mapDescription = get_the_title();
 			$mapDate = get_the_date();
-			$mapDescription = $mapDescription . " <span class='bbg__map__infobox__date'>(" . $mapDate . ")</span>";
 
-			$pinColor = "#981b1e";
+			$mapDescription = $mapDescription . ' <span class="bbg__map__infobox__date">(' . $mapDate . ')</span>';
+
+			$pinColor = '#981b1e';
 			if (has_category('VOA')){
-				$pinColor = "#344998";
-				$mapHeadline = "<h5><a href='". $storyLink ."'>VOA | " . $mapHeadline . '</a></h5>';
+				$pinColor = '#344998';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">VOA | ' . $mapHeadline . '</a></h5>';
 			} elseif (has_category('RFA')){
 				$pinColor = "#009c50";
-				$mapHeadline = "<h5><a href='". $storyLink ."'>RFA | " . $mapHeadline . '</a></h5>';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">RFA | ' . $mapHeadline . '</a></h5>';
 			} elseif (has_category('RFE/RL')){
 				$pinColor = "#ea6828";
-				$mapHeadline = "<h5><a href='". $storyLink ."'>RFE/RL | " . $mapHeadline . '</a></h5>';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">RFE/RL | ' . $mapHeadline . '</a></h5>';
 			} else {
-				$mapHeadline = "<h5><a href='". $storyLink ."'>" . $mapHeadline . '</a></h5>';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">' . $mapHeadline . '</a></h5>';
 			}
 			$features[] = array(
 				'type' => 'Feature',
@@ -212,15 +203,10 @@ if ( $custom_query->have_posts() ) :
 		echo "<script type='text/javascript'>\n";
 		echo 	"geojson = $geojsonStr";
 		echo "</script>";
-
 endif;
-
 ?>
 
-
-
-
-<?php /* include map stuff -------------------------------------------------- */ ?>
+<?php /* include map stuff */ ?>
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 
@@ -240,13 +226,8 @@ endif;
 <script type="text/javascript">
 L.mapbox.accessToken = '<?php echo 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw'; ?>';
 
-//console.log(geojson[0].features[0].properties);
-//console.log('description: '+ geojson[0].features[0].properties['description'])
-
 var map = L.mapbox.map('map', 'mapbox.emerald')
-//        .setView([-37.82, 175.215], 14);
-
-    var markers = new L.MarkerClusterGroup({
+	var markers = new L.MarkerClusterGroup({
 		iconCreateFunction: function (cluster) {
 			var childCount = cluster.getChildCount();
 			var c = ' marker-cluster-';
@@ -261,24 +242,24 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
 		}
 	});
 
-    for (var i = 0; i < geojson[0].features.length; i++) {
-        var coords = geojson[0].features[i].geometry.coordinates;
-        var title = geojson[0].features[i].properties.title; //a[2];
-        var description = geojson[0].features[i].properties['description'];
-        var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
-            icon: L.mapbox.marker.icon({
-            	'marker-symbol': '',
-            	'marker-color': geojson[0].features[i].properties['marker-color']
-           	})
-        });
-        var popupText = title + description;
-        marker.bindPopup(popupText);
-        markers.addLayer(marker);
-    }
+	for (var i = 0; i < geojson[0].features.length; i++) {
+		var coords = geojson[0].features[i].geometry.coordinates;
+		var title = geojson[0].features[i].properties.title; //a[2];
+		var description = geojson[0].features[i].properties['description'];
+		var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
+			icon: L.mapbox.marker.icon({
+				'marker-symbol': '',
+				'marker-color': geojson[0].features[i].properties['marker-color']
+			})
+		});
+		var popupText = title + description;
+		marker.bindPopup(popupText);
+		markers.addLayer(marker);
+	}
 
-    map.addLayer(markers);
+	map.addLayer(markers);
 
-	//Disable the map scroll/zoom so that you can scroll the page.
+	// Disable the map scroll/zoom so that you can scroll the page.
 	map.scrollWheelZoom.disable();
 
 	function centerMap(){
@@ -287,14 +268,14 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
 	centerMap();
 
 
-	//Recenter the map on resize
+	// Recenter the map on resize
 	function resizeStuffOnResize(){
-	  waitForFinalEvent(function(){
+		waitForFinalEvent(function(){
 			centerMap();
-	  }, 500, "some unique string");
+		}, 500, "some unique string");
 	}
 
-	//Wait for the window resize to 'end' before executing a function---------------
+	// Wait for the window resize to 'end' before executing a function
 	var waitForFinalEvent = (function () {
 		var timers = {};
 		return function (callback, ms, uniqueId) {
