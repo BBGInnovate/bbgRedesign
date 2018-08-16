@@ -11,8 +11,8 @@
 require 'inc/bbg-functions-assemble.php';
 
 $pageTagline = get_post_meta( get_the_ID(), 'page_tagline', true );
-if ($pageTagline && $pageTagline!=""){
-	$pageTagline = '<h6 class="bbg__page-header__tagline">' . $pageTagline . '</h6>';
+if ($pageTagline && !empty($pageTagline)){
+	$pageTagline = '<p class="lead-in">' . $pageTagline . '</p>';
 }
 
 $pageContent = "";
@@ -50,7 +50,7 @@ if ($videoUrl != "") {
 }
 
 $numPostsFirstPage = 7;
-if ( $hasIntroFeature ) {
+if ($hasIntroFeature) {
 	$numPostsFirstPage = 6;
 }
 $numPostsSubsequentPages = 6;
@@ -60,7 +60,7 @@ $postsPerPage = $numPostsFirstPage;
 $offset = 0;
 if ($currentPage > 1) {
 	$postsPerPage = $numPostsSubsequentPages;
-	$offset = $numPostsFirstPage + ( $currentPage - 2 ) * $numPostsSubsequentPages;
+	$offset = $numPostsFirstPage + ($currentPage - 2) * $numPostsSubsequentPages;
 }
 
 $hasTeamFilter = false;
@@ -69,29 +69,29 @@ $mobileAppsPostContent = "";
 if ($category_browser_type == "Page Children") {
 	/*** USED FOR APPS LANDING PAGE ****/
 	$qParams = array (
-		'post_type' => array( 'page' ),
+		'post_type' => array('page'),
 		'posts_per_page' => -1,
 		'post_parent' => get_the_ID(),
 		'order' => 'DESC'
 	);
-	if ( $pageTitle == "Burke Awards archive" ) {
-		$qParams['post_status'] = array( 'publish' ); // you can add 'private','pending','draft' for development
+	if ($pageTitle == "Burke Awards archive") {
+		$qParams['post_status'] = array('publish'); // you can add 'private','pending','draft' for development
 		$qParams['orderby'] = 'menu_order';
 		$qParams['order'] = 'ASC';
 	}
-} else if ( $category_browser_type == "Custom Post Type" ) {
+} else if ($category_browser_type == "Custom Post Type") {
 	/*** USED FOR AWARDS AND BURKE CANDIDATES ****/
-	$categoryBrowsePostType = get_post_meta( get_the_ID(), 'category_browser_post_type', true );
+	$categoryBrowsePostType = get_post_meta(get_the_ID(), 'category_browser_post_type', true);
 
 	/*** categoryBrowsePostType ***/
 	$qParams = array(
-		'post_type' => array( $categoryBrowsePostType ),
+		'post_type' => array($categoryBrowsePostType),
 		'posts_per_page' => $postsPerPage,
 		'offset' => $offset,
 		'order' => 'DESC'
 	);
 
-	if ( $categoryBrowsePostType == 'burke_candidate' ) {
+	if ($categoryBrowsePostType == 'burke_candidate') {
 		// $qParams['meta_key'] = 'burke_award_info_0_burke_ceremony_year';
 		// $qParams['orderby'] = 'meta_value';
 		$qParams['posts_per_page'] = -1;
@@ -160,67 +160,69 @@ $teamCategory=get_category($teamCategoryID);
 $portfolioDescription=$teamCategory->description;
 */
 
-get_header(); ?>
-
+get_header();
+?>
 
 <main id="main" class="site-main" role="main">
 	<?php
-		// $featured_media_result = get_feature_media_data();
-		// if ($featured_media_result != "") {
-		// 	echo $featured_media_result;
-		// }
-	?>
-	<div class="usa-grid">
-	<?php if ( $custom_query -> have_posts() ) : ?>
-		<header class="page-header">
-			<?php the_title( '<h5 class="bbg__label--mobile large">', '</h5>' ); ?>
-			<?php echo $pageTagline; ?>
-		</header><!-- .page-header -->
-	</div>
+		$featured_media_result = get_feature_media_data();
+		if ($featured_media_result != "") {
+			echo $featured_media_result;
+		}
 
-	<?php
-		// if ($videoUrl != "") {
-		// 	echo featured_video( $videoUrl );
-		// 	echo "<br/><br/>";
-		// } elseif (has_post_thumbnail() && ( $hideFeaturedImage != 1 )) {
-		// 	echo '<div class="usa-grid-full">';
-		// 	$featuredImageClass = "";
-		// 	$featuredImageCutline = "";
-		// 	$thumbnail_image = get_posts( array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment') );
-		// 	if ( $thumbnail_image && isset( $thumbnail_image[0] ) ) {
-		// 		$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-		// 	}
-		// 	$src = wp_get_attachment_image_src(get_post_thumbnail_id( $post -> ID), array(700, 450), false, '');
+		if ($custom_query -> have_posts()) {
+			$page_title  = '<div class="outer-container">';
+			$page_title .= 	'<div class="grid-container">';
+			$page_title .= 		'<h2>' . get_the_title() . '</h2>';
+			$page_title .= 		$pageTagline;
+			$page_title .= 	'</div>';
+			$page_title .= '</div>';
+			echo $page_title;
 
-		// 	echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerAdjustStr . '">';
-		// 	echo '</div>';
-		// 	echo '</div> <!-- usa-grid-full -->';
-		// }
-	?><!-- .bbg__article-header__thumbnail -->
-
-	<div class="usa-grid-full">
-		<?php
+			echo '<div class="outer-container">';
+			echo 	'<div class="grid-container">';
 			$counter = 0;
 			while ($custom_query -> have_posts())  {
 				$custom_query -> the_post();
 				$counter = $counter + 1;
 				if ($counter == 1 && $currentPage == 1 && !$hasIntroFeature) {
-					$includeMetaFeatured = FALSE;
-					get_template_part( 'template-parts/content-excerpt-featured', get_post_format() );
-					echo '<div class="usa-grid">';
+					$featured_media_result = get_feature_media_data();
+					if ($featured_media_result != "") {
+						echo $featured_media_result;
+					}
+					$featured_post .= 		'<h3>' . get_the_title() . '</h3>';
+					$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
+					echo $featured_post;
 				} elseif ($counter == 1 && $currentPage != 1) {
-					echo '<div class="usa-grid">';
-					$gridClass = "bbg-grid--1-2-3";
+					echo 	'<div class="grid-half">';
 					get_template_part('template-parts/content-portfolio', get_post_format());
+					echo 	'</div>';
 				} else {
-					$gridClass = "bbg-grid--1-2-3";
-					get_template_part('template-parts/content-portfolio', get_post_format());
+					echo 	'<div class="grid-third">';
+					$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
+					if (has_post_thumbnail()) {
+						$post_image .= the_post_thumbnail('medium-thumb');
+					} else {
+						$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
+					}
+					$post_image .= '</a>';
+					echo $post_image;
+					$link_header  = '<h4>';
+					$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
+					$link_header .= 		get_the_title();
+					$link_header .= 	'</a>';
+					$link_header .= '</h4>';
+					echo $link_header;
+					echo wp_trim_words(get_the_excerpt(), 10);
+					echo 	'<br><br><br></div>';
 				}
 			}
-			echo '</div><!-- .usa-grid -->';
+			echo '</div>';
+			echo '</div>'; // END .outer-container
 
 			if ( $pageTitle != "Burke Awards archive" ) {
-				echo '<div class="usa-grid">';
+				echo '<div class="outer-container">';
+				echo '<div class="grid-container">';
 				echo 	'<nav class="navigation posts-navigation" role="navigation">';
 				echo 		'<h2 class="screen-reader-text">Event navigation</h2>';
 				echo 		'<div class="nav-links">';
@@ -238,17 +240,16 @@ get_header(); ?>
 				}
 				echo 		'</div>';
 				echo 	'</nav>';
+				echo '</div>';
 				echo '</div><!-- .usa-grid -->';
 			}
-		?>
-	<?php else : ?>
-		<?php get_template_part('template-parts/content', 'none'); ?>
-	<?php endif; ?>
-	</div><!-- .usa-grid-full -->
-	<?php
-		//we are not applying the_content filter, so shortcodes won't be processed and paragraph tags won't be added
+		}
+		else {
+			get_template_part('template-parts/content', 'none');
+		}
 		echo $pageContent;
 	?>
-</main><!-- #main -->
+</main>
+
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

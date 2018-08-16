@@ -10,11 +10,11 @@
 
 //The byline meta info is displayed by default
 global $includeMetaFeatured;
-if (! isset ($includeMetaFeatured)) {
-	$includeMetaFeatured=TRUE;
+if (!isset($includeMetaFeatured)) {
+	$includeMetaFeatured = true;
 }
 
-$postPermalink=esc_url( get_permalink() );
+$postPermalink = esc_url(get_permalink());
 
 
 /*** the only way you should ever have a future post status here is if a future event is featured on the homepage */
@@ -32,21 +32,20 @@ if (isset($_GET['category_id'])) {
 
 //Add featured video
 $videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
-
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class("bbg-blog__excerpt--featured usa-grid-full"); ?>>
 	<header class="entry-header bbg-blog__excerpt-header--featured usa-grid-full">
 		<?php
 			$link = sprintf('<a href="%s" rel="bookmark">', $postPermalink);
-			$linkImage = sprintf( '<a href="%s" rel="bookmark" tabindex="-1">', $postPermalink );
+			$linkImage = sprintf('<a href="%s" rel="bookmark" tabindex="-1">', $postPermalink);
 			$linkH2 = '<h2 class="entry-title bbg-blog__excerpt-title--featured">' . $link;
 
-			$hideFeaturedImage = FALSE;
+			$hideFeaturedImage = false;
 			if ($videoUrl != "") {
 				echo featured_video($videoUrl);
-				$hideFeaturedImage = TRUE;
-			} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
+				$hideFeaturedImage = true;
+			} elseif (has_post_thumbnail() && ( $hideFeaturedImage != 1 )) {
 				$featuredImageClass = "";
 				$featuredImageCutline = "";
 				$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));

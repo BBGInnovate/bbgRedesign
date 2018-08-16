@@ -2971,7 +2971,7 @@ h6 a:link,
 h6 a:visited,
 .paragraph-header {
   font-family: "Alegreya Sans", sans-serif;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   line-height: 1.8rem;
   font-weight: 700;
   text-transform: none;
@@ -3009,7 +3009,7 @@ ul li {
 
 .side-content-container ul li,
 .side-content-container ol li,
-p.aside {
+.aside p.aside {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 1.6rem;
   line-height: 2rem; }

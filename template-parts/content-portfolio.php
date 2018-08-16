@@ -25,8 +25,7 @@ if (isset($_GET['category_id'])) {
 	$postPermalink = add_query_arg('category_id', $_GET['category_id'], $postPermalink);
 }
 
-
-echo '<article class="inner-container ' . get_post_class($classNames) . '" id="'. get_the_ID() . '">';
+echo '<article id="'. get_the_ID() . '">';
 	$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
 	if (has_post_thumbnail()) {
 		$post_image .= the_post_thumbnail('medium-thumb');

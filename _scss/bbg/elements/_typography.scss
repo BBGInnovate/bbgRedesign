@@ -63,7 +63,7 @@ h6 a:link,
 h6 a:visited,
 .paragraph-header {
     font-family: $font-sans;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     line-height: 1.8rem;
     font-weight: $font-bold;
     text-transform: none;
@@ -102,6 +102,8 @@ ul li {
 
 .side-content-container ul li, 
 .side-content-container ol li, 
+
+.aside
 p.aside {
     font-family: $font-sans;
     font-size: 1.6rem;

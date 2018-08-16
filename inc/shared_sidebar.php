@@ -266,7 +266,7 @@ if ($includeSidebar) {
 					}
 
 					if ($sectionDescription) {
-						$sidebar_markup .= '<p>' . $sectionDescription . '</p>';
+						$sidebar_markup .= '<p class="aside">' . $sectionDescription . '</p>';
 					}
 					$sidebar_markup .= '<style>div.usa-accordion-content {padding:1.5rem !important;}</style>';
 
@@ -397,11 +397,11 @@ if ($includeSidebar) {
 					if ($custom_query -> found_posts || $sectionDescription) {
 						$sidebar_markup .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $sectionTitle . '</h5>';
 						if ($sectionDescription) {
-							$sidebar_markup .= '<p>' . $sectionDescription . '</p>';
+							$sidebar_markup .= '<p class="aside">' . $sectionDescription . '</p>';
 						}
 						if ($custom_query -> found_posts) {
 							$i = 0;
-							$sidebar_markup .= '<p>';
+							$sidebar_markup .= '<p class="aside">';
 							while ( $custom_query->have_posts() )  {
 								$custom_query->the_post();
 								$i++;
