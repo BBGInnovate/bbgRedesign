@@ -7293,7 +7293,7 @@ div.appropriations-small > p.header {
   .bbg__map--banner .bbg__map__infobox__date {
     color: #757575; }
 
-.bbg__memorial .usa-grid-full, .bbg__memorial .bbg__svg__content {
+.bbg__memorial {
   background-color: #f1f1f1;
   padding-top: 2rem; }
 

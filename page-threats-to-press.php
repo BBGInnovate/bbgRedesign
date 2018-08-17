@@ -79,19 +79,19 @@ wp_reset_query();
 
 
 /* Map options */
-$trailingDays = get_post_meta( $id, 'threats_to_press_map_trailing_days', true );
-$maxClusterRadius = get_post_meta( $id, 'threats_to_press_map_maximum_cluster_radius', true );
-$cutoffDate = get_field( 'threats_to_press_map_cutoff_date', $id, true );
+$trailingDays = get_post_meta($id, 'threats_to_press_map_trailing_days', true);
+$maxClusterRadius = get_post_meta($id, 'threats_to_press_map_maximum_cluster_radius', true);
+$cutoffDate = get_field('threats_to_press_map_cutoff_date', $id, true);
 /* Adding optional quotation to the bottom of the page */
 $includeQuotation = get_field( 'quotation_include', '', true );
 $quotation = "";
 
-if ( $includeQuotation ) {
-	$quotationText = get_field( 'quotation_text', '', false );
-	$quotationSpeaker = get_field( 'quotation_speaker', '', false );
-	$quotationTagline = get_field( 'quotation_tagline', '', false );
+if ($includeQuotation) {
+	$quotationText = get_field('quotation_text', '', false);
+	$quotationSpeaker = get_field('quotation_speaker', '', false);
+	$quotationTagline = get_field('quotation_tagline', '', false);
 
-	$quoteMugshotID = get_field( 'quotation_mugshot', '', false );
+	$quoteMugshotID = get_field('quotation_mugshot', '', false);
 	$quoteMugshot = "";
 
 	if ( $quoteMugshotID ) {
@@ -100,11 +100,11 @@ if ( $includeQuotation ) {
 		$quoteMugshot = '<img src="' . $quoteMugshot .'" class="bbg__quotation-attribution__mugshot">';
 	}
 
-	$quotation = '<h2 class="bbg__quotation-text--large">“'. $quotationText .'”</h2>';
+	$quotation  = '<h4 class="bbg__quotation-text--large">“'. $quotationText .'”</h4>';
 	$quotation .= '<div class="bbg__quotation-attribution__container">';
-	$quotation .= '<p class="bbg__quotation-attribution">';
-	$quotation .= $quoteMugshot;
-	$quotation .= '<span class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">'. $quotationSpeaker .'</span><span class="bbg__quotation-attribution__credit">'. $quotationTagline .'</span></span>';
+	$quotation .= 	'<p class="bbg__quotation-attribution">';
+	$quotation .= 		$quoteMugshot;
+	$quotation .= 		'<span class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">'. $quotationSpeaker .'</span><span class="bbg__quotation-attribution__credit">'. $quotationTagline .'</span></span>';
 	$quotation .= '</p>';
 	$quotation .= '</div>';
 }
@@ -140,8 +140,8 @@ $threatsPermalink = get_category_link( $threatsCat->term_id );
 
 $fallenJournalists = get_field('fallen_journalists_section');
 $wall = "";
-if( $fallenJournalists ) {
-	foreach( $fallenJournalists as $j ) {
+if($fallenJournalists) {
+	foreach($fallenJournalists as $j) {
 		$id = $j->ID;
 		$mugshot = "/wp-content/media/2016/07/blankMugshot.png";
 		$date = get_field('profile_date_of_passing', $id, true); 
@@ -170,20 +170,19 @@ if( $fallenJournalists ) {
 			$journalistName = $name;
 		}
 
-		$journalist = "";
+		$journalist  = "";
 		$journalist .= '<div class="bbg__profile-grid__profile">';
-		$journalist .= $imgSrc;
-		$journalist .= '<h4 class="bbg__profile-grid__profile__name">' . $journalistName . '</h4>';
-		$journalist .= '<h5 class="bbg__profile-grid__profile__dates">Killed ' . $date . '</h5>';
-		$journalist .= '<p class="bbg__profile-grid__profile__description"></p>';
+		$journalist .= 	$imgSrc;
+		$journalist .= 	'<h4 class="bbg__profile-grid__profile__name">' . $journalistName . '</h4>';
+		$journalist .= 	'<h5 class="bbg__profile-grid__profile__dates">Killed ' . $date . '</h5>';
+		$journalist .= 	'<p class="bbg__profile-grid__profile__description"></p>';
 		$journalist .= '</div>';
 		$wall .= $journalist;
 	}
 }
 wp_reset_postdata();
 wp_reset_query();
-
- ?>
+?>
 
 
 <style>
@@ -239,54 +238,46 @@ wp_reset_query();
 		<main id="main" class="site-main" role="main">
 
 		<?php if ( $custom_query->have_posts() ) : ?>
-
-			<div class="usa-grid">
-				<header class="page-header">
-					<h5 class="bbg__label--mobile large"><?php echo $pageTitle; ?></h5>
-				</header><!-- .page-header -->
-			</div>
-
-			<section class="usa-section" style="position: relative;">
-					<div id="map-threats" class="bbg__map--banner"></div>
+			<div style="position: relative;">
+				<div id="map-threats" class="bbg__map--banner"></div>
 					<img id="resetZoom" src="/wp-content/themes/bbgRedesign/img/home.png" class="bbg__map__button"/>
 					<div class="usa-grid">
 						<p class="bbg__article-header__caption"><?php echo $threatsMapCaption ?></p>
 					</div>
-				<style> 
-					#mapFilters label { margin-left:15px; }
-				</style>
-			
-				<div align="center" id="mapFilters" class="u--show-medium-large">
-					<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2018" value="2018" /><label for="trainingYear_2018"> 2018</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2017" value="2017" /><label for="trainingYear_2017"> 2017</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2016" value="2016" /><label for="trainingYear_2016"> 2016</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2015" value="2015" /><label for="trainingYear_2015"> 2015</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2014" value="2014" /><label for="trainingYear_2014"> 2014</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2013" value="2013" /><label for="trainingYear_2013"> 2013</label>
-				</div>
-				<div align="center" id="mapFilters" class="u--hide-medium-large">
-					<p></p><h3>Select a year</h3>
-					<select name="trainingSelect">
-						<option value="all">All</option>
-						<option value="2018">2018</option>
-						<option value="2017">2017</option>
-						<option value="2016">2016</option>
-						<option value="2015">2015</option>
-						<option value="2014">2014</option>
-						<option value="2013">2013</option>
-					</select>
-				</div>
-			
-			</section>
+					<style> 
+						#mapFilters label {margin-left: 15px;}
+						.leaflet-right {display: none;}
+					</style>
+				
+					<div align="center" id="mapFilters" class="u--show-medium-large">
+						<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
+						<input type="radio" name="trainingYear" id="trainingYear_2018" value="2018" /><label for="trainingYear_2018"> 2018</label>
+						<input type="radio" name="trainingYear" id="trainingYear_2017" value="2017" /><label for="trainingYear_2017"> 2017</label>
+						<input type="radio" name="trainingYear" id="trainingYear_2016" value="2016" /><label for="trainingYear_2016"> 2016</label>
+						<input type="radio" name="trainingYear" id="trainingYear_2015" value="2015" /><label for="trainingYear_2015"> 2015</label>
+						<input type="radio" name="trainingYear" id="trainingYear_2014" value="2014" /><label for="trainingYear_2014"> 2014</label>
+						<input type="radio" name="trainingYear" id="trainingYear_2013" value="2013" /><label for="trainingYear_2013"> 2013</label>
+					</div>
 
-			<section class="usa-section">
-				<div class="usa-grid" style="margin-bottom: 3rem">
-					<h2 class="entry-title bbg-blog__excerpt-title--featured"><?php echo $pageTitle; ?></h2>
+					<div align="center" id="mapFilters" class="u--hide-medium-large">
+						<p class="paragraph-header">Select a year</p>
+						<select name="trainingSelect">
+							<option value="all">All</option>
+							<option value="2018">2018</option>
+							<option value="2017">2017</option>
+							<option value="2016">2016</option>
+							<option value="2015">2015</option>
+							<option value="2014">2014</option>
+							<option value="2013">2013</option>
+						</select>
+					</div>
+			</div>
+
+			<section class="outer-container" style="margin-top: 3rem;">
+				<div class="grid-container">
+					<h2><?php echo $pageTitle; ?></h2>
 					<?php
-						echo '<h3 class="usa-font-lead">';
-						echo $pageContent; // or $pageExcerpt
-						echo '</h3>';
+						echo '<p>' . $theContent . '</p>';
 					?>
 				</div>
 			</section>
@@ -295,89 +286,69 @@ wp_reset_query();
 				$featuredJournalists = "";
 				$profilePhoto = "";
 
-				// check if the flexible content field has rows of data
-				if( have_rows('featured_journalists_section') ){
+				if (have_rows('featured_journalists_section')) {
+				    while (have_rows('featured_journalists_section')) {
+				    	the_row();
+						$featuredJournalistsSectionLabel = get_sub_field('featured_journalists_section_label');
 
-				 	// loop through the rows of data
-				    while ( have_rows('featured_journalists_section') ) : the_row();
+						if (have_rows('featured_journalist')) {
+							$featuredJournalists .= '<div class="outer-container">';
+							$featuredJournalists .= 	'<div class="grid-container">';
+							$featuredJournalists .= 		'<h3>' . $featuredJournalistsSectionLabel . '</h3>';
+							$featuredJournalists .= 	'</div>';
 
-					// display a sub field value
-					$featuredJournalistsSectionLabel = get_sub_field('featured_journalists_section_label');
+							while (have_rows('featured_journalist')) {
+								the_row();
+								$relatedPages = get_sub_field('featured_journalist_profile');
+								$profileTitle = $relatedPages->post_title;
+								$profileName = $relatedPages->first_name . ' ' . $relatedPages->last_name;
+								$profileOccupation = $relatedPages->occupation;
+								$profilePhoto = $relatedPages->profile_photo;
+								$profileUrl = get_permalink( $relatedPages->ID );
+								$profileExcerpt = my_excerpt($relatedPages->ID);
 
-					if ( have_rows('featured_journalist') ){
-						//echo the_sub_field('featured_journalists_section_label');
-						$featuredJournalists .= '<section class="usa-section">';
-							$featuredJournalists .= '<div class="usa-grid-full">';
-								$featuredJournalists .= '<div class="usa-grid">';
-									$featuredJournalists .= '<header class="page-header">';
-										$featuredJournalists .= '<h5 class="bbg__label">' . $featuredJournalistsSectionLabel . '</h5>';
-									$featuredJournalists .= '</header><!-- .page-header -->';
+								$profileOccupation = '<span class="bbg__profile-excerpt__occupation">' . $profileOccupation .'</span>';
+
+								if ($profilePhoto) {
+									$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
+									$profilePhoto = $profilePhoto[0];
+									$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-featured__profile__mugshot"/></a>';
+								}
+
+								$featuredJournalists .= '<div class="mgmt-profile grid-half">';
+								$featuredJournalists .= 	'<h4 class="bbg__profile__name"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
+								$featuredJournalists .= 	'<p class="bbg__profile-excerpt__text">' . $profilePhoto . $profileOccupation . $profileExcerpt . '</p>';
 								$featuredJournalists .= '</div>';
-
-								$featuredJournalists .= '<div class="usa-grid">';
-
-							    while ( have_rows('featured_journalist') ) : the_row();
-									//var_dump(get_sub_field('featured_journalist_profile'));
-									$relatedPages = get_sub_field( 'featured_journalist_profile' );
-									$profileTitle = $relatedPages->post_title;
-									$profileName = $relatedPages->first_name . " " . $relatedPages->last_name;
-									$profileOccupation = $relatedPages->occupation;
-									$profilePhoto = $relatedPages->profile_photo;
-									$profileUrl = get_permalink( $relatedPages->ID );
-									//$profileExcerpt = get_the_excerpt($relatedPages->ID);
-									$profileExcerpt = my_excerpt($relatedPages->ID); //get_the_excerpt($relatedPages->ID);
-
-									$profileOccupation = '<span class="bbg__profile-excerpt__occupation">' . $profileOccupation .'</span>';
-
-									if ($profilePhoto) {
-										$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
-										$profilePhoto = $profilePhoto[0];
-										$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-featured__profile__mugshot"/></a>';
-									}
-
-									$featuredJournalists .= '<div class="bbg-grid--1-2-2">';
-										$featuredJournalists .= '<h3 class="bbg__profile__name"><a href="' . $profileUrl . '">'. $profileName .'</a></h3>';
-										$featuredJournalists .= '<p class="bbg__profile-excerpt__text">' . $profilePhoto . $profileOccupation . $profileExcerpt . '</p>';
-									$featuredJournalists .= '</div>';
-
-							    endwhile;
-								$featuredJournalists .= '</div>';
+							}
 							$featuredJournalists .= '</div>';
-						$featuredJournalists .= '</section>';
+						}
 					}
-				    endwhile;
 				}
 			?>
 
-			<section class="usa-section">
-				<div class="usa-grid">
-
-					<?php /* Start the Loop */
+			<section class="outer-container">
+				<div class="grid-container">
+					<?php echo '<h5 class="bbg__label"><a href="' . $threatsPermalink . '">News + updates</a></h5>'; ?>
+				</div>
+					<?php
 						$counter = 0;
-					?>
-					<?php while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
-
-						<?php
-
+						while ( $custom_query->have_posts() ) : $custom_query->the_post();
 							$counter++;
 							//Add a check here to only show featured if it's not paginated.
-							if(  $counter == 1 ){
-								echo '<h5 class="bbg__label"><a href="' . $threatsPermalink . '">News + updates</a></h5>';
-								echo '</div>';
-								echo '<div class="usa-grid">';
-								echo '<div class="bbg-grid--1-1-1-2 secondary-stories">';
-							//} elseif( $counter==3 ){
+							if ($counter == 1) {
+								echo '<div class="inner-container">';
+								echo '<div class="main-content-container">';
+
 							} elseif( $counter == 2 ){
 								echo '</div><!-- left column -->';
-								echo '<div class="bbg-grid--1-1-1-2 tertiary-stories">';
+								echo '<div class="side-content-container">';
 								echo '<header class="page-header">';
-								//echo '<h6 class="page-title bbg__label small">More news</h6>';
 								echo '</header>';
 
 								//These values are used for every excerpt >=4
-								$includeImage = FALSE;
-								$includeMeta = FALSE;
-								$includeExcerpt = FALSE;
+								$includeImage = false;
+								$includeMeta = false;
+								$includeExcerpt = false;
 							}
 							get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
 
@@ -387,34 +358,30 @@ wp_reset_query();
 						wp_reset_query();
 					?>
 					</div><!-- .bbg-grid right column -->
-				</div><!-- .usa-grid -->
 			</section>
 			<?php endif; ?>
 
 			<?php echo $featuredJournalists; ?>
 
-			<section class="usa-section bbg__memorial">
-				<div class="usa-grid-full">
+			<div class="outer-container bbg__memorial">
+				<div class="grid-container">
+						<h3>Fallen journalists</h3>
+				<!-- </div> -->
 					<div class="usa-grid">
-						<h5 class="bbg__label">Fallen journalists</h5>
-					</div>
-
-					<div class="usa-grid">
-						<div id="memorialWall">
-							<?php echo $wall; ?>
-
-						</div>
+					<!-- <div id="memorialWall"> -->
+						<?php echo $wall; ?>
+					<!-- </div> -->
 					</div>
 				</div>
-			</section>
+			</div>
 
-			<section class="usa-section ">
-				<div class="usa-grid">
+			<div class="outer-container">
+				<div class="grid-container">
 					<div class="bbg__quotation ">
 						<?php echo $quotation; ?>
 					</div>
 				</div>
-			</section>
+			</div>
 
 
 			<script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
@@ -454,7 +421,7 @@ wp_reset_query();
 			</style>
 
 			<script type="text/javascript">
-				L.mapbox.accessToken = '<?php echo MAPBOX_API_KEY; ?>';
+				L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 				var initialCenter = [28.304380682962783, 22.148437500000004];
 				
 				/**** this calculation of initial zoom based on the window width is done to prevent a dramatic zoom done right when you start the map ***/
