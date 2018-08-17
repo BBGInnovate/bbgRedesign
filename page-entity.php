@@ -52,26 +52,29 @@ $entityAwardsPageLink = get_permalink( get_page_by_path('awards'));
 $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPageLink);
 
 $entityMission = get_post_meta($id, 'entity_mission', true);
-$subgroups = getEntityLinks_taxonomy($entityCategorySlug);
-
-$site_select = "<h5>Explore the $abbreviation websites</h5>";
-if (count($subgroups) < 4) {
-	$site_select .= "<ul class='bbg__rss__list'>";
-	foreach ($subgroups as $s) {
-		if ($s->website_url != "") { // EX: mbn digital
-			$site_select .= "<li class='bbg__rss__list-link'><a target='_blank' href='" . $s->website_url . "'>" . $s->name . "</a></li>";
+$entity_link_groups = getEntityLinks_taxonomy($entityCategorySlug);
+// echo $entity_link_groups;
+$site_select = '<h5>Explore the ' . $abbreviation . 'websites</h5>';
+if (count($entity_link_groups) < 4) {
+	$site_select .= '<ul class="bbg__rss__list">';
+	foreach ($entity_link_groups as $entity_link) {
+		if ($entity_link->website_url != "") { // EX: mbn digital
+			$site_select .= '<li class="bbg__rss__list-link">';
+			$site_select .= 	'<a target="_blank" href="' . $entity_link->website_url . '">' . $entity_link->name . '</a>';
+			$site_select .= '</li>';
 		}
 	}
-	$site_select .= "</ul>";
+	$site_select .= '</ul>';
 } else {
-	$site_select .= "<select name='entity_sites' id='entity_sites'>";
-	$site_select .= "<option>Select a service</option>";
-	foreach ( $subgroups as $s ) {
-		if ( $s->website_url != "" ) { // EX: mbn digital
-			$site_select .= "<option value='" . $s->website_url . "'>" . $s->name . "</option>";
+	$site_select .= '<select name="entity_sites" id="entity_sites">';
+	$site_select .= '<option>Select a service</option>';
+	foreach ($entity_link_groups as $entity_link) {
+		// echo 'site: ' . $entity_url->name;
+		if ($entity_link->website_url != "") { // EX: mbn digital
+			$site_select .= '<option value="' . $entity_link->website_url . '">' . $entity_link->name . '</option>';
 		}
 	}
-	$site_select .= "</select><button class='usa-button' id='entityUrlGo'>Go</button>";
+	$site_select .= '</select><button class="usa-button" id="entityUrlGo">Go</button>';
 }
 
 //Entity fast facts / by-the-numbers
@@ -195,16 +198,16 @@ $bannerPosition = get_post_meta($id, 'adjust_the_banner_image', true);
 $videoUrl = "";
 
 /**** BEGIN CREATING rssItems array *****/
-$entityJson = getFeed($rssFeed, $id);
-$rssItems = array();
-$itemContainer = false;
-$languageDirection = "";
+// $entityJson = getFeed($rssFeed, $id);
+// $rssItems = array();
+// $itemContainer = false;
+// $languageDirection = "";
 
-if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
-	$itemContainer = $entityJson->channel;
-} else {
-	$itemContainer = $entityJson;
-}
+// if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
+// 	$itemContainer = $entityJson->channel;
+// } else {
+// 	$itemContainer = $entityJson;
+// }
 if ($itemContainer) {
 	if (property_exists($itemContainer, 'language')) {
 		if ($itemContainer -> language == "ar"){

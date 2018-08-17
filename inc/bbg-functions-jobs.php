@@ -82,52 +82,51 @@
 	add_shortcode( 'jobslist', 'jobs_shortcode' );
 
 	function outputEmployeeProfiles() {
+
 		$qParams = array(
 			'post_type' => array( 'post' ),
 			'post_status' => array( 'publish' ),
 			'posts_per_page' => 6,
 			'cat' => get_cat_id( 'Employee' ),
-			// 'order' => 'DESC',
-			// 'order_by' => 'RAND(1)',
 		);
 		$custom_query = new WP_Query( $qParams );
 
-		$epStr = '<section class="bbg__section" style="margin-top: 4rem;">';
-		$epStr .= '<h5 class="bbg__label small">Employee spotlight</h5>';
-		//$epStr .= '<h5 class="bbg__label small"><a href="/category/employee/">Employee spotlight</a></h5>';
-		//$epStr .= '<p class="" style="font-family: sans-serif;">This is a description that goes here and here.</p>';
-		$epStr .= '<div class="usa-grid-full">';
-		while ( $custom_query -> have_posts() )  {
+		$epStr  = '<div class="nest-container" style="margin-top: 3rem;">';
+		$epStr .= '<div class="inner-container" style="margin-top: 3rem;">';
+		$epStr .= '<div class="grid-container">';
+		$epStr .= 	'<h3>Employee spotlight</h3>';
+		$epStr .= '</div>';
+		remove_filter('the_content', 'wpautop');
+		while ($custom_query -> have_posts())  {
 			$custom_query -> the_post();
 			$id = get_the_ID();
-			$active = get_post_meta( $id, 'active', true );
-			$e = "";
-			if ( $active ){
-				$occupation = get_post_meta( $id, 'occupation', true );
-				$twitterProfileHandle = get_post_meta( $id, 'twitter_handle', true );
-				$profilePhotoID = get_post_meta( $id, 'profile_photo', true );
+			$active = get_post_meta($id, 'active', true);
+			$e = '';
+			if ($active) {
+				$occupation = get_post_meta($id, 'occupation', true);
+				$twitterProfileHandle = get_post_meta($id, 'twitter_handle', true);
+				$profilePhotoID = get_post_meta($id, 'profile_photo', true);
 				$profilePhoto = "";
-				if ( $profilePhotoID ) {
-					$profilePhoto = wp_get_attachment_image_src( $profilePhotoID , 'mugshot' );
+				if ($profilePhotoID) {
+					$profilePhoto = wp_get_attachment_image_src($profilePhotoID , 'mugshot');
 					$profilePhoto = $profilePhoto[0];
 				}
-				$firstName = get_post_meta( $id, 'first_name', true );
-				$lastName = get_post_meta( $id, 'last_name', true );
+				$firstName = get_post_meta($id, 'first_name', true);
+				$lastName = get_post_meta($id, 'last_name', true);
 				$profileName = $firstName . " " . $lastName;
 				$permalink = get_the_permalink();
-				$e = '';
-				$e .= '<div class="bbg__employee-profile__excerpt">';
 
-				$e .= '<a href="' . $permalink . '" tabindex="-1"><img src="' . $profilePhoto . '"/></a>';
-				$e .= '<h4 class="bbg__employee-profile__excerpt__name"><a href="' . $permalink . '">' . $profileName . '</a></h4>';
-				$e .= '<p class="bbg__employee-profile__excerpt__title">' . $occupation . '</p>';
+				$e  = '';
+				$e .= '<div class="grid-third">';
+				$e .= 	'<a href="' . $permalink . '" tabindex="-1"><img src="' . $profilePhoto . '"></a>';
+				$e .= 	'<h4><a href="' . $permalink . '">' . $profileName . '</a></h4>';
+				$e .= 	'<p class="bbg__employee-profile__excerpt__title">' . $occupation . '</p>';
 				$e .= '</div>';
 				$epStr .= $e;
 			}
 		}
-
 		$epStr .= '</div>';
-		$epStr .= '</section>';
+		$epStr .= '</div>';
 		return $epStr;
 	}
 

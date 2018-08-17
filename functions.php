@@ -803,15 +803,14 @@ function getEntityLinks_taxonomy($termSlug) {
 
 	$entityTerm = get_term_by('slug', $termSlug, 'language_services');
 	$terms = get_terms(array(
-		 'taxonomy' => 'language_services',
-		 'parent' => $entityTerm ->term_id,
-		 'orderby'    => 'name',
-		 'hide_empty' => false 	//allows us to use language service taxonomy for websites before we launch it and associate countries
+		'taxonomy' => 'language_services',
+		'parent' => $entityTerm ->term_id,
+		'orderby'    => 'name',
+		'hide_empty' => false  //allows us to use language service taxonomy for websites before we launch it and associate countries
 	));
 	$g = array();
 	foreach ($terms as $t) {
-		$termMeta = get_term_meta( $t->term_id );
-
+		$termMeta = get_field( "language_services", $t );
 		$siteName = "";
 		$siteUrl = "";
 		if ( count( $termMeta ) ) {

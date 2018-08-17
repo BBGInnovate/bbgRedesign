@@ -307,7 +307,7 @@ get_header();
 		}
 		echo '</div>';
 	}
-	else {
+	elseif (have_rows('about_flexible_page_rows')) {
 		// gather_flexible_rows();
 		foreach ($all_flex_rows as $flex_row) {
 			if (is_array($flex_row)) {
