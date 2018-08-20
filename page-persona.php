@@ -40,107 +40,91 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main bbg__2-column" role="main">
-			<div class="usa-grid-full">
+<div id="primary" class="content-area">
+	<main id="main" class="site-main bbg__2-column" role="main">
 
-				<?php while ( have_posts() ) : the_post();
-					//$videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
-				?>
-					<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
+		<?php while ( have_posts() ) : the_post(); ?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
+				<div class="outer-container">
+					<div class="inner-container">
+						<header class="page-header">
+							<?php if( $post->post_parent ) {
+								//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
+								$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+								$parent_link = get_permalink( $post->post_parent );
+								?>
+								<h2><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h2>
+							<?php } else { ?>
+								<h2><?php the_title(); ?></h2>
+							<?php } ?>
+						</header><!-- .page-header -->
+					</div>
+				</div>
 
-						<div class="usa-grid">
-							<header class="page-header">
+				<?php 
+					if ($addFeaturedGallery) {
+						echo '<div class="usa-grid-full">';
+						echo 	'<div class="usa-grid-full bbg__article-featured__gallery">';
+						$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
+						putUniteGallery($featuredGalleryID);
+						echo 	'</div>';
+						echo '</div>';
+					}
 
-								<?php if( $post->post_parent ) {
-									//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-									$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
-									$parent_link = get_permalink( $post->post_parent );
-									?>
-									<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5>
-								<?php } else { ?>
-									<h5 class="bbg__label--mobile large"><?php the_title(); ?></h5>
-								<?php } ?>
-
-							</header><!-- .page-header -->
-						</div>
-
-						<?php 
-							if ($addFeaturedGallery) {
-								echo "<div class='usa-grid-full'><div class='usa-grid-full bbg__article-featured__gallery' >";
-								$featuredGalleryID = get_post_meta( get_the_ID(), 'featured_gallery_id', true );
-								putUniteGallery($featuredGalleryID);
-								echo "</div>";
+					$hideFeaturedImage = FALSE;
+					if ( $videoUrl != "" ) {
+						echo featured_video($videoUrl);
+						$hideFeaturedImage = TRUE;
+					} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
+						echo '<div class="usa-grid-full">';
+							$featuredImageClass = "";
+							$featuredImageCutline = "";
+							$thumbnail_image = get_posts( array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment') );
+							if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
+								$featuredImageCutline = $thumbnail_image[0]->post_excerpt;
 							}
-						?>
-						</div>
 
-						<?php
-							$hideFeaturedImage = FALSE;
-							if ( $videoUrl != "" ) {
-								echo featured_video($videoUrl);
-								$hideFeaturedImage = TRUE;
-							} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-								echo '<div class="usa-grid-full">';
-									$featuredImageClass = "";
-									$featuredImageCutline = "";
-									$thumbnail_image = get_posts( array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment') );
-									if ( $thumbnail_image && isset($thumbnail_image[0]) ) {
-										$featuredImageCutline = $thumbnail_image[0]->post_excerpt;
+							$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 700,450 ), false, '' );
+
+							echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerAdjustStr . '">';
+							echo '</div>';
+						echo '</div> <!-- usa-grid-full -->';
+					}
+				?><!-- .bbg__article-header__thumbnail -->
+
+				<div class="outer-container">
+					<div class="custom-grid-container">
+						<div class="inner-container">
+							<div class="main-content-container">
+								<?php
+									if ( $post->post_parent ) {
+										//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
+										$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+										$parent_link = get_permalink($post->post_parent);
+										the_title( '<h3 class="entry-title">', '</h3>' );
+									} else {
+										$headlineStr = "<h3 class='bbg__entry__secondary-title'>" . $headline . "</h3>";
 									}
 
-									$src = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array( 700,450 ), false, '' );
+									echo $headlineStr;
 
-									echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerAdjustStr . '">';
-									echo '</div>';
-								echo '</div> <!-- usa-grid-full -->';
-							}
-						?><!-- .bbg__article-header__thumbnail -->
+									$lead = apply_filters('the_content',$lead);
+									$investigation = apply_filters('the_content',$investigation);
+									$confrontation = apply_filters('the_content',$confrontation);
+									$decision = apply_filters('the_content',$decision);
 
-						<div class="usa-grid">
+									echo '<h4>The Lead</h4>';
+									echo '<img width="200" style="float:right;" src="' . $avatar["url"] . '"> ';
+									echo $lead;
+									echo "<h4>The Investigation</h4>";
+									echo $investigation;
+									echo "<h4>The Confrontation</h4>";
+									echo $confrontation;
+									echo "<h4>The Decision</h4>";
+									echo $decision;
 
-							<header class="entry-header">
-								<!-- .bbg__label -->
-								<?php if ( $post->post_parent ) {
-									//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-									$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
-									$parent_link = get_permalink($post->post_parent);
-									?>
-									<!--<h5 class="entry-category bbg__label"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5>-->
-									<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+									the_content();
 
-								<?php } else { ?>
-									<!--<h5 class="entry-category bbg__label"><?php the_title(); ?></h5>-->
-									<?php $headlineStr = "<h1 class='bbg__entry__secondary-title'>" . $headline . "</h1>"; ?>
-								<?php } ?>
-
-							</header><!-- .entry-header -->
-
-							<div class="entry-content bbg__article-content large <?php echo $featuredImageClass; ?>">
-								<div class="bbg__profile__content">
-									<?php
-										echo $headlineStr;
-
-										$lead = apply_filters('the_content',$lead);
-										$investigation = apply_filters('the_content',$investigation);
-										$confrontation = apply_filters('the_content',$confrontation);
-										$decision = apply_filters('the_content',$decision);
-
-										echo "<h2>The Lead</h2>";
-										echo '<img width="200" style="float:right;" src="' . $avatar["url"] . '"> ';
-										echo $lead;
-										echo "<h2>The Investigation</h2>";
-										echo $investigation;
-										echo "<h2>The Confrontation</h2>";
-										echo $confrontation;
-										echo "<h2>The Decision</h2>";
-										echo $decision;
-
-										the_content();
-									?>
-								</div>
-
-								<?php
 									//Add blog posts below the main content
 									$relatedCategory=get_field('related_category_posts', $id);
 
@@ -167,10 +151,8 @@ get_header(); ?>
 										wp_reset_postdata();
 									}
 								?>
-							</div><!-- .entry-content -->
-
-							<div class="bbg__article-sidebar large">
-
+							</div>
+							<div class="side-content-container">
 								<?php 
 									if ($twitterCode) {
 										echo $twitterCode;
@@ -179,79 +161,70 @@ get_header(); ?>
 
 								<h5 class="bbg__label small bbg__sidebar__download__label">What happened</h5>
 								<div class="usa-accordion bbg__committee-list">
-								   <ul class="usa-unstyled-list">
-								      <li>
-								         <button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-1">Decided to publish</button>
-								         <div id="collapsible-faq-1" aria-hidden="true" class="usa-accordion-content">
-											<p><?php echo $decidedToPublish; ?></p>
-								         </div>
-								      </li>
-								      <li>
-								         <button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-2">Decided not to publish</button>
-								         <div id="collapsible-faq-2" aria-hidden="true" class="usa-accordion-content">
-								            <p><?php echo $decidedNotToPublish; ?></p>
-								         </div>
-								      </li>
-								   </ul>
+									<ul class="usa-unstyled-list">
+										<li>
+											<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-1">Decided to publish</button>
+											<div id="collapsible-faq-1" aria-hidden="true" class="usa-accordion-content">
+												<p><?php echo $decidedToPublish; ?></p>
+											</div>
+										</li>
+										<li>
+											<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-2">Decided not to publish</button>
+											<div id="collapsible-faq-2" aria-hidden="true" class="usa-accordion-content">
+												<p><?php echo $decidedNotToPublish; ?></p>
+											</div>
+										</li>
+									</ul>
 								</div>
 
 								<?php
 									if ( $secondaryColumnContent != "" ) {
-
 										if ( $secondaryColumnLabel != "" ) {
 											echo '<h5 class="bbg__label small">' . $secondaryColumnLabel . '</h5>';
 										}
-
 										echo $secondaryColumnContent;
-										
 									}
-
 									if ( $includeSidebar ) {
 										echo $sidebar;
 									}
-
 									if ( $listsInclude ) {
 										echo $sidebarDownloads;
 									}
-
-
-
 								?>
-
-							</div><!-- .bbg__article-sidebar -->
+							</div>
 						</div>
-
-						<div class="usa-grid">
-							<footer class="entry-footer bbg-post-footer 1234">
-								<?php
-									edit_post_link(
-										sprintf(
-											/* translators: %s: Name of current post */
-											esc_html__( 'Edit %s', 'bbginnovate' ),
-											the_title( '<span class="screen-reader-text">"', '"</span>', false )
-										),
-										'<span class="edit-link">',
-										'</span>'
-									);
-								?>
-							</footer><!-- .entry-footer -->
-						</div><!-- .usa-grid -->
-
-					</article><!-- #post-## -->
-
-					<div class="bbg-post-footer">
-					<?php
-						// If comments are open or we have at least one comment, load up the comment template.
-						if ( comments_open() || get_comments_number() ) :
-							comments_template();
-						endif;
-					?>
 					</div>
+				</div>
 
-				<?php endwhile; // End of the loop. ?>
-			</div><!-- .usa-grid-full -->
-		</main><!-- #main -->
-	</div><!-- #primary -->
+				<div class="outer-container">
+					<div class="grid-container">
+						<footer class="entry-footer bbg-post-footer 1234">
+							<?php
+								edit_post_link(
+									sprintf(
+										/* translators: %s: Name of current post */
+										esc_html__( 'Edit %s', 'bbginnovate' ),
+										the_title( '<span class="screen-reader-text">"', '"</span>', false )
+									),
+									'<span class="edit-link">',
+									'</span>'
+								);
+							?>
+						</footer>
+					</div>
+				</div>
 
-<?php /*get_sidebar();*/ ?>
+				<div class="bbg-post-footer">
+				<?php
+					// If comments are open or we have at least one comment, load up the comment template.
+					if ( comments_open() || get_comments_number() ) :
+						comments_template();
+					endif;
+				?>
+				</div>
+
+			<?php endwhile; // End of the loop. ?>
+	</main><!-- #main -->
+</div><!-- #primary -->
+
 <?php get_footer(); ?>
