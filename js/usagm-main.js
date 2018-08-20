@@ -17,7 +17,7 @@ $(window).on('resize', function() {
 // KEEPS BACKGROUND IMAGES A CONSISTENT SIZE
 function sizeBGimages() {
 	var img_scale = 1.77778;
-	$.each($('.umbrella-bg-image'), function() {
+	$.each($('.hd_scale'), function() {
 		var containerW = $(this).width();
 		var dynHeight = containerW / img_scale;
 		$(this).height(dynHeight);
@@ -27,6 +27,14 @@ sizeBGimages();
 $(window).on('resize', function() {
 	sizeBGimages();
 });
+
+function control_ribbon_height() {
+	var ribbonHeight = $('.bbg__ribbon .main-content-container').height();
+	$('.side-content-container').height(ribbonHeight)
+}
+if (($('.bbg__ribbon').length > 0) && $(window).width() > 1200) {
+	control_ribbon_height();
+}
 
 // KEEPS PROFILE LIST DIVS FROM CHANGING SIDES ON RESIZE
 function mgmtProfileSizing() {

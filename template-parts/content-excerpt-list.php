@@ -48,13 +48,13 @@ $linkImage = sprintf('<a href="%s" rel="bookmark" tabindex="-1">', esc_url(get_p
 
 
 // MARKUP
-$excerpt_list  = '<article id="'. get_the_ID() . '">';
+$excerpt_list  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
 if ($includeDate) { // FOR EVENT PAGE EXCERPTS ONLY
 	$excerpt_list .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
 }
-$excerpt_list .= 		'<h6>';
+$excerpt_list .= 		'<h4>';
 $excerpt_list .= 			'<a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
-$excerpt_list .= 		'</h6>';
+$excerpt_list .= 		'</h4>';
 
 if ('post' === get_post_type()) {
 	if ($includeMeta) {

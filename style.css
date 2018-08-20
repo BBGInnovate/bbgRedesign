@@ -5129,6 +5129,10 @@ ol li:before {
       .profile-header .content-column .content p {
         margin-bottom: 0; }
 
+button {
+  margin-bottom: 1.5rem;
+  background-color: #284f91; }
+
 .feautre-banner {
   margin-bottom: 6rem; }
 
@@ -5139,9 +5143,18 @@ ol li:before {
   font-style: italic;
   color: #aca299; }
 
-.umbrella-bg-image {
+.hd_scale {
   overflow: hidden;
   margin-bottom: 1.5rem; }
+
+.side-content-container {
+  overflow: hidden; }
+
+.bbg__ribbon *[style*="background-image"] {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 0; }
 
 .bbg__ribbon h2 {
   float: left;
@@ -6137,7 +6150,6 @@ div.banner_readmore h6 a:visited {
 
 .bbg__ribbon {
   background-color: #e9e9e9;
-  padding-bottom: 3rem;
   margin-bottom: 6rem; }
   .bbg__ribbon a {
     color: #9bdaf1; }

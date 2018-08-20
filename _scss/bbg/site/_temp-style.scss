@@ -66,6 +66,11 @@
 	}
 }
 
+button {
+	margin-bottom: 1.5rem;
+	background-color: $color-blue-darker;
+}
+
 // FEATURED MEDIA 
 .feautre-banner {margin-bottom: 6rem;}
 .graphic-caption {
@@ -76,12 +81,18 @@
 	color: $color-taupe-light;
 }
 // RIBBONS
-.umbrella-bg-image {
+.hd_scale {
 	overflow: hidden;
 	margin-bottom: 1.5rem;
 }
-
+.side-content-container {overflow: hidden;}
 .bbg__ribbon {
+	*[style*="background-image"] {
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		margin-bottom: 0
+	}
 	h2 {
 		float: left;
 		font-weight: 300;

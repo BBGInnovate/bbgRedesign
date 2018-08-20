@@ -441,303 +441,251 @@ get_header();
 			<!-- END PART 1 **** News + media advisories + contact & inquiries **** -->
 
 			<!-- PART 2 **** BBG by the numbers + CEO ribbon + latest award/featured page + Featured reports **** -->
-			<div class="usa-section usa-grid bbg__kits__section" id="page-sections">
+			<div class="bbg__kits__section" id="page-sections">
 				<!-- 2A **** 3-COL ROW: BBG by the numbers -->
-				<section class="usa-grid-full bbg__kits__section--row">
-					<h2 class="entry-title">BBG by the numbers</h2>
-					<div class="usa-grid-full bbg__kits__section--tiles">
+				<div class="outer-container bbg__kits__section--row">
+					<div class="grid-container bbg__kits__section--tiles">
+						<h3>BBG by the numbers</h3>
 						<!-- DISTRIBUTION tile -->
-						<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
-							<h3 class="bbg__kits__section--tile__title-bar">International operations</h3>
-							<p class="bbg__kits__section--tile__list"><span class="bbg__kits__section--tile__list--serif"><?php echo $networks; ?></span> and a system of <span class="bbg__kits__section--tile__list--sans"><?php echo $affiliates; ?></span> and over <span class="bbg__kits__section--tile__list--sans"><?php echo $transmittingSites; ?></span> distribute <span class="bbg__kits__section--tile__list--sans"><?php echo $programming; ?></span> of original content globally each week.</p>
-						</article>
+						<div class="nest-container">
+							<div class="inner-container">
+								<article class="grid-third bbg__kits__section--tile">
+									<h3 class="bbg__kits__section--tile__title-bar">International operations</h3>
+									<p class="bbg__kits__section--tile__list"><span class="bbg__kits__section--tile__list--serif"><?php echo $networks; ?></span> and a system of <span class="bbg__kits__section--tile__list--sans"><?php echo $affiliates; ?></span> and over <span class="bbg__kits__section--tile__list--sans"><?php echo $transmittingSites; ?></span> distribute <span class="bbg__kits__section--tile__list--sans"><?php echo $programming; ?></span> of original content globally each week.</p>
+								</article>
 
-						<!-- AUDIENCE tile -->
-						<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
-							<h3 class="bbg__kits__section--tile__title-bar">Global audience</h3>
-							<p class="bbg__kits__section--tile__list">A worldwide unduplicated audience of <span class="bbg__kits__section--tile__list--serif"><?php echo $audience; ?></span> from more than <span class="bbg__kits__section--tile__list--sans"><?php echo $countries; ?></span> tune in weekly in <span class="bbg__kits__section--tile__list--sans"><?php echo $languages; ?></span>.</p>
-						</article>
+								<!-- AUDIENCE tile -->
+								<article class="grid-third bbg__kits__section--tile">
+									<h3 class="bbg__kits__section--tile__title-bar">Global audience</h3>
+									<p class="bbg__kits__section--tile__list">A worldwide unduplicated audience of <span class="bbg__kits__section--tile__list--serif"><?php echo $audience; ?></span> from more than <span class="bbg__kits__section--tile__list--sans"><?php echo $countries; ?></span> tune in weekly in <span class="bbg__kits__section--tile__list--sans"><?php echo $languages; ?></span>.</p>
+								</article>
 
-					<!-- BUDGET tile -->
-					<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
-						<h3 class="bbg__kits__section--tile__title-bar">Annual budget</h3>
-						<table class="bbg__kits__section--tile__table--borderless">
-								<tbody>
-								<?php
-									// check that budget repeater field exists
-									$allBudgets = get_field( 'site_setting_annual_budgets', 'options', 'false' );
+								<!-- BUDGET tile -->
+								<article class="grid-third bbg__kits__section--tile">
+									<h3 class="bbg__kits__section--tile__title-bar">Annual budget</h3>
+									<table class="bbg__kits__section--tile__table--borderless">
+										<tbody>
+											<?php
+												// check that budget repeater field exists
+												$allBudgets = get_field( 'site_setting_annual_budgets', 'options', 'false' );
 
-									if( $allBudgets ) {
-										//build a new array with the key and value
-										foreach($allBudgets as $key => $value) {
-											//still going to sort by firstname
-											$budget[$key] = $value['fiscal_year'];
-										}
-										// sort multi-dimensional array by new array
-										array_multisort( $budget, SORT_DESC, $allBudgets );
+												if( $allBudgets ) {
+													//build a new array with the key and value
+													foreach($allBudgets as $key => $value) {
+														//still going to sort by firstname
+														$budget[$key] = $value['fiscal_year'];
+													}
+													// sort multi-dimensional array by new array
+													array_multisort( $budget, SORT_DESC, $allBudgets );
 
-										// create a variable to limit number of budget years
-										$maxYears = 0;
+													// create a variable to limit number of budget years
+													$maxYears = 0;
 
-										// loop through repeater rows
-										foreach( $allBudgets as $budget ) {
-											// populate variables for each row
-											$budgetFY = 'FY' . $budget['fiscal_year'];
-											$budgetStatus = $budget['status'];
-											$budgetAmount = $budget['dollar_amount'];
+													// loop through repeater rows
+													foreach( $allBudgets as $budget ) {
+														// populate variables for each row
+														$budgetFY = 'FY' . $budget['fiscal_year'];
+														$budgetStatus = $budget['status'];
+														$budgetAmount = $budget['dollar_amount'];
 
-											echo '<!-- ' . $budgetFY . ' budget -->';
-											echo '<tr>';
-												// fiscal year column
-												echo '<th scope="row">' . $budgetFY . ' <span class="bbg__file-size">(' . $budgetStatus  . ')</span></th>';
-												// amount column
-												echo '<td class="bbg__kits__section--tile__list--sans">' . money_format( '%.1n', $budgetAmount ) . 'M</td>';
-											echo '</tr>';
+														echo '<!-- ' . $budgetFY . ' budget -->';
+														echo '<tr>';
+															// fiscal year column
+															echo '<th scope="row">' . $budgetFY . ' <span class="bbg__file-size">(' . $budgetStatus  . ')</span></th>';
+															// amount column
+															echo '<td class="bbg__kits__section--tile__list--sans">' . money_format( '%.1n', $budgetAmount ) . 'M</td>';
+														echo '</tr>';
 
-											if ( $maxYears++ == 3 ) break; // change max number here to set new limit — current max is 4 (starting from 0)
-										}
-									}
-								?>
-								</tbody>
-							</table>
-						</article>
+														if ( $maxYears++ == 3 ) break; // change max number here to set new limit — current max is 4 (starting from 0)
+													}
+												}
+											?>
+										</tbody>
+									</table>
+								</article>
+							</div>
+						</div>
 					</div>
-				</section>
+				</div> <!-- END .outer-container .bbg__kits__section--row -->
 				<!-- END 2A **** BBG by the numbers -->
 
 				<!-- 2B **** Flexible content rows -->
 		        <?php
-				/**** FETCH AND RETURN DATA ROWS ****/
-
-				// check if the flexible content field has rows of data
-				if ( have_rows('kits_flexible_page_rows') ):
-					// set basic variables
+				if (have_rows('kits_flexible_page_rows')):
 					$counter = 0;
 					$pageTotal = 1; // for setting grid based on odd/even count
 					$containerClass = "bbg__kits__child ";
 
 					/* @Check if number of pages is odd or even
 					*  Return BOOL (true/false) */
-					function checkNum( $pageTotal ) {
-						return ( $pageTotal%2 ) ? TRUE : FALSE;
+					function checkNum($pageTotal) {
+						return ($pageTotal % 2) ? TRUE : FALSE;
 					}
 
-					// loop through all the rows
-					while ( have_rows('kits_flexible_page_rows') ) : the_row();
+					while (have_rows('kits_flexible_page_rows')) : the_row();
 						$counter++;
-
 						$sectionClasses = "usa-grid-full bbg__kits__section--row";
 
 						// change section class for ribbon rows
-						if ( get_row_layout() == 'kits_ribbon_page' ) {
-							$sectionClasses .= " bbg__ribbon--thin";
+						if (get_row_layout() == 'kits_ribbon_page') {
+							$sectionClasses .= " bbg__ribbon";
 						}
 
 						echo '<!-- ROW ' . $counter . '-->'; // output counter to keep track of rows
-						echo '<section class="' . $sectionClasses . '">'; // output row-specific class
 
-						if ( get_row_layout() == 'kits_ribbon_page' ):
-						/*** BEGIN DISPLAY OF ENTIRE RIBBON ROW ***/
-							// populate variables from row data
-							$labelText = get_sub_field( 'kits_ribbon_label' );
-							$labelLink = get_sub_field( 'kits_ribbon_label_link' );
-							$headlineText = get_sub_field( 'kits_ribbon_headline' );
-							$headlineLink = get_sub_field( 'kits_ribbon_headline_link' );
-							$summary = get_sub_field( 'kits_ribbon_summary' );
-							$imageURL = get_sub_field( 'kits_ribbon_image' );
-							$fileDownload = get_sub_field( 'kits_ribbon_download_button' );
-							$fileDownloadURL = get_sub_field( 'kits_ribbon_download_url' );
-							$fileDownloadText = get_sub_field( 'kits_ribbon_download_prompt' );
+						if (get_row_layout() == 'kits_ribbon_page'):
+							$labelText = get_sub_field('kits_ribbon_label');
+							$labelLink = get_sub_field('kits_ribbon_label_link');
+							$headlineText = get_sub_field('kits_ribbon_headline');
+							$headlineLink = get_sub_field('kits_ribbon_headline_link');
+							$summary = get_sub_field('kits_ribbon_summary');
+							$imageURL = get_sub_field('kits_ribbon_image');
+							$fileDownload = get_sub_field('kits_ribbon_download_button');
+							$fileDownloadURL = get_sub_field('kits_ribbon_download_url');
+							$fileDownloadText = get_sub_field('kits_ribbon_download_prompt');
 
-							// allow shortcodes in intro text
-							$summary = apply_filters( 'the_content', $summary );
-							$summary = str_replace( ']]>', ']]&gt;', $summary );
+							$summary = apply_filters('the_content', $summary);
+							$summary = str_replace(']]>', ']]&gt;', $summary);
 
-							echo '<div class="usa-grid">';
-								echo '<div class="bbg__announcement__flexbox">';
-									// output image
-									if ( $imageURL ) {
-										echo "<div class='bbg__announcement__photo' style='background-image: url($imageURL);'>";
-										echo '</div>';
-									}
-
-									echo '<div>';
-										// output label (with link if set)
-										if ( $labelLink ) {
-											echo "<h6 class='bbg__label'><a href='" . get_permalink( $labelLink ) . "'>$labelText</a></h6>";
-										} else {
-											echo "<h6 class='bbg__label'>$labelText</h6>";
-										}
-
-										// output headline (with link if set)
-										if ( $headlineLink ) {
-											echo "<h2 class='bbg__announcement__headline'><a href='" . get_permalink( $headlineLink ) . "'>$headlineText</a></h2>";
-										} else {
-											echo "<h2 class='bbg__announcement__headline'>$headlineText</h2>";
-										}
-
-										// output summary text
-										echo $summary;
-
-										//if download checked add button
-										if ( $fileDownload ) {
-											echo "<div class='bbg__announcement__container--button'><a href='$fileDownloadURL' class='usa-button bbg__kits__button' target='_blank' download><span class='fa fa-download'></span>&emsp;$fileDownloadText</a>";
-										}
-									echo '</div>';
-								echo '</div><!-- .bbg__announcement__flexbox -->';
-							echo '</div><!-- .usa-grid -->';
-						/*** END DISPLAY OF ENTIRE RIBBON ROW ***/
-
-						elseif ( get_row_layout() == 'kits_downloads_files' ):
-						/*** BEGIN DISPLAY OF DOWNLOAD LINKS ROW ***/
-							$downloadsLabel = get_sub_field( 'kits_downloads_label' );
-
-							// output label if set
-							if ( $downloadsLabel ) {
-								echo "<h2 class='bbg__label'>$downloadsLabel</h2>";
+							echo '<div class="bbg__ribbon">';
+							echo 	'<div class="outer-container">';
+							if (!empty($imageURL)) {
+								echo 	'<div class="side-content-container" style="background-image: url(' . $imageURL . ');">';
+								echo 	'</div>';
+							}
+							echo 		'<div class="main-content-container">';
+							if (!empty($labelLink)) {
+								echo 		'<h2><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h2>';
+							} else {
+								echo 		'<h2 class="bbg__label">' . $labelText . '</h2>';
 							}
 
-							echo "<div class='usa-grid-full bbg__kits__section--tiles'>";
-								// set variable object
-								$downloadFiles = get_sub_field( 'kits_downloads_file' );
+							if (!empty($headlineLink)) {
+								echo 		'<h4><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h4>';
+							} else {
+								echo 		'<h4 class="bbg__announcement__headline">' . $headlineText . '</h4>';
+							}
+							echo $summary;
 
-								// count the number of files
-								$countFiles = count ( $downloadFiles );
+							if (!empty($fileDownload)) {
+								echo 		'<button>';
+								echo 			'<a href=' . $fileDownloadURL . ' target="_blank" download><span class="fa fa-download"></span>&emsp;' . $fileDownloadText . '</a>';
+								echo 		'</button>';
+							}
+							echo 		'</div>';
+							echo 	'</div><!-- .outer-container -->';
+							echo '</div><!-- .bbg__ribbon -->';
 
-								// check number of files function return
-								if ( checkNum($countFiles) === TRUE ) {
-									// if TRUE: number is odd, set 3 column grid
-									$containerClass = 'bbg-grid--1-3-3';
-								} else {
-									// if FALSE: number is even, set 2 column grid
-									$containerClass = 'bbg-grid--1-2-2';
-								}
+						elseif (get_row_layout() == 'kits_downloads_files'):
+							$downloadsLabel = get_sub_field('kits_downloads_label');
+							echo '<div class="outer-container">';
+							echo 	'<div class="grid-container">';
+							if ($downloadsLabel) {
+								echo '<h3>' . $downloadsLabel . '</h3>';
+							}
+							echo 		'<div class="nest-container">';
+							echo 			'<div class="inner-container">';
 
-								if ( $downloadFiles ) {
-									// Loop through all the grandchild pages (objects in variable)
-									foreach ( $downloadFiles as $file ) {
-										// Define all variables
-										$fileImageObject = $file['downloads_file_image'];
-										// var_dump( $fileImageObject );
-										// retrieve ID from image object and load large thumbnail size
-										$thumbSrc = wp_get_attachment_image_src( $fileImageObject['ID'] , 'large-thumb' );
-
-									    $supportPageTitle = $file['kits_related_page_name'];
-
-									    // Related page array
-									    $supportPage = $file['kits_related_page'];
-									    	// page data
-									    	if ( $supportPageTitle ) {
-									    		$pageHeadline = $supportPageTitle;
-									    	} else {
-										    	$pageHeadline = get_the_title( $supportPage -> ID );
-									    	}
-									    	$pageURL = get_permalink( $supportPage -> ID );
-											$pageExcerpt = my_excerpt( $supportPage -> ID );
-											$pageExcerpt = apply_filters( 'the_content', $pageExcerpt );
-											$pageExcerpt = str_replace( ']]>', ']]&gt;', $pageExcerpt );
-
-										$fileTitle = $file['downloads_link_name'];
-
-									    // Files object array
-										$fileObj = $file['downloads_file'];
-											// file data
-											// var_dump( $fileObj );
-											if ( $fileTitle ) {
-												$fileName = $fileTitle;
-											} else {
-												$fileName = $fileObj['title'];
-											}
-											$fileID = $fileObj['ID'];
-											$fileURL = $fileObj['url'];
-											$file = get_attached_file( $fileID );
-											$fileExt = strtoupper( pathinfo( $file, PATHINFO_EXTENSION ) );
-											$fileSize = formatBytes( filesize( $file ) );
-
-										// Output variables in HTML format
-										echo "<article class='$containerClass bbg__kits__section--tile'>";
-											echo "<header class='bbg__kits__section--tile__header'>";
-												// Output page data
-												if ( $supportPage ) {
-													echo "<h3 class='bbg__kits__section--tile__title'>" . "<a href='" . $pageURL . "'>" . $pageHeadline . "</a></h3>";
-												} else {
-													echo "<h3 class='bbg__kits__section--tile__title'>" . "<a href='" . $fileURL . "' target='_blank'>" . $fileName . "</a></h3>";
-												}
-											echo "</header>";
-
-											// Output file image
-											if ( $thumbSrc ) {
-												echo '<a href="' . $fileURL . '" target="_blank">';
-													echo '<div class="bbg__kits__section--tile__thumb" style="background-image: url(' . $thumbSrc[0] . ');"></div>';
-												echo '</a>';
-												// echo $thumbSrc[0];
-											}
-
-											echo $pageExcerpt;
-
-											// Output file title/name
-											echo "<p class='bbg__kits__section--tile__downloads'><a href='" . $fileURL . "' target='_blank'>" . $fileName ."</a> <span class='bbg__file-size'>(" . $fileExt . ", " . $fileSize . ")</span></p>";
-										echo '</article>';
+							$downloadFiles = get_sub_field('kits_downloads_file');
+							$countFiles = count ($downloadFiles);
+							if (checkNum($countFiles) === true) {
+								$containerClass = 'grid-third';
+							} else {
+								$containerClass = 'grid-half';
+							}
+							if ($downloadFiles) {
+								foreach ($downloadFiles as $file) {
+									$fileImageObject = $file['downloads_file_image'];
+									$thumbSrc = wp_get_attachment_image_src($fileImageObject['ID'] , 'large-thumb');
+									$supportPageTitle = $file['kits_related_page_name'];
+									$supportPage = $file['kits_related_page'];
+									if ($supportPageTitle) {
+										$pageHeadline = $supportPageTitle;
+									} else {
+										$pageHeadline = get_the_title($supportPage -> ID);
 									}
-								}
-							echo '</div>';
-						/*** END DISPLAY OF DOWNLOAD LINKS ROW ***/
+									$pageURL = get_permalink($supportPage -> ID);
+									$pageExcerpt = my_excerpt($supportPage -> ID);
+									$pageExcerpt = apply_filters('the_content', $pageExcerpt);
+									$pageExcerpt = str_replace(']]>', ']]&gt;', $pageExcerpt);
 
-						elseif ( get_row_layout() == 'kits_recent_awards' ) :
+
+									$fileTitle = $file['downloads_link_name'];
+									$fileObj = $file['downloads_file'];
+									if ($fileTitle) {
+										$fileName = $fileTitle;
+									} else {
+										$fileName = $fileObj['title'];
+									}
+									$fileID = $fileObj['ID'];
+									$fileURL = $fileObj['url'];
+									$file = get_attached_file($fileID);
+									$fileExt = strtoupper(pathinfo( $file, PATHINFO_EXTENSION));
+									$fileSize = formatBytes(filesize($file));
+
+									echo '<article class="' . $containerClass . ' bbg__kits__section--tile">';
+									echo 	'<header class="bbg__kits__section--tile__header">';
+									if ( $supportPage ) {
+										echo '<h4 class="bbg__kits__section--tile__title"><a href="' . $pageURL . '">' . $pageHeadline . '</a></h4>';
+									} else {
+										echo '<h4 class="bbg__kits__section--tile__title"><a href="' . $fileURL . '" target="_blank">' . $fileName . '</a></h4>';
+									}
+									echo 	'</header>';
+
+									if ($thumbSrc) {
+										echo '<a href="' . $fileURL . '" target="_blank">';
+										echo '<img src="' . $thumbSrc[0] . '">';
+										echo '</a>';
+									}
+									echo $pageExcerpt;
+									echo 	'<p class="bbg__kits__section--tile__downloads"><a href="' . $fileURL . '" target="_blank">' . $fileName . '</a> <span class="bbg__file-size">(' . $fileExt . ', ' . $fileSize . ')</span></p>';
+									echo '</article>';
+								}
+							}
+							echo 			'</div>';
+							echo 		'</div>';
+							echo 	'</div>';
+							echo '</div>'; // END .outer-container
+
+						elseif (get_row_layout() == 'kits_recent_awards') :
 							$counter = 0;
 
-							// loop through all the awards
 							foreach ( $awards as $a ) {
 								$counter++;
-								$styleStr = '';
 
-								// add margin on the right for the fist left-hand column
-								if ( $counter == 1 ) {
-									$styleStr = " style='margin-right:2.35765%; '";
-								}
-
-								// populate all awards content variables
 								$id = $a['id'];
 								$url = $a['url'];
 								$title = $a['title'];
 								$awardYears = $a['awardYears'];
 								$awardTitle = $a['awardTitle'];
-								$awardCategoryLink = get_category_link( $awardCategoryObj -> term_id );
+								$awardCategoryLink = get_category_link($awardCategoryObj -> term_id);
 
-								// output HTML
-								$s = '<div class="usa-section usa-grid-full bbg__kits__section">';
-									$s .= '<section class="usa-grid-full bbg__kits__section--row">';
-
-										// left column content
-										$s .= '<div ' . $styleStr . ' class="bbg-grid--1-2-2 usa-width-one-half bbg__post-excerpt bbg__award__excerpt">';
-											$s .= '<h2 class="entry-title">Recent Awards</h2>';
-											$s .= '<h3 class="bbg__award-excerpt__title"><a href="' . $url . '">' . $title . '</a></h3>';
-											$s .= '<h4>' . join( $awardYears ) . ' ' . join( $organizations ) . '</h4>';
-											// $s .= '<p class="bbg__award-excerpt__org">' . $awardTitle . '</p>';
-											$s .= "<a href='$awardCategoryLink'class='bbg__kits__intro__more--link'>View all awards »</a>";
-										$s .= '</div>';
+								$s  = '<div class="outer-container">';
+								$s .= 	'<section class="grid-container">';
+								$s .= 		'<div class="grid-half">';
+								$s .= 			'<h3>Recent Awards</h3>';
+								$s .= 			'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+								$s .= 			'<h4>' . join( $awardYears ) . ' ' . join( $organizations ) . '</h4>';
+								$s .= 			'<a href="' . $awardCategoryLink . '" class="bbg__kits__intro__more--link">View all awards »</a>';
+								$s .= 		'</div>';
 							}
 
-							// create object variable for right-hand column focus page
 							$focusPageObj = get_sub_field('kits_recent_awards_focus_page');
-								// populate page content variables from object variable
-								$focusPageTitle = get_the_title( $focusPageObj -> ID );
-								$focusPageURL = get_the_permalink( $focusPageObj -> ID );
-								$focusPageExcerpt = my_excerpt( $focusPageObj -> ID );
-								$focusPageExcerpt = apply_filters( 'the_content', $focusPageExcerpt );
-								$focusPageExcerpt = str_replace( ']]>', ']]&gt;', $focusPageExcerpt );
+							$focusPageTitle = get_the_title($focusPageObj -> ID);
+							$focusPageURL = get_the_permalink($focusPageObj -> ID);
+							$focusPageExcerpt = my_excerpt($focusPageObj -> ID);
+							$focusPageExcerpt = apply_filters('the_content', $focusPageExcerpt);
+							$focusPageExcerpt = str_replace(']]>', ']]&gt;', $focusPageExcerpt);
 
-										// right column content
-										$s .= '<div class="bbg-grid--1-2-2 usa-width-one-half bbg__post-excerpt bbg__award__excerpt">';
-											$s .= '<h2 class="entry-title">' . $focusPageTitle . '</h2>';
-											$s .= '<p>' . $focusPageExcerpt . '</p>';
-											$s .= '<a href="' . $focusPageURL . '" class="bbg__kits__intro__more--link">Read more »</a>';
-										$s .= '</div>';
-									$s .= '</section>';
-								$s .= '</div>';
+							$s .= 		'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
+							$s .= 			'<h3>' . $focusPageTitle . '</h3>';
+							$s .= 			'<p>' . $focusPageExcerpt . '</p>';
+							$s .= 			'<a href="' . $focusPageURL . '" class="bbg__kits__intro__more--link">Read more »</a>';
+							$s .= 		'</div>';
+							$s .= 	'</section>';
+							$s .= '</div>';
 							echo $s;
 						endif;
-						echo '</section>';
 					endwhile;
 					echo '<!-- END ROWS -->';
 				endif;
