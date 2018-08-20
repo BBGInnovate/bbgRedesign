@@ -810,7 +810,7 @@ function getEntityLinks_taxonomy($termSlug) {
 	));
 	$g = array();
 	foreach ($terms as $t) {
-		$termMeta = get_field( "language_services", $t );
+		$termMeta = get_term_meta( $t->term_id );
 		$siteName = "";
 		$siteUrl = "";
 		if ( count( $termMeta ) ) {

@@ -53,7 +53,6 @@ $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPag
 
 $entityMission = get_post_meta($id, 'entity_mission', true);
 $entity_link_groups = getEntityLinks_taxonomy($entityCategorySlug);
-// echo $entity_link_groups;
 $site_select = '<h5>Explore the ' . $abbreviation . 'websites</h5>';
 if (count($entity_link_groups) < 4) {
 	$site_select .= '<ul class="bbg__rss__list">';
@@ -198,16 +197,16 @@ $bannerPosition = get_post_meta($id, 'adjust_the_banner_image', true);
 $videoUrl = "";
 
 /**** BEGIN CREATING rssItems array *****/
-// $entityJson = getFeed($rssFeed, $id);
-// $rssItems = array();
-// $itemContainer = false;
-// $languageDirection = "";
+$entityJson = getFeed($rssFeed, $id);
+$rssItems = array();
+$itemContainer = false;
+$languageDirection = "";
 
-// if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
-// 	$itemContainer = $entityJson->channel;
-// } else {
-// 	$itemContainer = $entityJson;
-// }
+if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
+	$itemContainer = $entityJson->channel;
+} else {
+	$itemContainer = $entityJson;
+}
 if ($itemContainer) {
 	if (property_exists($itemContainer, 'language')) {
 		if ($itemContainer -> language == "ar"){

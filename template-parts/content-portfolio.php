@@ -30,7 +30,7 @@ echo '<article id="'. get_the_ID() . '">';
 	if (has_post_thumbnail()) {
 		$post_image .= the_post_thumbnail('medium-thumb');
 	} else {
-		$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
+		$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="Missing image" />';
 	}
 	$post_image .= '</a>';
 	echo $post_image;

@@ -20,36 +20,34 @@ endif;
 wp_reset_postdata();
 wp_reset_query();
 
-/******* CREATE AN ARRAY FOR AWARDS INFO ******/
+// CREATE AN ARRAY FOR AWARDS INFO
 $awards = array();
-$awardCategoryObj = get_category_by_slug( 'award' );
-if ( is_object($awardCategoryObj) ) {
-	// set up award category query parameters
+$awardCategoryObj = get_category_by_slug('award');
+if (is_object($awardCategoryObj)) {
 	$awardCategoryID = $awardCategoryObj -> term_id;
 	$awardParams = array(
-		'post_type' => array( 'award' ),
+		'post_type' => array('award'),
 		'posts_per_page' => 1,
 		'orderby' => 'date',
 		'order' => 'DESC'
 	);
-	// execute awards query
 	$award_query = new WP_Query( $awardParams );
 	if ( $award_query -> have_posts() ) {
-		while ( $award_query -> have_posts() ) : $award_query -> the_post();
+		while ($award_query -> have_posts()) : $award_query -> the_post();
 			$id = get_the_ID();
 
-			$awardYears  = get_post_meta( $id, 'standardpost_award_year' );
-			$awardTitle = get_post_meta( $id, 'standardpost_award_title', true );
-			$orgTerms = get_field( 'standardpost_award_organization', $id );
+			$awardYears  = get_post_meta($id, 'standardpost_award_year');
+			$awardTitle = get_post_meta($id, 'standardpost_award_title', true);
+			$orgTerms = get_field('standardpost_award_organization', $id);
 		    $organizations = array();
 		    $organizations[] = $orgTerms -> name;
-			$entity = get_post_meta( $id, 'standardpost_award_recipient' );
-			$description = get_post_meta( $id, 'standardpost_award_description' );
+			$entity = get_post_meta($id, 'standardpost_award_recipient');
+			$description = get_post_meta($id, 'standardpost_award_description');
 
 			$awards[] = array(
 				'id' => $id,
-				'url' => get_permalink( $id ),
-				'title' => get_the_title( $id ),
+				'url' => get_permalink($id),
+				'title' => get_the_title($id),
 				'excerpt' => get_the_excerpt(),
 				'awardYears' => $awardYears,
 				'awardTitle' => $awardTitle,
@@ -60,20 +58,19 @@ if ( is_object($awardCategoryObj) ) {
 	}
 	wp_reset_postdata();
 }
-/******* DONE CREATING AN ARRAY FOR AWARDS INFO ******/
 
 /******* GRAB THE MOST RECENT MEDIA ADVISORY THAT HAS AN EXPIRATION DATE IN THE FUTURE. WE CHECK LATEST 5 ******/
 $advisory = false;
 // Get all posts with advisory category
-$mediaAdvisoryCategoryObj = get_category_by_slug( 'media-advisory' );
+$mediaAdvisoryCategoryObj = get_category_by_slug('media-advisory');
 
-if ( $pageName != "Office of Congressional Affairs" && is_object( $mediaAdvisoryCategoryObj ) ) {
+if ($pageName != "Office of Congressional Affairs" && is_object($mediaAdvisoryCategoryObj)) {
 	// set up award category query parameters
 	$mediaAdvisoryCategoryID = $mediaAdvisoryCategoryObj -> term_id;
 	$mediaParams = array(
-		'post_type' => array( 'post' ),
+		'post_type' => array('post'),
 		'posts_per_page' => 5,
-		'category__and' => array( $mediaAdvisoryCategoryID ),
+		'category__and' => array($mediaAdvisoryCategoryID),
 		'orderby' => 'date',
 		'order' => 'DESC'
 	);
@@ -84,18 +81,18 @@ if ( $pageName != "Office of Congressional Affairs" && is_object( $mediaAdvisory
 
 	$media_query = new WP_Query( $mediaParams );
 
-	if ( $media_query -> have_posts() ) {
-		while ( $media_query -> have_posts() ) : $media_query -> the_post();
-			if ( !$foundAdvisory ) {
+	if ($media_query -> have_posts()) {
+		while ($media_query -> have_posts()) : $media_query -> the_post();
+			if (!$foundAdvisory) {
 				$id = get_the_ID();
-				$expiryDate = get_field( 'media_advisory_expiration_date', $id );
+				$expiryDate = get_field('media_advisory_expiration_date', $id);
 				$expiryDateObj = DateTime::createFromFormat(
 					"m/d/Y h:i",
 					$expiryDate . " 00:00"
 				);
-				if ( $expiryDateObj > $todayDateObj ) {
+				if ($expiryDateObj > $todayDateObj) {
 					$foundAdvisory = true;
-					$thumb =  get_the_post_thumbnail( $id, 'medium-thumb' );
+					$thumb =  get_the_post_thumbnail($id, 'medium-thumb');
 					$advisory = array(
 						'id' => $id,
 						'url' => get_permalink(),
@@ -112,16 +109,16 @@ if ( $pageName != "Office of Congressional Affairs" && is_object( $mediaAdvisory
 }
 
 $numNews = 4;
-if ( $advisory ) {
+if ($advisory) {
 	$numNews = 1;
 }
 
-/****** PREPARE QUERY PARAMS PRESS RELEASES ********/
-$prCategoryObj = get_category_by_slug( 'press-release' );
+// PREPARE QUERY PARAMS PRESS RELEASES
+$prCategoryObj = get_category_by_slug('press-release');
 $prCategoryID = $prCategoryObj -> term_id;
 
 $qParamsPressReleases = array(
-	'post_type' => array( 'post' ),
+	'post_type' => array('post'),
 	'posts_per_page' => $numNews,
 	'category__and' => array( $prCategoryID ),
 	'orderby', 'date',
@@ -134,15 +131,13 @@ $qParamsPressReleases = array(
 			'operator' => 'NOT IN'
 		)
 	),
-	// 'category__not_in' => get_cat_id( 'Award' ) // exclude Awards posts ** not necessary with new awards workflow including custom Award post type
 );
 // set variable for PR category link to All network highlights page
-$prCategoryLink = get_permalink( get_page_by_path( 'news/network-highlights' ) );
-/******* DONE CREATING AN ARRAY FOR PRESS RELEASES ******/
+$prCategoryLink = get_permalink(get_page_by_path('news/network-highlights'));
 
-/****** PREPARE QUERY PARAMS CONGRESSIONAL NEWS ********/
+// PREPARE QUERY PARAMS CONGRESSIONAL NEWS
 $qParamsCongressional = array(
-	'post_type' => array( 'post' ),
+	'post_type' => array('post'),
 	'posts_per_page' => $numNews,
 	'tag' => 'office-of-congressional-affairs',
 	'orderby', 'date',
@@ -155,15 +150,15 @@ $qParamsCongressional = array(
 			'operator' => 'NOT IN'
 		)
 	),
-	'category__not_in' => get_cat_id( 'Award' ) // exclude Awards posts
+	'category__not_in' => get_cat_id('Award') // exclude Awards posts
 );
 // set variable for PR category link to main news page
-$congCategoryLink = get_permalink( get_page_by_path( 'news' ) );
-/******* DONE CREATING AN ARRAY FOR CONGRESSIONAL NEWS ******/
+$congCategoryLink = get_permalink( get_page_by_path('news'));
 
 include get_template_directory() . "/inc/constant-contact_sign-up.php";
 
-get_header(); ?>
+get_header();
+?>
 
 <style>
 	@media screen and ( min-width: 600px ) {
@@ -180,21 +175,21 @@ get_header(); ?>
 	function toggleForm() {
 		btnSignup = document.getElementById( 'btnSignup' );
 
-		if ( btnSignup.style.display == 'none' ) {
+		if (btnSignup.style.display == 'none') {
 			btnSignup.style.display = '';
-			ccForm = document.getElementsByName( 'embedded_signup' );
+			ccForm = document.getElementsByName('embedded_signup');
 			ccForm[0].style.display = 'none';
 		} else {
 			btnSignup.style.display = 'none';
-			ccForm = document.getElementsByName( 'embedded_signup' );
+			ccForm = document.getElementsByName('embedded_signup');
 			ccForm[0].style.display = '';
 		}
 	}
 
-	jQuery( document ).ready( function() {
+	jQuery(document).ready(function() {
 		/* click handler for the show/hide of constant contact form */
-		jQuery( '#btnClose' ).click( function() {
-		  toggleForm();
+		jQuery('#btnClose').click(function() {
+			toggleForm();
 		});
 	});
 </script>
@@ -204,10 +199,12 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-			<div class="usa-grid">
-				<header class="page-header">
-					<?php the_title( '<h5 class="bbg__label--mobile large">', '</h5>' ); ?>
-				</header><!-- .page-header -->
+			<div class="outer-container">
+				<div class="grid-container">
+					<header class="page-header">
+						<?php echo '<h2>' . get_the_title() . '</h2>'; ?>
+					</header>
+				</div>
 			</div>
 
 			<!-- SET UNIVERSAL VARIABLES -->
@@ -217,75 +214,64 @@ get_header(); ?>
 				// set locale for number filters
 				setlocale( LC_ALL, 'en_US.UTF-8' ); // currency
 
-			    /* BBG settings variables */
-			    // Load url for mission page
-			    $missionURL = get_field( 'site_setting_mission_statement_link', 'options', 'false' );
+				/* BBG settings variables */
+				// LOAD URL FROM MISSION PAGE
+				$missionURL = get_field( 'site_setting_mission_statement_link', 'options', 'false' );
 
-			    if ( $missionURL ) {
-			    	// get mission page ID
-			    	$missionID = url_to_postid( $missionURL );
-			    	// load excerpt from page
+				if ($missionURL) {
+					$missionID = url_to_postid( $missionURL );
 					$mission = my_excerpt( $missionID );
-					// apply content filters to excerpt
 					$mission = apply_filters( 'the_content', $mission );
 					$mission = str_replace( ']]>', ']]&gt;', $mission );
-					// remove last few characters from excerpt
 					$mission = substr($mission, 0, -5);
-					// add link to url at end of excerpt
 					$mission = $mission . ' <a href="' . $missionURL . '" class="bbg__kits__intro__more--link">Network missions »</a></p>';
-			    } else {
-			    	// get mission from BBG settings "mission statement" variable
-			    	$mission = get_field( 'site_setting_mission_statement', 'options', 'false' );
-			    	// apply content filters to text
+				} else {
+					$mission = get_field( 'site_setting_mission_statement', 'options', 'false' );
 					$mission = apply_filters( 'the_content', $mission );
 					$mission = str_replace( ']]>', ']]&gt;', $mission );
-			    }
+				}
 
 			    // numbers
-			    $networks = get_field( 'site_setting_total_networks', 'options', 'false' ) . " networks";
-			    $languages = get_field( 'site_setting_total_languages', 'options', 'false' ) . " languages";
-			    $countries = get_field( 'site_setting_total_countries', 'options', 'false' ) . " countries";
-			    $audience = get_field( 'site_setting_unduplicated_audience', 'options', 'false' ) . " million";
-			    $affiliates = get_field( 'site_setting_total_affiliates', 'options', 'false' );
-					$affiliates = number_format( $affiliates ) . " affiliates"; // format number and append value desc
-			    $transmittingSites = get_field( 'site_setting_transmitting_sites', 'options', 'false' );
-					$transmittingSites = number_format( $transmittingSites ) . " transmitting sites"; // format number and append value desc
-			    $programming = get_field( 'site_setting_weekly_programming', 'options', 'false' );
-					$programming = number_format( $programming ) . " hours"; // format number and append value desc
+				$networks = get_field('site_setting_total_networks', 'options', 'false') . " networks";
+				$languages = get_field('site_setting_total_languages', 'options', 'false') . " languages";
+				$countries = get_field('site_setting_total_countries', 'options', 'false') . " countries";
+				$audience = get_field('site_setting_unduplicated_audience', 'options', 'false') . " million";
+				$affiliates = get_field('site_setting_total_affiliates', 'options', 'false');
+				$affiliates = number_format($affiliates) . " affiliates"; // format number and append value desc
+				$transmittingSites = get_field('site_setting_transmitting_sites', 'options', 'false');
+				$transmittingSites = number_format($transmittingSites) . " transmitting sites"; // format number and append value desc
+				$programming = get_field('site_setting_weekly_programming', 'options', 'false');
+				$programming = number_format($programming) . " hours"; // format number and append value desc
 
 				/* Contact information */
-				$phone = get_field( 'agency_phone', 'options', 'false' );
-				$phone_link = str_replace( array('(',') ','-'), '' , $phone );
-
-				$phoneMedia = get_field( 'agency_phone_press', 'options', 'false' );
-				$phoneMedia_link = str_replace( array('(',') ','-'), '' , $phoneMedia );
-
-				$phoneCongress = get_field( 'agency_phone_congress', 'options', 'false' );
-				$phoneCongress_link = str_replace( array('(',') ','-'), '' , $phoneCongress );
-
-				$email = get_field( 'agency_email', 'options', 'false' );
-				$emailPress = get_field( 'agency_email_press', 'options', 'false' );
-				$emailCongress = get_field( 'agency_email_congress', 'options', 'false' );
-
-				$street = get_field( 'agency_street', 'options', 'false' );
-				$city = get_field( 'agency_city', 'options', 'false' );
-				$state = get_field( 'agency_state', 'options', 'false' );
-				$zip = get_field( 'agency_zip', 'options', 'false' );
+				$phone = get_field('agency_phone', 'options', 'false');
+				$phone_link = str_replace(array('(',') ','-'), '' , $phone);
+				$phoneMedia = get_field('agency_phone_press', 'options', 'false');
+				$phoneMedia_link = str_replace(array('(',') ','-'), '' , $phoneMedia);
+				$phoneCongress = get_field('agency_phone_congress', 'options', 'false');
+				$phoneCongress_link = str_replace(array('(',') ','-'), '' , $phoneCongress);
+				$email = get_field('agency_email', 'options', 'false');
+				$emailPress = get_field('agency_email_press', 'options', 'false');
+				$emailCongress = get_field('agency_email_congress', 'options', 'false');
+				$street = get_field('agency_street', 'options', 'false');
+				$city = get_field('agency_city', 'options', 'false');
+				$state = get_field('agency_state', 'options', 'false');
+				$zip = get_field('agency_zip', 'options', 'false');
 
 				/* Format all contact information */
 				// Pick which phone number to display based on page title
-				if ( $pageName == "Press room" && $phoneMedia != "" )  {
+				if ($pageName == "Press room" && $phoneMedia != "")  {
 					$phone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $phoneMedia_link . '">' . $phoneMedia . '</a></li>';
-				} elseif ( $pageName == "Office of Congressional Affairs" && $phoneCongress != "" )  {
+				} elseif ($pageName == "Office of Congressional Affairs" && $phoneCongress != "")  {
 					$phone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $phoneCongress_link . '">' . $phoneCongress . '</a></li>';
 				} else {
 					$phone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $phone_link . '">' . $phone . '</a></li>';
 				}
 
 				// Pick which email address to display based on page title
-				if ( $pageName == "Press room" && $emailPress != "" ) {
+				if ($pageName == "Press room" && $emailPress != "") {
 					$email = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $emailPress . '" title="Contact us">' . $emailPress . '</a></li>';
-				} elseif ( $pageName == "Office of Congressional Affairs" && $emailCongress != "" ) {
+				} elseif ($pageName == "Office of Congressional Affairs" && $emailCongress != "") {
 					$email = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $emailCongress . '" title="Contact us">' . $emailCongress . '</a></li>';
 				} else {
 					$email = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $email . '" title="Contact us">' . $email . '</a></li>';
@@ -293,13 +279,11 @@ get_header(); ?>
 
 				if ($street != "" && $city != "" && $state != "" && $zip != "") {
 					$address = $street . '<br/>' . $city . ', ' . $state . ' ' . $zip;
-
 					//Strip spaces for url-encoding.
 					$street = str_replace(" ", "+", $street);
 					$city = str_replace(" ", "+", $city);
 					$state = str_replace(" ", "+", $state);
 					$mapLink = 'https://www.google.com/maps/place/' . $street . ',+' . $city . ',+' . $state . '+' . $zip . '/';
-
 					$address = '<p itemprop="address" aria-label="address"><a href="'. $mapLink . '">' . $address . '</a></p>';
 				}
 
@@ -307,196 +291,177 @@ get_header(); ?>
 					$includeContactBox = TRUE;
 				}
 
-				// get all contact cards for dropdown
-				$allContacts = get_field( 'kits_network_contacts' );
-
-				$contactPostIDs = get_post_meta( $post -> ID, 'contact_post_id', true );
+				// GET ALL CONTACT CARDS FOR DROPDOWN
+				$allContacts = get_field('kits_network_contacts');
+				$contactPostIDs = get_post_meta($post -> ID, 'contact_post_id', true);
 			?>
 
 			<!-- PART 1 **** News + media advisories + contact & inquiries **** -->
-			<article class="bbg__article bbg__kits__section">
-				<div class="usa-grid">
+			<div class="outer-container">
+				<div class="grid-container">
 					<?php
-						$includeInfoBox = get_post_meta( $post -> ID, 'kits_include_info_box', true );
-						if ( $includeInfoBox ) {
-							$link = get_post_meta( $post -> ID, 'kits_info_box_link', true );
-							$title = get_post_meta( $post -> ID, 'kits_info_box_title', true );
-							$text = get_post_meta( $post -> ID, 'kits_info_box_text', true );
+						$includeInfoBox = get_post_meta($post -> ID, 'kits_include_info_box', true);
+						if ($includeInfoBox) {
+							$link = get_post_meta($post -> ID, 'kits_info_box_link', true);
+							$title = get_post_meta($post -> ID, 'kits_info_box_title', true);
+							$text = get_post_meta($post -> ID, 'kits_info_box_text', true);
 
-							$s = '';
+							$s  = '';
 							$s .= '<section class="usa-section">';
-							$s .= '<div class="usa-alert usa-alert-info">';
-							$s .= '<div class="usa-alert-body">';
-							$s .= '<h3 class="usa-alert-heading">';
-							if ( $link == "" ) {
-								$s .= $title;
+							$s .= 	'<div class="usa-alert usa-alert-info">';
+							$s .= 		'<div class="usa-alert-body">';
+							$s .= 			'<h3 class="usa-alert-heading">';
+							if ($link == "") {
+								$s .= 			$title;
 							} else {
-								$s .= '<a href="' . $link . '">' . $title . '</a>';
+								$s .= 			'<a href="' . $link . '">' . $title . '</a>';
 							}
-							$s .= '</h3>';
-							$s .= '<p class="usa-alert-text">';
-							$s .= $text;
-							$s .= '</p>';
-							$s .= '</div>';
-							$s .= '</div>';
+							$s .= 			'</h3>';
+							$s .= 			'<p class="usa-alert-text">' . $text . '</p>';
+							$s .= 		'</div>';
+							$s .= 	'</div>';
 							$s .= '</section>';
 							echo $s;
 						}
 					?>
 
-					<div class="entry-content bbg__article-content large">
-						<?php
+					<?php
 						echo '<!-- Recent news section -->';
-						echo '<section id="recent-posts" class="usa-section bbg__home__recent-posts">';
+						// echo '<section id="recent-posts" class="usa-section bbg__home__recent-posts">';
+						if (!$advisory && $pageName == "Press room") {
+							echo '<h3>Recent press releases</h3>';
+						} elseif (!$advisory && $pageName == "Office of Congressional Affairs") {
+							echo '<h3>Recent highlights</h3>';
+						}
+						// echo 	'<div class="bbg__kits__recent-posts">';
+						echo 	'<div class="nest-container">';
+						echo 		'<div class="inner-container">';
+						echo 			'<div class="grid-third bbg__secondary-stories">';
+						if ($advisory) {
+							echo 			'<h2>Latest press release</h2>';
+						}
+						/**** START FETCH related news based on page title ****/
+						if ($pageName == "Press room") {
+							query_posts($qParamsPressReleases);
+						} elseif ($pageName == "Office of Congressional Affairs") {
+							query_posts($qParamsCongressional);
+						}
 
-							if ( !$advisory && $pageName == "Press room" ) {
-								echo '<h2>Recent press releases</h2>';
-							} elseif ( !$advisory && $pageName == "Office of Congressional Affairs" ) {
-								echo '<h2>Recent highlights</h2>';
-							}
+						if (have_posts()) {
+							$counter = 0;
+							$includeImage = TRUE;
 
-							echo '<div class="bbg__kits__recent-posts">';
-								echo '<div class="usa-width-one-half bbg__secondary-stories">';
+							while (have_posts()) : the_post();
+								$counter++;
+								$postIDsUsed[] = get_the_ID();
+								$includeMeta = false;
+								$gridClass = "bbg-grid--full-width";
+								$includeExcerpt = false;
 
-								if ( $advisory ) {
-									echo '<h2>Latest press release</h2>';
-								}
-
-								/**** START FETCH related news based on page title ****/
-								if ( $pageName == "Press room" ) {
-									// Run query of press releases
-									query_posts( $qParamsPressReleases );
-								} elseif ( $pageName == "Office of Congressional Affairs" ) {
-									// Run query of congressional affairs tag
-									query_posts( $qParamsCongressional );
-								}
-
-								if ( have_posts() ) {
-									$counter = 0;
-									$includeImage = TRUE;
-
-									while ( have_posts() ) : the_post();
-										$counter++;
-										$postIDsUsed[] = get_the_ID();
-										$includeMeta = false;
-										$gridClass = "bbg-grid--full-width";
-										$includeExcerpt = false;
-
-										if ( $counter > 1 ) {
-											$includeImage = false;
-											$includeMeta = false;
-											if ( $counter == 2 ) {
-												echo '</div><div class="usa-width-one-half tertiary-stories">';
-											}
-										}
-										if ( $counter == 1 ) {
-											$includePortfolioDescription = false;
-											get_template_part( 'template-parts/content-portfolio', get_post_format() );
-										} else {
-											get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
-										}
-
-									endwhile;
-
-									echo "<br/><a href='$prCategoryLink' class='bbg__kits__intro__more--link'>View more »</a>";
-								}
-								wp_reset_query();
-								echo '</div>';
-
-								if ( $advisory && $pageName == "Press room" ) {
-									echo '<div class="usa-width-one-half tertiary-stories">';
-										echo '<h3 class="entry-title bbg-blog__excerpt-title"><span class="usa-label bbg__label--advisory">Media Advisory</span><br/><a href="' . $advisory['url'] . '">' . $advisory['title'] . '</a></h3>';
-										echo '<div class="entry-content bbg-blog__excerpt-content">';
-											echo '<p>' . $advisory['excerpt'] . '</p>';
+								if ($counter > 1) {
+									$includeImage = false;
+									$includeMeta = false;
+									if ($counter == 2) {
 										echo '</div>';
-									echo '</div>';
+										echo '<div class="grid-third">';
+									}
 								}
-								echo '</div><!-- headlines -->';
+								if ($counter == 1) {
+									$includePortfolioDescription = false;
+									get_template_part('template-parts/content-portfolio', get_post_format());
+								} else {
+									get_template_part('template-parts/content-excerpt-list', get_post_format());
+								}
+							endwhile;
 
-							echo '</section><!-- .BBG News -->';
-						?>
-					</div>
+							echo '<br/><a href="' . $prCategoryLink . '" class="bbg__kits__intro__more--link">View more »</a>';
+						}
+						wp_reset_query();
+						echo '</div>';
+
+						if ($advisory && $pageName == "Press room") {
+							echo '<div class="grid-third">';
+							echo 	'<h3 class="entry-title bbg-blog__excerpt-title">';
+							echo 		'<span class="usa-label bbg__label--advisory">Media Advisory</span><br/>';
+							echo 		'<a href="' . $advisory['url'] . '">' . $advisory['title'] . '</a>';
+							echo 	'</h3>';
+							echo 	'<div class="entry-content bbg-blog__excerpt-content">';
+							echo 		'<p>' . $advisory['excerpt'] . '</p>';
+							echo 	'</div>';
+							echo '</div>';
+						}
+					?>
 
 					<!-- Contact card (tailored to audience based on page title) -->
-					<div class="bbg__article-sidebar large">
-						<?php if ( $includeContactBox ) { ?>
-							<aside>
+					<div class="grid-third">
+						<?php if ($includeContactBox) { ?>
 								<div class="bbg__contact-card">
 									<div class="bbg__contact-card__text">
 										<?php
-											// Contact information
-											// $pageName = str_replace( "Private: ", "", $pageName ); // hide "private" label on staging
-
-											if ( $pageName == "Press room" ) {
+											if ($pageName == "Press room") {
 												echo '<h3>Office of Public Affairs</h3>';
-											} elseif ( $pageName == "Office of Congressional Affairs" ) {
+											} elseif ($pageName == "Office of Congressional Affairs") {
 												echo '<h3>Office of Congressional Affairs</h3>';
 											} else {
 												echo '<h3>' . $pageName . 'Contact information</h3>';
 											}
 											echo $address;
 											echo '<ul class="usa-unstyled-list">';
-												echo $phone;
-												echo $email;
+											echo 	$phone;
+											echo 	$email;
 											echo '</ul>';
-
 											echo '<!-- Social media profiles -->';
 											// check that budget repeater field exists
-											$allSocial = get_field( 'agency_social_media_profiles', 'options', 'false' );
+											$allSocial = get_field('agency_social_media_profiles', 'options', 'false');
 
 											echo '<div class="bbg__kits__social">';
-												if ( $allSocial ) {
-													// loop through repeater rows
-													foreach ( $allSocial as $socials ) {
-														// populate variables for each row
-														$socialPlatform = $socials['social_media_platform'];
-														$socialProfile = $socials['social_media_profile_name'];
-														$socialURL = $socials['social_media_url'];
-
-														echo '<a class="bbg__kits__social-link usa-link-' . strtolower( $socialPlatform ) . '" href="' . $socialURL . '" role="img" aria-label="' . $socialPlatform  . '"></a>';
-													}
+											if ($allSocial) {
+												foreach ($allSocial as $socials) {
+													$socialPlatform = $socials['social_media_platform'];
+													$socialProfile = $socials['social_media_profile_name'];
+													$socialURL = $socials['social_media_url'];
+													echo '<a class="bbg__kits__social-link usa-link-' . strtolower( $socialPlatform ) . '" href="' . $socialURL . '" role="img" aria-label="' . $socialPlatform  . '"></a>';
 												}
+											}
 											echo '</div>';
-
 											echo '<div class="bbg__kits__contacts">';
-												renderContactSelect($contactPostIDs);
+											renderContactSelect($contactPostIDs);
 											echo '</div>';
-;
 											echo "<button id='btnSignup' onclick=\" toggleForm();  \" class='usa-button-outline bbg__kits__inquiries__button--half' style='width:100%; margin-top:2rem;' data-enabled='enabled'>Sign up to receive updates</button>";
-
 											echo $signupForm;
 										?>
 									</div>
 								</div>
-							</aside>
 						<?php } ?>
-					</div>
-				</div>
-			</article>
+							</div><!-- .inner-container -->
+						</div><!-- .nest-container -->
+					</div><!-- last third (contacts) -->
+				</div><!-- END .grid-container -->
+			</div><!-- END .outer-container -->
 			<!-- END PART 1 **** News + media advisories + contact & inquiries **** -->
 
 			<!-- PART 2 **** BBG by the numbers + CEO ribbon + latest award/featured page + Featured reports **** -->
 			<div class="usa-section usa-grid bbg__kits__section" id="page-sections">
-		        <!-- 2A **** 3-COL ROW: BBG by the numbers -->
-		        <section class="usa-grid-full bbg__kits__section--row">
-		        	<h2 class="entry-title">BBG by the numbers</h2>
-		        	<div class="usa-grid-full bbg__kits__section--tiles">
+				<!-- 2A **** 3-COL ROW: BBG by the numbers -->
+				<section class="usa-grid-full bbg__kits__section--row">
+					<h2 class="entry-title">BBG by the numbers</h2>
+					<div class="usa-grid-full bbg__kits__section--tiles">
 						<!-- DISTRIBUTION tile -->
-		        		<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
-		        			<h3 class="bbg__kits__section--tile__title-bar">International operations</h3>
+						<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
+							<h3 class="bbg__kits__section--tile__title-bar">International operations</h3>
 							<p class="bbg__kits__section--tile__list"><span class="bbg__kits__section--tile__list--serif"><?php echo $networks; ?></span> and a system of <span class="bbg__kits__section--tile__list--sans"><?php echo $affiliates; ?></span> and over <span class="bbg__kits__section--tile__list--sans"><?php echo $transmittingSites; ?></span> distribute <span class="bbg__kits__section--tile__list--sans"><?php echo $programming; ?></span> of original content globally each week.</p>
-		        		</article>
+						</article>
 
-		        		<!-- AUDIENCE tile -->
-		        		<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
-		        			<h3 class="bbg__kits__section--tile__title-bar">Global audience</h3>
+						<!-- AUDIENCE tile -->
+						<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
+							<h3 class="bbg__kits__section--tile__title-bar">Global audience</h3>
 							<p class="bbg__kits__section--tile__list">A worldwide unduplicated audience of <span class="bbg__kits__section--tile__list--serif"><?php echo $audience; ?></span> from more than <span class="bbg__kits__section--tile__list--sans"><?php echo $countries; ?></span> tune in weekly in <span class="bbg__kits__section--tile__list--sans"><?php echo $languages; ?></span>.</p>
-		        		</article>
+						</article>
 
-		        		<!-- BUDGET tile -->
-		        		<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
-		        			<h3 class="bbg__kits__section--tile__title-bar">Annual budget</h3>
-		        			<table class="bbg__kits__section--tile__table--borderless">
+					<!-- BUDGET tile -->
+					<article class="bbg-grid--1-3-3 bbg__kits__section--tile">
+						<h3 class="bbg__kits__section--tile__title-bar">Annual budget</h3>
+						<table class="bbg__kits__section--tile__table--borderless">
 								<tbody>
 								<?php
 									// check that budget repeater field exists
@@ -535,9 +500,9 @@ get_header(); ?>
 								?>
 								</tbody>
 							</table>
-		        		</article>
-		        	</div>
-		        </section>
+						</article>
+					</div>
+				</section>
 				<!-- END 2A **** BBG by the numbers -->
 
 				<!-- 2B **** Flexible content rows -->
