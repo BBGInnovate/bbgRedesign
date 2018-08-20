@@ -517,7 +517,6 @@ function get_office_highlights_data() {
 			'post_type' => array('post'),
 			'posts_per_page' => 3,
 			'order-by' => 'date',
-			'order' => 'ASC',
 			'posts__not_in' => $used_office_highlights
 		);
 

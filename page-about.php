@@ -307,8 +307,7 @@ get_header();
 		}
 		echo '</div>';
 	}
-	elseif (have_rows('about_flexible_page_rows')) {
-		// gather_flexible_rows();
+	else {
 		foreach ($all_flex_rows as $flex_row) {
 			if (is_array($flex_row)) {
 				echo '<div class="outer-container">';

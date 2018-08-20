@@ -175,7 +175,8 @@ function build_ribbon_parts($ribbon_data) {
 		$ribbon_headline = '<h4>' . $ribbon_data['headline'] . '</h4>';
 	}
 	$ribbon_summary = $ribbon_data['summary'];
-	$ribbon_image = '<img src="' . $ribbon_data['image_url'] . '">';
+	// $ribbon_image = '<img src="' . $ribbon_data['image_url'] . '">';
+	$ribbon_image = '<div style="background-image: url(' . $ribbon_data['image_url'] . ');"></div>';
 
 	$ribbon_package = array(
 		'label' => $ribbon_label,
@@ -349,6 +350,7 @@ function build_office_highlights_parts($office_highlights_data) {
 				$office_hightlight_post .= 	'<a href="' . get_the_permalink() . '">';
 				$office_hightlight_post .= 		'<h4>' . get_the_title() . '</h4>';
 				$office_hightlight_post .= 	'</a>';
+				$office_hightlight_post .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
 				$office_hightlight_post .= 	'<p class="aside">' . wp_trim_words(get_the_excerpt(), 50) . '</p>';
 				$office_hightlight_post .= '</article>';
 				array_push($office_hightlight_post_group, $office_hightlight_post);

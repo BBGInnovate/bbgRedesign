@@ -445,7 +445,7 @@ get_header();
 				<!-- 2A **** 3-COL ROW: BBG by the numbers -->
 				<div class="outer-container bbg__kits__section--row">
 					<div class="grid-container bbg__kits__section--tiles">
-						<h3>BBG by the numbers</h3>
+						<h3>USAGM by the numbers</h3>
 						<!-- DISTRIBUTION tile -->
 						<div class="nest-container">
 							<div class="inner-container">
@@ -550,7 +550,8 @@ get_header();
 							echo '<div class="bbg__ribbon">';
 							echo 	'<div class="outer-container">';
 							if (!empty($imageURL)) {
-								echo 	'<div class="side-content-container" style="background-image: url(' . $imageURL . ');">';
+								echo 	'<div class="side-content-container">';
+								echo 		'<div style="background-image: url(' . $imageURL . ');"></div>';
 								echo 	'</div>';
 							}
 							echo 		'<div class="main-content-container">';
