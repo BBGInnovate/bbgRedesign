@@ -21,9 +21,11 @@ function get_feature_media_data() {
 	}
 	elseif (!empty($feature_gallery)) {
 		$gallery_id = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
-		echo "<div class='outer-container'>";
-		putUniteGallery($gallery_id);
-		echo "</div>";
+		if (!empty($gallery_id)) {
+			echo "<div class='outer-container'>";
+			putUniteGallery($gallery_id);
+			echo "</div>";
+		}
 	}
 	elseif (has_post_thumbnail()) {
 		$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
@@ -34,14 +36,15 @@ function get_feature_media_data() {
 		if ($thumbnail_image && isset($thumbnail_image[0])) {
 			$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
 		}
+		if (!empty($src[0])) {
+			$post_featured_image  = '<div class="page-post-featured-graphic">';
+			$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
+			$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
+			$post_featured_image .= 	'</div>';
+			$post_featured_image .= '</div>';
 
-		$post_featured_image  = '<div class="page-post-featured-graphic">';
-		$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
-		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
-		$post_featured_image .= 	'</div>';
-		$post_featured_image .= '</div>';
-
-		$featured_data = $post_featured_image;
+			$featured_data = $post_featured_image;
+		}
 	}
 	elseif ($addFeaturedMap || $media_dev_map) {
 		$featuredMapCaption = get_post_meta(get_the_ID(), 'featured_map_caption', true);
@@ -53,10 +56,16 @@ function get_feature_media_data() {
 		}
 		$featured_data = $featured_map;
 	}
+	else {
+		$featured_data = "k";
+	}
 	$featured_setup  = '<div class="feautre-banner">';
 	$featured_setup .= 		$featured_data;
 	$featured_setup .= '</div>';
-	return $featured_setup;
+echo $featured_data;
+	// if (!empty($featured_data)) {
+	// 	return $featured_setup;
+	// }
 }
 
 function get_flexible_row_data($str) {

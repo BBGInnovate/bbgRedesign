@@ -98,7 +98,11 @@ get_header(); ?>
 					}
 					$s  = '<div class="grid-container">';
 					$entityPermalink = get_permalink(get_page_by_path('networks/' . $e));
-					$s .= 	'<h3><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
+					if ($e == 'bbg') {
+						$s .= 	'<h3><a href="' . $entityPermalink . '">USAGM</a></h3>';
+					} else {
+						$s .= 	'<h3><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
+					}
 					$s .= 	'<div class="nest-container">';
 					$s .= 		'<div class="inner-container">';
 					if (count($pressReleases)) {

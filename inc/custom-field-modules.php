@@ -173,13 +173,36 @@ function assemble_office_contact_module($office_contact_parts) {
 	return $office_contact_block;
 }
 
-function build_office_highlights_module($office_highlights_parts) {
+function assemble_office_highlights_module($office_highlights_parts) {
 	$highlights_module = "";
 	if (!empty($office_highlights_parts)) {
 		$highlights_module  = '<div class="office-highlights">';
 		$highlights_module .= 	'<h5>Recent Highlights</h5>';
+		$counter = 0;
 		foreach ($office_highlights_parts as $office_highlight) {
-			$highlights_module .= $office_highlight;
+			if ($counter == 0) {
+				$highlights_module .= '<article>';
+				$highlights_module .= 	'<div class="nest-container">';
+				$highlights_module .= 		'<div class="inner-container">';
+				$highlights_module .= 			'<div class="side-content-container">';
+				$highlights_module .= 				$office_highlight['image'];
+				$highlights_module .= 			'</div>';
+				$highlights_module .= 			'<div class="main-content-container">';
+				$highlights_module .= 				$office_highlight['title'];
+				$highlights_module .= 				$office_highlight['meta'];
+				$highlights_module .= 				$office_highlight['excerpt'];
+				$highlights_module .= 			'</div>';
+				$highlights_module .= 		'</div>';
+				$highlights_module .= 	'</div>';
+				$highlights_module .= '</article>';
+			} else {
+				$highlights_module .= '<article>';
+				$highlights_module .= 	$office_highlight['title'];
+				$highlights_module .= 	$office_highlight['meta'];
+				$highlights_module .= 	$office_highlight['excerpt'];
+				$highlights_module .= '</article>';
+			}
+			$counter++;
 		}
 		$highlights_module .= '</div>';
 	}

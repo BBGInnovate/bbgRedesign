@@ -174,6 +174,16 @@ $splash_overlay = get_field('splash_page_overlay', 'option');
 	<script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=BBG&pua=ua-33523145-2" id="_fed_an_ua_tag" ></script>
 	<?php endif; ?>
 	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,500,700,700i" rel="stylesheet">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124338348-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-124338348-1');
+</script>
 </head>
 
 

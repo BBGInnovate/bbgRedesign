@@ -260,7 +260,7 @@ get_header();
 
 		$office_highlights_data_result = get_office_highlights_data();
 		$office_highlights_parts_result = build_office_highlights_parts($office_highlights_data_result);
-		$office_highlights_module = build_office_highlights_module($office_highlights_parts_result);
+		$office_highlights_module = assemble_office_highlights_module($office_highlights_parts_result);
 
 		$office_information_chuncks  = '<div class="outer-container office-page">';
 		$office_information_chuncks .= 	'<div class="custom-grid-container">';
@@ -269,7 +269,7 @@ get_header();
 		$office_information_chuncks .= 				$office_intro_result;
 		if (is_page('media-development')) {
 			$office_information_chuncks .= 				'<div id="map" class="bbg__map--banner"></div>';
-			$office_information_chuncks .= 				'<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>';
+			$office_information_chuncks .= 				'<p class="bbg__article-header__caption">This map displays the training opportunities that the USAGM has offered over on a year by year basis.</p>';
 		}
 		$office_information_chuncks .= 				$office_highlights_module;
 		$office_information_chuncks .= 			'</div>';

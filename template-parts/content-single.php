@@ -8,7 +8,7 @@
  */
 
 require get_template_directory() . '/inc/bbg-functions-assemble.php';
-include get_template_directory() . '/inc/shared_sidebar.php';
+require get_template_directory() . '/inc/shared_sidebar.php';
 
 $dateline = "";
 $includeDateline = get_post_meta(get_the_ID(), 'include_dateline', true);
@@ -420,9 +420,9 @@ if ($numLogos > 0 && $numLogos < 3) {
 <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 	<?php
 		$featured_media_result = get_feature_media_data();
-		if ($featured_media_result != "") {
-			echo $featured_media_result;
-		}
+		// if (!empty($featured_media_result)) {
+		// 	echo $featured_media_result;
+		// }
 	?>
 
 	<div class="outer-container">

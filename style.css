@@ -2972,7 +2972,8 @@ ul li {
 
 .side-content-container ul li,
 .side-content-container ol li,
-.aside p.aside {
+.aside,
+p.aside {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 1.6rem;
   line-height: 2rem; }
