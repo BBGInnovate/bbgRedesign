@@ -11,60 +11,83 @@
  *
  * @package bbgRedesign
  */
+require 'inc/bbg-functions-assemble.php';
 
 get_header();
 ?>
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
-
-		<div class="usa-grid-full">
-		<?php if (have_posts()) : ?>
-			<?php
+		
+		<div class="outer-container">
+			<div class="grid-container">
+				<h2><?php echo single_post_title(); ?></h2>
+			</div>
+		</div>
+		<?php 
+			if (have_posts()) :
 				$counter = 0;
-				while ( have_posts() ) : the_post();
+				while (have_posts()) : the_post();
 					$counter++;
-					// ADD CHECK TO ONLY SHOW FEATURED IF IT'S NOT PAGINATED
-					if ( (!is_paged() && $counter==1)) {
-						get_template_part('template-parts/content-excerpt-featured', get_post_format());
+					if ($counter < 4) {
+						$in_sidebar = false;
+					} else {
+						$in_sidebar = true;
 					}
-					else {
+					// ONLY SHOW FEATURED IF IT'S NOT PAGINATED
+					if ((!is_paged() && $counter == 1)) {
+						$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
+						$banner_position = get_field('adjust_the_banner_image', '', true);
+						$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+						echo '<div class="outer-container">';
+						echo 	'<div class="grid-container">';
+						echo 		'<article id="post-' . get_the_ID() . '">';
+						echo 			'<div class="bbg__article-header__banner" ';
+						echo 				'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
+						echo 			'</div>';
+						echo 		'<h4>' . get_the_title() . '</h4>';
+						echo 		'<p class="aside date-meta">' . get_the_date() . '</p>';
+						echo 		'<p>' . get_the_excerpt() . '</p>';
+						echo '</article>';
+						echo 	'</div>';
+						echo '</div>';
+					}
+					if ($counter == 2) {
+						echo '<div class="outer-container">';
+						echo 	'<div class="custom-grid-container">';
+						echo 		'<div class="inner-container">';
+					}
+					if ((!is_paged() && $counter > 1)) {
 						if ((!is_paged() && $counter == 2) || (is_paged() && $counter == 1)) {
 							echo '</div>';
-							echo '<div class="usa-grid">';
-							echo 	'<div class="bbg-grid--1-1-1-2 secondary-stories">';
-						} elseif( (!is_paged() && $counter == 4) || (is_paged() && $counter==3)){
-							echo 	'</div><!-- left column -->';
-							echo '<div class="bbg-grid--1-1-1-2 tertiary-stories">';
-							echo 	'<header>';
-							echo 		'<h5>More news</h5>';
-							echo 	'</header>';
-
-							// These values are used for every excerpt > = 4
-							$includeImage = false;
-							$includeMeta = false;
-							$includeExcerpt = false;
+							echo 	'<div class="main-content-container">';
+						} elseif( (!is_paged() && $counter == 4) || (is_paged() && $counter == 3)){
+							echo '</div>';
+							echo '<div class="side-content-container">';
+							echo 	'<h5>More news</h5>';
 						}
-						get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
+						$article_markup  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
+						if ($in_sidebar == false) {
+							$article_markup .= '<h4><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h4>';
+							$article_markup .= '<p class="aside date-meta">' . get_the_date() . '</p>';
+							$article_markup .= '<p>' . get_the_excerpt() . '</p>';
+						} else {
+							$article_markup .= '<h6><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h6>';
+						}
+						$article_markup .= '</article>';
+						echo $article_markup;
 					}
-					/*
-					 * Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-				?>
-			<?php endwhile; ?>
-			</div><!-- .usa-grid -->
-
-			<?php the_posts_navigation(); ?>
-		<?php else : ?>
-
-			<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
-		<?php endif; ?>
-		</div><!-- .usa-grid -->
-	</main><!-- #main -->
-</div><!-- #primary -->
+				endwhile;
+				the_posts_navigation();
+				echo 		'</div>';
+				echo 	'</div>';
+				echo '</div>';
+			else :
+				get_template_part( 'template-parts/content', 'none' );
+			endif;
+		?>
+	</main>
+</div>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

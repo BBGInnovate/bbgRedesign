@@ -65,13 +65,8 @@ require 'inc/bbg-functions-assemble.php';
 								$moreLabel = "More Board Meetings";
 							}
 							echo 	'<h5>' . $moreLabel . '</h5>';
-
-							//These values are used for every excerpt >=4
-							$includeImage = false;
-							$includeMeta = false;
-							$includeExcerpt = false;
 						}
-						// get_template_part('template-parts/content-excerpt-list', get_post_format());
+
 						$article_markup  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
 						if ($in_sidebar == false) {
 							$article_markup .= '<h4><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h4>';
@@ -83,12 +78,6 @@ require 'inc/bbg-functions-assemble.php';
 						$article_markup .= '</article>';
 						echo $article_markup;
 					}
-
-					/*
-					 * Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
 				endwhile;
 
 				the_posts_navigation();
