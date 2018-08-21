@@ -222,10 +222,10 @@ get_header();
 			<aside class="side-content-container">
 				<article class="social-share">
 					<h5>Share</h5>
-					<a href="<?php echo $fbUrl; ?>">
+					<a href="<?php echo $fbUrl; ?>" target="_blank">
 						<i class="fab fa-facebook-square"></i>
 					</a>
-					<a href="<?php echo $twitterURL; ?>">
+					<a href="<?php echo $twitterURL; ?>" target="_blank">
 						<i class="fab fa-twitter-square"></i>
 					</a>
 				</article>
@@ -263,7 +263,7 @@ get_header();
 					if ($twitterProfileHandle != "") {
 						$twitter_markup  = '<article>';
 						$twitter_markup .= 	'<h5>Follow on Twitter</h5>';
-						$twitter_markup .= 	'<a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . get_the_title() . ' on Twitter">';
+						$twitter_markup .= 	'<a href="https://twitter.com/' . $twitterProfileHandle . '" target="_blank" title="Follow ' . get_the_title() . ' on Twitter">';
 						$twitter_markup .= 		'<i class="fab fa-twitter"></i> @' . $twitterProfileHandle;
 						$twitter_markup .= 	'</a>';
 						$twitter_markup .= '</article>';

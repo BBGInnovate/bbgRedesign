@@ -29,8 +29,8 @@ $(window).on('resize', function() {
 });
 
 function control_ribbon_height() {
-	var ribbonHeight = $('.bbg__ribbon .main-content-container').height();
-	$('.side-content-container div').outerHeight(ribbonHeight)
+	var ribbonHeight = $('.bbg__ribbon .main-content-container').outerHeight();
+	$('.bbg__ribbon .side-content-container div').height(ribbonHeight)
 }
 if (($('.bbg__ribbon').length > 0) && $(window).width() > 1200) {
 	control_ribbon_height();

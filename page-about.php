@@ -307,7 +307,7 @@ get_header();
 		}
 		echo '</div>';
 	}
-	else {
+	elseif (!is_page('who-we-are') && !empty($all_flex_rows)) {
 		foreach ($all_flex_rows as $flex_row) {
 			if (is_array($flex_row)) {
 				echo '<div class="outer-container">';

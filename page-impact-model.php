@@ -60,7 +60,7 @@ get_header();
 
 			<section class="outer-container bbg__impact-model__section">
 				<div class="grid-container">
-					<p class="lead-in">USAGM networks operate in a competitive, diverse, fragmented global media environment undergoing revolutionary change. There is more information, more channels of distribution and Limited Freedom of the Press.</p>
+					<p class="lead-in">USAGM networks operate in a competitive, diverse, fragmented global media environment undergoing revolutionary change. There is more information, more channels of distribution and limited freedom of the press.</p>
 
 					<div class="grid-half">
 						<img src="<?php echo get_template_directory_uri() ?>/img/impact/01_pie_free-press.png" alt="" class="bbg__impact-model__graphic large" >
@@ -87,7 +87,7 @@ get_header();
 			<section class="outer-container bbg__impact-model__section">
 				<div class="grid-container">
 					<h3>How do we measure impact?</h3>
-					<p class="lead-in">We measure impact across networks, across media, in 61 languages and in more than 100 countries. Our shared mission provides the framework for a common standard to define and measure impact.</p>
+					<p class="lead-in">We measure impact across networks, across media, in <?php echo do_shortcode("[languages]"); ?> languages and in more than <?php echo do_shortcode("[countries]"); ?> countries. Our shared mission provides the framework for a common standard to define and measure impact.</p>
 				</div>
 				<div class="side-content-container">
 					<h4>5 Networks. </h4>

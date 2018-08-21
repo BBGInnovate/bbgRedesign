@@ -96,9 +96,11 @@ get_header(); ?>
 							wp_reset_query();
 						}
 					}
-					$s  = '<div class="inner-container">';
+					$s  = '<div class="grid-container">';
 					$entityPermalink = get_permalink(get_page_by_path('networks/' . $e));
-					$s .= 	'<h3><a href="' . $entityPermalink . '">'. $entityString .'</a></h3>';
+					$s .= 	'<h3><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
+					$s .= 	'<div class="nest-container">';
+					$s .= 		'<div class="inner-container">';
 					if (count($pressReleases)) {
 						$counter = 0;
 						foreach ($pressReleases as $pr) {
@@ -114,24 +116,26 @@ get_header(); ?>
 
 
 							if ($counter == 1) {
-								$s .= '<h4><a href="' . $url . '">' . $title . '</a></h4>';
-								$s .= 	$pr['thumb'];
-								$s .= '<p>' . $pr['excerpt'] . '</p>';
+								// $s .= 	$pr['thumb'];
+								$s .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+								$s .= 	'<p>' . $pr['excerpt'] . '</p>';
 							} else {
-								$s .= '<h6><a href="' . $url . '">' . $title . '</a></h6>';
+								$s .= 	'<h6><a href="' . $url . '">' . $title . '</a></h6>';
 							}
 							if ($counter == 1 || $counter == 5) {
 								if ($counter == 5) {
 									$idObj = get_category_by_slug($entitySlug);
 				  					$id = $idObj->term_id;
-									$s .= '<article><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></article>';
+									$s .= 	'<article><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></article>';
 								}
 								$s .= '</div>';
 							}
 						}
 
 					}
-					$s .= '</div>'; // END .inner-container
+					$s .= 		'</div>'; // END .inner-container
+					$s .= 	'</div>'; // END .nest-container
+					$s .= '</div>'; // END .grid-container
 					echo $s;
 				}
 			?>

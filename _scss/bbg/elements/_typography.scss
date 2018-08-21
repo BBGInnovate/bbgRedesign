@@ -15,6 +15,11 @@ h2 a:visited {
     color: $color-red;
     margin: 0 0 3rem 0;
 }
+.bbg__ribbon {
+    h2 {
+        a:link {color: $white;}
+    }
+}
 .special-block h2, 
 .special-block h2 a:link, 
 .special-block h2 a:visited, {
@@ -92,6 +97,7 @@ ol li {
     font-family: $font-serif;
     font-size: 1.8rem;
     line-height: 2.8rem;
+    color: #545454;
     margin-bottom: 1.5rem;
 }
 ul li {

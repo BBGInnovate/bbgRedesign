@@ -2,7 +2,7 @@
 	// Add shortcode reference for the USAGM mission
 	function mission_shortcode( $atts ) {
 	    $a = shortcode_atts( array(
-	        'org' => 'Broadcasting Board of Governors',
+	        'org' => 'United States Agency for Global Media',
 	    ), $atts );
 
 	    return "<p>The mission of the {$a['org']} is to inform, engage, and connect people around the world in support of freedom and democracy.</p>";
