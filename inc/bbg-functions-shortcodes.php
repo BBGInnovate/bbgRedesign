@@ -1,5 +1,5 @@
 <?php
-	// Add shortcode reference for the BBG mission
+	// Add shortcode reference for the USAGM mission
 	function mission_shortcode( $atts ) {
 	    $a = shortcode_atts( array(
 	        'org' => 'Broadcasting Board of Governors',
@@ -10,7 +10,7 @@
 
 	add_shortcode( 'mission', 'mission_shortcode' );
 
-	// Add shortcode reference for the "About the BBG"
+	// Add shortcode reference for the "About the USAGM"
 	function about_shortcode( $atts ) {
 		$atts = shortcode_atts( array(
 			'name' => 'BBG',
@@ -30,7 +30,7 @@
 
 			// Set default description for "About BBG" in case field is empty
 			if ( ! $boilerplate || $boilerplate == "" ) {
-				$boilerplate = "The Broadcasting Board of Governors is an independent federal agency supervising all U.S. government-supported, civilian international media. Its mission is to inform, engage and connect people around the world in support of freedom and democracy. BBG networks include the Voice of America, Radio Free Europe/Radio Liberty, the Middle East Broadcasting Networks (Alhurra TV and Radio Sawa), Radio Free Asia, and the Office of Cuba Broadcasting (Radio and TV Martí). BBG programming has a measured audience of [audience] in more than [countries] and in [languages].";
+				$boilerplate = "The United States Agency for Global Media is an independent federal agency supervising all U.S. government-supported, civilian international media. Its mission is to inform, engage and connect people around the world in support of freedom and democracy. USAGM networks include the Voice of America, Radio Free Europe/Radio Liberty, the Middle East Broadcasting Networks (Alhurra TV and Radio Sawa), Radio Free Asia, and the Office of Cuba Broadcasting (Radio and TV Martí). USAGM programming has a measured audience of [audience] in more than [countries] and in [languages].";
 			}
         } else if ( $orgName == "ct" ) {
         	$fullName = "Current Time";

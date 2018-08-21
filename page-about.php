@@ -300,10 +300,10 @@ get_header();
 		echo '</div>';
 
 		echo '<div class="outer-container">';
-		$i = 0;
 		foreach ($umbrella_end as $rest_of_umbrella) {
-			echo $rest_of_umbrella[$i];
-			$i++;
+			foreach ($rest_of_umbrella as $umbrella_chunk) {
+				echo $umbrella_chunk;
+			}
 		}
 		echo '</div>';
 	}

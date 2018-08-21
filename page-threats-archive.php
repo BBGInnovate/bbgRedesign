@@ -74,55 +74,54 @@ wp_reset_query();
 get_header();
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
 
-		<?php if ( count( $threats ) ) : ?>
+	<?php if ( count( $threats ) ) : ?>
 
-			<div class="usa-grid">
+		<div class="outer-container">
+			<div class="inner-container">
 				<header class="page-header">
-					<h5 class="bbg__label--mobile large">Threats to Press</h5>
+					<h2>Threats to Press</h2>
 				</header><!-- .page-header -->
 			</div>
+		</div>
 
-			<section class="usa-section">
-				<div class="usa-grid" style="margin-bottom: 3rem">
-					<h2 class="entry-title bbg-blog__excerpt-title--featured"><?php echo $pageTitle; ?></h2>
-					<?php
-						echo '<h3 class="usa-font-lead">';
-						echo $pageContent; // or $pageExcerpt
-						echo '</h3>';
+		<section class="outer-container">
+			<div class="grid-container" style="margin-bottom: 3rem">
+				<h2 class="entry-title bbg-blog__excerpt-title--featured"><?php echo $pageTitle; ?></h2>
+				<?php
+					echo '<p class="lead-in">';
+					echo 	$pageContent;
+					echo '</p>';
 
-						foreach ($threats as $t) {	//4773aa, 112e51
-							$imgSrc = '';
-							foreach ($t['network'] as $abbreviation) {
-								$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //
-							}
-
-							echo '<article class="bbg-blog__excerpt--list ">';
-								echo '<header class="entry-header bbg__article-icons-container">';
-									echo '<div class="bbg__article-icon" style="background-position: left 0.25rem; background-image: url(' . $imgSrc . ');"></div>';
-									echo '<h3 class="entry-title" style="color:#4773aa">' . $t['headline'] . '</h3>';
-								echo '</header>';
-								echo '<div class="entry-meta bbg__excerpt-meta">';
-									echo '<span class="posted-on">';
-									echo '<time class="entry-date published" >' . $t['niceDate'] . '</time>';
-									echo '</span></div>';
-									echo '<div class="entry-content bbg-blog__excerpt-content"><p>' . $t['description'] . '</p>';
-								echo '</div>';
-							echo '</article>';
+					foreach ($threats as $t) {	//4773aa, 112e51
+						$imgSrc = '';
+						foreach ($t['network'] as $abbreviation) {
+							$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //
 						}
 
-					?>
-				</div>
-			</section>
+						echo '<article class="bbg-blog__excerpt--list ">';
+						echo 	'<header class="entry-header bbg__article-icons-container">';
+						echo 		'<div class="bbg__article-icon" style="background-position: left 0.25rem; background-image: url(' . $imgSrc . ');"></div>';
+						echo 		'<h3 class="entry-title" style="color:#4773aa">' . $t['headline'] . '</h3>';
+						echo 	'</header>';
+						echo 	'<div class="entry-meta bbg__excerpt-meta">';
+						echo 		'<span class="posted-on">';
+						echo 			'<time class="entry-date published" >' . $t['niceDate'] . '</time>';
+						echo 		'</span></div>';
+						echo 	'<div class="entry-content bbg-blog__excerpt-content">';
+						echo 		'<p>' . $t['description'] . '</p>';
+						echo 	'</div>';
+						echo '</article>';
+					}
+				?>
+			</div>
+		</section>
 
-
-			<?php endif; ?>
-		</main><!-- #main -->
-	</div><!-- #primary -->
+		<?php endif; ?>
+	</main><!-- #main -->
+</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
-
-
