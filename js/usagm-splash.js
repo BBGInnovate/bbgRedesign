@@ -47,7 +47,6 @@ if ($('#usagm-splash-wrapper').length != 0) {
 	var topPos = Number($('#bbg-logo-container').offset().top);
 	var maxPos = topPos + $('#bbg-logo-container').height();
 	var minPos = topPos;
-console.log(topPos);
 	var posGroup = (maxPos - minPos) * 100;
 	var newTopPos;
 
@@ -55,7 +54,6 @@ console.log(topPos);
 		topPos = Number(elem.offset().top);
 		var bodyPc = ($(this).scrollTop() / $('body').height());
 		newTopPos = ((bodyPc * posGroup) / 100) + minPos;
-console.log(newTopPos);
 		elem.css('top', newTopPos);
 		// UPDATE VALUES
 		topPos = elem.offset().top;
@@ -63,6 +61,70 @@ console.log(newTopPos);
 
 	$(window).on('scroll', function() {
 		scrollLogoTopPos($('#bbg-logo-container'));
+	});
+
+	// LIGHTBOX
+	var lb = $('.lightbox');
+	var lbLinks = $('.lightbox-link');
+	var lbLinksRefs = lbLinks.attr('href');
+	var lbBg = $('<div class="lb-bg"></div>');
+	var lbVideoBox = $('<div id="videoBox"></div>');
+	var closeBu = $('<div class="close">X</div>');
+
+	lbVideoBox.append(closeBu);
+	lbBg.append(lbVideoBox);
+
+	var screenTop = 0;
+	var screenHeight = 0;
+	function setLightboxParams() {
+		screenTop = $('html').scrollTop();
+		screenHeight = $(window).height();
+		lbBg.css({
+			'top' : screenTop,
+			'height' : screenHeight
+		});
+	}
+	setLightboxParams();
+
+	var refArr = [];
+	lbLinks.each(function() {
+		refArr.push($(this).attr('href'));
+	});
+
+	var i, curImg;
+
+	lbLinks.on('click', function(e) {
+		console.log('event5');
+		var curId = $(this).attr('id');
+		var selImg = $(this);
+		var selImgRef = selImg.attr('href');
+
+		lbBg.show();
+		closeBu.show();
+		lbVideoBox.append(closeBu);
+		$('body').prepend(lbBg);
+		if (curId == "what-we-do") {
+			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/_j94Vc-8zyg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+		}
+		else if (curId == "who-we-are") {
+			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/z4XWcruGhNk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+		}
+		else if (curId == "ceo-message") {
+			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/eTNV0cnb6No" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+		}
+	});
+
+	// CONTROLS
+	lbBg.add(closeBu).on('click', function(e) {
+		if (e.target == this) {
+			lbBg.hide();
+			closeBu.hide();
+			lbVideoBox.children().remove();
+		}
+	});
+
+	$(window).on('scroll', function() {
+		setLightboxParams();
 	});
 
 } // END #usagm-splash-wrapper CHECK

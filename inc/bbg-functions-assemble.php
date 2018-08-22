@@ -56,16 +56,13 @@ function get_feature_media_data() {
 		}
 		$featured_data = $featured_map;
 	}
-	else {
-		$featured_data = "k";
-	}
 	$featured_setup  = '<div class="feautre-banner">';
 	$featured_setup .= 		$featured_data;
 	$featured_setup .= '</div>';
-echo $featured_data;
-	// if (!empty($featured_data)) {
-	// 	return $featured_setup;
-	// }
+
+	if (!empty($featured_data)) {
+		return $featured_setup;
+	}
 }
 
 function get_flexible_row_data($str) {

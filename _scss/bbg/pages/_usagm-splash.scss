@@ -1,4 +1,5 @@
 html, body {height: 100%;}
+
 #usagm-splash-wrapper {
 	height: 100%;
 	font-size: 10px;
@@ -75,6 +76,11 @@ html, body {height: 100%;}
 		a:hover, a:active {color: $color-cool-blue; text-decoration: none;}
 		.message {
 			margin-bottom: 3rem;
+			h4, p {
+				text-align: center;
+				color: $white;
+			}
+			.fas {font-size: 0.6em;}
 			.message-image {
 				width: 50%;
 				margin: 0 auto 1.5rem auto;
@@ -82,13 +88,6 @@ html, body {height: 100%;}
 					border: 3px solid $color-red;
 					border-radius: 50%;
 				}
-			}
-			.message-text {
-				h4, p {
-					text-align: center;
-					color: $white;
-				}
-				.fas {font-size: 0.6em;}
 			}
 		}
 	}
@@ -128,6 +127,37 @@ html, body {height: 100%;}
 		}
 		.ed-img {display: none;}
 	}
+}
+/* LIGHTBOX */
+.lb-bg {
+	position: absolute;
+	z-index: 100000;
+	width: 100%;
+	background-color: rgba(0,0,0,0.75);
+}
+#videoBox {
+	position: absolute;
+	margin: 0 auto;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+}
+.close {
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	font-size: 20px;
+	border-radius: 25px;
+	padding: 5px 11px 5px 10px;
+	font-family: sans-serif;
+	font-weight: bold;
+	color: #cccccc;
+	background-color: #000000;
+	border: 2px solid #cccccc;
+	cursor: pointer;
+	display: none;
 }
 
 @include media($small-screen) {
@@ -171,7 +201,7 @@ html, body {height: 100%;}
 		}
 		#murrow-quote {
 			.outer-container {
-				background-image: url('http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png');
+				background-image: url('http://usagm.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png');
 				background-repeat: no-repeat;
 				background-size: auto 100%;
 				background-position: -10% top;

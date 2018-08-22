@@ -7701,17 +7701,17 @@ html, body {
       text-decoration: none; }
     #usagm-splash-wrapper .messaging-section .message {
       margin-bottom: 3rem; }
+      #usagm-splash-wrapper .messaging-section .message h4, #usagm-splash-wrapper .messaging-section .message .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message a, #usagm-splash-wrapper .messaging-section .message p {
+        text-align: center;
+        color: #ffffff; }
+      #usagm-splash-wrapper .messaging-section .message .fas {
+        font-size: 0.6em; }
       #usagm-splash-wrapper .messaging-section .message .message-image {
         width: 50%;
         margin: 0 auto 1.5rem auto; }
         #usagm-splash-wrapper .messaging-section .message .message-image img {
           border: 3px solid #b2201c;
           border-radius: 50%; }
-      #usagm-splash-wrapper .messaging-section .message .message-text h4, #usagm-splash-wrapper .messaging-section .message .message-text .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message .message-text a, #usagm-splash-wrapper .messaging-section .message .message-text p {
-        text-align: center;
-        color: #ffffff; }
-      #usagm-splash-wrapper .messaging-section .message .message-text .fas {
-        font-size: 0.6em; }
   #usagm-splash-wrapper .messaging-section#site-link * {
     text-align: center;
     margin-bottom: 0; }
@@ -7749,6 +7749,37 @@ html, body {
     #usagm-splash-wrapper #murrow-quote .ed-img {
       display: none; }
 
+/* LIGHTBOX */
+.lb-bg {
+  position: absolute;
+  z-index: 100000;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75); }
+
+#videoBox {
+  position: absolute;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+.close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 20px;
+  border-radius: 25px;
+  padding: 5px 11px 5px 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #cccccc;
+  background-color: #000000;
+  border: 2px solid #cccccc;
+  cursor: pointer;
+  display: none; }
+
 @media screen and (min-width: 481px) {
   #usagm-splash-wrapper {
     font-size: 12px; }
@@ -7770,7 +7801,7 @@ html, body {
   #usagm-splash-wrapper .logo-board .logo-container {
     width: 60%; }
   #usagm-splash-wrapper #murrow-quote .outer-container {
-    background-image: url("http://dev.bbg.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png");
+    background-image: url("http://usagm.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png");
     background-repeat: no-repeat;
     background-size: auto 100%;
     background-position: -10% top; }

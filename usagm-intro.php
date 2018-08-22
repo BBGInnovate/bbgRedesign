@@ -42,38 +42,29 @@ get_header();
 	<div class="outer-container">
 		<div class="grid-container">
 			<div class="inner-container message">
-				<div class="grid-container">
-					<div class="message-image">
+				<div class="grid-container lightbox">
+					<div class="message-image lightbox-link" id="what-we-do">
 						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/what-we-do.jpg" alt="">
 					</div>
-					<div class="message-text">
+					<div class="message-text lightbox-link">
 						<h4>What We Do</h4>
-						<!-- <p><i class="fas fa-arrow-right"></i> Video: 30 seconds</p> -->
 					</div>
 				</div>
 			</div>
 			<div class="inner-container message">
-				<div class="grid-container">
-					<a class="messageing-link" href="http://dev.bbg.gov/who-we-are/">
-						<div class="message-image">
-							<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/who-we-are.jpg" alt="">
-						</div>
-						<div class="message-text">
-							<h4>Who We Are</h4>
-							<!-- <p><i class="fas fa-arrow-right"></i> Video: 60 seconds</p> -->
-						</div>
-					</a>
+				<div class="grid-container lightbox">
+					<div class="message-image lightbox-link"  id="who-we-are">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/who-we-are.jpg" alt="">
+					</div>
+					<h4>Who We Are</h4>
 				</div>
 			</div>
 			<div class="inner-container message">
-				<div class="grid-container">
-					<div class="message-image">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/where-we-are-going.jpg" alt="">
+				<div class="grid-container lightbox">
+					<div class="message-image lightbox-link"  id="ceo-message">
+						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/ceo-message.jpg" alt="">
 					</div>
-					<div class="message-text">
-						<h4>Where We Are Going</h4>
-						<!-- <p><i class="fas fa-arrow-right"></i> Letter from CEO: 60 seconds</p> -->
-					</div>
+					<h4>Message from the CEO</h4>
 				</div>
 			</div>
 		</div>
