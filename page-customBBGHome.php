@@ -64,7 +64,7 @@ get_header();
 			?>
 
 			<section id="mission" class="outer-container">
-				<h1 class="header-outliner">About the BBG</h1>
+				<h1 class="header-outliner">About USAGM</h1>
 				<div class="grid-container">
 				<?php
 					$settings_result = get_site_settings_data();
@@ -80,9 +80,9 @@ get_header();
 
 			<!-- BBG NEWS -->
 			<section class="outer-container featured-row">
-				<h1 class="header-outliner">BBG News</h1>
+				<h1 class="header-outliner">USAGM News</h1>
 				<div class="grid-container">
-					<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">BBG News</a></h2>
+					<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">USAGM News</a></h2>
 				</div>
 				<div class="custom-grid-container">
 					<div class="inner-container">

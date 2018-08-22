@@ -69,7 +69,8 @@ if ($('#usagm-splash-wrapper').length != 0) {
 	var lbLinksRefs = lbLinks.attr('href');
 	var lbBg = $('<div class="lb-bg"></div>');
 	var lbVideoBox = $('<div id="videoBox"></div>');
-	var closeBu = $('<div class="close">X</div>');
+	var closeBu = $('<div class="close"><i class="far fa-times-circle"></i></div>');
+	var closer = $('.close');
 
 	lbVideoBox.append(closeBu);
 	lbBg.append(lbVideoBox);
@@ -80,8 +81,8 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		screenTop = $('html').scrollTop();
 		screenHeight = $(window).height();
 		lbBg.css({
-			'top' : screenTop,
-			'height' : screenHeight
+			'top' : screenTop
+			// 'height' : screenHeight
 		});
 	}
 	setLightboxParams();
@@ -94,7 +95,6 @@ if ($('#usagm-splash-wrapper').length != 0) {
 	var i, curImg;
 
 	lbLinks.on('click', function(e) {
-		console.log('event5');
 		var curId = $(this).attr('id');
 		var selImg = $(this);
 		var selImgRef = selImg.attr('href');
@@ -115,13 +115,19 @@ if ($('#usagm-splash-wrapper').length != 0) {
 	});
 
 	// CONTROLS
-	lbBg.add(closeBu).on('click', function(e) {
-		if (e.target == this) {
-			lbBg.hide();
-			closeBu.hide();
-			lbVideoBox.children().remove();
-		}
+	lbBg.on('click', function() {
+		lbBg.hide();
+		closeBu.hide();
+		lbVideoBox.children().remove();
+		console.log('close');
 	});
+	closeBu.click(function() {
+		console.log('close bu');
+		lbBg.hide();
+		closeBu.hide();
+		lbVideoBox.children().remove();
+	});
+	console.log('12');
 
 	$(window).on('scroll', function() {
 		setLightboxParams();

@@ -18,7 +18,6 @@ get_header();
 		<div class="logo-fader-up"></div>
 		<div class="center-copy-block">
 			<p>The Broadcasting Board of Governors is&nbsp;now&nbsp;the<br>United States Agency for Global Media.</p>
-			<!-- <p>For 75 years we've been telling the truth. And the truth is, our name was outdated.</p> -->
 			<p class="splash-down"><i class="fas fa-angle-down"></i></p>
 		</div>
 	</div>
@@ -31,7 +30,6 @@ get_header();
 
 	<div class="logo-copy" id="usagm-copy">
 		<div class="center-copy-block">
-			<!-- <p>The Broadcasting Board of Governors is&nbsp;now&nbsp;the<br>United States Agency for Global&nbsp;Media.</p><p>New name, same mission.</p> -->
 			<p>New name, same mission.</p>
 			<p class="splash-down"><i class="fas fa-angle-down"></i></p>
 		</div>
@@ -43,28 +41,32 @@ get_header();
 		<div class="grid-container">
 			<div class="inner-container message">
 				<div class="grid-container lightbox">
-					<div class="message-image lightbox-link" id="what-we-do">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/what-we-do.jpg" alt="">
-					</div>
-					<div class="message-text lightbox-link">
-						<h4>What We Do</h4>
+					<div class="lightbox-link" id="what-we-do">
+						<div class="message-image">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/what-we-do.jpg" alt="">
+							<h4>What We Do</h4>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="inner-container message">
 				<div class="grid-container lightbox">
-					<div class="message-image lightbox-link"  id="who-we-are">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/who-we-are.jpg" alt="">
+					<div class="lightbox-link" id="who-we-are">
+						<div class="message-image">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/who-we-are.jpg" alt="">
+							<h4>Who We Are</h4>
+						</div>
 					</div>
-					<h4>Who We Are</h4>
 				</div>
 			</div>
 			<div class="inner-container message">
 				<div class="grid-container lightbox">
-					<div class="message-image lightbox-link"  id="ceo-message">
-						<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/ceo-message.jpg" alt="">
+					<div class="lightbox-link" id="ceo-message">
+						<div class="message-image">
+							<img src="<?php echo get_template_directory_uri(); ?>/img/usagm-splash/ceo-message.jpg" alt="">
+						</div>
+						<h4>Message from the CEO</h4>
 					</div>
-					<h4>Message from the CEO</h4>
 				</div>
 			</div>
 		</div>
@@ -77,7 +79,7 @@ get_header();
 			<div class="ed-quote">
 				<p class="splash-quote">To be persuasive we must be believable; to be believable we must be credible, to be credible we must be truthful. It is as simple as that.”</p>
 				<p class="splash-quote-by">&mdash;Edward R. Murrow</p>
-				<p class="splash-quote-by">Director, US Information Agency <br>(precursor to USAGM) 1961&ndash;1964)</p>
+				<p class="splash-quote-by">Director, 1961&ndash;1964<br>U.S. Information Agency (precursor to the USAGM)</p>
 			</div>
 		</div>
 	</div>
@@ -86,7 +88,7 @@ get_header();
 <div class="messaging-section" id="site-link">
 	<div class="outer-container">
 		<div class="grid-container">
-			<h2><a style="font-size: 2rem; font-weight: 300;" class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to usagm.gov</a></h2>
+			<p style="font-size: 3.5rem; text-transform: uppercase; font-weight: 300; letter-spacing: 2px;"><a class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to usagm.gov</a></p>
 		</div>
 	</div>
 </div>

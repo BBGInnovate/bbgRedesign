@@ -74,13 +74,21 @@ html, body {height: 100%;}
 		}
 		a:link, a:visited {color: $white; text-decoration: none;}
 		a:hover, a:active {color: $color-cool-blue; text-decoration: none;}
+		.message:hover {
+			h4 {color: $color-cool-blue;}
+			.message-image img {border: 3px solid $color-taupe-light;}
+		}
 		.message {
 			margin-bottom: 3rem;
-			h4, p {
+			h4 {
 				text-align: center;
 				color: $white;
 			}
 			.fas {font-size: 0.6em;}
+			.lightbox-link {
+				cursor: pointer;
+				h4 {margin-top: 1.5rem;}
+			}
 			.message-image {
 				width: 50%;
 				margin: 0 auto 1.5rem auto;
@@ -131,8 +139,9 @@ html, body {height: 100%;}
 /* LIGHTBOX */
 .lb-bg {
 	position: absolute;
-	z-index: 100000;
+	z-index: 1000;
 	width: 100%;
+	height: 100%;
 	background-color: rgba(0,0,0,0.75);
 }
 #videoBox {
@@ -144,18 +153,23 @@ html, body {height: 100%;}
 		-ms-transform: translate(-50%, -50%);
 			transform: translate(-50%, -50%);
 }
+// CHANGE FOR MICROSOFT EDGE
+@supports (-ms-ime-align: auto) {
+	.lb-bg {position: fixed;}
+}
+// CHANGE FOR MOBILE DEVICES
+@media only screen and (max-device-width : 640px) {
+	.lb-bg {position: fixed;}
+	#videoBox {width: 90%;}
+}
+
 .close {
 	position: absolute;
+	z-index: 10000;
 	top: -15px;
 	right: -15px;
-	font-size: 20px;
-	border-radius: 25px;
-	padding: 5px 11px 5px 10px;
-	font-family: sans-serif;
-	font-weight: bold;
+	font-size: 3rem;
 	color: #cccccc;
-	background-color: #000000;
-	border: 2px solid #cccccc;
 	cursor: pointer;
 	display: none;
 }

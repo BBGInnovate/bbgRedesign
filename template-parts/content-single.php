@@ -420,9 +420,9 @@ if ($numLogos > 0 && $numLogos < 3) {
 <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 	<?php
 		$featured_media_result = get_feature_media_data();
-		// if (!empty($featured_media_result)) {
-		// 	echo $featured_media_result;
-		// }
+		if (!empty($featured_media_result)) {
+			echo $featured_media_result;
+		}
 	?>
 
 	<div class="outer-container">

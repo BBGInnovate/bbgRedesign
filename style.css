@@ -7699,13 +7699,21 @@ html, body {
     #usagm-splash-wrapper .messaging-section a:hover, #usagm-splash-wrapper .messaging-section a:active {
       color: #82afd2;
       text-decoration: none; }
+    #usagm-splash-wrapper .messaging-section .message:hover h4, #usagm-splash-wrapper .messaging-section .message:hover .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message:hover a {
+      color: #82afd2; }
+    #usagm-splash-wrapper .messaging-section .message:hover .message-image img {
+      border: 3px solid #aca299; }
     #usagm-splash-wrapper .messaging-section .message {
       margin-bottom: 3rem; }
-      #usagm-splash-wrapper .messaging-section .message h4, #usagm-splash-wrapper .messaging-section .message .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message a, #usagm-splash-wrapper .messaging-section .message p {
+      #usagm-splash-wrapper .messaging-section .message h4, #usagm-splash-wrapper .messaging-section .message .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message a {
         text-align: center;
         color: #ffffff; }
       #usagm-splash-wrapper .messaging-section .message .fas {
         font-size: 0.6em; }
+      #usagm-splash-wrapper .messaging-section .message .lightbox-link {
+        cursor: pointer; }
+        #usagm-splash-wrapper .messaging-section .message .lightbox-link h4, #usagm-splash-wrapper .messaging-section .message .lightbox-link .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message .lightbox-link a {
+          margin-top: 1.5rem; }
       #usagm-splash-wrapper .messaging-section .message .message-image {
         width: 50%;
         margin: 0 auto 1.5rem auto; }
@@ -7752,8 +7760,9 @@ html, body {
 /* LIGHTBOX */
 .lb-bg {
   position: absolute;
-  z-index: 100000;
+  z-index: 1000;
   width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.75); }
 
 #videoBox {
@@ -7765,18 +7774,23 @@ html, body {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
 
+@supports (-ms-ime-align: auto) {
+  .lb-bg {
+    position: fixed; } }
+
+@media only screen and (max-device-width: 640px) {
+  .lb-bg {
+    position: fixed; }
+  #videoBox {
+    width: 90%; } }
+
 .close {
   position: absolute;
+  z-index: 10000;
   top: -15px;
   right: -15px;
-  font-size: 20px;
-  border-radius: 25px;
-  padding: 5px 11px 5px 10px;
-  font-family: sans-serif;
-  font-weight: bold;
+  font-size: 3rem;
   color: #cccccc;
-  background-color: #000000;
-  border: 2px solid #cccccc;
   cursor: pointer;
   display: none; }
 
