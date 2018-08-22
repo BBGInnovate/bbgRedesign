@@ -24,7 +24,7 @@ function build_soapbox_parts($soap_data, $layout) {
 	}
 
 	$soap_title .= '<h4>';
-	$soap_title .= 	'<a href="' . $soap_data['header_link'] . '">';
+	$soap_title .= 	'<a href="' . $soap_data['post_link'] . '">';
 	$soap_title .= 		$soap_data['title'];
 	$soap_title .= 	'</a>';
 	$soap_title .= '</h4>';

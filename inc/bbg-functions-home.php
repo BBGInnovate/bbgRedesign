@@ -156,7 +156,7 @@ function get_recent_post_data($maxPostsToShow, $used_id) {
 		'posts_per_page' => $maxPostsToShow,
 		'orderby' => 'post_date',
 		'order' => 'desc',
-		'category__not_in' => $catExclude,
+		'category__not_in' => array('1046'),
 		'post__not_in' => $used_id,
 		'tax_query' => array(
 			array(
@@ -169,7 +169,6 @@ function get_recent_post_data($maxPostsToShow, $used_id) {
 	);
 	$param_data = query_posts($qParams);
 	return $param_data;
-	// return build_recent_post_blocks($param_data);
 }
 
 // BUILDIND BLOCKS

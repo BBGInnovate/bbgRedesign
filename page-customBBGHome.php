@@ -71,18 +71,17 @@ get_header();
 
 					$mission  = '<p class="lead-in">';
 					$mission .= 	$settings_result['intro_content'];
-					// $mission .= 	'<a href="' . $settings_result['intro_link'] . '" class="read-more">LEARN MORE</a>';
 					$mission .= '</p>';
 					echo $mission;
 				?>
 				</div>
 			</section>
 
-			<!-- BBG NEWS -->
+			<!-- USAGM NEWS -->
 			<section class="outer-container featured-row">
 				<h1 class="header-outliner">USAGM News</h1>
 				<div class="grid-container">
-					<h2><a href="<?php echo get_permalink(get_page_by_path('news')); ?>">USAGM News</a></h2>
+					<h2><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
 				</div>
 				<div class="custom-grid-container">
 					<div class="inner-container">
@@ -128,7 +127,7 @@ get_header();
 								<h2 class="screen-reader-text">Recent Posts Navigation</h2>
 								<div class="nav-links">
 									<div class="nav-previous">
-										<a href="<?php get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
+										<a href="<?php echo get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
 									</div>
 								</div>
 							</nav>
@@ -136,11 +135,11 @@ get_header();
 						</div>
 					</div><!-- end nest -->
 				</div><!-- end grid -->
-			</section><!-- END BBG NEWS -->
+			</section><!-- END USAGM NEWS -->
 			
 			<?php
 				// PREP: SOAPBOX, CORNER HERO, IMPACT STORIES
-				$soap_result = get_soapbox_data();
+				$soap_result = get_soapbox_data();				
 				$corner_hero_result = get_corner_hero_data();
 
 				$soap_layout = "";
