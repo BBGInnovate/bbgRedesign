@@ -132,6 +132,7 @@ $qParamsPressReleases = array(
 		)
 	),
 );
+// var_dump($qParamsPressReleases);
 // set variable for PR category link to All network highlights page
 $prCategoryLink = get_permalink(get_page_by_path('news/network-highlights'));
 
@@ -341,7 +342,7 @@ get_header();
 							echo 			'<h2>Latest press release</h2>';
 						}
 						/**** START FETCH related news based on page title ****/
-						if ($pageName == "Press room") {
+						if ($pageName == "Press Room") {
 							query_posts($qParamsPressReleases);
 						} elseif ($pageName == "Office of Congressional Affairs") {
 							query_posts($qParamsCongressional);

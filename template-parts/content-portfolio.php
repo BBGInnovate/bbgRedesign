@@ -39,7 +39,7 @@ echo '<article id="'. get_the_ID() . '">';
 
 	$link_header  = '<h4>';
 	$link_header .= 	'<a href="' . $postPermalink . ' rel="bookmark">';
-	// $link_header .= 		get_the_title();
+	$link_header .= 		get_the_title();
 	$link_header .= 	'</a>';
 	$link_header .= '</h4>';
 	echo $link_header;
