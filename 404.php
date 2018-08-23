@@ -6,82 +6,68 @@
  *
  * @package bbgRedesign
  */
-
+error_reporting(E_ERROR | E_PARSE);
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-
-				<div class="usa-grid">
-					<header class="page-header">
-						<h1 class="page-title"><span style="color: #900;">404!</span> That page can’t be found.</h1>
-					</header><!-- .page-header -->
-
-					<h6 class="bbg__page-header__tagline">But here are some recent BBG highlights from around the world.</h6>
-				</div>
-
-				<!-- this section holds the map and is populated later in the page by javascript -->
-				<section class="usa-section">
-					<div id="map" class="bbg__map--banner" style="max-height: 350px;"></div>
-				</section>
-
-
-			<section class="error-404 not-found usa-grid">
-
-
-
-
-				<div class="page-content">
-
-					<?php
-						/* translators: %1$s: smiley */
-						$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives.', 'bbginnovate' ), convert_smilies( ':)' ) ) . '</p>';
-						the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-					?>
-
-				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+			<div class="usa-grid">
+				<header class="page-header">
+					<h1 class="page-title"><span style="color: #900;">404!</span> That page can’t be found.</h1>
+				</header><!-- .page-header -->
+				<h6 class="bbg__page-header__tagline">But here are some recent BBG highlights from around the world.</h6>
+			</div>
+			<!-- this section holds the map and is populated later in the page by javascript -->
+			<section class="usa-section">
+				<div id="map" class="bbg__map--banner" style="max-height: 350px;"></div>
+			</section>
+		<section class="error-404 not-found usa-grid">
+			<div class="page-content">
+				<?php
+					/* translators: %1$s: smiley */
+					$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives.', 'bbginnovate' ), convert_smilies( ':)' ) ) . '</p>';
+					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
+				?>
+			</div>
+		</section>
+	</main>
+</div><!-- #primary -->
 
 
 
 <?php
-
 $postsPerPage = 10;
 
-$qParams=array(
-	'post_type' => array('post')
-	,'cat' => get_cat_id('Map it')
-	,'posts_per_page' => $postsPerPage
-	,'post_status' => array('publish')
+$qParams = array(
+	'post_type' => array('post'),
+	'cat' => get_cat_id('Map it'),
+	'posts_per_page' => $postsPerPage,
+	'post_status' => array('publish')
 );
 
 /*** late in the game we ran into a pagination issue, so we're running a second query here ***/
-$custom_query_args= $qParams;
-$custom_query = new WP_Query( $custom_query_args );
+$custom_query_args = $qParams;
+$custom_query = new WP_Query($custom_query_args);
 
 $features = array();
 
-if ( $custom_query->have_posts() ) :
+if ($custom_query->have_posts()) :
 		$counter = 0;
-		while ( $custom_query->have_posts() ) : $custom_query->the_post();
+		while ($custom_query->have_posts()) : $custom_query->the_post();
 			$id = get_the_ID();
-			$location = get_post_meta( $id, 'map_location', true );
+			$location = get_post_meta($id, 'map_location', true);
+			// var_dump($location);
 			$storyLink = get_permalink();
-			$mapHeadline = get_post_meta( $id, 'map_headline', true );
-			//$mapHeadline = "<a href='". $storyLink ."'>" . $mapHeadline . '</a>';
+			$mapHeadline = get_post_meta($id, 'map_headline', true);
 
 			$mapDescription = get_the_title();
 			$mapDate = get_the_date();
-			$mapDescription = $mapDescription . " <span class='bbg__map__infobox__date'>(" . $mapDate . ")</span>";
+			$mapDescription = $mapDescription . ' <span class="bbg__map__infobox__date">(' . $mapDate . ')</span>';
 
 			$pinColor = "#981b1e";
 			if (has_category('VOA')){
 				$pinColor = "#344998";
-				$mapHeadline = "<h5><a href='". $storyLink ."'>VOA | " . $mapHeadline . '</a></h5>';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">VOA | ' . $mapHeadline . '</a></h5>';
 			} elseif (has_category('RFA')){
 				$pinColor = "#009c50";
 				$mapHeadline = "<h5><a href='". $storyLink ."'>RFA | " . $mapHeadline . '</a></h5>';
@@ -146,7 +132,8 @@ endif;
 </style>
 
 <script type="text/javascript">
-L.mapbox.accessToken = '<?php echo MAPBOX_API_KEY; ?>';
+// L.mapbox.accessToken = '<?php echo MAPBOX_API_KEY; ?>';
+L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 
 var map = L.mapbox.map('map', 'mapbox.emerald')
 

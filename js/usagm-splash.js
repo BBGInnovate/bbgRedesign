@@ -51,14 +51,15 @@ if ($('#usagm-splash-wrapper').length != 0) {
 	var newTopPos;
 
 	function scrollLogoTopPos(elem) {
-		topPos = Number(elem.offset().top);
+		var topPos = Number(elem.offset().top);
 		var bodyPc = ($(this).scrollTop() / $('body').height());
 		newTopPos = ((bodyPc * posGroup) / 100) + minPos;
 		elem.css('top', newTopPos);
 		// UPDATE VALUES
 		topPos = elem.offset().top;
 	}
-
+	scrollLogoTopPos($('#bbg-logo-container'));
+console.log('scroll: 0');
 	$(window).on('scroll', function() {
 		scrollLogoTopPos($('#bbg-logo-container'));
 	});
@@ -82,7 +83,6 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		screenHeight = $(window).height();
 		lbBg.css({
 			'top' : screenTop
-			// 'height' : screenHeight
 		});
 	}
 	setLightboxParams();
@@ -104,13 +104,13 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		lbVideoBox.append(closeBu);
 		$('body').prepend(lbBg);
 		if (curId == "what-we-do") {
-			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/_j94Vc-8zyg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/_j94Vc-8zyg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
 		}
 		else if (curId == "who-we-are") {
-			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/z4XWcruGhNk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/z4XWcruGhNk?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
 		}
 		else if (curId == "ceo-message") {
-			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/eTNV0cnb6No" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
+			lbVideoBox.append('<iframe width="560" height="315" src="https://www.youtube.com/embed/eTNV0cnb6No?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>');
 		}
 	});
 
@@ -119,15 +119,12 @@ if ($('#usagm-splash-wrapper').length != 0) {
 		lbBg.hide();
 		closeBu.hide();
 		lbVideoBox.children().remove();
-		console.log('close');
 	});
 	closeBu.click(function() {
-		console.log('close bu');
 		lbBg.hide();
 		closeBu.hide();
 		lbVideoBox.children().remove();
 	});
-	console.log('12');
 
 	$(window).on('scroll', function() {
 		setLightboxParams();
