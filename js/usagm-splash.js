@@ -44,22 +44,11 @@ if ($('#usagm-splash-wrapper').length != 0) {
 	});
 
 	// PARALLAX BBG LOGO
-	var topPos = Number($('#bbg-logo-container').offset().top);
-	var maxPos = topPos + $('#bbg-logo-container').height();
-	var minPos = topPos;
-	var posGroup = (maxPos - minPos) * 100;
-	var newTopPos;
-
 	function scrollLogoTopPos(elem) {
-		var topPos = Number(elem.offset().top);
-		var bodyPc = ($(this).scrollTop() / $('body').height());
-		newTopPos = ((bodyPc * posGroup) / 100) + minPos;
-		elem.css('top', newTopPos);
-		// UPDATE VALUES
-		topPos = elem.offset().top;
+		var thisFarDownPage = $(window).scrollTop();
+		elem.css('top', thisFarDownPage);
 	}
 	scrollLogoTopPos($('#bbg-logo-container'));
-console.log('scroll: 0');
 	$(window).on('scroll', function() {
 		scrollLogoTopPos($('#bbg-logo-container'));
 	});
