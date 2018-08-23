@@ -157,6 +157,10 @@ html, body {height: 100%;}
 @supports (-ms-ime-align: auto) {
 	.lb-bg {position: fixed;}
 }
+// CHANGES FOR INTERNET EXPLORER 11
+@media all and (-ms-high-contrast:none) {
+	// #usagm-splash-wrapper .logo-copy .center-copy-block p { color: black }
+}
 // CHANGE FOR MOBILE DEVICES
 @media only screen and (max-device-width : 640px) {
 	.lb-bg {position: fixed;}
