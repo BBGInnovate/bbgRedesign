@@ -57,7 +57,7 @@ echo '<article id="'. get_the_ID() . '">';
 				echo '<p><strong>Network:</strong> ' . $burkeNetwork . '</p>';
 				echo '<p>' . $burkeReason[0] . '</p>';
 			} else {
-				the_excerpt();
+				echo wp_trim_words(get_the_excerpt(), 10);
 			}
 
 			wp_link_pages(array(

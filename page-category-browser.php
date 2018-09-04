@@ -20,10 +20,9 @@ $pageTitle = "";
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
 		$pageContent = get_the_content();
+		$page_content = do_shortcode($pageContent);
 		$pageTitle = get_the_title();
 		$pageTitle = str_replace("Private: ", "", $pageTitle);
-		//$pageContent = apply_filters('the_content', $pageContent);
-   		//$pageContent = str_replace(']]>', ']]&gt;', $pageContent);
 	endwhile;
 endif;
 wp_reset_postdata();
@@ -184,7 +183,7 @@ get_header();
 			$counter = 0;
 			while ($custom_query -> have_posts())  {
 				$custom_query -> the_post();
-				$counter = $counter + 1;
+				$counter++;
 				if ($counter == 1 && $currentPage == 1 && !$hasIntroFeature) {
 					$featured_media_result = get_feature_media_data();
 					if ($featured_media_result != "") {
@@ -194,7 +193,7 @@ get_header();
 					$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
 					echo $featured_post;
 				} elseif ($counter == 1 && $currentPage != 1) {
-					echo 	'<div class="grid-half">';
+					echo 	'<div class="grid-third">';
 					get_template_part('template-parts/content-portfolio', get_post_format());
 					echo 	'</div>';
 				} else {
