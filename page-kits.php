@@ -404,7 +404,7 @@ get_header();
 											} elseif ($pageName == "Office of Congressional Affairs") {
 												echo '<h3>Office of Congressional Affairs</h3>';
 											} else {
-												echo '<h3>' . $pageName . 'Contact information</h3>';
+												echo '<h3>Contact Information</h3>';
 											}
 											echo $address;
 											echo '<ul class="usa-unstyled-list">';
