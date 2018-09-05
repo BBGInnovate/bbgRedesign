@@ -7641,55 +7641,24 @@ html, body {
     font-family: "Alegreya Sans", sans-serif; }
   #usagm-splash-wrapper img {
     margin: 0; }
-  #usagm-splash-wrapper .logo-fader-up {
-    position: absolute;
-    top: -25rem;
-    width: 100%;
-    height: 25rem;
-    background: linear-gradient(rgba(255, 255, 255, 0), white); }
   #usagm-splash-wrapper .logo-board {
-    position: relative;
-    height: 75vh;
-    background-color: #ffffff; }
-    #usagm-splash-wrapper .logo-board .logo-container {
-      position: absolute;
-      height: 75vh;
-      top: 0;
-      left: 50%;
-      width: 70%;
-      transform: translateX(-50%); }
-    #usagm-splash-wrapper .logo-board img.logo {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%); }
-  #usagm-splash-wrapper .logo-board.locked #bbg-logo-container {
-    position: fixed; }
-  #usagm-splash-wrapper .logo-copy {
-    position: relative;
     text-align: center;
-    height: 25vh;
-    background-color: #989898; }
-    #usagm-splash-wrapper .logo-copy .center-copy-block {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80%; }
-      #usagm-splash-wrapper .logo-copy .center-copy-block p {
-        font-size: 2rem;
+    padding: 15rem 0; }
+    #usagm-splash-wrapper .logo-board img {
+      width: 50%;
+      max-width: 80rem; }
+    #usagm-splash-wrapper .logo-board .logo-copy {
+      margin-top: 3rem; }
+      #usagm-splash-wrapper .logo-board .logo-copy p {
+        text-align: center;
+        font-size: 2.8rem;
         line-height: 2.7rem;
         font-weight: 300;
         letter-spacing: 0.03rem;
-        color: #ffffff;
-        margin: 0; }
-      #usagm-splash-wrapper .logo-copy .center-copy-block .splash-down {
-        position: absolute;
-        left: 50%;
-        margin: 0;
-        cursor: pointer; }
+        color: #989898; }
   #usagm-splash-wrapper .messaging-section {
     padding: 6rem 0;
-    background-color: #333333; }
+    background-color: #00002c; }
     #usagm-splash-wrapper .messaging-section img {
       width: 100%;
       margin: 0 auto; }
@@ -7708,8 +7677,6 @@ html, body {
       #usagm-splash-wrapper .messaging-section .message h4, #usagm-splash-wrapper .messaging-section .message .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message a {
         text-align: center;
         color: #ffffff; }
-      #usagm-splash-wrapper .messaging-section .message .fas {
-        font-size: 0.6em; }
       #usagm-splash-wrapper .messaging-section .message .lightbox-link {
         cursor: pointer; }
         #usagm-splash-wrapper .messaging-section .message .lightbox-link h4, #usagm-splash-wrapper .messaging-section .message .lightbox-link .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message .lightbox-link a {
@@ -7720,9 +7687,23 @@ html, body {
         #usagm-splash-wrapper .messaging-section .message .message-image img {
           border: 3px solid #b2201c;
           border-radius: 50%; }
-  #usagm-splash-wrapper .messaging-section#site-link * {
+  #usagm-splash-wrapper #site-link {
     text-align: center;
-    margin-bottom: 0; }
+    padding: 3rem 0;
+    margin-bottom: 0;
+    background-color: #00002c; }
+    #usagm-splash-wrapper #site-link button {
+      font-size: 2rem;
+      font-weight: 500;
+      background-color: #ffffff; }
+      #usagm-splash-wrapper #site-link button a:link, #usagm-splash-wrapper #site-link button a:visited {
+        color: #3f7ad1; }
+      #usagm-splash-wrapper #site-link button a:hover, #usagm-splash-wrapper #site-link button a:active {
+        text-decoration: none; }
+    #usagm-splash-wrapper #site-link button:hover {
+      background-color: #3f7ad1; }
+      #usagm-splash-wrapper #site-link button:hover a {
+        color: #ffffff; }
   #usagm-splash-wrapper #murrow-quote {
     background-color: #3f7ad1; }
     #usagm-splash-wrapper #murrow-quote .outer-container {
@@ -7778,6 +7759,16 @@ html, body {
   .lb-bg {
     position: fixed; } }
 
+@supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) {
+  .lb-bg {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.75); } }
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  ::i-block-chrome, .lb-bg {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.75); } }
+
 @media only screen and (max-device-width: 640px) {
   .lb-bg {
     position: fixed; }
@@ -7796,24 +7787,18 @@ html, body {
 
 @media screen and (min-width: 481px) {
   #usagm-splash-wrapper {
-    font-size: 12px; }
-    #usagm-splash-wrapper .logo-copy .center-copy-block p {
-      font-size: 2.5rem;
-      line-height: 3.2rem; } }
+    font-size: 12px; } }
 
 @media screen and (min-width: 600px) {
-  #usagm-splash-wrapper .logo-copy .center-copy-block p {
-    font-size: 3rem;
-    line-height: 3.7rem; }
   #usagm-splash-wrapper .messaging-section .message {
-    width: calc(33.33333% - 26.66667px);
-    float: left;
-    margin-left: 20px;
+    display: inline-block;
+    width: 33%;
+    width: -webkit-calc(33%);
+    width: -moz-calc(33%);
+    width: calc(33%);
     margin-bottom: 0; } }
 
 @media screen and (min-width: 900px) {
-  #usagm-splash-wrapper .logo-board .logo-container {
-    width: 60%; }
   #usagm-splash-wrapper #murrow-quote .outer-container {
     background-image: url("http://usagm.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png");
     background-repeat: no-repeat;
@@ -7823,13 +7808,12 @@ html, body {
     margin-left: calc(50% - 30px + 40px); } }
 
 @media screen and (min-width: 1201px) {
-  #usagm-splash-wrapper .logo-board .logo-container {
-    width: 50%; }
   #usagm-splash-wrapper #murrow-quote .outer-container {
     background-position: left top; }
   #usagm-splash-wrapper #murrow-quote .ed-quote {
     margin-left: calc(41.66667% - 28.33333px + 40px); } }
 
+/* END SPLASH STYLE */
 @media print {
   /* @page :first {
 		margin-left: 2.5in;

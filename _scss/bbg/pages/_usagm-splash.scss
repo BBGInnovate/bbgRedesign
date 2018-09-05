@@ -6,68 +6,30 @@ html, body {height: 100%;}
 	p {font-family: $font-sans;}
 	img {margin: 0;}
 
-	.logo-fader-up {
-		position: absolute;
-		top: -25rem;
-		width: 100%;
-		height: 25rem;
-		background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-	}
-
 	.logo-board {
-		position: relative;
-		height: 75vh;
-		background-color: $white;
-		.logo-container {
-			position: absolute;
-			height: 75vh;
-			top: 0;
-			left: 50%;
-			width: 70%;
-			transform: translateX(-50%);
-		}
-		img.logo {
-			position: fixed;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-	}
-	.logo-board.locked {
-		#bbg-logo-container {
-			position: fixed;
-		}
-	}
-	.logo-copy {
-		position: relative;
 		text-align: center;
-		height: 25vh;
-		background-color: #989898;
-		.center-copy-block {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 80%;
+		padding: 15rem 0;
+		img {
+			width: 50%;
+			max-width: 80rem;
+		}
+
+		.logo-copy {
+			margin-top: 3rem;
 			p {
-				font-size: 2rem;
+				text-align: center;
+				font-size: 2.8rem;
 				line-height: 2.7rem;
 				font-weight: 300;
 				letter-spacing: 0.03rem;
-				color: $white;
-				margin: 0;
-			}
-			.splash-down {
-				position: absolute;
-				left: 50%;
-				margin: 0;
-				cursor: pointer;
+				color: #989898;
 			}
 		}
 	}
 
 	.messaging-section {
 		padding: 6rem 0;
-		background-color: $black3;
+		background-color: #00002c;
 		img {
 			width: 100%;
 			margin: 0 auto;
@@ -84,7 +46,6 @@ html, body {height: 100%;}
 				text-align: center;
 				color: $white;
 			}
-			.fas {font-size: 0.6em;}
 			.lightbox-link {
 				cursor: pointer;
 				h4 {margin-top: 1.5rem;}
@@ -99,7 +60,23 @@ html, body {height: 100%;}
 			}
 		}
 	}
-	.messaging-section#site-link * {text-align: center; margin-bottom: 0;}
+	#site-link {
+		text-align: center;
+		padding: 3rem 0;
+		margin-bottom: 0;
+		background-color: #00002c;
+		button {
+			font-size: 2rem;
+			font-weight: 500;
+			background-color: #ffffff;
+			a:link, a:visited {color: #3f7ad1;}
+			a:hover, a:active {text-decoration: none;}
+		}
+		button:hover {
+			background-color: #3f7ad1;
+			a {color: #ffffff;}
+		}
+	}
 
 	#murrow-quote {
 		background-color: $color-blue;
@@ -161,6 +138,25 @@ html, body {height: 100%;}
 @media all and (-ms-high-contrast:none) {
 	// #usagm-splash-wrapper .logo-copy .center-copy-block p { color: black }
 }
+
+// CHANGES FOR SAFARI & CHROME ON BROWSER
+@supports (-webkit-marquee-repetition:infinite) and (object-fit:fill) {
+	.lb-bg {
+		position: fixed;
+		background-color: rgba(0,0,0,0.75);
+	}
+}
+
+// CHANGES FOR SAFARI & CHROME ON iPAD
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+	::i-block-chrome,.lb-bg {
+		position: fixed;
+		background-color: rgba(0,0,0,0.75);
+	}
+}
+
+
+
 // CHANGE FOR MOBILE DEVICES
 @media only screen and (max-device-width : 640px) {
 	.lb-bg {position: fixed;}
@@ -181,30 +177,17 @@ html, body {height: 100%;}
 @include media($small-screen) {
 	#usagm-splash-wrapper {
 		font-size: 12px;
-		
-		.logo-copy {
-			.center-copy-block {
-				p {
-					font-size: 2.5rem;
-					line-height: 3.2rem;
-				}
-			}
-		}
 	}
 }
 @include media($medium-screen) {
 	#usagm-splash-wrapper {
-		.logo-copy {
-			.center-copy-block {
-				p {
-					font-size: 3rem;
-					line-height: 3.7rem;
-				}
-			}
-		}
 		.messaging-section {
 			.message {
-				@include grid-column(4)
+				display: inline-block;
+				width: 33%;
+				width: -webkit-calc(33%);
+				width: -moz-calc(33%);
+				width: calc(33%);
 				margin-bottom: 0;
 			}
 		}
@@ -212,11 +195,6 @@ html, body {height: 100%;}
 }
 @include media($medium-large-screen) {
 	#usagm-splash-wrapper {
-		.logo-board {
-			.logo-container {
-				width: 60%;
-			}
-		}
 		#murrow-quote {
 			.outer-container {
 				background-image: url('http://usagm.gov/wp-content/themes/bbgRedesign/img/usagm-splash/ed-murrow-blue.png');
@@ -232,11 +210,6 @@ html, body {height: 100%;}
 }
 @include media($large-screen) {
 	#usagm-splash-wrapper {
-		.logo-board {
-			.logo-container {
-				width: 50%;
-			}
-		}
 		#murrow-quote {
 			.outer-container {
 				background-position: left top;
@@ -247,3 +220,4 @@ html, body {height: 100%;}
 		}
 	}
 }
+/* END SPLASH STYLE */
