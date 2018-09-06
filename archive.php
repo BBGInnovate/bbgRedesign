@@ -13,16 +13,8 @@ require 'inc/bbg-functions-assemble.php';
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
-
 		<?php
 			if (have_posts()) :
-				// $page_header  = '<div class="outer-container">';
-				// $page_header .= 	'<div class="grid-container">';
-				// $page_header .= 		'<h2>' . get_the_archive_title() . '</h2>';
-				// $page_header .= 	'</div>';
-				// $page_header .= '</div>';
-				// echo $page_header;
-
 				$counter = 0;
 				while (have_posts()) : the_post();
 					$counter++;
@@ -46,18 +38,18 @@ require 'inc/bbg-functions-assemble.php';
 						echo '</div>';
 					} 
 
-					if ($counter == 2) {
+					if ((!is_paged() && $counter == 2) || is_paged() && $counter == 1) {
 						echo '<div class="outer-container">';
 						echo 	'<div class="custom-grid-container">';
 						echo 		'<div class="inner-container">';
 					}
 
-					if ((!is_paged() && $counter > 1)) {
+					if ((!is_paged() && $counter > 1) || (is_paged() && $counter > 0)) {
 						if ((!is_paged() && $counter == 2) || (is_paged() && $counter == 1)) {
 							echo '</div>';
 							echo 	'<div class="main-content-container">';
 						}
-						elseif ((!is_paged() && $counter == 4) || (is_paged() && $counter == 3)) {
+						elseif ((!is_paged() && $counter == 4) || (is_paged() && $counter == 4)) {
 							echo '</div>';
 							echo '<div class="side-content-container">';
 							$moreLabel = "More News";
@@ -80,8 +72,8 @@ require 'inc/bbg-functions-assemble.php';
 					}
 				endwhile;
 
-				the_posts_navigation();
 				echo 		'</div>';
+				the_posts_navigation();
 				echo 	'</div>';
 				echo '</div>';
 			else :
