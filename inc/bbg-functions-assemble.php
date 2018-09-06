@@ -12,9 +12,9 @@ function get_feature_media_data() {
 		$video_data = featured_video($video_url);
 
 		$video_markup  = '<div class="page-featured-media">';
-		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" ';
-		$video_markup .= 		'src="' . $video_url . '"';
-		$video_markup .= 		' frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
+		$video_markup .= 		$video_data['url'];
+		$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
 		$video_markup .= 	'</iframe>';
 		$video_markup .= '</div>';
 		$featured_data = $video_markup;
