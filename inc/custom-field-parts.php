@@ -79,7 +79,7 @@ function build_corner_hero_parts($corner_hero_data) {
 		$corner_hero_title .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
 		$corner_hero_title .= '</h4>';
 
-		$corner_hero_content = '<p>' . $corner_hero_data['excerpt'] . '</p>';
+		$corner_hero_content = '<p class="aside">' . $corner_hero_data['excerpt'] . '</p>';
 
 		// INSERT PART INTO GRID
 		// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
