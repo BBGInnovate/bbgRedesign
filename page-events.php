@@ -52,7 +52,7 @@ if ($showFeaturedEvent && $featuredEvent && has_category('event', $featuredEvent
 $featured_event_query = new WP_Query($qParamsFirst);
 while ($featured_event_query->have_posts()) {
 	$featured_event_query->the_post(); 
-	$postIDsUsed[] = get_the_ID();
+	// $postIDsUsed[] = get_the_ID();
 }
 
 // QUERY PAST EVENTS FOR MAIN PAGE LOOP
@@ -64,6 +64,8 @@ $qParams = array(
 	'post_status' => array('publish'),
 	'post__not_in' => $postIDsUsed
 );
+// KR EDIT
+// var_dump($qParams);
 $past_events_query_args = $qParams;
 $past_events_query = new WP_Query($past_events_query_args);
 
