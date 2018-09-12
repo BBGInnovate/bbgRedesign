@@ -60,6 +60,20 @@
 		.soap-corner-share-grid {
 			.small-side {@include grid-column(4);}
 			.large-side {@include grid-column(8);}
+			// ====================================
+			// FIX FOR IPAD 5.1.1 CHROME AND SAFARI
+			// ====================================
+			@media screen and (-webkit-min-device-pixel-ratio) {
+				.small-side {
+					display: inline-block;
+					width: 23.357%;
+				}
+				.large-side {
+					display: inline-block;
+					width: 54.375%;
+				}
+			}
+			// END FIX ============================
 		}
 		.impacts-share {@include grid-column(7);}
 	}

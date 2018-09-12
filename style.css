@@ -4612,6 +4612,11 @@ e.g. on the intern testimonial page */
   float: left;
   margin-left: 20px; }
 
+@media screen and (-webkit-min-device-pixel-ratio) {
+  ::i-block-chrome, .grid-container {
+    display: inline-block;
+    width: 96.093%; } }
+
 .side-content-container article.full-width-block {
   width: 100%; }
 
@@ -4766,6 +4771,20 @@ e.g. on the intern testimonial page */
     width: calc(83.33333% - 55px);
     float: left;
     margin-left: 30px; } }
+
+@media screen and (min-width: 900px) and (-webkit-min-device-pixel-ratio) {
+  .main-content-container {
+    display: inline-block;
+    width: 63.378%; }
+  .side-content-container {
+    display: inline-block;
+    width: 30.664%; }
+  .medium-main-content-container {
+    display: inline-block;
+    width: 71.582%; }
+  .medium-side-content-container {
+    display: inline-block;
+    width: 22.558%; } }
 
 .sidebar-content-container {
   width: calc(33.33333% - 26.66667px);
@@ -5198,6 +5217,15 @@ button {
     width: calc(91.66667% - 38.33333px);
     float: left;
     margin-left: 20px; } }
+
+@media screen and (min-width: 900px) and (-webkit-min-device-pixel-ratio) {
+  .entity-main {
+    display: inline-block;
+    width: 17.578%; }
+    .entity-main .entity-icon {
+      width: 80%; }
+    .entity-main .entity-desc {
+      width: 80%; } }
 
 .page-sidebar {
   width: calc(25% - 25px);
@@ -6255,7 +6283,17 @@ div.banner_readmore h6 a:visited {
   .mentions .soap-corner-share-grid .large-side {
     width: calc(66.66667% - 33.33333px);
     float: left;
-    margin-left: 20px; }
+    margin-left: 20px; } }
+
+@media screen and (min-width: 900px) and (-webkit-min-device-pixel-ratio) {
+  .mentions .soap-corner-share-grid .small-side {
+    display: inline-block;
+    width: 23.357%; }
+  .mentions .soap-corner-share-grid .large-side {
+    display: inline-block;
+    width: 54.375%; } }
+
+@media screen and (min-width: 900px) {
   .mentions .impacts-share {
     width: calc(58.33333% - 31.66667px);
     float: left;

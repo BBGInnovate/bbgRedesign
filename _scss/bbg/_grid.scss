@@ -6,7 +6,6 @@
 // 2. EVEN BLOCKS
 // 3. SIDEBARS
 
-
 // 0. CUSTOM GRID STYLES
 .sidebar-divider {border-left: 1px solid #e6e6e6;}
 .related-divider {
@@ -29,6 +28,16 @@
 .nest-container {@include grid-collapse;}
 .inner-container {@include grid-container;}
 .grid-container {@include grid-column(12);}
+// ====================================
+// FIX FOR IPAD 5.1.1 CHROME AND SAFARI
+// ====================================
+@media screen and (-webkit-min-device-pixel-ratio) {
+	::i-block-chrome,.grid-container {
+		display: inline-block;
+		width: 96.093%;
+	}
+}
+// END FIX ============================
 .side-content-container {
 	article.full-width-block {width: 100%;}
 }
@@ -129,6 +138,28 @@ $icon-content-grid: (
 		img {width: auto; margin-bottom: 3rem;}
 	}
 	.icon-main-content-container {@include grid-column(5, $icon-content-grid);}
+	// ====================================
+	// FIX FOR IPAD 5.1.1 CHROME AND SAFARI
+	// ====================================
+	@media screen and (-webkit-min-device-pixel-ratio) {
+		.main-content-container {
+			display: inline-block;
+			width: 63.378%;
+		}
+		.side-content-container {
+			display: inline-block;
+			width: 30.664%;
+		}
+		.medium-main-content-container {
+			display: inline-block;
+			width: 71.582%;
+		}
+		.medium-side-content-container {
+			display: inline-block;
+			width: 22.558%;
+		}
+	}
+	// END FIX ============================
 }
 
 

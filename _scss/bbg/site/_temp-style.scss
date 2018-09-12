@@ -147,6 +147,18 @@ button {
 		.entity-icon {@include grid-column(1);}
 		.entity-desc {@include grid-column(11);}
 	}
+	// ====================================
+	// FIX FOR IPAD 5.1.1 CHROME AND SAFARI
+	// ====================================
+	@media screen and (-webkit-min-device-pixel-ratio) {
+		.entity-main {
+			display: inline-block;
+			width: 17.578%;
+			.entity-icon {width: 80%;}
+			.entity-desc {width: 80%;}
+		}
+	}
+	// END FIX ============================
 }
 
 // GRID
