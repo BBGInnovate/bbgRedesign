@@ -105,6 +105,11 @@ ul li {
     list-style: none;
     list-style-image: none;
 }
+ul li:before {
+    content: "";
+    display: none;
+    padding-right: 0;
+}
 
 .side-content-container ul li, 
 .side-content-container ol li, 
