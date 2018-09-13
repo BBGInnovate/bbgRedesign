@@ -2620,7 +2620,7 @@ form[id^=fscf_form] {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     height: 3.3rem;
-    margin: 0;
+    margin: 5px 0 0 0;
     padding: 0;
     width: 4.5rem; }
     @media screen and (min-width: 481px) {
@@ -3643,6 +3643,7 @@ object {
   width: 290px; }
 
 .bbg__main-navigation {
+  position: relative;
   display: block;
   width: 100%;
   padding: 1.5rem 0 1rem 0; }
@@ -3698,6 +3699,35 @@ object {
     display: block;
     padding: 0 1.5rem 0 0;
     text-decoration: none; }
+  .bbg__main-navigation .nav-menu {
+    margin-bottom: 6rem; }
+  .bbg__main-navigation button#nav-search-bu {
+    float: right;
+    background-color: transparent; }
+  .bbg__main-navigation .bbg__main-navigation__search {
+    position: absolute;
+    display: block;
+    bottom: 0rem;
+    right: 0;
+    padding: 0; }
+  .bbg__main-navigation .usa-search [type="search"] {
+    position: absolute;
+    bottom: 2px;
+    right: 3rem;
+    height: 4.5rem;
+    text-align: left;
+    font-weight: 300;
+    font-size: 14px;
+    background-color: transparent;
+    border-top: none;
+    border-left: none; }
+  .bbg__main-navigation .search-icon-close {
+    position: absolute;
+    top: -2rem;
+    right: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #d5d1c4; }
 
 .menu-toggle {
   position: absolute;
@@ -3734,7 +3764,10 @@ object {
   display: none; }
 
 .bbg__main-navigation.toggled .bbg__main-navigation__search {
-  display: block; }
+  display: block;
+  width: 100%;
+  height: 50px;
+  background-color: #ffffff; }
 
 .menu-item-has-children > a {
   display: inline-block !important;
