@@ -1,5 +1,6 @@
 // 2. SMALL SCREEN
 // 3. MEDIUM-LARGE SCREEN
+// 4. LARGE SCREEN
 
 // TOP NAV
 .menu-all-pages-container {
@@ -69,11 +70,11 @@
 						border-bottom: 1px solid #d6d1c4;
 					}
 					a:link, a:visited {color: #323a45;}
-					a:hover, a:active {color: #ffffff;}
+					a:hover, a:active {color: $color-light-blue;}
 				}
-				li:last-of-type {
-					a {border-bottom: none;}
-				}
+				// li:last-of-type {
+				// 	a {border-bottom: none;}
+				// }
 			}
 		}
 	}
@@ -328,6 +329,7 @@
 
 	.bbg__main-navigation {
 		ul {font-size: 0.9em;}
+		.nav-menu {margin-bottom: 0px;}
 	}
 
 	.bbg__main-navigation__toggler:focus {background-color: transparent;}
@@ -336,7 +338,7 @@
 		a:hover, a:active {color: $color-cool-blue; text-decoration: none;}
 	}
 	li.subnav-open {
-		// OK FOR IMPORTANT BECAUSE IT'S ONLY TEMPORARY
+		// OK FOR !IMPORTANT BECAUSE IT'S ONLY TEMPORARY
 		a:link, a:visited {color: $color-tan-light !important;}
 		ul {
 			a:link, a:visited {color: $color-blue-darker !important;}
@@ -360,7 +362,7 @@
 		.bbg__top-nav__link-text {width: auto;}
 
 
-		ul li a {padding: 0.5rem 1.5rem;}
+		ul li a {padding: 0.9rem 0.8rem;}
 		a:hover {text-decoration: underline; background-color: transparent;}
 
 		.menu-usagm-container {
@@ -369,15 +371,22 @@
 			right: 0;
 			text-align: right;
 			margin: 0;
-			padding: 0 1.5rem;
-			width: 85rem;
+			padding: 0 1rem;
+			width: 95%;
 			
 			a {text-align: left; width: 100%;}
 			ul li.menu-item-has-children {
 				display: inline-block;
 				vertical-align: top;
 				width: 19%;
+				padding: 0 1rem;
 
+				ul.sub-menu {
+					padding: 0;
+					li a {
+						padding: 8px;
+					}
+				}
 			}
 		}
 		
@@ -396,8 +405,10 @@
 				a {
 					background-color: transparent;
 				}
+				// THIS IS TIED TO A HOVER FUNCTION IN NAVIGATION.JS
+				// IF HOVER COLOR CHANGES HERE, CHANGE IT IN JS TOO.
 				a:hover {
-					color: $color-taupe-dark;
+					color: $black9;
 					background-color: transparent;
 				}
 
@@ -407,7 +418,7 @@
 					margin-right: 1.5rem;
 					background-color: transparent;
 
-					li:hover {background-color: $color-taupe-light;}
+					li:hover {background-color: $faint-blue;}
 				}
 			}
 		}
@@ -440,5 +451,12 @@
 			cursor: pointer;
 			color: $color-tan-light;
 		}
+	}
+}
+
+// 4. LARGE SCREEN
+@include media($large-screen) {
+	.bbg__main-navigation {
+		.menu-usagm-container {width: 75%;}
 	}
 }

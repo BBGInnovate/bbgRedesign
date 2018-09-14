@@ -109,16 +109,14 @@ function toggleFocus() {
 }
 
 $('.subnav-back').hide();
+var subnavH;
 // DROPDOWN NAV HOVER
 function setMegaNav() {
 	if ($(window).width() >= 875) {
-		var subnavH;
-		$.each($('.sub-menu'), function() {
-			subnavH = subnavH > $(this).outerHeight() ? subnavH : $(this).outerHeight();
-		});
-		$('.bbg__main-navigation').append('<div class="subnav-back"></div>');
-		$('.subnav-back').css('height', subnavH);
-		$('.sub-menu, .subnav-back').hide();
+		subnavH = $('.nav-menu').outerHeight() - $('.bbg__top-nav__link-text').height();
+		if ($('.subnav-back').length == 0) {
+			$('.bbg__main-navigation').append('<div class="subnav-back"></div>');
+		}
 
 		$('.nav-menu').mouseenter(function() {
 			clearTimeout($(this).data('timeoutId'));
@@ -131,9 +129,25 @@ function setMegaNav() {
 			}, 500);
 			$('.nav-menu').data('timeoutId', timeoutId);;
 		});
+		$('.subnav-back').css('height', subnavH);
+		$('.sub-menu, .subnav-back').hide();
 	}
 }
 setMegaNav();
+
+// SUB MENU NAV HOVER CONNECTORS
+$('.sub-menu li').hover(function() {
+	$(this).parent().parent().children('a').css('color', '#999999');
+}, function() {
+	$(this).parent().parent().children('a').css('color', 'inherit');
+});
+// THE ABOVE FUNCTION BREAKS CSS HOVER AFTER RUN ONCE FOR EACH UL
+// MUST REASSIGN HOVER FUNCTIONALITY VIA JS
+$('.menu-item-has-children').hover(function() {
+	$(this).children('a').css('color', '#999999');
+}, function() {
+	$(this).children('a').css('color', '#323a45');
+});
 
 $(window).on('resize', function() {
 	setMegaNav();
