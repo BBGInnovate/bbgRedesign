@@ -108,47 +108,56 @@ function toggleFocus() {
 	}
 }
 
+// DROPDOWN NAV HOVER
+// Create backdrop for sub nav, height determined by tallest sub nav column
 $('.subnav-back').hide();
 var subnavH;
-// DROPDOWN NAV HOVER
+subnavH = $('.nav-menu').outerHeight() - $('.bbg__top-nav__link-text').height();
 function setMegaNav() {
 	if ($(window).width() >= 875) {
-		subnavH = $('.nav-menu').outerHeight() - $('.bbg__top-nav__link-text').height();
-		if ($('.subnav-back').length == 0) {
-			$('.bbg__main-navigation').append('<div class="subnav-back"></div>');
-		}
+		setTimeout(function() {
+			if ($('.subnav-back').length == 0) {
+				$('.bbg__main-navigation').append('<div class="subnav-back"></div>');
+			}
 
-		$('.nav-menu').mouseenter(function() {
-			clearTimeout($(this).data('timeoutId'));
-			$('.subnav-back').slideDown(200);
-			$('.sub-menu').slideDown(200);
-		}).mouseleave(function() {
-			timeoutId = setTimeout(function() {
-				$('.sub-menu').slideUp(200);
-				$('.subnav-back').slideUp(200);
-			}, 500);
-			$('.nav-menu').data('timeoutId', timeoutId);;
-		});
-		$('.subnav-back').css('height', subnavH);
-		$('.sub-menu, .subnav-back').hide();
+			$('.nav-menu').mouseenter(function() {
+				clearTimeout($(this).data('timeoutId'));
+				$('.subnav-back').slideDown(200);
+				$('.sub-menu').slideDown(200);
+			}).mouseleave(function() {
+				timeoutId = setTimeout(function() {
+					$('.sub-menu').slideUp(200);
+					$('.subnav-back').slideUp(200);
+				}, 500);
+				$('.nav-menu').data('timeoutId', timeoutId);;
+			});
+			$('.subnav-back').css('height', subnavH);
+			$('.sub-menu, .subnav-back').hide();
+		}, 500);
 	}
 }
 setMegaNav();
 
-// SUB MENU NAV HOVER CONNECTORS
+
+// SUB NAV MENU HOVER CONNECTORS
+// Highlight parent nav item when hovering on child
 $('.sub-menu li').hover(function() {
 	$(this).parent().parent().children('a').css('color', '#999999');
 }, function() {
 	$(this).parent().parent().children('a').css('color', 'inherit');
 });
-// THE ABOVE FUNCTION BREAKS CSS HOVER AFTER RUN ONCE FOR EACH UL
-// MUST REASSIGN HOVER FUNCTIONALITY VIA JS
+/*
+ *  This breaks css hover functionality after first run for each <ul>
+ *  Must reassign hover functionality via js
+ */
 $('.menu-item-has-children').hover(function() {
 	$(this).children('a').css('color', '#999999');
 }, function() {
 	$(this).children('a').css('color', '#323a45');
 });
 
+
+// FUNCTIONS TO RUN ON WINDOW RESIZE
 $(window).on('resize', function() {
 	setMegaNav();
 });
