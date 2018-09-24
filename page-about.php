@@ -228,12 +228,15 @@ wp_reset_query();
 get_header();
 ?>
 
-<main id="main" class="site-main" role="main">
 <?php
 	$featured_media_result = get_feature_media_data();
 	if ($featured_media_result != "") {
 		echo $featured_media_result;
 	}
+?>
+
+<main id="main" class="site-main" role="main">
+<?php
 	$page_header  = '<div class="outer-container">';
 	$page_header .= 	'<div class="grid-container">';
 	$page_header .= 		'<h2>' . get_the_title() . '</h2>';

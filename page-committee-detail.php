@@ -68,16 +68,17 @@ if (have_posts()) {
 wp_reset_postdata();
 wp_reset_query();
 
-get_header(); ?>
+get_header();
+?>
+
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
 
 <main id="main" class="site-main" role="main">
-
-	<?php
-		$featured_media_result = get_feature_media_data();
-		if ($featured_media_result != "") {
-			echo $featured_media_result;
-		}
-	?>
 
 	<div class="outer-container">
 		<div class="grid-container">

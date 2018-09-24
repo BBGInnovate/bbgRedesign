@@ -9,6 +9,9 @@
    template name: Info Kits
  */
 
+include get_template_directory() . "/inc/bbg-functions-assemble.php";
+include get_template_directory() . "/inc/constant-contact_sign-up.php";
+
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
 		$pageName = get_the_title();
@@ -132,7 +135,7 @@ $qParamsPressReleases = array(
 		)
 	),
 );
-// var_dump($qParamsPressReleases);
+
 // set variable for PR category link to All network highlights page
 $prCategoryLink = get_permalink(get_page_by_path('news/network-highlights'));
 
@@ -155,8 +158,6 @@ $qParamsCongressional = array(
 );
 // set variable for PR category link to main news page
 $congCategoryLink = get_permalink( get_page_by_path('news'));
-
-include get_template_directory() . "/inc/constant-contact_sign-up.php";
 
 get_header();
 ?>
@@ -194,6 +195,13 @@ get_header();
 		});
 	});
 </script>
+
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
 
 <div id="main" class="site-main">
 
@@ -404,7 +412,7 @@ get_header();
 											} elseif ($pageName == "Office of Congressional Affairs") {
 												echo '<h3>Office of Congressional Affairs</h3>';
 											} else {
-												echo '<h3>Contact Information</h3>';
+												echo '<h3>' . $pageName . 'Contact information</h3>';
 											}
 											echo $address;
 											echo '<ul class="usa-unstyled-list">';

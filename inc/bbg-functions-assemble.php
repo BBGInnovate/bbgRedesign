@@ -12,14 +12,10 @@ function get_feature_media_data() {
 		$video_data = featured_video($video_url);
 
 		$video_markup  = '<div class="page-featured-media">';
-		if(strpos($video_data, 'facebook.com')) {
-			$video_markup .= 		$video_data;
-		} else {
-			$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
-			$video_markup .= 		$video_data['url'];
-			$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
-			$video_markup .= 	'</iframe>';
-		}
+		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
+		$video_markup .= 		$video_data['url'];
+		$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+		$video_markup .= 	'</iframe>';
 		$video_markup .= '</div>';
 		$featured_data = $video_markup;
 	}
@@ -66,6 +62,8 @@ function get_feature_media_data() {
 
 	if (!empty($featured_data)) {
 		return $featured_setup;
+	} else {
+		return '<style>#main {margin-top: 6rem;}</style>';
 	}
 }
 

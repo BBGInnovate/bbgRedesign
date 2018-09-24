@@ -6,7 +6,17 @@
  *
  * @package bbgRedesign
  */
-get_header(); ?>
+require 'inc/bbg-functions-assemble.php';
+
+get_header();
+?>
+
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
 
 <section id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">

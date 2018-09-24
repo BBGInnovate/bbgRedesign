@@ -18,6 +18,13 @@ if (have_posts()) :
 	while (have_posts()) : the_post();
 ?>
 
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
+
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
 
@@ -37,13 +44,6 @@ if (have_posts()) :
 				?>
 			</header>
 		</div>
-
-		<?php
-			$featured_media_result = get_feature_media_data();
-			if ($featured_media_result != "") {
-				echo $featured_media_result;
-			}
-		?>
 
 		<div class="outer-container">
 			<div class="grid-container">

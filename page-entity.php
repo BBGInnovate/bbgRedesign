@@ -15,7 +15,6 @@
 
 require 'inc/custom-field-data.php';
 require 'inc/custom-field-parts.php';
-
 require 'inc/bbg-functions-assemble.php';
 
 if (have_posts()) {
@@ -379,17 +378,18 @@ $abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
 $abbreviation = str_replace("/", "", $abbreviation);
 $network_logo = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png';
 
-get_header(); ?>
+get_header();
+?>
+
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
-
-		<?php
-			$featured_media_result = get_feature_media_data();
-			if ($featured_media_result != "") {
-				echo $featured_media_result;
-			}
-		?>
 
 		<div class="outer-container">
 			<div class="main-content-container">
