@@ -5297,15 +5297,18 @@ button {
   margin-bottom: 1.5rem;
   background-color: #eaebf0; }
   .box-special p {
-    font-family: "Carrara-Regular", serif;
-    font-size: 2.5rem;
-    line-height: 4rem;
-    font-style: italic;
-    color: #b2201c;
     margin-bottom: 0; }
 
+.red-special p {
+  font-family: "Carrara-Regular", serif;
+  font-size: 2.5rem;
+  line-height: 4rem;
+  font-style: italic;
+  color: #b2201c;
+  margin-bottom: 0; }
+
 @media screen and (min-width: 1201px) {
-  .box-special p {
+  .red-special p {
     font-size: 2.5rem;
     line-height: 4.5rem; } }
 

@@ -191,6 +191,11 @@ button {
 	margin-bottom: 1.5rem;
 	background-color: $faint-blue;
 	p {
+		margin-bottom: 0;
+	}
+}
+.red-special {
+	p {
 		font-family: $font-serif;
 		font-size: 2.5rem;
 		line-height: 4rem;
@@ -199,8 +204,9 @@ button {
 		margin-bottom: 0;
 	}
 }
+
 @include media($large-screen) {
-	.box-special {
+	.red-special {
 		p {
 			font-size: 2.5rem;
 			line-height: 4.5rem;

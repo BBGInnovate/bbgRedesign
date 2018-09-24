@@ -83,9 +83,20 @@ function assemble_umbrella_main($main) {
 }
 
 function assemble_marquee_module($umbrella_parts) {
-	$marquee  = '<div class="inner-container">';
-	$marquee .= 	$umbrella_parts['content'];
-	$marquee .= '</div>';
+	if (is_page('who-we-are')) {
+		$marquee  = '<div class="inner-container red-special">';
+		$marquee .= 	$umbrella_parts['content'];
+		$marquee .= '</div>';
+	} else {
+		$marquee  = '<div class="outer-container">';
+		$marquee .= 	'<div class="grid-container box-special">';
+		$marquee .= 		'<a href="' . $umbrella_parts['link'] . '">';
+		$marquee .= 			$umbrella_parts['header'];
+		$marquee .= 		'</a>';
+		$marquee .= 		$umbrella_parts['content'];
+		$marquee .= 	'</div>';
+		$marquee .= '</div>';
+	}
 
 	return $marquee;
 }
