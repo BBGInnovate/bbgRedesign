@@ -104,6 +104,7 @@ get_header();
 							echo $headline_string;
 						}
 
+						echo '<h3>' . get_the_title() . '</h3>';
 						echo '<div class="page-content">';
 						echo 	$page_content;
 						echo '</div>';
