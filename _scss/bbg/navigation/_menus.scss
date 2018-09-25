@@ -314,7 +314,10 @@
 		width: auto;
 		margin-top: 0;
 	}
-
+	// The sub-nav background is determined by tallest sub-nav ul so sub-nav must be displayed on page load
+	// At page load lift the banner above the sub-nav to hide it. After page load, put it back with navigation.js
+	.bbg-banner {z-index: 1000;}
+	
 	.menu-item {
 		.nav-icon {
 			position: absolute;

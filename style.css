@@ -3893,6 +3893,8 @@ object {
     position: static;
     width: auto;
     margin-top: 0; }
+  .bbg-banner {
+    z-index: 1000; }
   .menu-item .nav-icon {
     position: absolute;
     font-size: 1.5rem;

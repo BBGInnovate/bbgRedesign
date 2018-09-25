@@ -417,13 +417,15 @@ if ($numLogos > 0 && $numLogos < 3) {
 .leaflet-popup-pane {min-width: 300px !important;}
 </style>
 
+<?php
+	$featured_media_result = get_feature_media_data();
+	if (!empty($featured_media_result)) {
+		echo $featured_media_result;
+	}
+?>
+
+<div id="main">
 <article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
-	<?php
-		$featured_media_result = get_feature_media_data();
-		if (!empty($featured_media_result)) {
-			echo $featured_media_result;
-		}
-	?>
 
 	<div class="outer-container">
 		<div class="grid-container">
@@ -582,7 +584,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 		</div><!-- .outer-container -->
 	<?php } ?>
 </article><!-- #post-## -->
-
+</div><!-- END #main -->
 
 <?php
 if ($media_dev_map) {

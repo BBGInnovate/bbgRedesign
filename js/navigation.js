@@ -111,6 +111,9 @@ function toggleFocus() {
 // DROPDOWN NAV HOVER
 // Create backdrop for sub nav, height determined by tallest sub nav column
 $('.subnav-back').hide();
+setTimeout(function() {
+	$('.bbg-banner').css('z-index', 0);
+}, 700);
 var subnavH;
 subnavH = $('.nav-menu').outerHeight() - $('.bbg__top-nav__link-text').height();
 function setMegaNav() {
