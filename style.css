@@ -3505,8 +3505,7 @@ object {
 /*   used on homepage, posts and pages  */
 .bbg-embed-shell {
   margin-right: auto;
-  margin-left: auto;
-  max-width: 600px; }
+  margin-left: auto; }
 
 .single .bbg-embed-shell {
   margin: 0 auto 3rem auto; }

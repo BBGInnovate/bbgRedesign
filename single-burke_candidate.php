@@ -6,319 +6,242 @@
  */
 /* we go through the loop once and reset it in order to get some vars for our og tags */
 
-if ( have_posts() ) {
+require 'inc/bbg-functions-assemble.php';
+include get_template_directory() . '/inc/shared_sidebar.php';
+
+if (have_posts()) {
 	the_post();
 	// $metaAuthor = get_the_author();
-	$metaKeywords = strip_tags( get_the_tag_list('', ', ', '') );
+	$metaKeywords = strip_tags(get_the_tag_list('', ', ', ''));
 	/**** CREATE OG TAGS ***/
 	$ogDescription = get_the_excerpt();
 	$ogTitle = get_the_title();
-	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post -> ID ) , 'Full' );
+	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id( $post -> ID ) , 'Full');
 	$ogImage = $thumb['0'];
-	$socialImageID = get_post_meta( $post -> ID, 'social_image', true );
+	$socialImageID = get_post_meta($post -> ID, 'social_image', true);
 	if ( $socialImageID ) {
-		$socialImage = wp_get_attachment_image_src( $socialImageID, 'Full' );
+		$socialImage = wp_get_attachment_image_src($socialImageID, 'Full');
 		$ogImage = $socialImage[0];
 	}
 
 	/**** CREATE $bannerAdjustStr *****/
-	$bannerPosition = get_post_meta( get_the_ID() , 'adjust_the_banner_image', true );
-	$bannerPositionCSS = get_field( 'adjust_the_banner_image_css', '', true );
+	$bannerPosition = get_post_meta(get_the_ID() , 'adjust_the_banner_image', true);
+	$bannerPositionCSS = get_field('adjust_the_banner_image_css', '', true);
 	$bannerAdjustStr = "";
-	if ( $bannerPositionCSS ) {
+	if ($bannerPositionCSS) {
 		$bannerAdjustStr = $bannerPositionCSS;
 	}
 	else
-	if ( $bannerPosition ) {
+	if ($bannerPosition) {
 		$bannerAdjustStr = $bannerPosition;
 	}
 
 	rewind_posts();
 }
 
-//Add shared sidebar
-include get_template_directory() . "/inc/shared_sidebar.php";
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
+		$id = get_the_ID();
+		$page_content = do_shortcode(get_the_content());
+		$page_content = apply_filters('the_content', $page_content);
+		$ogDescription = get_the_excerpt();
+	}
+}
+wp_reset_postdata();
+wp_reset_query();
 
-get_header(); ?>
+get_header();
+echo '<style>.bbg__main-navigation .subnav-back {background-color: rgba(228, 235, 236, 0.95);}</style>';
+echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;}</style>';
+?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
 
-	<?php
-		while ( have_posts() ):
-			the_post();
+<main id="main" class="site-main" role="main">
 
-		// Default adds a space above header if there's no image set
-		$featuredImageClass = " bbg__article--no-featured-image";
+	<div class="outer-container">
+		<div class="grid-container">
+			<h2><a href="<?php echo network_home_url()?>burke-awards/burke-honorees">Burke Awards honorees</a></h2>
+		</div>
+	</div>
 
-		// the title/headline field, followed by the URL and the author's twitter handle
-		$twitterText = "";
-		$twitterText.= "Profile of " . html_entity_decode( get_the_title() );
-		$twitterText.= " by @bbggov " . get_permalink();
-		$twitterURL = "//twitter.com/intent/tweet?text=" . rawurlencode( $twitterText );
-		$fbUrl = "//www.facebook.com/sharer/sharer.php?u=" . urlencode( get_permalink() );
-	?>
-
-		<article id="post-<?php the_ID(); ?>" <?php post_class( "bbg__article" ); ?>>
-			<div class="usa-grid">
-				<h5 class="bbg__label--mobile large">
-					<a href="<?php echo network_home_url()?>burke-awards/burke-honorees">Burke Awards honorees</a>
-				</h5>
-			</div>
-
-			<?php
-				$hideFeaturedImage = get_post_meta( get_the_ID() , "hide_featured_image", true );
-				if ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
-					echo '<div class="usa-grid-full">';
-						$featuredImageClass = "";
-						$featuredImageCutline = "";
-						$thumbnail_image = get_posts( array(
-							'p' => get_post_thumbnail_id( get_the_ID() ),
-							'post_type' => 'attachment'
-						));
-						if ( $thumbnail_image && isset( $thumbnail_image[0] ) ) {
-							$featuredImageCutline = $thumbnail_image[0] -> post_excerpt;
-						}
-
-						$src = wp_get_attachment_image_src( get_post_thumbnail_id( $post -> ID ) , array( 700, 450 ) , false, '' );
-
-						echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large bbg__article-header__banner--profile" style="background-image: url(' . $src[0] . '); background-position: ' . $bannerAdjustStr . '">';
-						echo '</div>';
-					echo '</div> <!-- usa-grid-full -->';
-				}
-			?><!-- .bbg__article-header__thumbnail -->
-
-			<div class="usa-grid">
-			<?php
-				$burkeProfileObj = get_field( 'burke_award_info' );
-				$numRows = count ( $burkeProfileObj );
-				// create variable to sort the award array by year
-				$orderByYear = array();
-				// populate order
-				foreach( $burkeProfileObj as $i => $row ) {
-					$orderByYear[ $i ] = $row[ 'burke_ceremony_year' ];
-				}
-
-				// use multisort to reorder the award array based on the year (reverse chrono)
-				array_multisort( $orderByYear, SORT_DESC, $burkeProfileObj );
-				// var_dump( $burkeProfileObj );
-
-				echo '<header class="entry-header bbg__article-header' . $featuredImageClass . '">';
-					echo '<div class="bbg__profile-title" style="max-width: none;">';
-						the_title( '<h1 class="entry-title bbg__article-header__title">', '</h1>' );
-						echo "<!-- .bbg__article-header__title -->";
-						// output variables: ceremony year + win status
-						echo '<h5 class="entry-category bbg__profile-tagline">';
-							// check if the repeater field has rows of data
-							foreach ( array_values($burkeProfileObj) as $i => $profile ) {
-								$burkeYear = $profile[ "burke_ceremony_year" ];
-								// check if this profile won for this year
-								$burkeWin = $profile[ "burke_is_winner" ];
-								if ( !$burkeWin ) { // if not a winner, add nominee tag
-									$burkeStatus = " nominee";
-								} else { // else add winner tag
-									$burkeStatus = " winner";
-								}
-
-								echo $burkeYear . $burkeStatus;
-								if ( $numRows > 1 && $i + 1 < $numRows ) {
-									echo " | ";
-								}
-							}
-						echo "</h5><!-- .bbg__label -->";
-					echo "</div>";
-				echo "</header><!-- .bbg__article-header -->";
-			?>
-				<div class="bbg__article-sidebar--left">
-					<h3 class="bbg__sidebar-label bbg__contact-label">Share </h3>
-					<ul class="bbg__article-share">
-						<li class="bbg__article-share__link facebook">
-							<a href="<?php echo $fbUrl; ?>">
-								<span class="bbg__article-share__icon facebook"></span>
-							</a>
-						</li>
-						<li class="bbg__article-share__link twitter">
-							<a href="<?php echo $twitterURL; ?>">
-								<span class="bbg__article-share__icon twitter"></span>
-							</a>
-						</li>
-					</ul>
-				</div>
-
-				<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
-					<?php the_content();
-						echo "<!-- Acceptance Videos -->";
-						$v = "";
-						// output acceptance video
-						foreach ( array_values($burkeProfileObj) as $i => $profileVid ) {
-							$burkeVidURL = $profileVid[ "burke_acceptance_video_url" ];
-							if ( $burkeVidURL ) {
-								if ( $numRows > 1 ) {
-									$v .= "<h3>Watch acceptance videos</h3>";
-								} else {
-									$v .=  "<h3>Watch acceptance video</h3>";
-								}
-								// output valid URL
-								$v .= apply_filters( 'the_content', $burkeVidURL );
-							}
-						}
-						echo $v;
-					?>
-				</div><!-- .entry-content -->
-
-				<div class="bbg__article-sidebar">
+	<div class="outer-container">
+		<div class="custom-grid-container">
+			<div class="inner-container">
+				<div class="main-content-container">
 					<?php
-						// loop through all award entries
-						foreach ( array_values( $burkeProfileObj ) as $i => $profile ) {
+						$burkeProfileObj = get_field('burke_award_info');
+						$numRows = count ($burkeProfileObj);
+						// Create variable to sort the award array by year
+						// Populate and sort awards in reverse chronological order
+						$orderByYear = array();
+						foreach($burkeProfileObj as $i => $row) {
+							$orderByYear[$i] = $row['burke_ceremony_year'];
+						}
+						array_multisort($orderByYear, SORT_DESC, $burkeProfileObj);
+
+						$candidata_and_win  = '<h3>' . get_the_title() . ', ';
+
+						// Check if repeater field has data
+						// Check if profile won this year
+						foreach (array_values($burkeProfileObj) as $i => $profile) {
+							$burkeYear = $profile['burke_ceremony_year'];
+							$burkeWin = $profile['burke_is_winner'];
+							if (!$burkeWin) {
+								$burkeStatus = ' nominee';
+							} else {
+								$burkeStatus = ' winner';
+							}
+
+							$candidata_and_win .= $burkeYear . $burkeStatus;
+							if ($numRows > 1 && $i + 1 < $numRows) {
+								$candidata_and_win .= ' | ';
+							}
+						}
+						$candidata_and_win .= '</h3>';
+						echo $candidata_and_win;
+						echo $page_content;
+
+						$acceptance_vidoes = '';
+						foreach (array_values($burkeProfileObj) as $i => $profileVid) {
+							$burke_video_url = $profileVid['burke_acceptance_video_url'];
+							if ($burke_video_url) {
+								if ($numRows > 1) {
+									$acceptance_vidoes .= '<h4>Watch acceptance videos</h4>';
+								} else {
+									$acceptance_vidoes .=  '<h4>Watch acceptance video</h4>';
+								}
+								$acceptance_vidoes .= apply_filters('the_content', $burke_video_url);
+							}
+						}
+						echo $acceptance_vidoes;
+					?>
+				</div>
+				<div class="side-content-container">
+					<?php
+						foreach (array_values($burkeProfileObj) as $i => $profile) {
 							$i = $i + 1; // add a number to the item key to start at 1
-							$b = ""; // create a variable for all the award content
-							// populate variables
-							$burkeTitle = $profile[ "burke_occupation" ]; // check for full title
-							$burkeNetwork = strtoupper( $profile[ "burke_network" ] ); // convert network name to uppercase
-							if ( $burkeNetwork == "RFERL" ) { // add backward slash to RFERL
+							$award_list = '';
+
+							$burkeTitle = $profile['burke_occupation'];
+							$burkeNetwork = strtoupper($profile['burke_network']);
+							if ($burkeNetwork == "RFERL") {
 								$burkeNetwork = "RFE/RL";
 							}
-							// check for language service
-							$burkeService = "";
-							if ( $profile[ "burke_service" ] ) {
-								$burkeService = $profile[ "burke_service" ] . ' Service';
+							$burkeService = '';
+							if ($profile['burke_service']) {
+								$burkeService = $profile['burke_service'] . ' Service';
 							}
 
-							// output all award details
-							echo "<div id='award-$i' class='bbg__sidebar__primary'>";
-								// output year and winner label
-								$b .=  '<h3 class="bbg__label">' . $profile[ "burke_ceremony_year" ];
-									if ( $profile[ "burke_is_winner" ] ) {
-										$b .= ' Winner';
-									} else {
-										$b .= ' Nominee';
-									}
-								$b .= '</h3>';
+							echo '<div id="award-' . $i . '" class="bbg__sidebar__primary">';
+							$award_list .= '<h5>' . $profile['burke_ceremony_year'];
+							if ($profile['burke_is_winner']) {
+								$award_list .= ' Winner';
+							} else {
+								$award_list .= ' Nominee';
+							}
+							$award_list .= '</h5>';
 
-								$b .= '<p>';
-									// output honoree details
-									if ( $burkeTitle ) {
-										// output bold title
-										$b .= '<strong class="bbg__label--burke">' . $burkeTitle . '</strong><br/>';
-										// output network + service (if set)
-										if ( $burkeService ) {
-											$b .= $burkeNetwork . ', ' . $burkeService;
-										} else {
-											$b .= $burkeNetwork;
-										}
-									} else {
-										// output network + service (if set)
-										if ( $burkeService ) {
-											$b .= '<strong class="bbg__label--burke">' . $burkeNetwork . ', ' . $burkeService . '</strong>';
-										} else {
-											$b .= '<strong class="bbg__label--burke">' . $burkeNetwork . '</strong>';
-										}
-									}
-
-								$b .= "</p>";
-
-								// output reason for award
-								$b .= "<p class='bbg__article-sidebar__emphasis--italic'>" . $profile[ "burke_reason" ] . "</p>";
-
-								// output related profiles
-								$burkeRelated = $profile [ "burke_associated_profiles" ];
-								// var_dump($burkeRelated);
-								if ( $burkeRelated ) {
-									$b .= "<h4>Recognized with</h4>";
-									$b .= "<ul class='usa-unstyled-list'>";
-										// loop through URLs of award-winning work
-										foreach( $burkeRelated as $burkeRelProfile ) {
-											// var_dump( $burkeRelProfile->guid );
-											$b .= '<li class="bbg__sidebar__primary-headline"><a target="_blank" href="' . get_post_permalink( $burkeRelProfile -> ID ) . '">' . $burkeRelProfile->post_title . ' »</a></li>';
-										}
-									$b .= "</ul>";
+							$award_list .= '<p class="aside">';
+							if ($burkeTitle) {
+								$award_list .= '<strong>' . $burkeTitle . '</strong><br/>';
+								if ($burkeService) {
+									$award_list .= $burkeNetwork . ', ' . $burkeService;
+								} else {
+									$award_list .= $burkeNetwork;
 								}
+							} else {
+								if ($burkeService) {
+									$award_list .= '<strong>' . $burkeNetwork . ', ' . $burkeService . '</strong>';
+								} else {
+									$award_list .= '<strong>' . $burkeNetwork . '</strong>';
+								}
+							}
+							$award_list .= '</p>';
 
-								// set variable for sample work URL repeater
-								$burkeWorkObj = $profile[ "burke_sample_works" ];
-								// create variables to separate link types
-								$workLinks = array();
-								$otherLinks = array();
-								// output links to work
-								if ( $burkeWorkObj ) {
-									$links = count( $burkeWorkObj );
-									// populate order
-									for ( $l = 0; $l + 1 <= $links; $l++ ) {
-										// check link type
-										$linkType = $burkeWorkObj[$l][ 'burke_sample_works_type' ];
-										// add to link type array
-										if ( $linkType == 'work' ) {
-										 	$workLinks[] = array (
-									 						'type' => $linkType,
-									 						'title' => $burkeWorkObj[$l][ 'burke_sample_works_title' ],
-									 						'url' => $burkeWorkObj[$l][ 'burke_sample_works_link' ]
-									 						);
-										} elseif ( $linkType == 'related' ) {
-											$otherLinks[] = array (
-									 						'type' => $linkType,
-									 						'title' => $burkeWorkObj[$l][ 'burke_sample_works_title' ],
-									 						'url' => $burkeWorkObj[$l][ 'burke_sample_works_link' ]
-									 						);
-										}
+							$award_list .= '<p class="aside">' . $profile['burke_reason'] . '</p>';
+							$burkeRelated = $profile ['burke_associated_profiles'];
+							if ( $burkeRelated ) {
+								$award_list .= '<h6>Recognized with</h6>';
+								$award_list .= '<ul class="usa-unstyled-list">';
+									foreach( $burkeRelated as $burkeRelProfile ) {
+										$award_list .= '<li class="aside"><a target="_blank" href="' . get_post_permalink( $burkeRelProfile -> ID ) . '">' . $burkeRelProfile->post_title . ' »</a></li>';
 									}
-									// output work links header
-									if ( count( $workLinks ) == 1 && $workLinks[0]['url'] ) { // if only one singular
-										$b .= "<h4>Award-winning work</h4>";
-										$b .= '<p class="bbg__sidebar__primary-headline"><a target="_blank" href="' . $workLinks[0]["url"] . '">' . $workLinks[0]["title"] . ' »</a></p>';
+								$award_list .= '</ul>';
+							}
 
-									} elseif ( count( $workLinks ) > 1 ) { // if 1+ pluralize
-										$b .= "<h4>Award-winning works</h4>";
-										$b .= "<ul style='margin-bottom:1rem;'>";
-											// loop through URLs of award-winning work
-											foreach( $workLinks as $workURL ) {
-												// var_dump( $burkeWorkURL );
-												$b .= '<li class="bbg__sidebar__primary-headline"><a target="_blank" href="' . $workURL[ "url" ] . '">' . $workURL[ "title" ] . ' »</a></li>';
-											}
-										$b .= "</ul>";
-									}
-									// output other links header
-									if ( count( $otherLinks ) == 1 && $otherLinks[0]['url'] ) { // if only one singular
-										$b .= "<h4>Related link</h4>";
-										$b .= '<p class="bbg__sidebar__primary-headline"><a target="_blank" href="' . $otherLinks[0]["url"] . '">' . $otherLinks[0]["title"] . ' »</a></p>';
+							// set variable for sample work URL repeater
+							$burkeWorkObj = $profile['burke_sample_works'];
+							$workLinks = array();
+							$otherLinks = array();
+							if ($burkeWorkObj) {
+								$links = count( $burkeWorkObj );
 
-									} elseif ( count( $otherLinks ) > 1 ) { // if 1+ pluralize
-										$b .= "<h4>Related links</h4>";
-										$b .= "<ul style='margin-bottom:1rem;'>";
-											// loop through URLs of award-winning work
-											foreach( $otherLinks as $otherURL ) {
-												// var_dump( $burkeWorkURL );
-												$b .= '<li class="bbg__sidebar__primary-headline"><a target="_blank" href="' . $otherURL[ "url" ] . '">' . $otherURL[ "title" ] . ' »</a></li>';
-											}
-										$b .= "</ul>";
+								for ($l = 0; $l + 1 <= $links; $l++) {
+									$linkType = $burkeWorkObj[$l]['burke_sample_works_type'];
+									if ($linkType == 'work') {
+									 	$workLinks[] = array (
+											'type' => $linkType,
+											'title' => $burkeWorkObj[$l]['burke_sample_works_title'],
+											'url' => $burkeWorkObj[$l]['burke_sample_works_link']
+										);
+									} elseif ($linkType == 'related') {
+										$otherLinks[] = array (
+												'type' => $linkType,
+												'title' => $burkeWorkObj[$l]['burke_sample_works_title'],
+												'url' => $burkeWorkObj[$l]['burke_sample_works_link']
+										);
 									}
 								}
 
-								echo $b;
-							echo "</div>";
+								if (count($workLinks) == 1 && $workLinks[0]['url']) {
+									$award_list .= '<h6>Award-winning work</h6>';
+									$award_list .= '<p class="aside"><a target="_blank" href="' . $workLinks[0]['url'] . '">' . $workLinks[0]['title'] . ' »</a></p>';
+								} elseif (count($workLinks) > 1) {
+									$award_list .= '<h6>Award-winning works</h6>';
+									$award_list .= '<ul style="margin-bottom: 1rem;">';
+										foreach($workLinks as $workURL) {
+											$award_list .= '<li class="aside"><a target="_blank" href="' . $workURL['url'] . '">' . $workURL['title'] . ' »</a></li>';
+										}
+									$award_list .= '</ul>';
+								}
+								// output other links header
+								if (count($otherLinks) == 1 && $otherLinks[0]['url']) {
+									$award_list .= '<h6>Related link</h6>';
+									$award_list .= '<p class="aside"><a target="_blank" href="' . $otherLinks[0]['url'] . '">' . $otherLinks[0]['title'] . ' »</a></p>';
+								} elseif (count($otherLinks) > 1) {
+									$award_list .= '<h6>Related links</h6>';
+									$award_list .= '<ul style="margin-bottom: 1rem;">';
+										foreach($otherLinks as $otherURL) {
+											$award_list .= '<li class="aside"><a target="_blank" href="' . $otherURL['url'] . '">' . $otherURL['title'] . ' »</a></li>';
+										}
+									$award_list .= '</ul>';
+								}
+							}
+							echo 	$award_list;
+							echo '</div>';
 						}
 					?>
-					<!-- class="bbg__sidebar__primary-headline" -->
-					<section id="added-sidebar" class="usa-grid-full">
+					<article id="added-sidebar">
 						<?php
 							echo "<!-- Additional sidebar content -->";
-							if ( $includeSidebar ) {
+							if ($includeSidebar) {
 								echo $sidebar;
 							}
-
 							echo $sidebarDownloads;
 						?>
-					</section>
+					</article>
 					<?php wp_reset_postdata();?>
-				</div><!-- .bbg__article-sidebar -->
-			</div><!-- .usa-grid -->
-		</article><!-- #post-## -->
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
 
-	<?php endwhile; // End of the loop. ?>
-
-	</main><!-- #main -->
-</div><!-- #primary -->
-
-<section class="usa-grid">
-	<?php get_sidebar(); ?>
-</section>
 <?php get_footer(); ?>
