@@ -46,6 +46,12 @@ if (have_posts()) {
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
 		$ogDescription = get_the_excerpt();
+
+		$twitterText = '';
+		$twitterText.= 'Profile of ' . html_entity_decode(get_the_title());
+		$twitterText.= ' by @bbggov ' . get_permalink();
+		$twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitterText);
+		$fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode(get_permalink());
 	}
 }
 wp_reset_postdata();
@@ -238,6 +244,16 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 						?>
 					</article>
 					<?php wp_reset_postdata();?>
+
+					<article>
+						<h5>Share</h5>
+						<a href="<?php echo $fbUrl; ?>">
+							<span class="bbg__article-share__icon facebook"></span>
+						</a>
+						<a href="<?php echo $twitterURL; ?>">
+							<span class="bbg__article-share__icon twitter"></span>
+						</a>
+					</article>
 				</div>
 			</div>
 		</div>
