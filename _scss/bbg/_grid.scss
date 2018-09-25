@@ -19,7 +19,7 @@
 .outer-container {
 	@include grid-container;
 	max-width: 1200px;
-	margin: 0 auto 5rem auto;
+	margin: 0 auto $side-margins-xlarge auto;
 }
 .custom-grid-container {
 	max-width: 1200px;

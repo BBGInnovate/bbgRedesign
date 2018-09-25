@@ -52,13 +52,13 @@ get_header();
 				$banner_markup .= 	'<div class="bbg-banner" ';
 				$banner_markup .= 		'style="background-image: url(' . $banner_result['image_source'] . ') !important; background-position: ' . $banner_result['position'] . '">';
 				$banner_markup .= 	'</div>';
-				$banner_markup .= 	'<div class="outer-container">';
+				// $banner_markup .= 	'<div class="outer-container">';
 				$banner_markup .= 		'<div class="grid-container">';
 				$banner_markup .= 			'<p class="graphic-caption">';
 				$banner_markup .= 				$banner_result['caption'];
 				$banner_markup .= 			'</p>';
 				$banner_markup .= 		'</div>';
-				$banner_markup .=	'</div>';
+				// $banner_markup .=	'</div>';
 				$banner_markup .= '</div>';
 				echo $banner_markup;
 			?>
@@ -148,7 +148,7 @@ get_header();
 					$soap_layout = 'image-right';
 					$impact_quantity = 2;
 				} else {
-					$soap_layout = 'image-left';
+					$soap_layout = 'image-top';
 					$impact_quantity = 2;
 				}
 
@@ -157,7 +157,7 @@ get_header();
 				$mentions_group = array();
 				if ($soap_result['toggle'] == 'on') {
 					$show_soap = true;
-					$soap_layout = (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) ? 'image-right' : 'image-left';
+					$soap_layout = (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) ? 'image-right' : 'image-top';
 					$soap_parts = build_soapbox_parts($soap_result, $soap_layout);
 					array_push($mentions_group, $soap_parts);
 				}

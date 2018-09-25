@@ -22,9 +22,9 @@ function get_feature_media_data() {
 	elseif (!empty($feature_gallery)) {
 		$gallery_id = get_post_meta(get_the_ID(), 'featured_gallery_id', true);
 		if (!empty($gallery_id)) {
-			echo "<div class='outer-container'>";
+			echo '<div class="inner-container">';
 			putUniteGallery($gallery_id);
-			echo "</div>";
+			echo '</div>';
 		}
 	}
 	elseif (has_post_thumbnail()) {

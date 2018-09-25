@@ -237,16 +237,12 @@ get_header();
 
 <main id="main" class="site-main" role="main">
 <?php
-	$page_header  = '<div class="outer-container">';
-	$page_header .= 	'<div class="grid-container">';
-	$page_header .= 		'<h2>' . get_the_title() . '</h2>';
-	$page_header .= 	'</div>';
-	$page_header .= '</div>';
-	echo $page_header;
-
 	// PAGE CONTENT
 	if ($page_content != "") {
 		$body_copy  = '<div class="outer-container">';
+		$body_copy .= 	'<div class="grid-container">';
+		$body_copy .= 		'<h2>' . get_the_title() . '</h2>';
+		$body_copy .= 	'</div>';
 		$body_copy .= 	'<div class="grid-container page-content">';
 		$body_copy .= 		$page_content;
 		$body_copy .= 	'</div>';

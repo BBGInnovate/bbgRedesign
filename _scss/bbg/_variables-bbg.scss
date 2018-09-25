@@ -94,12 +94,13 @@ $social-icon-home:				40px;
 
 
 // Site margins
-$site-margins-small:          1rem;
-$site-margins-medium:         $site-margins / 2; // 1.5rem
-$site-margins-medium-plus:	  $site-margins-small * 2; // 2rem
-//$site-margins:              3rem; //defined in _variables.scss
-$site-margins-large:          $site-margins * 2; // 6rem
-$bbg-grid-gutter:             2.35765%;
+// $site-margins = 3 rem
+$site-margins-small: 		1rem;
+$site-margins-medium: 		$site-margins / 2; // 1.5rem
+$site-margins-medium-plus: 	$site-margins-small * 2; // 2rem
+$site-margins-large: 		$site-margins * 2; // 6rem
+$side-margins-xlarge: 		$site-margins * 2.5; // 7.5rem
+$bbg-grid-gutter: 			2.35765%;
 
 
 //Profile stuff

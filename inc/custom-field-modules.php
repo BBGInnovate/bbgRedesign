@@ -11,25 +11,22 @@
 
 // HOMEPAGE OPTIONS
 function assemble_mentions_full_width($mention_data, $impact_group) {
-	$mention_full  = '<div class="inner-container">';
-	$mention_full .= 	'<div class="grid-container soap-corner-full">';
+	$mention_full  = '<div class="custom-grid-container">';
+	$mention_full .= 	'<div class="inner-container">';
+	$mention_full .= 		'<div class="side-content-container">';
+	$mention_full .= 			'<div class="soap-corner-share-grid">';
 	// SOAPBOX AND/OR CORNER HERO
-	foreach($mention_data as $mention) { 
-		$mention_full .= 	$mention;
+	foreach($mention_data as $data) {
+		$mention_full .= 		$data;
 	}
+	$mention_full .= 			'</div>';
+	$mention_full .= 		'</div>';
+	$mention_full .= 		'<div class="main-content-container impact-share">';
+	// IMPACT STORY (ONLY ONE FOR THIS LAYOUT)
+	$mention_full .= 			'<h2>Impact Stories</h2>';
+	$mention_full .= 			$impact_group[0];
+	$mention_full .= 		'</div>';
 	$mention_full .= 	'</div>';
-	$mention_full .= '</div>';
-
-	$mention_full .= '<div class="grid-container">';
-	$mention_full .= 	'<h2>Impact Stories</h2>';
-	$mention_full .= '</div>';
-	$mention_full .= '<div class="inner-container ">';
-	// IMPACT STORIES
-	foreach($impact_group as $impact) {
-		$mention_full .= '<div class="split-grid">';
-		$mention_full .= 	$impact;
-		$mention_full .= '</div>';
-	}
 	$mention_full .= '</div>';
 	echo $mention_full;
 }
@@ -72,7 +69,7 @@ function assemble_threats_to_press_ribbon($threat_data) {
 // ABOUT FLEXIBLE ROWS
 function assemble_umbrella_main($main) {
 	if (!empty($main['section_header']) || !empty($main['intro_text'])) {
-		$umbrella_main  = '<div class="outer-container">';
+		$umbrella_main  = '<div class="inner-container">';
 		$umbrella_main .= 	'<div class="grid-container">';
 		$umbrella_main .= 		$main['section_header'];
 		$umbrella_main .= 		$main['intro_text'];

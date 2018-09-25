@@ -34,7 +34,7 @@ function build_soapbox_parts($soap_data, $layout) {
 	$soap_content .= '</p>';
 
 	if (!empty($soap_data['profile_image'])) {
-		$soap_image  = '<div><img src="' . $soap_data['profile_image'] . '"></div>';
+		$soap_image  = '<img src="' . $soap_data['profile_image'] . '">';
 		if ($soap_data['profile_name'] != "") {
 			$soap_image .= '<p class="aside">' . $soap_data['profile_name'] . '</p>';
 		}
@@ -43,18 +43,26 @@ function build_soapbox_parts($soap_data, $layout) {
 	// INSERT PART INTO GRID
 	// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
 	$soapbox_markup  = '<div class="inner-container soap-corner special-block ' . $article_class . '">';
-	if ($layout == 'image-left') {
-		$soapbox_markup .= 	'<div class="small-side">';
-		$soapbox_markup .= 		$soap_image;
+	if ($layout == 'image-top') {
+		$soapbox_markup .= 	'<div class="grid-container">';
+		$soapbox_markup .= 		$soap_heading;
+		$soapbox_markup .= 		'<div class="inner-container ceo-box">';
+		$soapbox_markup .= 			$soap_image;
+		$soapbox_markup .= 		'</div>';
+		$soapbox_markup .= 	'</div>';
+		$soapbox_markup .= 	'<div class="grid-container">';
+		$soapbox_markup .= 		$soap_title;
+		$soapbox_markup .= 		$soap_content;
 		$soapbox_markup .= 	'</div>';
 	}
-	$soapbox_markup .= 		'<div class="large-side">';
-	$soapbox_markup .= 			$soap_heading;
-	$soapbox_markup .= 			$soap_title;
-	$soapbox_markup .= 			$soap_content;
-	$soapbox_markup .= 		'</div>';
+	
 	if ($layout == 'image-right') {
-		$soapbox_markup .= 	'<div class="small-side">';
+		$soapbox_markup .= 		'<div class="large-side">';
+		$soapbox_markup .= 			$soap_heading;
+		$soapbox_markup .= 			$soap_title;
+		$soapbox_markup .= 			$soap_content;
+		$soapbox_markup .= 		'</div>';
+		$soapbox_markup .= 	'<div class="small-side ceo-box">';
 		$soapbox_markup .= 		$soap_image;
 		$soapbox_markup .= 	'</div>';
 	}

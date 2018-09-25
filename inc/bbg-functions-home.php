@@ -47,11 +47,11 @@ function get_homepage_banner_data() {
 		$bannerAdjustStr = '';
 
 		if ($homepageBannerType == 'specific_image') {
-			$img = get_field( 'homepage_banner_image', 'option' );
+			$img = get_field('homepage_banner_image', 'option');
 			if ($img) {
 				$attachment_id = $img['ID'];
 				$useRandomImage = false;
-				$featuredImageCutline='';
+				$featuredImageCutline = '';
 				$thumbnail_image = get_posts(
 					array(
 						'p' => $attachment_id,
@@ -59,12 +59,12 @@ function get_homepage_banner_data() {
 					)
 				);
 				if ($thumbnail_image && isset($thumbnail_image[0])) {
-					$bannerCutline=$thumbnail_image[0]->post_excerpt;
+					$bannerCutline = $thumbnail_image[0]->post_excerpt;
 				}
 
 				$bannerAdjustStr = '';
-				$bannerBackgroundPosition = get_field( 'homepage_banner_background_position', 'option' );
-				if ( $bannerBackgroundPosition ) {
+				$bannerBackgroundPosition = get_field('homepage_banner_background_position', 'option');
+				if ($bannerBackgroundPosition) {
 					$bannerAdjustStr = $bannerBackgroundPosition;
 				}
 			}
@@ -82,16 +82,16 @@ function get_homepage_banner_data() {
 
 		// SORT SOURCES IN NUMERIC ORDER
 		ksort( $tempSources );
-		$prevWidth=0;
+		$prevWidth = 0;
 
 		// NO IMAGE LARGER THAN 1200px WIDE??
-		foreach( $tempSources as $key => $tempSource ) {
-			if ( $key > 1900 ) {
+		foreach($tempSources as $key => $tempSource) {
+			if ($key > 1900) {
 				unset( $tempSources[$key] );
 			}
 		}
 
-		foreach( $tempSources as $key => $tempSourceObj ) {
+		foreach($tempSources as $key => $tempSourceObj) {
 			$tempSource = $tempSourceObj['src'];
 		}
 

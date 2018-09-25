@@ -21,6 +21,10 @@
 // MENTIONS SECTION (SOAPBOX, CORNER HERO, IMPACT STORIES)
 // STRUCTURE
 .mentions {
+	.ceo-box {
+		img {margin-bottom: 1rem;}
+		p {margin-bottom: 1.5rem;}
+	}
 	.soap-corner-full {
 		@include grid-column(12);
 		.small-side {display: none;}
@@ -90,6 +94,13 @@
 			font-size: 1.3rem;
 			line-height: 1.6rem
 		}
+	}
+	.ceo-box {
+		p {
+			margin-bottom: 1.5rem;
+			text-align: right;
+		}
+
 	}
 	.corner-hero {
 		.corner-hero-side {
