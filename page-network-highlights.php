@@ -26,127 +26,127 @@ if ($pageTagline && $pageTagline!=""){
 	$pageTagline = '<h6 class="bbg__page-header__tagline">' . $pageTagline . '</h6>';
 }
 
-get_header(); ?>
+get_header();
+?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
-		<!-- this section holds the map and is populated later in the page by javascript -->
-		<section class="usa-section">
-			<div id="map" class="bbg__map--banner"></div>
-		</section>
+<!-- this section holds the map and is populated later in the page by javascript -->
+<div class="feautre-banner">
+	<div id="map" class="bbg__map--banner"></div>
+</div>
 
-		<br><br>
-		<div class="outer-container">
-			<div class="grid-container">
-				<header class="page-header">
-					<h2><?php echo $page_title; ?></h2>
-					<?php echo $pageTagline; ?>
-				</header>
-			</div>
+<main id="main" class="site-main" role="main">
+
+	<div class="outer-container">
+		<div class="grid-container">
+			<header class="page-header">
+				<h2><?php echo $page_title; ?></h2>
+				<?php echo $pageTagline; ?>
+			</header>
 		</div>
+	</div>
 
-		<div class="outer-container">
-			<div class="custom-grid-container">
-			<?php
-				$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn'];
-				foreach ($entities as $e) {
-					/**** START FETCH related press releases ****/
-					$entityString = $e;
-					if ($entityString == 'rferl'){
-						$entityString = 'RFE/RL';
-					}
-					$entitySlug = $e;
-					$pressReleases = array();
-					if ($entitySlug != "") {
-						$prCategoryObj = get_category_by_slug($entitySlug );
-						if (is_object($prCategoryObj)) {
-							$prCategoryID = $prCategoryObj->term_id;
-							$qParams = array(
-								'post_type' => array('post'),
-								'posts_per_page' => 5,
-								'category__and' => array(
-										$prCategoryID,
-										get_cat_ID('Press Release')
-								),
-								'orderby', 'date',
-								'order', 'DESC',
-								'tax_query' => array(
-									array(
-										'taxonomy' => 'post_format',
-										'field' => 'slug',
-										'terms' => 'post-format-quote',
-										'operator' => 'NOT IN'
-									)
-								)
-							);
-							$custom_query = new WP_Query($qParams);
-							if ($custom_query -> have_posts()) {
-								while ($custom_query -> have_posts()) {
-									$custom_query->the_post();
-									$id = get_the_ID();
-									$pressReleases[] = array(
-										'url' => get_permalink($id),
-										'title' => get_the_title($id),
-										'excerpt' => get_the_excerpt(),
-										'thumb' => get_the_post_thumbnail($id, 'small-thumb')
-									);
-								}
-							}
-							wp_reset_postdata();
-							wp_reset_query();
-						}
-					}
-					$s  = '<div class="grid-container">';
-					$entityPermalink = get_permalink(get_page_by_path('networks/' . $e));
-					if ($e == 'bbg') {
-						$s .= 	'<h3><a href="' . $entityPermalink . '">USAGM</a></h3>';
-					} else {
-						$s .= 	'<h3><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
-					}
-					$s .= 	'<div class="nest-container">';
-					$s .= 		'<div class="inner-container">';
-					if (count($pressReleases)) {
-						$counter = 0;
-						foreach ($pressReleases as $pr) {
-							$counter++;
-							$url = $pr['url'];
-							$title = $pr['title'];
-
-							if ($counter == 1) {
-								$s .= '<div class="main-content-container">';
-							} else if ($counter == 2) {
-								$s .= '<div class="side-content-container">';
-							}
-
-
-							if ($counter == 1) {
-								// $s .= 	$pr['thumb'];
-								$s .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
-								$s .= 	'<p>' . $pr['excerpt'] . '</p>';
-							} else {
-								$s .= 	'<h6><a href="' . $url . '">' . $title . '</a></h6>';
-							}
-							if ($counter == 1 || $counter == 5) {
-								if ($counter == 5) {
-									$idObj = get_category_by_slug($entitySlug);
-				  					$id = $idObj->term_id;
-									$s .= 	'<article><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></article>';
-								}
-								$s .= '</div>';
-							}
-						}
-
-					}
-					$s .= 		'</div>'; // END .inner-container
-					$s .= 	'</div>'; // END .nest-container
-					$s .= '</div>'; // END .grid-container
-					echo $s;
+	<div class="outer-container">
+		<div class="custom-grid-container">
+		<?php
+			$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn'];
+			foreach ($entities as $e) {
+				/**** START FETCH related press releases ****/
+				$entityString = $e;
+				if ($entityString == 'rferl'){
+					$entityString = 'RFE/RL';
 				}
-			?>
-			</div>
+				$entitySlug = $e;
+				$pressReleases = array();
+				if ($entitySlug != "") {
+					$prCategoryObj = get_category_by_slug($entitySlug );
+					if (is_object($prCategoryObj)) {
+						$prCategoryID = $prCategoryObj->term_id;
+						$qParams = array(
+							'post_type' => array('post'),
+							'posts_per_page' => 5,
+							'category__and' => array(
+									$prCategoryID,
+									get_cat_ID('Press Release')
+							),
+							'orderby', 'date',
+							'order', 'DESC',
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'post_format',
+									'field' => 'slug',
+									'terms' => 'post-format-quote',
+									'operator' => 'NOT IN'
+								)
+							)
+						);
+						$custom_query = new WP_Query($qParams);
+						if ($custom_query -> have_posts()) {
+							while ($custom_query -> have_posts()) {
+								$custom_query->the_post();
+								$id = get_the_ID();
+								$pressReleases[] = array(
+									'url' => get_permalink($id),
+									'title' => get_the_title($id),
+									'excerpt' => get_the_excerpt(),
+									'thumb' => get_the_post_thumbnail($id, 'small-thumb')
+								);
+							}
+						}
+						wp_reset_postdata();
+						wp_reset_query();
+					}
+				}
+				$s  = '<div class="grid-container">';
+				$entityPermalink = get_permalink(get_page_by_path('networks/' . $e));
+				if ($e == 'bbg') {
+					$s .= 	'<h3><a href="' . $entityPermalink . '">USAGM</a></h3>';
+				} else {
+					$s .= 	'<h3><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
+				}
+				$s .= 	'<div class="nest-container">';
+				$s .= 		'<div class="inner-container">';
+				if (count($pressReleases)) {
+					$counter = 0;
+					foreach ($pressReleases as $pr) {
+						$counter++;
+						$url = $pr['url'];
+						$title = $pr['title'];
+
+						if ($counter == 1) {
+							$s .= '<div class="main-content-container">';
+						} else if ($counter == 2) {
+							$s .= '<div class="side-content-container">';
+						}
+
+
+						if ($counter == 1) {
+							// $s .= 	$pr['thumb'];
+							$s .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+							$s .= 	'<p>' . $pr['excerpt'] . '</p>';
+						} else {
+							$s .= 	'<h6><a href="' . $url . '">' . $title . '</a></h6>';
+						}
+						if ($counter == 1 || $counter == 5) {
+							if ($counter == 5) {
+								$idObj = get_category_by_slug($entitySlug);
+			  					$id = $idObj->term_id;
+								$s .= 	'<article><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></article>';
+							}
+							$s .= '</div>';
+						}
+					}
+
+				}
+				$s .= 		'</div>'; // END .inner-container
+				$s .= 	'</div>'; // END .nest-container
+				$s .= '</div>'; // END .grid-container
+				echo $s;
+			}
+		?>
 		</div>
-	</main><!-- #main -->
-</div><!-- #primary -->
+	</div>
+</main><!-- #main -->
+
 
 <?php
 $postsPerPage = 50;
@@ -166,9 +166,9 @@ if ($custom_query->have_posts()) :
 		$counter = 0;
 		while ($custom_query->have_posts()) : $custom_query->the_post();
 			$id = get_the_ID();
-			$location = get_post_meta( $id, 'map_location', true );
+			$location = get_post_meta($id, 'map_location', true);
 			$storyLink = get_permalink();
-			$mapHeadline = get_post_meta( $id, 'map_headline', true );
+			$mapHeadline = get_post_meta($id, 'map_headline', true);
 			$mapDescription = get_the_title();
 			$mapDate = get_the_date();
 
@@ -202,11 +202,11 @@ if ($custom_query->have_posts()) :
 				)
 			);
 		endwhile;
-		$geojsonObj= array(array(
+		$geojsonObj = array(array(
 			'type' => 'FeatureCollection',
 			'features' => $features
 		));
-		$geojsonStr=json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
+		$geojsonStr = json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
 		echo "<script type='text/javascript'>\n";
 		echo 	"geojson = $geojsonStr";
@@ -250,7 +250,7 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
 		}
 	});
 
-	for (var i = 0; i < geojson[0].features.length; i++) {
+	for (var i = 1; i < geojson[0].features.length; i++) {
 		var coords = geojson[0].features[i].geometry.coordinates;
 		var title = geojson[0].features[i].properties.title; //a[2];
 		var description = geojson[0].features[i].properties['description'];
