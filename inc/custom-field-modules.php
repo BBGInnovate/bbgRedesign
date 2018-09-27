@@ -161,8 +161,8 @@ function assemble_entity_section($entity_data) {
 		$entity_markup .= 	'</div>';
 		$entity_markup .= '</div>';
 	}
-		$entity_markup .= 	'</div>';
-		$entity_markup .= '</section>';
+	$entity_markup .= 	'</div>';
+	$entity_markup .= '</section>';
 	echo $entity_markup;
 }
 

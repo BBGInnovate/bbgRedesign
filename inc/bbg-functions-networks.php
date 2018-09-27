@@ -101,7 +101,7 @@ function outputBroadcasters($cols) {
 			}
 		}
 	}
-	$entity_markup .= '</div>';
+	$entity_markup .= '</article>';
 
 	wp_reset_postdata();
 	return $entity_markup;

@@ -232,9 +232,9 @@ function build_umbrella_main_parts($umbrella_main_data) {
 }
 
 function build_umbrella_content_parts($content_data) {
-	$blank_target = '';
-	if ($content_data['column_type'] == 'umbrella_content_external') {
-		$blank_target = ' target="_blank"';
+	$link_target = '';
+	if ($content_data['column_type'] == 'umbrella_content_external' || $content_data['column_type'] == 'umbrella_content_file') {
+		$link_target = ' target="_blank"';
 	}
 
 	if ($content_data['column_title']) {
@@ -243,7 +243,7 @@ function build_umbrella_content_parts($content_data) {
 
 	if ($content_data['item_title']) {
 		$item_title  = '<h4>';
-		$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $blank_target . '>';
+		$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>';
 		$item_title .= 		$content_data['item_title'];
 		$item_title .= 	'</a>';
 		if ($content_data['column_type'] == 'umbrella_content_file') {

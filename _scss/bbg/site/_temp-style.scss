@@ -116,6 +116,7 @@ button {
 	@include grid-column(12);
 	.entity-icon {
 		@include grid-column(3);
+		img {margin: 0;}
 	}
 	.entity-desc {
 		@include grid-column(9);

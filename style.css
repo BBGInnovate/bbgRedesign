@@ -5216,6 +5216,8 @@ button {
     width: calc(25% - 25px);
     float: left;
     margin-left: 20px; }
+    .contain-entity .entity-icon img {
+      margin: 0; }
   .contain-entity .entity-desc {
     width: calc(75% - 35px);
     float: left;
