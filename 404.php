@@ -6,41 +6,40 @@
  *
  * @package bbgRedesign
  */
-error_reporting(E_ERROR | E_PARSE);
-get_header(); ?>
+require 'inc/bbg-functions-assemble.php';
+get_header();
+?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
-			<div class="usa-grid">
-				<header class="page-header">
-					<h1 class="page-title"><span style="color: #900;">404!</span> That page can’t be found.</h1>
-				</header><!-- .page-header -->
-				<h6 class="bbg__page-header__tagline">But here are some recent BBG highlights from around the world.</h6>
-			</div>
-			<!-- this section holds the map and is populated later in the page by javascript -->
-			<section class="usa-section">
-				<div id="map" class="bbg__map--banner" style="max-height: 350px;"></div>
-			</section>
-		<section class="error-404 not-found usa-grid">
-			<div class="page-content">
-				<?php
-					/* translators: %1$s: smiley */
-					$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives.', 'bbginnovate' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-				?>
-			</div>
-		</section>
-	</main>
-</div><!-- #primary -->
+<div class="outer-container" style="margin-bottom: 30px;">
+	<div class="inner-container">
+		<h1><span style="color: #900;">404!</span> That page can’t be found.</h1>
+	</div>
+</div>
+<!-- this section holds the map and is populated later in the page by javascript -->
+<section class="page-post-featured-graphic">
+	<div id="map" class="bbg__map--banner"></div>
+</section>
+
+<main id="main" class="site-main" role="main">
+	<section class="outer-container">
+		<div class="inner-container">
+			<p class="lead-in">But here are some recent BBG highlights from around the world.</p>
+			<?php
+				/* translators: %1$s: smiley */
+				$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives.', 'bbginnovate' ), convert_smilies( ':)' ) ) . '</p>';
+				the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
+			?>
+		</div>
+	</section>
+</main>
 
 
 
 <?php
-$postsPerPage = 10;
-
+$postsPerPage = 50;
 $qParams = array(
 	'post_type' => array('post'),
-	'cat' => get_cat_id('Map it'),
+	'category__and' => array(get_cat_id('Map it'), get_cat_id('Press Release')),
 	'posts_per_page' => $postsPerPage,
 	'post_status' => array('publish')
 );
@@ -48,7 +47,6 @@ $qParams = array(
 /*** late in the game we ran into a pagination issue, so we're running a second query here ***/
 $custom_query_args = $qParams;
 $custom_query = new WP_Query($custom_query_args);
-
 $features = array();
 
 if ($custom_query->have_posts()) :
@@ -56,30 +54,29 @@ if ($custom_query->have_posts()) :
 		while ($custom_query->have_posts()) : $custom_query->the_post();
 			$id = get_the_ID();
 			$location = get_post_meta($id, 'map_location', true);
-			// var_dump($location);
 			$storyLink = get_permalink();
 			$mapHeadline = get_post_meta($id, 'map_headline', true);
-
 			$mapDescription = get_the_title();
 			$mapDate = get_the_date();
+
 			$mapDescription = $mapDescription . ' <span class="bbg__map__infobox__date">(' . $mapDate . ')</span>';
 
-			$pinColor = "#981b1e";
+			$pinColor = '#981b1e';
 			if (has_category('VOA')){
-				$pinColor = "#344998";
+				$pinColor = '#344998';
 				$mapHeadline = '<h5><a href="' . $storyLink . '">VOA | ' . $mapHeadline . '</a></h5>';
 			} elseif (has_category('RFA')){
 				$pinColor = "#009c50";
-				$mapHeadline = "<h5><a href='". $storyLink ."'>RFA | " . $mapHeadline . '</a></h5>';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">RFA | ' . $mapHeadline . '</a></h5>';
 			} elseif (has_category('RFE/RL')){
 				$pinColor = "#ea6828";
-				$mapHeadline = "<h5><a href='". $storyLink ."'>RFE/RL | " . $mapHeadline . '</a></h5>';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">RFE/RL | ' . $mapHeadline . '</a></h5>';
 			} else {
-				$mapHeadline = "<h5><a href='". $storyLink ."'>" . $mapHeadline . '</a></h5>';
+				$mapHeadline = '<h5><a href="' . $storyLink . '">' . $mapHeadline . '</a></h5>';
 			}
 			$features[] = array(
 				'type' => 'Feature',
-				'geometry' => array( 
+				'geometry' => array(
 					'type' => 'Point',
 					'coordinates' => array($location['lng'],$location['lat'])
 				),
@@ -87,34 +84,24 @@ if ($custom_query->have_posts()) :
 					'title' => $mapHeadline,
 					'description' => $mapDescription,
 					'marker-color' => $pinColor,
-					'marker-size' => 'large', 
+					'marker-size' => 'large',
 					'marker-symbol' => ''
 				)
 			);
 		endwhile;
-		$geojsonObj= array(array(
+		$geojsonObj = array(array(
 			'type' => 'FeatureCollection',
 			'features' => $features
 		));
-		$geojsonStr=json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT);
+		$geojsonStr = json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
 		echo "<script type='text/javascript'>\n";
-		echo "geojson = $geojsonStr";
+		echo 	"geojson = $geojsonStr";
 		echo "</script>";
-		//echo $geojsonStr;
-
-endif; 
-
+endif;
 ?>
 
-
-
-
-
-
-
-
-<?php /* include map stuff -------------------------------------------------- */ ?>
+<?php /* include map stuff */ ?>
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 
@@ -132,23 +119,9 @@ endif;
 </style>
 
 <script type="text/javascript">
-// L.mapbox.accessToken = '<?php echo MAPBOX_API_KEY; ?>';
-L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
+L.mapbox.accessToken = '<?php echo 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw'; ?>';
 
 var map = L.mapbox.map('map', 'mapbox.emerald')
-
-/*
-var map = L.mapbox.map('map', 'mapbox.emerald')
-var map = L.mapbox.map('map', 'mapbox.satellite')
-var map = L.mapbox.map('map', 'mapbox.streets')
-var map = L.mapbox.map('map', 'mapbox.dark')
-var map = L.mapbox.map('map', 'mapbox.light')
-var map = L.mapbox.map('map', 'mapbox.outdoors')
-var map = L.mapbox.map('map', 'mapbox.satellite-outdoors')
-
-*/
-//        .setView([-37.82, 175.215], 14);
-
 	var markers = new L.MarkerClusterGroup({
 		iconCreateFunction: function (cluster) {
 			var childCount = cluster.getChildCount();
@@ -164,41 +137,40 @@ var map = L.mapbox.map('map', 'mapbox.satellite-outdoors')
 		}
 	});
 
-    for (var i = 0; i < geojson[0].features.length; i++) {
-        var coords = geojson[0].features[i].geometry.coordinates;
-        var title = geojson[0].features[i].properties.title; //a[2];
-        var description = geojson[0].features[i].properties['description'];
-        var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
-            icon: L.mapbox.marker.icon({
-            	'marker-symbol': '', 
-            	'marker-color': geojson[0].features[i].properties['marker-color']
-           	})
-        });
-        var popupText = title + description;
-        marker.bindPopup(popupText);
-        markers.addLayer(marker);
-    }
+	for (var i = 1; i < geojson[0].features.length; i++) {
+		var coords = geojson[0].features[i].geometry.coordinates;
+		var title = geojson[0].features[i].properties.title; //a[2];
+		var description = geojson[0].features[i].properties['description'];
+		var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
+			icon: L.mapbox.marker.icon({
+				'marker-symbol': '',
+				'marker-color': geojson[0].features[i].properties['marker-color']
+			})
+		});
+		var popupText = title + description;
+		marker.bindPopup(popupText);
+		markers.addLayer(marker);
+	}
 
-    map.addLayer(markers);
+	map.addLayer(markers);
 
-	//Disable the map scroll/zoom so that you can scroll the page.
+	// Disable the map scroll/zoom so that you can scroll the page.
 	map.scrollWheelZoom.disable();
 
 	function centerMap(){
 		map.fitBounds(markers.getBounds());
 	}
-
 	centerMap();
 
 
-	//Recenter the map on resize
+	// Recenter the map on resize
 	function resizeStuffOnResize(){
-	  waitForFinalEvent(function(){
+		waitForFinalEvent(function(){
 			centerMap();
-	  }, 500, "some unique string");
+		}, 500, "some unique string");
 	}
 
-	//Wait for the window resize to 'end' before executing a function---------------
+	// Wait for the window resize to 'end' before executing a function
 	var waitForFinalEvent = (function () {
 		var timers = {};
 		return function (callback, ms, uniqueId) {
