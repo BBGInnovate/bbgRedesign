@@ -4,6 +4,7 @@
  * @package bbginnovate
   template name: Threats to Press Archive
  */
+require 'inc/bbg-functions-assemble.php';
 
 $qParams = array(
 	'post_type'=> 'threat_to_press',
@@ -19,7 +20,7 @@ $qParams = array(
     )
 );
 
-$custom_query = new WP_Query( $qParams );
+$custom_query = new WP_Query($qParams);
 
 $threats = array();
 if ( $custom_query->have_posts() ) :
@@ -32,7 +33,7 @@ if ( $custom_query->have_posts() ) :
 		$status = get_post_meta( $id, 'threats_to_press_status', true );
 		$link = get_post_meta( $id, 'threats_to_press_link', true );
 
-		$t = array(
+		$threat_post_data = array(
 			'country' => $country,
 			'name' => $targetNames,
 			'date' => get_the_date(),
@@ -47,7 +48,7 @@ if ( $custom_query->have_posts() ) :
 			'longitude' => $coordinates['lng'],
 			'headline' => get_the_title()
 		);
-		$threats[] = $t;
+		$threats[] = $threat_post_data;
 	endwhile;
 endif;
 wp_reset_postdata();
@@ -74,54 +75,46 @@ wp_reset_query();
 get_header();
 ?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
 
-	<?php if ( count( $threats ) ) : ?>
-
-		<div class="outer-container">
-			<div class="inner-container">
-				<header class="page-header">
-					<h2>Threats to Press</h2>
-				</header><!-- .page-header -->
-			</div>
+<main id="main" class="site-main" role="main">
+	<div class="outer-container">
+		<div class="grid-container">
+			<h2>Threats to Press</h2>
 		</div>
+	</div>
 
-		<section class="outer-container">
-			<div class="grid-container" style="margin-bottom: 3rem">
-				<h2 class="entry-title bbg-blog__excerpt-title--featured"><?php echo $pageTitle; ?></h2>
+	<?php if (count($threats)) : ?>
+		<div class="outer-container">
+			<div class="grid-container">
+				<h3><?php echo $pageTitle; ?></h3>
 				<?php
-					echo '<p class="lead-in">';
-					echo 	$pageContent;
-					echo '</p>';
-
-					foreach ($threats as $t) {	//4773aa, 112e51
+					foreach ($threats as $threat_post) {
 						$imgSrc = '';
-						foreach ($t['network'] as $abbreviation) {
+						foreach ($threat_post['network'] as $abbreviation) {
 							$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //
 						}
 
-						echo '<article class="bbg-blog__excerpt--list ">';
-						echo 	'<header class="entry-header bbg__article-icons-container">';
+						echo '<article>';
+						echo 	'<header class="bbg__article-icons-container">';
 						echo 		'<div class="bbg__article-icon" style="background-position: left 0.25rem; background-image: url(' . $imgSrc . ');"></div>';
-						echo 		'<h3 class="entry-title" style="color:#4773aa">' . $t['headline'] . '</h3>';
+						echo 		'<h4>' . $threat_post['headline'] . '</h4>';
 						echo 	'</header>';
-						echo 	'<div class="entry-meta bbg__excerpt-meta">';
-						echo 		'<span class="posted-on">';
-						echo 			'<time class="entry-date published" >' . $t['niceDate'] . '</time>';
-						echo 		'</span></div>';
-						echo 	'<div class="entry-content bbg-blog__excerpt-content">';
-						echo 		'<p>' . $t['description'] . '</p>';
+						echo 	'<div class="aside">';
+						echo 		'<time>' . $threat_post['niceDate'] . '</time>';
 						echo 	'</div>';
+						echo 	'<p>' . $threat_post['description'] . '</p>';
 						echo '</article>';
 					}
 				?>
 			</div>
-		</section>
-
+		</div>
 		<?php endif; ?>
-	</main><!-- #main -->
-</div><!-- #primary -->
+</main>
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
