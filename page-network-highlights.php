@@ -130,6 +130,9 @@ get_header();
 							if ($counter == 5) {
 								$idObj = get_category_by_slug($entitySlug);
 			  					$id = $idObj->term_id;
+			  					if ($entityString == 'bbg') {
+			  						$entityString = "usagm";
+			  					}
 								$s .= 	'<article><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></article>';
 							}
 							$s .= '</div>';
