@@ -97,7 +97,7 @@ get_header();
 
 // DELETE CODE BETWEEN COMMENTS 10/02/2018
 $featured_post_result = get_field_post_data('featured', 1);
-$main_featured_post .= 	'<a href="">';
+$main_featured_post .= 	'<a href="who-we-are/history/">';
 $main_featured_post .= 		'<div class="feature-banner">';
 $main_featured_post .= 			'<div class="page-post-featured-graphic">';
 $main_featured_post .= 				'<div class="bbg__article-header__banner" style="background-image: url(http://dev.usagm.com/wp-content/uploads/2016/05/AP_5302270177.jpg); background-position: center center"></div>';
