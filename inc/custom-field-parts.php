@@ -104,6 +104,25 @@ function build_corner_hero_parts($corner_hero_data) {
 
 		return $corner_hero_markup;
 	}
+	else if ($type == 'quote') {
+		$entity_code = strtolower($corner_hero_data['quote_data']['network']);
+		if ($entity_code == 'rfe/rl') {
+			$entity_code = 'rferl';
+		}
+
+		$corner_hero_markup  = '<div class="inner-container soap-corner special-block" style="border-top: 4px solid '. $corner_hero_data['quote_data']['color'] . '">';
+		$corner_hero_markup .= 	'<div class="small-side">';
+		$corner_hero_markup .= 		'<img src="' . get_template_directory_uri() . '/img/logo_' . $entity_code . '--circle-200.png">';
+		$corner_hero_markup .= 	'</div>';
+		$corner_hero_markup .= 	'<div class="large-side">';
+		$corner_hero_markup .= 		'<p style="font-style:italic">' . $corner_hero_data['quote_data']['quote'] . '</p>';
+		$corner_hero_markup .= 		'<br><p class="aside">&mdash;' . $corner_hero_data['quote_data']['speaker'] . '</p>';
+		$corner_hero_markup .= 		'<p class="aside">' . $corner_hero_data['quote_data']['tagline'] . '</p>';
+		$corner_hero_markup .= 	'</div>';
+		$corner_hero_markup .= '</div>';
+
+		return $corner_hero_markup;
+	}
 }
 
 function build_impact_markup($impact_data) {

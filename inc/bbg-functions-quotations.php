@@ -57,39 +57,39 @@
 		wp_reset_postdata();
 		return $quotes;
 	}
-	function getRandomQuote( $entity, $idsToExclude ) {
+	function getRandomQuote($entity, $idsToExclude) {
 		//	allEntities or rfa, rferl, voa, mbn, ocb
-		$allQuotes = getAllQuotes( $entity, $idsToExclude );
+		$allQuotes = getAllQuotes($entity, $idsToExclude);
 		$returnVal = false;
-		if ( count( $allQuotes ) ) {
-			$randKey = array_rand( $allQuotes );
+		if (count($allQuotes)) {
+			$randKey = array_rand($allQuotes);
 			$returnVal = $allQuotes[$randKey];
 		}
 		return $returnVal;
 	}
 
-	function outputQuote( $q, $class = '' ) {
+	function outputQuote($q, $placement = '') {
 		$quoteDate = $q['quoteDate'];
 		$ID = $q['ID'];
 		$url = $q['url'];
 		$speaker = $q['speaker'];
 		$quoteText = $q['quoteText'];
 		$tagline = $q['quoteTagline'];
-		if ( $tagline != '' ) {
+		if ($tagline != '') {
 			$tagline = '' . $tagline;
 		}
 		$mugshot = $q['quoteMugshot'];
 
 		$catArray = $q['quoteNetwork'];
-		$networks = array( 'VOA','OCB','RFE/RL','RFA','MBN' );
-		$networkColors = array( '#1330bf','#003a8d','#EA6903','#478406','#E64C66' );
+		$networks = array('VOA','OCB','RFE/RL','RFA','MBN');
+		$networkColors = array('#1330bf','#003a8d','#EA6903','#478406','#E64C66');
 		$quoteNetwork = '';
 
-		foreach ( $catArray as $cat ) {
+		foreach ($catArray as $cat) {
 			$networkName = $cat -> cat_name;
 
-			for ( $i = 0; $i <= count( $networks ) - 1; $i++ ) {
-				if ( $networks[$i] == $networkName ) {
+			for ($i = 0; $i <= count($networks) - 1; $i++) {
+				if ($networks[$i] == $networkName) {
 					$quoteNetwork = $networkName;
 					$networkColor = $networkColors[$i];
 					break;
@@ -97,26 +97,38 @@
 			}
 		}
 
-		$quote  = '';
-		$quote .= '<div class="bbg__quotation">';
-		if ($quoteNetwork != '') {
-			$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkColor . '">' . $quoteNetwork . '</div>';
+		if ($placement == 'mention') {
+			$quote_data = array(
+				'color' => $networkColor,
+				'network' => $quoteNetwork,
+				'quote' => $quoteText,
+				'image' => $mugshot,
+				'speaker' => $speaker,
+				'tagline' => $tagline
+			);
+			return $quote_data;
 		}
-		$quote .= 	'<h4>&ldquo;' . $quoteText . '&rdquo;</h4>';
-		$quote .= 	'<div class="bbg__quotation-attribution__container">';
-		$quote .= 		'<p class="bbg__quotation-attribution">';
+		else {
+			$quote  = '<div class="bbg__quotation">';
+			if ($quoteNetwork != '') {
+				$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkColor . '">' . $quoteNetwork . '</div>';
+			}
+			$quote .= 	'<h4>&ldquo;' . $quoteText . '&rdquo;</h4>';
+			$quote .= 	'<div class="bbg__quotation-attribution__container">';
+			$quote .= 		'<p class="bbg__quotation-attribution">';
 
-		if ( $mugshot != '' ) {
-			$quote .= 		'<img src="' . $mugshot . '" class="bbg__quotation-attribution__mugshot"/>';
+			if ($mugshot != '') {
+				$quote .= 		'<img src="' . $mugshot . '" class="bbg__quotation-attribution__mugshot"/>';
+			}
+			$quote .= 			'<span class="bbg__quotation-attribution__text">';
+			$quote .= 				'<span class="bbg__quotation-attribution__name">' . $speaker . '</span>';
+			$quote .= 				'<span class="bbg__quotation-attribution__credit">' . $tagline . '</span>';
+			$quote .= 			'</span>';
+			$quote .= 		'</p>';
+			$quote .= 	'</div>';
+			$quote .= '</div>';
+			echo $quote;
 		}
-		$quote .= 			'<span class="bbg__quotation-attribution__text">';
-		$quote .= 				'<span class="bbg__quotation-attribution__name">' . $speaker . '</span>';
-		$quote .= 				'<span class="bbg__quotation-attribution__credit">' . $tagline . '</span>';
-		$quote .= 			'</span>';
-		$quote .= 		'</p>';
-		$quote .= 	'</div>';
-		$quote .= '</div>';
-		echo $quote;
 	}
 
 	function outputCallout( $q ) {

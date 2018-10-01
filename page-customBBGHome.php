@@ -52,13 +52,11 @@ get_header();
 				$banner_markup .= 	'<div class="bbg-banner" ';
 				$banner_markup .= 		'style="background-image: url(' . $banner_result['image_source'] . ') !important; background-position: ' . $banner_result['position'] . '">';
 				$banner_markup .= 	'</div>';
-				// $banner_markup .= 	'<div class="outer-container">';
 				$banner_markup .= 		'<div class="grid-container">';
 				$banner_markup .= 			'<p class="graphic-caption">';
 				$banner_markup .= 				$banner_result['caption'];
 				$banner_markup .= 			'</p>';
 				$banner_markup .= 		'</div>';
-				// $banner_markup .=	'</div>';
 				$banner_markup .= '</div>';
 				echo $banner_markup;
 			?>
@@ -139,17 +137,17 @@ get_header();
 			
 			<?php
 				// PREP: SOAPBOX, CORNER HERO, IMPACT STORIES
-				$soap_result = get_soapbox_data();				
+				$soap_result = get_soapbox_data();
 				$corner_hero_result = get_corner_hero_data();
 
 				$soap_layout = "";
 				$impact_quantity = "";
 				if (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) {
 					$soap_layout = 'image-right';
-					$impact_quantity = 2;
+					$impact_quantity = 1;
 				} else {
 					$soap_layout = 'image-top';
-					$impact_quantity = 2;
+					$impact_quantity = 1;
 				}
 
 				$impact_result = get_impact_stories_data($impact_quantity);

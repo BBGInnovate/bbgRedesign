@@ -193,7 +193,6 @@ function get_corner_hero_data() {
 		$excerpt = my_excerpt($id);
 		$corner_hero_package = array('toggle' => $toggle, 'type' => $c_type, 'class' => $cornerHeroClass, 'p_link' => $cornerHeroPermalink, 'label' => $cornerHeroLabel, 'title' => $cornerHeroTitle, 'excerpt' => $excerpt);
 
-		// return build_corner_hero_parts($corner_hero_package);
 		return $corner_hero_package;
 	}
 	else if ($homepage_hero_corner == 'callout' && $featuredCallout) {
@@ -206,10 +205,10 @@ function get_corner_hero_data() {
 		$q = getRandomQuote('allEntities', $postIDsUsed);
 		if ($q) {
 			$postIDsUsed[] = $q['ID'];
-			$quote = outputQuote($q, '');
+			$quote = outputQuote($q, 'mention');
 		}
-		// $quote_package = array('toggle' => $toggle, 'type' => $c_type);
-		// return $quote_package;
+		$quote_package = array('toggle' => $toggle, 'type' => $c_type, 'quote_data' => $quote);
+		return $quote_package;
 	}
 }
 
