@@ -85,31 +85,13 @@ get_header();
 					<div class="inner-container">
 						<div class="main-content-container">
 						<?php
-							// TEMPORARY MANUAL CHANGE FOR 10/01/2018
-							// UNCOMMENT ON 10/02/2018
-							// $featured_post_result = get_field_post_data('featured', 1);
+							$featured_post_result = get_field_post_data('featured', 1);
 
-							// $main_featured_post .= 	$featured_post_result['linked_media'];
-							// $main_featured_post .= 	'<h4>' . $featured_post_result['linked_title'] . '</h4>';
-							// $main_featured_post .= 	'<p class="aside date-meta">' . $featured_post_result['date'] . '</p>';
-							// $main_featured_post .= 	'<p>' . $featured_post_result['excerpt'] . '</p>';
-							// echo $main_featured_post;
-
-// DELETE CODE BETWEEN COMMENTS 10/02/2018
-$featured_post_result = get_field_post_data('featured', 1);
-$main_featured_post .= 	'<a href="who-we-are/history/">';
-$main_featured_post .= 		'<div class="feature-banner">';
-$main_featured_post .= 			'<div class="page-post-featured-graphic">';
-$main_featured_post .= 				'<div class="bbg__article-header__banner" style="background-image: url(http://dev.usagm.com/wp-content/uploads/2016/05/AP_5302270177.jpg); background-position: center center"></div>';
-$main_featured_post .= 			'</div>';
-$main_featured_post .= 		'</div>';
-$main_featured_post .= 	'</a>';
-$main_featured_post .= 	'<h4>Informing, engaging and connecting people around the world in support of freedom and democracy for 19 years</h4>';
-$main_featured_post .= 	'<p class="aside date-meta">October 01, 2018</p>';
-$main_featured_post .= 	'<p>USAGM (then known as BBG) became an independent agency on October 1, 1999, as a result of the Foreign Affairs Reform & Restructuring Act of 1998. It would henceforth be responsible for all U.S. government and government-sponsored non-military international broadcasting.</p>';
-$main_featured_post .= 	'<p>Learn more about <a href="who-we-are/history/">USAGM\'s history</a></p>';
-echo $main_featured_post;
-// DELETE CODE BETWEEN COMMENTS 10/02/2018
+							$main_featured_post .= 	$featured_post_result['linked_media'];
+							$main_featured_post .= 	'<h4>' . $featured_post_result['linked_title'] . '</h4>';
+							$main_featured_post .= 	'<p class="aside date-meta">' . $featured_post_result['date'] . '</p>';
+							$main_featured_post .= 	'<p>' . $featured_post_result['excerpt'] . '</p>';
+							echo $main_featured_post;
 						?>
 						</div>
 						<div class="side-content-container">
