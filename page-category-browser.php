@@ -213,7 +213,7 @@ get_header();
 					get_template_part('template-parts/content-portfolio', get_post_format());
 					echo 	'</div>';
 				} else {
-					echo 	'<div class="grid-third mgmt-profile">';
+					echo 	'<div class="grid-third">';
 					$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
 					if (has_post_thumbnail()) {
 						$post_image .= get_the_post_thumbnail($post, 'medium-thumb');
@@ -230,7 +230,7 @@ get_header();
 					echo $link_header;
 
 					if (is_page('deep-dive-series')) {
-						echo wp_trim_words(get_the_excerpt());
+						// echo wp_trim_words(get_the_excerpt());
 					} else {
 						echo wp_trim_words(get_the_excerpt(), 10);
 					}
