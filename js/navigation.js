@@ -135,7 +135,6 @@ function setMegaNav() {
 	}
 }
 setMegaNav();
-console.log('1');
 
 
 // SUB NAV MENU HOVER CONNECTORS

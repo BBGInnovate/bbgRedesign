@@ -221,422 +221,407 @@ wp_reset_query();
 	}
 </style>
 
-<div id='legend' style='display:none;'>
-<strong>Threats since 2013</strong>
-  <!-- 
- <nav class='legend clearfix'>
-    <span style='background:#B66063;'></span>
-    <span style='background:#981b1e;'></span>
-    <span style='background:#000000;'></span> 
-    <label>Threatened</label>
-    <label></label>
-    <label>Killed</label>
-   <small>Source: <a href="#link to source">Name of source</a></small> -->
-</div>
+<main id="main" class="site-main" role="main">
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-		<?php if ( $custom_query->have_posts() ) : ?>
-			<div style="position: relative;">
-				<div id="map-threats" class="bbg__map--banner"></div>
-					<img id="resetZoom" src="/wp-content/themes/bbgRedesign/img/home.png" class="bbg__map__button"/>
-					<div class="usa-grid">
-						<p class="bbg__article-header__caption"><?php echo $threatsMapCaption ?></p>
-					</div>
-					<style> 
-						#mapFilters label {margin-left: 15px;}
-						.leaflet-right {display: none;}
-					</style>
-				
-					<div align="center" id="mapFilters" class="u--show-medium-large">
-						<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
-						<input type="radio" name="trainingYear" id="trainingYear_2018" value="2018" /><label for="trainingYear_2018"> 2018</label>
-						<input type="radio" name="trainingYear" id="trainingYear_2017" value="2017" /><label for="trainingYear_2017"> 2017</label>
-						<input type="radio" name="trainingYear" id="trainingYear_2016" value="2016" /><label for="trainingYear_2016"> 2016</label>
-						<input type="radio" name="trainingYear" id="trainingYear_2015" value="2015" /><label for="trainingYear_2015"> 2015</label>
-						<input type="radio" name="trainingYear" id="trainingYear_2014" value="2014" /><label for="trainingYear_2014"> 2014</label>
-						<input type="radio" name="trainingYear" id="trainingYear_2013" value="2013" /><label for="trainingYear_2013"> 2013</label>
-					</div>
-
-					<div align="center" id="mapFilters" class="u--hide-medium-large">
-						<p class="paragraph-header">Select a year</p>
-						<select name="trainingSelect">
-							<option value="all">All</option>
-							<option value="2018">2018</option>
-							<option value="2017">2017</option>
-							<option value="2016">2016</option>
-							<option value="2015">2015</option>
-							<option value="2014">2014</option>
-							<option value="2013">2013</option>
-						</select>
-					</div>
+<?php if ( $custom_query->have_posts() ) : ?>
+	<div style="position: relative;">
+		<div id="map-threats" class="bbg__map--banner"></div>
+			<img id="resetZoom" src="/wp-content/themes/bbgRedesign/img/home.png" class="bbg__map__button"/>
+			<div class="usa-grid">
+				<p class="bbg__article-header__caption"><?php echo $threatsMapCaption ?></p>
 			</div>
-
-			<section class="outer-container" style="margin-top: 3rem;">
-				<div class="grid-container">
-					<h2><?php echo $pageTitle; ?></h2>
-					<?php
-						echo '<p>' . $theContent . '</p>';
-					?>
-				</div>
-			</section>
-
-			<?php
-				$featuredJournalists = "";
-				$profilePhoto = "";
-
-				if (have_rows('featured_journalists_section')) {
-				    while (have_rows('featured_journalists_section')) {
-				    	the_row();
-						$featuredJournalistsSectionLabel = get_sub_field('featured_journalists_section_label');
-
-						if (have_rows('featured_journalist')) {
-							$featuredJournalists .= '<div class="outer-container">';
-							$featuredJournalists .= 	'<div class="grid-container">';
-							$featuredJournalists .= 		'<h3>' . $featuredJournalistsSectionLabel . '</h3>';
-							$featuredJournalists .= 	'</div>';
-
-							while (have_rows('featured_journalist')) {
-								the_row();
-								$relatedPages = get_sub_field('featured_journalist_profile');
-								$profileTitle = $relatedPages->post_title;
-								$profileName = $relatedPages->first_name . ' ' . $relatedPages->last_name;
-								$profileOccupation = $relatedPages->occupation;
-								$profilePhoto = $relatedPages->profile_photo;
-								$profileUrl = get_permalink( $relatedPages->ID );
-								$profileExcerpt = my_excerpt($relatedPages->ID);
-
-								$profileOccupation = '<span class="bbg__profile-excerpt__occupation">' . $profileOccupation .'</span>';
-
-								if ($profilePhoto) {
-									$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
-									$profilePhoto = $profilePhoto[0];
-									$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-featured__profile__mugshot"/></a>';
-								}
-
-								$featuredJournalists .= '<div class="mgmt-profile grid-half">';
-								$featuredJournalists .= 	'<h4 class="bbg__profile__name"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
-								$featuredJournalists .= 	'<p class="bbg__profile-excerpt__text">' . $profilePhoto . $profileOccupation . $profileExcerpt . '</p>';
-								$featuredJournalists .= '</div>';
-							}
-							$featuredJournalists .= '</div>';
-						}
-					}
-				}
-			?>
-
-			<section class="outer-container">
-				<div class="grid-container">
-					<?php echo '<h5 class="bbg__label"><a href="' . $threatsPermalink . '">News + updates</a></h5>'; ?>
-				</div>
-					<?php
-						$counter = 0;
-						while ( $custom_query->have_posts() ) : $custom_query->the_post();
-							$counter++;
-							//Add a check here to only show featured if it's not paginated.
-							if ($counter == 1) {
-								echo '<div class="inner-container">';
-								echo '<div class="main-content-container">';
-
-							} elseif( $counter == 2 ){
-								echo '</div><!-- left column -->';
-								echo '<div class="side-content-container">';
-								echo '<header class="page-header">';
-								echo '</header>';
-
-								//These values are used for every excerpt >=4
-								$includeImage = false;
-								$includeMeta = false;
-								$includeExcerpt = false;
-							}
-							get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
-
-						?>
-					<?php endwhile; 
-						wp_reset_postdata();
-						wp_reset_query();
-					?>
-					</div><!-- .bbg-grid right column -->
-			</section>
-			<?php endif; ?>
-
-			<?php echo $featuredJournalists; ?>
-
-			<div class="outer-container bbg__memorial">
-				<div class="grid-container">
-						<h3>Fallen journalists</h3>
-				<!-- </div> -->
-					<div class="usa-grid">
-					<!-- <div id="memorialWall"> -->
-						<?php echo $wall; ?>
-					<!-- </div> -->
-					</div>
-				</div>
-			</div>
-
-			<div class="outer-container">
-				<div class="grid-container">
-					<div class="bbg__quotation ">
-						<?php echo $quotation; ?>
-					</div>
-				</div>
-			</div>
-
-
-			<script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
-			<link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
-
-
-			<script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/leaflet.markercluster.js'></script>
-			<link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/MarkerCluster.css' rel='stylesheet' />
-			<link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/MarkerCluster.Default.css' rel='stylesheet' />
-			<!-- <script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>-->
-			<script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/master/src/subgroup.js"></script>
-
-			<style>
-				.marker-cluster-small, .marker-cluster-small div, .marker-cluster-medium, .marker-cluster-medium div  {
-					/* D4A5A8 */
-					background-color: #ba1c21 !important;
-					color:#FFF;
-				}
-				
-				.marker-cluster-large, .marker-cluster-large div {
-					/* #981b1e */
-					background-color: #7a3336 !important;
-					color:#FFF;
-					/* font-size:15px; */
-
-				} 
-				.mapBubbleDate {
-					font-style: italic;
-					margin-bottom:4px;
-				}
-				/*
-				.marker-cluster-killed div {
-					background-color: rgba(0, 0, 0, 1) !important;
-					color:#FFF;
-				}
-				*/
+			<style> 
+				#mapFilters label {margin-left: 15px;}
+				.leaflet-right {display: none;}
 			</style>
+		
+			<div align="center" id="mapFilters" class="u--show-medium-large">
+				<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
+				<input type="radio" name="trainingYear" id="trainingYear_2018" value="2018" /><label for="trainingYear_2018"> 2018</label>
+				<input type="radio" name="trainingYear" id="trainingYear_2017" value="2017" /><label for="trainingYear_2017"> 2017</label>
+				<input type="radio" name="trainingYear" id="trainingYear_2016" value="2016" /><label for="trainingYear_2016"> 2016</label>
+				<input type="radio" name="trainingYear" id="trainingYear_2015" value="2015" /><label for="trainingYear_2015"> 2015</label>
+				<input type="radio" name="trainingYear" id="trainingYear_2014" value="2014" /><label for="trainingYear_2014"> 2014</label>
+				<input type="radio" name="trainingYear" id="trainingYear_2013" value="2013" /><label for="trainingYear_2013"> 2013</label>
+			</div>
 
-			<script type="text/javascript">
-				L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
-				var initialCenter = [28.304380682962783, 22.148437500000004];
-				
-				/**** this calculation of initial zoom based on the window width is done to prevent a dramatic zoom done right when you start the map ***/
-				var initialZoom = 3;
-				if (window.innerWidth < 600) {
-					initialZoom=1;
-				} else if (window.innerWidth < 1160) {
-					initialZoom = 2;
-				}
-				var map = L.mapbox.map('map-threats', 'mapbox.emerald', {attributionControl:false}).setView(initialCenter, initialZoom);
-				map.legendControl.addLegend(document.getElementById('legend').innerHTML);
-				var attribStr = '';
-				var attribution = L.control.attribution({prefix:false, position:'topright'}).addTo(map);
-				 // attribution.setPrefix(attribStr);
-				 // //attribution.addAttribution(attribStr);
-				 // attribution.addTo(map);
+			<div align="center" id="mapFilters" class="u--hide-medium-large">
+				<p class="paragraph-header">Select a year</p>
+				<select name="trainingSelect">
+					<option value="all">All</option>
+					<option value="2018">2018</option>
+					<option value="2017">2017</option>
+					<option value="2016">2016</option>
+					<option value="2015">2015</option>
+					<option value="2014">2014</option>
+					<option value="2013">2013</option>
+				</select>
+			</div>
+	</div>
 
-				var mcg = new L.MarkerClusterGroup({
-					maxClusterRadius: <?php echo $maxClusterRadius; ?>,
-					iconCreateFunction: function (cluster) {
-						var childCount = cluster.getChildCount();
-						var c = ' marker-cluster-';
-						if (childCount < 10) {
-						    c += 'small';
-						} else if (childCount < 20) {
-						    c += 'medium';
-						} else {
-						    c += 'large';
+	<section class="outer-container" style="margin-top: 3rem;">
+		<div class="grid-container">
+			<h2><?php echo $pageTitle; ?></h2>
+			<?php
+				echo '<p>' . $theContent . '</p>';
+			?>
+		</div>
+	</section>
+
+	<?php
+		$featuredJournalists = "";
+		$profilePhoto = "";
+
+		if (have_rows('featured_journalists_section')) {
+		    while (have_rows('featured_journalists_section')) {
+		    	the_row();
+				$featuredJournalistsSectionLabel = get_sub_field('featured_journalists_section_label');
+
+				if (have_rows('featured_journalist')) {
+					$featuredJournalists .= '<div class="outer-container">';
+					$featuredJournalists .= 	'<div class="grid-container">';
+					$featuredJournalists .= 		'<h3>' . $featuredJournalistsSectionLabel . '</h3>';
+					$featuredJournalists .= 	'</div>';
+
+					while (have_rows('featured_journalist')) {
+						the_row();
+						$relatedPages = get_sub_field('featured_journalist_profile');
+						$profileTitle = $relatedPages->post_title;
+						$profileName = $relatedPages->first_name . ' ' . $relatedPages->last_name;
+						$profileOccupation = $relatedPages->occupation;
+						$profilePhoto = $relatedPages->profile_photo;
+						$profileUrl = get_permalink( $relatedPages->ID );
+						$profileExcerpt = my_excerpt($relatedPages->ID);
+
+						$profileOccupation = '<span class="bbg__profile-excerpt__occupation">' . $profileOccupation .'</span>';
+
+						if ($profilePhoto) {
+							$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
+							$profilePhoto = $profilePhoto[0];
+							$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-featured__profile__mugshot"/></a>';
 						}
-						return new L.DivIcon({ html: '<div><span><b>' + childCount + '</b></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(0, 0), iconAnchor: new L.Point(20,20) }); 
+
+						$featuredJournalists .= '<div class="mgmt-profile grid-half">';
+						$featuredJournalists .= 	'<h4 class="bbg__profile__name"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
+						$featuredJournalists .= 	'<p class="bbg__profile-excerpt__text">' . $profilePhoto . $profileOccupation . $profileExcerpt . '</p>';
+						$featuredJournalists .= '</div>';
 					}
+					$featuredJournalists .= '</div>';
+				}
+			}
+		}
+	?>
+
+	<section class="outer-container">
+		<div class="grid-container">
+			<?php echo '<h5 class="bbg__label"><a href="' . $threatsPermalink . '">News + updates</a></h5>'; ?>
+		</div>
+			<?php
+				$counter = 0;
+				while ( $custom_query->have_posts() ) : $custom_query->the_post();
+					$counter++;
+					//Add a check here to only show featured if it's not paginated.
+					if ($counter == 1) {
+						echo '<div class="inner-container">';
+						echo '<div class="main-content-container">';
+
+					} elseif( $counter == 2 ){
+						echo '</div><!-- left column -->';
+						echo '<div class="side-content-container">';
+						echo '<header class="page-header">';
+						echo '</header>';
+
+						//These values are used for every excerpt >=4
+						$includeImage = false;
+						$includeMeta = false;
+						$includeExcerpt = false;
+					}
+					get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
+
+				?>
+			<?php endwhile; 
+				wp_reset_postdata();
+				wp_reset_query();
+			?>
+			</div><!-- .bbg-grid right column -->
+	</section>
+	<?php endif; ?>
+
+	<?php echo $featuredJournalists; ?>
+
+	<div class="outer-container bbg__memorial">
+		<div class="grid-container">
+				<h3>Fallen journalists</h3>
+		<!-- </div> -->
+			<div class="usa-grid">
+			<!-- <div id="memorialWall"> -->
+				<?php echo $wall; ?>
+			<!-- </div> -->
+			</div>
+		</div>
+	</div>
+
+	<div class="outer-container">
+		<div class="grid-container">
+			<div class="bbg__quotation ">
+				<?php echo $quotation; ?>
+			</div>
+		</div>
+	</div>
+
+
+	<script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
+	<link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
+
+
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/leaflet.markercluster.js'></script>
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/MarkerCluster.css' rel='stylesheet' />
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/MarkerCluster.Default.css' rel='stylesheet' />
+	<!-- <script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>-->
+	<script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/master/src/subgroup.js"></script>
+
+	<style>
+		.marker-cluster-small, .marker-cluster-small div, .marker-cluster-medium, .marker-cluster-medium div  {
+			/* D4A5A8 */
+			background-color: #ba1c21 !important;
+			color:#FFF;
+		}
+		
+		.marker-cluster-large, .marker-cluster-large div {
+			/* #981b1e */
+			background-color: #7a3336 !important;
+			color:#FFF;
+			/* font-size:15px; */
+
+		} 
+		.mapBubbleDate {
+			font-style: italic;
+			margin-bottom:4px;
+		}
+		/*
+		.marker-cluster-killed div {
+			background-color: rgba(0, 0, 0, 1) !important;
+			color:#FFF;
+		}
+		*/
+	</style>
+
+	<script type="text/javascript">
+		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
+		var initialCenter = [28.304380682962783, 22.148437500000004];
+		
+		/**** this calculation of initial zoom based on the window width is done to prevent a dramatic zoom done right when you start the map ***/
+		var initialZoom = 3;
+		if (window.innerWidth < 600) {
+			initialZoom=1;
+		} else if (window.innerWidth < 1160) {
+			initialZoom = 2;
+		}
+		var map = L.mapbox.map('map-threats', 'mapbox.emerald', {attributionControl:false}).setView(initialCenter, initialZoom);
+		map.legendControl.addLegend(document.getElementById('legend').innerHTML);
+		var attribStr = '';
+		var attribution = L.control.attribution({prefix:false, position:'topright'}).addTo(map);
+		 // attribution.setPrefix(attribStr);
+		 // //attribution.addAttribution(attribStr);
+		 // attribution.addTo(map);
+
+		var mcg = new L.MarkerClusterGroup({
+			maxClusterRadius: <?php echo $maxClusterRadius; ?>,
+			iconCreateFunction: function (cluster) {
+				var childCount = cluster.getChildCount();
+				var c = ' marker-cluster-';
+				if (childCount < 10) {
+				    c += 'small';
+				} else if (childCount < 20) {
+				    c += 'medium';
+				} else {
+				    c += 'large';
+				}
+				return new L.DivIcon({ html: '<div><span><b>' + childCount + '</b></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(0, 0), iconAnchor: new L.Point(20,20) }); 
+			}
+		});
+		// var killedMarkers = new L.MarkerClusterGroup({
+		// 	iconCreateFunction: function (cluster) {
+		// 		var childCount = cluster.getChildCount();
+		// 		var c = ' marker-cluster-killed';
+		// 		return new L.DivIcon({ html: '<div><span><b>' + childCount + '</b></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+		// 	}
+		// });
+
+		layers = {};    
+		layersNoCluster = {};
+
+	    for (var year=2020; year >= 2013; year--) {
+     		var newLayer = L.featureGroup.subGroup(mcg);
+     		newLayer.addTo(map);
+     		layers[year] = newLayer;
+     		var newLayer2 =  L.featureGroup();
+     		layersNoCluster[year] = newLayer2;
+	    }
+
+		var markerColor = "#900";
+		for (var i = 0; i < threats.length; i++) {
+			var t = threats[i];
+
+			var headline = t.name;
+			if (t.headline != "") {
+				headline = t.headline;
+			}
+			var titleLink = "<h5>" + headline + "</h5>";
+			if (t.link != "") {
+				titleLink="<h5><a href='" + t.link + "'>" + headline + "</a></h5>";
+			}
+
+			if (false && t.status == "Killed"){
+				//this code should never get executed. It's legacy code from when the map had different behavior.  feel free to eventually delete.
+				markerColor = "#000";
+				var marker = L.marker(new L.LatLng(t.latitude, t.longitude), {
+					icon: L.mapbox.marker.icon({
+						'marker-symbol': '',
+						'marker-color': markerColor
+					})
 				});
-				// var killedMarkers = new L.MarkerClusterGroup({
-				// 	iconCreateFunction: function (cluster) {
-				// 		var childCount = cluster.getChildCount();
-				// 		var c = ' marker-cluster-killed';
-				// 		return new L.DivIcon({ html: '<div><span><b>' + childCount + '</b></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
-				// 	}
-				// });
+				marker.bindPopup(titleLink + t.description + '<BR><BR>' + t.niceDate);
+				killedMarkers.addLayer(marker);
+				//marker.addTo(map);
 
-				layers = {};    
-				layersNoCluster = {};
+			} else {
 
-			    for (var year=2020; year >= 2013; year--) {
-		     		var newLayer = L.featureGroup.subGroup(mcg);
-		     		newLayer.addTo(map);
-		     		layers[year] = newLayer;
-		     		var newLayer2 =  L.featureGroup();
-		     		layersNoCluster[year] = newLayer2;
-			    }
+				// JBF 3/8/2017: this comment block is here for the future when we re-enable colors based on status
 
-				var markerColor = "#900";
-				for (var i = 0; i < threats.length; i++) {
-					var t = threats[i];
-
-					var headline = t.name;
-					if (t.headline != "") {
-						headline = t.headline;
-					}
-					var titleLink = "<h5>" + headline + "</h5>";
-					if (t.link != "") {
-						titleLink="<h5><a href='" + t.link + "'>" + headline + "</a></h5>";
-					}
-
-					if (false && t.status == "Killed"){
-						//this code should never get executed. It's legacy code from when the map had different behavior.  feel free to eventually delete.
-						markerColor = "#000";
-						var marker = L.marker(new L.LatLng(t.latitude, t.longitude), {
-							icon: L.mapbox.marker.icon({
-								'marker-symbol': '',
-								'marker-color': markerColor
-							})
-						});
-						marker.bindPopup(titleLink + t.description + '<BR><BR>' + t.niceDate);
-						killedMarkers.addLayer(marker);
-						//marker.addTo(map);
-
-					} else {
-
-						// JBF 3/8/2017: this comment block is here for the future when we re-enable colors based on status
-
-						// if ( t.status == "threatened" || t.status == "arrested" || t.status == "detained") {
-						// 	markerColor = "#B66063";
-						// } else if ( t.status == "missing" || t.status == "attacked") {
-						// 	markerColor = "#981b1e";
-						// } else if (t.status == "killed") {
-						// 	markerColor = "#000";
-						// } else {
-						// 	//check this pin to see what the status is
-						// 	markerColor = "#F0F";
-						// }
-						markerColor = "#DB6266";
-						var marker = L.marker(new L.LatLng(t.latitude, t.longitude), {
-							icon: L.mapbox.marker.icon({
-								'marker-symbol': '',
-								'marker-color': markerColor
-							})
-						});
-
-						marker.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.niceDate + '</div>' + t.description);
-						var targetLayer = layers[t.year];
-        				marker.addTo(targetLayer);
-
-        				//we need a separate instance of the markers for the individual years because they're not supposed to have clustering
-        				var marker2 = L.marker(new L.LatLng(t.latitude, t.longitude), {
-							icon: L.mapbox.marker.icon({
-								'marker-symbol': '',
-								'marker-color': markerColor
-							})
-						});
-						marker2.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.niceDate + '</div>' + t.description);
-        				marker2.addTo(layersNoCluster[t.year])
-					}
-				}
-
-			    map.addLayer(mcg);
-			    //map.addLayer(killedMarkers);
-
-				//Disable the map scroll/zoom so that you can scroll the page.
-				map.scrollWheelZoom.disable();
-
-				function centerMap(){
-					if (activeYear == "all") {
-						lGroup = mcg;
-					} else {
-						lGroup = layersNoCluster[activeYear];
-					}
-					if (lGroup) {
-						map.fitBounds(lGroup.getBounds());
-					}
-					
-				}
-
-				//Recenter the map on resize
-				function resizeStuffOnResize(){
-				  waitForFinalEvent(function(){
-						centerMap();
-				  }, 500, "some unique string");
-				}
-
-				jQuery( "#resetZoom" ).click(function() {
-					centerMap();
+				// if ( t.status == "threatened" || t.status == "arrested" || t.status == "detained") {
+				// 	markerColor = "#B66063";
+				// } else if ( t.status == "missing" || t.status == "attacked") {
+				// 	markerColor = "#981b1e";
+				// } else if (t.status == "killed") {
+				// 	markerColor = "#000";
+				// } else {
+				// 	//check this pin to see what the status is
+				// 	markerColor = "#F0F";
+				// }
+				markerColor = "#DB6266";
+				var marker = L.marker(new L.LatLng(t.latitude, t.longitude), {
+					icon: L.mapbox.marker.icon({
+						'marker-symbol': '',
+						'marker-color': markerColor
+					})
 				});
 
-				//Wait for the window resize to 'end' before executing a function---------------
-				var waitForFinalEvent = (function () {
-					var timers = {};
-					return function (callback, ms, uniqueId) {
-						if (!uniqueId) {
-							uniqueId = "Don't call this twice without a uniqueId";
-						}
-						if (timers[uniqueId]) {
-							clearTimeout (timers[uniqueId]);
-						}
-						timers[uniqueId] = setTimeout(callback, ms);
-					};
-				})();
+				marker.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.niceDate + '</div>' + t.description);
+				var targetLayer = layers[t.year];
+				marker.addTo(targetLayer);
 
-				window.addEventListener('resize', function(event){
-					resizeStuffOnResize();
+				//we need a separate instance of the markers for the individual years because they're not supposed to have clustering
+				var marker2 = L.marker(new L.LatLng(t.latitude, t.longitude), {
+					icon: L.mapbox.marker.icon({
+						'marker-symbol': '',
+						'marker-color': markerColor
+					})
 				});
+				marker2.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.niceDate + '</div>' + t.description);
+				marker2.addTo(layersNoCluster[t.year])
+			}
+		}
 
-				resizeStuffOnResize();
+	    map.addLayer(mcg);
+	    //map.addLayer(killedMarkers);
 
-				
+		//Disable the map scroll/zoom so that you can scroll the page.
+		map.scrollWheelZoom.disable();
 
-				function setSelectedYear(year, displayMode) {
-					activeYear = year;
-					for (var p in layers) {
-						if (layers.hasOwnProperty(p)) {
-							map.removeLayer(layers[p]);
-							map.removeLayer(layersNoCluster[p]);
-						}
-					}
-					if (year == "all") {
-						for (var p in layers) {
-							if (layers.hasOwnProperty(p)) {
-								map.addLayer(layers[p]);
-							}
-						}
-					} else {
-						map.addLayer(layersNoCluster[year]);
-					}
-					//at mobile (when we're showing a select box) it helps to recenter the map after changing platforms
-					//if (displayMode=='select') {
-					//	centerMap();	
-					//}
-					
+		function centerMap(){
+			if (activeYear == "all") {
+				lGroup = mcg;
+			} else {
+				lGroup = layersNoCluster[activeYear];
+			}
+			if (lGroup) {
+				map.fitBounds(lGroup.getBounds());
+			}
+			
+		}
+
+		//Recenter the map on resize
+		function resizeStuffOnResize(){
+		  waitForFinalEvent(function(){
+				centerMap();
+		  }, 500, "some unique string");
+		}
+
+		jQuery( "#resetZoom" ).click(function() {
+			centerMap();
+		});
+
+		//Wait for the window resize to 'end' before executing a function---------------
+		var waitForFinalEvent = (function () {
+			var timers = {};
+			return function (callback, ms, uniqueId) {
+				if (!uniqueId) {
+					uniqueId = "Don't call this twice without a uniqueId";
 				}
-				jQuery( document ).ready(function() {
-					jQuery('input[type=radio][name=trainingYear]').change(function() {
-						setSelectedYear(this.value, 'radio');
-					});
-					jQuery('select[name=trainingSelect]').change(function() {
-						var year = jQuery(this).val();
-						setSelectedYear(year,'select');
-					});
-					//initialize the year to 'all' at startup
-					setSelectedYear('all');
-				});
-
-				/*
-				//Test if zoomed in
-				//Could be used for hiding or graying the home/reset button
-				function zoomLevel(){
-					console.log('check zoom: ' + map.getZoom());
-					return map.getZoom();
+				if (timers[uniqueId]) {
+					clearTimeout (timers[uniqueId]);
 				}
+				timers[uniqueId] = setTimeout(callback, ms);
+			};
+		})();
 
-				map.on('click', zoomLevel);
-				markers.on('click', zoomLevel);
-				*/
-			</script>
-		</main><!-- #main -->
-	</div><!-- #primary -->
+		window.addEventListener('resize', function(event){
+			resizeStuffOnResize();
+		});
+
+		resizeStuffOnResize();
+
+		
+
+		function setSelectedYear(year, displayMode) {
+			activeYear = year;
+			for (var p in layers) {
+				if (layers.hasOwnProperty(p)) {
+					map.removeLayer(layers[p]);
+					map.removeLayer(layersNoCluster[p]);
+				}
+			}
+			if (year == "all") {
+				for (var p in layers) {
+					if (layers.hasOwnProperty(p)) {
+						map.addLayer(layers[p]);
+					}
+				}
+			} else {
+				map.addLayer(layersNoCluster[year]);
+			}
+			//at mobile (when we're showing a select box) it helps to recenter the map after changing platforms
+			//if (displayMode=='select') {
+			//	centerMap();	
+			//}
+			
+		}
+		jQuery( document ).ready(function() {
+			jQuery('input[type=radio][name=trainingYear]').change(function() {
+				setSelectedYear(this.value, 'radio');
+			});
+			jQuery('select[name=trainingSelect]').change(function() {
+				var year = jQuery(this).val();
+				setSelectedYear(year,'select');
+			});
+			//initialize the year to 'all' at startup
+			setSelectedYear('all');
+		});
+
+		/*
+		//Test if zoomed in
+		//Could be used for hiding or graying the home/reset button
+		function zoomLevel(){
+			console.log('check zoom: ' + map.getZoom());
+			return map.getZoom();
+		}
+
+		map.on('click', zoomLevel);
+		markers.on('click', zoomLevel);
+		*/
+	</script>
+</main><!-- #main -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

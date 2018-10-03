@@ -115,8 +115,8 @@ if (have_posts()) {
 get_header();
 ?>
 
-<div id="primary" class="content-area">
-	<main id="main" role="main">
+
+<main id="main" role="main">
 
 <?php
 	$featuredImageSrc = $randomFeaturedImage['hot_spot_rotating_featured_image']['sizes']['large-thumb'];
@@ -143,131 +143,129 @@ get_header();
 	$hotspot_page_title .= '</div>';
 	// echo $hotspot_page_title;
 ?>
-		<div class="outer-container">
-			<div class="main-content-container">
+	<div class="outer-container">
+		<div class="main-content-container">
 
-				<div class="nest-container">
-					<div class="inner-container">
-						<div class="icon-side-content-container">
-							<?php echo '<img src="' . $mapImageSrc . '">'; ?>
-						</div>
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="icon-side-content-container">
+						<?php echo '<img src="' . $mapImageSrc . '">'; ?>
+					</div>
 
-						<div class="icon-main-content-container">
-						<?php
-							$hotspot_page_title  = '<h2>' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
-							$hotspot_page_title .= 	'<h5 class="entry-category bbg__profile-tagline">';
-							$hotspot_page_title .= 		'<a href="' . get_permalink(get_page_by_path('hot-spots')) . '">Hot Spots</a>';
-							$hotspot_page_title .= 	'</h5>';
-							$hotspot_page_title .= '</h2>';
-							echo $hotspot_page_title;
+					<div class="icon-main-content-container">
+					<?php
+						$hotspot_page_title  = '<h2>' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
+						$hotspot_page_title .= 	'<h5 class="entry-category bbg__profile-tagline">';
+						$hotspot_page_title .= 		'<a href="' . get_permalink(get_page_by_path('hot-spots')) . '">Hot Spots</a>';
+						$hotspot_page_title .= 	'</h5>';
+						$hotspot_page_title .= '</h2>';
+						echo $hotspot_page_title;
 
-							// PAGE CONTENT
-							$body_copy  = '<div class="page-content">';
-							$body_copy .= 	$page_content;
-							$body_copy .= '</div>';
-							echo $body_copy;
+						// PAGE CONTENT
+						$body_copy  = '<div class="page-content">';
+						$body_copy .= 	$page_content;
+						$body_copy .= '</div>';
+						echo $body_copy;
 
-							// FREEFORM TEXT AREA
-							if (have_rows('hot_spot_freeform_textareas')) {
-								while(have_rows('hot_spot_freeform_textareas')) {
-									the_row();
-									$label = get_sub_field('hot_spot_freeform_textarea_label');
-									$content = get_sub_field('hot_spot_freeform_textarea_text');
-									$content = str_replace("[threatstopress]", $threats_shortcode_result, $content);
-									echo '<h3>' . $label . '</h3>';
-									echo $content;
-								}
+						// FREEFORM TEXT AREA
+						if (have_rows('hot_spot_freeform_textareas')) {
+							while(have_rows('hot_spot_freeform_textareas')) {
+								the_row();
+								$label = get_sub_field('hot_spot_freeform_textarea_label');
+								$content = get_sub_field('hot_spot_freeform_textarea_text');
+								$content = str_replace("[threatstopress]", $threats_shortcode_result, $content);
+								echo '<h3>' . $label . '</h3>';
+								echo $content;
 							}
-						?>
-						</div>
+						}
+					?>
 					</div>
 				</div>
-
 			</div>
-			<div class="side-content-container">
 
-				<article>
-					<div class="nest-container">
-						<div class="inner-container">
-							<div class="grid-container">
-								<h5>Languages Served</h5>
-							</div>
-
-							<?php while(have_rows('hot_spot_languages')): the_row(); ?>
-								<div class="grid-container">
-									<h6><?php the_sub_field('hot_spot_language_name'); ?></h6>
-								</div>
-								<?php 
-									if( have_rows('hot_spot_language_sites') ): 
-								?>
-									<?php 
-										while(have_rows('hot_spot_language_sites')): 
-											the_row();
-											$link = get_sub_field('hot_spot_site_url');
-											$serviceInLanguage = get_sub_field('hot_spot_language_site_name_in_language');
-											$serviceInEnglish = get_sub_field('hot_spot_site_name_in_english');
-											$hotSpotNetwork = get_sub_field('hot_spot_site_network');
-											$serviceName = $serviceInLanguage;
-											$entityLogo = getTinyEntityLogo($hotSpotNetwork);
-									?>
-									<div class="inner-container">
-										<div class="small-side-content-container">
-											<img width="20" height="20" style='height:20px !important; width:20px !important; max-width:none;' src="<?php if ($entityLogo) { echo $entityLogo; } ?>" />
-											<a title="<?php echo $serviceInEnglish; ?>"  target="_blank" href="<?php echo $link; ?>" class="bbg__jobs-list__title"><?php echo $serviceName; ?></a>
-										</div>
-										<div class="small-main-content-container">
-											<?php echo str_replace("http://", "", $link); ?>
-										</div>
-									</div>
-
-									<?php endwhile; ?>
-								<?php endif; ?>
-							<?php endwhile; ?>
-						</div>
-					</div>
-				</article>
-
-				<?php 
-					if (have_rows('hot_spot_press_freedom_numbers')):
-						echo '<article>';
-						echo '<h5>Press Freedom</h5>';
-						echo $pressFreedomIntro;
-						echo '<ul>';
-						while ( have_rows('hot_spot_press_freedom_numbers') ) : the_row();
-							$countryName = get_sub_field('hot_spot_press_freedom_country_name');
-							$freedomIndex = get_sub_field('hot_spot_press_freedom_index');
-							echo "<li>$countryName ($freedomIndex)</li>";
-						endwhile;
-						echo '</ul>';
-						echo '</article>';
-					endif;
-				?>
-
-				<?php
-					$xxx = network_news_posts();
-					if (count($xxx) > 0) {
-						echo '<article class="inner-container">';
-						echo 	'<h5>News from our Networks</h5>';
-						foreach ($xxx as $news_post) {
-							$network_article  = '<div class="nest-container">';
-							$network_article .= 	'<div class="inner-container">';
-							$network_article .= 		'<div class="side-content-container">';
-							$network_article .=				'<a tabindex="-1" href="' . $news_post['url'] . '">' . $news_post['thumb'] . '</a>';
-							$network_article .=			'</div>';
-							$network_article .=			'<div class="main-content-container">';
-							$network_article .=				'<h6><a href="' . $news_post['url'] . '">' . $news_post['title'] . '</a></h6>';
-							$network_article .= 		'</div>';
-							$network_article .= 	'</div>';
-							$network_article .= '</div>';
-							echo $network_article;
-						}
-						echo '</article>';
-					}
-				?>
-			</div>
 		</div>
+		<div class="side-content-container">
 
-	</main>
-</div>
+			<article>
+				<div class="nest-container">
+					<div class="inner-container">
+						<div class="grid-container">
+							<h5>Languages Served</h5>
+						</div>
+
+						<?php while(have_rows('hot_spot_languages')): the_row(); ?>
+							<div class="grid-container">
+								<h6><?php the_sub_field('hot_spot_language_name'); ?></h6>
+							</div>
+							<?php 
+								if( have_rows('hot_spot_language_sites') ): 
+							?>
+								<?php 
+									while(have_rows('hot_spot_language_sites')): 
+										the_row();
+										$link = get_sub_field('hot_spot_site_url');
+										$serviceInLanguage = get_sub_field('hot_spot_language_site_name_in_language');
+										$serviceInEnglish = get_sub_field('hot_spot_site_name_in_english');
+										$hotSpotNetwork = get_sub_field('hot_spot_site_network');
+										$serviceName = $serviceInLanguage;
+										$entityLogo = getTinyEntityLogo($hotSpotNetwork);
+								?>
+								<div class="inner-container">
+									<div class="small-side-content-container">
+										<img width="20" height="20" style='height:20px !important; width:20px !important; max-width:none;' src="<?php if ($entityLogo) { echo $entityLogo; } ?>" />
+										<a title="<?php echo $serviceInEnglish; ?>"  target="_blank" href="<?php echo $link; ?>" class="bbg__jobs-list__title"><?php echo $serviceName; ?></a>
+									</div>
+									<div class="small-main-content-container">
+										<?php echo str_replace("http://", "", $link); ?>
+									</div>
+								</div>
+
+								<?php endwhile; ?>
+							<?php endif; ?>
+						<?php endwhile; ?>
+					</div>
+				</div>
+			</article>
+
+			<?php 
+				if (have_rows('hot_spot_press_freedom_numbers')):
+					echo '<article>';
+					echo '<h5>Press Freedom</h5>';
+					echo $pressFreedomIntro;
+					echo '<ul>';
+					while ( have_rows('hot_spot_press_freedom_numbers') ) : the_row();
+						$countryName = get_sub_field('hot_spot_press_freedom_country_name');
+						$freedomIndex = get_sub_field('hot_spot_press_freedom_index');
+						echo "<li>$countryName ($freedomIndex)</li>";
+					endwhile;
+					echo '</ul>';
+					echo '</article>';
+				endif;
+			?>
+
+			<?php
+				$xxx = network_news_posts();
+				if (count($xxx) > 0) {
+					echo '<article class="inner-container">';
+					echo 	'<h5>News from our Networks</h5>';
+					foreach ($xxx as $news_post) {
+						$network_article  = '<div class="nest-container">';
+						$network_article .= 	'<div class="inner-container">';
+						$network_article .= 		'<div class="side-content-container">';
+						$network_article .=				'<a tabindex="-1" href="' . $news_post['url'] . '">' . $news_post['thumb'] . '</a>';
+						$network_article .=			'</div>';
+						$network_article .=			'<div class="main-content-container">';
+						$network_article .=				'<h6><a href="' . $news_post['url'] . '">' . $news_post['title'] . '</a></h6>';
+						$network_article .= 		'</div>';
+						$network_article .= 	'</div>';
+						$network_article .= '</div>';
+						echo $network_article;
+					}
+					echo '</article>';
+				}
+			?>
+		</div>
+	</div>
+</main>
 
 <?php get_footer(); ?>

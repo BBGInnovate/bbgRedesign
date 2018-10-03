@@ -15,28 +15,26 @@ if( $post -> post_parent ) {
 	$parentTitle = $parent -> post_title;
 }
 
-get_header(); ?>
+get_header();
+?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
-		<?php 
-			while (have_posts()) {
-				the_post();
-				if ( $parentTitle == "Legislation" ) {
-					get_template_part('template-parts/content-law', 'page');
-				} else {
-					get_template_part('template-parts/content', 'page');
-				}
+<main id="main" class="site-main" role="main">
+	<?php 
+		while (have_posts()) {
+			the_post();
+			if ( $parentTitle == "Legislation" ) {
+				get_template_part('template-parts/content-law', 'page');
+			} else {
+				get_template_part('template-parts/content', 'page');
+			}
 
-				echo '<div class="bbg-post-footer">';
-				if ( comments_open() || get_comments_number() ) {
-					comments_template();
-				}
-				echo '</div>';
-			 }
-		 ?>
-	</main><!-- #main -->
-</div><!-- #primary -->
+			echo '<div class="bbg-post-footer">';
+			if ( comments_open() || get_comments_number() ) {
+				comments_template();
+			}
+			echo '</div>';
+		 }
+	 ?>
+</main><!-- #main -->
 
-<?php /*get_sidebar();*/ ?>
 <?php get_footer(); ?>

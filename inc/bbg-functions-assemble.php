@@ -62,8 +62,6 @@ function get_feature_media_data() {
 
 	if (!empty($featured_data)) {
 		return $featured_setup;
-	} else {
-		return '<style>#main {margin-top: 6rem;}</style>';
 	}
 }
 

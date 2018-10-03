@@ -1,6 +1,11 @@
 (function($) {
 $('document').ready(function() {
 
+// IF NO (MAIN) FEATURED IMAGE, ADD SPACE BELOW NAVBAR
+if (!($('#main').prev().hasClass('page-featured-media'))) {
+	$('#main').css('padding-top', '6rem');
+}
+
 // KEEPS FEATURED MEDIA SCALED AT HD PROPORTIONS
 function featuredMediaHD() {
 	var hd_scale = 1.77778;

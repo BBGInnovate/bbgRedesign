@@ -40,65 +40,62 @@ echo getNetworkExcerptJS();
 	border-style: solid;
 }
 </style>
+<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/ammap.js'></script>
+<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/mapdata-worldLow.js'></script>
+<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/map-hotspot.js'></script>
 
-	<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/ammap.js'></script>
-	<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/mapdata-worldLow.js'></script>
-	<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/map-hotspot.js'></script>
+<main id="main" class="site-main" role="main">
+	<div class="usa-grid-full">
+		<div class="usa-grid">
+			<header class="page-header">
+				
+				<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>">Section Title<?php //echo $parent->post_title; ?></a></h5>
+				<?php echo "<h1 class='entry-title'>$pageTitle</h1>"; ?>
+			</header><!-- .page-header -->
+			<h3 id="site-intro" class="usa-font-lead"><?php echo $pageContent; ?></h3>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-			<div class="usa-grid-full">
-				<div class="usa-grid">
-					<header class="page-header">
-						
-						<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>">Section Title<?php //echo $parent->post_title; ?></a></h5>
-						<?php echo "<h1 class='entry-title'>$pageTitle</h1>"; ?>
-					</header><!-- .page-header -->
-					<h3 id="site-intro" class="usa-font-lead"><?php echo $pageContent; ?></h3>
+		</div><!-- div.usa-grid -->
+	</div><!-- div.usa-grid-full -->
+	<section class="usa-section">
+		<div class="usa-grid">
+			<div class="btn-group entity-buttons u--show-medium-large" role="group" aria-label="..." style="clear: none;">
+				<button type="button" title="ALL" class=" btn-default all" value="all"><span class="bbg__map__button-text">ALL</span></button><!--
+				--><button type="button" title="COUNTERING VIOLENT EXTREMISM" class=" btn-default cve" value="cve"><span class="bbg__map__button-text">COUNTERING VIOLENT EXTREMISM</span></button><!--
+				--><button type="button" title="RUSSIA" class=" btn-default russia" value="russia"><span class="bbg__map__button-text">RUSSIA</span></button><!--
+				--><button type="button" title="IRAN" class=" btn-default iran" value="iran"><span class="bbg__map__button-text">IRAN</span></button><!--
+				--><button type="button" title="CHINA" class=" btn-default china" value="china"><span class="bbg__map__button-text">CHINA</span></button><!--
+				--><button type="button" title="CUBA" class=" btn-default cuba" value="cuba"><span class="bbg__map__button-text">CUBA</span></button><!--
+				--></div>
+			<div align="center" id="mapFilters" class="u--hide-medium-large">
+				<BR>
+				<select id="hotSpotPicker">
+					<option value="all">All</option>
+					<option value="cve">CVE</option>
+					<option value="russia">Russia</option>
+					<option value="iran">Iran</option>
+					<option value="china">China</option>
+					<option value="cuba">Cuba</option>
+				</select>
+			</div>
 
-				</div><!-- div.usa-grid -->
-			</div><!-- div.usa-grid-full -->
-			<section class="usa-section">
-				<div class="usa-grid">
-					<div class="btn-group entity-buttons u--show-medium-large" role="group" aria-label="..." style="clear: none;">
-						<button type="button" title="ALL" class=" btn-default all" value="all"><span class="bbg__map__button-text">ALL</span></button><!--
-						--><button type="button" title="COUNTERING VIOLENT EXTREMISM" class=" btn-default cve" value="cve"><span class="bbg__map__button-text">COUNTERING VIOLENT EXTREMISM</span></button><!--
-						--><button type="button" title="RUSSIA" class=" btn-default russia" value="russia"><span class="bbg__map__button-text">RUSSIA</span></button><!--
-						--><button type="button" title="IRAN" class=" btn-default iran" value="iran"><span class="bbg__map__button-text">IRAN</span></button><!--
-						--><button type="button" title="CHINA" class=" btn-default china" value="china"><span class="bbg__map__button-text">CHINA</span></button><!--
-						--><button type="button" title="CUBA" class=" btn-default cuba" value="cuba"><span class="bbg__map__button-text">CUBA</span></button><!--
-						--></div>
-					<div align="center" id="mapFilters" class="u--hide-medium-large">
-						<BR>
-						<select id="hotSpotPicker">
-							<option value="all">All</option>
-							<option value="cve">CVE</option>
-							<option value="russia">Russia</option>
-							<option value="iran">Iran</option>
-							<option value="china">China</option>
-							<option value="cuba">Cuba</option>
-						</select>
-					</div>
+			<div class="bbg__map-area__container " style="postion: relative;">
+				<div id="chartdiv"></div>
+			</div>
+			<div style="margin-top:1rem;" class="u--show-medium-large"><em>Hover over a country to highlight other countries in its primary hot spot.  Use the buttons at the top to view hot spots one at a time.</em></div><BR>
 
-					<div class="bbg__map-area__container " style="postion: relative;">
-						<div id="chartdiv"></div>
-					</div>
-					<div style="margin-top:1rem;" class="u--show-medium-large"><em>Hover over a country to highlight other countries in its primary hot spot.  Use the buttons at the top to view hot spots one at a time.</em></div><BR>
-
-					<div align="left" class="u--hide-medium-large">
-						<div align="center" >
-							<div class="legendBox china"></div> China 
-							<div class="legendBox cuba"></div> Cuba 
-							<div class="legendBox iran"></div> Iran 
-							<div class="legendBox russia"></div> Russia<BR>
-							<div class="legendBox cve"></div> Countering Violent Extremism
-						</div>
-					</div>
+			<div align="left" class="u--hide-medium-large">
+				<div align="center" >
+					<div class="legendBox china"></div> China 
+					<div class="legendBox cuba"></div> Cuba 
+					<div class="legendBox iran"></div> Iran 
+					<div class="legendBox russia"></div> Russia<BR>
+					<div class="legendBox cve"></div> Countering Violent Extremism
 				</div>
-			</section>
-			</div><!-- .usa-grid-full -->
-		</main><!-- #main -->
-	</div><!-- #primary -->
+			</div>
+		</div>
+	</section>
+	</div><!-- .usa-grid-full -->
+</main><!-- #main -->
 
 <?php /*get_sidebar();*/ ?>
 <?php get_footer(); ?>
