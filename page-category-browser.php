@@ -15,15 +15,15 @@ if ($pageTagline && !empty($pageTagline)){
 	$pageTagline = '<p class="lead-in">' . $pageTagline . '</p>';
 }
 
-$pageContent = "";
+$page_content = "";
 $pageTitle = "";
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
-		$pageContent = get_the_content();
 		$pageTitle = get_the_title();
 		$pageTitle = str_replace("Private: ", "", $pageTitle);
-		//$pageContent = apply_filters('the_content', $pageContent);
-   		//$pageContent = str_replace(']]>', ']]&gt;', $pageContent);
+		$page_content = do_shortcode(get_the_content());
+		$page_content = apply_filters('the_content', $page_content);
+		$ogDescription = get_the_excerpt();
 	endwhile;
 endif;
 wp_reset_postdata();
@@ -173,7 +173,11 @@ get_header();
 <main id="main" class="site-main" role="main">
 	<?php
 		if ($custom_query -> have_posts()) {
-			$page_title  = '<div class="outer-container">';
+			$page_title  = '<div class="outer-container"';
+			if (is_page('deep-dive-series')) {
+				$page_title .= 	' style="margin-bottom: 1.5rem;"';
+			}
+			$page_title .= '>';
 			$page_title .= 	'<div class="grid-container">';
 			$page_title .= 		'<h2>' . get_the_title() . '</h2>';
 			$page_title .= 		$pageTagline;
@@ -181,8 +185,17 @@ get_header();
 			$page_title .= '</div>';
 			echo $page_title;
 
+			if (is_page('deep-dive-series')) {
+				echo '<div class="outer-container" style="margin-bottom: 3rem;">';
+				echo 	'<div class="grid-container">';
+				echo 		'<div class="page-content">';
+				echo 			$page_content;
+				echo 		'</div>';
+				echo 	'</div>';
+				echo '</div>';
+			}
+
 			echo '<div class="outer-container">';
-			echo 	'<div class="grid-container">';
 			$counter = 0;
 			while ($custom_query -> have_posts())  {
 				$custom_query -> the_post();
@@ -203,7 +216,8 @@ get_header();
 					echo 	'<div class="grid-third">';
 					$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
 					if (has_post_thumbnail()) {
-						$post_image .= the_post_thumbnail('medium-thumb');
+						// $post_image .= the_post_thumbnail('medium-thumb');
+						$post_image .= get_the_post_thumbnail($post, 'medium-thumb');
 					} else {
 						$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
 					}
@@ -215,11 +229,12 @@ get_header();
 					$link_header .= 	'</a>';
 					$link_header .= '</h4>';
 					echo $link_header;
-					echo wp_trim_words(get_the_excerpt(), 10);
+					if (!is_page('deep-dive-series')) {
+						echo wp_trim_words(get_the_excerpt(), 10);
+					}
 					echo 	'<br><br><br></div>';
 				}
 			}
-			echo '</div>';
 			echo '</div>'; // END .outer-container
 
 			if ( $pageTitle != "Burke Awards archive" ) {
@@ -249,7 +264,9 @@ get_header();
 		else {
 			get_template_part('template-parts/content', 'none');
 		}
-		echo $pageContent;
+		if (!is_page('deep-dive-series')) {
+			echo $page_content;
+		}
 	?>
 </main>
 

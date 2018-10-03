@@ -70,5 +70,13 @@ $('.page-content').first().on('click', function() {
 	}
 })
 
+// GRID THIRDS
+if ($('.grid-third').length > 0) {
+	$.each($('.outer-container'), function() {
+		var grid_count = $('.grid-third').length;
+		console.log(grid_count);
+	});
+}
+
 }); // END READY
 })(jQuery);
