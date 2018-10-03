@@ -213,10 +213,9 @@ get_header();
 					get_template_part('template-parts/content-portfolio', get_post_format());
 					echo 	'</div>';
 				} else {
-					echo 	'<div class="grid-third">';
+					echo 	'<div class="grid-third mgmt-profile">';
 					$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
 					if (has_post_thumbnail()) {
-						// $post_image .= the_post_thumbnail('medium-thumb');
 						$post_image .= get_the_post_thumbnail($post, 'medium-thumb');
 					} else {
 						$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
@@ -229,7 +228,10 @@ get_header();
 					$link_header .= 	'</a>';
 					$link_header .= '</h4>';
 					echo $link_header;
-					if (!is_page('deep-dive-series')) {
+
+					if (is_page('deep-dive-series')) {
+						echo wp_trim_words(get_the_excerpt());
+					} else {
 						echo wp_trim_words(get_the_excerpt(), 10);
 					}
 					echo 	'<br><br><br></div>';
