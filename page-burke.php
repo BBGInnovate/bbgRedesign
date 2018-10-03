@@ -33,6 +33,8 @@ $activeYear = 2017;  //in theory we could let the user pick this
 
 /*** output the standard header ***/
 get_header();
+echo '<style>.bbg__main-navigation .menu-usagm-container {background-color: rgba(228, 235, 236, 0.95);}</style>';
+echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;}</style>';
 ?>
 
 <div id="primary" class="content-area">

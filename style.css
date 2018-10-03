@@ -3958,12 +3958,6 @@ object {
           padding: 0; }
           .bbg__main-navigation .menu-usagm-container ul li.menu-item-has-children ul.sub-menu li a {
             padding: 8px; }
-    .bbg__main-navigation .subnav-back {
-      position: absolute;
-      top: 14.5rem;
-      z-index: 1;
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.95); }
     .bbg__main-navigation ul {
       border-top: none;
       display: block; }
@@ -4009,7 +4003,10 @@ object {
 
 @media screen and (min-width: 1201px) {
   .bbg__main-navigation .menu-usagm-container {
-    width: 75%; } }
+    position: absolute;
+    width: 100%;
+    padding-left: 25%;
+    background-color: rgba(255, 255, 255, 0.95); } }
 
 .bbg__avatar__container {
   margin: 0 auto;

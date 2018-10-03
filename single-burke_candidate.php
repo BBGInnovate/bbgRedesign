@@ -58,7 +58,7 @@ wp_reset_postdata();
 wp_reset_query();
 
 get_header();
-echo '<style>.bbg__main-navigation .subnav-back {background-color: rgba(228, 235, 236, 0.95);}</style>';
+echo '<style>.bbg__main-navigation .menu-usagm-container {background-color: rgba(228, 235, 236, 0.95);}</style>';
 echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;}</style>';
 ?>
 
