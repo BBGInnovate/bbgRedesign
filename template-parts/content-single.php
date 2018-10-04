@@ -439,7 +439,11 @@ if ($numLogos > 0 && $numLogos < 3) {
 				$threats_header .= '</h5>';
 
 				$header_markup .= $threats_header;
-			} else {
+			}
+			else if (has_category('deep-dive-series')) {
+				$header_markup .= '<h2><a href="our-work/strategy-and-results/deep-dive-series/">Deep Dive Series</a></h2>';
+			}
+			else {
 				$header_markup .= bbginnovate_post_categories();
 			}
 			$header_markup .= '<h3>' . get_the_title() . '</h3>';

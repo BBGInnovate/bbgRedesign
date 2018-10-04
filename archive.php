@@ -11,7 +11,14 @@ get_header();
 require 'inc/bbg-functions-assemble.php';
 ?>
 
-<main id="main" class="site-main" role="main" style="margin-top: 6rem;">
+<?php
+$featured_media_result = get_feature_media_data();
+if ($featured_media_result != "") {
+	echo $featured_media_result;
+}
+?>
+
+<main id="main" class="site-main" role="main">
 
 	<?php
 		if (have_posts()) :
@@ -25,14 +32,9 @@ require 'inc/bbg-functions-assemble.php';
 				}
 				// ONLY SHOW FEATURED IF IT'S NOT PAGINATED
 				if ((!is_paged() && $counter == 1 || is_category('BBG360'))) {
-					$featured_media_result = get_feature_media_data();
-					if ($featured_media_result != "") {
-						echo $featured_media_result;
-					}
-
 					echo '<div class="outer-container">';
 					echo 	'<div class="grid-container">';
-					echo 		'<h3>' . get_the_title() . '</h3>';
+					echo 		'<h3><a href="'. get_the_permalink() . '">' . get_the_title() . '</a></h3>';
 					echo 		'<span class="lead-in">' . get_the_excerpt() . '</span>';
 					echo 	'</div>';
 					echo '</div>';
@@ -57,7 +59,7 @@ require 'inc/bbg-functions-assemble.php';
 				if ($counter > 1) {
 					$article_markup  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
 					if ($in_sidebar == false) {
-						$article_markup .= '<h4><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h4>';
+						$article_markup .= '<h3><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
 						$article_markup .= '<p class="aside date-meta">' . get_the_date() . '</p>';
 						$article_markup .= '<p>' . get_the_excerpt() . '</p>';
 					} else {
