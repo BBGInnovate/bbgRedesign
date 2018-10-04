@@ -51,6 +51,9 @@
 }
 @include media($medium-medium-screen) {
 	.grid-half {@include grid-column(6);}
+	.grid-third {@include grid-column(6);}
+}
+@include media($medium-large-screen) {
 	.grid-third {@include grid-column(4);}
 }
 

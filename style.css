@@ -4689,6 +4689,12 @@ e.g. on the intern testimonial page */
     float: left;
     margin-left: 20px; }
   .grid-third {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px; } }
+
+@media screen and (min-width: 900px) {
+  .grid-third {
     width: calc(33.33333% - 26.66667px);
     float: left;
     margin-left: 20px; } }
