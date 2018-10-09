@@ -94,7 +94,7 @@ if ($includeSidebar) {
 				$external_links .= 			'<a target="blank" href="' . $sidebarLinkLink . '">' . $sidebarLinkTitle . '</a>';
 				$external_links .= 		'</h6>';
 
-				if ($sidebarLinkDescription && $sidebarLinkDescription != "") {
+				if ($sidebarLinkDescription != "") {
 					$external_links .= '<p class="aside">';
 					$external_links .= 		$sidebarLinkDescription;
 					$external_links .= '</p>';
@@ -117,8 +117,8 @@ if ($includeSidebar) {
 				}
 				$internal_links .= 		'</a>';
 				$internal_links .= 	'</h6>';
-				if ($sidebarInternalDescription && $sidebarInternalDescription != "") {
-					$internal_links .= 	$sidebarDescription;
+				if (!empty($sidebarInternalDescription)) {
+					$internal_links .= 	$sidebarInternalDescription;
 				}
 				$internal_links .= '</article>';
 				$sidebar_markup .= $internal_links;
