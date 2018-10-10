@@ -118,6 +118,7 @@ var subnavH;
 subnavH = $('.nav-menu').outerHeight() - $('.bbg__top-nav__link-text').height();
 function setMegaNav() {
 	if ($(window).width() >= 875) {
+		$('.sub-menu').hide();
 		setTimeout(function() {
 			$('.nav-menu').mouseenter(function() {
 				clearTimeout($(this).data('timeoutId'));
@@ -128,13 +129,22 @@ function setMegaNav() {
 					$('.sub-menu').slideUp(200);
 					$('.menu-usagm-container').css('padding-bottom', '0');
 				}, 500);
-				$('.nav-menu').data('timeoutId', timeoutId);;
+				$('.nav-menu').data('timeoutId', timeoutId);
 			});
-			$('.sub-menu').hide();
 		}, 500);
+	}
+	else {
+		// KEEP SUB-NAV VISIBLE WHILE IN MOBILE WIDTHS
+		$('.sub-menu').show();
+		$('.sub-menu').css('display', 'block');
+		$('.nav-menu').off('mouseenter');
+		$('.nav-menu').off('mouseleave');
 	}
 }
 setMegaNav();
+$(window).on('resize', function() {
+	setMegaNav();
+});
 
 
 // SUB NAV MENU HOVER CONNECTORS
@@ -154,13 +164,14 @@ $('.menu-item-has-children').hover(function() {
 	$(this).children('a').css('color', '#323a45');
 });
 
-
-// FUNCTIONS TO RUN ON WINDOW RESIZE
-$(window).on('resize', function() {
-	setMegaNav();
-});
-
 }); // END READY
 })(jQuery);
 
-jQuery('.sub-menu').hide();
+function showProperNav() {
+	if (jQuery(window).width() >= 875) {
+		jQuery('.sub-menu').hide();
+	} else {
+		jQuery('.sub-menu').show();
+	}
+}
+showProperNav();
