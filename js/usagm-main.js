@@ -78,5 +78,20 @@ if ($('.grid-third').length > 0) {
 	});
 }
 
+// SIDEBAR ENTITY
+function setResponsiveHeight() {
+	if ($('.sidebar-entities').length > 0) {
+		var entityHeight = $('.entity-image-side').height();
+		$('.entity-text-side').css('height', entityHeight);
+	}
+}
+setTimeout(function() {
+	setResponsiveHeight();
+}, 200);
+
+$(window).on('resize', function() {
+	setResponsiveHeight();
+})
+
 }); // END READY
 })(jQuery);

@@ -176,12 +176,36 @@ $icon-content-grid: (
 }
 
 
-
+// TEST NEW GRIDS
+.sidebar-entities {
+	position: relative;
+	.entity-image-side {
+		@include span-columns(3);
+		img {margin-bottom: 0;}
+	}
+	.entity-text-side {
+		position: relative;
+		/* IN ORDER TO CENTER VERTICALLY, */
+		/* HEIGH IS DETERMINED BY JAVASCRIPT js/usagm-main.js */
+		@include span-columns(9);
+		.entity-title {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+}
+@include media($medium-screen) {
+	.sidebar-entities {
+		.entity-image-side {@include span-columns(2);}
+		.entity-text-side {@include span-columns(10);}
+	}
+}
+// END TEST NEW GRIDS
 
 
 
 @include media($medium-screen) {
-	// DELETE ALL THIS LATER
 	.bbg-grid--1-2-2 {@include span-columns(6); margin-right: 0;}
 	.bbg-grid--1-2-2:nth-child(2n+1) {clear: left; margin-right: $bbg-grid-gutter;}
 

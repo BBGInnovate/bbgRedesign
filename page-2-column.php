@@ -100,11 +100,11 @@ get_header();
 							echo '<h2><a href="' . $parent_link . '">' . get_the_title($post->post_parent) . '</a></h2>';
 						}
 						else {
-							$headline_string  = '<h3>' . $headline . '</h3>';
+							$headline_string  = '<h2>' . $headline . '</h2>';
 							echo $headline_string;
 						}
 
-						echo '<h3>' . get_the_title() . '</h3>';
+						// echo '<h3>' . get_the_title() . '</h3>';
 						echo '<div class="page-content">';
 						echo 	$page_content;
 						echo '</div>';
@@ -144,12 +144,12 @@ get_header();
 						$secondaryColumnContent = get_field('secondary_column_content');
 
 						if ($secondaryColumnContent != "") {
-							echo '<article>';
+							echo '<div id="right-hand-column-custom-field">';
 							if ($secondaryColumnLabel != "") {
 								echo '<h5>' . $secondaryColumnLabel . '</h5>';
 							}
 							echo $secondaryColumnContent;
-							echo '</article>';
+							echo '</div>';
 						}
 						if ($includeSidebar) {
 							echo $sidebar;

@@ -71,7 +71,7 @@ function outputBroadcasters($cols) {
 		$columnsClass = " bbg-grid--1-1-1-2";
 	}
 
-	$entity_markup  = '<article class="contain-entity side-bar-entity full-width-block">';
+	$entity_markup  = '<div class="sidebar-entities">';
 	$custom_query = new WP_Query($qParams);
 	if ($custom_query -> have_posts()) {
 		while ($custom_query -> have_posts())  {
@@ -86,22 +86,18 @@ function outputBroadcasters($cols) {
 				$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
 				$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
 
-				$entity_markup .= '<div class="nest-container">';
-				$entity_markup .= 	'<div class="inner-container">';
-				$entity_markup .= 		'<div class="entity-icon">';
-				$entity_markup .=  			'<a href="' . $link . '" tabindex="-1">';
-				$entity_markup .= 				'<img src="' . $imgSrc . '">';
-				$entity_markup .=  			'</a>';
-				$entity_markup .= 		'</div>';
-				$entity_markup .= 		'<div class="entity-desc">';
-				$entity_markup .= 			'<h4><a href="' . $link . '">' . $fullName . '</a></h4>';
-				$entity_markup .= 		'</div>';
+				$entity_markup .= '<div class="inner-container">';
+				$entity_markup .= 	'<div class="entity-image-side">';
+				$entity_markup .= 		'<img src="' . $imgSrc . '">';
+				$entity_markup .= 	'</div>';
+				$entity_markup .= 	'<div class="entity-text-side">';
+				$entity_markup .= 		'<h4 class="entity-title"><a href="' . $link . '">' . $fullName . '</a></h4>';
 				$entity_markup .= 	'</div>';
 				$entity_markup .= '</div>';
 			}
 		}
 	}
-	$entity_markup .= '</article>';
+	$entity_markup .= '</div>';
 
 	wp_reset_postdata();
 	return $entity_markup;
