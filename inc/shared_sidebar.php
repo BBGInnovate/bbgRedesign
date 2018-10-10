@@ -46,15 +46,15 @@ if ($includeSidebar) {
 
 				$sidebarImage = '';
 				if ($sidebarDownloadThumbnail && $sidebarDownloadThumbnail != "") {
-					$sidebarImage = '<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download">';
+					$sidebarImage = '<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download" style="margin-bottom: 0.5rem;">';
 				}
 
 				$sidebar_download  = '<article>';
+				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
 				$sidebar_download .= 	'<h6>';
 				$sidebar_download .= 		'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
 				$sidebar_download .= 		'<span class="bbg__file-size"><br>(' . $ext . ', ' . $filesize . ')</span>';
 				$sidebar_download .= 	'</h6>';
-				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
 				
 				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
 					$sidebar_download .= '<p class="aside">';
