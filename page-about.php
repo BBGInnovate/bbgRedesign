@@ -43,9 +43,9 @@ if (have_rows('about_flexible_page_rows')) {
 			$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
 			// DETERMINE GRID
 			$content_counter = count(get_sub_field('umbrella_content'));
-			$grid_class = 'grid-half';
+			$grid_class = 'bbg-grid--1-2-2';
 			if (isOdd($content_counter)) {
-				$grid_class = 'grid-third';
+				$grid_class = 'bbg-grid--1-2-3';
 			}
 			$umbrella_main_data_group = assemble_umbrella_main($main_umbrella_parts);
 			array_push($umbrella_group, $umbrella_main_data_group);

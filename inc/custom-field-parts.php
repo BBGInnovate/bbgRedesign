@@ -202,8 +202,9 @@ function build_ribbon_parts($ribbon_data) {
 		$ribbon_headline = '<h4>' . $ribbon_data['headline'] . '</h4>';
 	}
 	$ribbon_summary = $ribbon_data['summary'];
-	// $ribbon_image = '<img src="' . $ribbon_data['image_url'] . '">';
-	$ribbon_image = '<div style="background-image: url(' . $ribbon_data['image_url'] . ');"></div>';
+	if (!empty($ribbon_data['image_url'])) {
+		$ribbon_image = '<div style="background-image: url(' . $ribbon_data['image_url'] . ');"></div>';
+	}
 
 	$ribbon_package = array(
 		'label' => $ribbon_label,

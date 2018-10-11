@@ -78,8 +78,16 @@ $icon-content-grid: (
 	article {
 		display: inline-block;
 		vertical-align: top;
-		width: 50%;
+		width: 100%;
 		padding: 0 1.5rem 3rem 1.5rem;
+	}
+}
+@include media($medium-large-screen) {
+	.side-content-container {
+		@include grid-column(12);
+		article {
+			width: 50%;
+		}
 	}
 }
 

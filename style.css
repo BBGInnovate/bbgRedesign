@@ -4714,8 +4714,16 @@ e.g. on the intern testimonial page */
   .side-content-container article {
     display: inline-block;
     vertical-align: top;
-    width: 50%;
+    width: 100%;
     padding: 0 1.5rem 3rem 1.5rem; }
+
+@media screen and (min-width: 900px) {
+  .side-content-container {
+    width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px; }
+    .side-content-container article {
+      width: 50%; } }
 
 .medium-main-content-container {
   width: calc(100% - 40px);

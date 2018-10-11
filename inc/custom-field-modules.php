@@ -100,7 +100,8 @@ function assemble_marquee_module($umbrella_parts) {
 
 function assemble_umbrella_content_section($umbrella_parts) {
 	if (!empty($umbrella_parts)) {
-		$umbrella_content_block = '<div class="outer-container">';
+		$umbrella_content_block  = '<div class="outer-container">';
+		$umbrella_content_block .= 	'<div class="grid-container">';
 		foreach($umbrella_parts as $umbrella_chunk) {
 			$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
 			$umbrella_content_block .= 	$umbrella_chunk['column_title'];
@@ -109,6 +110,7 @@ function assemble_umbrella_content_section($umbrella_parts) {
 			$umbrella_content_block .= 	$umbrella_chunk['description'];
 			$umbrella_content_block .= '</div>';
 		}
+		$umbrella_content_block .= 	'</div>';
 		$umbrella_content_block .= '</div>';
 		return $umbrella_content_block;
 	}
@@ -118,10 +120,14 @@ function assemble_ribbon_module($ribbon_parts) {
 	if (!empty($ribbon_parts)) {
 		$ribbon_box  = '<div class="bbg__ribbon inner-ribbon">';
 		$ribbon_box .= 	'<div class="outer-container">';
-		$ribbon_box .= 		'<div class="side-content-container">';
-		$ribbon_box .= 			$ribbon_parts['image'];
-		$ribbon_box .= 		'</div>';
-		$ribbon_box .= 		'<div class="main-content-container">';
+		if (!empty($ribbon_parts['image'])) {
+			$ribbon_box .= 		'<div class="side-content-container">';
+			$ribbon_box .= 			$ribbon_parts['image'];
+			$ribbon_box .= 		'</div>';
+			$ribbon_box .= 		'<div class="main-content-container">';
+		} else {
+			$ribbon_box .= 		'<div class="grid-container">';
+		}
 		$ribbon_box .= 			$ribbon_parts['label'];
 		$ribbon_box .= 			$ribbon_parts['headline'];
 		$ribbon_box .= 			$ribbon_parts['summary'];
