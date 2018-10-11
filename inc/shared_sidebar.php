@@ -106,7 +106,7 @@ if ($includeSidebar) {
 				$sidebarInternalTitle = get_sub_field('sidebar_internal_title', false);
 				$sidebarInternalLocation = get_sub_field('sidebar_internal_location');
 				$sidebarInternalDescription = get_sub_field('sidebar_internal_description', false);
-
+// kr
 				$internal_links  = '<article>';
 				$internal_links .= 	'<h6>';
 				$internal_links .= 		'<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
@@ -459,7 +459,7 @@ if ($listsInclude) {
 				$sidebarDownloadsRows = get_sub_field('sidebar_downloads' );
 				$sidebarDownloadsTotal = count( $sidebarDownloadsRows);
 
-				$download_select  = '<article>';
+				$download_select  = '<div class="sidebar-section">';
 				$download_select .= 	'<h5>' . $sidebarDownloadsTitle . '</h5>';
 
 				if ($sidebarDownloadsTotal >= 2) {
@@ -487,10 +487,10 @@ if ($listsInclude) {
 						$download_select .= 	'</option>';
 					}
 
-					$download_select .= 		'</select>';
-					$download_select .= 	'</form>';
-					$download_select .= 	'<button class="usa-button downloadFile" id="downloadFile" style="width: 100%;">Download</button>';
-					$download_select .= '</article>';
+					$download_select .= 	'</select>';
+					$download_select .= '</form>';
+					$download_select .= '<button class="usa-button downloadFile" id="downloadFile" style="width: 100%;">Download</button>';
+					$download_select .= '</div>';
 					$s .= $download_select;
 				}
 				else {
@@ -525,7 +525,7 @@ if ($listsInclude) {
 				$sidebarInternalDefault = get_sub_field('sidebar_internal_default');
 				$sidebarInternalRows = get_sub_field('sidebar_internal_objects');
 
-				$sidebar_internal_links  = '<article>';
+				$sidebar_internal_links  = '<div class="sidebar-section">';
 
 				if (count($sidebarInternalRows) < 5) {
 					$sidebar_internal_links .= '<h5>' . $sidebarInternalTitle . '</h5>';
@@ -566,7 +566,7 @@ if ($listsInclude) {
 					$sidebar_form .= '<button class="usa-button internalLink" style="width: 100%;">Go</button>';
 					$s .= $sidebar_form;
 				}
-				$s .= '</article>';
+				$s .= '</div>';
 			}
 		endwhile;
 		$sidebarDownloads = $s;

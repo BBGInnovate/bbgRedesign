@@ -59,6 +59,8 @@
 
 // 3. SIDEBARS
 // CUSTOM SIDEBAR GRID
+.sidebar-section {margin-bottom: 3rem;}
+
 $sidebar-grid: (
 	columns: 12,
 	gutter: 30px,
@@ -77,7 +79,7 @@ $icon-content-grid: (
 		display: inline-block;
 		vertical-align: top;
 		width: 50%;
-		padding: 0 1.5rem;
+		padding: 0 1.5rem 3rem 1.5rem;
 	}
 }
 
@@ -96,15 +98,6 @@ $icon-content-grid: (
 @include media($small-screen) {
 	.small-main-content-container {@include grid-column(9);}
 	.small-side-content-container {@include grid-column(3);}
-}
-
-@include media($medium-screen) {
-	.icon-side-content-container {
-		img {width: 25%;}
-	}
-	.side-content-container {
-		article {width: 25%;}
-	}
 }
 
 @include media($medium-medium-screen) {

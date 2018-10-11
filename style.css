@@ -4699,6 +4699,9 @@ e.g. on the intern testimonial page */
     float: left;
     margin-left: 20px; } }
 
+.sidebar-section {
+  margin-bottom: 3rem; }
+
 .main-content-container {
   width: calc(100% - 40px);
   float: left;
@@ -4712,7 +4715,7 @@ e.g. on the intern testimonial page */
     display: inline-block;
     vertical-align: top;
     width: 50%;
-    padding: 0 1.5rem; }
+    padding: 0 1.5rem 3rem 1.5rem; }
 
 .medium-main-content-container {
   width: calc(100% - 40px);
@@ -4755,12 +4758,6 @@ e.g. on the intern testimonial page */
     width: calc(25% - 25px);
     float: left;
     margin-left: 20px; } }
-
-@media screen and (min-width: 600px) {
-  .icon-side-content-container img {
-    width: 25%; }
-  .side-content-container article {
-    width: 25%; } }
 
 @media screen and (min-width: 700px) {
   .medium-main-content-container {

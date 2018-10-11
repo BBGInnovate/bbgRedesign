@@ -93,5 +93,14 @@ $(window).on('resize', function() {
 	setResponsiveHeight();
 })
 
+// MAKE SURE ALL SIDEBAR PARAGRAPHS HAVE CLASS OF ASIDE
+if ($('.sidebar-section').length > 0) {
+	$.each($('.sidebar-section p'), function() {
+		if (!$(this).hasClass('aside')) {
+			$(this).addClass('aside');
+		}
+	});
+}
+
 }); // END READY
 })(jQuery);
