@@ -169,7 +169,8 @@ if ($custom_query->have_posts()) :
 		$counter = 0;
 		while ($custom_query->have_posts()) : $custom_query->the_post();
 			$id = get_the_ID();
-			$location = get_post_meta($id, 'map_location', true);
+			// $location = get_post_meta($id, 'map_location', true);
+			$location = get_field('map_location');
 			$storyLink = get_permalink();
 			$mapHeadline = get_post_meta($id, 'map_headline', true);
 			$mapDescription = get_the_title();
