@@ -3,6 +3,10 @@
 function get_feature_media_data() {
 	$feature_gallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
 	$banner_position = get_field('adjust_the_banner_image', '', true);
+	$banner_position_css_override = get_field('adjust_the_banner_image_css', '', true);
+	if (!empty($banner_position_css_override)) {
+		$banner_position = $banner_position_css_override;
+	}
 	$video_url = get_field('featured_video_url', '', true);
 	$addFeaturedMap = get_post_meta(get_the_ID(), 'featured_map_add', true);
 	$media_dev_map = get_field('media_dev_coordinates');
