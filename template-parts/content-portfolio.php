@@ -26,7 +26,7 @@ if (isset($_GET['category_id'])) {
 }
 
 echo '<article id="'. get_the_ID() . '">';
-	$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
+	$post_image  = '<a href="' . $postPermalink . '">';
 	if (has_post_thumbnail()) {
 		$post_image .= the_post_thumbnail('medium-thumb');
 	} else {
@@ -38,7 +38,7 @@ echo '<article id="'. get_the_ID() . '">';
 	echo buildLabel(implode(get_post_class($classNames))); //check bbg-functions-utilities
 
 	$link_header  = '<h4>';
-	$link_header .= 	'<a href="' . $postPermalink . ' rel="bookmark">';
+	$link_header .= 	'<a href="' . $postPermalink . '">';
 	$link_header .= 		get_the_title();
 	$link_header .= 	'</a>';
 	$link_header .= '</h4>';
@@ -57,7 +57,7 @@ echo '<article id="'. get_the_ID() . '">';
 				echo '<p><strong>Network:</strong> ' . $burkeNetwork . '</p>';
 				echo '<p>' . $burkeReason[0] . '</p>';
 			} else {
-				echo wp_trim_words(get_the_excerpt(), 10);
+				the_excerpt();
 			}
 
 			wp_link_pages(array(
