@@ -103,7 +103,7 @@ if (is_page('media-development')) {
 
 			$id = get_the_ID();
 			// $location = get_post_meta($id, 'media_dev_coordinates', true);
-			$location = get_field('media_dev_coordinates');
+			$location = get_field('media_dev_coordinates', $id);
 			$story_link = get_permalink($id);
 			$training_name = get_post_meta($id, 'media_dev_name_of_training', true);
 			$training_year = get_post_meta($id, 'media_dev_years', true);

@@ -201,8 +201,12 @@ $rssItems = array();
 $itemContainer = false;
 $languageDirection = "";
 
-if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
-	$itemContainer = $entityJson->channel;
+if ($entityJson != false) {
+	if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
+		$itemContainer = $entityJson->channel;
+	} else {
+		$itemContainer = $entityJson;
+	}
 } else {
 	$itemContainer = $entityJson;
 }
