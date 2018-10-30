@@ -5964,7 +5964,9 @@ div.banner_readmore h6 a:visited {
       font-size: 1rem; } }
 
 .bbg__entity__pullquote {
-  margin-top: 6rem; }
+  margin-top: 6rem;
+  margin-right: 20px;
+  margin-left: 20px; }
 
 /****************************************************/
 /* PAGE HEADER STYLES                               */
@@ -6766,6 +6768,101 @@ section.usa-section.bbg-banner__section {
   font-weight: normal;
   line-height: 1.7; }
 
+.icon-side-content-container img {
+  margin-right: 1.5rem; }
+
+.icon-side-content-container #reach-entity {
+  display: inline-block;
+  vertical-align: top; }
+  .icon-side-content-container #reach-entity .entity-left-article {
+    margin-bottom: 1rem; }
+    .icon-side-content-container #reach-entity .entity-left-article * {
+      display: inline-block;
+      margin-bottom: 0; }
+    .icon-side-content-container #reach-entity .entity-left-article h5, .icon-side-content-container #reach-entity .entity-left-article .bbg__sidebar__table th, .bbg__sidebar__table .icon-side-content-container #reach-entity .entity-left-article th {
+      margin-right: 1.5rem; }
+
+@media screen and (min-width: 700px) {
+  .icon-side-content-container {
+    text-align: right; }
+    .icon-side-content-container #reach-entity {
+      text-align: left; } }
+
+@media screen and (min-width: 900px) {
+  .icon-side-content-container img {
+    margin-right: 0; }
+  .icon-side-content-container #reach-entity {
+    display: inherit; }
+    .icon-side-content-container #reach-entity .entity-left-article * {
+      margin-bottom: inherit; }
+    .icon-side-content-container #reach-entity .entity-left-article h5, .icon-side-content-container #reach-entity .entity-left-article .bbg__sidebar__table th, .bbg__sidebar__table .icon-side-content-container #reach-entity .entity-left-article th {
+      margin-right: 0; } }
+
+.side-content-container .side-recent-stories .post-group {
+  width: 99%;
+  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
+  margin-left: 1px;
+  background-color: #f1f1f1; }
+  .side-content-container .side-recent-stories .post-group .post-image {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 0; }
+    .side-content-container .side-recent-stories .post-group .post-image img {
+      margin-bottom: 0; }
+  .side-content-container .side-recent-stories .post-group .post-copy {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px; }
+    .side-content-container .side-recent-stories .post-group .post-copy .aside {
+      display: none; }
+
+@media screen and (min-width: 600px) {
+  .side-content-container .side-recent-stories .post-group .post-image {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px; }
+  .side-content-container .side-recent-stories .post-group .post-copy {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; }
+    .side-content-container .side-recent-stories .post-group .post-copy .aside {
+      display: block;
+      margin-bottom: 0; } }
+
+@media screen and (min-width: 700px) {
+  .side-content-container .side-recent-stories .post-group .post-image {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
+  .side-content-container .side-recent-stories .post-group .post-copy {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; } }
+
+@media screen and (min-width: 900px) {
+  .side-content-container .side-recent-stories .post-group {
+    width: auto;
+    padding: 0 0 1.5rem 0;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 0;
+    background-color: inherit; }
+    .side-content-container .side-recent-stories .post-group .post-image {
+      width: calc(33.33333% - 26.66667px);
+      float: left;
+      margin-left: 20px; }
+    .side-content-container .side-recent-stories .post-group .post-copy {
+      width: calc(66.66667% - 33.33333px);
+      float: left;
+      margin-left: 20px; }
+      .side-content-container .side-recent-stories .post-group .post-copy .aside {
+        display: none; } }
+
+.bbg__contact-card:first-of-type {
+  margin-bottom: 0; }
+
 .bbg__contact-card {
   background-color: #f1f1f1;
   border-radius: 0.3rem;
@@ -6799,11 +6896,6 @@ section.usa-section.bbg-banner__section {
       margin-bottom: 0;
       position: relative;
       width: 100%; }
-      @media screen and (min-width: 600px) {
-        .bbg__contact-card.bbg__contact-card--include-map .bbg__contact-card__map {
-          height: 100%;
-          position: absolute;
-          width: 50%; } }
       @media screen and (min-width: 900px) {
         .bbg__contact-card.bbg__contact-card--include-map .bbg__contact-card__map {
           height: 200px;

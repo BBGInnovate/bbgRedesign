@@ -400,32 +400,37 @@ get_header();
 				<div class="inner-container">
 					<div class="icon-side-content-container">
 						<img src="<?php echo $entityLogo; ?>">
-						
-						<h5>Website</h5>
-						<p class="aside"><?php echo strtolower($websiteName); ?></p>
+						<div id="reach-entity">
+							<div class="entity-left-article">
+								<h5>Website</h5>
+								<p class="aside"><?php echo strtolower($websiteName); ?></p>
+							</div>
 
-						<?php
-							if (!empty($facebook) || !empty($twitterProfileHandle) || !empty($instagram)) {
-								echo '<article>';
-								echo 	'<h5>Social Media</h5>';
-								if (!empty($facebook)) {
-									echo '<a href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
-									echo 	'<span class="bbg__article-share__icon facebook"></span>';
-									echo '</a>';
+							<?php
+								if (!empty($facebook) || !empty($twitterProfileHandle) || !empty($instagram)) {
+									echo '<div class="entity-left-article">';
+									echo 	'<h5>Social Media</h5>';
+									echo 	'<p>';
+									if (!empty($facebook)) {
+										echo '<a href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
+										echo 	'<span class="bbg__article-share__icon facebook"></span>';
+										echo '</a>';
+									}
+									if (!empty($twitterProfileHandle)) {
+										echo '<a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . get_the_title() . ' on Twitter">';
+										echo 	'<span class="bbg__article-share__icon twitter"></span>';
+										echo '</a>';
+									}
+									if (!empty($instagram)) {
+										echo '<a href="https://instagram.com/' . $instagram . '" title="Follow ' . get_the_title() . ' on Instagram">';
+										echo 	'<span class="bbg__article-share__icon instagram"></span>';
+										echo '</a>';
+									}
+									echo 	'</p>';
+									echo '</div>';
 								}
-								if (!empty($twitterProfileHandle)) {
-									echo '<a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . get_the_title() . ' on Twitter">';
-									echo 	'<span class="bbg__article-share__icon twitter"></span>';
-									echo '</a>';
-								}
-								if (!empty($instagram)) {
-									echo '<a href="https://instagram.com/' . $instagram . '" title="Follow ' . get_the_title() . ' on Instagram">';
-									echo 	'<span class="bbg__article-share__icon instagram"></span>';
-									echo '</a>';
-								}
-								echo '</article>';
-							}
-						?>
+							?>
+						</div>
 					</div>
 					<div class="icon-main-content-container">
 						<?php echo '<h2>' . $fullName . '</h2>'; ?>
@@ -475,12 +480,12 @@ get_header();
 			$ethics_data = get_journalistic_code_of_ethics_data();
 			$ethics_parts = build_ethics_file_parts($ethics_data);
 			if (!empty($ethics_parts)) {
-				echo '<aside>';
+				echo '<article>';
 				echo '<h5>Journalistic Standards</h5>';
 				foreach($ethics_parts as $ethic) {
 					echo $ethic;
 				}
-				echo '</aside>';
+				echo '</article>';
 			}
 
 
@@ -489,24 +494,25 @@ get_header();
 			echo '</article>';
 
 			if (count($rssItems)) {
-				$rss_markup  = '<article class="inner-container">';
+				$rss_markup  = '<article class="inner-container side-recent-stories">';
 				$rss_markup .= 	'<h5>Recent stories from ' . $websiteName . '</h5>';
 				$maxRelatedStories = 3;
 				for ($i = 0; $i < min($maxRelatedStories, count($rssItems)); $i++) {
 					$o = $rssItems[$i];
-					$rss_markup .= '<div class="nest-container">';
+					$short_copy = wp_trim_words($o['description'], 15, ' ...');
+
+					$rss_markup .= '<div class="nest-container post-group">';
 					$rss_markup .= 	'<div class="inner-container">';
-					$rss_markup .= 		'<div class="side-content-container">';
+					$rss_markup .= 		'<div class="post-image">';
 					if ($o['image'] != "") {
 						$rss_markup .= 		'<a href="' . $o['url'] . '">';
-						$rss_markup .= 			'<img src="' . $o['image'] . '" />';
+						$rss_markup .= 			'<img src="' . $o['image'] . '">';
 						$rss_markup .= 		'</a>';
 					}
 					$rss_markup .= 		'</div>';
-					$rss_markup .= 		'<div class="main-content-container">';
-					$rss_markup .= 			'<h6>';
-					$rss_markup .= 				'<a href="' . $o['url'] . '">' . $o['title'] . '</a>';
-					$rss_markup .= 			'</h6>';
+					$rss_markup .= 		'<div class="post-copy">';
+					$rss_markup .= 			'<h6><a href="' . $o['url'] . '">' . $o['title'] . '</a></h6>';
+					$rss_markup .= 			'<p class="aside">' . $short_copy . '</p>';
 					$rss_markup .= 		'</div>';
 					$rss_markup .= 	'</div>';
 					$rss_markup .= '</div>';
@@ -541,24 +547,23 @@ get_header();
 
 			// CONTACT INFORMATION
 			if ($includeContactBox) {
-				$contact_box  = 	'<article class="inner-container bbg__contact-card';
+				$contact_box  = '<article class="inner-container">';
+				$contact_box .= 	'<h5>Contact information</h5>';
 				if ($includeMap) {
-					$contact_box .= ' bbg__contact-card--include-map';
-				}
-				$contact_box .= 	'">';
-				if ($includeMap) {
+					$contact_box .= '<div class="bbg__contact-card bbg__contact-card--include-map">';
 					$contact_box .= 	'<div id="map" class="bbg__contact-card__map"></div>';
+					$contact_box .= '</div>';
 				}
-				$contact_box .= 		'<div class="grid-container">';
-				$contact_box .= 			'<h4>Contact information</h4>';
-				$contact_box .= 			$address;
-				$contact_box .= 			'<ul class="no-list-style">';
-				$contact_box .= 				$phone_li;
-				$contact_box .= 				$email_li;
-				$contact_box .= 				$learnMore;
-				$contact_box .= 			'</ul>';
-				$contact_box .= 		'</div>';
-				$contact_box .= 	'</article>';
+				$contact_box .= 	'<div class="bbg__contact-card">';
+				// $contact_box .= 		'<h4>Contact information</h4>';
+				$contact_box .= 		$address;
+				$contact_box .= 		'<ul class="no-list-style">';
+				$contact_box .= 			$phone_li;
+				$contact_box .= 			$email_li;
+				$contact_box .= 			$learnMore;
+				$contact_box .= 		'</ul>';
+				$contact_box .= 	'</div>';
+				$contact_box .= '</article>';
 				echo $contact_box;
 			}
 		?>

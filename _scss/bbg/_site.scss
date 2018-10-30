@@ -713,7 +713,11 @@ div.banner_readmore h6 a:visited {
     }
 }
 
-.bbg__entity__pullquote {margin-top: $site-margins-large;}
+.bbg__entity__pullquote {
+    margin-top: $site-margins-large;
+    margin-right: 20px;
+    margin-left: 20px;
+}
 
 
 /****************************************************/

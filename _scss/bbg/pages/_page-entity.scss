@@ -1,3 +1,107 @@
+// NETWORK INFORMATION AT TOP (MOBILE), LEFT (DESKTOP)
+.icon-side-content-container {
+	img {margin-right: 1.5rem;}
+	#reach-entity {
+		display: inline-block;
+		vertical-align: top;
+		.entity-left-article {
+			margin-bottom: 1rem;
+			* {
+				display: inline-block;
+				margin-bottom: 0;
+			}
+			h5 {margin-right: 1.5rem;}
+		}
+	}
+}
+@include media($medium-medium-screen) {
+	.icon-side-content-container {
+		text-align: right;
+		#reach-entity {text-align: left;}
+	}
+}
+@include media($medium-large-screen) {
+	.icon-side-content-container {
+		img {margin-right: 0;}
+		#reach-entity {
+			display: inherit;
+			.entity-left-article {
+				* {margin-bottom: inherit;}
+				h5 {margin-right: 0;}
+			}
+		}
+	}
+}
+
+// SIDEBAR RECENT STORIES
+.side-content-container {
+	.side-recent-stories {
+		.post-group {
+			width: 99%;
+			padding: 1.5rem 0;
+			margin-bottom: 1.5rem;
+			margin-left: 1px;
+			background-color: #f1f1f1;
+			.post-image {
+				@include grid-column(6);
+				margin-bottom: 0;
+				img {margin-bottom: 0;}
+			}
+			.post-copy {
+				@include grid-column(6);
+				.aside {display: none;}
+			}
+		}
+	}
+}
+@include media($medium-screen) {
+	.side-content-container {
+		.side-recent-stories {
+			.post-group {
+				.post-image {@include grid-column(4);}
+				.post-copy {
+					@include grid-column(8);
+					.aside {
+						display: block;
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+	}
+}
+@include media($medium-medium-screen) {
+	.side-content-container {
+		.side-recent-stories {
+			.post-group {
+				.post-image {@include grid-column(3);}
+				.post-copy {@include grid-column(9);}
+			}
+		}
+	}
+}
+@include media($medium-large-screen) {
+	.side-content-container {
+		.side-recent-stories {
+			.post-group {
+				width: auto;
+				padding: 0 0 1.5rem 0;
+				margin-left: -20px;
+				margin-right: -20px;
+				margin-bottom: 0;
+				background-color: inherit;
+				.post-image {@include grid-column(4);}
+				.post-copy {
+					@include grid-column(8);
+					.aside {display: none;}
+				}
+			}
+		}
+	}
+}
+
+// CONTACT CARD, MAP
+.bbg__contact-card:first-of-type {margin-bottom: 0;}
 .bbg__contact-card {
 	background-color: $color-gray-lightest;
 	border-radius: $border-radius;
@@ -40,12 +144,6 @@
 			margin-bottom: 0;
 			position: relative;
 			width: 100%;
-
-			@include media($medium-screen) {
-				height: 100%;
-				position: absolute;
-				width: 50%;
-			}
 
 			@include media($medium-large-screen) {
 				height: 200px;
