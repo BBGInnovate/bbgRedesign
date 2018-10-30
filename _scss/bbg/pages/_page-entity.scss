@@ -1,6 +1,10 @@
 // NETWORK INFORMATION AT TOP (MOBILE), LEFT (DESKTOP)
 .icon-side-content-container {
-	img {margin-right: 1.5rem;}
+	img {
+		width: 69px;
+		height: 69px;
+		margin-right: 1.5rem;
+	}
 	#reach-entity {
 		display: inline-block;
 		vertical-align: top;
@@ -14,15 +18,13 @@
 		}
 	}
 }
-@include media($medium-medium-screen) {
-	.icon-side-content-container {
-		text-align: right;
-		#reach-entity {text-align: left;}
-	}
-}
 @include media($medium-large-screen) {
 	.icon-side-content-container {
-		img {margin-right: 0;}
+		img {
+			width: 100%;
+			height: auto;
+			margin-right: 0;
+		}
 		#reach-entity {
 			display: inherit;
 			.entity-left-article {
@@ -107,6 +109,8 @@
 	border-radius: $border-radius;
 	margin-bottom: $site-margins;
 	padding: $site-margins;
+	
+	ul {margin-bottom: 0;}
 
 	@include media($medium-screen) {
 		position: relative;

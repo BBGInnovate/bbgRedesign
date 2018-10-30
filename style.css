@@ -6769,6 +6769,8 @@ section.usa-section.bbg-banner__section {
   line-height: 1.7; }
 
 .icon-side-content-container img {
+  width: 69px;
+  height: 69px;
   margin-right: 1.5rem; }
 
 .icon-side-content-container #reach-entity {
@@ -6782,14 +6784,10 @@ section.usa-section.bbg-banner__section {
     .icon-side-content-container #reach-entity .entity-left-article h5, .icon-side-content-container #reach-entity .entity-left-article .bbg__sidebar__table th, .bbg__sidebar__table .icon-side-content-container #reach-entity .entity-left-article th {
       margin-right: 1.5rem; }
 
-@media screen and (min-width: 700px) {
-  .icon-side-content-container {
-    text-align: right; }
-    .icon-side-content-container #reach-entity {
-      text-align: left; } }
-
 @media screen and (min-width: 900px) {
   .icon-side-content-container img {
+    width: 100%;
+    height: auto;
     margin-right: 0; }
   .icon-side-content-container #reach-entity {
     display: inherit; }
@@ -6868,6 +6866,8 @@ section.usa-section.bbg-banner__section {
   border-radius: 0.3rem;
   margin-bottom: 3rem;
   padding: 3rem; }
+  .bbg__contact-card ul {
+    margin-bottom: 0; }
   @media screen and (min-width: 600px) {
     .bbg__contact-card {
       position: relative; } }
