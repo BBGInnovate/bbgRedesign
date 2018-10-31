@@ -573,14 +573,13 @@ ul.bbg__article-content__list--inline {
 		@include backgroundCover();
 		border-radius: $border-radius;
 		display: inline-block;
-		height: $share-icon-large;
+		width: $share-icon-small;
+		height: $share-icon-small;
 		margin-right: .5rem;
+		margin-bottom: 0;
 		vertical-align: middle;
-		width: $share-icon-large;
 		@include media($medium-screen) {
 			border-radius: 0;
-			height: $share-icon-small;
-			width: $share-icon-small;
 		}
 	}
 

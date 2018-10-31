@@ -555,7 +555,6 @@ get_header();
 					$contact_box .= '</div>';
 				}
 				$contact_box .= 	'<div class="bbg__contact-card">';
-				// $contact_box .= 		'<h4>Contact information</h4>';
 				$contact_box .= 		$address;
 				$contact_box .= 		'<ul class="no-list-style">';
 				$contact_box .= 			$phone_li;
