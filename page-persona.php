@@ -45,7 +45,7 @@ get_header(); ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
 			<div class="outer-container">
-				<div class="inner-container">
+				<div class="grid-container">
 					<header class="page-header">
 						<?php if( $post->post_parent ) {
 							//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
