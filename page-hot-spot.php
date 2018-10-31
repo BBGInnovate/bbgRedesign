@@ -212,7 +212,7 @@ get_header();
 								?>
 								<div class="inner-container">
 									<div class="small-side-content-container">
-										<img width="20" height="20" style='height:20px !important; width:20px !important; max-width:none;' src="<?php if ($entityLogo) { echo $entityLogo; } ?>" />
+										<img width="20" height="20" style="height:20px !important; width:20px !important; max-width:none; margin-bottom:0;" src="<?php if ($entityLogo) { echo $entityLogo; } ?>" />
 										<a title="<?php echo $serviceInEnglish; ?>"  target="_blank" href="<?php echo $link; ?>" class="bbg__jobs-list__title"><?php echo $serviceName; ?></a>
 									</div>
 									<div class="small-main-content-container">
