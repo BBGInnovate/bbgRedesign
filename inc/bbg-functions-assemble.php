@@ -11,7 +11,7 @@ function get_feature_media_data() {
 	$addFeaturedMap = get_post_meta(get_the_ID(), 'featured_map_add', true);
 	$media_dev_map = get_field('media_dev_coordinates');
 
-	if ($video_url != "") {
+	if ($video_url != "" && !empty($addFeaturedMap)) {
 		$featured_data = "";
 		$video_data = featured_video($video_url);
 
