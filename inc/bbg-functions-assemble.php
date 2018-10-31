@@ -11,15 +11,19 @@ function get_feature_media_data() {
 	$addFeaturedMap = get_post_meta(get_the_ID(), 'featured_map_add', true);
 	$media_dev_map = get_field('media_dev_coordinates');
 
-	if ($video_url != "" && !empty($addFeaturedMap)) {
+	if ($video_url != "") {
 		$featured_data = "";
 		$video_data = featured_video($video_url);
 
 		$video_markup  = '<div class="page-featured-media">';
-		$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
-		$video_markup .= 		$video_data['url'];
-		$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
-		$video_markup .= 	'</iframe>';
+		if ($video_data['extra_classes'] == 'facebook') {
+			$video_markup .= 	$video_data['url'];
+		} else {
+			$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
+			$video_markup .= 		$video_data['url'];
+			$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
+			$video_markup .= 	'</iframe>';
+		}
 		$video_markup .= '</div>';
 		$featured_data = $video_markup;
 	}

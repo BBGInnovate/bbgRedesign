@@ -402,6 +402,8 @@ add_filter('embed_oembed_html', 'custom_youtube_settings');
 function featured_video ($url) {
 	if(strpos($url, 'facebook.com')) {
 		$return = apply_filters('the_content',$url);
+		$video_package = array('extra_classes' => 'facebook', 'url' => $return);
+		return $video_package;
 	} else {
 		if(strpos($url, 'youtu.be') !== false) {
 			//URL's of the youtu.be form, which are what you get click share, don't naturally embed.  let's transform them.
@@ -439,7 +441,7 @@ function featured_video ($url) {
 		$video_package = array('extra_classes' => $extraClass, 'url' => $url);
 		return $video_package;
 	}
-	return $return;
+	// return $return;
 }
 
 function featured_timeline ($url) {
