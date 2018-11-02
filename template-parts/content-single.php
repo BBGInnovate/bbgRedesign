@@ -15,7 +15,7 @@ $includeDateline = get_post_meta(get_the_ID(), 'include_dateline', true);
 if (in_category('Press Release') && $includeDateline) {
 	$dateline  = '<span class="bbg__article-dateline">';
 	$dateline .= 	get_post_meta( get_the_ID(), 'dateline_location', true);
-	$dateline .= " — </span>";
+	$dateline .= ' — </span>';
 }
 
 // DATELINE GOES INSIDE FIRST PARAGRAPH TAG FOR FORMATTING
@@ -23,8 +23,8 @@ $pageContent = get_the_content();
 $pageContent = apply_filters('the_content', $pageContent);
 $pageContent = str_replace(']]>', ']]&gt;', $pageContent);
 if ($dateline != "") {
-	$needle = "<p>";
-	$replaceNeedle = "<p>" . $dateline;
+	$needle = '<p>';
+	$replaceNeedle = '<p>' . $dateline;
 	$pos = strpos($pageContent, $needle);
 	if ($pos !== false) {
 		$pageContent = substr_replace($pageContent, $replaceNeedle, $pos, strlen($needle));
@@ -331,18 +331,14 @@ if ($addFeaturedMap) {
 
 $media_dev_sponsors = "";
 if (have_rows('media_dev_sponsors')) {
-	$media_dev_sponsors .= '<h3 class="bbg__sidebar-label">Funders</h3>';
+	$media_dev_sponsors .= '<h5>Funders</h5>';
 	if(have_rows('media_dev_sponsors')) {
-		$media_dev_sponsors .= '<ul class="usa-unstyled-list">';
+		$media_dev_sponsors .= '<ul>';
 		while (have_rows('media_dev_sponsors')) {
 			the_row();
 			$sponsorName = get_sub_field('media_dev_participant_name');
 
-			$media_dev_sponsors .= '<li>';
-			$media_dev_sponsors .= 	'<h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name">';
-			$media_dev_sponsors .= 		$sponsorName;
-			$media_dev_sponsors .= 	'</h5>';
-			$media_dev_sponsors .= '</li>';
+			$media_dev_sponsors .= '<li><h6>' . $sponsorName . '</h6>';
 		}
 		$media_dev_sponsors .= '</ul>';
 	}
@@ -350,7 +346,7 @@ if (have_rows('media_dev_sponsors')) {
 
 $media_dev_presenters = "";
 if (have_rows('media_dev_presenters')) {
-	$media_dev_sponsors .= '<h3 class="bbg__sidebar-label">Presenters</h3>';
+	$media_dev_sponsors .= '<h5>Presenters</h5>';
 	$media_dev_presenters .= '<ul class="usa-unstyled-list">';
 	while (have_rows('media_dev_presenters')) {
 		the_row();
@@ -358,11 +354,23 @@ if (have_rows('media_dev_presenters')) {
 		$presenterTitle = get_sub_field('media_dev_participant_job_title');
 
 		$media_dev_presenters .= '<li>';
-		$media_dev_presenters .= 		'<h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name">' . $presenterName . '</h5>';
-		$media_dev_presenters .= 		'<span class="bbg__profile-excerpt__occupation">' . $presenterTitle . '</span>';
+		$media_dev_presenters .= 	'<h6>' . $presenterName . '</h6>';
+		$media_dev_presenters .= 	'<span class="bbg__profile-excerpt__occupation">' . $presenterTitle . '</span>';
 		$media_dev_presenters .= '</li>';
 	}
-	$media_dev_presenters .= "</ul>";
+	$media_dev_presenters .= '</ul>';
+}
+
+$media_dev_addtl_images = get_field('media_dev_additional_images');
+if (!empty($media_dev_addtl_images)) {
+	$addtl_images = '';
+	// var_dump($media_dev_addtl_images);
+	foreach($media_dev_addtl_images as $addtl_dev_image) {
+		foreach($addtl_dev_image as $media_image) {
+			$addtl_image_set .= '<div><img src="' . $media_image['url'] . '"></div>';
+		}
+	}
+
 }
 
 // AWARD INFO
@@ -523,6 +531,10 @@ if ($numLogos > 0 && $numLogos < 3) {
 							// CONTACT CARDS
 							$contactPostIDs = get_post_meta( $post->ID, 'contact_post_id', true );
 							renderContactCard($contactPostIDs);
+
+							if (!empty($media_dev_addtl_images)) {
+								echo $addtl_image_set;
+							}
 						?>
 	<?php if ($page_columns == 3) { ?>
 						</div>
@@ -535,6 +547,15 @@ if ($numLogos > 0 && $numLogos < 3) {
 					</div> <!-- END .main-content-container -->
 					<div class="side-content-container">
 	<?php } ?>
+			<article>
+				<h5>Share </h5>
+				<a href="<?php echo $fbUrl; ?>">
+					<span class="bbg__article-share__icon facebook"></span>
+				</a>
+				<a href="<?php echo $twitterURL; ?>">
+					<span class="bbg__article-share__icon twitter"></span>
+				</a>
+			</article>
 			<?php
 				if ($includeRelatedProfile) {
 					echo $relatedProfile;
@@ -562,22 +583,15 @@ if ($numLogos > 0 && $numLogos < 3) {
 				if ($includeSidebar) {
 					echo $sidebar;
 				}
-				// if ($listsInclude) {
-				// 	echo $sidebarDownloads;
-				// }
-				// echo $media_dev_sponsors;
-				// echo $media_dev_presenters;
-				// echo $team_roster;
-				// echo getAccordion();
+				if ($listsInclude) {
+					echo $sidebarDownloads;
+				}
+				echo $media_dev_sponsors;
+				echo $media_dev_presenters;
+				echo $team_roster;
+				echo getAccordion();
 			?>
 
-			<h5>Share </h5>
-			<a href="<?php echo $fbUrl; ?>">
-				<span class="bbg__article-share__icon facebook"></span>
-			</a>
-			<a href="<?php echo $twitterURL; ?>">
-				<span class="bbg__article-share__icon twitter"></span>
-			</a>
 	<?php if ($page_columns == 3) { ?>
 			</aside>
 		</div><!-- .outer-container -->
