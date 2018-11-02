@@ -418,7 +418,7 @@ wp_reset_query();
 			initialZoom = 2;
 		}
 		var map = L.mapbox.map('map-threats', 'mapbox.emerald', {attributionControl:false}).setView(initialCenter, initialZoom);
-		map.legendControl.addLegend(document.getElementById('legend').innerHTML);
+		// map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 		var attribStr = '';
 		var attribution = L.control.attribution({prefix:false, position:'topright'}).addTo(map);
 		 // attribution.setPrefix(attribStr);
