@@ -12,7 +12,7 @@ function featuredMediaHD() {
 	var containerW = $('.page-featured-media').width();
 	var dynHeight = containerW / hd_scale;
 	if ($('.page-featured-media').children('bbg-banner')) {
-		if ($('iframe').attr('src').indexOf('youtube') != 0) {
+		if (($('iframe').length > 0) && ($('iframe').attr('src').indexOf('youtube') != 0)) {
 			$('.bbg-banner').width('100%');
 			containerW = $('iframe.bbg-banner').width();
 		}

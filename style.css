@@ -6045,7 +6045,7 @@ div.banner_readmore h6 a:visited {
     visibility: hidden; } }
 
 .bbg__entity-logo__press-release {
-  float: right;
+  float: left;
   max-width: 80px; }
   @media screen and (min-width: 900px) {
     .bbg__entity-logo__press-release {

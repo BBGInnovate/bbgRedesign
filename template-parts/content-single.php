@@ -455,9 +455,9 @@ if ($numLogos > 0 && $numLogos < 3) {
 				$header_markup .= bbginnovate_post_categories();
 			}
 			$header_markup .= '<h3>' . get_the_title() . '</h3>';
-			$header_markup .= 	'<div class="date-meta">';
-			$header_markup .= 		bbginnovate_posted_on();
-			$header_markup .= 	'</div>';
+			$header_markup .= '<div class="date-meta">';
+			$header_markup .= 	bbginnovate_posted_on();
+			$header_markup .= '</div>';
 			$header_markup .= '</header>';
 			echo $header_markup;
 		?>
@@ -547,8 +547,8 @@ if ($numLogos > 0 && $numLogos < 3) {
 					</div> <!-- END .main-content-container -->
 					<div class="side-content-container">
 	<?php } ?>
+			<h5>Share </h5>
 			<article>
-				<h5>Share </h5>
 				<a href="<?php echo $fbUrl; ?>">
 					<span class="bbg__article-share__icon facebook"></span>
 				</a>
