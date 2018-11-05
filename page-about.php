@@ -152,23 +152,26 @@ if (is_page('media-development')) {
 
 			$pinColor = '#ff0000';
 			if ( !isset($location['lng']) || !isset($location['lat'])) {
-				$error_note .= '<!-- check lat/lng for ' . $map_headline . ' -->\n';
+				$error_note .= '<!-- check lat/lng for ' . $map_headline . ' -->';
 			}
-			$features[] = array(
-				'type' => 'Feature',
-				'geometry' => array( 
-					'type' => 'Point',
-					'coordinates' => array($location['lng'],$location['lat'])
-				),
-				'properties' => array(
-					'title' => $map_headline,
-					'description' => $popupBody,
-					'year' => $training_year,
-					'marker-color' => $pinColor,
-					'marker-size' => 'large', 
-					'marker-symbol' => ''
-				)
-			);
+
+			if (!empty($location)) {				
+				$features[] = array(
+					'type' => 'Feature',
+					'geometry' => array( 
+						'type' => 'Point',
+						'coordinates' => array($location['lng'],$location['lat'])
+					),
+					'properties' => array(
+						'title' => $map_headline,
+						'description' => $popupBody,
+						'year' => $training_year,
+						'marker-color' => $pinColor,
+						'marker-size' => 'large', 
+						'marker-symbol' => ''
+					)
+				);
+			}
 		}
 
 		$post_accordion  = '';
