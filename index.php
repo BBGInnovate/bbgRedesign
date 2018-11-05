@@ -45,7 +45,7 @@ get_header();
 						echo 			'<div class="bbg__article-header__banner" ';
 						echo 				'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
 						echo 			'</div>';
-						echo 		'<h4>' . get_the_title() . '</h4>';
+						echo 		'<h4><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>';
 						echo 		'<p class="aside date-meta">' . get_the_date() . '</p>';
 						echo 		'<p>' . get_the_excerpt() . '</p>';
 						echo '</article>';
