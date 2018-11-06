@@ -1,6 +1,6 @@
 <?php
 // test function, original is underneath
-function get_feature_media_data() {
+function get_feature_media_data($home_page = NULL) {
 	$feature_gallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
 	$banner_position = get_field('adjust_the_banner_image', '', true);
 	$banner_position_css_override = get_field('adjust_the_banner_image_css', '', true);
@@ -64,6 +64,17 @@ function get_feature_media_data() {
 		}
 		$featured_data = $featured_map;
 	}
+
+	if ($home_page) {
+		$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+		$post_featured_image  = '<div class="page-post-featured-graphic">';
+		$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
+		$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
+		$post_featured_image .= 	'</div>';
+		$post_featured_image .= '</div>';
+		$featured_data = $post_featured_image;
+	}
+
 	$featured_setup  = '<div class="feautre-banner">';
 	$featured_setup .= 		$featured_data;
 	$featured_setup .= '</div>';

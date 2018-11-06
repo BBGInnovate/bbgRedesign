@@ -142,7 +142,7 @@ function get_field_post_data($type, $qty) {
 			$feature_post_data = array(
 				'id' => get_the_ID(),
 				'title' => get_the_title(),
-				'media' => get_feature_media_data()
+				'media' => get_feature_media_data('home')
 			);
 			return build_featured_post_blocks($feature_post_data);
 		}
