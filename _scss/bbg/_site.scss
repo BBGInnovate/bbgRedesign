@@ -12,6 +12,15 @@
 /*    3-column: used on most posts and many pages  */
 /*    2-column: used on expanded profiles e.g. CEO */
 
+.learn-more {
+    font-family: $font-sans;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    font-weight: 700;
+    text-align: right;
+    a:link {text-decoration: none;}
+    :after {content: " \226B"}
+}
 .bbg__article-header {
     @include clearfix();
     margin: 0 auto $site-margins auto;
@@ -984,7 +993,7 @@ div.banner_readmore h6 a:visited {
     background-color: #e9e9e9;
     margin-bottom: $side-margins-xlarge;
 
-    a {color: $color-primary-alt-light;}
+    a {color: $color-blue;}
     .outer-container {margin-bottom: 0;}
     .side-content-container {border-left: none;}
     .bbg__label {

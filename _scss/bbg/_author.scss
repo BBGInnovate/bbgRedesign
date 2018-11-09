@@ -1,5 +1,52 @@
 //Small profile photos or icons
 //Used for staff profiles, team icons and comment gravatars(?)
+
+// AVATAR MODULE STYLES
+.avatar-container {
+	text-align: center;
+
+	h3 {margin-bottom: 0;}
+
+	.avatar-image {
+		margin-bottom: 0.5rem;
+		img {
+			border-radius: 50%;
+			margin-bottom: 0;
+		}
+	}
+	.avatar-title {
+		color: $color-blue;
+		margin-bottom: 2rem;
+	}
+	.avatar-description {text-align: left;}
+}
+
+@include media($medium-medium-screen) {
+	.avatar-container {
+		text-align: left;
+		padding-top: 30px;
+		border-bottom: 1px solid #e9e9e9;
+		div {
+			display: inline-block;
+			vertical-align: top;
+		}
+		.avatar-image {
+			width: 15%;
+			margin-right: 20px;
+		}
+		.avatar-information {width: 80%;}
+	}
+}
+@include media($medium-large-screen) {
+	.avatar-container {
+		.avatar-image {width: 10%;}
+		.avatar-information {width: 85%;}
+	}
+}
+// END AVATAR MODULE STYLES
+
+
+
 .bbg__avatar__container {
 	margin: 0 auto;
 	max-width: $bbg__avatar-width;

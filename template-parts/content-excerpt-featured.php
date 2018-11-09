@@ -44,34 +44,10 @@ require get_template_directory() . '/inc/bbg-functions-assemble.php';
 				echo $featured_media_result;
 			}
 		?>
-		<?php
-			// $link = sprintf('<a href="%s" rel="bookmark">', $postPermalink);
-			// $linkImage = sprintf('<a href="%s" rel="bookmark" tabindex="-1">', $postPermalink);
-			// $linkH2 = '<h2 class="entry-title bbg-blog__excerpt-title--featured">' . $link;
-
-			// $hideFeaturedImage = false;
-			// if ($videoUrl != "") {
-			// 	// echo $videoUrl;
-			// 	echo featured_video($videoUrl);
-			// 	$hideFeaturedImage = true;
-			// } elseif (has_post_thumbnail() && ( $hideFeaturedImage != 1 )) {
-			// 	$featuredImageClass = "";
-			// 	$featuredImageCutline = "";
-			// 	$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
-			// 	if ($thumbnail_image && isset($thumbnail_image[0])) {
-			// 		$featuredImageCutline = $thumbnail_image[0]->post_excerpt;
-			// 	}
-			// 	echo $linkImage;
-			// 	echo '<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large">';
-			// 	echo 	the_post_thumbnail('large-thumb');
-			// 	echo '</a>';
-			// 	echo '</div>';
-			// }
-		?>
 
 		<div class="outer-container">
 			<div class="grid-container">
-			<?php echo '<h2>' . get_the_title() . '</h2>'; ?>
+			<?php echo '<h3>' . get_the_title() . '</h3>'; ?>
 			<?php if ($includeMetaFeatured){ ?>
 				<div class="entry-meta bbg__excerpt-meta bbg__excerpt-meta--featured">
 					<?php bbginnovate_posted_on(); ?>
