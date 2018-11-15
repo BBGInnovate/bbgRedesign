@@ -22,6 +22,7 @@ if ($threatsToPressPost) {
 }
 
 get_header();
+echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">';
 ?>
 
 <main id="main" class="site-content bbg-home-main" role="main">

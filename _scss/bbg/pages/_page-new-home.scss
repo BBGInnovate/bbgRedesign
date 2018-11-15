@@ -70,10 +70,6 @@ $custom-entity-fifth: (
 
 // BEGIN USAGM NEWS
 .sidebar-grid--large-gutter {
-	// article {margin-bottom: 1.5rem;}
-	.main-column {@include grid-column(12);}
-	.side-column {@include grid-column(12);}
-
 	.article-inline:nth-of-type(2) {
 		.large-column {@include grid-column(5);}
 		.small-column {
@@ -164,14 +160,8 @@ $custom-entity-fifth: (
 		.entity-title {font-size: 2.5rem;}
 	}
 	.sidebar-grid--large-gutter {
-		> .inner-container > div:nth-child(2) {padding-left: 4rem;}
 		article {border-bottom: 1px solid #f1f1f1; margin-bottom: 3rem;}
 		article:last-of-type {border-bottom: none;}
-		.main-column {@include grid-column(8);}
-		.side-column {
-			@include grid-column(4);
-			padding-left: 4rem;
-		}
 		.divider-left {border-left: 1px solid #f1f1f1;}
 		.divider-right {border-right: 1px solid #f1f1f1;}
 

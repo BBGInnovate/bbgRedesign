@@ -193,7 +193,6 @@ function bbginnovate_scripts() {
 	
 	function custom_add_google_fonts() {
 		wp_enqueue_style('custom-google-fonts', 'https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,700,700i', false);
-		wp_enqueue_style('roboto-slab-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Slab:400,700', false);
 	}
  	add_action( 'wp_enqueue_scripts', 'custom_add_google_fonts' );
 

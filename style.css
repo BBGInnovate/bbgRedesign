@@ -4662,6 +4662,29 @@ e.g. on the intern testimonial page */
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6; }
 
+.sidebar-grid--large-gutter .main-column {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+.sidebar-grid--large-gutter .side-column {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+@media screen and (min-width: 900px) {
+  .sidebar-grid--large-gutter > .inner-container > div:nth-child(2) {
+    padding-left: 4rem; }
+  .sidebar-grid--large-gutter .main-column {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; }
+  .sidebar-grid--large-gutter .side-column {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px;
+    padding-left: 4rem; } }
+
 .outer-container {
   max-width: 1200px;
   margin: 0 auto 7.5rem auto; }
@@ -6821,16 +6844,6 @@ section.usa-section.bbg-banner__section {
   text-transform: uppercase;
   color: #3f7ad1; }
 
-.sidebar-grid--large-gutter .main-column {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-
-.sidebar-grid--large-gutter .side-column {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-
 .sidebar-grid--large-gutter .article-inline:nth-of-type(2) {
   border-top: 1px solid #f1f1f1;
   border-bottom: 1px solid #f1f1f1;
@@ -6935,22 +6948,11 @@ section.usa-section.bbg-banner__section {
 @media screen and (min-width: 900px) {
   .all-entities .entity-title {
     font-size: 2.5rem; }
-  .sidebar-grid--large-gutter > .inner-container > div:nth-child(2) {
-    padding-left: 4rem; }
   .sidebar-grid--large-gutter article {
     border-bottom: 1px solid #f1f1f1;
     margin-bottom: 3rem; }
   .sidebar-grid--large-gutter article:last-of-type {
     border-bottom: none; }
-  .sidebar-grid--large-gutter .main-column {
-    width: calc(66.66667% - 33.33333px);
-    float: left;
-    margin-left: 20px; }
-  .sidebar-grid--large-gutter .side-column {
-    width: calc(33.33333% - 26.66667px);
-    float: left;
-    margin-left: 20px;
-    padding-left: 4rem; }
   .sidebar-grid--large-gutter .divider-left {
     border-left: 1px solid #f1f1f1; }
   .sidebar-grid--large-gutter .divider-right {

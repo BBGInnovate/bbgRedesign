@@ -2,6 +2,7 @@
 // https://neat.bourbon.io/docs/latest/
 
 // 0. CUSTOM GRID STYLES
+// 	  0.1 SIDEBAR-GRID--LARGE-GUTTER
 // 1. FULL, NESTED GRIDS
 // 2. EVEN BLOCKS
 // 3. SIDEBARS
@@ -13,6 +14,26 @@
 	border-top: 1px solid #e6e6e6;
 	border-bottom: 1px solid #e6e6e6;
 }
+
+// 0.1 SIDEBAR-GRID--LARGE-GUTTER
+// ------------------------------------------------------------------------
+.sidebar-grid--large-gutter {
+	.main-column {@include grid-column(12);}
+	.side-column {@include grid-column(12);}
+}
+
+@include media($medium-large-screen) {
+	.sidebar-grid--large-gutter {
+		> .inner-container > div:nth-child(2) {padding-left: 4rem;}
+		.main-column {@include grid-column(8);}
+		.side-column {
+			@include grid-column(4);
+			padding-left: 4rem;
+		}
+	}
+}
+// ------------------------------------------------------------------------
+
 
 
 // 1. FULL, NESTED GRIDS
