@@ -122,7 +122,7 @@ function get_field_post_data($type, $qty) {
 			'posts_per_page' => 1,
 			'orderby' => 'post_date',
 			'order' => 'desc',
-			'category__not_in' => $catExclude,
+			'category__not_in' => array(2, 56),
 			'post__not_in' => $used_posts,
 			'tax_query' => array(
 				array(
@@ -156,7 +156,7 @@ function get_recent_post_data($maxPostsToShow, $used_id) {
 		'posts_per_page' => $maxPostsToShow,
 		'orderby' => 'post_date',
 		'order' => 'desc',
-		'category__not_in' => array('1046'),
+		'category__not_in' => array(2, 56, 1046),
 		'post__not_in' => $used_id,
 		'tax_query' => array(
 			array(
