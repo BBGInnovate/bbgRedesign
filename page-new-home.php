@@ -77,133 +77,83 @@ get_header();
 	</div>
 
 	<!-- USAGM NEWS -->
-	<section class="outer-container featured-row">
+	<section class="outer-container">
 		<h1 class="header-outliner">USAGM News</h1>
 		<div class="grid-container">
 			<h2><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
 		</div>
-		<div class="custom-grid-container">
-			<div class="inner-container">
-				<div class="main-content-container">
-				<?php
-					$featured_post_result = get_field_post_data('featured', 1);
 
-					$main_featured_post .= 	$featured_post_result['linked_media'];
-					$main_featured_post .= 	'<h4>' . $featured_post_result['linked_title'] . '</h4>';
-					$main_featured_post .= 	'<p class="aside date-meta">' . $featured_post_result['date'] . '</p>';
-					$main_featured_post .= 	'<p>' . $featured_post_result['excerpt'] . '</p>';
-					echo $main_featured_post;
-				?>
-				</div>
-				<div class="side-content-container">
-				<?php
-					$recent_post_quantity = 2;
-					$used_ids = array();
-					array_push($used_ids, $featured_post_result['id']);
-					$recent_result = get_recent_post_data($recent_post_quantity, $used_ids);
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="main-column">
+						<!-- TO BE DYNAMIC -->
+						<article class="article-inline">
+							<div class="nest-container">
+								<div class="inner-container">
+									<div class="large-column">
+										<div class="post-image"></div>
+									</div>
+									<div class="small-column">
+										<h4>Pakistan and Information Warfare</h4>
+										<p class="aside date-meta">October 9, 2018</p>
+										<p class="excerpt">Russia has been rocked by a series of protests in the year-long run-up to the presidential elections in March 2018. While state television has ignored such events, Current Time has delivered live coverage to its TV and online audiences… <span class="new-learn-more">Read More</span></p>
+									</div>
+								</div><!-- END .inner-container -->
+							</div><!-- END .nest-container -->
+						</article>
+						<!-- END DYNAMIC -->
+						<article class="article-inline">
+							<div class="nest-container">
+								<div class="inner-container">
+									<div class="large-column">
+										<div class="post-image"></div>
+									</div>
+									<div class="small-column">
+										<h4>Pakistan and Information Warfare</h4>
+										<p class="aside date-meta">October 9, 2018</p>
+										<p class="excerpt">Russia has been rocked by a series of protests in the year-long run-up to the presidential elections in March 2018. While state television has ignored such events, Current Time has delivered live coverage to its TV and online audiences… <span class="new-learn-more">Read More</span></p>
+									</div>
+								</div><!-- END .inner-container -->
+							</div><!-- END .nest-container -->
+						</article>
+					</div>
+					<div class="side-column divider-left">
 
-					if (have_posts()) {
-						while (have_posts()) {
-							the_post();
-							$recent_post  = '<div class="inner-container">';
-							$recent_post .= 	'<h4>';
-							$recent_post .= 		'<a href="' . get_the_permalink() . '">';
-							$recent_post .= 			get_the_title();
-							$recent_post .= 		'</a>';
-							$recent_post .= 	'</h4>';
-							$recent_post .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
-							$recent_post .= 	'<p>';
-							$recent_post .= 		wp_trim_words(get_the_content(), 50);
-							$recent_post .= 		' <a class="read-more" href="' . get_the_permalink() . '">READ MORE</a>';
-							$recent_post .= 	'</p>';
-							$recent_post .= '</div>';
-							echo $recent_post;
-						}
-					}
-				?>
-					<!-- NEWS PAGE LINK -->
-					<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
-						<h2 class="screen-reader-text">Recent Posts Navigation</h2>
-						<div class="nav-links">
-							<div class="nav-previous">
-								<a href="<?php echo get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
+						<!-- TO BE DYNAMIC -->
+						<article class="article-block">
+							<div class="nest-container">
+								<div class="inner-container">
+									<div class="post-image-slot">
+										<div class="post-image"></div>
+									</div>
+									<div class="article-descripiton">
+										<h4>Pakistan and Information Warfare</h4>
+										<p class="aside date-meta">October 9, 2018</p>
+									</div>
+								</div>
 							</div>
-						</div>
-					</nav>
+						</article>
+						<!-- END DYNAMIC -->
+						<article class="article-block">
+							<div class="nest-container">
+								<div class="inner-container">
+									<div class="post-image-slot">
+										<div class="post-image"></div>
+									</div>
+									<div class="article-descripiton">
+										<h4>Pakistan and Information Warfare</h4>
+										<p class="aside date-meta">October 9, 2018</p>
+									</div>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div><!-- END .inner-container -->
+			</div><!-- END .nest-container -->
+		</div><!-- END .grid-container -->
 
-				</div>
-			</div><!-- end nest -->
-		</div><!-- end grid -->
 	</section><!-- END USAGM NEWS -->
-	
-	<?php
-		// PREP: SOAPBOX, CORNER HERO, IMPACT STORIES
-		$soap_result = get_soapbox_data();
-		$corner_hero_result = get_corner_hero_data();
-
-		$soap_layout = "";
-		$impact_quantity = "";
-		if (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) {
-			$soap_layout = 'image-right';
-			$impact_quantity = 1;
-		} else {
-			$soap_layout = 'image-top';
-			$impact_quantity = 1;
-		}
-
-		$impact_result = get_impact_stories_data($impact_quantity);
-
-		$mentions_group = array();
-		if ($soap_result['toggle'] == 'on') {
-			$show_soap = true;
-			$soap_layout = (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) ? 'image-right' : 'image-top';
-			$soap_parts = build_soapbox_parts($soap_result, $soap_layout);
-			array_push($mentions_group, $soap_parts);
-		}
-		if ($corner_hero_result['toggle'] == 'on') {
-			$show_corner = true;
-			$corner_hero_parts = build_corner_hero_parts($corner_hero_result);
-			array_push($mentions_group, $corner_hero_parts);
-		}
-		
-		$impact_markup = build_impact_markup($impact_result);
-
-		// MARKUP: SOAPBOX, CORNER HERO, IMPACT STORIES
-		echo '<section class="outer-container mentions">';
-		if ($show_soap && $show_corner) {
-			assemble_mentions_share_space($mentions_group, $impact_markup);
-		} else {
-			assemble_mentions_full_width($mentions_group, $impact_markup);
-		}
-		echo '</section>';
-	?>
-
-	<!-- THREATS TO PRESS RIBBON -->
-	<?php
-		$threats_result = get_threats_to_press_data();
-		$threats_parts = build_threat_parts($threats_result);
-		assemble_threats_to_press_ribbon($threats_parts);
-	?>
-
-	<!-- NETWORK ENTITY LIST -->
-	<?php
-		// $entity_placement can be ["entity-main" | "entity-side"]
-		$entity_data = get_entity_data("entity-main");
-	?>
-
-	<!-- Quotation -->
-	<div class="outer-container">
-		<div class="grid-container">
-			<?php
-				$postIDsUsed = array();
-				$q = getRandomQuote('allEntities', $postIDsUsed);
-				if ($q) {
-					$postIDsUsed[] = $q["ID"];
-					outputQuote($q);
-				}
-			?>
-		</div>
-	</div><!-- Quotation -->
 
 </main>
 

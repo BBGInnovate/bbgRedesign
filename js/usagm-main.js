@@ -3,12 +3,21 @@ $('document').ready(function() {
 
 // IF NO (MAIN) FEATURED IMAGE, ADD SPACE BELOW NAVBAR
 if (!($('#main').prev().hasClass('page-featured-media') || $('#main').prev().hasClass('feautre-banner'))) {
-	if (top.location.pathname === '/new-homepage-test/') {
-		$('#main').css('padding-top', '0');
-	} else {
+	$('#main').css('padding-top', '6rem');
+}
+
+function newHomeMainSpace() {
+	if ((top.location.pathname === '/new-homepage-test/') && ($(window).width() > 685)) {
 		$('#main').css('padding-top', '6rem');
+	} else {
+		$('#main').css('padding-top', '0');
 	}
 }
+newHomeMainSpace();
+
+$(window).on('resize', function() {
+	newHomeMainSpace();
+})
 
 // KEEPS FEATURED MEDIA SCALED AT HD PROPORTIONS
 function featuredMediaHD() {
@@ -137,7 +146,7 @@ function resizeEntityBoxes() {
 			'width': entityBoxW
 		});
 		$('.entity-title.entity-voa').text('Voice of America');
-		$('.entity-title.entity-rferl').text('Radio Free Europe / Radio Liberty');
+		$('.entity-title.entity-rferl').text('Radio Free Europe/Radio Liberty');
 		$('.entity-title.entity-ocb').text('Office of Cuba Broadcasting');
 		$('.entity-title.entity-rfa').text('Radio Free Asia');
 		$('.entity-title.entity-mbn').text('Middle East Broadcasting Network');
@@ -145,8 +154,25 @@ function resizeEntityBoxes() {
 }
 resizeEntityBoxes();
 
+function resizePostImage() {
+	// SCALE EACH POST IMATE HEIGHT TO 35% OF WIDTH
+	var scalePcx = 0.35;
+	var dynamicHeight = 0;
+	var postImageWidth = 0;
+	var postImage = $('.post-image');
+
+	$.each(postImage, function() {
+		postImageWidth = $(this).parent().width();
+		dynamicHeight = postImageWidth * scalePcx;
+		dynamicHeight = postImageWidth - dynamicHeight;
+		$(this).height(dynamicHeight);
+	});
+}
+resizePostImage();
+
 $(window).on('resize', function() {
 	resizeEntityBoxes();
+	resizePostImage();
 });
 
 }); // END READY
