@@ -26,19 +26,55 @@ get_header();
 
 <main id="main" class="site-content bbg-home-main" role="main">
 
-	<section class="outer-container">
+	<section class="outer-container" id="home-about">
 		<h1 class="header-outliner">About USAGM</h1>
 		<div class="grid-container">
 		<?php
 			$settings_result = get_site_settings_data();
 
-			$mission  = '<p class="lead-in">';
+			$mission  = '<p class="new-home-lead-in">';
 			$mission .= 	$settings_result['intro_content'];
 			$mission .= '</p>';
 			echo $mission;
 		?>
 		</div>
 	</section>
+
+	<div id="network-entity-container">
+		<section class="outer-container">
+			<div class="all-entities">
+				<!-- DYNAMIC -->
+				<div class="network-entity-chunk">
+					<div class="inner-entity entity-image entity-voa"></div>
+					<div class="inner-entity entity-overlay entity-voa"></div>
+					<div class="entity-title entity-voa"></div>
+				</div>
+				<!-- DYNAMIC -->
+				<!-- THESE BELOW GET DELETED -->
+				<div class="network-entity-chunk">
+					<div class="inner-entity entity-image entity-rferl"></div>
+					<div class="inner-entity entity-overlay entity-rferl"></div>
+					<div class="entity-title entity-rferl"></div>
+				</div>
+				<div class="network-entity-chunk">
+					<div class="inner-entity entity-image entity-ocb"></div>
+					<div class="inner-entity entity-overlay entity-ocb"></div>
+					<div class="entity-title entity-ocb"></div>
+				</div>
+				<div class="network-entity-chunk">
+					<div class="inner-entity entity-image entity-rfa"></div>
+					<div class="inner-entity entity-overlay entity-rfa"></div>
+					<div class="entity-title entity-rfa"></div>
+				</div>
+				<div class="network-entity-chunk">
+					<div class="inner-entity entity-image entity-mbn"></div>
+					<div class="inner-entity entity-overlay entity-mbn"></div>
+					<div class="entity-title entity-mbn"></div>
+				</div>
+				<!-- THESE ABOVE GET DELETED -->
+			</div>
+		</section>
+	</div>
 
 	<!-- USAGM NEWS -->
 	<section class="outer-container featured-row">

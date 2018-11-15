@@ -1,0 +1,72 @@
+// NEW GRIDS
+$custom-entity-fifth: (
+	columns: 5,
+	gutter: 0px,
+);
+
+// STYLES
+#home-about {margin: 0 auto 3rem auto;}
+.new-home-lead-in {
+	font-family: $font-sans;
+	font-size: 2.5rem;
+	line-height: 4rem;
+	font-weight: 100;
+	color: #878787;
+}
+
+.all-entities {
+	.network-entity-chunk {
+		position: relative;
+		height: 85px;
+	}
+	.entity-image {
+		height: 85px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 100% auto;
+		z-index: 1;
+	}
+	.entity-overlay {
+		height: 85px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 50;
+	}
+	.entity-title {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 100;
+		width: 100%;
+		font-family: 'Roboto Slab', serif;
+		font-size: 3rem;
+		color: $white;
+		text-align: center;
+	}
+	// BEFORE DYNAMIC
+	.entity-image.entity-voa {background-image: url('http://dev.usagm.com/wp-content/uploads/2011/11/VOA_Plugged-in_Episode-5-11-1900x1267.jpg');}
+		.entity-overlay.entity-voa {background-color: rgba(50,72,158,0.70);}
+	.entity-image.entity-rferl {background-image: url('http://dev.usagm.com/wp-content/uploads/2011/11/RFERL_banner_Russian-Service.jpg');}
+		.entity-overlay.entity-rferl {background-color: rgba(234,105,3,0.70);}
+	.entity-image.entity-ocb {background-image: url('http://dev.usagm.com/wp-content/uploads/2011/12/IMG_1752_edit-e1522866079150.jpg');}
+		.entity-overlay.entity-ocb {background-color: rgba(237,237,237,0.70);}
+	.entity-image.entity-rfa {background-image: url('http://dev.usagm.com/wp-content/uploads/2017/02/5.jpg');}
+		.entity-overlay.entity-rfa {background-color: rgba(1,151,62,0.70);}
+	.entity-image.entity-mbn {background-image: url('http://dev.usagm.com/wp-content/uploads/2017/02/GT-BBG.jpg');}
+		.entity-overlay.entity-mbn {background-color: rgba(239,66,60,0.70);}
+}
+#network-entity-container {background-color: #e9e9e9;}
+
+
+@include media($medium-screen) {
+	.all-entities {
+		.network-entity-chunk {
+			@include grid-column(1, $custom-entity-fifth);
+		}
+		.entity-image {background-size: auto 100%;}
+	}
+}

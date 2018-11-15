@@ -3,7 +3,11 @@ $('document').ready(function() {
 
 // IF NO (MAIN) FEATURED IMAGE, ADD SPACE BELOW NAVBAR
 if (!($('#main').prev().hasClass('page-featured-media') || $('#main').prev().hasClass('feautre-banner'))) {
-	$('#main').css('padding-top', '6rem');
+	if (top.location.pathname === '/new-homepage-test/') {
+		$('#main').css('padding-top', '0');
+	} else {
+		$('#main').css('padding-top', '6rem');
+	}
 }
 
 // KEEPS FEATURED MEDIA SCALED AT HD PROPORTIONS
@@ -107,6 +111,43 @@ if ($('.sidebar-section').length > 0) {
 		}
 	});
 }
+
+
+// TEST NEW HOME
+var windowWidth = 0;
+function resizeEntityBoxes() {
+	windowWidth = $(window).width();
+	var entityBoxW = $('.network-entity-chunk').width();
+	if (windowWidth < 585) {
+		$('.network-entity-chunk').height('85px');
+		$('.inner-entity').css({
+			'height': '85px',
+			'width': entityBoxW
+		});
+		$('.entity-title.entity-voa').text('VOA');
+		$('.entity-title.entity-rferl').text('RFE/RL');
+		$('.entity-title.entity-ocb').text('OCB');
+		$('.entity-title.entity-rfa').text('RFA');
+		$('.entity-title.entity-mbn').text('MBN');
+	}
+	else {
+		$('.network-entity-chunk').height(entityBoxW);
+		$('.inner-entity').css({
+			'height': entityBoxW,
+			'width': entityBoxW
+		});
+		$('.entity-title.entity-voa').text('Voice of America');
+		$('.entity-title.entity-rferl').text('Radio Free Europe / Radio Liberty');
+		$('.entity-title.entity-ocb').text('Office of Cuba Broadcasting');
+		$('.entity-title.entity-rfa').text('Radio Free Asia');
+		$('.entity-title.entity-mbn').text('Middle East Broadcasting Network');
+	}
+}
+resizeEntityBoxes();
+
+$(window).on('resize', function() {
+	resizeEntityBoxes();
+});
 
 }); // END READY
 })(jQuery);
