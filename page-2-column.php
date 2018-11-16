@@ -95,19 +95,8 @@ get_header();
 			<div class="inner-container">
 				<div class="main-content-container">
 					<?php
-						if($post->post_parent) {
-							$parent_link = get_permalink($post->post_parent);
-							echo '<h2><a href="' . $parent_link . '">' . get_the_title($post->post_parent) . '</a></h2>';
-						}
-						elseif (!empty($headline_string)) {
-							$headline_string  = '<h2>' . $headline . '</h2>';
-							echo $headline_string;
-						}
-						else {
-							echo '<h2>' . get_the_title() . '</h2>';
-						}
+						echo '<h2>' . get_the_title() . '</h2>';
 
-						// echo '<h3>' . get_the_title() . '</h3>';
 						echo '<div class="page-content">';
 						echo 	$page_content;
 						echo '</div>';
