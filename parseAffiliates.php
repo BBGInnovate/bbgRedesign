@@ -161,7 +161,9 @@ if (isset($_FILES['fileToUpload'])) {
 					"$platformOtherFreeText"
 				);
 
-				$specificNameObj = split("-", $specificAffiliateName);
+				// $specificNameObj = split("-", $specificAffiliateName);
+				$specificNameObj = preg_split("/\-/", $specificAffiliateName);
+
 				$parsedPlatform = "";
 				if ($platform == "Other") {
 					$parsedPlatform = "\t" . $specificNameObj[count($specificNameObj)-1];	
