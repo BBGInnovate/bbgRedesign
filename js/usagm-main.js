@@ -159,7 +159,7 @@ function resizePostImage() {
 	var scalePcx = 0.35;
 	var dynamicHeight = 0;
 	var postImageWidth = 0;
-	var postImage = $('.post-image');
+	var postImage = $('#new-home-test .post-image');
 
 	$.each(postImage, function() {
 		postImageWidth = $(this).parent().width();

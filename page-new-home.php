@@ -26,7 +26,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 ?>
 
 <main id="main" class="site-content bbg-home-main" role="main">
-
+<div id="new-home-test">
 	<section class="outer-container" id="home-about">
 		<h1 class="header-outliner">About USAGM</h1>
 		<div class="grid-container">
@@ -155,7 +155,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		</div><!-- END .grid-container -->
 
 	</section><!-- END USAGM NEWS -->
-
+</div>
 </main>
 
 <?php get_footer(); ?>

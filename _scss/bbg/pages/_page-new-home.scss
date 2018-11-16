@@ -1,3 +1,4 @@
+#new-home-test {
 // NEW GRIDS
 $custom-entity-fifth: (
 	columns: 5,
@@ -81,21 +82,8 @@ $custom-entity-fifth: (
 		padding-top: 2rem;
 		margin-bottom: 2rem;
 	}
-	.article-block {
-		.post-image-slot {
-			@include grid-column(5);
-			margin-bottom: 0;
-		}
-		.article-descripiton {@include grid-column(7);}
-		border-bottom: 1px solid #f1f1f1;
-		margin-bottom: 2rem;
-	}
 }
 
-.article-inline {
-	.large-column {@include grid-column(12);}
-	.small-column {@include grid-column(12);}
-}
 .post-image {
 	width: 100%;
 	background-image: url('http://dev.usagm.com/wp-content/uploads/2017/02/GT-BBG.jpg');
@@ -122,19 +110,11 @@ $custom-entity-fifth: (
 
 	.sidebar-grid--large-gutter {
 		.article-inline {
-			.large-column {@include grid-column(6);}
-			.small-column {
-				@include grid-column(6);
-			}
 			border-bottom: none;
 		}
 		.article-inline:nth-of-type(2), {
 			.large-column {@include grid-column(2);}
 			.small-column {@include grid-column(10);}
-		}
-		.article-block {
-			.post-image-slot {@include grid-column(2);}
-			.article-descripiton {@include grid-column(10);}
 		}
 	}
 }
@@ -144,13 +124,11 @@ $custom-entity-fifth: (
 		.entity-title {font-size: 2rem;}
 	}
 
-	.sidebar-grid--large-gutter {
-		.article-inline:nth-of-type(2), {
-			.large-column {@include grid-column(6);}
-			.small-column {
-				@include grid-column(6);
-				.excerpt {display: block;}
-			}
+	.article-inline:nth-of-type(2), {
+		.large-column {@include grid-column(6);}
+		.small-column {
+			@include grid-column(6);
+			.excerpt {display: block;}
 		}
 	}
 }
@@ -162,23 +140,13 @@ $custom-entity-fifth: (
 	.sidebar-grid--large-gutter {
 		article {border-bottom: 1px solid #f1f1f1; margin-bottom: 3rem;}
 		article:last-of-type {border-bottom: none;}
-		.divider-left {border-left: 1px solid #f1f1f1;}
-		.divider-right {border-right: 1px solid #f1f1f1;}
 
-		.article-inline {
-			.large-column {@include grid-column(12);}
-			.small-column {@include grid-column(12);}
-		}
 		.article-inline:nth-of-type(2) {
 			.large-column {@include grid-column(3);}
 			.small-column {
 				@include grid-column(9);
 				.excerpt {display: none;}
 			}
-		}
-		.article-block {
-			.post-image-slot {@include grid-column(12);}
-			.article-descripiton {@include grid-column(12);}
 		}
 	}
 }
@@ -189,11 +157,8 @@ $custom-entity-fifth: (
 	}
 
 	.sidebar-grid--large-gutter {
-		.article-inline {
-			.large-column {@include grid-column(7);}
-			.small-column {@include grid-column(5);}
-		}
 		.article-inline:nth-of-type(2) {
+			border-bottom: none;
 			.large-column {@include grid-column(7);}
 			.small-column {
 				@include grid-column(5);
@@ -201,4 +166,5 @@ $custom-entity-fifth: (
 			}
 		}
 	}
+}
 }

@@ -1,0 +1,50 @@
+// ARTICLE INLINE
+// ------------------------------------------------------------------------
+.article-inline {
+	.large-column {@include grid-column(12);}
+	.small-column {@include grid-column(12);}
+}
+
+@include media($medium-screen) {
+	.article-inline {
+		.large-column {@include grid-column(6);}
+		.small-column {@include grid-column(6);}
+	}
+}
+@include media($medium-large-screen) {
+	.article-inline {
+		.large-column {@include grid-column(12);}
+		.small-column {@include grid-column(12);}
+	}
+}
+@include media($large-screen) {
+	.article-inline {
+		.large-column {@include grid-column(7);}
+		.small-column {@include grid-column(5);}
+	}
+}
+// ARTICLE BLOCK
+// ------------------------------------------------------------------------
+.article-block {
+	.post-image-slot {
+	@include grid-column(5);
+		margin-bottom: 0;
+	}
+	.article-descripiton {@include grid-column(7);}
+	border-bottom: 1px solid #f1f1f1;
+	margin-bottom: 2rem;
+}
+
+@include media($medium-screen) {
+	.article-block {
+		.post-image-slot {@include grid-column(2);}
+		.article-descripiton {@include grid-column(10);}
+	}
+}
+@include media($medium-large-screen) {
+	.article-block {
+		.post-image-slot {@include grid-column(12);}
+		.article-descripiton {@include grid-column(12);}
+	}
+}
+// ------------------------------------------------------------------------
