@@ -170,9 +170,17 @@ function resizePostImage() {
 }
 resizePostImage();
 
+function scaleRibbonBanner() {
+	var ribbonCopy = $('#new-home-test .ribbon-copy');
+	var ribbonCopyH = ribbonCopy.outerHeight();
+	$('#new-home-test .ribbon-banner .ribbon-image').height(ribbonCopyH);
+}
+scaleRibbonBanner()
+
 $(window).on('resize', function() {
 	resizeEntityBoxes();
 	resizePostImage();
+	scaleRibbonBanner()
 });
 
 }); // END READY

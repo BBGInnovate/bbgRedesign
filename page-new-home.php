@@ -26,136 +26,145 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 ?>
 
 <main id="main" class="site-content bbg-home-main" role="main">
-<div id="new-home-test">
-	<section class="outer-container" id="home-about">
-		<h1 class="header-outliner">About USAGM</h1>
-		<div class="grid-container">
-		<?php
-			$settings_result = get_site_settings_data();
+	<div id="new-home-test">
+		<section class="outer-container" id="home-about">
+			<h1 class="header-outliner">About USAGM</h1>
+			<div class="grid-container">
+			<?php
+				$settings_result = get_site_settings_data();
 
-			$mission  = '<p class="new-home-lead-in">';
-			$mission .= 	$settings_result['intro_content'];
-			$mission .= '</p>';
-			echo $mission;
-		?>
-		</div>
-	</section>
-
-	<div id="network-entity-container">
-		<section class="outer-container">
-			<div class="all-entities">
-				<!-- DYNAMIC -->
-				<div class="network-entity-chunk">
-					<div class="inner-entity entity-image entity-voa"></div>
-					<div class="inner-entity entity-overlay entity-voa"></div>
-					<div class="entity-title entity-voa"></div>
-				</div>
-				<!-- DYNAMIC -->
-				<!-- THESE BELOW GET DELETED -->
-				<div class="network-entity-chunk">
-					<div class="inner-entity entity-image entity-rferl"></div>
-					<div class="inner-entity entity-overlay entity-rferl"></div>
-					<div class="entity-title entity-rferl"></div>
-				</div>
-				<div class="network-entity-chunk">
-					<div class="inner-entity entity-image entity-ocb"></div>
-					<div class="inner-entity entity-overlay entity-ocb"></div>
-					<div class="entity-title entity-ocb"></div>
-				</div>
-				<div class="network-entity-chunk">
-					<div class="inner-entity entity-image entity-rfa"></div>
-					<div class="inner-entity entity-overlay entity-rfa"></div>
-					<div class="entity-title entity-rfa"></div>
-				</div>
-				<div class="network-entity-chunk">
-					<div class="inner-entity entity-image entity-mbn"></div>
-					<div class="inner-entity entity-overlay entity-mbn"></div>
-					<div class="entity-title entity-mbn"></div>
-				</div>
-				<!-- THESE ABOVE GET DELETED -->
+				$mission  = '<p class="new-home-lead-in">';
+				$mission .= 	$settings_result['intro_content'];
+				$mission .= '</p>';
+				echo $mission;
+			?>
 			</div>
 		</section>
-	</div>
 
-	<!-- USAGM NEWS -->
-	<section class="outer-container">
-		<h1 class="header-outliner">USAGM News</h1>
-		<div class="grid-container">
-			<h2><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
+		<div id="network-entity-container">
+			<section class="outer-container">
+				<div class="all-entities">
+					<!-- DYNAMIC -->
+					<div class="network-entity-chunk">
+						<div class="inner-entity entity-image entity-voa"></div>
+						<div class="inner-entity entity-overlay entity-voa"></div>
+						<div class="entity-title entity-voa"></div>
+					</div>
+					<!-- DYNAMIC -->
+					<!-- THESE BELOW GET DELETED -->
+					<div class="network-entity-chunk">
+						<div class="inner-entity entity-image entity-rferl"></div>
+						<div class="inner-entity entity-overlay entity-rferl"></div>
+						<div class="entity-title entity-rferl"></div>
+					</div>
+					<div class="network-entity-chunk">
+						<div class="inner-entity entity-image entity-ocb"></div>
+						<div class="inner-entity entity-overlay entity-ocb"></div>
+						<div class="entity-title entity-ocb"></div>
+					</div>
+					<div class="network-entity-chunk">
+						<div class="inner-entity entity-image entity-rfa"></div>
+						<div class="inner-entity entity-overlay entity-rfa"></div>
+						<div class="entity-title entity-rfa"></div>
+					</div>
+					<div class="network-entity-chunk">
+						<div class="inner-entity entity-image entity-mbn"></div>
+						<div class="inner-entity entity-overlay entity-mbn"></div>
+						<div class="entity-title entity-mbn"></div>
+					</div>
+					<!-- THESE ABOVE GET DELETED -->
+				</div>
+			</section>
 		</div>
 
-		<div class="grid-container sidebar-grid--large-gutter">
-			<div class="nest-container">
-				<div class="inner-container">
-					<div class="main-column">
-						<!-- TO BE DYNAMIC -->
-						<article class="article-inline">
-							<div class="nest-container">
-								<div class="inner-container">
-									<div class="large-column">
-										<div class="post-image"></div>
-									</div>
-									<div class="small-column">
-										<h4>Pakistan and Information Warfare</h4>
-										<p class="aside date-meta">October 9, 2018</p>
-										<p class="excerpt">Russia has been rocked by a series of protests in the year-long run-up to the presidential elections in March 2018. While state television has ignored such events, Current Time has delivered live coverage to its TV and online audiences… <span class="new-learn-more">Read More</span></p>
-									</div>
-								</div><!-- END .inner-container -->
-							</div><!-- END .nest-container -->
-						</article>
-						<!-- END DYNAMIC -->
-						<article class="article-inline">
-							<div class="nest-container">
-								<div class="inner-container">
-									<div class="large-column">
-										<div class="post-image"></div>
-									</div>
-									<div class="small-column">
-										<h4>Pakistan and Information Warfare</h4>
-										<p class="aside date-meta">October 9, 2018</p>
-										<p class="excerpt">Russia has been rocked by a series of protests in the year-long run-up to the presidential elections in March 2018. While state television has ignored such events, Current Time has delivered live coverage to its TV and online audiences… <span class="new-learn-more">Read More</span></p>
-									</div>
-								</div><!-- END .inner-container -->
-							</div><!-- END .nest-container -->
-						</article>
-					</div>
-					<div class="side-column divider-left">
+		<!-- USAGM NEWS -->
+		<section class="outer-container">
+			<h1 class="header-outliner">USAGM News</h1>
+			<div class="grid-container">
+				<h2><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
+			</div>
 
-						<!-- TO BE DYNAMIC -->
-						<article class="article-block">
-							<div class="nest-container">
-								<div class="inner-container">
-									<div class="post-image-slot">
-										<div class="post-image"></div>
-									</div>
-									<div class="article-descripiton">
-										<h4>Pakistan and Information Warfare</h4>
-										<p class="aside date-meta">October 9, 2018</p>
+			<div class="grid-container sidebar-grid--large-gutter">
+				<div class="nest-container">
+					<div class="inner-container">
+						<div class="main-column">
+							<!-- TO BE DYNAMIC -->
+							<article class="article-inline">
+								<div class="nest-container">
+									<div class="inner-container">
+										<div class="large-column">
+											<div class="post-image"></div>
+										</div>
+										<div class="small-column">
+											<h4>Pakistan and Information Warfare</h4>
+											<p class="aside date-meta">October 9, 2018</p>
+											<p class="excerpt">Russia has been rocked by a series of protests in the year-long run-up to the presidential elections in March 2018. While state television has ignored such events, Current Time has delivered live coverage to its TV and online audiences… <span class="new-learn-more">Read More</span></p>
+										</div>
+									</div><!-- END .inner-container -->
+								</div><!-- END .nest-container -->
+							</article>
+							<!-- END DYNAMIC -->
+							<article class="article-inline">
+								<div class="nest-container">
+									<div class="inner-container">
+										<div class="large-column">
+											<div class="post-image"></div>
+										</div>
+										<div class="small-column">
+											<h4>Pakistan and Information Warfare</h4>
+											<p class="aside date-meta">October 9, 2018</p>
+											<p class="excerpt">Russia has been rocked by a series of protests in the year-long run-up to the presidential elections in March 2018. While state television has ignored such events, Current Time has delivered live coverage to its TV and online audiences… <span class="new-learn-more">Read More</span></p>
+										</div>
+									</div><!-- END .inner-container -->
+								</div><!-- END .nest-container -->
+							</article>
+						</div>
+						<div class="side-column divider-left">
+
+							<!-- TO BE DYNAMIC -->
+							<article class="article-block">
+								<div class="nest-container">
+									<div class="inner-container">
+										<div class="post-image-slot">
+											<div class="post-image"></div>
+										</div>
+										<div class="article-descripiton">
+											<h4>Pakistan and Information Warfare</h4>
+											<p class="aside date-meta">October 9, 2018</p>
+										</div>
 									</div>
 								</div>
-							</div>
-						</article>
-						<!-- END DYNAMIC -->
-						<article class="article-block">
-							<div class="nest-container">
-								<div class="inner-container">
-									<div class="post-image-slot">
-										<div class="post-image"></div>
-									</div>
-									<div class="article-descripiton">
-										<h4>Pakistan and Information Warfare</h4>
-										<p class="aside date-meta">October 9, 2018</p>
+							</article>
+							<!-- END DYNAMIC -->
+							<article class="article-block">
+								<div class="nest-container">
+									<div class="inner-container">
+										<div class="post-image-slot">
+											<div class="post-image"></div>
+										</div>
+										<div class="article-descripiton">
+											<h4>Pakistan and Information Warfare</h4>
+											<p class="aside date-meta">October 9, 2018</p>
+										</div>
 									</div>
 								</div>
-							</div>
-						</article>
-					</div>
-				</div><!-- END .inner-container -->
-			</div><!-- END .nest-container -->
-		</div><!-- END .grid-container -->
+							</article>
+						</div>
+					</div><!-- END .inner-container -->
+				</div><!-- END .nest-container -->
+			</div><!-- END .grid-container -->
+		</section><!-- END USAGM NEWS -->
 
-	</section><!-- END USAGM NEWS -->
-</div>
+		<section class="outer-container ribbon-banner">
+			<div class="ribbon-image" style="background-image: url('http://dev.usagm.com/wp-content/uploads/2015/09/John-Lansing_s.jpg')"></div>
+			<div class="ribbon-copy">
+				<h2>From the CEO</h2>
+				<h4>Statement from CEO John F. Lansing on agency rebrand</h4>
+				<p>We recognize the overdue need to communicate the evolving, global scope of our work as well as our renewed, urgent focus on the agency’s global priorities, which reflect U.S. national security and public diplomacy interests... <span class="new-learn-more">Read More</span></p>
+			</div>
+		</section>
+
+	</div> <!-- END #new-home-test -->
 </main>
 
 <?php get_footer(); ?>
