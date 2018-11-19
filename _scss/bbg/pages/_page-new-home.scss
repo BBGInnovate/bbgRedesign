@@ -128,6 +128,43 @@
 	}
 	// END .ribbon-banner MODULE
 
+	.corner-hero {
+		border: 1px solid #f1f1f1;
+		padding: 2rem;
+		margin: 2rem 0;
+		.corner-hero-image {display: none;}
+		.corner-hero-copy {
+			p {margin-bottom: 0;}
+			padding: 0 2rem;
+		}
+	}
+	@include media($medium-large-screen) {
+		.corner-hero {
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+	}
+	@include media($large-screen) {
+		.corner-hero {
+			border: none;
+			padding: 0;
+			margin: 0;
+			.corner-hero-image {
+				@include grid-column(3);
+				display: block;
+				background-image: url('http://dev.usagm.com/wp-content/uploads/2018/06/usagm-touch-image.png');
+				background-repeat: no-repeat;
+				background-position: top;
+				background-size: 100% auto;
+			}
+			.corner-hero-copy {
+				@include grid-column(9);
+				p {margin-bottom: 2rem;}
+			}
+		}
+	}
+	// END .corner-hero MODULE
 
 	@include media($medium-screen) {
 		.all-entities {
@@ -140,9 +177,10 @@
 
 		.sidebar-grid--large-gutter {
 			.article-inline {
-				border-bottom: none;
+				// border-bottom: none;
 			}
 			.article-inline:nth-of-type(2), {
+				border-bottom: none;
 				.large-column {@include grid-column(2);}
 				.small-column {@include grid-column(10);}
 			}
@@ -169,7 +207,6 @@
 		}
 		.sidebar-grid--large-gutter {
 			article {border-bottom: 1px solid #f1f1f1;}
-			article:last-of-type {border-bottom: none;}
 
 			.article-inline:nth-of-type(2) {
 				.large-column {@include grid-column(3);}
@@ -188,7 +225,6 @@
 
 		.sidebar-grid--large-gutter {
 			.article-inline:nth-of-type(2) {
-				border-bottom: none;
 				.large-column {@include grid-column(7);}
 				.small-column {
 					@include grid-column(5);

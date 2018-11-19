@@ -6978,6 +6978,44 @@ section.usa-section.bbg-banner__section {
     margin-left: 20px;
     padding: 2rem 0; } }
 
+#new-home-test .corner-hero {
+  border: 1px solid #f1f1f1;
+  padding: 2rem;
+  margin: 2rem 0; }
+  #new-home-test .corner-hero .corner-hero-image {
+    display: none; }
+  #new-home-test .corner-hero .corner-hero-copy {
+    padding: 0 2rem; }
+    #new-home-test .corner-hero .corner-hero-copy p {
+      margin-bottom: 0; }
+
+@media screen and (min-width: 900px) {
+  #new-home-test .corner-hero {
+    border: none;
+    padding: 0;
+    margin: 0; } }
+
+@media screen and (min-width: 1201px) {
+  #new-home-test .corner-hero {
+    border: none;
+    padding: 0;
+    margin: 0; }
+    #new-home-test .corner-hero .corner-hero-image {
+      width: calc(25% - 25px);
+      float: left;
+      margin-left: 20px;
+      display: block;
+      background-image: url("http://dev.usagm.com/wp-content/uploads/2018/06/usagm-touch-image.png");
+      background-repeat: no-repeat;
+      background-position: top;
+      background-size: 100% auto; }
+    #new-home-test .corner-hero .corner-hero-copy {
+      width: calc(75% - 35px);
+      float: left;
+      margin-left: 20px; }
+      #new-home-test .corner-hero .corner-hero-copy p {
+        margin-bottom: 2rem; } }
+
 @media screen and (min-width: 600px) {
   #new-home-test .all-entities .network-entity-chunk {
     width: calc(20%);
@@ -6987,16 +7025,16 @@ section.usa-section.bbg-banner__section {
     background-size: auto 100%; }
   #new-home-test .all-entities .entity-title {
     font-size: 1.75rem; }
-  #new-home-test .sidebar-grid--large-gutter .article-inline {
+  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) {
     border-bottom: none; }
-  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .large-column {
-    width: calc(16.66667% - 23.33333px);
-    float: left;
-    margin-left: 20px; }
-  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column {
-    width: calc(83.33333% - 36.66667px);
-    float: left;
-    margin-left: 20px; } }
+    #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .large-column {
+      width: calc(16.66667% - 23.33333px);
+      float: left;
+      margin-left: 20px; }
+    #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column {
+      width: calc(83.33333% - 36.66667px);
+      float: left;
+      margin-left: 20px; } }
 
 @media screen and (min-width: 700px) {
   #new-home-test .all-entities .entity-title {
@@ -7017,8 +7055,6 @@ section.usa-section.bbg-banner__section {
     font-size: 2.5rem; }
   #new-home-test .sidebar-grid--large-gutter article {
     border-bottom: 1px solid #f1f1f1; }
-  #new-home-test .sidebar-grid--large-gutter article:last-of-type {
-    border-bottom: none; }
   #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .large-column {
     width: calc(25% - 25px);
     float: left;
@@ -7033,18 +7069,16 @@ section.usa-section.bbg-banner__section {
 @media screen and (min-width: 1201px) {
   #new-home-test .all-entities .entity-title {
     font-size: 3rem; }
-  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) {
-    border-bottom: none; }
-    #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .large-column {
-      width: calc(58.33333% - 31.66667px);
-      float: left;
-      margin-left: 20px; }
-    #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column {
-      width: calc(41.66667% - 28.33333px);
-      float: left;
-      margin-left: 20px; }
-      #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column .excerpt {
-        display: block; } }
+  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .large-column {
+    width: calc(58.33333% - 31.66667px);
+    float: left;
+    margin-left: 20px; }
+  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column {
+    width: calc(41.66667% - 28.33333px);
+    float: left;
+    margin-left: 20px; }
+    #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column .excerpt {
+      display: block; } }
 
 .office-page .office-highlights {
   border-top: 1px solid #e6e6e6;

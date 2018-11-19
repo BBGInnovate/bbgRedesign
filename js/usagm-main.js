@@ -177,10 +177,18 @@ function scaleRibbonBanner() {
 }
 scaleRibbonBanner()
 
+function scaleCornerHero() {
+	var cornerHeroCopy = $('#new-home-test .corner-hero-copy');
+	var cornerHeroCopyH = cornerHeroCopy.outerHeight();
+	$('#new-home-test .corner-hero .corner-hero-image').height(cornerHeroCopyH);
+}
+scaleCornerHero()
+
 $(window).on('resize', function() {
 	resizeEntityBoxes();
 	resizePostImage();
-	scaleRibbonBanner()
+	scaleRibbonBanner();
+	scaleCornerHero();
 });
 
 }); // END READY

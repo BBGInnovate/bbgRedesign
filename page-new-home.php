@@ -164,6 +164,55 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			</div>
 		</section>
 
+		<!-- USAGM NEWS -->
+		<section class="outer-container">
+			<h1 class="header-outliner">USAGM News</h1>
+			<div class="grid-container">
+				<h2><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">Impact Stories</a></h2>
+			</div>
+
+			<div class="grid-container sidebar-grid--large-gutter">
+				<div class="nest-container">
+					<div class="inner-container">
+						<div class="main-column">
+							<!-- TO BE DYNAMIC -->
+							<article class="article-inline">
+								<div class="nest-container">
+									<div class="inner-container">
+										<div class="large-column">
+											<div class="post-image"></div>
+										</div>
+										<div class="small-column">
+											<h4>Pakistan and Information Warfare</h4>
+											<p class="aside date-meta">October 9, 2018</p>
+											<p class="excerpt">Russia has been rocked by a series of protests in the year-long run-up to the presidential elections in March 2018. While state television has ignored such events, Current Time has delivered live coverage to its TV and online audiences… <span class="new-learn-more">Read More</span></p>
+										</div>
+									</div><!-- END .inner-container -->
+								</div><!-- END .nest-container -->
+							</article>
+						</div>
+						<div class="side-column divider-left">
+
+							<!-- TO BE DYNAMIC -->
+							<article class="corner-hero">
+								<div class="nest-container">
+									<div class="inner-container">
+										<div class="corner-hero-image"></div>
+										<div class="corner-hero-copy">
+											<h2>Events</h2>
+											<h4>Board Meeting, September 5</h4>
+											<p>The Broadcasting Board of Governors will meet at it headquarters in Washington, D.C. More details will be added here as information becomes available.</p>
+										</div>
+									</div>
+								</div>
+							</article>
+							
+						</div>
+					</div><!-- END .inner-container -->
+				</div><!-- END .nest-container -->
+			</div><!-- END .grid-container -->
+		</section><!-- END IMPACT STORIES -->
+
 	</div> <!-- END #new-home-test -->
 </main>
 
