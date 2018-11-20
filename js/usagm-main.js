@@ -7,10 +7,13 @@ if (!($('#main').prev().hasClass('page-featured-media') || $('#main').prev().has
 }
 
 function newHomeMainSpace() {
-	if ((top.location.pathname === '/new-homepage-test/') && ($(window).width() > 685)) {
-		$('#main').css('padding-top', '6rem');
-	} else {
-		$('#main').css('padding-top', '0');
+	if ((top.location.pathname === '/new-homepage-test/')) {
+		if ($(window).width() > 685) {
+			$('#main').css('padding-top', '6rem');
+		}
+		else {
+			$('#main').css('padding-top', '0');
+		}
 	}
 }
 newHomeMainSpace();
