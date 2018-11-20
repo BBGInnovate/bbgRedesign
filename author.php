@@ -212,7 +212,7 @@ get_header();
 					if ($featured_media_result != "") {
 						$author_featured_post .= $featured_media_result;
 					}
-					$author_featured_post .= '<h3>' . get_the_title() . '</h3>';
+					$author_featured_post .= '<h4><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>';
 					$author_featured_post .= '<p class="lead-in">' . get_the_excerpt() . '</p>';
 				}
 				$author_featured_post .= 	'</div>';
@@ -225,7 +225,7 @@ get_header();
 				$blogLink = '/category/from-the-ceo+blog/';
 				echo '<div class="outer-container">';
 				echo 	'<div class="grid-container">';
-				echo 		'<h2><a href="' . $blogLink . '">Blog</a></h2>';
+				echo 		'<h3><a href="' . $blogLink . '">Blog</a></h3>';
 				echo 	'</div>';
 				echo 	'<div class="custom-grid-container" >';
 				echo 		'<div class="inner-container">';
@@ -239,7 +239,7 @@ get_header();
 
 					echo 					'<div class="grid-half">';
 					echo 						'<a href="' . get_the_permalink() . '">' . get_the_post_thumbnail() . '</a>';
-					echo 						'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+					echo 						'<h4><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>';
 					echo 						'<p>' . get_the_excerpt() . '</p>';
 					echo 					'</div>';
 				}
@@ -282,9 +282,9 @@ get_header();
 					$postIDsUsed[] = get_the_ID();
 
 					echo 	'<div class="grid-half">';
-					echo 		'<h2><a target="_blank" href="' . $statementsLink . '">Statements</a></h2>';
+					echo 		'<h3><a target="_blank" href="' . $statementsLink . '">Statements</a></h3>';
 					echo 		get_the_post_thumbnail();
-					echo 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+					echo 		'<h4><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>';
 					echo 		'<p>' . get_the_excerpt() . '</p>';
 					echo 		'<p class="learn-more"><a href="' . $statementsLink . '">More statements</a></p>';
 					echo 	'</div>';
@@ -299,9 +299,9 @@ get_header();
 					$postIDsUsed[] = get_the_ID();
 
 					echo 	'<div class="grid-half">';
-					echo 		'<h2><a target="_blank" href="' . $opEdLink . '">Op-Eds</a></h2>';
+					echo 		'<h3><a target="_blank" href="' . $opEdLink . '">Op-Eds</a></h3>';
 					echo 		get_the_post_thumbnail();
-					echo 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+					echo 		'<h4><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>';
 					echo 		'<p>' . get_the_excerpt() . '</p>';
 					echo 		'<p class="learn-more"><a href="' . $opEdLink . '">More op-eds</a></p>';
 					echo 	'</div>';
