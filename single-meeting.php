@@ -82,7 +82,7 @@ if (have_posts()) {
 	if ( $meetingTime != "") {
 		$meetingTime = $meetingTime . ", ";
 	}
-	$meetingSpeakers = get_post_meta( get_the_ID(), 'board_meeting_speakers', true );
+	$meetingSpeakers = get_post_meta(get_the_ID(), 'board_meeting_speakers', true);
 
 	// CREATE EVENTBRITE IFRAME
 	$eventBriteButtonStr = "";
@@ -205,7 +205,7 @@ get_header();
 							echo $event_info;
 						?>
 						<div class="share-social">
-							<h6>Share</h6>
+							<h5>Share</h5>
 							<a href="<?php echo $fbUrl; ?>">
 								<span class="bbg__article-share__icon facebook"></span>
 							</a>
@@ -216,11 +216,11 @@ get_header();
 						</div>
 						<!-- SPEAKERS -->
 						<?php
-							if ( have_rows('board_meeting_speakers') ) {
+							if (have_rows('board_meeting_speakers')) {
 								$speakersLabel = get_field('board_meeting_speaker_label');
 								
-								echo '<h6>' . $speakersLabel . '</h6>';
-								while ( have_rows('board_meeting_speakers') ) : the_row();
+								echo '<h5>' . $speakersLabel . '</h5>';
+								while (have_rows('board_meeting_speakers')) : the_row();
 
 									// SHOW INTERNAL SPEAKER LIST
 									if (get_row_layout() == 'board_meeting_speakers_internal') {
@@ -243,9 +243,7 @@ get_header();
 													$profileLink = get_page_link($pID);
 
 													$profile_list  = '<li>';
-													$profile_list .= 	'<h5>';
-													$profile_list .= 		'<a href="' . $profileLink . '">' . $profileName . '</a>';
-													$profile_list .= 	'</h5>';
+													$profile_list .= 	'<h6><a href="' . $profileLink . '">' . $profileName . '</a></h6>';
 													$profile_list .= 	'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
 													$profile_list .= '</li>';
 												}
@@ -268,13 +266,13 @@ get_header();
 												$speakerLink = $profile["meeting_speaker_url"];
 
 												$external_speaker_list  = '<li>';
-												$external_speaker_list .= 	'<h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name">';
+												$external_speaker_list .= 	'<h6>';
 												if ($speakerName && $speakerLink != "") {
 													$external_speaker_list .= 		'<a href="' . $speakerLink . '">' . $speakerName . '</a>';
 												} else {
 													$external_speaker_list .= $speakerName;
 												}
-												$external_speaker_list .= 	'</h5>';
+												$external_speaker_list .= 	'</h6>';
 												$external_speaker_list .= 	'<span class="bbg__profile-excerpt__occupation">' . $speakerTitle . '</span>';
 												$external_speaker_list .= '</li>';
 
