@@ -8,16 +8,16 @@
  */
 
 //can't 'DEFINE' an array, so we just set a var.  Note that this should be kept here and not called on 'init' else it won't be available globally.
-$STANDARD_POST_CATEGORY_EXCLUDES = array(
-	get_cat_id('Special Days'),
-	get_cat_id('From the CEO'),
-	get_cat_id('Employee'),
-	get_cat_id('Intern Testimonial'),
-	get_cat_id('Impact'),
-	get_cat_id('Media Development Map'),
-	get_cat_id('Media Advisory'),
-	get_cat_id('Event')
-);
+// $STANDARD_POST_CATEGORY_EXCLUDES = array(
+// 	get_cat_id('Special Days'),
+// 	get_cat_id('From the CEO'),
+// 	get_cat_id('Employee'),
+// 	get_cat_id('Intern Testimonial'),
+// 	get_cat_id('Impact'),
+// 	get_cat_id('Media Development Map'),
+// 	get_cat_id('Media Advisory'),
+// 	get_cat_id('Event')
+// );
 
 require get_template_directory() . '/inc/bbg-functions-utilities.php';
 

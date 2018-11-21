@@ -104,7 +104,7 @@ function get_homepage_banner_data() {
 	}
 }
 
-function get_field_post_data($type, $qty, $excluded_categories) {
+function get_field_post_data($type, $qty) {
 	if ($type == "featured") {
 		$post_data = get_field('homepage_featured_post', 'option');
 	}
@@ -120,10 +120,10 @@ function get_field_post_data($type, $qty, $excluded_categories) {
 		$qParams = get_recent_post_data(1, $used_posts, $excluded_categories);
 	}
 	if (!empty($qParams)) {
-		query_posts($qParams);
+		$featured_post = new WP_Query($qParams);
 
-		if (have_posts()) {
-			the_post();
+		if ($featured_post -> have_posts()) {
+			$featured_post -> the_post();
 			$feature_post_data = array(
 				'id' => get_the_ID(),
 				'title' => get_the_title(),
@@ -135,13 +135,23 @@ function get_field_post_data($type, $qty, $excluded_categories) {
 	wp_reset_query();
 }
 
-function get_recent_post_data($maxPostsToShow, $used_id, $excluded_categories) {
+// CATEGORY IDs TO EXCLUDE
+// Event, 3
+// Employee, 34
+// Intern Testimonial, 36
+// Impact, 38
+// Media Advisory, 55
+// Media Development Map, 56
+// From the CEO, 1046
+// Special Days, 1244
+
+function get_recent_post_data($maxPostsToShow, $used_id) {
 	$qParams = array(
 		'post_type' => array('post'),
 		'posts_per_page' => $maxPostsToShow,
 		'orderby' => 'post_date',
 		'order' => 'desc',
-		'category__not_in' => $excluded_categories,
+		'category__not_in' => array(3, 24, 36, 38, 55, 56, 1046, 1244),
 		'post__not_in' => $used_id,
 		'tax_query' => array(
 			'relation' => 'OR',
@@ -159,8 +169,7 @@ function get_recent_post_data($maxPostsToShow, $used_id, $excluded_categories) {
 			)
 		)
 	);
-	$param_data = query_posts($qParams);
-	return $param_data;
+	return $qParams;
 }
 
 // BUILDIND BLOCKS
