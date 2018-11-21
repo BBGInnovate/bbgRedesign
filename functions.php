@@ -15,7 +15,8 @@ $STANDARD_POST_CATEGORY_EXCLUDES = array(
 	get_cat_id('Intern Testimonial'),
 	get_cat_id('Impact'),
 	get_cat_id('Media Development Map'),
-	get_cat_id('Media Advisory')
+	get_cat_id('Media Advisory'),
+	get_cat_id('Event')
 );
 
 require get_template_directory() . '/inc/bbg-functions-utilities.php';

@@ -104,7 +104,7 @@ function get_homepage_banner_data() {
 	}
 }
 
-function get_field_post_data($type, $qty) {
+function get_field_post_data($type, $qty, $excluded_categories) {
 	if ($type == "featured") {
 		$post_data = get_field('homepage_featured_post', 'option');
 	}
@@ -117,22 +117,7 @@ function get_field_post_data($type, $qty) {
 			'post_status' => array('publish', 'future')
 		);
 	} else {
-		$qParams = array(
-			'post_type' => array('post'),
-			'posts_per_page' => 1,
-			'orderby' => 'post_date',
-			'order' => 'desc',
-			'category__not_in' => array(56),
-			'post__not_in' => $used_posts,
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'post_format',
-					'field' => 'slug',
-					'terms' => 'post-format-quote',
-					'operator' => 'NOT IN'
-				)
-			)
-		);
+		$qParams = get_recent_post_data(1, $used_posts, $excluded_categories);
 	}
 	if (!empty($qParams)) {
 		query_posts($qParams);
@@ -150,20 +135,27 @@ function get_field_post_data($type, $qty) {
 	wp_reset_query();
 }
 
-function get_recent_post_data($maxPostsToShow, $used_id) {
+function get_recent_post_data($maxPostsToShow, $used_id, $excluded_categories) {
 	$qParams = array(
 		'post_type' => array('post'),
 		'posts_per_page' => $maxPostsToShow,
 		'orderby' => 'post_date',
 		'order' => 'desc',
-		'category__not_in' => array(56, 1046),
+		'category__not_in' => $excluded_categories,
 		'post__not_in' => $used_id,
 		'tax_query' => array(
+			'relation' => 'OR',
 			array(
 				'taxonomy' => 'post_format',
 				'field' => 'slug',
 				'terms' => 'post-format-quote',
 				'operator' => 'NOT IN'
+			),
+			array(
+				'taxonomy' => 'category',
+				'field' => 'slug',
+				'terms' => array('press-release'),
+				'operator' => 'IN'
 			)
 		)
 	);

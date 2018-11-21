@@ -83,7 +83,8 @@ get_header();
 			<div class="inner-container">
 				<div class="main-content-container">
 				<?php
-					$featured_post_result = get_field_post_data('featured', 1);
+					// $STANDARD_POST_CATEGORY_EXCLUDES is located in functions.php
+					$featured_post_result = get_field_post_data('featured', 1, $STANDARD_POST_CATEGORY_EXCLUDES);
 
 					$main_featured_post .= 	$featured_post_result['linked_media'];
 					$main_featured_post .= 	'<h4>' . $featured_post_result['linked_title'] . '</h4>';
@@ -97,7 +98,7 @@ get_header();
 					$recent_post_quantity = 2;
 					$used_ids = array();
 					array_push($used_ids, $featured_post_result['id']);
-					$recent_result = get_recent_post_data($recent_post_quantity, $used_ids);
+					$recent_result = get_recent_post_data($recent_post_quantity, $used_ids, $STANDARD_POST_CATEGORY_EXCLUDES);
 
 					if (have_posts()) {
 						while (have_posts()) {
