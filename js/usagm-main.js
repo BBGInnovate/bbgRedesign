@@ -174,18 +174,19 @@ function resizePostImage() {
 resizePostImage();
 
 function scaleRibbonBanner() {
-	var ribbonCopy = $('#new-home-test .ribbon-copy');
-	var ribbonCopyH = ribbonCopy.outerHeight();
-	$('#new-home-test .ribbon-banner .ribbon-image').height(ribbonCopyH);
+	setTimeout(function() {
+		var ribbonCopyH = $('#new-home-test .ribbon-banner').outerHeight();
+		$('#new-home-test .ribbon-banner .ribbon-image').height(ribbonCopyH);
+	}, 200);
 }
-scaleRibbonBanner()
+scaleRibbonBanner();
 
 function scaleCornerHero() {
 	var cornerHeroCopy = $('#new-home-test .corner-hero-copy');
 	var cornerHeroCopyH = cornerHeroCopy.outerHeight();
 	$('#new-home-test .corner-hero .corner-hero-image').height(cornerHeroCopyH);
 }
-scaleCornerHero()
+scaleCornerHero();
 
 $(window).on('resize', function() {
 	resizeEntityBoxes();

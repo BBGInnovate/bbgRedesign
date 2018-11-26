@@ -6922,7 +6922,6 @@ section.usa-section.bbg-banner__section {
   color: #3f7ad1; }
 
 #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) {
-  border-top: 1px solid #f1f1f1;
   border-bottom: 1px solid #f1f1f1;
   padding-top: 2rem;
   margin-bottom: 2rem; }
@@ -6949,14 +6948,17 @@ section.usa-section.bbg-banner__section {
   text-transform: uppercase;
   color: #3f7ad1; }
 
+#new-home-test .soapbox h2,
+#new-home-test .corner-hero h2 {
+  font-size: 1em;
+  margin-bottom: 1.5rem; }
+
 #new-home-test .ribbon-banner {
   background-color: #dde3ee; }
   #new-home-test .ribbon-banner .ribbon-image {
     display: none; }
   #new-home-test .ribbon-banner .ribbon-copy {
     padding: 2rem; }
-    #new-home-test .ribbon-banner .ribbon-copy h2 {
-      font-size: 1em; }
     #new-home-test .ribbon-banner .ribbon-copy p {
       margin-bottom: 0; }
 
@@ -6971,7 +6973,7 @@ section.usa-section.bbg-banner__section {
     background-size: 100% auto;
     margin-bottom: 0;
     margin-left: 0;
-    padding: 2rem 0 0 0; }
+    padding: 0; }
   #new-home-test .ribbon-banner .ribbon-copy {
     width: calc(75% - 35px);
     float: left;
@@ -7025,16 +7027,14 @@ section.usa-section.bbg-banner__section {
     background-size: auto 100%; }
   #new-home-test .all-entities .entity-title {
     font-size: 1.75rem; }
-  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) {
-    border-bottom: none; }
-    #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .large-column {
-      width: calc(16.66667% - 23.33333px);
-      float: left;
-      margin-left: 20px; }
-    #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column {
-      width: calc(83.33333% - 36.66667px);
-      float: left;
-      margin-left: 20px; } }
+  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .large-column {
+    width: calc(16.66667% - 23.33333px);
+    float: left;
+    margin-left: 20px; }
+  #new-home-test .sidebar-grid--large-gutter .article-inline:nth-of-type(2) .small-column {
+    width: calc(83.33333% - 36.66667px);
+    float: left;
+    margin-left: 20px; } }
 
 @media screen and (min-width: 700px) {
   #new-home-test .all-entities .entity-title {

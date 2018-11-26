@@ -155,7 +155,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			</div><!-- END .grid-container -->
 		</section><!-- END USAGM NEWS -->
 
-		<section class="outer-container ribbon-banner">
+		<section class="outer-container ribbon-banner soapbox">
 			<div class="ribbon-image" style="background-image: url('http://dev.usagm.com/wp-content/uploads/2015/09/John-Lansing_s.jpg')"></div>
 			<div class="ribbon-copy">
 				<h2>From the CEO</h2>
@@ -212,6 +212,22 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				</div><!-- END .nest-container -->
 			</div><!-- END .grid-container -->
 		</section><!-- END IMPACT STORIES -->
+
+		<!-- THREATS TO PRESS RIBBON -->
+		<?php
+			$threats_result = get_threats_to_press_data();
+			$threats_parts = build_threat_parts($threats_result);
+			assemble_threats_to_press_ribbon($threats_parts);
+		?>
+
+		<!-- QUOTE -->
+		<section class="outer-container">
+			<div class="grid-container" style="text-align: center;">
+				<img src="https://www.usagm.gov/wp-content/uploads/2018/02/Vitaly-Mansky-100.jpg" style="border-radius: 50%;">
+				<p style="font-family: 'Alegreya Sans'; font-size: 2.2rem; font-weight: 300; color: #3f7ad1; margin-bottom: 1.5rem;">“Television is not the only source of information. but it is the source in which many people have the greatest trust. Current Time is the only television in the world that tells these people, in Russian, the truth about the current state of affairs. And it is television that is the most effective way of gaining their trust.”</p>
+				<p style="font-family: 'Alegreya Sans'; font-size: 1.8rem; color: #545454; ">Vitaly Mansky, Russian<br><span style="text-transform: uppercase; font-size: 1.6rem;">documentary filmmaker</span></p>
+			</div>
+		</section>
 
 	</div> <!-- END #new-home-test -->
 </main>

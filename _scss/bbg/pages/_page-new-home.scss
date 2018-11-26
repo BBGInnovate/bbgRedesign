@@ -77,7 +77,7 @@
 				@include grid-column(7);
 				.excerpt {display: none;}
 			}
-			border-top: 1px solid #f1f1f1;
+			// border-top: 1px solid #f1f1f1;
 			border-bottom: 1px solid #f1f1f1;
 			padding-top: 2rem;
 			margin-bottom: 2rem;
@@ -98,11 +98,14 @@
 	}
 	// END USAGM NEWS
 
+	// SOAPBOX, CORNER HERO
+	.soapbox h2,
+	.corner-hero h2 {font-size: 1em; margin-bottom: 1.5rem;}
+
 	.ribbon-banner {
 		.ribbon-image {display: none;}
 		.ribbon-copy {
 			padding: 2rem;
-			h2 {font-size: 1em;}
 			p {margin-bottom: 0;}
 		}
 		background-color: #dde3ee;
@@ -118,7 +121,7 @@
 				background-size: 100% auto;
 				margin-bottom: 0;
 				margin-left: 0;
-				padding: 2rem 0 0 0;
+				padding: 0;
 			}
 			.ribbon-copy {
 				@include grid-column(9);
@@ -176,11 +179,7 @@
 		}
 
 		.sidebar-grid--large-gutter {
-			.article-inline {
-				// border-bottom: none;
-			}
 			.article-inline:nth-of-type(2), {
-				border-bottom: none;
 				.large-column {@include grid-column(2);}
 				.small-column {@include grid-column(10);}
 			}
