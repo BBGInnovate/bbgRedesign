@@ -21,7 +21,7 @@ if (in_category('Press Release') && $includeDateline) {
 // DATELINE GOES INSIDE FIRST PARAGRAPH TAG FOR FORMATTING
 $pageContent = get_the_content();
 $pageContent = apply_filters('the_content', $pageContent);
-$pageContent = str_replace(']]>', ']]&gt;', $pageContent);
+$pageContent = do_shortcode($pageContent);
 if ($dateline != "") {
 	$needle = '<p>';
 	$replaceNeedle = '<p>' . $dateline;
