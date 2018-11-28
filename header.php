@@ -189,6 +189,15 @@ gtag('config', 'UA-124338348-1');
 
 <body <?php body_class(); ?>>
 
+<!-- Loading tealium script asynchronously -->
+<script type="text/javascript">
+    (function(a,b,c,d){
+    a='//tags.tiqcdn.com/utag/bbg/main/prod/utag.js';
+    b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+    a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+    })();
+</script>
+
 <h1 class="header-outliner">United States Agency for Global Media</h1>
 <div id="page" class="site main-content" role="main">
 	<a class="skipnav skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bbginnovate' ); ?></a>
