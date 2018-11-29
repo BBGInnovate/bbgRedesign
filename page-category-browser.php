@@ -206,7 +206,7 @@ get_header();
 					if ($featured_media_result != "") {
 						echo $featured_media_result;
 					}
-					$featured_post .= 		'<h3>' . get_the_title() . '</h3>';
+					$featured_post .= 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
 					$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
 					echo $featured_post;
 				} elseif ($counter == 1 && $currentPage != 1) {
