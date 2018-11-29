@@ -28,8 +28,8 @@ function getNetworkExcerptJS() {
 				$description = apply_filters('the_content', $description);
    				$description = str_replace(']]>', ']]&gt;', $description);
 
-				$link = get_permalink( get_page_by_path( "/broadcasters/$abbreviation/" ) );
-				$url = get_post_meta( $id, 'entity_site_url', true );
+				$link = get_permalink(get_page_by_path("/broadcasters/$abbreviation/"));
+				$url = get_post_meta($id, 'entity_site_url', true);
 
 				$imgSrc = get_template_directory_uri().'/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
 				$entity_group[$abbreviation] = array(
@@ -41,10 +41,10 @@ function getNetworkExcerptJS() {
 		}
 	}
 	wp_reset_postdata();
-	$entity_group['bbg'] = array(
+	$entity_group['usagm'] = array(
 		'description' => 'The five networks of the BBG are trusted news sources, providing high-quality journalism and programming to more than 278 million people each week. They provide international, U.S. and local news in more than 100 countries and in 58 languages.',
-		'url' => 'https://www.bbg.gov',
-		'fullName' => 'Broadcasting Board of Governors'
+		'url' => 'https://www.usagm.gov',
+		'fullName' => 'U.S. Agency for Global Media'
 	);
 	$entityJson = json_encode(new ArrayValue($entity_group), JSON_PRETTY_PRINT);
 	$entityJson = str_replace("\/", "/", $entityJson);

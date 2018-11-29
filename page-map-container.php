@@ -7,14 +7,15 @@
  * template name: Map Container
  */
 
-$pageContent = "";
-if ( have_posts() ) :
-	while ( have_posts() ) : the_post();
-		$pageContent = get_the_content();
-		$pageContent = apply_filters( 'the_content', $pageContent );
-		$pageContent = str_replace( ']]>', ']]&gt;', $pageContent );
-	endwhile;
-endif;
+$page_content = "";
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
+		$page_content = get_the_content();
+		$page_content = do_shortcode(get_the_content());
+		$page_content = apply_filters('the_content', $page_content);
+	}
+}
 wp_reset_postdata();
 wp_reset_query();
 
@@ -171,7 +172,7 @@ for (serviceName in servicesByName) {
 	<section class="outer-container">
 		<div class="grid-container">
 			<div class="btn-group entity-buttons" role="group" aria-label="..." style="display: inline; clear: none;">
-				<button type="button" title="BBG" class=" btn-default bbg"><span class="bbg__map__button-text">BBG</span></button><!--
+				<button type="button" title="USAGM" class=" btn-default usagm"><span class="bbg__map__button-text">USAGM</span></button><!--
 				--><button type="button" title="VOA" class=" btn-default voa"><span class="bbg__map__button-text">VOA</span></button><!--
 				--><button type="button" title="RFA" class=" btn-default rfa"><span class="bbg__map__button-text">RFA</span></button><!--
 				--><button type="button" title="RFERL" class=" btn-default rferl"><span class="bbg__map__button-text">RFERL</span></button><!--
