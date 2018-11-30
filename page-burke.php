@@ -13,6 +13,8 @@
   template name: Burke Awards
  */
 
+require 'inc/bbg-functions-assemble.php';
+
 /******* BEGIN BURKE AWARDS ****/
 
 function getBurkeImage() {
@@ -37,85 +39,14 @@ echo '<style>.bbg__main-navigation .menu-usagm-container {background-color: rgba
 echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;}</style>';
 ?>
 
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
+
 <main id="bbg-home" class="site-content bbg-home-main" role="main">
-	<?php
-		/*** output our <style> node for use by the responsive banner ***/
-		$randomImg = getBurkeImage();
-		$bannerCutline = "";
-		$bannerAdjustStr = "";
-		if ($randomImg) {
-			$attachment_id = $randomImg['imageID'];
-			$bannerCutline = $randomImg['imageCutline'];
-			$bannerAdjustStr = $randomImg['bannerAdjustStr'];
-		}
-		if($attachment_id) {
-			$tempSources = bbgredesign_get_image_size_links($attachment_id);
-			//sources aren't automatically in numeric order.  ksort does the trick.
-			ksort($tempSources);
-			$counter = 0;
-			$prevWidth = 0;
-			// Let's prevent any images with width > 1200px from being an output as part of responsive banner
-			foreach($tempSources as $key => $tempSource) {
-				if ($key > 1900) {
-					unset($tempSources[$key]);
-				}
-			}
-			echo "<style>";
-			if ($bannerAdjustStr != "") {
-				echo "\t.bbg-banner { background-position: $bannerAdjustStr; }";
-			}
-			foreach($tempSources as $key => $tempSourceObj) {
-				$counter++;
-				$tempSource = $tempSourceObj['src'];
-				if ($counter == 1) {
-					echo "\t.bbg-banner { background-image: url($tempSource) !important; }\n";
-				} elseif ($counter < count( $tempSources)) {
-					echo "\t@media (min-width: " . ( $prevWidth + 1 ) . "px) and (max-width: " . $key . "px) {\n";
-					echo "\t\t.bbg-banner { background-image: url($tempSource) !important; }\n";
-					echo "\t}\n";
-				} else {
-					echo "\t@media (min-width: " . ( $prevWidth + 1 ) . "px) {\n";
-					echo "\t\t.bbg-banner { background-image: url($tempSource) !important; }\n";
-					echo "\t}\n";
-				}
-				$prevWidth = $key;
-			}
-			echo "</style>";
-		}
-	?>
-
-	<?php
-		if (true || isset ($_GET['slider'])) :
-			echo '<section class="usa-section bbg-banner__section" style="position: relative;">';
-			echo do_shortcode('[rev_slider alias="burke-awards"]');
-			echo '</section>';
-		else:
-	?>
-
-	<!-- Responsive Banner -->
-	<div class="usa-section bbg-banner__section" style="position: relative;">
-		<div class="bbg-banner">
-			<div class="bbg-banner__gradient"></div>
-			<div class="usa-grid bbg-banner__container--home">
-				<img class="bbg-banner__site-logo" src="<?php echo $bannerLogo; ?>" alt="BBG logo">
-				<div class="bbg-banner-box">
-					<h1 class="bbg-banner-site-title"><?php echo $bannerText; ?></h1>
-				</div>
-				<div class="bbg-social__container">
-					<div class="bbg-social">
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="bbg-banner__cutline usa-grid">
-			<?php echo $bannerCutline; ?>
-		</div>
-	</div>
-
-	<?php
-		endif;
-	?>
 
 	<div class="outer-container">
 		<div class="grid-container">
