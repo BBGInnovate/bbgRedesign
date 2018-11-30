@@ -1,43 +1,3 @@
-.wp-caption {
-	margin-bottom: 1.5em;
-	max-width: 100%;
-
-	img[class*="wp-image-"] {
-		@include center-block;
-	}
-
-	.size-large {
-		max-width: $article-max-width;
-		width: 100%;
-
-		+ .wp-caption-text {
-			margin: {
-				right: auto;
-				left: auto;
-			}
-			max-width: $article-max-width;
-		}
-	}
-
-	.wp-caption-text {
-		margin: 0.8075em 0;
-	}
-}
-
-.wp-caption-text {
-	color: $color-gray-dark;
-	font: {
-		family: Georgia, serif; // editing to fix font rendering issue on Windows machines
-		size: $caption-font-size;
-		style: italic;
-		weight: $font-light;
-	}
-	line-height: $lead-line-height;
-	margin-top: 1rem;
-	text-align: left;
-}
-
-
 /* Mugshot used in the Soapbox on the homepage */
 .bbg__mugshot {
 	float: left;
@@ -45,9 +5,7 @@
 	min-width: 100px;
 	width: 20%;
 
-	@include media($small-screen) {
-		margin-top: $site-margins-small;
-	}
+	@include media($small-screen) {margin-top: $site-margins-small;}
 }
 
 .bbg__mugshot__caption {
@@ -82,26 +40,16 @@
 
 		.size-medium {
 			width: 100%;
-
-			@include media($small-screen) {
-				width: 100%;
-			}
+			@include media($small-screen) {width: 100%;}
 		}
-
 	}
 
 	@include media($small-screen) {
-		.alignleft {
-			margin-right: $site-margins-medium;
-		}
-		.alignright {
-			margin-left: $site-margins-medium;
-		}
+		.alignleft {margin-right: $site-margins-medium;}
+		.alignright {margin-left: $site-margins-medium;}
 	}
 }
 
 /* Fixing the slignment on full-column photos in posts */
 .bbg__article-content .alignnone,
-.bbg__article-content .aligncenter {
-	width: auto !important;
-}
+.bbg__article-content .aligncenter {width: auto !important;}

@@ -231,7 +231,7 @@ gtag('config', 'UA-124338348-1');
 			<div class="usa-grid">
 				<span class="usa-disclaimer-official">
 					<img class="usa-flag_icon" alt="U.S. flag signifying that this is a United States federal government website" src="<?php echo get_template_directory_uri() ?>/img/us_flag_small.png">
-					An official website of <span class="u--no-wrap">the United States government</span>
+					An official website of <span class="u--no-wrap">the&nbsp;United&nbsp;States&nbsp;government</span>
 				</span>
 			</div>
 		</div>

@@ -64,7 +64,7 @@ get_header(); ?>
 								</header><!-- .bbg-blog__excerpt-header--featured -->
 								<div class="usa-grid">
 								<div class="entry-content bbg-blog__excerpt-content--featured ">
-									<h3 class="usa-font-lead"><?php echo $description; ?></h3>
+									<h3 class="lead-in"><?php echo $description; ?></h3>
 								</div><!-- .entry-content -->
 								</div>
 							</article>

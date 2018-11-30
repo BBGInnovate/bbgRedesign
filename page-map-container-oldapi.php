@@ -47,7 +47,7 @@ echo getNetworkExcerptJS();
 						<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
 					</header><!-- .page-header -->
-					<h3 id="site-intro" class="usa-font-lead"><?php echo get_the_excerpt(); ?> <!--<a href="/who-we-are/" class="bbg__read-more">LEARN MORE »</a>--></h3>
+					<h3 id="site-intro" class="lead-in"><?php echo get_the_excerpt(); ?> <!--<a href="/who-we-are/" class="bbg__read-more">LEARN MORE »</a>--></h3>
 				</div><!-- div.usa-grid -->
 			</div><!-- div.usa-grid-full -->
 

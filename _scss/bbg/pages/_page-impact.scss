@@ -1,9 +1,7 @@
 .bbg__impact-model {
 
 	@include media($medium-large-screen) {
-		.bbg__impact-model__headline {
-			font-size: 6rem;
-		}
+		.bbg__impact-model__headline {font-size: 6rem;}
 	}
 	@include media($small-screen) {
 		.bbg__label {
@@ -19,21 +17,12 @@
 	}
 
 
-	ul {
-		margin-bottom: 0; 
-	}
+	ul {margin-bottom: 0; }
 
-	p{
-		font-family: $font-sans;
-	}
+	p {font-family: $font-sans;}
 
-	p.usa-font-lead{
-		font-family: $font-serif;
-	}
 
-	p.bbg__infobox__tagline {
-		margin-top: 0;
-	}
+	p.bbg__infobox__tagline {margin-top: 0;}
 
 	.bbg__impact-model__section {
 		border-bottom: $border-dotted;
@@ -58,9 +47,7 @@
 		}
 	}
 
-	.bbg__impact-model__optional {
-		color: #999;
-	}
+	.bbg__impact-model__optional {color: #999;}
 
 	.bbg__impact-model__graphic {
 		display: block;
@@ -70,9 +57,7 @@
 	}
 
 	@include media($medium-screen) {
-		.bbg__big-type {
-			font-size: 4rem;
-		}
+		.bbg__big-type {font-size: 4rem;}
 		.usa-grid {
 			.usa-width-one-half {
 				border-left: 1px dotted #999;

@@ -1,38 +1,4 @@
-.u--no-wrap {
-	white-space: nowrap;
-}
-
-.u--show-mobile {
-	@include media($small-screen) {
-		display: none;
-	}
-}
-
-.u--hide-mobile {
-	display: none;
-
-	@include media($small-screen) {
-		display: inline;
-	}
-}
-
-.u--hide-mobile--td {
-	display: none;
-
-	@include media($medium-screen) {
-		display: table-cell;
-	}
-}
-
-.u--space-below-mobile--large {
-	margin-bottom: $site-margins-large; 
-
-	@include media($medium-screen) {
-		margin-bottom: 0; 
-	}
-}
-
-//hide things at medium-large and wider
+// HIDE AT MEDIUM-LARGE AND WIDER
 .u--hide-medium-large {
 	display:inherit;
 	@include media($medium-large-screen) {
@@ -40,7 +6,7 @@
 	}
 }
 
-//don't show things until you reach medium-large
+// DON'T SHOW THINGS UNTIL MEDIUM-LARGE
 .u--show-medium-large {
 	display:none;
 	@include media($medium-large-screen) {
@@ -48,11 +14,10 @@
 	}
 }
 
-//Used to consistently specifiy seperators throughout the site.
+// Consistently specifiy seperators throughout the site.
 .u--seperator:before {
 	content: " | ";
 }
-
 
 @mixin backgroundCover() {
 	background-size: cover;
@@ -92,14 +57,4 @@
 	@include media($medium-screen) {
 		font-size: $read-in-font-size;
 	}
-}
-
-.bbg__clear {
-	@include clearfix();
-}
-
-
-.bbg__code {
-	color: $color-green;
-	font-family: Courier, monospace;
 }

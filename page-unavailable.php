@@ -172,7 +172,7 @@ require 'inc/custom-field-modules.php';
 <div class="usa-disclaimer">
 	<span class="usa-disclaimer-official">
 		<img class="usa-flag_icon" alt="U.S. flag signifying that this is a United States federal government website" src="https://www.bbg.gov/wp-content/themes/bbgRedesign/img/us_flag_small.png">
-		An official website of <span class="u--no-wrap">the United States government</span>
+		An official website of <span class="u--no-wrap">the&nbsp;United&nbsp;States&nbsp;government</span>
 	</span>
 </div>
 

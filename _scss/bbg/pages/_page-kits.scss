@@ -4,7 +4,6 @@
 	margin-bottom: $site-margins;
 
 	p {
-		@extend .usa-font-lead;
 		line-height: 2.5;
 
 		&:first-of-type {
@@ -449,7 +448,6 @@ a.bbg__kits__intro__more--link {
 *****/
 .bbg__kits__child__intro {
 	p:first-of-type {
-		@extend .usa-font-lead;
 		line-height: 2.5;
 	}
 }

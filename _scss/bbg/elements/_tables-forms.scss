@@ -44,28 +44,13 @@ table td {
 }
 
 .bbg__table__money {
-	thead th {
-		text-align: center;
-	}
-
-	th {
-		text-align: left;
-	}
-
-	td{
-		text-align: right;
-	}
-
-	td,
-	th {
-		padding: 1rem;
-	}
+	thead th {text-align: center;}
+	th {text-align: left;}
+	td {text-align: right;}
+	td, th {padding: 1rem;}
 
 	@include media($medium-screen) {
-		td,
-		th {
-			padding: 1.5rem;
-		}
+		td, th {padding: 1.5rem;}
 	}
 
 	.bbg__table__row__total th,
@@ -77,22 +62,13 @@ table td {
 
 }
 
-.bbg__table__caption {
-	margin-bottom: 0;
-}
+.bbg__table__caption {margin-bottom: 0;}
 
 .bbg__sidebar__table {
 	@extend .usa-table-borderless;
-
 	font-size: $small-font-size;
-
-	caption {
-		@extend h3;
-	}
-
-	th {
-		@extend h5;
-	}
+	caption {@extend h3;}
+	th {@extend h5;}
 }
 
 
@@ -102,9 +78,7 @@ table td {
 .bbg__article__form {
 	display: none;
 
-	.bbg__article__form-select--sub {
-		display: none;
-	}
+	.bbg__article__form-select--sub {display: none;}
 }
 
 .usa-fieldset-inputs .bbg__article__form-radio__label,
@@ -121,16 +95,8 @@ table td {
 .bbg__article__form--inline {
 	@extend .bbg__table-plain;
 
-	fieldset {
-		display: table-row;
-	}
+	fieldset {display: table-row;}
 
-	/*temporarily disabling because this breaks the forms on mobile apps */
-	/*
-	legend {
-		display: table-caption;
-	}
-	*/
 	div {
 		display: table-cell;
 		padding: {

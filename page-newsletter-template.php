@@ -180,7 +180,7 @@
 								<header class="page-header">
 									<h5 class="bbg__label--mobile large">Media Highlights</h5>
 									<h6 class="bbg__page-header__tagline">Spotlighting some of the media coverage of the BBG networks</h6>
-									<h3 id="site-intro" class="usa-font-lead">Our is to inform, engage, and connect people around the world in support of freedom and democracy. The agency’s mission is reinforced by those of the individual broadcasters that are overseen by the BBG. <a href="https://www.bbg.gov/who-we-are/" class="bbg__read-more">LEARN MORE »</a></h3>
+									<h3 id="site-intro" class="lead-in">Our is to inform, engage, and connect people around the world in support of freedom and democracy. The agency’s mission is reinforced by those of the individual broadcasters that are overseen by the BBG. <a href="https://www.bbg.gov/who-we-are/" class="bbg__read-more">LEARN MORE »</a></h3>
 								</header>
 								<!-- .page-header -->
 							</div>
@@ -198,7 +198,7 @@
 									</header>
 									<!-- .bbg-blog__excerpt-header--featured -->
 									<div class="entry-content bbg-blog__excerpt-content--featured usa-grid">
-										<h3 class="usa-font-lead">
+										<h3 class="lead-in">
 											Amid news reports of migrants fleeing turmoil in Syria, Iraq and Afghanistan, over 150,000 people in 2015 have fled violence and hardship in Africa largely have gone unnoticed.
 										</h3>
 									</div>
@@ -273,7 +273,7 @@
 						<div class="bbg__quotation ">
 							<h2 class="bbg__quotation-text--large">“Historians now acknowledge that the Voice of America, Radio Free Europe were major contributors to the bringing down the then Soviet Union. There’s no doubt about it.”</h2>
 							<div class="bbg__quotation-attribution__container">
-								<p class="bbg__quotation-attribution"><img src="https://bbgredesign.voanews.com/wp-content/media/2016/05/mugshot_John-McCain-100.jpg" class="bbg__quotation-attribution__mugshot"><span class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">U.S. Senator <span class="u--no-wrap">John McCain</span> (R-AZ)</span><span class="bbg__quotation-attribution__credit"></span></span></p>
+								<p class="bbg__quotation-attribution"><img src="https://bbgredesign.voanews.com/wp-content/media/2016/05/mugshot_John-McCain-100.jpg" class="bbg__quotation-attribution__mugshot"><span class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">U.S. Senator John&nbs;McCain (R-AZ)</span><span class="bbg__quotation-attribution__credit"></span></span></p>
 							</div>
 						</div>
 					</div>
@@ -300,7 +300,7 @@
 					<div class="usa-grid">
 						<h6 class="bbg__label"><a href="<?php echo get_permalink( get_page_by_path( 'networks' ) ); ?>" title="A list of the BBG broadcasters.">Our networks</a></h6>
 						<div class="usa-intro bbg__broadcasters__intro">
-							<h3 class="usa-font-lead">Every week, more than 226 million listeners, viewers and Internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</h3>
+							<h3 class="lead-in">Every week, more than 226 million listeners, viewers and Internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual BBG international broadcasters.</h3>
 						</div>
 						<div class="usa-grid-full">
 							<article class="bbg__entity bbg-grid--1-1-1-2">

@@ -33,7 +33,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 @import 'core/variables';
 @import 'bbg/variables-bbg';
 
-// @import 'core/fonts';
 @import 'core/base';
 @import 'core/grid-settings';
 @import 'core/grid';
@@ -65,13 +64,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 @import 'components/skipnav';
 
 
-// WordPress -------------- //
-
-@import '_wp/media/media';
-@import '_wp/modules/alignments';
-@import '_wp/layouts/sidebar-content';
-
-
 // BBG -------------- //
 
 /*@import 'bbg/variables-bbg'; MOVED ABOVE TO UPDATE FONTS */
@@ -79,9 +71,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 @import 'bbg/elements/typography';
 @import 'bbg/components/comments';
 @import 'bbg/components/sharing';
-@import 'bbg/components/sidebar';
 @import 'bbg/elements/tables-forms';
-@import 'bbg/elements/responsive-svg';
 @import 'bbg/media/media';
 @import 'bbg/media/maps';
 
@@ -101,7 +91,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 @import 'bbg/pages/page-careers';
 @import 'bbg/pages/page-entity';
 @import 'bbg/pages/page-burke';
-/*@import 'bbg/pages/page-fuego'; // Not using this on the BBG site. */
 @import 'bbg/pages/page-profile';
 @import 'bbg/pages/page-search-results';
 @import 'bbg/pages/page-legislation';

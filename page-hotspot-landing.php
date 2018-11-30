@@ -52,7 +52,7 @@ echo getNetworkExcerptJS();
 				<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>">Section Title<?php //echo $parent->post_title; ?></a></h5>
 				<?php echo "<h1 class='entry-title'>$pageTitle</h1>"; ?>
 			</header><!-- .page-header -->
-			<h3 id="site-intro" class="usa-font-lead"><?php echo $pageContent; ?></h3>
+			<h3 id="site-intro" class="lead-in"><?php echo $pageContent; ?></h3>
 
 		</div><!-- div.usa-grid -->
 	</div><!-- div.usa-grid-full -->
