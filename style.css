@@ -4983,6 +4983,9 @@ ol li:before {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid #8b8278; }
 
+.unstyled-list li {
+  list-style-type: none; }
+
 .profile-name {
   margin-bottom: 1.5rem; }
 

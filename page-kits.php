@@ -12,6 +12,10 @@
 include get_template_directory() . "/inc/bbg-functions-assemble.php";
 include get_template_directory() . "/inc/constant-contact_sign-up.php";
 
+function isOdd($pageTotal) {
+	return ($pageTotal % 2) ? true : false;
+}
+
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
 		$pageName = get_the_title();
@@ -28,15 +32,16 @@ $awards = array();
 $awardCategoryObj = get_category_by_slug('award');
 if (is_object($awardCategoryObj)) {
 	$awardCategoryID = $awardCategoryObj -> term_id;
-	$awardParams = array(
+	$award_params = array(
 		'post_type' => array('award'),
 		'posts_per_page' => 1,
 		'orderby' => 'date',
 		'order' => 'DESC'
 	);
-	$award_query = new WP_Query( $awardParams );
-	if ( $award_query -> have_posts() ) {
-		while ($award_query -> have_posts()) : $award_query -> the_post();
+	$award_query = new WP_Query($award_params);
+	if ($award_query -> have_posts()) {
+		while ($award_query -> have_posts()) {
+			$award_query -> the_post();
 			$id = get_the_ID();
 
 			$awardYears  = get_post_meta($id, 'standardpost_award_year');
@@ -57,7 +62,7 @@ if (is_object($awardCategoryObj)) {
 				'organizations' => $organizations,
 				'recipients' => $entity
 			);
-		endwhile;
+		}
 	}
 	wp_reset_postdata();
 }
@@ -158,6 +163,60 @@ $qParamsCongressional = array(
 );
 // set variable for PR category link to main news page
 $congCategoryLink = get_permalink( get_page_by_path('news'));
+
+// KITS UMBRELLA
+function get_kits_umbrella_main_data() {
+	$header = get_sub_field('kits_subpage_heading');
+	$header_link = get_sub_field('kits_subpage_heading_link');
+	if (!empty($header_link)) {
+		$header = '<a href="' . $header_link . '">' . $header . '</a>';
+	}
+
+	$kits_main_data = array(
+		'header' => $header,
+		'header_link' => $header_link
+	);
+	return $kits_main_data;
+}
+function get_kits_umbrella_content_data($layout_type) {
+	if ($layout_type == 'kits_internal_page') {
+		$column_title = get_sub_field('kits_column_title');
+		$thumbnail = get_sub_field('kits_thumbnail');
+		$include_excerpt = get_sub_field('kits_include_excerpt');
+		$link_arr = get_sub_field('kits_link');
+		$post_id = $link_arr[0];
+		$link = get_the_permalink($post_id);
+		$post_title = get_the_title($post_id);
+		$description = get_the_excerpt($post_id);
+
+		if (!empty($link)) {
+			$column_title = '<a href="' . $link . '">' . $column_title . '</a>';
+		}
+	}
+	else if ($layout_type == 'kits_file') {
+		$column_title = get_sub_field('kits_file_column_title');
+		$thumbnail = get_sub_field('kits_file_thumbnail');
+		$link_arr = get_sub_field('kits_file_link');
+		$post_id = $link_arr[0];
+		$link = get_the_permalink($post_id);
+		$post_title = get_the_title($post_id);
+		$description = get_the_excerpt($post_id);
+		$file = get_sub_field('kits_file');
+
+		if (!empty($link)) {
+			$column_title = '<a href="' . $link . '">' . $column_title . '</a>';
+		}
+	}
+	$kit_data = array(
+		'column_title' => $column_title,
+		'thumbnail' => $thumbnail,
+		'link' => $link,
+		'post_title' => $post_title,
+		'file' => $file,
+		'description' => $description
+	);
+	return $kit_data;
+}
 
 get_header();
 ?>
@@ -412,10 +471,10 @@ get_header();
 											} elseif ($pageName == "Office of Congressional Affairs") {
 												echo '<h3>Office of Congressional Affairs</h3>';
 											} else {
-												echo '<h3>' . $pageName . 'Contact information</h3>';
+												echo '<h3>' . $pageName . ' Contact Information</h3>';
 											}
 											echo $address;
-											echo '<ul class="usa-unstyled-list">';
+											echo '<ul class="unstyled-list">';
 											echo 	$phone;
 											echo 	$email;
 											echo '</ul>';
@@ -542,7 +601,7 @@ get_header();
 
 						echo '<!-- ROW ' . $counter . '-->'; // output counter to keep track of rows
 
-						if (get_row_layout() == 'kits_ribbon_page'):
+						if (get_row_layout() == 'kits_ribbon_page') {
 							$labelText = get_sub_field('kits_ribbon_label');
 							$labelLink = get_sub_field('kits_ribbon_label_link');
 							$headlineText = get_sub_field('kits_ribbon_headline');
@@ -585,8 +644,8 @@ get_header();
 							echo 		'</div>';
 							echo 	'</div><!-- .outer-container -->';
 							echo '</div><!-- .bbg__ribbon -->';
-
-						elseif (get_row_layout() == 'kits_downloads_files'):
+						}
+						elseif (get_row_layout() == 'kits_downloads_files') {
 							$downloadsLabel = get_sub_field('kits_downloads_label');
 							echo '<div class="outer-container">';
 							echo 	'<div class="grid-container">';
@@ -656,28 +715,28 @@ get_header();
 							echo 		'</div>';
 							echo 	'</div>';
 							echo '</div>'; // END .outer-container
-
-						elseif (get_row_layout() == 'kits_recent_awards') :
+						}
+						elseif (get_row_layout() == 'kits_recent_awards') {
 							$counter = 0;
 
-							foreach ( $awards as $a ) {
+							foreach ($awards as $current_award) {
 								$counter++;
 
-								$id = $a['id'];
-								$url = $a['url'];
-								$title = $a['title'];
-								$awardYears = $a['awardYears'];
-								$awardTitle = $a['awardTitle'];
+								$id = $current_award['id'];
+								$url = $current_award['url'];
+								$title = $current_award['title'];
+								$awardYears = $current_award['awardYears'];
+								$awardTitle = $current_award['awardTitle'];
 								$awardCategoryLink = get_category_link($awardCategoryObj -> term_id);
 
-								$s  = '<div class="outer-container">';
-								$s .= 	'<section class="grid-container">';
-								$s .= 		'<div class="grid-half">';
-								$s .= 			'<h3>Recent Awards</h3>';
-								$s .= 			'<h4><a href="' . $url . '">' . $title . '</a></h4>';
-								$s .= 			'<h4>' . join( $awardYears ) . ' ' . join( $organizations ) . '</h4>';
-								$s .= 			'<a href="' . $awardCategoryLink . '" class="bbg__kits__intro__more--link">View all awards »</a>';
-								$s .= 		'</div>';
+								$award_block  = '<div class="outer-container">';
+								$award_block .= 	'<section class="grid-container">';
+								$award_block .= 		'<div class="grid-half">';
+								$award_block .= 			'<h3>Recent Awards</h3>';
+								$award_block .= 			'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+								$award_block .= 			'<h4>' . join($awardYears) . ' ' . join($organizations) . '</h4>';
+								$award_block .= 			'<a href="' . $awardCategoryLink . '" class="bbg__kits__intro__more--link">View all awards »</a>';
+								$award_block .= 		'</div>';
 							}
 
 							$focusPageObj = get_sub_field('kits_recent_awards_focus_page');
@@ -687,15 +746,56 @@ get_header();
 							$focusPageExcerpt = apply_filters('the_content', $focusPageExcerpt);
 							$focusPageExcerpt = str_replace(']]>', ']]&gt;', $focusPageExcerpt);
 
-							$s .= 		'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
-							$s .= 			'<h3>' . $focusPageTitle . '</h3>';
-							$s .= 			'<p>' . $focusPageExcerpt . '</p>';
-							$s .= 			'<a href="' . $focusPageURL . '" class="bbg__kits__intro__more--link">Read more »</a>';
-							$s .= 		'</div>';
-							$s .= 	'</section>';
-							$s .= '</div>';
-							echo $s;
-						endif;
+							$award_block .= 		'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
+							$award_block .= 			'<h3>' . $focusPageTitle . '</h3>';
+							$award_block .= 			'<p>' . $focusPageExcerpt . '</p>';
+							$award_block .= 			'<a href="' . $focusPageURL . '" class="bbg__kits__intro__more--link">Read more »</a>';
+							$award_block .= 		'</div>';
+							$award_block .= 	'</section>';
+							$award_block .= '</div>';
+							echo $award_block;
+						}
+						elseif (get_row_layout() == 'kits_umbrella_page') {
+							$kits_umbrella_main_data = get_kits_umbrella_main_data();
+							$content_counter = count(get_sub_field('kits_section_content'));
+							
+							$grid_class = 'bbg-grid--1-2-2';
+							if (isOdd($content_counter)) {
+								$grid_class = 'bbg-grid--1-2-3';
+							}
+							$kit_umbrella  = '<div class="outer-container">';
+							$kit_umbrella .= 	'<div class="grid-container">';
+							$kit_umbrella .= 		'<h3>' . $kits_umbrella_main_data['header'] . '</h3>';
+							$kit_umbrella .= 		'<div class="nest-container">';
+							$kit_umbrella .= 			'<div class="inner-container">';
+							$kit_umbrella .= 				'<div class="grid-container">';
+
+							while (have_rows('kits_section_content')) {
+								the_row();
+								$kits_row = get_row_layout();
+								$kit_umbrella_content_data = get_kits_umbrella_content_data($kits_row);
+								if (!empty($kit_umbrella_content_data)) {
+									$kit_umbrella .= 			'<div class="' . $grid_class . '">';
+									$kit_umbrella .= 				'<h4>' . $kit_umbrella_content_data['column_title'] . '</h4>';
+									$kit_umbrella .= 				'<div class="hd_scale umbrella-bg-image" ';
+									$kit_umbrella .= 					'style="background-image: url(\'' . $kit_umbrella_content_data['thumbnail']['url'] . '\')">';
+									$kit_umbrella .= 				'</div>';
+									$kit_umbrella .= 				'<p>' . $kit_umbrella_content_data['description'] . '</p>';
+									if (!empty($kit_umbrella_content_data['file'])) {
+										$kit_umbrella .= 			'<p class="bbg__kits__section--tile__downloads"><a href="'. $kit_umbrella_content_data['file']['url'] . '">' . $kit_umbrella_content_data['file']['title'] . '</a> <span class="bbg__file">(' . $kit_umbrella_content_data['file']['subtype'] . ' ' . formatBytes($kit_umbrella_content_data['file']['filesize']) . ')</span></p>';
+									} else {
+										$kit_umbrella .= 				'<p><a href="'. $kit_umbrella_content_data['link'] . '">' . $kit_umbrella_content_data['post_title'] . '</a></p>';
+									}
+									$kit_umbrella .= 			'</div>';
+								}
+							}
+							$kit_umbrella .= 				'</div>'; // END .grid-container
+							$kit_umbrella .= 			'</div>';// END .inner-container
+							$kit_umbrella .= 		'</div>'; // END .nest-container
+							$kit_umbrella .= 	'</div>'; // END .grid-container
+							$kit_umbrella .= '</div>'; // END .outer-container
+							echo $kit_umbrella;
+						}
 					endwhile;
 					echo '<!-- END ROWS -->';
 				endif;

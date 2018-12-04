@@ -101,7 +101,6 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 				while ($custom_query -> have_posts()) {
 					$custom_query -> the_post();
 					$counter++;
-					//get_template_part( 'template-parts/content-burke', get_post_format() );
 				}
 				wp_reset_query();
 			?>
