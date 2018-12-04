@@ -183,7 +183,7 @@ if ( has_category('Media Advisory')) {
 		$advisoryExpertsStr .= '<p class="bbg-tagline bbg-tagline--main">' . $expertDescription . '</p>';
 
 		if ( have_rows( 'media_advisory_list_of_experts' )) {
-			$advisoryExpertsStr .= '<ul class="usa-unstyled-list">';
+			$advisoryExpertsStr .= '<ul class="unstyled-list">';
 			while ( have_rows('media_advisory_list_of_experts') ) : the_row();
 				$expertName = get_sub_field( 'expert_name' );
 				$expertTitle = get_sub_field( 'expert_title' );
@@ -347,7 +347,7 @@ if (have_rows('media_dev_sponsors')) {
 $media_dev_presenters = "";
 if (have_rows('media_dev_presenters')) {
 	$media_dev_sponsors .= '<h5>Presenters</h5>';
-	$media_dev_presenters .= '<ul class="usa-unstyled-list">';
+	$media_dev_presenters .= '<ul class="unstyled-list">';
 	while (have_rows('media_dev_presenters')) {
 		the_row();
 		$presenterName = get_sub_field('media_dev_participant_name');
@@ -388,7 +388,7 @@ if ($isPodcast) {
 	$podcastTranscript = apply_filters('the_content', $podcastTranscript);
 	if ($podcastTranscript) {
 		$podcastTranscript  = '<div id="podcastTranscript" class="usa-accordion-bordered bbg__committee-list">';
-		$podcastTranscript .= 	'<ul class="usa-unstyled-list">';
+		$podcastTranscript .= 	'<ul class="unstyled-list">';
 		$podcastTranscript .= 		'<li>';
 		$podcastTranscript .= 			'<button id="transcriptButton" class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-podcast-1">Transcript</button>';
 		$podcastTranscript .= 			'<div id="collapsible-podcast-1" aria-hidden="true" class="usa-accordion-content">' . $podcastTranscript . '</div>';

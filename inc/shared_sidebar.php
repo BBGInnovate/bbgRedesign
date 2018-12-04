@@ -168,7 +168,7 @@ if ($includeSidebar) {
 					$accordion .= '</style>';
 
 					$accordion .= '<div class="usa-accordion bbg__committee-list">';
-					$accordion .= 		'<ul class="usa-unstyled-list">';
+					$accordion .= 		'<ul class="unstyled-list">';
 					$i = 0;
 					while (have_rows('sidebar_accordion_items')) : the_row();
 						$i++;
@@ -222,7 +222,7 @@ if ($includeSidebar) {
 						$widgetLinkLabel = '#' . $widgetHashtag;
 					}
 					$sidebar_markup .= '<h5>Follow on Twitter</h5>';
-					$sidebar_markup .= '<ul class="bbg__article-share ">';
+					$sidebar_markup .= '<ul class="bbg__article-share unstyled-list">';
 					$sidebar_markup .= 	'<li class="bbg__article-share__link twitter">';
 					$sidebar_markup .= 		'<a href="' . $widgetLink . '" title="Follow on Twitter"><span class="bbg__article-share__icon twitter"></span><span class="">' . $widgetLinkLabel . '</span></a>';
 					$sidebar_markup .= 	'</li>';
@@ -271,7 +271,7 @@ if ($includeSidebar) {
 					$sidebar_markup .= '<style>div.usa-accordion-content {padding:1.5rem !important;}</style>';
 
 					$sidebar_markup .= '<div class="usa-accordion bbg__committee-list">';
-					$sidebar_markup .= 	'<ul class="usa-unstyled-list">';
+					$sidebar_markup .= 	'<ul class="unstyled-list">';
 					$qParams = array(
 						'post_type' => array('post'),
 						'posts_per_page' => 999,

@@ -227,7 +227,7 @@ get_header();
 										if (get_sub_field('bbg_speaker_name')) {
 											$profiles = get_sub_field('bbg_speaker_name');
 
-											echo "<ul class='usa-unstyled-list'>";
+											echo "<ul class='usa-unstyled-list unstyled-list'>";
 
 											foreach ($profiles as $profile) {
 												$pID = $profile->ID;
@@ -258,7 +258,7 @@ get_header();
 										if (get_sub_field('meeting_speaker')) {
 											$profiles = get_sub_field('meeting_speaker');
 
-											echo "<ul class='usa-unstyled-list'>";
+											echo "<ul class='usa-unstyled-list usa-unstyled-list unstyled-list'>";
 
 											foreach ($profiles as $profile) {
 												$speakerName = $profile["meeting_speaker_name"];
