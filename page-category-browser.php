@@ -10,22 +10,23 @@
 
 require 'inc/bbg-functions-assemble.php';
 
-$pageTagline = get_post_meta( get_the_ID(), 'page_tagline', true );
-if ($pageTagline && !empty($pageTagline)){
-	$pageTagline = '<p class="lead-in">' . $pageTagline . '</p>';
+$page_tag_line = get_post_meta( get_the_ID(), 'page_tagline', true );
+if ($page_tag_line && !empty($page_tag_line)){
+	$page_tag_line = '<p class="lead-in">' . $page_tag_line . '</p>';
 }
 
 $page_content = "";
 $pageTitle = "";
-if ( have_posts() ) :
-	while ( have_posts() ) : the_post();
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
 		$pageTitle = get_the_title();
 		$pageTitle = str_replace("Private: ", "", $pageTitle);
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
 		$ogDescription = get_the_excerpt();
-	endwhile;
-endif;
+	}
+}
 wp_reset_postdata();
 wp_reset_query();
 
@@ -92,8 +93,6 @@ if ($category_browser_type == "Page Children") {
 	);
 
 	if ($categoryBrowsePostType == 'burke_candidate') {
-		// $qParams['meta_key'] = 'burke_award_info_0_burke_ceremony_year';
-		// $qParams['orderby'] = 'meta_value';
 		$qParams['posts_per_page'] = -1;
 		$qParams['meta_query'] = array(
 		    'relation' => 'OR',
@@ -136,7 +135,6 @@ if ($category_browser_type == "Page Children") {
 				'value' => $entity,
 				'compare' => '='
 			);
-
 		}
 		$qParams['meta_query'] = $meta_query;
 	}
@@ -150,15 +148,6 @@ $totalPages = 1;
 if ($custom_query -> found_posts > $numPostsFirstPage) {
 	$totalPages = 1 + ceil(($custom_query -> found_posts - $numPostsFirstPage) / $numPostsSubsequentPages);
 }
-
-//query_posts($qParams);
-
-/*** SHARING VARS ****/
-/*
-$teamCategoryID=$_GET["cat"];
-$teamCategory=get_category($teamCategoryID);
-$portfolioDescription=$teamCategory->description;
-*/
 
 get_header();
 ?>
@@ -180,7 +169,7 @@ get_header();
 			$page_title .= '>';
 			$page_title .= 	'<div class="grid-container">';
 			$page_title .= 		'<h2>' . get_the_title() . '</h2>';
-			$page_title .= 		$pageTagline;
+			$page_title .= 		$page_tag_line;
 			$page_title .= 	'</div>';
 			$page_title .= '</div>';
 			echo $page_title;
@@ -209,12 +198,14 @@ get_header();
 					$featured_post .= 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
 					$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
 					echo $featured_post;
-				} elseif ($counter == 1 && $currentPage != 1) {
-					echo 	'<div class="grid-half">';
-					get_template_part('template-parts/content-portfolio', get_post_format());
-					echo 	'</div>';
-				} else {
-					echo 	'<div class="bbg-grid--1-2-3">';
+				} 
+				// elseif ($counter == 1 && $currentPage != 1) {
+				// 	echo 	'<div class="grid-half">';
+				// 	get_template_part('template-parts/content-portfolio', get_post_format());
+				// 	echo 	'</div>';
+				// } 
+				else {
+					echo 	'<div class="grid-third">';
 					$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
 					if (has_post_thumbnail()) {
 						$post_image .= the_post_thumbnail('medium-thumb');
