@@ -4458,13 +4458,22 @@ e.g. on the intern testimonial page */
   .grid-third {
     width: calc(50% - 30px);
     float: left;
-    margin-left: 20px; } }
+    margin-left: 20px; }
+  .grid-third:nth-child(2n+0) {
+    clear: both;
+    margin-left: 0; } }
 
 @media screen and (min-width: 900px) {
   .grid-third {
     width: calc(33.33333% - 26.66667px);
     float: left;
-    margin-left: 20px; } }
+    margin-left: 20px; }
+  .grid-third:nth-child(2n+0) {
+    clear: none;
+    margin-left: inherit; }
+  .grid-third:nth-child(3n+0) {
+    clear: both;
+    margin-left: 0; } }
 
 .sidebar-section {
   margin-bottom: 3rem; }

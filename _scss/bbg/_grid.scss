@@ -75,9 +75,12 @@
 @include media($medium-medium-screen) {
 	.grid-half {@include grid-column(6);}
 	.grid-third {@include grid-column(6);}
+	.grid-third:nth-child(2n+0) {clear: both; margin-left: 0;}
 }
 @include media($medium-large-screen) {
 	.grid-third {@include grid-column(4);}
+	.grid-third:nth-child(2n+0) {clear: none; margin-left: inherit;}
+	.grid-third:nth-child(3n+0) {clear: both; margin-left: 0;}
 }
 
 // 3. SIDEBARS
