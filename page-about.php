@@ -242,17 +242,17 @@ get_header();
 <main id="main" class="site-main" role="main">
 <?php
 	// PAGE CONTENT
+	$body_copy  = '<div class="outer-container">';
+	$body_copy .= 	'<div class="grid-container">';
+	$body_copy .= 		'<h2>' . get_the_title() . '</h2>';
+	$body_copy .= 	'</div>';
 	if ($page_content != "") {
-		$body_copy  = '<div class="outer-container">';
-		$body_copy .= 	'<div class="grid-container">';
-		$body_copy .= 		'<h2>' . get_the_title() . '</h2>';
-		$body_copy .= 	'</div>';
-		$body_copy .= 	'<div class="grid-container page-content">';
-		$body_copy .= 		$page_content;
-		$body_copy .= 	'</div>';
+		$body_copy .= '<div class="grid-container page-content">';
+		$body_copy .= 	$page_content;
 		$body_copy .= '</div>';
-		echo $body_copy;
 	}
+	$body_copy .= '</div>';
+	echo $body_copy;
 
 	// OFFICE PAGE OFFICE INFORMATION
 	$office_intro_result = get_office_intro_data();
