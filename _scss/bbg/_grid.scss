@@ -70,17 +70,17 @@
 .grid-third {@include grid-column(12);}
 @include media($medium-screen) {
 	.grid-half {@include grid-column(12);}
-	.grid-third {@include grid-column(12);}
+	.grid-third {@include grid-column(12); clear: none;}
 }
 @include media($medium-medium-screen) {
 	.grid-half {@include grid-column(6);}
 	.grid-third {@include grid-column(6);}
-	.grid-third:nth-child(2n+0) {clear: both; margin-left: 0;}
+.grid-third {clear: none;}
+.grid-third:nth-child(3n+1) {clear: left;}
+.grid-third:nth-child(2n+1) {clear: none;}
 }
 @include media($medium-large-screen) {
 	.grid-third {@include grid-column(4);}
-	.grid-third:nth-child(2n+0) {clear: none; margin-left: inherit;}
-	.grid-third:nth-child(3n+0) {clear: both; margin-left: 0;}
 }
 
 // 3. SIDEBARS

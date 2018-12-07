@@ -184,33 +184,34 @@ get_header();
 				echo '</div>';
 			}
 
-			echo '<div class="outer-container">';
-			echo 	'<div class="grid-container">';
 			$counter = 0;
 			while ($custom_query -> have_posts())  {
 				$custom_query -> the_post();
 				$counter = $counter + 1;
+
 				if ($counter == 1 && $currentPage == 1 && !$hasIntroFeature) {
+					$featured_post  = '<div class="outer-container">';
+					$featured_post .= 	'<div class="grid-container">';
 					$featured_media_result = get_feature_media_data();
 					if ($featured_media_result != "") {
-						echo $featured_media_result;
+						$featured_post .= $featured_media_result;
 					}
 					$featured_post .= 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
 					$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
+					$featured_post .= 	'</div>';
+					$featured_post .= '</div>';
 					echo $featured_post;
-				} 
-				// elseif ($counter == 1 && $currentPage != 1) {
-				// 	echo 	'<div class="grid-half">';
-				// 	get_template_part('template-parts/content-portfolio', get_post_format());
-				// 	echo 	'</div>';
-				// } 
-				else {
-					echo 	'<div class="grid-third">';
+				}
+				if (($counter == 2 && $currentPage == 1) || ($counter == 1 && $currentPage > 1)) {
+					echo '<div class="outer-container" style="border: 1px solid #00ffff;">';
+				}
+				if ($counter > 1 && $currentPage == 1 || $currentPage > 1) {
+					echo 		'<div class="grid-third">';
 					$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
 					if (has_post_thumbnail()) {
 						$post_image .= the_post_thumbnail('medium-thumb');
 					} else {
-						$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White BBG logo on medium gray background" />';
+						$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
 					}
 					$post_image .= '</a>';
 					echo $post_image;
@@ -230,10 +231,9 @@ get_header();
 					echo 	'<br><br><br></div>';
 				}
 			}
-			echo 	'</div>'; // END .grid-container
 			echo '</div>'; // END .outer-container
 
-			if ( $pageTitle != "Burke Awards archive" ) {
+			if ($pageTitle != "Burke Awards archive") {
 				echo '<div class="outer-container">';
 				echo '<div class="grid-container">';
 				echo 	'<nav class="navigation posts-navigation" role="navigation">';
