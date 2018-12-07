@@ -206,8 +206,8 @@ get_header();
 					echo '<div class="outer-container">';
 				}
 				if ($counter > 1 && $currentPage == 1 || $currentPage > 1) {
-					echo 		'<div class="grid-third">';
-					$post_image  = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
+					echo '<div class="grid-third">';
+					$post_image = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
 					if (has_post_thumbnail()) {
 						$post_image .= the_post_thumbnail('medium-thumb');
 					} else {
@@ -215,6 +215,7 @@ get_header();
 					}
 					$post_image .= '</a>';
 					echo $post_image;
+					
 					$link_header  = '<h4>';
 					$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
 					$link_header .= 		get_the_title();
@@ -228,32 +229,32 @@ get_header();
 					} else {
 						echo wp_trim_words(get_the_excerpt(), 10);
 					}
-					echo 	'<br><br><br></div>';
+					echo '<br><br><br></div>'; // END .grid-third
 				}
 			}
 			echo '</div>'; // END .outer-container
 
 			if ($pageTitle != "Burke Awards archive") {
 				echo '<div class="outer-container">';
-				echo '<div class="grid-container">';
-				echo 	'<nav class="navigation posts-navigation" role="navigation">';
-				echo 		'<h2 class="screen-reader-text">Event navigation</h2>';
-				echo 		'<div class="nav-links">';
+				echo 	'<div class="grid-container">';
+				echo 		'<nav class="navigation posts-navigation" role="navigation">';
+				echo 			'<h2 class="screen-reader-text">Event navigation</h2>';
+				echo 			'<div class="nav-links">';
 				$nextLink = get_next_posts_link('Older ' . $paginationLabel, $totalPages);
 				$prevLink = get_previous_posts_link('Newer ' . $paginationLabel);
 				if ($nextLink != "") {
-					echo 		'<div class="nav-previous">';
-					echo 			$nextLink;
-					echo 		'</div>';
+					echo 			'<div class="nav-previous">';
+					echo 				$nextLink;
+					echo 			'</div>';
 				}
 				if ($prevLink != "") {
-					echo 		'<div class="nav-next">';
-					echo 			$prevLink;
-					echo 		'</div>';
+					echo 			'<div class="nav-next">';
+					echo 				$prevLink;
+					echo 			'</div>';
 				}
-				echo 		'</div>';
-				echo 	'</nav>';
-				echo '</div>';
+				echo 			'</div>';
+				echo 		'</nav>';
+				echo 	'</div>';
 				echo '</div><!-- .usa-grid -->';
 			}
 		}
