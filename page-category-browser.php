@@ -215,7 +215,7 @@ get_header();
 					}
 					$post_image .= '</a>';
 					echo $post_image;
-					
+
 					$link_header  = '<h4>';
 					$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
 					$link_header .= 		get_the_title();

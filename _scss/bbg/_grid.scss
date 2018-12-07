@@ -75,12 +75,12 @@
 @include media($medium-medium-screen) {
 	.grid-half {@include grid-column(6);}
 	.grid-third {@include grid-column(6);}
-.grid-third {clear: none;}
-.grid-third:nth-child(3n+1) {clear: left;}
-.grid-third:nth-child(2n+1) {clear: none;}
+	.grid-third:nth-child(odd) {clear: left;}
 }
 @include media($medium-large-screen) {
 	.grid-third {@include grid-column(4);}
+	.grid-third:nth-child(3n+1) {clear: left;}
+	.grid-third:nth-child(2n+1) {clear: none;}
 }
 
 // 3. SIDEBARS

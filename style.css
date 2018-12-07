@@ -4460,18 +4460,18 @@ e.g. on the intern testimonial page */
     width: calc(50% - 30px);
     float: left;
     margin-left: 20px; }
-  .grid-third {
-    clear: none; }
-  .grid-third:nth-child(3n+1) {
-    clear: left; }
-  .grid-third:nth-child(2n+1) {
-    clear: none; } }
+  .grid-third:nth-child(odd) {
+    clear: left; } }
 
 @media screen and (min-width: 900px) {
   .grid-third {
     width: calc(33.33333% - 26.66667px);
     float: left;
-    margin-left: 20px; } }
+    margin-left: 20px; }
+  .grid-third:nth-child(3n+1) {
+    clear: left; }
+  .grid-third:nth-child(2n+1) {
+    clear: none; } }
 
 .sidebar-section {
   margin-bottom: 3rem; }
