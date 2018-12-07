@@ -203,7 +203,7 @@ get_header();
 					echo $featured_post;
 				}
 				if (($counter == 2 && $currentPage == 1) || ($counter == 1 && $currentPage > 1)) {
-					echo '<div class="outer-container" style="border: 1px solid #00ffff;">';
+					echo '<div class="outer-container">';
 				}
 				if ($counter > 1 && $currentPage == 1 || $currentPage > 1) {
 					echo 		'<div class="grid-third">';
