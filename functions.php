@@ -1001,14 +1001,13 @@ function getRandomEntityImage() {
 
 }
 
-
+// LINK PRESS CLIPS/MAILCHIMP INSTRUCTIONS TO MEDIA CLIPS SUBMENU
 add_action('admin_menu', 'wpdocs_register_my_custom_submenu_page');
 function wpdocs_register_my_custom_submenu_page() {
-	/* NOTE - this isn't officially supported by WP ****/
 	global $submenu;
-	$submenu['edit.php?post_type=media_clips'][500] = array( 'Sending with Mailchimp', 'Sending with Mailchimp' , 'https://docs.google.com/document/d/11POafEgz5MInKEyQCCepuViizySzqxqJQRgxoLl74cE/edit?usp=sharing' );
+	$permalink = 'https://docs.google.com/document/d/11POafEgz5MInKEyQCCepuViizySzqxqJQRgxoLl74cE/edit?usp=sharing';
+	$submenu['edit.php?post_type=media_clips'][] = array( 'Sending with Mailchimp', 'manage_options', $permalink);
 }
-
 
 add_action( 'admin_bar_menu', 'toolbar_link_to_mypage', 999 );
 function toolbar_link_to_mypage( $wp_admin_bar ) {
