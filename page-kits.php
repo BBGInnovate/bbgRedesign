@@ -730,13 +730,12 @@ get_header();
 								$awardCategoryLink = get_category_link($awardCategoryObj -> term_id);
 
 								$award_block  = '<div class="outer-container">';
-								$award_block .= 	'<section class="grid-container">';
-								$award_block .= 		'<div class="grid-half">';
-								$award_block .= 			'<h3>Recent Awards</h3>';
-								$award_block .= 			'<h4><a href="' . $url . '">' . $title . '</a></h4>';
-								$award_block .= 			'<h4>' . join($awardYears) . ' ' . join($organizations) . '</h4>';
-								$award_block .= 			'<a href="' . $awardCategoryLink . '" class="bbg__kits__intro__more--link">View all awards »</a>';
-								$award_block .= 		'</div>';
+								$award_block .= 	'<div class="grid-half">';
+								$award_block .= 		'<h3>Recent Awards</h3>';
+								$award_block .= 		'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+								// $award_block .= 		'<h4>' . join($awardYears) . ' ' . join($organizations) . '</h4>';
+								$award_block .= 		'<a href="' . $awardCategoryLink . '" class="bbg__kits__intro__more--link">View all awards »</a>';
+								$award_block .= 	'</div>';
 							}
 
 							$focusPageObj = get_sub_field('kits_recent_awards_focus_page');
@@ -746,12 +745,11 @@ get_header();
 							$focusPageExcerpt = apply_filters('the_content', $focusPageExcerpt);
 							$focusPageExcerpt = str_replace(']]>', ']]&gt;', $focusPageExcerpt);
 
-							$award_block .= 		'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
-							$award_block .= 			'<h3>' . $focusPageTitle . '</h3>';
-							$award_block .= 			'<p>' . $focusPageExcerpt . '</p>';
-							$award_block .= 			'<a href="' . $focusPageURL . '" class="bbg__kits__intro__more--link">Read more »</a>';
-							$award_block .= 		'</div>';
-							$award_block .= 	'</section>';
+							$award_block .= 	'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
+							$award_block .= 		'<h3>' . $focusPageTitle . '</h3>';
+							$award_block .= 		'<p>' . $focusPageExcerpt . '</p>';
+							$award_block .= 		'<a href="' . $focusPageURL . '" class="bbg__kits__intro__more--link">Read more »</a>';
+							$award_block .= 	'</div>';
 							$award_block .= '</div>';
 							echo $award_block;
 						}
