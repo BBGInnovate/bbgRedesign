@@ -6030,6 +6030,8 @@ div.banner_readmore h6 a:visited {
   margin-bottom: 7.5rem; }
   .bbg__ribbon a {
     color: #3f7ad1; }
+  .bbg__ribbon button a:link {
+    color: #ffffff; }
   .bbg__ribbon .outer-container {
     margin-bottom: 0; }
   .bbg__ribbon .side-content-container {
