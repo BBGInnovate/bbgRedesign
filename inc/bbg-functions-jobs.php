@@ -118,7 +118,7 @@
 				$employee  = '<div class="grid-third">';
 				$employee .= 	'<a href="' . $permalink . '"><img src="' . $profilePhoto . '"></a>';
 				$employee .= 	'<h4><a href="' . $permalink . '">' . $firstName . ' ' . $lastName . '</a></h4>';
-				$employee .= 	'<p class="bbg__employee-profile__excerpt__title">' . $occupation . '</p>';
+				$employee .= 	'<p class="aside">' . $occupation . '</p>';
 				$employee .= '</div>';
 
 				$employee_block .= $employee;

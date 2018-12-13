@@ -98,7 +98,7 @@ get_header();
 						echo '<h2>' . get_the_title() . '</h2>';
 
 						echo '<div class="page-content">';
-						echo 	$page_content;
+						echo 	'<p>' . $page_content . '</p>';
 						echo '</div>';
 
 						if (is_page('foia-reports')) {

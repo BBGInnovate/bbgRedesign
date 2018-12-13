@@ -1033,7 +1033,7 @@ div.banner_readmore h6 a:visited {
     margin-bottom: $site-margins;
     padding: 2rem;
 
-    p, a, ul, li {font-family: $font-sans;}
+    a, ul li {font-family: $font-sans;}
 
     ul li:after,
     ol li:after {margin-bottom: 0;}

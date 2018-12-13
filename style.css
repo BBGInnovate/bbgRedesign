@@ -6061,7 +6061,7 @@ div.banner_readmore h6 a:visited {
   border-radius: 0.3rem;
   margin-bottom: 3rem;
   padding: 2rem; }
-  .bbg__infobox p, .bbg__infobox a, .bbg__infobox ul, .bbg__infobox li {
+  .bbg__infobox a, .bbg__infobox ul li {
     font-family: "Alegreya Sans", sans-serif; }
   .bbg__infobox ul li:after,
   .bbg__infobox ol li:after {
