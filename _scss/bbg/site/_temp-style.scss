@@ -8,6 +8,8 @@
 // TYPOGRAPHY
 // PAGE-EVENTS
 // IMAGES
+// MODUES
+	// FIVE GRID BOX
 
 .date-meta {
 	font-size: 0.9em;
@@ -239,5 +241,50 @@ img,
 	>a:focus {
 		background-color: transparent;
 		text-decoration: none;
+	}
+}
+
+
+// MODUES
+// FIVE GRID BOX
+$custom-entity-fifth: (
+	columns: 5,
+	gutter: 0px,
+);
+
+.grid-box-container {
+	[style*="background-image"] {margin: 0;}
+	p {margin: 0;}
+	background-color: #b2ccd1;
+
+	.grid-box-chunk {
+		position: relative;
+		height: 85px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100% auto;
+
+		.grid-box-text {
+			text-align: center;
+			width: 100%;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+
+			img {margin: 0;}
+			p {
+				color: $white;
+				font-size: 2.5rem;
+			}
+		}
+	}
+}
+
+@include media($medium-screen) {
+	.grid-box-container {
+		.grid-box-chunk {
+			@include grid-column(1, $custom-entity-fifth);
+			background-size: auto 100%;
+		}
 	}
 }

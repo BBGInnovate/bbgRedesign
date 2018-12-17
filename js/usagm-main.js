@@ -157,6 +157,40 @@ function resizeEntityBoxes() {
 }
 resizeEntityBoxes();
 
+
+// FIVE GRID BOX MODULE: Hover
+if ($('.grid-box-chunk').length > 0) {
+	$('.grid-box-text').hide();
+	var overlay = $('div class="grid-box-overlay"><div>');
+	overlay.css({
+		'width' : $('.grid-box-chunk').width(),
+		'height' : '100%'
+	});
+	$.each($('.grid-box-chunk'), function() {
+		$(this).hover(function() {
+			$(this).append(overlay);
+			$(this).children('.grid-box-text').show();
+			overlay.css('background-color', 'rgba(102, 102, 102, 0.8)');
+		}, function() {
+			$('.grid-box-overlay').remove();
+			$(this).children('.grid-box-text').hide();
+			overlay.css('background-color', 'transparent');
+		})
+	});
+}
+// FIVE GRID BOX MODULE: Size
+function setFiveGridBox() {
+	windowWidth = $(window).width();
+	var entityBoxW = $('.grid-box-chunk').width();
+	if (windowWidth < 585) {
+		$('.grid-box-chunk').height('85px');
+	}
+	else {
+		$('.grid-box-chunk').height(entityBoxW);
+	}
+}
+setFiveGridBox();
+
 function resizePostImage() {
 	// SCALE EACH POST IMATE HEIGHT TO 35% OF WIDTH
 	var scalePcx = 0.35;
@@ -190,6 +224,7 @@ scaleCornerHero();
 
 $(window).on('resize', function() {
 	resizeEntityBoxes();
+	setFiveGridBox();
 	resizePostImage();
 	scaleRibbonBanner();
 	scaleCornerHero();
