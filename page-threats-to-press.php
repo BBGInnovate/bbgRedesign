@@ -82,10 +82,10 @@ wp_reset_query();
 $trailingDays = get_post_meta($id, 'threats_to_press_map_trailing_days', true);
 $maxClusterRadius = get_post_meta($id, 'threats_to_press_map_maximum_cluster_radius', true);
 $cutoffDate = get_field('threats_to_press_map_cutoff_date', $id, true);
-/* Adding optional quotation to the bottom of the page */
-$includeQuotation = get_field( 'quotation_include', '', true );
-$quotation = "";
 
+/* Adding optional quotation to the bottom of the page */
+$includeQuotation = get_field('quotation_include', '', true);
+$quotation = "";
 if ($includeQuotation) {
 	$quotationText = get_field('quotation_text', '', false);
 	$quotationSpeaker = get_field('quotation_speaker', '', false);
@@ -94,19 +94,17 @@ if ($includeQuotation) {
 	$quoteMugshotID = get_field('quotation_mugshot', '', false);
 	$quoteMugshot = "";
 
-	if ( $quoteMugshotID ) {
+	if ($quoteMugshotID) {
 		$quoteMugshot = wp_get_attachment_image_src( $quoteMugshotID , 'mugshot');
 		$quoteMugshot = $quoteMugshot[0];
-		$quoteMugshot = '<img src="' . $quoteMugshot .'" class="bbg__quotation-attribution__mugshot">';
 	}
 
-	$quotation  = '<h4 class="bbg__quotation-text--large">“'. $quotationText .'”</h4>';
-	$quotation .= '<div class="bbg__quotation-attribution__container">';
-	$quotation .= 	'<p class="bbg__quotation-attribution">';
-	$quotation .= 		$quoteMugshot;
-	$quotation .= 		'<span class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">'. $quotationSpeaker .'</span><span class="bbg__quotation-attribution__credit">'. $quotationTagline .'</span></span>';
+	$quotation  = '<img class="quote-image"  src="' . $quoteMugshot .'">';
+	$quotation .= '<h4 class="quote-text">“'. $quotationText .'”</h4>';
+	$quotation .= '<p  class="quote-byline">';
+	$quotation .= 	$quotationSpeaker .'<br>';
+	$quotation .= 	'<span class="occupation">'. $quotationTagline .'</span>';
 	$quotation .= '</p>';
-	$quotation .= '</div>';
 }
 
 $wall = "";
@@ -363,7 +361,7 @@ wp_reset_query();
 
 	<div class="outer-container">
 		<div class="grid-container">
-			<div class="bbg__quotation ">
+			<div class="usagm-quotation ">
 				<?php echo $quotation; ?>
 			</div>
 		</div>

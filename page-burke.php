@@ -132,35 +132,17 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 	
 	<div class="outer-container">
 		<div class="grid-container">
-			<?php
-				$quote = '';
-				$networkColor = '#FF0000';
-				$quoteNetwork = 'BBG';
-				$quoteText = 'These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.';
-				$speaker = 'John Lansing';
-				$tagline = 'BBG CEO and Director';
-				$mugshot = get_template_directory_uri() . '/img/john_lansing_ceo-sq-200x200.jpg';
-				$quote .= '<div class="bbg__quotation">';
-					if ($quoteNetwork != '') {
-						$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkColor . '">' . $quoteNetwork . '</div>';
-					}
-					$quote .= '<h4>&ldquo;' . $quoteText . '&rdquo;</h4>';
-					$quote .= '<div class="bbg__quotation-attribution__container">';
-						$quote .= '<p class="bbg__quotation-attribution">';
-
-						if ( $mugshot != '' ) {
-							$quote .= '<img src="' . $mugshot . '" class="bbg__quotation-attribution__mugshot"/>';
-						}
-						$quote .= '<span class="bbg__quotation-attribution__text">';
-						$quote .= '<span class="bbg__quotation-attribution__name">' . $speaker . '</span>';
-						$quote .= '<span class="bbg__quotation-attribution__credit">' . $tagline . '</span>';
-						$quote .= '</span></p>';
-					$quote .= '</div>';
-				$quote .= '</div>';
-				echo $quote;
-			?>
+			<div class="usagm-quotation">
+				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot"/>
+				<h4 class="quote-text">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</h4>
+				<p class="quote-byline">
+					John Lansing<br>
+					<span class="occupation">BBG CEO and Director</span>
+				</p>
+			</div>
 		</div>
 	</div>
+
 </main>
 
 <div id="secondary" class="widget-area" role="complementary">

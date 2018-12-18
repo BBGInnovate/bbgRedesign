@@ -5287,6 +5287,23 @@ img,
 .bbg__article-header__banner--profile {
   margin-bottom: 0; }
 
+.usagm-quotation {
+  text-align: center; }
+  .usagm-quotation .quote-image {
+    width: 75px;
+    border-radius: 50%; }
+  .usagm-quotation .quote-text::before {
+    content: "\201C"; }
+  .usagm-quotation .quote-text::after {
+    content: "\201D"; }
+  .usagm-quotation .quote-byline {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 2rem;
+    line-height: 2rem; }
+    .usagm-quotation .quote-byline .occupation {
+      font-size: 1.4rem;
+      text-transform: uppercase; }
+
 .bbg__article-sidebar {
   font-family: "Alegreya Sans", sans-serif;
   margin: 0 auto;

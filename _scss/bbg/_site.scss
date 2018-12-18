@@ -54,6 +54,24 @@
     margin-bottom: 0;
 }
 
+.usagm-quotation {
+    text-align: center;
+    .quote-image {
+        width: 75px;
+        border-radius: 50%;
+    }
+    .quote-text::before {content: "\201C";}
+    .quote-text::after {content: "\201D";}
+    .quote-byline {
+        font-family: $font-sans;
+        font-size: 2rem;
+        line-height: 2rem;
+        .occupation {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+        }
+    }
+}
 
 .bbg__article-sidebar {
     font-family: $font-sans;

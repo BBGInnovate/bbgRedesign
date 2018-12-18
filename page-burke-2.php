@@ -158,16 +158,12 @@ if ($ceremony_post -> have_posts()) {
 
 	<div class="outer-container">
 		<div class="grid-container">
-			<div class="bbg__quotation">
-				<div class="bbg__quotation-attribution__container">
-					<img src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot"/>
-				</div>
-				<h4>&ldquo;These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.&rdquo;</h4>
-				<p class="bbg__quotation-attribution">
-					<span class="bbg__quotation-attribution__text">
-						<span class="bbg__quotation-attribution__name">John Lansing</span>
-						<span class="bbg__quotation-attribution__credit">BBG CEO and Director</span>
-					</span>
+			<div class="usagm-quotation">
+				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot"/>
+				<h4 class="quote-text">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</h4>
+				<p class="quote-byline">
+					John Lansing<br>
+					<span class="occupation">BBG CEO and Director</span>
 				</p>
 			</div>
 		</div>
