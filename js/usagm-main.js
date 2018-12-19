@@ -170,7 +170,10 @@ if ($('.grid-box-chunk').length > 0) {
 		$(this).hover(function() {
 			$(this).append(overlay);
 			$(this).children('.grid-box-text').show();
-			overlay.css('background-color', 'rgba(102, 102, 102, 0.8)');
+			overlay.css({
+				'background-color' : 'rgba(102, 102, 102, 0.8)',
+				'width' : '100%'
+			});
 		}, function() {
 			$('.grid-box-overlay').remove();
 			$(this).children('.grid-box-text').hide();

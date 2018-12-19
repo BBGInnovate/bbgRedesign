@@ -37,11 +37,13 @@ if (have_rows('grid_box')) {
 		$grid_text = get_sub_field('grid_box_text');
 		$bg_image = get_sub_field('grid_box_background_image');
 		$bg_image_url = $bg_image['url'];
+		$candidate_profile_link = get_sub_field('grid_box_profile_link');
 
 		$winner_set = array(
 			'icon_url' => $icon_url,
 			'grid_text' => $grid_text,
-			'grid_image' => $bg_image_url
+			'grid_image' => $bg_image_url,
+			'candidate_profile' => $candidate_profile_link
 		);
 		array_push($all_entity_winners, $winner_set);
 	}
@@ -112,9 +114,23 @@ if ($ceremony_post -> have_posts()) {
 				<div class="side-content-container">
 					<article>
 						<h5>Event</h5>
+						<h6>Burke Award Ceremony</h6>
 						<?php
 							echo '<p class="aside">' . $event_location[0] . '<br>' . $event_time[0] . '</p>';
 							echo '<p class="aside">' . $more_info[0] . '</p>';
+						?>
+					</article>
+
+					<article>
+						<h5>Past Winners</h5>
+						<?php
+							$burke_archive_page = new WP_Query(array('page_id' => 39519));
+							if ($burke_archive_page -> have_posts()) {
+								while ($burke_archive_page -> have_posts()) {
+									$burke_archive_page -> the_post();
+									echo '<h6><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h6>';
+								}
+							}
 						?>
 					</article>
 				</div>
@@ -126,12 +142,14 @@ if ($ceremony_post -> have_posts()) {
 		<div class="outer-container">
 			<?php
 				foreach($all_entity_winners as $entity_winner) {
-					$grid_box_set  = '<div class="grid-box-chunk" style="background-image: url(' . $entity_winner['grid_image'] . ');">';
-					$grid_box_set .= 	'<div class="grid-box-text">';
-					$grid_box_set .= 		'<img src=' . $entity_winner['icon_url'] . '>';
-					$grid_box_set .= 		'<p>' . $entity_winner['grid_text'] . '</p>';
+					$grid_box_set  = '<a href="' . $entity_winner['candidate_profile'] . '">';
+					$grid_box_set .= 	'<div class="grid-box-chunk" style="background-image: url(' . $entity_winner['grid_image'] . ');">';
+					$grid_box_set .= 		'<div class="grid-box-text">';
+					$grid_box_set .= 			'<img src=' . $entity_winner['icon_url'] . '>';
+					$grid_box_set .= 			'<p>' . $entity_winner['grid_text'] . '</p>';
+					$grid_box_set .= 		'</div>';
 					$grid_box_set .= 	'</div>';
-					$grid_box_set .= '</div>';
+					$grid_box_set .= '</a>';
 					echo $grid_box_set;
 				}
 			?>

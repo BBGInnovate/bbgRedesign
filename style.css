@@ -5205,8 +5205,6 @@ img,
   background-color: #b2ccd1; }
   .grid-box-container [style*="background-image"] {
     margin: 0; }
-  .grid-box-container p {
-    margin: 0; }
   .grid-box-container .grid-box-chunk {
     position: relative;
     height: 85px;
@@ -5220,17 +5218,35 @@ img,
       top: 50%;
       transform: translateY(-50%); }
       .grid-box-container .grid-box-chunk .grid-box-text img {
+        width: 10%;
         margin: 0; }
       .grid-box-container .grid-box-chunk .grid-box-text p {
         color: #ffffff;
-        font-size: 2.5rem; }
+        font-size: 1.4rem;
+        margin: 0; }
 
 @media screen and (min-width: 600px) {
   .grid-box-container .grid-box-chunk {
     width: calc(20%);
     float: left;
     margin-left: 0px;
-    background-size: auto 100%; } }
+    background-size: auto 100%; }
+    .grid-box-container .grid-box-chunk .grid-box-text img {
+      width: 35%; }
+    .grid-box-container .grid-box-chunk .grid-box-text p {
+      font-size: 1.6rem; } }
+
+@media screen and (min-width: 900px) {
+  .grid-box-container .grid-box-chunk .grid-box-text img {
+    width: auto; }
+  .grid-box-container .grid-box-chunk .grid-box-text p {
+    font-size: 1.8rem; } }
+
+@media screen and (min-width: 1201px) {
+  .grid-box-container .grid-box-chunk .grid-box-text img {
+    width: auto; }
+  .grid-box-container .grid-box-chunk .grid-box-text p {
+    font-size: 2rem; } }
 
 /**
  * CH 02 - 2- and 3-COLUMN PAGE STRUCTURE
