@@ -25,7 +25,7 @@ get_header();
 echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">';
 ?>
 
-<main id="main" class="site-content bbg-home-main" role="main">
+<main id="main" class="site-content" role="main">
 	<div id="new-home-test">
 		<section class="outer-container" id="home-about">
 			<h1 class="header-outliner">About USAGM</h1>

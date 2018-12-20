@@ -57,7 +57,7 @@ get_header();
 	echo $banner_markup;
 ?>
 
-<main id="main" class="site-content bbg-home-main" role="main">
+<main id="main" class="site-content" role="main">
 
 	<section id="mission" class="outer-container">
 		<h1 class="header-outliner">About USAGM</h1>

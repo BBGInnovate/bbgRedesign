@@ -46,7 +46,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 	}
 ?>
 
-<main id="bbg-home" class="site-content bbg-home-main" role="main">
+<main role="main">
 
 	<div class="outer-container">
 		<div class="grid-container">
