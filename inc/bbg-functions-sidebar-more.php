@@ -1,75 +1,83 @@
 <?php
 	function getAccordion() {
 		$accordion = "";
-		if( have_rows('accordion_items') ):
+		if(have_rows('accordion_items')):
 			$accordion .= '<style>
 			div.usa-accordion-content {
 				padding:1.5rem !important;
 			}
 			</style>';
-			$accordion .= '<div class="usa-accordion bbg__committee-list"><ul class="usa-unstyled-list">';
-		    $i = 0;
-		    while ( have_rows('accordion_items') ) : the_row();
-		        $i++;
-		        $itemLabel = get_sub_field('accordion_item_label');
-		        $itemText = get_sub_field('accordion_item_text');
+			$accordion .= '<div class="usa-accordion bbg__committee-list">';
+			$accordion .= 	'<ul class="usa-unstyled-list">';
+			$i = 0;
+			while (have_rows('accordion_items')) : the_row();
+				$i++;
+				$itemLabel = get_sub_field('accordion_item_label');
+				$itemText = get_sub_field('accordion_item_text');
 				$accordion .= '<li>';
-				$accordion .= '<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $itemLabel . '</button>';
-				$accordion .= '<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
-				$accordion .= $itemText;
-				$accordion .= '</div>';
+				$accordion .= 	'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $itemLabel . '</button>';
+				$accordion .= 	'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">' . $itemText . '</div>';
 				$accordion .= '</li>';
-		    endwhile;
-		    $accordion .= '</ul></div>';
+			endwhile;
+			$accordion .= 	'</ul>';
+			$accordion .= '</div>';
 		endif;
 		return $accordion;
 	}
 
 	function getInterviewees() {
-		    // set the interviewees label field variable
-			$intervieweesLabel = get_field('interviews_label');
-			// create list variable
-			$intervieweesList = "";
+			$interviewees_label = get_field('interviews_label');
+			$interviewees_list = "";
 
-		    while ( have_rows('interview_names') ) : the_row();
-		    	// open a new div + output label + open list
-				$intervieweesList .= '<div><h3 class="bbg__sidebar-label">' . $intervieweesLabel . '</h3><ul class="usa-unstyled-list">';
+			while (have_rows('interview_names')) : the_row();
+				// BUILD LIST IN ARRAY AND ASSEMBLE BELOW
+				$list_items = array();
 
-				if ( get_row_layout() == 'interview_names_internal' ) {
-					// set variable for WP object array
+				if (get_row_layout() == 'interview_names_internal') {
 					$profileObjects = get_sub_field( 'interviewee_internal' );
 
-					// loop through all the items in the array
-					foreach ( $profileObjects as $profile ) {
-						// get data out of WP object
-						$url = get_permalink( $profile -> ID ); // Use WP object ID to get permalink for link
+					foreach ($profileObjects as $profile) {
+						$url = get_permalink($profile -> ID); // Use WP object ID to get permalink for link
 						$name = $profile -> post_title; // WP object title
 						$title = $profile -> occupation; // custom field
 
-						// output list item
-						$intervieweesList .= '<li><h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name"><a href="' . $url . '">' . $name . '</a></h5><span class="bbg__profile-excerpt__occupation">' . $title . '</span></li>';
+						$internal_interviews  = '<li>';
+						$internal_interviews .= 	'<h6>';
+						$internal_interviews .= 		'<a href="' . $url . '">' . $name . '</a>';
+						$internal_interviews .= 	'</h6>';
+						$internal_interviews .= 	'<span class="bbg__profile-excerpt__occupation">' . $title . '</span>';
+						$internal_interviews .= '</li>';
+						array_push($list_items, $internal_interviews);
 					}
 
-				} elseif ( get_row_layout() == 'interview_names_external' ) {
-					// set variable for names array
+				} elseif (get_row_layout() == 'interview_names_external') {
 					$extInterviewees = get_sub_field( 'interviewee_external' );
 
-					// loop through all the items in the array
-					foreach ( $extInterviewees as $extName ) {
-						// set variables from custom fields
+					foreach ($extInterviewees as $extName) {
 						$externalName = $extName['interviewee_name'];
 						$externalTitle = $extName['interviewee_title'];
 						$externalURL = $extName['interviewee_url'];
 
-						// output list item
-						$intervieweesList .= '<li><h5 class="bbg__sidebar__primary-headline bbg__profile-excerpt__name"><a href="' . $externalURL . '">' . $externalName . '</a></h5><span class="bbg__profile-excerpt__occupation">' . $externalTitle . '</span></li>';
+						$external_interviews  = '<li>';
+						$external_interviews .= 	'<h6>';
+						$external_interviews .= 		'<a href="' . $externalURL . '">' . $externalName . '</a>';
+						$external_interviews .= 	'</h6>';
+						$external_interviews .= 	'<span class="bbg__profile-excerpt__occupation">' . $externalTitle . '</span>';
+						$external_interviews .= '</li>';
+						array_push($list_items, $external_interviews);
 					}
 				}
 
-				// close list and div
-				$intervieweesList .= '</ul></div>';
-		    endwhile;
+				$interviewees_list .= '<div>';
+				$interviewees_list .= 	'<h5>' . $interviewees_label . '</h5>';
+				$interviewees_list .= 	'<ul class="unstyled-list">';
+				foreach ($list_items as $interview_item) {
+					$interviewees_list .= 		$interview_item;
+				}
+				$interviewees_list .= 	'</ul>';
+				$interviewees_list .= '</div>';
+			endwhile;
 
-		return $intervieweesList;
+		return $interviewees_list;
 	}
 ?>

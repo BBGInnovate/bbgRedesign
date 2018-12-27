@@ -462,10 +462,10 @@ if ($numLogos > 0 && $numLogos < 3) {
 			echo $header_markup;
 		?>
 		</div>
-	</div>
+	<!-- </div> -->
 
 	<?php if ($page_columns == 3) { ?>
-		<div class="outer-container">
+		<!-- <div class="outer-container"> -->
 			<div class="main-content-container">
 				<div class="nest-container">
 					<div class="inner-container">
@@ -492,7 +492,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 						</div>
 						<div class="icon-main-content-container">
 	<?php } else { // TWO COLUMNS ?>
-		<div class="outer-container">
+		<!-- <div class="outer-container"> -->
 			<div class="custom-grid-container">
 				<div class="inner-container">
 					<div class="main-content-container">
