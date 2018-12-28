@@ -66,6 +66,7 @@ if (($('.bbg__ribbon').length > 0) && $(window).width() > 1200) {
 }
 
 // KEEPS PROFILE LIST DIVS FROM CHANGING SIDES ON RESIZE
+// This can probably be taken care of by setting clears in the css for which ever grid this uses
 function mgmtProfileSizing() {
 	if ($('.mgmt-profile').length > 0) {
 		var seniorProfile = $('.mgmt-profile');
@@ -212,8 +213,20 @@ resizePostImage();
 
 function scaleRibbonBanner() {
 	setTimeout(function() {
-		var ribbonCopyH = $('#new-home-test .ribbon-banner').outerHeight();
-		$('#new-home-test .ribbon-banner .ribbon-image').height(ribbonCopyH);
+		var ribbonCopyH = $('.bbg__ribbon .main-content-container').outerHeight();
+		$('.bbg__ribbon .ribbon-image').css('height', ribbonCopyH);
+		if ($(window).width() < 900) {
+			$('.bbg__ribbon .side-content-container').css({
+				'width' : '100%',
+				'margin-left' : '0'
+			});
+		}
+		else {
+			$('.bbg__ribbon .side-content-container').css({
+				'width' : 'calc(33.33333% - 26.66667px)',
+				'margin-left' : '20px'
+			});
+		}
 	}, 200);
 }
 scaleRibbonBanner();

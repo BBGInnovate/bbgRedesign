@@ -203,7 +203,7 @@ function build_ribbon_parts($ribbon_data) {
 	}
 	$ribbon_summary = $ribbon_data['summary'];
 	if (!empty($ribbon_data['image_url'])) {
-		$ribbon_image = '<div style="background-image: url(' . $ribbon_data['image_url'] . ');"></div>';
+		$ribbon_image = '<div class="ribbon-image" style="background-image: url(' . $ribbon_data['image_url'] . ');"></div>';
 	}
 
 	$ribbon_package = array(
