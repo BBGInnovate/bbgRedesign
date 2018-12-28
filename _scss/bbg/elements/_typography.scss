@@ -92,6 +92,7 @@ p.lead-in {
     a:hover, a:active {color: $color-cool-blue;}
 }
 
+ul, ol {padding-left: 1em;}
 ul li:not(.menu-item),
 ol li {
     font-family: $font-serif;

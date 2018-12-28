@@ -2767,6 +2767,9 @@ p.lead-in {
   p.lead-in a:hover, p.lead-in a:active {
     color: #82afd2; }
 
+ul, ol {
+  padding-left: 1em; }
+
 ul li:not(.menu-item),
 ol li {
   font-family: "Carrara-Regular", serif;
