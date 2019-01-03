@@ -46,9 +46,9 @@ include get_template_directory() . '/inc/shared_sidebar.php';
 					echo '<div>';
 					$lawName = get_field('law_name');
 					if ($lawName) {
-						echo '<h2>' . $lawName . '</h2>';
+						echo '<h4>' . $lawName . '</h4>';
 					}
-					echo 	get_the_content();
+					echo 	'<p>' . get_the_content() . '</p>';
 					echo '</div>';
 				?>
 			</div>

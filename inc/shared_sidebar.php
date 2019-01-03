@@ -13,16 +13,13 @@ if ($includeSidebar) {
 	$sidebarTitle = get_post_meta(get_the_ID(), 'sidebar_title', true);
 	$sidebarDescription = get_post_meta(get_the_ID(), 'sidebar_description', true);
 
-	$sidebar_markup = "";
-	if ($sidebarTitle != "") {
-		$sidebar_markup .= "<h5>" . $sidebarTitle . "</h5>";
+	$sidebar_markup = '';
+	if ($sidebarTitle != '') {
+		$sidebar_markup .= '<h5>' . $sidebarTitle . '</h5>';
 	}
 
 	if ($sidebarDescription != "") {
-		$sidebarDescription = apply_filters('the_content', $sidebarDescription);
-		$sidebarDescription = str_replace(']]>', ']]&gt;', $sidebarDescription);
-
-		$sidebar_markup .= $sidebarDescription;
+		$sidebar_markup .= '<p class="aside">' . $sidebarDescription . '</p>';
 	}
 
 	if (have_rows('sidebar_items')):
@@ -70,10 +67,10 @@ if ($includeSidebar) {
 				$sidebarQuotationSpeakerTitle = get_sub_field('sidebar_quotation_speaker_title');
 
 				$quote_markup  = '<article class="bbg__quotation">';
-				$quote_markup .= 	'<h5>' . $sidebarQuotationText . '</h5>';
+				$quote_markup .= 	'<p>&quot;' . $sidebarQuotationText . '&quot;</p>';
 				$quote_markup .= 	'<p class="aside">';
-				$quote_markup .= 		'<span class="bbg__quotation-attribution__name">' . $sidebarQuotationSpeaker . ',</span>';
-				$quote_markup .= 		'<span class="bbg__quotation-attribution__credit">' . $sidebarQuotationSpeakerTitle . '</span>';
+				$quote_markup .= 		'&mdash;' . $sidebarQuotationSpeaker . '<br>';
+				$quote_markup .= 		$sidebarQuotationSpeakerTitle;
 				$quote_markup .= 	'</p>';
 				$quote_markup .= '</article>';
 
