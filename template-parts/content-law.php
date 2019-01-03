@@ -7,111 +7,92 @@
  * @package bbginnovate
  */
 
-
-//Experimenting with adding the social share code to Pages
-//the title/headline field, followed by the URL and the author's twitter handle
-$twitterText = "";
-$twitterText .= html_entity_decode( get_the_title() );
-$twitterHandle = get_the_author_meta( 'twitterHandle' );
-$twitterHandle = str_replace( "@", "", $twitterHandle );
-if ( $twitterHandle && $twitterHandle != '' ) {
-	$twitterText .= " by @" . $twitterHandle;
+$twitter_text = html_entity_decode(get_the_title());
+$twitter_handle = get_the_author_meta('twitterHandle');
+$twitter_handle = str_replace('@', '', $twitter_handle);
+if ($twitter_handle && $twitter_handle != '') {
+	$twitter_text .= ' by @' . $twitter_handle;
 } else {
-	$authorDisplayName = get_the_author();
-	if ( $authorDisplayName && $authorDisplayName!='' ) {
-		$twitterText .= " by " . $authorDisplayName;
+	$author_display_name = get_the_author();
+	if ($author_display_name && $author_display_name!='') {
+		$twitter_text .= ' by ' . $author_display_name;
 	}
 }
-$twitterText .= " " . get_permalink();
-$hashtags="";
-//$hashtags="testhashtag1,testhashtag2";
+$twitter_text .= ' ' . get_permalink();
+$hashtags = '';
 
-///$twitterURL="//twitter.com/intent/tweet?url=" . urlencode(get_permalink()) . "&text=" . urlencode($ogDescription) . "&hashtags=" . urlencode($hashtags);
-$twitterURL="//twitter.com/intent/tweet?text=" . rawurlencode( $twitterText );
-$fbUrl="//www.facebook.com/sharer/sharer.php?u=" . urlencode( get_permalink() );
+$twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitter_text);
+$fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode( get_permalink() );
 
-$listsInclude = get_field( 'sidebar_dropdown_include', '', true);
+$listsInclude = get_field('sidebar_dropdown_include', '', true);
 
-include get_template_directory() . "/inc/shared_sidebar.php";
+include get_template_directory() . '/inc/shared_sidebar.php';
 ?>
 
-<article id="post-<?php the_ID(); ?>">
-	<div class="usa-grid">
-		<?php echo bbginnovate_post_categories(); ?>
+<div class="outer-container">
+	<div class="custom-grid-container">
+		<div class="inner-container">
+			<div class="main-content-container">
+				<?php
+					echo bbginnovate_post_categories();
+					if($post->post_parent) {
+						// Borrowed from: https://wordpress.org/support/topic/link-to-parent-page
+						$parent = $wpdb->get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
+						$parent_link = get_permalink($post->post_parent);
+						echo'<h2><a href="' . $parent_link . '">' . $parent->post_title . '</a></h2>';
+					}
+					echo '<h3>' . get_the_title() . '</h3>';
 
-		<!-- .bbg__label -->
-		<header class="entry-header">
-			<?php if($post->post_parent) {
-				//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-				$parent = $wpdb->get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
-				$parent_link = get_permalink($post->post_parent);
+					echo '<div>';
+					$lawName = get_field('law_name');
+					if ($lawName) {
+						echo '<h2>' . $lawName . '</h2>';
+					}
+					echo 	get_the_content();
+					echo '</div>';
 				?>
-				<h5 class="bbg__label"><a href="<?php echo $parent_link; ?>"><?php echo $parent->post_title; ?></a></h5>
-			<?php } ?>
+			</div>
+			<div class="side-content-container">
 
-			<?php the_title( '<h1 class="entry-title bbg__article-header__title">', '</h1>' ); ?>
-		</header><!-- .entry-header -->
-
-
-		<div class="usa-grid-full">
-			<div class="bbg__article-sidebar--left">
-				<h3 class="bbg__sidebar-label bbg__contact-label">Share </h3>
-				<ul class="bbg__article-share">
-					<li class="bbg__article-share__link facebook">
-						<a href="<?php echo $fbUrl; ?>">
-							<span class="bbg__article-share__icon facebook"></span>
-						</a>
-					</li>
-					<li class="bbg__article-share__link twitter">
-						<a href="<?php echo $twitterURL; ?>">
-							<span class="bbg__article-share__icon twitter"></span>
-						</a>
-					</li>
-				</ul>
-			</div><!-- .bbg__article-sidebar--left -->
-
-			<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
+				<!-- SOCIAL MEDIA -->
+				<article>
+					<h5>Share</h5>
+					<a href="<?php echo $fbUrl; ?>">
+						<span class="bbg__article-share__icon facebook"></span>
+					</a>
+					<a href="<?php echo $twitterURL; ?>">
+						<span class="bbg__article-share__icon twitter"></span>
+					</a>
+				</article>
 
 				<?php
-					$lawName = get_field('law_name');
-
-					if ( $lawName ) {
-						echo "<h2 class='act-title'>" . $lawName . "</h2>";
-					}
-					echo "<section class='usa-grid-full'>";
-						the_content();
-					echo "</section>";
-
-
-				?>
-			</div><!-- .entry-content -->
-			<?php
-			// Right sidebar
-			echo "<div class='bbg__article-sidebar'>";
-				echo "<!-- Sidebar content -->";
-					if ( $includeSidebar && $sidebarTitle != "" ) {
+					echo '<article class="bbg__article-sidebar">';
+					if ($includeSidebar && $sidebarTitle != "") {
 						echo $sidebar;
 					}
 
-					if ( $listsInclude ) {
+					if ($listsInclude) {
 						echo $sidebarDownloads;
 					}
-			echo "</div><!-- .bbg__article-sidebar -->";
-			?>
+					echo '</article>';
+				?>
+			</div>
 		</div>
+	</div>
+</div>
 
-		<footer class="entry-footer bbg-post-footer 1234">
-			<?php
-				edit_post_link(
-					sprintf(
-						/* translators: %s: Name of current post */
-						esc_html__( 'Edit %s', 'bbginnovate' ),
-						the_title( '<span class="screen-reader-text">"', '"</span>', false )
-					),
-					'<span class="edit-link">',
-					'</span>'
-				);
-			?>
-		</footer><!-- .entry-footer -->
-	</div><!-- .usa-grid -->
-</article><!-- #post-## -->
+<div class="outer-container">
+	<footer class="entry-footer bbg-post-footer 1234">
+	<?php
+		edit_post_link(
+			sprintf(
+				/* translators: %s: Name of current post */
+				esc_html__( 'Edit %s', 'bbginnovate' ),
+				the_title( '<span class="screen-reader-text">"', '"</span>', false )
+			),
+			'<span class="edit-link">',
+			'</span>'
+		);
+	?>
+	</footer>
+</div>

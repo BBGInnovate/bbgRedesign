@@ -9,6 +9,8 @@
  * @package bbgRedesign
  */
 
+require 'inc/bbg-functions-assemble.php';
+
 $parentTitle = "";
 if( $post -> post_parent ) {
 	$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
@@ -16,6 +18,13 @@ if( $post -> post_parent ) {
 }
 
 get_header();
+?>
+
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
 ?>
 
 <main id="main" class="site-main" role="main">
