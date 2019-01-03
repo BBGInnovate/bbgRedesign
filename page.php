@@ -9,7 +9,7 @@
  * @package bbgRedesign
  */
 
-require 'inc/bbg-functions-assemble.php';
+include 'inc/bbg-functions-assemble.php';
 
 $parentTitle = "";
 if( $post -> post_parent ) {
@@ -44,6 +44,6 @@ get_header();
 			echo '</div>';
 		 }
 	 ?>
-</main><!-- #main -->
+</main>
 
 <?php get_footer(); ?>

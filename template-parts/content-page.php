@@ -7,9 +7,6 @@
  * @package bbginnovate
  */
 
-// require '../inc/bbg-functions-assemble.php';
-require get_template_directory() . '/inc/bbg-functions-assemble.php';
-
 $videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
 $timelineUrl = get_post_meta( get_the_ID(), 'featured_timeline_url', true );
 
@@ -49,98 +46,88 @@ if(have_rows('project_team_members')):
 	$s .= '</div>';
 	$teamRoster .= $s;
 endif;
-
-
-include get_template_directory() . "/inc/shared_sidebar.php";
-
 ?>
 
+<div class="outer-container">
+	<div class="main-content-container">
+		<?php
+			if($post -> post_parent) {
+				// REFERENCE: https://wordpress.org/support/topic/link-to-parent-page
+				$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+				$parent_link_data = get_permalink($post -> post_parent) ;
 
-	<?php
-		$featured_media_result = get_feature_media_data();
-		if ($featured_media_result != "") {
-			echo $featured_media_result;
-		}
-	?>
+				$parent_link_markup  = '<h2>';
+				$parent_link_markup .= 	'<a href"' . $parent_link_data . '">' . $parent -> post_title . '</a>';
+				$parent_link_markup .= '</h2>';
 
-	<div class="outer-container">
-		<div class="main-content-container">
+				$page_header .= $parent_link_markup;
+			}
+
+			$page_header  = 	'<h2>' . get_the_title() . '</h2>';
+			echo $page_header;
+		?>
+
+		<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
 			<?php
-				if($post -> post_parent) {
-					// REFERENCE: https://wordpress.org/support/topic/link-to-parent-page
-					$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
-					$parent_link_data = get_permalink($post -> post_parent) ;
-
-					$parent_link_markup  = '<h2>';
-					$parent_link_markup .= 	'<a href"' . $parent_link_data . '">' . $parent -> post_title . '</a>';
-					$parent_link_markup .= '</h2>';
-
-					$page_header .= $parent_link_markup;
-				}
-
-				$page_header  = 	'<h2>' . get_the_title() . '</h2>';
-				echo $page_header;
+			$pageTagline = get_field('page_tagline');
+			if ( $pageTagline ) {
+				echo "<h3>" . $pageTagline . "</h3>";
+			}
+			the_content();
 			?>
+		</div><!-- .entry-content -->
 
-			<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
-				<?php
-				$pageTagline = get_field('page_tagline');
-				if ( $pageTagline ) {
-					echo "<h3>" . $pageTagline . "</h3>";
+		<footer class="entry-footer bbg-post-footer 1234">
+			<?php
+				edit_post_link(
+					sprintf(
+						/* translators: %s: Name of current post */
+						esc_html__( 'Edit %s', 'bbginnovate' ),
+						the_title( '<span class="screen-reader-text">"', '"</span>', false )
+					),
+					'<span class="edit-link">',
+					'</span>'
+				);
+			?>
+		</footer><!-- .entry-footer -->
+	</div>
+	<div class="side-content-container">
+		<article>
+			<h5>Share</h5>
+			<a href="<?php echo $fbUrl; ?>">
+				<span class="bbg__article-share__icon facebook"></span>
+			</a>
+			<a href="<?php echo $twitterURL; ?>">
+				<span class="bbg__article-share__icon twitter"></span>
+			</a>
+		</article>
+
+		<article>
+			<?php
+				echo '<!-- Sidebar content -->';
+				if ( $includeSidebar && $sidebarTitle != "" ) {
+					echo $sidebar;
 				}
-				the_content();
-				?>
-			</div><!-- .entry-content -->
+				if ( $secondaryColumnContent != "" ) {
+					echo $secondaryColumnContent;
+				}
+				echo $sidebarDownloads;
+				echo $teamRoster;
+			?>
+		</article>
+	</div>
+</div><!-- .usa-grid -->
 
-			<footer class="entry-footer bbg-post-footer 1234">
-				<?php
-					edit_post_link(
-						sprintf(
-							/* translators: %s: Name of current post */
-							esc_html__( 'Edit %s', 'bbginnovate' ),
-							the_title( '<span class="screen-reader-text">"', '"</span>', false )
-						),
-						'<span class="edit-link">',
-						'</span>'
-					);
-				?>
-			</footer><!-- .entry-footer -->
-		</div>
-		<div class="side-content-container">
-			<article>
-				<h5>Share</h5>
-				<a href="<?php echo $fbUrl; ?>">
-					<span class="bbg__article-share__icon facebook"></span>
-				</a>
-				<a href="<?php echo $twitterURL; ?>">
-					<span class="bbg__article-share__icon twitter"></span>
-				</a>
-			</article>
+<?php 
+if ( $timelineUrl != "" ) {
+	$urlParts = parse_url($timelineUrl);
+	$domain = $urlParts['host'];
+	$path = $urlParts['path'];
+	$urlQuery = $urlParts['query'];
 
-			<article>
-				<?php
-					echo "<!-- Sidebar content -->";
-					if ( $includeSidebar && $sidebarTitle != "" ) {
-						echo $sidebar;
-					}
-					if ( $secondaryColumnContent != "" ) {
-						echo $secondaryColumnContent;
-					}
-					echo $sidebarDownloads;
-					echo $teamRoster;
-				?>
-			</article>
-		</div>
-	</div><!-- .usa-grid -->
+	$timelineUrl = '//' . $domain . $path . '?' . $urlQuery;
 
-	<?php if ( $timelineUrl != "" ) {
-		$urlParts = parse_url($timelineUrl);
-		$domain = $urlParts['host'];
-		$path = $urlParts['path'];
-		$urlQuery = $urlParts['query'];
-
-		$timelineUrl = "//" . $domain . $path . "?" . $urlQuery;
-
-		echo featured_timeline($timelineUrl);
-		$hideFeaturedImage = TRUE;
-	} ?>
+	echo featured_timeline($timelineUrl);
+	$hideFeaturedImage = TRUE;
+}
+?>
