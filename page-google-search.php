@@ -43,7 +43,7 @@ article h3 {
 
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+		<main id="main" role="main">
 			<div class="usa-grid-full">
 				<div class="usa-grid">
 					<?php 

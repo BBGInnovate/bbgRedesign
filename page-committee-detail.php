@@ -78,7 +78,7 @@ get_header();
 	}
 ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 
 	<div class="outer-container">
 		<div class="grid-container">

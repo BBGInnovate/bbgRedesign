@@ -111,7 +111,7 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 get_header();
 ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 	<?php
 		while ( have_posts() ) : the_post(); 
 			$projectCategoryID = get_cat_id('Project');

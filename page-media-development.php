@@ -185,101 +185,64 @@ if ( $custom_query->have_posts() ) :
 		echo "geojson = $geojsonStr";
 		echo "</script>";
 		//echo $geojsonStr;
-
 endif; 
 
 get_header(); ?>
 
 <style>
-div.usa-accordion-content {
-	padding:1.5rem !important;
-}
-div.usa-accordion-content a {
-	font-weight:bold;
-}
+	div.usa-accordion-content {padding:1.5rem !important;}
+	div.usa-accordion-content a {font-weight:bold;}
 </style>
 
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main bbg__2-column" role="main">
+<main id="main" bbg__2-column" role="main">
+	<div class="usa-grid">
+		<header class="page-header">
+			<h5 class="bbg__label--mobile large"><?php echo "Media Training and Development"; //echo $pageTitle;  //WE ARE DELIBERATELY HARDCODING THIS BECAUSE THE NAME IS TOO LONG IN THE PAGE PICKER ON THE PARENT PAGE ?></h5>
+			<?php echo $pageTagline; ?>
+		</header><!-- .page-header -->
+	</div>
 
-			<div class="usa-grid">
-				<header class="page-header">
-					<h5 class="bbg__label--mobile large"><?php echo "Media Training and Development"; //echo $pageTitle;  //WE ARE DELIBERATELY HARDCODING THIS BECAUSE THE NAME IS TOO LONG IN THE PAGE PICKER ON THE PARENT PAGE ?></h5>
-					<?php echo $pageTagline; ?>
-				</header><!-- .page-header -->
+	<!-- this section holds the map and is populated later in the page by javascript -->
+	<section class="usa-section" style="position: relative;">
+		<div id="map" class="bbg__map--banner"></div>
+		<div class="usa-grid">
+			<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>
+		</div>
+		
+		<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button"/>
+
+		<style> 
+			#mapFilters label { margin-left:15px; }
+		</style>
+	</section>
+
+	<div class="usa-grid">	
+		<div class="entry-content bbg__article-content large <?php echo $featuredImageClass; ?>">
+			<div class="bbg__profile__content">
+				<?php
+					echo $headlineStr;
+					echo $pageContent;
+				?>
 			</div>
+		</div>
+		<div class="bbg__article-sidebar large">
+			<?php
+				if ( $secondaryColumnContent != "" ) {
+					if ( $secondaryColumnLabel != "" ) {
+						echo '<h5 class="bbg__label small">' . $secondaryColumnLabel . '</h5>';
+					}
+					echo $secondaryColumnContent;
+				}
 
-			<!-- this section holds the map and is populated later in the page by javascript -->
-			<section class="usa-section" style="position: relative;">
-				<div id="map" class="bbg__map--banner"></div>
-				<div class="usa-grid">
-					<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>
-				</div>
-				
-				<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button"/>
-
-				<style> 
-					#mapFilters label { margin-left:15px; }
-				</style>
-				<!--
-				<div align="center" id="mapFilters" class="u--show-medium-large">
-					<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2016" value="2016" /><label for="trainingYear_2016"> 2016</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2015" value="2015" /><label for="trainingYear_2015"> 2015</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2014" value="2014" /><label for="trainingYear_2014"> 2014</label>
-					<input type="radio" name="trainingYear" id="trainingYear_2013" value="2013" /><label for="trainingYear_2013"> 2013</label>
-					
-				</div>
-				<div align="center" id="mapFilters" class="u--hide-medium-large">
-					<p></p><h3>Select a year</h3>
-					<select name="trainingSelect">
-						<option value="all">All</option>
-						<option value="2016">2016</option>
-						<option value="2015">2015</option>
-						<option value="2014">2014</option>
-						<option value="2013">2013</option>
-					</select>
-				</div>
-				-->
-			</section>
-
-			<div class="usa-grid">	
-				<div class="entry-content bbg__article-content large <?php echo $featuredImageClass; ?>">
-					<div class="bbg__profile__content">
-						<?php
-							echo $headlineStr;
-							echo $pageContent;
-
-						?>
-					</div>
-				</div>
-				<div class="bbg__article-sidebar large">
-
-					<?php
-						if ( $secondaryColumnContent != "" ) {
-
-							if ( $secondaryColumnLabel != "" ) {
-								echo '<h5 class="bbg__label small">' . $secondaryColumnLabel . '</h5>';
-							}
-
-							echo $secondaryColumnContent;
-						}
-
-						if ( $listsInclude ) {
-							echo $sidebarDownloads;
-						}
-						echo $trainingStr;
-					?>
-
-				</div><!-- .bbg__article-sidebar -->
-			</div>
-
-
-			
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
+				if ( $listsInclude ) {
+					echo $sidebarDownloads;
+				}
+				echo $trainingStr;
+			?>
+		</div><!-- .bbg__article-sidebar -->
+	</div>
+</main>
 
 <?php /* include map stuff -------------------------------------------------- */ ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.css" />

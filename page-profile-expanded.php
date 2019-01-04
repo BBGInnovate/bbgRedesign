@@ -85,7 +85,7 @@ get_header();
 	}
 ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 	<?php
 		//Default adds a space above header if there's no image set
 		$featuredImageClass = " bbg__article--no-featured-image";

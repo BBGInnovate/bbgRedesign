@@ -88,7 +88,7 @@ get_header();
 	}
 ?>
 
-<main id="main" class="site-main bbg__2-column" role="main">
+<main id="main" bbg__2-column" role="main">
 
 	<div class="outer-container">
 		<div class="custom-grid-container">

@@ -20,7 +20,7 @@ get_header();
 	<div id="map" class="bbg__map--banner"></div>
 </section>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 	<section class="outer-container">
 		<div class="inner-container">
 			<p class="lead-in">But here are some recent BBG highlights from around the world.</p>

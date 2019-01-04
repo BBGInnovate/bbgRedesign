@@ -20,7 +20,7 @@ if (  isset( $_GET['hideLink'] ) && current_user_can('publish_posts') ) {
 get_header(); 
 
 ?>
-<div id="main" class="site-main">
+<div id="main">
 	<div id="primary" class="content-area">
 		<main id="content" class="site-content" role="main">
 
@@ -339,7 +339,7 @@ get_header();
 		<div id="secondary" class="widget-area" role="complementary">
 		</div><!-- #secondary .widget-area -->
 </div>
-</div><!-- #main .site-main -->
+</div><!-- #main -->
 
 <?php 
 

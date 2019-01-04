@@ -69,7 +69,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 	}
 ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 
 	<div class="outer-container">
 		<div class="grid-container">

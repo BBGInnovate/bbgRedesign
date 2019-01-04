@@ -40,11 +40,6 @@ function outputTerm($t, $headerTag) {
 		$countryName = get_the_title();
 		$countries []= $countryName;
 	}
-	// echo "<ul style='margin-top:1em;'>";
-	// foreach ($countries as $c) {
-	// 	echo "<li>$c</li>";
-	// }
-	// echo "</ul>";
 	echo "<em>Countries: </em>&nbsp;" ;
 	$i=0;
 
@@ -55,12 +50,10 @@ function outputTerm($t, $headerTag) {
 		}
 		echo $c;
 	}
-
 	echo "<br /><br />";
 }
 
 function getMapData() {
-
 	$networks = array();
 	$terms = get_terms(  "language_services" , array('hide_empty' => false));
 	if ($terms) {
@@ -80,13 +73,10 @@ function getMapData() {
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-			<div class="usa-grid-full">
-				<?php getMapData(); ?>
-			</div><!-- .usa-grid-full -->
-		</main><!-- #main -->
-	</div><!-- #primary -->
+<main id="main" role="main">
+	<div class="usa-grid-full">
+		<?php getMapData(); ?>
+	</div>
+</main>
 
-<?php /*get_sidebar();*/ ?>
 <?php get_footer(); ?>

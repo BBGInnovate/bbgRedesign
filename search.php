@@ -18,41 +18,35 @@ get_header();
 	}
 ?>
 
-<section id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
-		<div class="outer-container">
-			<div class="grid-container">
-				<?php if ( have_posts() ) : ?>
+<main id="main" role="main">
+	<div class="outer-container">
+		<div class="grid-container">
+			<?php
+				if (have_posts()) {
+					echo '<header>';
+					echo 	'<h2>';
+					printf(esc_html__('Search Results for: %s', 'bbginnovate'), '<span>' . get_search_query() . '</span>' );
+					echo 	'</h2>';
+					echo '</header>';
 
-					<header>
-						<h2><?php printf( esc_html__( 'Search Results for: %s', 'bbginnovate' ), '<span>' . get_search_query() . '</span>' ); ?></h2>
-					</header><!-- .page-header -->
-
-					<?php /* Start the Loop */ ?>
-					<?php while ( have_posts() ) : the_post(); ?>
-
-						<?php
+					while (have_posts() ) {
+						the_post();
 						/**
 						 * Run the loop for the search to output the results.
 						 * If you want to overload this in a child theme then include a file
 						 * called content-search.php and that will be used instead.
 						 */
-						get_template_part( 'template-parts/content', 'search' );
-						?>
+						get_template_part('template-parts/content', 'search');
+					}
 
-					<?php endwhile; ?>
-
-					<?php the_posts_navigation(); ?>
-
-				<?php else : ?>
-
-					<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
-				<?php endif; ?>
-			</div>
+					the_posts_navigation();
+			} else {
+				get_template_part('template-parts/content', 'none');
+			}
+			?>
 		</div>
-	</main><!-- #main -->
-</section><!-- #primary -->
+	</div>
+</main>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

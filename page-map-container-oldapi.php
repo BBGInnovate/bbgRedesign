@@ -30,7 +30,7 @@ echo getNetworkExcerptJS();
 	<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/map-entity-reach-oldapi.js'></script>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+		<main id="main" role="main">
 			<div class="usa-grid-full" style="margin-bottom: 5rem;">
 				<div class="usa-grid">
 					<header class="page-header">

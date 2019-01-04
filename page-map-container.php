@@ -160,7 +160,7 @@ for (serviceName in servicesByName) {
 <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/mapdata-worldLow.js'></script>
 <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/map-entity-reach.js'></script>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 
 	<div class="outer-container">
 		<div class="grid-container">

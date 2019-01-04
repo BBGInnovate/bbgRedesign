@@ -40,7 +40,7 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 
 get_header(); ?>
 
-<main id="main" class="site-main bbg__2-column" role="main">
+<main id="main" class="bbg__2-column" role="main">
 
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>

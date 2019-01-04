@@ -10,7 +10,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+		<main id="main" role="main">
 			<div class="usa-grid-full">
 				<?php 
 					$templates =  wp_get_theme()->get_page_templates();

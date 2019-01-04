@@ -219,7 +219,7 @@ wp_reset_query();
 	}
 </style>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 
 <?php if ( $custom_query->have_posts() ) : ?>
 	<div style="position: relative;">

@@ -110,7 +110,7 @@ get_header();
 	}
 </style>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 
 		<!-- this section holds the map and is populated later in the page by javascript -->
 		<section class="map-banner" style="position: relative; z-index: 0;">

@@ -174,7 +174,7 @@
 				<!-- #masthead -->
 				<div id="content" class="site-content">
 					<div id="primary" class="content-area">
-						<main id="main" class="site-main" role="main">
+						<main id="main" role="main">
 							<!-- NEWSLETTER INTRODUCTION -->
 							<div class="usa-grid">
 								<header class="page-header">
@@ -366,7 +366,6 @@
 			</div>
 			<!-- #primary .content-area -->
 			</div>
-			<!-- #main .site-main -->
 			</div>
 			<!-- #content -->
 			<footer class="usa-footer usa-footer-medium usa-sans" role="contentinfo" style="position: relative; z-index: 9990;">

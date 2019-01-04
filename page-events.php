@@ -112,7 +112,7 @@ wp_reset_postdata();
 
 get_header(); ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 	<?php
 		if (!is_paged()) {
 			while ($featured_event_query->have_posts()) {

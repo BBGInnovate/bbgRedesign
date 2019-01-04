@@ -239,7 +239,7 @@ get_header();
 	}
 ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 <?php
 	// PAGE CONTENT
 	$body_copy  = '<div class="outer-container">';

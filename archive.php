@@ -18,7 +18,7 @@ if ($featured_media_result != "") {
 }
 ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 
 	<?php
 		if (have_posts()) :

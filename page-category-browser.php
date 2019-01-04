@@ -159,7 +159,7 @@ get_header();
 	}
 ?>
 
-<main id="main" class="site-main" role="main">
+<main id="main" role="main">
 	<?php
 		if ($custom_query -> have_posts()) {
 			$page_title  = '<div class="outer-container"';
