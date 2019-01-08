@@ -79,8 +79,8 @@ if (have_posts()) {
 	if (!$meetingContactTagline || $meetingContactTagline == "") {
 		$meetingContactTagline = "For more information, please contact BBG Public Affairs at (202) 203-4400 or by e-mail at pubaff@bbg.gov.";
 	}
-	if ( $meetingTime != "") {
-		$meetingTime = $meetingTime . ", ";
+	if ($meetingTime != '') {
+		$meetingTime = $meetingTime;
 	}
 	$meetingSpeakers = get_post_meta(get_the_ID(), 'board_meeting_speakers', true);
 
@@ -194,10 +194,9 @@ get_header();
 				<!-- SIDEBAR -->
 				<div class="side-content-container">
 						<?php
-							$event_info  = '<p class="sidebar-paragraph-head">';
-							$event_info .= 		'<a href="/news/events/">' . $eventPageHeader . ':</a>';
-							$event_info .= 		$meetingTime . ' ' . $postDate . '<br>' . $meetingLocation;
-							$event_info .= '</p>';
+							$event_info  = '<h5><a href="/news/events/">Event</a></h5>';
+							$event_info .= '<p class="aside">' . $postDate . ', ' . $meetingTime . '<br><br>';
+							$event_info .= $meetingLocation . '</p>';
 							$event_info .= $eventBriteButtonStr;
 							$event_info .= '<p class="bbg-tagline bbg-tagline--main">';
 							$event_info .= 	$meetingContactTagline;
@@ -287,14 +286,14 @@ get_header();
 
 						<!-- RELATED DOCUMENTS -->
 						<?php
-							if ( have_rows('board_meeting_related_documents') ) {
-								echo '<h3 class="bbg__sidebar-label">Meeting documents</h3>';
-								echo '<ul class="bbg__profile__related-link__list">';
-								while ( have_rows('board_meeting_related_documents') ) { 
+							if (have_rows('board_meeting_related_documents')) {
+								echo '<h5>Meeting documents</h5>';
+								echo '<ul>';
+								while (have_rows('board_meeting_related_documents')) { 
 									the_row();
-									echo '<li class="bbg__profile__related-link">';
+									echo '<li>';
 									$dl = get_sub_field('board_meeting_related_document');
-									echo "<a href='" . $dl['url'] . "'>" . $dl['title'] . "</a>";
+									echo '<a href="' . $dl['url'] . '">' . $dl['title'] . '</a>';
 									echo '</li>';
 								}
 								echo '</ul>';
