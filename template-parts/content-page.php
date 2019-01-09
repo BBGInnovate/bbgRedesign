@@ -19,7 +19,14 @@ $twitterText .= " by @bbggov " . get_permalink();
 $twitterURL = "//twitter.com/intent/tweet?text=" . rawurlencode( $twitterText );
 $fbUrl = "//www.facebook.com/sharer/sharer.php?u=" . urlencode( get_permalink() );
 
-// INCLUDE SIDEBAR LIST OF PEOPLE WHO WHORED ON THE PROJECT
+$include_sidebar = get_field('sidebar_include');
+if (!empty($include_sidebar)) {
+	$sidebar_title = get_field('sidebar_title');
+	$sidebar_description = get_field('sidebar_description');
+	$sidebar_items = get_field('sidebar_items');
+}
+
+// INCLUDE SIDEBAR LIST OF PEOPLE WHO WHORED(?) ON THE PROJECT
 $teamRoster = "";
 if(have_rows('project_team_members')):
 	$s  = '<div class="bbg__project-team">';
@@ -105,13 +112,33 @@ endif;
 		<article>
 			<?php
 				echo '<!-- Sidebar content -->';
-				if ( $includeSidebar && $sidebarTitle != "" ) {
+				if ($includeSidebar && $sidebarTitle != "") {
 					echo $sidebar;
 				}
-				if ( $secondaryColumnContent != "" ) {
+				if ($secondaryColumnContent != "") {
 					echo $secondaryColumnContent;
 				}
-				echo $sidebarDownloads;
+				if (!empty($include_sidebar)) {
+					echo '<h5>' . $sidebar_title . '</h5>';
+					if (!empty($sidebar_items)) {
+						foreach ($sidebar_items as $cur_sidebar) {
+							$download_title = $cur_sidebar['sidebar_download_title'];
+							$download_url = $cur_sidebar['sidebar_download_link']['url'];
+							$download_thumbnail_url = $cur_sidebar['sidebar_download_thumbnail'];
+							$download_description = $cur_sidebar['sidebar_download_description'];
+
+							echo '<article>';
+							if (!empty($download_thumbnail_url)) {
+								echo '<img src="' . $download_thumbnail_url . '" title="' . $download_title . '" alt="' . $download_title . '">';
+							}
+							echo '<h6><a href="' . $download_url . '" target="_blank">' . $download_title . '</a></h6>';
+							if (!empty($download_description)) {
+								echo '<p class="aside">' . $download_description . '</p>';
+							}
+							echo '</article>';
+						}
+					}
+				}
 				echo $teamRoster;
 			?>
 		</article>
