@@ -74,6 +74,15 @@ h6 a:visited,
     text-transform: none;
     color: $color-blue-darker;
     margin: 0 0 0.5rem 0;
+
+    .aside, 
+    p.aside {
+        font-family: $font-sans;
+        font-weight: $font-normal;
+        color: #545454;
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }
 }
 
 p {

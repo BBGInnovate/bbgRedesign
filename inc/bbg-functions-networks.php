@@ -55,8 +55,8 @@ function getNetworkExcerptJS() {
 
 	return $entity_script;
 }
-// soon to be deleted, replaced with bbg-functions get_entity_data()
-function outputBroadcasters($cols) {
+
+function outputBroadcasters($cols, $citing = NULL) {
 	$entityParentPage = get_page_by_path('networks');
 	$qParams = array(
 		'post_type' => array('page'),
@@ -83,7 +83,7 @@ function outputBroadcasters($cols) {
 				$abbreviation = str_replace("/", "", $abbreviation);
 				$description = get_post_meta($id, 'entity_description', true);
 				$description = apply_filters('the_content', $description);
-				$link = get_permalink( get_page_by_path("/networks/$abbreviation/"));
+				$link = get_permalink(get_page_by_path("/networks/$abbreviation/"));
 				$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //need to fix this
 
 				$entity_markup .= '<div class="inner-container">';
@@ -91,7 +91,13 @@ function outputBroadcasters($cols) {
 				$entity_markup .= 		'<img src="' . $imgSrc . '">';
 				$entity_markup .= 	'</div>';
 				$entity_markup .= 	'<div class="entity-text-side">';
-				$entity_markup .= 		'<h4 class="entity-title"><a href="' . $link . '">' . $fullName . '</a></h4>';
+				$entity_markup .= 		'<h4 class="entity-title">';
+				if (is_null($citing)) {
+					$entity_markup .= 			'<a href="' . $link . '">' . $fullName . '</a>';
+				} else {
+					$entity_markup .= '<a href="' . add_query_arg('entity', $abbreviation, '/press-citing-listing/') . '">' . $fullName . '</a>';
+				}
+				$entity_markup .= 		'</h4>';
 				$entity_markup .= 	'</div>';
 				$entity_markup .= '</div>';
 			}

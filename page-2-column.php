@@ -88,7 +88,7 @@ get_header();
 	}
 ?>
 
-<main id="main" bbg__2-column" role="main">
+<main id="main" class="bbg__2-column" role="main">
 
 	<div class="outer-container">
 		<div class="custom-grid-container">
@@ -134,7 +134,6 @@ get_header();
 					<?php
 						$secondaryColumnLabel = get_field('secondary_column_label');
 						$secondaryColumnContent = get_field('secondary_column_content');
-						// $secondaryColumnContent = get_field('secondary_column_content', false, false);
 
 						if ($secondaryColumnContent != "") {
 							echo '<div class="sidebar-section">';

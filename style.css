@@ -2749,6 +2749,19 @@ h6 a:visited,
   text-transform: none;
   color: #284f91;
   margin: 0 0 0.5rem 0; }
+  h6 .aside,
+  h6 p.aside,
+  h6 a:link .aside,
+  h6 a:link p.aside,
+  h6 a:visited .aside,
+  h6 a:visited p.aside,
+  .paragraph-header .aside,
+  .paragraph-header p.aside {
+    font-family: "Alegreya Sans", sans-serif;
+    font-weight: 400;
+    color: #545454;
+    font-size: 1.6rem;
+    line-height: 2rem; }
 
 p {
   font-family: "Carrara-Regular", serif;
