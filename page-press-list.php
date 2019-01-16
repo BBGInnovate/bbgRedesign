@@ -27,20 +27,18 @@ if ($all_media_clips->have_posts()) {
 		$all_media_clips->the_post();
 
 		$press_post_id = get_the_id();
-		$press_post_title = get_the_title();
 		$press_post_outlet = get_post_meta($press_post_id, 'media_clip_outlet', true);
-		$press_post_outlet_link = get_post_meta($press_post_id, 'media_clip_story_url', true);
 		$term_data = get_term($press_post_outlet);
-		$outlet_name = $term_data -> name;
 		$press_post_date = get_post_meta($press_post_id, 'media_clip_published_on', true);
-		$press_post_description = wp_trim_words(get_the_content(), 40);
+		$date = new DateTime($press_post_date);
+		$press_post_date = $date->format('F d, Y');
 
 		$press_post_data = array(
-			'title' => $press_post_title,
-			'outlet' => $outlet_name,
-			'story_link' => $press_post_outlet_link,
-			'date' => get_the_date(),
-			'description' => $press_post_description
+			'title' => get_the_title(),
+			'outlet' => $term_data -> name,
+			'story_link' => get_post_meta($press_post_id, 'media_clip_story_url', true),
+			'date' => $press_post_date,
+			'description' => wp_trim_words(get_the_content(), 40)
 		);
 		array_push($posts_set, $press_post_data);
 	}
@@ -64,9 +62,9 @@ get_header();
 					<?php
 						foreach ($posts_set as $press_post) {
 							$cur_press_post  = '<article>';
-							$cur_press_post .= '<h4>' . $press_post['title'] . '</h4>';
-							$cur_press_post .= '<p class="paragraph-header"><a href="' . $press_post['story_link'] . '" target="_blank">' . $press_post['outlet'] . '</a> &nbsp;<span class="aside">' . $press_post['date'] . '</span></p>';
-							$cur_press_post .= '<p>' . $press_post['description'] . '</p>';
+							$cur_press_post .= 	'<h4><a href="' . $press_post['story_link'] . '" target="_blank">' . $press_post['title'] . '</a></h4>';
+							$cur_press_post .= 	'<p class="paragraph-header">' . $press_post['outlet'] . ' &nbsp;<span class="aside">' . $press_post['date'] . '</span></p>';
+							$cur_press_post .= 	'<p>' . $press_post['description'] . '</p>';
 							$cur_press_post .= '<article>';
 							echo $cur_press_post;
 						}
@@ -74,8 +72,29 @@ get_header();
 						previous_posts_link('Newer Entries');
 					?>
 				</div>
+
 				<div class="side-content-container">
-					<h5>Citings</h5>
+					<h5>Sort Articles</h5>
+					<p class="aside">Group articles by category and entity.</p>
+
+					<h6>ABOUT US</h6>
+					<?php
+						$usagm_icon  = '<div class="sidebar-entities">';
+						$usagm_icon .= 	'<div class="inner-container">';
+						$usagm_icon .= 		'<div class="entity-image-side">';
+						$usagm_icon .= 			'<img src="' . get_template_directory_uri() . '/img/logo_usagm--circle-200.png">';
+						$usagm_icon .= 		'</div>';
+						$usagm_icon .= 		'<div class="entity-text-side">';
+						$usagm_icon .= 			'<h4 class="entity-title">';
+						$usagm_icon .= 				'<a href="' . add_query_arg('entity', 'usagm', '/press-citing-listing/') . '">U.S. Agency for Global Media</a>';
+						$usagm_icon .= 			'</h4>';
+						$usagm_icon .= 		'</div>';
+						$usagm_icon .= 	'</div>';
+						$usagm_icon .= '</div>';
+						echo $usagm_icon;
+					?>
+
+					<h6>NETWORK CITINGS</h6>
 					<?php
 						$network_citings = outputBroadcasters(1, "citing");
 						if (!empty($network_citings)) {
