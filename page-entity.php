@@ -23,13 +23,13 @@ if (have_posts()) {
 		$id = get_the_ID();
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
-		$ogDescription = get_the_excerpt(); //get_the_excerpt()
+		$ogDescription = get_the_excerpt();
 	}
 }
 wp_reset_postdata();
 wp_reset_query();
 
-$fullName = get_post_meta($id, 'entity_full_name', true);
+$entity_full_name = get_post_meta($id, 'entity_full_name', true);
 $abbreviation = get_post_meta($id, 'entity_abbreviation', true);
 $description = get_post_meta($id, 'entity_description', true);
 $siteUrl = get_post_meta($id, 'entity_site_url', true);
@@ -104,6 +104,24 @@ if ($appLink != "") {
 	$app_link_markup  = '<h5>Download the apps</h5>';
 	$app_link_markup .= '<p class="aside">' . $appLink . '<br><a href="https://www.bbg.gov/apps/">Visit the apps page</a></p>';
 }
+
+$cur_press_entity = strtolower($abbreviation);
+// GET CITED PRESS CLIPS OF THIS ENTITY
+$press_clip_query_args = array(
+	'post_type' => 'media_clips',
+	'posts_per_page' => 5,
+	'meta_query'	=> array(
+		'relation' => 'OR',
+		array(
+			'key' => 'outlet_citations',
+			'value' => $cur_press_entity,
+			'compare' => 'LIKE'
+		)
+	)
+);
+$all_media_clips = new WP_Query($press_clip_query_args);
+// GO TO functions.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
+$press_clippings_data = request_media_query_data($all_media_clips);
 
 // SOCIAL, CONTACT LINKS
 $twitterProfileHandle = get_post_meta($id, 'entity_twitter_handle', true);
@@ -433,7 +451,7 @@ get_header();
 						</div>
 					</div>
 					<div class="icon-main-content-container">
-						<?php echo '<h2>' . $fullName . '</h2>'; ?>
+						<?php echo '<h2>' . $entity_full_name . '</h2>'; ?>
 						<div class="page-content">
 							<?php echo $page_content; ?>
 						</div>
@@ -469,7 +487,7 @@ get_header();
 			if ($budget != "" || $employees != "" || $languages != "" || $audience != "" || $app_link_markup != "") {
 				echo '<h5>Fast facts</h5>';
 			}
-			echo 	'<ul>';
+			echo 	'<ul class="unstyled-list">';
 			echo 		$budget;
 			echo 		$employees;
 			echo 		$languages;
@@ -541,6 +559,20 @@ get_header();
 					echo '</article>';
 				}
 			}
+
+			// SHOW CITED POSTS
+			if (!empty($press_clippings_data)) {
+				$cited_post_list  = '<article>';
+				$cited_post_list .= 	'<h5>' . $cur_press_entity . ' Cited in the NEWS</h5>';
+				foreach ($press_clippings_data as $cited_post) {
+					$cited_post_list .= '<h6><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a></h6>';
+				}
+				$cited_post_list .= '<p><a class="read-more" href="' . add_query_arg('entity', $cur_press_entity, '/press-citing-listing/') . '">Click here to see full list</a></p>';
+				$cited_post_list .= '</article>';
+				echo $cited_post_list;
+			}
+
+			// SEARCH ENTITY WEBSITE
 			echo '<article>';
 			echo 	$site_select;
 			echo '</article>';

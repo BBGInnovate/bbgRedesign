@@ -1180,7 +1180,7 @@ function foia_upload($file) {
 
 
 // QUERY ALL PRESS CLIPPINGS (MEDIA CLIPS)
-// page-press-list.php, page-press-citing.php, 
+// page-press-list.php, page-press-citing.php, page-entity.php
 function request_media_query_data($query_args) {
 	if ($query_args->have_posts()) {
 		$citing_post_list = array();
