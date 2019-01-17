@@ -14,36 +14,15 @@
 // COLLECT ALL PRESS CLIPPINGS AND SET PAGINATION
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-$all_media_clips = new WP_Query(
-	array(
-		'post_type' => 'media_clips',
-		'posts_per_page' => 5,
-		'paged' => $paged
-	)
+$press_clip_query_args = array(
+	'post_type' => 'media_clips',
+	'posts_per_page' => 5,
+	'paged' => $paged
 );
-if ($all_media_clips->have_posts()) {
-	$posts_set = array();
-	while ($all_media_clips->have_posts()) {
-		$all_media_clips->the_post();
+$all_media_clips = new WP_Query($press_clip_query_args);
 
-		$press_post_id = get_the_id();
-		$press_post_outlet = get_post_meta($press_post_id, 'media_clip_outlet', true);
-		$term_data = get_term($press_post_outlet);
-		$press_post_date = get_post_meta($press_post_id, 'media_clip_published_on', true);
-		$date = new DateTime($press_post_date);
-		$press_post_date = $date->format('F d, Y');
-
-		$press_post_data = array(
-			'title' => get_the_title(),
-			'outlet' => $term_data -> name,
-			'story_link' => get_post_meta($press_post_id, 'media_clip_story_url', true),
-			'date' => $press_post_date,
-			'description' => wp_trim_words(get_the_content(), 40)
-		);
-		array_push($posts_set, $press_post_data);
-	}
-	wp_reset_postdata();
-}
+// GO TO functions.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
+$press_clippings_data = request_media_query_data($all_media_clips);
 
 get_header();
 ?>
@@ -60,7 +39,7 @@ get_header();
 			<div class="inner-container">
 				<div class="main-content-container">
 					<?php
-						foreach ($posts_set as $press_post) {
+						foreach ($press_clippings_data as $press_post) {
 							$cur_press_post  = '<article>';
 							$cur_press_post .= 	'<h4><a href="' . $press_post['story_link'] . '" target="_blank">' . $press_post['title'] . '</a></h4>';
 							$cur_press_post .= 	'<p class="paragraph-header">' . $press_post['outlet'] . ' &nbsp;<span class="aside">' . $press_post['date'] . '</span></p>';
@@ -68,8 +47,10 @@ get_header();
 							$cur_press_post .= '<article>';
 							echo $cur_press_post;
 						}
-						next_posts_link('Older Entries', $all_media_clips->max_num_pages);
-						previous_posts_link('Newer Entries');
+						if ($press_clippings_data >= 5) {
+							next_posts_link('Older Entries', $press_post['query_var']->max_num_pages);
+							previous_posts_link('Newer Entries');
+						}
 					?>
 				</div>
 

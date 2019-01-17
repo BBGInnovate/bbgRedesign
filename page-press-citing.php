@@ -6,14 +6,24 @@
    template name: Citing List
  */
 
-/* THIS IS NOT A TEMPLATE. THIS IS A LIST OF ARTICLES FROM THE LINKS FROM page-press-list.php */
+/* 
+ * THIS IS NOT A TEMPLATE. 
+ * THIS IS A LIST OF ARTICLES 
+ * FROM THE LINKS FROM page-press-list.php 
+ */
+
+// 1. GET ENTITY SELECTION FRO page-press-list.php
 if (!empty($_GET['entity'])) {
 	$selected_entity = htmlspecialchars($_GET['entity']);
 }
 
-// USE $selected_entity TO GET ALL CITED POSTS FOR THAT SPECIFIC ENTITY
+// 2. SET PAGINATION FOR PRESS CLIPPINGS LIST
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+// USE SELECTED ENTITY TO GET QUERY ARGS TO CALL CORRESPONDING CITED POSTS, 
+// WHETER ABOUT US OR CITED, AND MAKE QUERY
 if ($selected_entity == 'usagm') {
-	$outlet_args = array(
+	$press_clip_query_args = array(
 		'post_type' => 'media_clips',
 		'meta_query'	=> array(
 			'relation' => 'OR',
@@ -24,10 +34,11 @@ if ($selected_entity == 'usagm') {
 			)
 		)
 	);
-}
-else {
-	$outlet_args = array(
+} else {
+	$press_clip_query_args = array(
 		'post_type' => 'media_clips',
+		'posts_per_page' => 5,
+		'paged' => $paged,
 		'meta_query'	=> array(
 			'relation' => 'OR',
 			array(
@@ -38,31 +49,10 @@ else {
 		)
 	);
 }
-$outlet_post_list = new WP_Query($outlet_args);
+$all_media_clips = new WP_Query($press_clip_query_args);
 
-if ($outlet_post_list->have_posts()) {
-	$citing_post_list = array();
-	while ($outlet_post_list->have_posts()) {
-		$outlet_post_list->the_post();
-
-		$press_post_id = get_the_ID();
-		$press_post_outlet = get_post_meta($press_post_id, 'media_clip_outlet', true);
-		$term_data = get_term($press_post_outlet);
-		$press_post_date = get_post_meta($press_post_id, 'media_clip_published_on', true);
-		$date = new DateTime($press_post_date);
-		$press_post_date = $date->format('F d, Y');
-
-		$cited_post_data = array(
-			'title' => get_the_title(),
-			'outlet' => $term_data -> name,
-			'story_link' => get_post_meta($press_post_id, 'media_clip_story_url', true),
-			'date' => $press_post_date,
-			'description' => wp_trim_words(get_the_content(), 40)
-		);
-		array_push($citing_post_list, $cited_post_data);
-	}
-	wp_reset_postdata();
-}
+// 3. GO TO functions.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
+$press_clippings_data = request_media_query_data($all_media_clips);
 
 get_header();
 ?>
@@ -80,7 +70,7 @@ get_header();
 						else {
 							echo '<h2>' . $selected_entity . ' Cited Press Clips</h2>';
 						}
-						foreach ($citing_post_list as $cited_post) {
+						foreach ($press_clippings_data as $cited_post) {
 							$cur_cited_post  = '<article>';
 							$cur_cited_post .= 	'<h4><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a></h4>';
 							$cur_cited_post .= 	'<p class="paragraph-header">' . $cited_post['outlet'] . ' &nbsp;<span class="aside">' . $cited_post['date'] . '</span></p>';
@@ -88,8 +78,10 @@ get_header();
 							$cur_cited_post .= '<article>';
 							echo $cur_cited_post;
 						}
-						// next_posts_link('Older Entries', $all_media_clips->max_num_pages);
-						// previous_posts_link('Newer Entries');
+						if ($press_clippings_data >= 5) {
+							next_posts_link('Older Entries', $cited_post['query_var']->max_num_pages);
+							previous_posts_link('Newer Entries');
+						}
 					?>
 				</div>
 
