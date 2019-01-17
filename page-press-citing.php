@@ -45,13 +45,16 @@ if ($outlet_post_list->have_posts()) {
 	while ($outlet_post_list->have_posts()) {
 		$outlet_post_list->the_post();
 
-		$cited_post_id = get_the_ID();
+		$press_post_id = get_the_ID();
+		$press_post_outlet = get_post_meta($press_post_id, 'media_clip_outlet', true);
+		$term_data = get_term($press_post_outlet);
 		$press_post_date = get_post_meta($press_post_id, 'media_clip_published_on', true);
 		$date = new DateTime($press_post_date);
 		$press_post_date = $date->format('F d, Y');
 
 		$cited_post_data = array(
 			'title' => get_the_title(),
+			'outlet' => $term_data -> name,
 			'story_link' => get_post_meta($press_post_id, 'media_clip_story_url', true),
 			'date' => $press_post_date,
 			'description' => wp_trim_words(get_the_content(), 40)
