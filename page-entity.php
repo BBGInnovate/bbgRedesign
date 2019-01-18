@@ -52,7 +52,7 @@ $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPag
 
 $entityMission = get_post_meta($id, 'entity_mission', true);
 $entity_link_groups = getEntityLinks_taxonomy($entityCategorySlug);
-$site_select = '<h5>Explore the ' . $abbreviation . 'websites</h5>';
+$site_select = '<h5>Explore the ' . $abbreviation . ' websites</h5>';
 if (count($entity_link_groups) < 4) {
 	$site_select .= '<ul class="bbg__rss__list">';
 	foreach ($entity_link_groups as $entity_link) {
@@ -105,8 +105,12 @@ if ($appLink != "") {
 	$app_link_markup .= '<p class="aside">' . $appLink . '<br><a href="https://www.bbg.gov/apps/">Visit the apps page</a></p>';
 }
 
+
+// PRESS 1. GET CITED PRESS CLIPS OF THIS ENTITY
 $cur_press_entity = strtolower($abbreviation);
-// GET CITED PRESS CLIPS OF THIS ENTITY
+	// TEMPORARILY SWITCH BECUASE OUTLET NAME IN TAXONOMY HAS NO SLASH
+	if ($cur_press_entity == "rfe/rl") {$cur_press_entity = "rferl";}
+
 $press_clip_query_args = array(
 	'post_type' => 'media_clips',
 	'posts_per_page' => 5,
@@ -120,8 +124,17 @@ $press_clip_query_args = array(
 	)
 );
 $all_media_clips = new WP_Query($press_clip_query_args);
-// GO TO functions.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
+
+// PRESS 2. GO TO functions.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
 $press_clippings_data = request_media_query_data($all_media_clips);
+
+// PRESS 3. CSS SPECIFIC TO PRESS CLIPPINGS
+$press_clippings_style  = '<style>';
+$press_clippings_style .= 	'.entity_press_clippings h6 {margin-bottom: 1rem}';
+$press_clippings_style .= 	'.entity_press_clippings h6 .aside {font-size: 0.9em; font-weight: 500;} ';
+$press_clippings_style .= '</style>';
+echo $press_clippings_style;
+
 
 // SOCIAL, CONTACT LINKS
 $twitterProfileHandle = get_post_meta($id, 'entity_twitter_handle', true);
@@ -562,10 +575,14 @@ get_header();
 
 			// SHOW CITED POSTS
 			if (!empty($press_clippings_data)) {
-				$cited_post_list  = '<article>';
+				$cited_post_list  = '<article class="entity_press_clippings">';
+				// SWITCH BACK FOR HEADER SO IT'S MORE STYLED
+				if ($cur_press_entity == "rferl") {$cur_press_entity = "rfe/rl";}
+
 				$cited_post_list .= 	'<h5>' . $cur_press_entity . ' Cited in the NEWS</h5>';
 				foreach ($press_clippings_data as $cited_post) {
-					$cited_post_list .= '<h6><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a></h6>';
+					$cited_post_list .= '<h6><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a> ';
+					$cited_post_list .= '<span class="aside">(' . $cited_post['outlet'] . ')</span></h6>';
 				}
 				$cited_post_list .= '<p><a class="read-more" href="' . add_query_arg('entity', $cur_press_entity, '/press-citing-listing/') . '">Click here to see full list</a></p>';
 				$cited_post_list .= '</article>';
