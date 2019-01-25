@@ -30,7 +30,7 @@ get_header();
 	<div class="outer-container">
 		<div class="grid-container">
 			<h2>Press Clippings</h2>
-			<p class="leadin">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			<!-- <p class="leadin">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> -->
 		</div>
 	</div>
 
