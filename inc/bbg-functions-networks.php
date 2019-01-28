@@ -56,7 +56,7 @@ function getNetworkExcerptJS() {
 	return $entity_script;
 }
 
-function outputBroadcasters($cols, $citing = NULL) {
+function outputBroadcasters($cols) {
 	$entityParentPage = get_page_by_path('networks');
 	$qParams = array(
 		'post_type' => array('page'),
@@ -92,11 +92,7 @@ function outputBroadcasters($cols, $citing = NULL) {
 				$entity_markup .= 	'</div>';
 				$entity_markup .= 	'<div class="entity-text-side">';
 				$entity_markup .= 		'<h4 class="entity-title">';
-				if (is_null($citing)) {
-					$entity_markup .= 			'<a href="' . $link . '">' . $fullName . '</a>';
-				} else {
-					$entity_markup .= '<a href="' . add_query_arg('entity', $abbreviation, '/press-citing-listing/') . '">' . $fullName . '</a>';
-				}
+				$entity_markup .= 			'<a href="' . $link . '">' . $fullName . '</a>';
 				$entity_markup .= 		'</h4>';
 				$entity_markup .= 	'</div>';
 				$entity_markup .= '</div>';

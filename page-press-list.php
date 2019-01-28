@@ -8,8 +8,7 @@
    template name: Press Clippings List
  */
 
-// START SESSION TO CARRY SELECTION OF CITED ENTITY TO page-press-citing.php TO DYNAMICALLY POPULATE WITH POSTS
-// session_start();
+include 'inc/media-clips-reference.php';
 
 // COLLECT ALL PRESS CLIPPINGS AND SET PAGINATION
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -55,31 +54,12 @@ get_header();
 				</div>
 
 				<div class="side-content-container">
-					<h5>Sort Articles</h5>
-					<p class="aside">Group articles by category and entity.</p>
-
-					<h6>ABOUT US</h6>
 					<?php
-						$usagm_icon  = '<div class="sidebar-entities">';
-						$usagm_icon .= 	'<div class="inner-container">';
-						$usagm_icon .= 		'<div class="entity-image-side">';
-						$usagm_icon .= 			'<img src="' . get_template_directory_uri() . '/img/logo_usagm--circle-200.png">';
-						$usagm_icon .= 		'</div>';
-						$usagm_icon .= 		'<div class="entity-text-side">';
-						$usagm_icon .= 			'<h4 class="entity-title">';
-						$usagm_icon .= 				'<a href="' . add_query_arg('entity', 'usagm', '/press-citing-listing/') . '">U.S. Agency for Global Media</a>';
-						$usagm_icon .= 			'</h4>';
-						$usagm_icon .= 		'</div>';
-						$usagm_icon .= 	'</div>';
-						$usagm_icon .= '</div>';
-						echo $usagm_icon;
-					?>
-
-					<h6>NETWORK CITINGS</h6>
-					<?php
-						$network_citings = outputBroadcasters(1, "citing");
-						if (!empty($network_citings)) {
-							echo $network_citings;
+						$clip_types = array("about", "citation");
+						echo '<h5>Press Clippings Group</h5>';
+						$entity_dropdown = build_media_clips_entity_dropdown($clip_types);
+						foreach ($entity_dropdown as $clip_menu_item) {
+							echo $clip_menu_item;
 						}
 					?>
 				</div>
