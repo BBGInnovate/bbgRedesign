@@ -51,26 +51,26 @@ function build_media_clips_entity_dropdown($reference = NULL) {
 		} else if ($ref == 'Citations') {
 			$url_param = 'citation';
 		}
-		$entity_dropdown .= 		'<li>';
-		$entity_dropdown .= 				'<h6>';
+		$entity_dropdown .= 	'<li>';
+		$entity_dropdown .= 		'<h6>';
 		if ($ref != 'Of Interest') {
-			$entity_dropdown .= 				strtoupper($ref) . ' <i class="fas fa-angle-down"></i>';
+			$entity_dropdown .= 		strtoupper($ref) . ' <i class="fas fa-angle-down"></i>';
 		} else {
-			$entity_dropdown .= 					'<a href="' . add_query_arg('interest', 'true', '/press-citing-listing/') . '">' . strtoupper($ref) . '</a>';
+			$entity_dropdown .= 		'<a href="' . add_query_arg('interest', 'true', '/press-citing-listing/') . '">' . strtoupper($ref) . '</a>';
 		}
-		$entity_dropdown .= 				'</h6>';
+		$entity_dropdown .= 		'</h6>';
 		if ($ref != 'Of Interest') {
-			$entity_dropdown .= 		'<ul class="clipping_nest_list">';
+			$entity_dropdown .= 	'<ul class="clipping_nest_list">';
 			if ($ref == 'About Networks') {
-				$entity_dropdown .= 			'<li><a href="' . add_query_arg('about', 'usagm', '/press-citing-listing/') . '">USAGM / BBG</a></li>';
+				$entity_dropdown .= 	'<li><a href="' . add_query_arg('about', 'usagm', '/press-citing-listing/') . '">USAGM / BBG</a></li>';
 			}
 			// LOOP ENTITIES FROM THE QUERY ABOVE
 			foreach ($entity_set as $entity_item) {
-				$entity_dropdown .= 		'<li><a href="' . add_query_arg($url_param, $entity_item['abbr'], '/press-citing-listing/') . '">' . strtoupper($entity_item['abbr']) . '</a></li>';
+				$entity_dropdown .= 	'<li><a href="' . add_query_arg($url_param, $entity_item['abbr'], '/press-citing-listing/') . '">' . strtoupper($entity_item['abbr']) . '</a></li>';
 			}
-			$entity_dropdown .= 		'</ul>';
+			$entity_dropdown .= 	'</ul>';
 		}
-		$entity_dropdown .= 		'</li>';
+		$entity_dropdown .= 	'</li>';
 
 		array_push($menu_set, $entity_dropdown);
 	}
