@@ -55,12 +55,11 @@ get_header();
 
 				<div class="side-content-container">
 					<?php
-						$clip_types = array("about", "citation");
 						echo '<h5>Press Clippings Group</h5>';
+
+						$clip_types = array('About Networks', 'Citations', 'Of Interest');
 						$entity_dropdown = build_media_clips_entity_dropdown($clip_types);
-						foreach ($entity_dropdown as $clip_menu_item) {
-							echo $clip_menu_item;
-						}
+						echo $entity_dropdown;
 					?>
 				</div>
 			</div>

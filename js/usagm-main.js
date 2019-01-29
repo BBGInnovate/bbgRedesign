@@ -246,5 +246,41 @@ $(window).on('resize', function() {
 	scaleCornerHero();
 });
 
+
+// PRESS CLIPPINGS DROPDOWN
+var clipsListParent = $('.media-clips-entities-dropdown');
+var clipsListItems = $('.media-clips-entities-dropdown ul li');
+clipsListItems.children('ul').hide();
+// TOGGLE
+console.log('3');
+var touchNestedList = false;
+$.each(clipsListItems, function() {
+	$(this).on('click', function() {
+		if (($(this).children('h6').siblings('ul').css('display') == 'none') && touchNestedList == false) {
+			$(this).children('h6').siblings('ul').show();
+			$(this).children('h6').children('i').attr('class', 'fas fa-angle-up');
+			$(this).css({
+				'margin-bottom' : '10px',
+				'background-color' : '#f9f9f9'
+			});
+			$(this).children('ul').on('click', function() {
+				touchNestedList = true;
+				// SET TIMER TO DISPABLE VARIABLE INCASE USER OPENS LINK IN A NEW TAB, THEY CAN STILL CLOSE DROPDOWN
+				setTimeout(function() {
+					touchNestedList = false;
+				}, 2000);
+			})
+		} else if (($(this).children('h6').siblings('ul').css('display') != 'none') && (touchNestedList == false)) {
+			$(this).children('h6').siblings('ul').hide();
+			$(this).children('h6').children('i').attr('class', 'fas fa-angle-down');
+			$(this).removeAttr('style');
+		}
+		// KEEP LIST OPEN IF CLICKING CHILDREN
+		// if ($(this).children('ul').on('click', function(e) {
+		// 	console.log($(this));
+		// }));
+	});
+})
+
 }); // END READY
 })(jQuery);
