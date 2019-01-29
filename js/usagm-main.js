@@ -275,10 +275,6 @@ $.each(clipsListItems, function() {
 			$(this).children('h6').children('i').attr('class', 'fas fa-angle-down');
 			$(this).removeAttr('style');
 		}
-		// KEEP LIST OPEN IF CLICKING CHILDREN
-		// if ($(this).children('ul').on('click', function(e) {
-		// 	console.log($(this));
-		// }));
 	});
 })
 
