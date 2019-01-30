@@ -101,17 +101,14 @@ get_header();
 							echo '<h2>Press Clippings Of Interest</h2>';
 						}
 						echo '</heading>';
+						
 						if (!empty($press_clippings_data)) {
-							foreach ($press_clippings_data as $cited_post) {
-								$cur_cited_post  = '<article>';
-								$cur_cited_post .= 	'<h4><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a></h4>';
-								$cur_cited_post .= 	'<p class="paragraph-header">' . $cited_post['outlet'] . ' &nbsp;<span class="aside">' . $cited_post['date'] . '</span></p>';
-								$cur_cited_post .= 	'<p>' . $cited_post['description'] . '</p>';
-								$cur_cited_post .= '</article>';
+							foreach ($press_clippings_data as $press_clip) {
+								$cur_cited_post = build_press_clipping_article_list($press_clip);
 								echo $cur_cited_post;
 							}
 							if ($press_clippings_data >= 5) {
-								next_posts_link('Older Entries', $cited_post['query_var']->max_num_pages);
+								next_posts_link('Older Entries', $press_clip['query_var']->max_num_pages);
 								previous_posts_link('Newer Entries');
 							}
 						}

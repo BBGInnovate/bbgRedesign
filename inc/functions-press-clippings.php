@@ -87,4 +87,18 @@ function build_media_clips_entity_dropdown($reference = NULL) {
 	return $entity_dropdown;
 }
 
+// BUILD THE ARTICLE DIV BLOCKS
+function build_press_clipping_article_list($press_clip) {
+	$press_clipping_block  = '<article>';
+	$press_clipping_block .= 	'<h4><a href="' . $press_clip['story_link'] . '" target="_blank">' . $press_clip['title'] . '</a></h4>';
+	$press_clipping_block .= 	'<p class="paragraph-header">';
+	$press_clipping_block .= 		'<a href="javascript:void(0)">' . $press_clip['outlet'] . '</a> &nbsp;';
+	$press_clipping_block .= 		'<span class="aside">' . $press_clip['date'] . '</span>';
+	$press_clipping_block .= 	'</p>';
+	$press_clipping_block .= 	'<p>' . $press_clip['description'] . '</p>';
+	$press_clipping_block .= '</article>';
+
+	return $press_clipping_block;
+}
+
 ?>

@@ -46,19 +46,15 @@ get_header();
 				<section class="main-content-container">
 					<h1 class="header-outliner">All Press Clipping Posts</h1>
 					<?php
-						foreach ($press_clippings_data as $press_post) {
-							$cur_press_post  = '<article>';
-							$cur_press_post .= 	'<header>';
-							$cur_press_post .= 		'<h4><a href="' . $press_post['story_link'] . '" target="_blank">' . $press_post['title'] . '</a></h4>';
-							$cur_press_post .= 	'</header>';
-							$cur_press_post .= 	'<p class="paragraph-header">' . $press_post['outlet'] . ' &nbsp;<span class="aside">' . $press_post['date'] . '</span></p>';
-							$cur_press_post .= 	'<p>' . $press_post['description'] . '</p>';
-							$cur_press_post .= '</article>';
-							echo $cur_press_post;
-						}
-						if ($press_clippings_data >= 5) {
-							next_posts_link('Older Entries', $press_post['query_var']->max_num_pages);
-							previous_posts_link('Newer Entries');
+						if (!empty($press_clippings_data)) {
+							foreach ($press_clippings_data as $press_clip) {
+								$cur_cited_post = build_press_clipping_article_list($press_clip);
+								echo $cur_cited_post;
+							}
+							if ($press_clippings_data >= 5) {
+								next_posts_link('Older Entries', $press_clip['query_var']->max_num_pages);
+								previous_posts_link('Newer Entries');
+							}
 						}
 					?>
 				</section>
