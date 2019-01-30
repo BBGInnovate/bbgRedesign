@@ -47,26 +47,32 @@ function build_media_clips_entity_dropdown($reference = NULL) {
 	// LOOP THROUGH PARAMETERS
 	foreach ($reference as $ref) {
 		if ($ref == 'About Networks') {
-			$url_param = 'about';
+			$cat_param = 'about-';
 		} else if ($ref == 'Citations') {
-			$url_param = 'citation';
+			$cat_param = 'citation-';
 		}
 		$entity_dropdown .= 	'<li>';
 		$entity_dropdown .= 		'<h6>';
 		if ($ref != 'Of Interest') {
-			$entity_dropdown .= 		strtoupper($ref) . ' <i class="fas fa-angle-down"></i>';
+			$entity_dropdown .= 		'<a href="javascript:void(0)">' . strtoupper($ref) . ' <i class="fas fa-angle-down"></i></a>';
 		} else {
-			$entity_dropdown .= 		'<a href="' . add_query_arg('interest', 'true', '/press-citing-listing/') . '">' . strtoupper($ref) . '</a>';
+			$entity_dropdown .= 		'<a href="' . add_query_arg('clip-type', 'interest', '/press-clipping-collections/') . '">' . strtoupper($ref) . '</a>';
 		}
 		$entity_dropdown .= 		'</h6>';
 		if ($ref != 'Of Interest') {
 			$entity_dropdown .= 	'<ul class="clipping_nest_list">';
 			if ($ref == 'About Networks') {
-				$entity_dropdown .= 	'<li><a href="' . add_query_arg('about', 'usagm', '/press-citing-listing/') . '">USAGM / BBG</a></li>';
+				$entity_dropdown .= 	'<li><a href="' . add_query_arg('clip-type', 'about-usagm', '/press-clipping-collections/') . '">USAGM / BBG</a></li>';
 			}
 			// LOOP ENTITIES FROM THE QUERY ABOVE
 			foreach ($entity_set as $entity_item) {
-				$entity_dropdown .= 	'<li><a href="' . add_query_arg($url_param, $entity_item['abbr'], '/press-citing-listing/') . '">' . strtoupper($entity_item['abbr']) . '</a></li>';
+				$entity_dropdown .= 	'<li><a href="' . add_query_arg('clip-type', $cat_param . $entity_item['abbr'], '/press-clipping-collections/') . '">';
+				if ($entity_item['abbr'] == 'rferl') {
+					$entity_dropdown .= 	'RFE/RL';
+				} else {
+					$entity_dropdown .= 	strtoupper($entity_item['abbr']);
+				}
+				$entity_dropdown .= 	'</a></li>';
 			}
 			$entity_dropdown .= 	'</ul>';
 		}
