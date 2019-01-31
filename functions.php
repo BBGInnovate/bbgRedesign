@@ -1178,35 +1178,4 @@ function foia_upload($file) {
 }
 // END FOIA GROUP
 
-
-// QUERY ALL PRESS CLIPPINGS (MEDIA CLIPS)
-// page-press-list.php, page-press-citing.php, page-entity.php
-function request_media_query_data($query_args) {
-	if ($query_args->have_posts()) {
-		$citing_post_list = array();
-		while ($query_args->have_posts()) {
-			$query_args->the_post();
-
-			$press_post_id = get_the_ID();
-			$press_post_outlet = get_post_meta($press_post_id, 'media_clip_outlet', true);
-			$term_data = get_term($press_post_outlet);
-			$press_post_date = get_post_meta($press_post_id, 'media_clip_published_on', true);
-			$date = new DateTime($press_post_date);
-			$press_post_date = $date->format('F d, Y');
-
-			$cited_post_data = array(
-				'title' => get_the_title(),
-				'outlet' => $term_data -> name,
-				'story_link' => get_post_meta($press_post_id, 'media_clip_story_url', true),
-				'date' => $press_post_date,
-				'description' => wp_trim_words(get_the_content(), 40),
-				'query_var' => $query_args
-			);
-			array_push($citing_post_list, $cited_post_data);
-		}
-		wp_reset_postdata();
-		return $citing_post_list;
-	}
-}
-
 ?>

@@ -20,9 +20,10 @@ $press_clip_query_args = array(
 );
 $all_media_clips = new WP_Query($press_clip_query_args);
 
-// GO TO functions.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
+// GO TO functions-press-clippings.php AND RETURN THE POST'S DATA
 $press_clippings_data = request_media_query_data($all_media_clips);
 
+// COLLECT DATA FROM THIS MAIN PAGE
 if (have_posts()) {
 	while (have_posts()) {
 		the_post();
@@ -33,6 +34,7 @@ if (have_posts()) {
 
 get_header();
 ?>
+
 <main id="main"  role="main">
 	<section class="outer-container">
 		<header class="grid-container">
@@ -44,7 +46,7 @@ get_header();
 		<div class="custom-grid-container">
 			<div class="inner-container">
 				<section class="main-content-container">
-					<h1 class="header-outliner">All Press Clipping Posts</h1>
+					<h2 class="header-outliner">All Press Clipping Posts</h2>
 					<?php
 						if (!empty($press_clippings_data)) {
 							foreach ($press_clippings_data as $press_clip) {
