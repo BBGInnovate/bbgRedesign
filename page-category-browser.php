@@ -162,11 +162,11 @@ get_header();
 <main id="main" role="main">
 	<?php
 		if ($custom_query -> have_posts()) {
-			$page_title  = '<div class="outer-container"';
-			if (is_page('deep-dive-series')) {
-				$page_title .= 	' style="margin-bottom: 1.5rem;"';
+			if (!is_page('deep-dive-series')) {
+				$page_title  = '<div class="outer-container">';
+			} else {
+				$page_title .= 	'<div class="outer-container" style="margin-bottom: 1.5rem;">';
 			}
-			$page_title .= '>';
 			$page_title .= 	'<div class="grid-container">';
 			$page_title .= 		'<h2>' . get_the_title() . '</h2>';
 			$page_title .= 		$page_tag_line;
@@ -184,55 +184,63 @@ get_header();
 				echo '</div>';
 			}
 
-			$counter = 0;
-			while ($custom_query -> have_posts())  {
-				$custom_query -> the_post();
-				$counter = $counter + 1;
+			if ($custom_query -> have_posts()) {
+				$counter = 0;
+				while ($custom_query -> have_posts())  {
+					$custom_query -> the_post();
+					$counter = $counter + 1;
 
-				if ($counter == 1 && $currentPage == 1 && !$hasIntroFeature) {
-					$featured_post  = '<div class="outer-container">';
-					$featured_post .= 	'<div class="grid-container">';
-					$featured_media_result = get_feature_media_data();
-					if ($featured_media_result != "") {
-						$featured_post .= $featured_media_result;
+					$main_top_post = false;
+					if ($counter == 1 && $currentPage == 1 && !$hasIntroFeature) {
+						$main_top_post = true;
+						$featured_post  = '<div class="outer-container">';
+						$featured_post .= 	'<div class="grid-container">';
+						$featured_media_result = get_feature_media_data();
+						if ($featured_media_result != "") {
+							$featured_post .= $featured_media_result;
+						}
+						$featured_post .= 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+						$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
+						$featured_post .= 	'</div>';
+						$featured_post .= '</div>';
+						echo $featured_post;
 					}
-					$featured_post .= 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
-					$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
-					$featured_post .= 	'</div>';
-					$featured_post .= '</div>';
-					echo $featured_post;
-				}
-				if (($counter == 2 && $currentPage == 1) || ($counter == 1 && $currentPage > 1)) {
-					echo '<div class="outer-container">';
-				}
-				if ($counter > 1 && $currentPage == 1 || $currentPage > 1) {
-					echo '<div class="grid-third">';
-					$post_image = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
-					if (has_post_thumbnail()) {
-						$post_image .= the_post_thumbnail('medium-thumb');
-					} else {
-						$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
-					}
-					$post_image .= '</a>';
-					echo $post_image;
 
-					$link_header  = '<h4>';
-					$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
-					$link_header .= 		get_the_title();
-					$link_header .= 	'</a>';
-					$link_header .= '</h4>';
-					echo $link_header;
-
-					if (is_page('deep-dive-series')) {
-						echo '<p class="aside" style="margin-bottom: 1.5rem;">' . get_the_date() . '</p>';
-						echo get_the_excerpt();
-					} else {
-						echo wp_trim_words(get_the_excerpt(), 10);
+					if ((($counter == 2 && $currentPage == 1) || ($counter == 1 && $currentPage > 1)) && !is_page('deep-dive-series')) {
+						echo '<div class="outer-container">';
+					} else if ((is_page('deep-dive-series') && $counter == 1)) {
+						echo '<div class="outer-container">';
 					}
-					echo '<br><br><br></div>'; // END .grid-third
-				}
+
+					if ((is_page('deep-dive-series') && $counter == 1) || ($counter > 1 && $currentPage == 1 || $currentPage > 1)) {
+						echo '<div class="grid-third">';
+						$post_image = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
+						if (has_post_thumbnail()) {
+							$post_image .= the_post_thumbnail('medium-thumb');
+						} else {
+							$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
+						}
+						$post_image .= '</a>';
+						echo $post_image;
+
+						$link_header  = '<h4>';
+						$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
+						$link_header .= 		get_the_title();
+						$link_header .= 	'</a>';
+						$link_header .= '</h4>';
+						echo $link_header;
+
+						if (is_page('deep-dive-series')) {
+							echo '<p class="aside" style="margin-bottom: 1.5rem;">' . get_the_date() . '</p>';
+							echo get_the_excerpt();
+						} else {
+							echo wp_trim_words(get_the_excerpt(), 10);
+						}
+						echo '<br><br><br></div>'; // END .grid-third
+					}
+				} // END WHILE
+				echo '</div>'; // END .outer-container
 			}
-			echo '</div>'; // END .outer-container
 
 			if ($pageTitle != "Burke Awards archive") {
 				echo '<div class="outer-container">';
