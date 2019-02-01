@@ -126,7 +126,7 @@ $press_clip_query_args = array(
 $all_media_clips = new WP_Query($press_clip_query_args);
 
 // PRESS 2. GO TO functions.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
-$press_clippings_data = request_media_query_data($all_media_clips);
+// $press_clippings_data = request_media_query_data($all_media_clips);
 
 // PRESS 3. CSS SPECIFIC TO PRESS CLIPPINGS
 $press_clippings_style  = '<style>';
