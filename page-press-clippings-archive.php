@@ -210,9 +210,15 @@ get_header();
 
 						echo '<h5>Media Outlet Tags</h5>';
 						$tax_cloud_args = array(
-							'taxonomy' 	=> 'outlet',
-							'smallest' 	=> 8,
-							'largest' 	=> 22,
+							'taxonomy' 					=> 'outlet',
+							'smallest' 					=> 8,
+							'largest' 					=> 22,
+							'unit'                      => 'pt', 
+							'format'                    => 'flat',
+							'separator'                 => ', ',
+							'topic_count_text_callback' => default_topic_count_text,
+							'echo'                      => true,
+							'show_count'                  => 0,
 						);
 						wp_tag_cloud($tax_cloud_args);
 					?>
