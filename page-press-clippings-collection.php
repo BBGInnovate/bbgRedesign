@@ -21,16 +21,18 @@ if (!empty($_GET['clip-type'])) {
 if (!empty($_GET['clip-entity'])) {
 	$press_clip_entity = htmlspecialchars($_GET['clip-entity']);
 }
-// 1b. GET OUTLET SELECTION FROM URL PARAMETER
-if (!empty($_GET['outlet'])) {
-	$cur_outlet_id = htmlspecialchars(urldecode($_GET['outlet']));
-	$cur_outlet_name = htmlspecialchars(urldecode($_GET['outlet-name']));
+// 2a. GET OUTLET SELECTION FROM URL PARAMETER FROM POSTS
+if (!empty($_GET['outlet-name'])) {
+	$cur_outlet_slug = htmlspecialchars(urldecode($_GET['outlet-name']));
+	$cur_outlet_data = get_term_by('slug', $cur_outlet_slug, 'outlet');
+	$cur_outlet_id = $cur_outlet_data -> term_id;
+	$cur_outlet_name = $cur_outlet_data -> name;
 }
 
 // SET PAGINATION FOR PRESS CLIPPINGS LIST
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-// USE SELECTED CLIP TYPE TO GET QUERY ARGS TO CALL CORRESPONDING CITED POSTS, 
+// 1b. USE SELECTED CLIP TYPE TO GET QUERY ARGS TO CALL CORRESPONDING CITED POSTS, 
 // WHETER ABOUT US, CITED, OR OF INTEREST AND MAKE QUERY
 if (!empty($press_clip_type) && empty($cur_outlet_id)) {
 	$dash = '-';
@@ -83,7 +85,7 @@ if (!empty($press_clip_type) && empty($cur_outlet_id)) {
 	}
 	$all_media_clips = new WP_Query($press_clip_query_args);
 
-	// 3a. GO TO functions-press-clippings.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
+	// 1b. GO TO functions-press-clippings.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
 	$press_clippings_data = request_media_query_data($all_media_clips);
 
 	if ($press_clip_type[1] == 'rferl') {
@@ -106,7 +108,6 @@ if (!empty($cur_outlet_id)) {
 	);
 	$all_media_clips = new WP_Query($press_clip_query_args);
 
-	// 3b. GO TO functions-press-clippings.php AND PERFORM FUNCTION, RETURN THE POST'S DATA
 	$press_clippings_data = request_media_query_data($all_media_clips);
 }
 

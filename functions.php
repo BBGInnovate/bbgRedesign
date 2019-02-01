@@ -1178,4 +1178,10 @@ function foia_upload($file) {
 }
 // END FOIA GROUP
 
+
+add_filter( 'wp_tag_cloud', 'no_follow_tag_cloud_links' );
+function no_follow_tag_cloud_links( $return ) {
+	$return = str_replace('<a href="http://dev.usagm.com/outlet/', '<a href="?outlet-name=', $return );
+	return $return;
+}
 ?>
