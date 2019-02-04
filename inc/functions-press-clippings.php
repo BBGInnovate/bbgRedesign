@@ -143,4 +143,13 @@ function build_press_clipping_article_list($press_clip, $clip_type = NULL) {
 	return $press_clipping_block;
 }
 
+// ADJUST URL FOR TAG CLOUD LINKS
+add_filter( 'wp_tag_cloud', 'no_follow_tag_cloud_links' );
+function no_follow_tag_cloud_links($return) {
+	// LIVE
+	$return = str_replace('<a href="https://usagm.gov/outlet/', '<a href="?outlet-name=', $return );
+	// DEV
+	// $return = str_replace('<a href="http://dev.usagm.com/outlet/', '<a href="?outlet-name=', $return );
+	return $return;
+}
 ?>
