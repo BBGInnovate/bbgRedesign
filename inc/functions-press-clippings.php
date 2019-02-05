@@ -13,16 +13,14 @@ function request_media_query_data($query_args) {
 			$query_args->the_post();
 
 			$press_post_id = get_the_ID();
-			$press_post_outlet = get_post_meta($press_post_id, 'media_clip_outlet', true);
-			$term_data = get_term($press_post_outlet);
+			$press_post_outlet = wp_get_post_terms(get_the_ID(), 'outlet');
 			$press_post_date = get_post_meta($press_post_id, 'media_clip_published_on', true);
 			$date = new DateTime($press_post_date);
 			$press_post_date = $date->format('F d, Y');
 
 			$cited_post_data = array(
 				'title' => get_the_title(),
-				'outlet_term' => $term_data,
-				'outlet_name' => $term_data -> name,
+				'outlet_name' => $press_post_outlet[0]->name,
 				'story_link' => get_post_meta($press_post_id, 'media_clip_story_url', true),
 				'date' => $press_post_date,
 				'description' => wp_trim_words(get_the_content(), 40),
@@ -144,12 +142,12 @@ function build_press_clipping_article_list($press_clip, $clip_type = NULL) {
 }
 
 // ADJUST URL FOR TAG CLOUD LINKS
-add_filter( 'wp_tag_cloud', 'no_follow_tag_cloud_links' );
+add_filter('wp_tag_cloud', 'no_follow_tag_cloud_links');
 function no_follow_tag_cloud_links($return) {
 	// LIVE
-	$return = str_replace('<a href="https://www.usagm.gov/outlet/', '<a href="?outlet-name=', $return );
+	$return = str_replace('<a href="https://www.usagm.gov/outlet/', '<a href="?outlet-name=', $return);
 	// DEV
-	// $return = str_replace('<a href="http://dev.usagm.com/outlet/', '<a href="?outlet-name=', $return );
+	// $return = str_replace('<a href="http://dev.usagm.com/outlet/', '<a href="?outlet-name=', $return);
 	return $return;
 }
 ?>

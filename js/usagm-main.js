@@ -252,7 +252,6 @@ var clipsListParent = $('.media-clips-entities-dropdown');
 var clipsListItems = $('.media-clips-entities-dropdown ul li');
 clipsListItems.children('ul').hide();
 // TOGGLE
-console.log('3');
 var touchNestedList = false;
 $.each(clipsListItems, function() {
 	$(this).on('click', function() {

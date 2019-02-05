@@ -12,7 +12,6 @@ include 'inc/functions-press-clippings.php';
 
 // COLLECT ALL PRESS CLIPPINGS AND SET PAGINATION
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-
 $press_clip_query_args = array(
 	'post_type' => 'media_clips',
 	'posts_per_page' => 5,
@@ -117,12 +116,13 @@ if (!empty($cur_outlet_id)) {
 		'post_type' => 'media_clips',
 		'posts_per_page' => 5,
 		'paged' => $paged,
-		'meta_query' => array(
-			array(
-				'key' => 'media_clip_outlet',
-				'value' => $cur_outlet_id
+		'tax_query' => array(
+			array (
+				'taxonomy' => 'outlet',
+				'field' => 'slug',
+				'terms' => $cur_outlet_name,
 			)
-		)
+		),
 	);
 	$all_media_clips = new WP_Query($press_clip_query_args);
 
