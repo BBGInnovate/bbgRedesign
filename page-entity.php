@@ -409,9 +409,11 @@ if ($entity_category_slug != "") {
 	}
 }
 /**** END FETCH threats to press ****/
-$abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
-$abbreviation = str_replace("/", "", $abbreviation);
-$network_logo = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png';
+
+// COMMENTING THIS OUT BECAUSE IT BLOCKS ABBREVIATION IN PRESS CLIPPING SECTION
+// $abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
+// $abbreviation = str_replace("/", "", $abbreviation);
+// $network_logo = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png';
 
 get_header();
 ?>
@@ -429,7 +431,7 @@ get_header();
 		<div class="main-content-container">
 			<div class="nest-container">
 				<div class="inner-container">
-					<div class="icon-side-content-container">
+					<section class="icon-side-content-container">
 						<img src="<?php echo $entityLogo; ?>">
 						<div id="reach-entity">
 							<div class="entity-left-article">
@@ -462,13 +464,13 @@ get_header();
 								}
 							?>
 						</div>
-					</div>
-					<div class="icon-main-content-container">
+					</section>
+					<section class="icon-main-content-container">
 						<?php echo '<h2>' . $entity_full_name . '</h2>'; ?>
 						<div class="page-content">
 							<?php echo $page_content; ?>
 						</div>
-					</div>
+					</section>
 				</div>
 			</div>
 		</div>
@@ -519,6 +521,23 @@ get_header();
 				echo '</article>';
 			}
 
+			echo '<article>';
+			echo 	'<h5>Press Clippings</h5>';
+			echo 	'<div class="media-clips-entities-dropdown">';
+			echo 		'<ul class="unstyled-list" style="margin-top: 0;">';
+			echo 			'<li>';
+			echo 				'<h6>';
+			echo 					'<a href="' . add_query_arg('clip-type', 'about-' . $abbreviation . '', '/press-clippings-archive/') . '">ABOUT ' . $abbreviation . '<i class="fas fa-angle-right"></i></a>';
+			echo 				'</h6>';
+			echo 			'</li>';
+			echo 			'<li>';
+			echo 				'<h6>';
+			echo 					'<a href="' . add_query_arg('clip-type', 'citation-' . $abbreviation . '', '/press-clippings-archive/') . '">' . $abbreviation . ' CITATIONS<i class="fas fa-angle-right"></i></a>';
+			echo 				'</h6>';
+			echo 			'</li>';
+			echo 		'</ul>';
+			echo 	'</div>';
+			echo '</article>';
 
 			echo '<article>';
 			echo 	$app_link_markup;
