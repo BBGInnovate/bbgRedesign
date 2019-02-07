@@ -3410,6 +3410,7 @@ object {
   .bbg__main-navigation ul {
     width: 100%;
     margin-top: 0;
+    padding-left: 0;
     display: none; }
     .bbg__main-navigation ul li {
       display: block;
