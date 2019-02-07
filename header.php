@@ -233,6 +233,15 @@ gtag('config', 'UA-124338348-1');
 			</div>
 		</div>
 
+		<div class="social-header">
+			<ul class="unstyled-list">
+				<li><a href="https://www.facebook.com/USAGMgov/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+				<li><a href="https://twitter.com/USAGMgov" target="_blank"><i class="fab fa-twitter"></i></a></li>
+				<li><a href="https://www.youtube.com/channel/UCvYge67D7cpRJ6aYn2E9pPw" target="_blank"><i class="fab fa-youtube"></i></a></li>
+				<li><a href="https://www.linkedin.com/company/united-states-agency-for-global-media/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+			</ul>
+		</div>
+
 		<!-- MENU TOGGLE -->
 		<button id="bbg__menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
 			<span class="menu-toggle-label">

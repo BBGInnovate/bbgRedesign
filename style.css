@@ -5308,6 +5308,24 @@ img,
 /*    CH 02 – 2- and 3-COLUMN PAGE STRUCTURE       */
 /*    3-column: used on most posts and many pages  */
 /*    2-column: used on expanded profiles e.g. CEO */
+.social-header {
+  position: absolute;
+  z-index: 100;
+  right: 50px; }
+  .social-header ul {
+    margin-top: 15px; }
+    .social-header ul li {
+      display: inline-block;
+      line-height: 0;
+      padding: 0 15px;
+      margin: 0; }
+      .social-header ul li a:link, .social-header ul li a:visited {
+        color: #999999; }
+      .social-header ul li a:hover, .social-header ul li a:active {
+        color: #5b8cd3; }
+  .social-header ul li:after {
+    margin-bottom: 0; }
+
 .learn-more {
   font-family: "Alegreya Sans", sans-serif;
   text-transform: uppercase;

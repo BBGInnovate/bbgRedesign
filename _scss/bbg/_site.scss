@@ -12,6 +12,24 @@
 /*    3-column: used on most posts and many pages  */
 /*    2-column: used on expanded profiles e.g. CEO */
 
+.social-header {
+    position: absolute;
+    z-index: 100;
+    right: 50px;
+    ul {
+        margin-top: 15px;
+        li {
+            display: inline-block;
+            line-height: 0;
+            padding: 0 15px;
+            margin: 0;
+            a:link, a:visited {color: $black9;}
+            a:hover, a:active {color: $color-light-blue;}
+        }
+    }
+    ul li:after {margin-bottom: 0;}
+}
+
 .learn-more {
     font-family: $font-sans;
     text-transform: uppercase;
