@@ -3456,18 +3456,64 @@ object {
     padding: 0 1.5rem 0 0;
     text-decoration: none; }
   .bbg__main-navigation .nav-menu {
-    margin-bottom: 55px; }
+    margin-bottom: 90px; }
   .bbg__main-navigation button#nav-search-bu {
     float: right;
     background-color: transparent; }
   .bbg__main-navigation .bbg__main-navigation__search {
     position: absolute;
     display: block;
-    bottom: 0rem;
+    bottom: 3rem;
     right: 0;
     padding: 0; }
-  .bbg__main-navigation .usa-search [type="search"] {
+  .bbg__main-navigation .social-header {
     position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center; }
+    .bbg__main-navigation .social-header ul {
+      margin-bottom: 0; }
+      .bbg__main-navigation .social-header ul li#facebook-social a:link, .bbg__main-navigation .social-header ul li#facebook-social a:visited {
+        color: #ffffff;
+        background-color: #3b5998; }
+      .bbg__main-navigation .social-header ul li#facebook-social a:hover, .bbg__main-navigation .social-header ul li#facebook-social a:active {
+        color: #3b5998;
+        background-color: #dfe3ee; }
+      .bbg__main-navigation .social-header ul li#twitter-social a:link, .bbg__main-navigation .social-header ul li#twitter-social a:visited {
+        color: #ffffff;
+        background-color: #00aced; }
+      .bbg__main-navigation .social-header ul li#twitter-social a:hover, .bbg__main-navigation .social-header ul li#twitter-social a:active {
+        color: #0084b4;
+        background-color: #c0deed; }
+      .bbg__main-navigation .social-header ul li#youtube-social a:link, .bbg__main-navigation .social-header ul li#youtube-social a:visited {
+        color: #ffffff;
+        background-color: #ff0000; }
+      .bbg__main-navigation .social-header ul li#youtube-social a:hover, .bbg__main-navigation .social-header ul li#youtube-social a:active {
+        color: #ff0000;
+        background-color: #282828; }
+      .bbg__main-navigation .social-header ul li#linkedin-social a:link, .bbg__main-navigation .social-header ul li#linkedin-social a:visited {
+        color: #ffffff;
+        background-color: #0077b5; }
+      .bbg__main-navigation .social-header ul li#linkedin-social a:hover, .bbg__main-navigation .social-header ul li#linkedin-social a:active {
+        color: #0077b5;
+        background-color: #caccce; }
+      .bbg__main-navigation .social-header ul li {
+        display: inline-block;
+        font-size: 16px;
+        width: 25%;
+        padding: 0; }
+        .bbg__main-navigation .social-header ul li a:link, .bbg__main-navigation .social-header ul li a:visited {
+          color: #999999;
+          padding: 5px 0 3px 0;
+          margin: 0;
+          background-color: transparent; }
+        .bbg__main-navigation .social-header ul li a:hover, .bbg__main-navigation .social-header ul li a:active {
+          color: #5b8cd3; }
+  .bbg__main-navigation .usa-search {
+    padding-left: 3rem; }
+  .bbg__main-navigation input[type="search"] {
+    max-width: 90%; }
+  .bbg__main-navigation .usa-search [type="search"] {
     bottom: 2px;
     right: 3rem;
     height: 4.5rem;
@@ -3642,6 +3688,48 @@ object {
     color: #d5d1c4; } }
 
 @media screen and (min-width: 900px) {
+  .bbg__main-navigation .social-header {
+    top: -11.5rem;
+    bottom: auto;
+    z-index: 100;
+    right: 50px;
+    width: auto; }
+    .bbg__main-navigation .social-header ul {
+      margin-top: 15px; }
+      .bbg__main-navigation .social-header ul li#facebook-social a:link, .bbg__main-navigation .social-header ul li#facebook-social a:visited {
+        color: #999999;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#facebook-social a:hover, .bbg__main-navigation .social-header ul li#facebook-social a:active {
+        color: #3b5998;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#twitter-social a:link, .bbg__main-navigation .social-header ul li#twitter-social a:visited {
+        color: #999999;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#twitter-social a:hover, .bbg__main-navigation .social-header ul li#twitter-social a:active {
+        color: #00aced;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#youtube-social a:link, .bbg__main-navigation .social-header ul li#youtube-social a:visited {
+        color: #999999;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#youtube-social a:hover, .bbg__main-navigation .social-header ul li#youtube-social a:active {
+        color: #ff0000;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#linkedin-social a:link, .bbg__main-navigation .social-header ul li#linkedin-social a:visited {
+        color: #999999;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#linkedin-social a:hover, .bbg__main-navigation .social-header ul li#linkedin-social a:active {
+        color: #0077b5;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li {
+        display: inline-block;
+        line-height: 0;
+        padding: 0 15px;
+        margin: 0;
+        width: auto; }
+    .bbg__main-navigation .social-header ul li:after {
+      margin-bottom: 0; }
+  .bbg__main-navigation input[type="search"] {
+    max-width: 46rem; }
   .menu-usagm-container {
     position: static;
     width: auto;
@@ -5309,24 +5397,6 @@ img,
 /*    CH 02 – 2- and 3-COLUMN PAGE STRUCTURE       */
 /*    3-column: used on most posts and many pages  */
 /*    2-column: used on expanded profiles e.g. CEO */
-.social-header {
-  position: absolute;
-  z-index: 100;
-  right: 50px; }
-  .social-header ul {
-    margin-top: 15px; }
-    .social-header ul li {
-      display: inline-block;
-      line-height: 0;
-      padding: 0 15px;
-      margin: 0; }
-      .social-header ul li a:link, .social-header ul li a:visited {
-        color: #999999; }
-      .social-header ul li a:hover, .social-header ul li a:active {
-        color: #5b8cd3; }
-  .social-header ul li:after {
-    margin-bottom: 0; }
-
 .learn-more {
   font-family: "Alegreya Sans", sans-serif;
   text-transform: uppercase;

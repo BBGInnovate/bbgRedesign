@@ -233,15 +233,6 @@ gtag('config', 'UA-124338348-1');
 			</div>
 		</div>
 
-		<div class="social-header">
-			<ul class="unstyled-list">
-				<li><a href="https://www.facebook.com/USAGMgov/" target="_blank"><i class="fab fa-facebook"></i></a></li>
-				<li><a href="https://twitter.com/USAGMgov" target="_blank"><i class="fab fa-twitter"></i></a></li>
-				<li><a href="https://www.youtube.com/channel/UCvYge67D7cpRJ6aYn2E9pPw" target="_blank"><i class="fab fa-youtube"></i></a></li>
-				<li><a href="https://www.linkedin.com/company/united-states-agency-for-global-media/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-			</ul>
-		</div>
-
 		<!-- MENU TOGGLE -->
 		<button id="bbg__menu-toggle" class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
 			<span class="menu-toggle-label">
@@ -253,24 +244,31 @@ gtag('config', 'UA-124338348-1');
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
 			<h1 class="header-outliner">Navigation</h1>
 			<a class="site-brand" href="<?php echo get_home_url(); ?>/home"><img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-RGB-hires.png"></a>
-			<?php
-				$btnSearch = "<input alt='Search' type='image' class='bbg__main-navigation__search-toggle' src='" . get_template_directory_uri() . "/img/search.png'>";
-				$btnSearch = "";
 
-				$searchBox  = '<form id="top-nav-search-form" class="usa-search usa-search-small" action="' . site_url() . '">';
-				$searchBox .= 	'<button type="submit" id="nav-search-bu">';
-				$searchBox .= 		'<span class="usa-sr-only">Search</span>';
-				$searchBox .= 	'</button>';
-				$searchBox .= 	'<div role="search">';
-				$searchBox .= 		'<label class="usa-sr-only" for="search-field-small">Search small</label>';
-				$searchBox .= 		'<input class="mag-search" id="search-field-small" type="search" name="s" placeholder="Search ...">';
-				$searchBox .= 	'</div>';
-				$searchBox .= '</form>';
+			<?php
+				$search_box  = '<div class="bbg__main-navigation__search">';
+				$search_box .= 	'<form id="top-nav-search-form" class="usa-search usa-search-small" action="' . site_url() . '">';
+				$search_box .= 		'<button type="submit" id="nav-search-bu">';
+				$search_box .= 			'<span class="usa-sr-only">Search</span>';
+				$search_box .= 		'</button>';
+				$search_box .= 		'<label class="usa-sr-only" for="search-field-small">Search small</label>';
+				$search_box .= 		'<input class="mag-search" id="search-field-small" type="search" name="s" placeholder="Search ...">';
+				$search_box .= 	'</form>';
+				$search_box .= '</div>';
+
+				$social_box .= '<div class="social-header">';
+				$social_box .= 	'<ul class="unstyled-list">';
+				$social_box .= 		'<li id="facebook-social"><a href="https://www.facebook.com/USAGMgov/" target="_blank"><i class="fab fa-facebook"></i></a></li>';
+				$social_box .= 		'<li id="twitter-social"><a href="https://twitter.com/USAGMgov" target="_blank"><i class="fab fa-twitter"></i></a></li>';
+				$social_box .= 		'<li id="youtube-social"><a href="https://www.youtube.com/channel/UCvYge67D7cpRJ6aYn2E9pPw" target="_blank"><i class="fab fa-youtube"></i></a></li>';
+				$social_box .= 		'<li id="linkedin-social"><a href="https://www.linkedin.com/company/united-states-agency-for-global-media/" target="_blank"><i class="fab fa-linkedin"></i></a></li>';
+				$social_box .= 	'</ul>';
+				$social_box .= '</div>';
 
 				wp_nav_menu(array(
 					'theme_location' => 'primary',
 					'menu_id' => 'primary-menu',
-					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul><div class="bbg__main-navigation__search">' . $searchBox . '</div>',
+					'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>' . $search_box . $social_box,
 					'walker' => new bbginnovate_walker_header_usa_menu()
 				));
 			?>
