@@ -12,6 +12,8 @@ require 'inc/bbg-functions-assemble.php';
 if (have_posts()) {
 	while (have_posts()) {
 		the_post();
+		$page_id = get_the_ID();
+		$page_title = get_the_title($page_id);
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
 	}
@@ -31,7 +33,7 @@ get_header();
 	<div class="outer-container">
 		<div class="grid-container">
 			<?php
-				echo '<h2>' . get_the_title() . '</h2>';
+				echo '<h2>' . $page_title . '</h2>';
 				echo $page_content;
 			?>
 		</div>
