@@ -65,25 +65,20 @@ if (($('.bbg__ribbon').length > 0) && $(window).width() > 1200) {
 	control_ribbon_height();
 }
 
-// KEEPS PROFILE LIST DIVS FROM CHANGING SIDES ON RESIZE
-// This can probably be taken care of by setting clears in the css for which ever grid this uses
+// PROFILES: CAN'T REMOVE WP_AUTO FILTER FOR JUST THESE SHORTCODES
+// THE WP_AUTO FILTER ADDS AN EMPTY PARAGRAPH TO EACH BLOCK, THIS FUNCTION REMOVES THEM
 function mgmtProfileSizing() {
-	if ($('.mgmt-profile').length > 0) {
-		var seniorProfile = $('.mgmt-profile');
-		var profileHeights = new Array();
-
-		seniorProfile.css('height', 'auto');
-		$.each(seniorProfile, function() {
-			profileHeights.push($(this).height())
+	if ($('.profile-clears').length > 0) {
+		var memberProfile = $('.profile-clears');
+		$.each(memberProfile, function() {
+			if ($(this).children().eq(1).is(':empty')) {
+				$(this).children().eq(1).remove();
+			}
 		});
-		var tallestProfileHeight = Math.max.apply(Math, profileHeights);
-		seniorProfile.css('height', tallestProfileHeight);
 	}
 }
 mgmtProfileSizing();
-$(window).on('resize', function() {
-	mgmtProfileSizing();
-});
+
 
 if ($('.page-content').first().tagName == 'P') {
 	$('.page-content p').first().attr('class', 'lead-in');

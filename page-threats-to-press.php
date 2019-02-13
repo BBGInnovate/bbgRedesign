@@ -279,16 +279,17 @@ wp_reset_query();
 					$featuredJournalists .= '<div class="outer-container">';
 					$featuredJournalists .= 	'<div class="grid-container">';
 					$featuredJournalists .= 		'<h3>' . $featuredJournalistsSectionLabel . '</h3>';
-					$featuredJournalists .= 	'</div>';
+					$featuredJournalists .=  		'<div class="nest-container">';
+					$featuredJournalists .=  			'<div class="inner-container">';
 
 					while (have_rows('featured_journalist')) {
-						the_row();
+						the_row();	
 						$relatedPages = get_sub_field('featured_journalist_profile');
 						$profileTitle = $relatedPages->post_title;
 						$profileName = $relatedPages->first_name . ' ' . $relatedPages->last_name;
 						$profileOccupation = $relatedPages->occupation;
 						$profilePhoto = $relatedPages->profile_photo;
-						$profileUrl = get_permalink( $relatedPages->ID );
+						$profileUrl = get_permalink($relatedPages->ID);
 						$profileExcerpt = my_excerpt($relatedPages->ID);
 
 						$profileOccupation = '<span class="bbg__profile-excerpt__occupation">' . $profileOccupation .'</span>';
@@ -296,14 +297,18 @@ wp_reset_query();
 						if ($profilePhoto) {
 							$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
 							$profilePhoto = $profilePhoto[0];
-							$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-featured__profile__mugshot"/></a>';
+							$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo"></a>';
 						}
 
-						$featuredJournalists .= '<div class="mgmt-profile grid-half">';
-						$featuredJournalists .= 	'<h4 class="bbg__profile__name"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
-						$featuredJournalists .= 	'<p class="bbg__profile-excerpt__text">' . $profilePhoto . $profileOccupation . $profileExcerpt . '</p>';
+						$featuredJournalists .= '<div class="grid-half profile-clears">';
+						$featuredJournalists .= 	$profilePhoto;
+						$featuredJournalists .= 	'<h4 class="bbg__profile-excerpt__name"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
+						$featuredJournalists .= 	'<p class="bbg__profile-excerpt__text">' . $profileOccupation . $profileExcerpt . '</p>';
 						$featuredJournalists .= '</div>';
 					}
+					$featuredJournalists .= 			'</div>';
+					$featuredJournalists .= 		'</div>';
+					$featuredJournalists .= 	'</div>';
 					$featuredJournalists .= '</div>';
 				}
 			}

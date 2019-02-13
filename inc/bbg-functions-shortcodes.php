@@ -486,12 +486,12 @@
 	 * @return Text
 	 */
 	function infobox_shortcode($atts) {
-		$atts = shortcode_atts( array(
+		$atts = shortcode_atts(array(
 			'width' => 'full', //full, half, third
 			'categories' => '', //comma separated list, will be AND-ed
 			'title' => '', //the header in the box
 			'archivelinktext' => 'View all'
-		), $atts ); 
+		), $atts); 
 
 
 		$width = $atts['width'];
@@ -501,11 +501,11 @@
 		$archiveLinkText = $atts['archivelinktext'] . " »";
 
 		$tax_query = false;
-		if ( strlen( $categoryStr ) ) {
+		if (strlen($categoryStr)) {
 			$tax_query = array(
 				'relation' => 'AND'
 			);
-			$categories = explode( ",", $categoryStr );
+			$categories = explode(',', $categoryStr);
 			foreach ($categories as $cat) {
 				$tax_query []= array (
 					'taxonomy' => 'category',
@@ -522,7 +522,7 @@
 			'order'	=> 'DESC'
 		);
 
-		if ( $tax_query ) {
+		if ($tax_query) {
 			$qParams['tax_query'] = $tax_query;
 		}
 
@@ -530,40 +530,38 @@
 		$title = '';
 		$excerpt = '';
 		$categoryLink = '';
-		if ( $categoryStr != '' ) {
-			$categoryLink = '/category/' . str_replace(',', '+', $categoryStr ) . "/";
+		if ($categoryStr != '') {
+			$categoryLink = '/category/' . str_replace(',', '+', $categoryStr) . '/';
 		}
 		
-		$custom_query = new WP_Query( $qParams );
-		while ( $custom_query->have_posts() ) : 
+		$custom_query = new WP_Query($qParams);
+		while ($custom_query->have_posts()) { 
 			$custom_query->the_post();
 			$id = get_the_ID();
 
 			$url = get_the_permalink();
 			$title = get_the_title();
 			$excerpt = my_excerpt($id);
-		endwhile;
+		}
 
 		$classes = 'bbg__infobox ';
 		
-		if ( $width == 'half' ) {
+		if ($width == 'half') {
 			$classes .= 'grid-half';
 		} else if ($width == 'third') {
 			$classes .= ' bbg-grid--1-3-3 usa-width-one-third ';
 		}
 		
-		$str  = '<div class="' . $classes . '">';
-		$str .= 	'<h2>' . $boxTitle . '</h2>';
-		$str .= 	'<h4>';
-		$str .= 		'<a href="' . $url . '">' . $title . '</a>';
-		$str .= 	'</h4>';
-		$str .= 	'<p>' . $excerpt . '</p>';
-		$str .= 	'<div style="text-align:right;">';
-		$str .= 		'<a href="' . $categoryLink . '" class="bbg__kits__intro__more--link">' . $archiveLinkText . '</a>';
-		$str .= 	'</div>';
-		$str .= '</div>';
+		$infobox_markup  = '<div class="' . $classes . '">';
+		$infobox_markup .= 	'<h2>' . $boxTitle . '</h2>';
+		$infobox_markup .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+		$infobox_markup .= 	'<p>' . $excerpt . '</p>';
+		$infobox_markup .= 	'<div style="text-align:right;">';
+		$infobox_markup .= 		'<a href="' . $categoryLink . '" class="bbg__kits__intro__more--link">' . $archiveLinkText . '</a>';
+		$infobox_markup .= 	'</div>';
+		$infobox_markup .= '</div>';
 		
-		return $str;
+		return $infobox_markup;
 	}
 	add_shortcode('infobox', 'infobox_shortcode');
 

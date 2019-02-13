@@ -1,3 +1,9 @@
+.profile-clears {
+	margin-bottom: 2rem;
+	h4 {clear: none;}
+}
+.grid-half.profile-clears:nth-of-type(2n+1) {clear: left;}
+
 .bbg__article--no-featured-image {
 	.bbg__profile-photo {
 		margin: 0 auto;
@@ -165,7 +171,8 @@
 .bbg__profile-excerpt__photo {
 	border: $border-solid;
 	float: left;
-	margin-right: $site-margins-small;
+	margin-right: 2rem;
+	margin-bottom: 0;
 	max-width: 150px;
 	width: 30%;
 }

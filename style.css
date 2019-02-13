@@ -3456,7 +3456,7 @@ object {
     padding: 0 1.5rem 0 0;
     text-decoration: none; }
   .bbg__main-navigation .nav-menu {
-    margin-bottom: 90px; }
+    margin-bottom: 80px; }
   .bbg__main-navigation button#nav-search-bu {
     float: right;
     background-color: transparent; }
@@ -7226,6 +7226,14 @@ section.usa-section.bbg-banner__section {
   .page-id-37417 .bbg__footer__return-to-top {
     background-color: #fff; }
 
+.profile-clears {
+  margin-bottom: 2rem; }
+  .profile-clears h4, .profile-clears .bbg__board__committee-list li a, .bbg__board__committee-list li .profile-clears a {
+    clear: none; }
+
+.grid-half.profile-clears:nth-of-type(2n+1) {
+  clear: left; }
+
 .bbg__article--no-featured-image .bbg__profile-photo {
   margin: 0 auto; }
   @media screen and (min-width: 600px) {
@@ -7363,7 +7371,8 @@ section.usa-section.bbg-banner__section {
 .bbg__profile-excerpt__photo {
   border: 1px solid #CCC;
   float: left;
-  margin-right: 1rem;
+  margin-right: 2rem;
+  margin-bottom: 0;
   max-width: 150px;
   width: 30%; }
 
