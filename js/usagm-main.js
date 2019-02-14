@@ -24,9 +24,8 @@ $(window).on('resize', function() {
 
 // KEEPS FEATURED MEDIA SCALED AT HD PROPORTIONS
 function featuredMediaHD() {
-	var hd_scale = 1.77778;
+	var hd_scale = 0.5625;
 	var containerW = $('.page-featured-media').width();
-	var dynHeight = containerW / hd_scale;
 	if ($('.page-featured-media').children('bbg-banner')) {
 		if (($('iframe').length > 0) && ($('iframe').attr('src').indexOf('youtube') != 0)) {
 			$('.bbg-banner').width('100%');
@@ -35,7 +34,7 @@ function featuredMediaHD() {
 	} else {
 		$('.bbg-banner').width(containerW);
 	}	
-	var dynHeight = containerW / hd_scale;
+	var dynHeight = containerW * hd_scale;
 	$('.bbg-banner').height(dynHeight);
 }
 featuredMediaHD();

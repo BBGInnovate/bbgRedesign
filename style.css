@@ -2816,6 +2816,10 @@ p.aside {
 .bbg__contact-card > ul li {
   list-style-type: none; }
 
+a:focus {
+  background-color: #f2f2f2;
+  text-decoration: underline; }
+
 a:not(.bbg__article-share__icon):focus img,
 a:not(.bbg__article-share__icon):focus *[class*="avatar"],
 a:not(.bbg__article-share__icon):focus *[class*="image"],
@@ -3429,6 +3433,9 @@ object {
       .bbg__main-navigation ul li a:hover {
         color: #ffffff;
         background-color: rgba(40, 79, 145, 0.95); }
+      .bbg__main-navigation ul li a:focus {
+        background-color: #f2f2f2;
+        text-decoration: underline; }
       .bbg__main-navigation ul li ul {
         margin-bottom: 0;
         background-color: rgba(241, 241, 241, 0.95); }
