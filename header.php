@@ -61,7 +61,24 @@ $sitewideAlert = get_field('sitewide_alert', 'option');	//off, simple, or comple
 
 $splash_overlay = get_field('splash_page_overlay', 'option');
 
-?><!DOCTYPE html>
+// GET SOCIAL MEDIA LINKS FROM BBG SETTINGS PAGE
+$settings_social_media_list = get_field('agency_social_media_profiles', 'option');
+foreach ($settings_social_media_list as $social_platform) {
+	if ($social_platform['social_media_platform'] == 'Facebook') {
+		$facebook_settings_link = $social_platform['social_media_url'];
+	}
+	if ($social_platform['social_media_platform'] == 'Twitter') {
+		$twitter_settings_link = $social_platform['social_media_url'];
+	}
+	if ($social_platform['social_media_platform'] == 'YouTube') {
+		$youtube_settings_link = $social_platform['social_media_url'];
+	}
+	if ($social_platform['social_media_platform'] == 'LinkedIn') {
+		$linkedin_settings_link = $social_platform['social_media_url'];
+	}
+}
+?>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 	<head>
@@ -258,10 +275,10 @@ gtag('config', 'UA-124338348-1');
 
 				$social_box .= '<div class="social-header">';
 				$social_box .= 	'<ul class="unstyled-list">';
-				$social_box .= 		'<li id="facebook-social"><a href="https://www.facebook.com/USAGMgov/" target="_blank"><i class="fab fa-facebook"></i></a></li>';
-				$social_box .= 		'<li id="twitter-social"><a href="https://twitter.com/USAGMgov" target="_blank"><i class="fab fa-twitter"></i></a></li>';
-				$social_box .= 		'<li id="youtube-social"><a href="https://www.youtube.com/channel/UCvYge67D7cpRJ6aYn2E9pPw" target="_blank"><i class="fab fa-youtube"></i></a></li>';
-				$social_box .= 		'<li id="linkedin-social"><a href="https://www.linkedin.com/company/united-states-agency-for-global-media/" target="_blank"><i class="fab fa-linkedin"></i></a></li>';
+				$social_box .= 		'<li id="facebook-social"><a href="' . $facebook_settings_link . '" target="_blank"><i class="fab fa-facebook"></i></a></li>';
+				$social_box .= 		'<li id="twitter-social"><a href="' . $twitter_settings_link . '" target="_blank"><i class="fab fa-twitter"></i></a></li>';
+				$social_box .= 		'<li id="youtube-social"><a href="' . $youtube_settings_link . '" target="_blank"><i class="fab fa-youtube"></i></a></li>';
+				$social_box .= 		'<li id="linkedin-social"><a href="' . $linkedin_settings_link . '" target="_blank"><i class="fab fa-linkedin"></i></a></li>';
 				$social_box .= 	'</ul>';
 				$social_box .= '</div>';
 
