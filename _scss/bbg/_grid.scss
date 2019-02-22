@@ -28,7 +28,7 @@
 		.main-column {@include grid-column(8);}
 		.side-column {
 			@include grid-column(4);
-			padding-left: 4rem;
+			padding-left: 3rem;
 		}
 		.divider-left {border-left: 1px solid #f1f1f1;}
 		.divider-right {border-right: 1px solid #f1f1f1;}

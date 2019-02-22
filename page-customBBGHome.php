@@ -23,6 +23,24 @@ require 'inc/bbg-functions-assemble.php';
 
 $templateName = 'customBBGHome';
 
+
+// USAGM NEWS
+// GET RECENT POSTS, SEPARATE INTO MANAGEABLE ARRAYS FOR PLACEMENT
+$recent_posts = get_recent_posts(3);
+$recent_post_counter = 0;
+$feature_recent_post = '';
+$secondary_recent_posts = array();
+
+foreach ($recent_posts as $x) {
+	if ($recent_post_counter == 0) {
+		$feature_recent_post = $x;
+	} else {
+		$secondary_recent_posts[] = $x;
+	}
+	$recent_post_counter++;
+}
+
+
 /*** store a handful of page links that we'll use in a few places ***/
 $impactPermalink = get_permalink( get_page_by_path('our-work/impact-and-results'));
 $impactPortfolioPermalink = get_permalink( get_page_by_path('our-work/impact-and-results/impact-portfolio'));
@@ -73,66 +91,34 @@ get_header();
 		</div>
 	</section>
 
-	<!-- USAGM NEWS -->
-	<section class="outer-container featured-row">
-		<h1 class="header-outliner">USAGM News</h1>
-		<div class="grid-container">
-			<h2><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
-		</div>
-		<div class="custom-grid-container">
-			<div class="inner-container">
-				<div class="main-content-container">
-				<?php
-					$featured_post_result = get_field_post_data('featured', 1);
+	<?php // USAGM NEWS ?>
+		<section class="outer-container">
+			<div class="grid-container">
+				<h2 class="new_heading"><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
+			</div>
 
-					$main_featured_post .= 	$featured_post_result['linked_media'];
-					$main_featured_post .= 	'<h4>' . $featured_post_result['linked_title'] . '</h4>';
-					$main_featured_post .= 	'<p class="aside date-meta">' . $featured_post_result['date'] . '</p>';
-					$main_featured_post .= 	'<p>' . $featured_post_result['excerpt'] . '</p>';
-					echo $main_featured_post;
-				?>
-				</div>
-				<div class="side-content-container">
-				<?php
-					$recent_post_quantity = 2;
-					$used_ids = array();
-					array_push($used_ids, $featured_post_result['id']);
-					$recent_post_data = get_recent_post_data($recent_post_quantity, $used_ids);
-					$recent_posts = new WP_Query($recent_post_data);
-
-					if ($recent_posts -> have_posts()) {
-						while ($recent_posts -> have_posts()) {
-							$recent_posts -> the_post();
-							$recent_post  = '<div class="inner-container">';
-							$recent_post .= 	'<h4>';
-							$recent_post .= 		'<a href="' . get_the_permalink() . '">';
-							$recent_post .= 			get_the_title();
-							$recent_post .= 		'</a>';
-							$recent_post .= 	'</h4>';
-							$recent_post .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
-							$recent_post .= 	'<p>';
-							$recent_post .= 		wp_trim_words(get_the_content(), 50);
-							$recent_post .= 		' <a class="read-more" href="' . get_the_permalink() . '">READ MORE</a>';
-							$recent_post .= 	'</p>';
-							$recent_post .= '</div>';
-							echo $recent_post;
-						}
-					}
-				?>
-					<!-- NEWS PAGE LINK -->
-					<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
-						<h2 class="screen-reader-text">Recent Posts Navigation</h2>
-						<div class="nav-links">
-							<div class="nav-previous">
-								<a href="<?php echo get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
-							</div>
+			<div class="grid-container sidebar-grid--large-gutter">
+				<div class="nest-container">
+					<div class="inner-container">
+						<div class="main-column">
+							<?php
+								$featured_post = build_vertical_post_main($feature_recent_post);
+								echo $featured_post;
+							?>
 						</div>
-					</nav>
-
+						<!-- <div class="side-column divider-left"> -->
+						<div class="side-column">
+							<?php
+								foreach($secondary_recent_posts as $cur_secondary_post) {
+									$secondary_post_element = build_post_aside($cur_secondary_post);
+									echo $secondary_post_element;
+								}
+							?>
+						</div>
+					</div>
 				</div>
-			</div><!-- end nest -->
-		</div><!-- end grid -->
-	</section><!-- END USAGM NEWS -->
+			</div><!-- END .grid-container -->
+		</section><!-- END USAGM NEWS -->
 	
 	<?php
 		// PREP: SOAPBOX, CORNER HERO, IMPACT STORIES

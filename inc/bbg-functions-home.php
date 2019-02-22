@@ -104,73 +104,7 @@ function get_homepage_banner_data() {
 	}
 }
 
-function get_field_post_data($type, $qty) {
-	if ($type == "featured") {
-		$post_data = get_field('homepage_featured_post', 'option');
-	}
-	if ($post_data) {
-		$post_data = $post_data[0];
 
-		$qParams = array(
-			'posts_per_page' => $qty,
-			'post__in' => array($post_data -> ID),
-			'post_status' => array('publish', 'future')
-		);
-	} else {
-		$qParams = get_recent_post_data(1, $used_posts, $excluded_categories);
-	}
-	if (!empty($qParams)) {
-		$featured_post = new WP_Query($qParams);
-
-		if ($featured_post -> have_posts()) {
-			$featured_post -> the_post();
-			$feature_post_data = array(
-				'id' => get_the_ID(),
-				'title' => get_the_title(),
-				'media' => get_feature_media_data('home')
-			);
-			return build_featured_post_blocks($feature_post_data);
-		}
-	}
-	wp_reset_query();
-}
-
-// CATEGORY IDs TO EXCLUDE
-// Event, 3
-// Employee, 34
-// Intern Testimonial, 36
-// Impact, 38
-// Media Advisory, 55
-// Media Development Map, 56
-// From the CEO, 1046
-// Special Days, 1244
-
-function get_recent_post_data($maxPostsToShow, $used_id) {
-	$qParams = array(
-		'post_type' => array('post'),
-		'posts_per_page' => $maxPostsToShow,
-		'orderby' => 'post_date',
-		'order' => 'desc',
-		'category__not_in' => array(3, 24, 36, 38, 55, 56, 1046, 1244),
-		'post__not_in' => $used_id,
-		'tax_query' => array(
-			'relation' => 'OR',
-			array(
-				'taxonomy' => 'post_format',
-				'field' => 'slug',
-				'terms' => 'post-format-quote',
-				'operator' => 'NOT IN'
-			),
-			array(
-				'taxonomy' => 'category',
-				'field' => 'slug',
-				'terms' => array('press-release'),
-				'operator' => 'IN'
-			)
-		)
-	);
-	return $qParams;
-}
 
 // BUILDIND BLOCKS
 function build_featured_post_blocks($feat_post_data) {
@@ -192,4 +126,77 @@ function build_featured_post_blocks($feat_post_data) {
 	return $feature_blocks;
 }
 
+
+// NEW HOME PAGE FUNCTIONS
+function get_recent_posts($qty) {
+	$used_posts = array();
+	$all_recent_posts = array();
+
+	$selected_featured_post = get_field('homepage_featured_post', 'option');
+	if (!empty($selected_featured_post)) {
+		$selection_array = $selected_featured_post;
+		$used_posts = $selected_featured_post[0]->ID;
+		$all_recent_posts = $selection_array;
+		$qty--;
+	}
+
+	if ($qty != 0) {
+		$recent_posts_args = array(
+			'posts_per_page' => $qty,
+			'post_type' => array('post'),
+			'orderby' => 'post_date',
+			'order' => 'desc',
+			'category__not_in' => array(3, 24, 36, 38, 55, 56, 1046, 1244),
+			'post__not_in' => $used_id,
+			'tax_query' => array(
+				'relation' => 'OR',
+				array(
+					'taxonomy' => 'post_format',
+					'field' => 'slug',
+					'terms' => 'post-format-quote',
+					'operator' => 'NOT IN'
+				),
+				array(
+					'taxonomy' => 'category',
+					'field' => 'slug',
+					'terms' => array('press-release'),
+					'operator' => 'IN'
+				)
+			)
+		);
+	}
+	$recent_post_query = new WP_Query($recent_posts_args);
+	$recent_query_array = $recent_post_query->posts;
+	foreach ($recent_query_array as $recent_query) {
+		$all_recent_posts[] = $recent_query;
+	}
+	
+	return $all_recent_posts;
+}
+
+function build_vertical_post_main($article_data) {
+	$article_structure  = '<article>';
+	$article_structure .= 	'<div class="post-image">' . get_the_post_thumbnail($article_data) . '</div>';
+	$article_structure .= 	'<div class="article-info">';
+	$article_structure .= 		'<h4>' . get_the_title($article_data) . '</h4>';
+	$article_structure .= 		'<p class="date-meta">' . get_the_date() . '</p>';
+	$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <span class="new-learn-more">Read More</span></p>';
+	$article_structure .= 	'</div>';
+	$article_structure .= '</article>';
+	return $article_structure;
+}
+function build_post_aside($article_data) {
+	$article_structure  = '<article class="article-aside">';
+	$article_structure .= 	'<div class="nest-container">';
+	$article_structure .= 		'<div class="inner-container">';
+	$article_structure .= 			'<div class="article-image post-image">' . get_the_post_thumbnail($article_data) . '</div>';
+	$article_structure .= 			'<div class="article-desc article-info">';
+	$article_structure .= 				'<h4>' . get_the_title($article_data) . '</h4>';
+	$article_structure .= 				'<p class="date-meta">' . get_the_date() . '</p>';
+	$article_structure .= 			'</div>';
+	$article_structure .= 		'</div>';
+	$article_structure .= 	'</div>';
+	$article_structure .= '</article>';
+	return $article_structure;
+}
 ?>
