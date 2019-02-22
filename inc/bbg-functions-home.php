@@ -141,12 +141,14 @@ function get_recent_posts($qty) {
 	}
 
 	if ($qty != 0) {
+		// CATEGORIES TO EXCLUDE
+		// 3 Event:, 24:?, 36: Intern Testimonial, 55: Media Advisory, 56: Media Developent Map, 68: Threats to Press, 1046: From the CEO, 1244: Special Days
 		$recent_posts_args = array(
 			'posts_per_page' => $qty,
 			'post_type' => array('post'),
 			'orderby' => 'post_date',
 			'order' => 'desc',
-			'category__not_in' => array(3, 24, 36, 38, 55, 56, 1046, 1244),
+			'category__not_in' => array(3, 24, 36, 38, 55, 56, 68, 1046, 1244),
 			'post__not_in' => $used_id,
 			'tax_query' => array(
 				'relation' => 'OR',
@@ -176,9 +178,9 @@ function get_recent_posts($qty) {
 
 function build_vertical_post_main($article_data) {
 	$article_structure  = '<article>';
-	$article_structure .= 	'<div class="post-image">' . get_the_post_thumbnail($article_data) . '</div>';
+	$article_structure .= 	'<div class="post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
 	$article_structure .= 	'<div class="article-info">';
-	$article_structure .= 		'<h4>' . get_the_title($article_data) . '</h4>';
+	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
 	$article_structure .= 		'<p class="date-meta">' . get_the_date() . '</p>';
 	$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <span class="new-learn-more">Read More</span></p>';
 	$article_structure .= 	'</div>';
@@ -189,9 +191,9 @@ function build_post_aside($article_data) {
 	$article_structure  = '<article class="article-aside">';
 	$article_structure .= 	'<div class="nest-container">';
 	$article_structure .= 		'<div class="inner-container">';
-	$article_structure .= 			'<div class="article-image post-image">' . get_the_post_thumbnail($article_data) . '</div>';
+	$article_structure .= 			'<div class="article-image post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
 	$article_structure .= 			'<div class="article-desc article-info">';
-	$article_structure .= 				'<h4>' . get_the_title($article_data) . '</h4>';
+	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date() . '</p>';
 	$article_structure .= 			'</div>';
 	$article_structure .= 		'</div>';
