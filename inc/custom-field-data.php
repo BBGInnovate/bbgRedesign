@@ -239,61 +239,24 @@ function get_impact_stories_data($qty) {
 	return $post_id_group;
 }
 
-function getThreatsPostQueryParams($numPosts, $used) {
+function get_threats_to_press_data() {
+	$threat_query_id_set = array();
 	$qParams = array(
 		'post_type' => array('post'),
-		'posts_per_page' => $numPosts,
+		'posts_per_page' => 2,
 		'orderby' => 'post_date',
 		'order' => 'desc',
 		'cat' => get_cat_id('Threats to Press'),
-		'post__not_in' => $used
 	);
-	return $qParams;
-}
-
-function get_threats_to_press_data() {
-	$threat_query_id_set = array();
-	$threatsToPressPost = get_field('homepage_threats_to_press_post', 'option');
-	$randomFeaturedThreatsID = false;
-
-	if ($threatsToPressPost) {
-		$randKey = array_rand($threatsToPressPost);
-		$randomFeaturedThreatsID = $threatsToPressPost[$randKey];
-	}
-
-	$threatsUsedPosts = array();
-	if ($randomFeaturedThreatsID) {
-		$qParams = array(
-			'post__in' => array(1, $randomFeaturedThreatsID)
-		);
-	} else {
-		$qParams = getThreatsPostQueryParams($threatsUsedPosts);
-	}
 	query_posts($qParams);
 
 	if (have_posts()) {
 		while (have_posts()) {
 			the_post();
 			$id = get_the_ID();
-			$threatsUsedPosts[] = $id;
 			$postIDsUsed[] = $id;
 			array_push($threat_query_id_set, $id);
 		}
-	}
-	wp_reset_query();
-
-	// ADDITIONAL THREAT POSTS
-	$maxPostsToShow = 1;
-	$qParams = getThreatsPostQueryParams($maxPostsToShow, $threatsUsedPosts);
-	query_posts($qParams);
-
-	if (have_posts()) {
-		$counter = 0;
-		while (have_posts()) : the_post();
-			$counter++;
-			$postIDsUsed[] = get_the_ID();
-			array_push($threat_query_id_set, get_the_ID());
-		endwhile;
 	}
 	wp_reset_query();
 

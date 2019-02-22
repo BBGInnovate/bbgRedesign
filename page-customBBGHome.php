@@ -48,14 +48,6 @@ $impactPortfolioPermalink = get_permalink( get_page_by_path('our-work/impact-and
 /*** add any posts from custom fields to our array that tracks post IDs that have already been used on the page ***/
 $postIDsUsed = array();
 
-$threatsToPressPost = get_field('homepage_threats_to_press_post', 'option');
-$threatsPermalink = get_permalink(get_page_by_path('threats-to-press'));
-$randomFeaturedThreatsID = false;
-if ($threatsToPressPost) {
-	$randKey = array_rand($threatsToPressPost);
-	$randomFeaturedThreatsID = $threatsToPressPost[$randKey];
-}
-
 get_header();
 ?>
 
@@ -92,33 +84,33 @@ get_header();
 	</section>
 
 	<?php // USAGM NEWS ?>
-		<section class="outer-container">
-			<div class="grid-container">
-				<h2 class="new_heading"><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
-			</div>
+	<section class="outer-container">
+		<div class="grid-container">
+			<h2 class="new_heading"><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
+		</div>
 
-			<div class="grid-container sidebar-grid--large-gutter">
-				<div class="nest-container">
-					<div class="inner-container">
-						<div class="main-column">
-							<?php
-								$featured_post = build_vertical_post_main($feature_recent_post);
-								echo $featured_post;
-							?>
-						</div>
-						<!-- <div class="side-column divider-left"> -->
-						<div class="side-column">
-							<?php
-								foreach($secondary_recent_posts as $cur_secondary_post) {
-									$secondary_post_element = build_post_aside($cur_secondary_post);
-									echo $secondary_post_element;
-								}
-							?>
-						</div>
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="main-column">
+						<?php
+							$featured_post = build_vertical_post_main($feature_recent_post);
+							echo $featured_post;
+						?>
+					</div>
+					<!-- <div class="side-column divider-left"> -->
+					<div class="side-column">
+						<?php
+							foreach($secondary_recent_posts as $cur_secondary_post) {
+								$secondary_post_element = build_post_aside($cur_secondary_post);
+								echo $secondary_post_element;
+							}
+						?>
 					</div>
 				</div>
-			</div><!-- END .grid-container -->
-		</section><!-- END USAGM NEWS -->
+			</div>
+		</div><!-- END .grid-container -->
+	</section><!-- END USAGM NEWS -->
 	
 	<?php
 		// PREP: SOAPBOX, CORNER HERO, IMPACT STORIES
