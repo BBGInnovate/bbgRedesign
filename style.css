@@ -6422,7 +6422,8 @@ div.banner_readmore h6 a:visited {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  max-height: 675px;
+  height: 400px;
+  max-height: 500px;
   margin-bottom: 1.5rem;
   max-width: 9999px;
   position: relative;

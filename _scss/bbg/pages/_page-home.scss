@@ -141,8 +141,8 @@
 .bbg-banner {
 	background-color: $color-gray-lightest;
 	@include backgroundCover();
-	// HEIGHT DETERMING BY WIDTH BY usagm-main.js
-	max-height: 675px;
+	height: 400px;
+	max-height: 500px;
 	margin-bottom: 1.5rem;
 	max-width: 9999px;
 	position: relative;
