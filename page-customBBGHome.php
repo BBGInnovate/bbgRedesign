@@ -106,6 +106,14 @@ get_header();
 								echo $secondary_post_element;
 							}
 						?>
+						<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
+							<h2 class="screen-reader-text">Recent Posts Navigation</h2>
+							<div class="nav-links">
+								<div class="nav-previous">
+									<a href="<?php echo get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
+								</div>
+							</div>
+						</nav>
 					</div>
 				</div>
 			</div>
