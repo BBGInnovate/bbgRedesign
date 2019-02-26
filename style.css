@@ -4903,6 +4903,7 @@ article {
   article .post-image {
     overflow: hidden; }
     article .post-image img, article .post-image *[class*="image"] {
+      width: 100%;
       margin-bottom: 0; }
   article .article-info p {
     margin-bottom: 1rem; }
@@ -6403,19 +6404,30 @@ div.banner_readmore h6 a:visited {
   .mentions .soap-corner {
     padding: 1.5rem 0; } }
 
-.threats-ribbon {
+#homepage-threats {
   background-image: url("/wp-content/themes/bbgRedesign/img/site-icons/usagm-tourch.png");
   background-repeat: no-repeat;
   background-position: left;
-  background-size: contain; }
-  .threats-ribbon .outer-container {
+  background-size: contain;
+  background-color: #222222;
+  height: 100%;
+  margin-bottom: 7.5rem; }
+  #homepage-threats .outer-container {
     margin-bottom: 0; }
-  .threats-ribbon .threat-container {
-    margin-top: 7rem; }
-  .threats-ribbon h5, .threats-ribbon .bbg__sidebar__table th, .bbg__sidebar__table .threats-ribbon th {
-    color: #5b8cd3; }
-    .threats-ribbon h5 a:link, .threats-ribbon .bbg__sidebar__table th a:link, .bbg__sidebar__table .threats-ribbon th a:link, .threats-ribbon h5 a:visited, .threats-ribbon .bbg__sidebar__table th a:visited, .bbg__sidebar__table .threats-ribbon th a:visited {
-      color: inherit; }
+  #homepage-threats h2, #homepage-threats h4, #homepage-threats .bbg__board__committee-list li a, .bbg__board__committee-list li #homepage-threats a {
+    color: #ffffff; }
+  #homepage-threats h4 a:link, #homepage-threats .bbg__board__committee-list li a a:link, .bbg__board__committee-list li #homepage-threats a a:link, #homepage-threats h4 a:visited, #homepage-threats .bbg__board__committee-list li a a:visited, .bbg__board__committee-list li #homepage-threats a a:visited {
+    color: #ffffff; }
+  #homepage-threats #threats-main-column {
+    padding: 2em; }
+    #homepage-threats #threats-main-column article {
+      margin-bottom: 0; }
+  #homepage-threats #threats-side-column {
+    padding: 2em;
+    background-image: linear-gradient(#333333, #222222);
+    height: 100%; }
+    #homepage-threats #threats-side-column article {
+      border-bottom: 2px solid #222222; }
 
 .bbg-banner {
   background-color: #f1f1f1;

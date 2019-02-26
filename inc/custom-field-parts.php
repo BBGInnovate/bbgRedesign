@@ -131,22 +131,24 @@ function build_impact_markup($impact_data) {
 	foreach($impact_data as $impact_id) {
 		$cur_post = get_post($impact_id);
 
-		$impact_linked_image =  	'<a href="' . get_permalink($impact_id) . '">';
+		$impact_linked_image  = '<div class="post-image">';
+		$impact_linked_image .=  	'<a href="' . get_permalink($impact_id) . '">';
 		if (get_permalink($impact_id)) {
 			$impact_linked_image .= 		get_the_post_thumbnail($impact_id);
 		} else {
 			$impact_linked_image .= 		'<img class="post-image" src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="BBG Placeholder Image" />';
 		}
 		$impact_linked_image .= 	'</a>';
+		$impact_linked_image .=  '</div>';
 
 		$impact_header = 	'<h4><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h4>';
 		$impact_content = 	'<p>' . wp_trim_words($cur_post->post_content, 70) . '</p>';
 
-		$impact_markup  = '<div>';
+		$impact_markup  = '<article>';
 		$impact_markup .= 	$impact_linked_image;
 		$impact_markup .= 	$impact_header;
 		$impact_markup .= 	$impact_content;
-		$impact_markup .= '</div>';
+		$impact_markup .= '</article>';
 
 		// DYNAMIC VARIABLE NAME FOR UNIQUE NAME TO POPULATE ARRAY
 		${"impact_block" . $i} = $impact_markup;

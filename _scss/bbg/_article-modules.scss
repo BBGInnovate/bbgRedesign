@@ -4,7 +4,7 @@ article {
 	margin-bottom: 3rem;
 	.post-image {
 		overflow: hidden;
-		img, *[class*="image"] {margin-bottom: 0;}
+		img, *[class*="image"] {width: 100%; margin-bottom: 0;}
 	}
 	.article-info {
 		p {margin-bottom: 1rem;}

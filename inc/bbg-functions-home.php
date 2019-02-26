@@ -106,25 +106,6 @@ function get_homepage_banner_data() {
 
 
 
-// BUILDIND BLOCKS
-function build_featured_post_blocks($feat_post_data) {
-	$post_media  = '<a href="' . get_the_permalink() . '">';
-	$post_media .= 		$feat_post_data['media'];
-	$post_media .= '</a>';
-
-	$post_title  = '<a href="' . get_the_permalink() . '">';
-	$post_title .= 		get_the_title();
-	$post_title .= '</a>';
-
-	$feature_blocks = array(
-		'id' => get_the_ID(),
-		'linked_media' => $post_media,
-		'linked_title' => $post_title,
-		'date' => get_the_date(),
-		'excerpt' => get_the_excerpt()
-	);
-	return $feature_blocks;
-}
 
 
 // NEW HOME PAGE FUNCTIONS
@@ -176,13 +157,19 @@ function get_recent_posts($qty) {
 	return $all_recent_posts;
 }
 
+
+// ARTICLE STRUCTURES
 function build_vertical_post_main($article_data) {
 	$article_structure  = '<article>';
-	$article_structure .= 	'<div class="post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+	if (!empty(get_the_permalink($article_data))) {
+		$article_structure .= 	'<div class="post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+	}
 	$article_structure .= 	'<div class="article-info">';
-	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
+	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
 	$article_structure .= 		'<p class="date-meta">' . get_the_date() . '</p>';
-	$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <span class="new-learn-more">Read More</span></p>';
+	if (!empty($article_data->post_excerpt)) {
+		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <span class="new-learn-more"><a href="' . get_the_permalink($article_data) . '">Read More</a></span></p>';
+	}
 	$article_structure .= 	'</div>';
 	$article_structure .= '</article>';
 	return $article_structure;
@@ -191,7 +178,9 @@ function build_post_aside($article_data) {
 	$article_structure  = '<article class="article-aside">';
 	$article_structure .= 	'<div class="nest-container">';
 	$article_structure .= 		'<div class="inner-container">';
-	$article_structure .= 			'<div class="article-image post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+	if (!empty(get_the_permalink($article_data))) {
+		$article_structure .= 			'<div class="article-image post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+	}
 	$article_structure .= 			'<div class="article-desc article-info">';
 	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date() . '</p>';

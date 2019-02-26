@@ -31,11 +31,11 @@ $recent_post_counter = 0;
 $feature_recent_post = '';
 $secondary_recent_posts = array();
 
-foreach ($recent_posts as $x) {
+foreach ($recent_posts as $cur_recent_post) {
 	if ($recent_post_counter == 0) {
-		$feature_recent_post = $x;
+		$feature_recent_post = $cur_recent_post;
 	} else {
-		$secondary_recent_posts[] = $x;
+		$secondary_recent_posts[] = $cur_recent_post;
 	}
 	$recent_post_counter++;
 }
@@ -163,10 +163,31 @@ get_header();
 	?>
 
 	<!-- THREATS TO PRESS RIBBON -->
-	<?php
-		$threats_result = get_threats_to_press_data();
-		$threats_parts = build_threat_parts($threats_result);
-		assemble_threats_to_press_ribbon($threats_parts);
+	<?php		
+		$threat_article_list = get_threats_to_press_posts();
+
+		$threat_structure  = '<section id="homepage-threats">';
+		$threat_structure .= '<div class="outer-container">';
+		$threat_structure .= 	'<div class="grid-half" id="threats-main-column">';
+		$threat_structure .= 		'<h2>Threats to Press</h2>';
+		$threat_structure .= 		'<article>';
+		$threat_structure .= 			'<div class="article-image post-image"><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_post_thumbnail($threat_article_list[0]) . '</a></div>';
+		$threat_structure .= 			'<div class="article-info">';
+		$threat_structure .= 				'<h4><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_title($threat_article_list[0]) . '</a></h4>';
+		$threat_structure .= 			'</div>';
+		$threat_structure .= 		'</article>';
+		$threat_structure .= 	'</div>';
+		$threat_structure .= 	'<div class="grid-half" id="threats-side-column">';
+		$secondary_threats = array_shift($threat_article_list);
+		foreach ($threat_article_list as $recent_threat) {
+			$threat_structure .= 	'<article>';
+			$threat_structure .= 		'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
+			$threat_structure .= 	'</article>';
+		}
+		$threat_structure .= 	'</div>';
+		$threat_structure .= '</div>';
+		$threat_structure .= '</section>';
+		echo $threat_structure;
 	?>
 
 	<!-- NETWORK ENTITY LIST -->

@@ -239,28 +239,77 @@ function get_impact_stories_data($qty) {
 	return $post_id_group;
 }
 
-function get_threats_to_press_data() {
-	$threat_query_id_set = array();
-	$qParams = array(
-		'post_type' => array('post'),
-		'posts_per_page' => 2,
-		'orderby' => 'post_date',
-		'order' => 'desc',
-		'cat' => get_cat_id('Threats to Press'),
-	);
-	query_posts($qParams);
+function get_threats_to_press_posts() {
+	// GET SELECTED THREATS TO PRESS POSTS FROM HOMEPAGE OPTION
+	$selected_threats_posts = get_field('homepage_threats_to_press_post', 'option');
+	$used_threats = array();
+	if (!empty($selected_threats_posts)) {
+		$featured_threat_array = array();
+		$featured_threats_args = array(
+			'post__in' => $selected_threats_posts
+		);
+	}
+	$featured_threats_query = new WP_Query($featured_threats_args);
 
-	if (have_posts()) {
-		while (have_posts()) {
-			the_post();
-			$id = get_the_ID();
-			$postIDsUsed[] = $id;
-			array_push($threat_query_id_set, $id);
+	// IF THERE ARE SELECTED POSTS TO FEATURE, COLLECT THE RESULTS OF THE QUERY
+	if (!empty($featured_threats_query)) {
+		$featured_threat_array[] = $featured_threats_query->posts;
+	}
+
+	// THIS ARRAY CONTAINS THE ARRAY OF POSTS, SO GET INSIDE
+	// SAVE ID's SO THEY'RE NOT USED AGAIN
+	if (!empty($featured_threat_array)) {
+		foreach ($featured_threat_array as $featured_posts) {
+			$featured_threats = $featured_posts;
+
+			if (!empty($featured_posts)) {
+				foreach ($featured_posts as $post_for_id) {
+					$used_threats[] = $post_for_id->ID;
+				}
+			}
 		}
 	}
-	wp_reset_query();
 
-	return $threat_query_id_set;
+	// GET MOST RECENT THREATS TO PRESS POSTS
+	$all_recent_threats = array();
+	$sel_threat_post = get_post($selected_threats);
+
+	// IF THERE ARE SELECTED POSTS, SUBTRACT THE LENGTH FROM THE TOTAL TO SHOW
+	$threats_to_display = 7;
+	if (count($featured_threats)) {
+		$threats_to_display = $threats_to_display - count($featured_threats);
+	}
+
+	$recent_threat_query_params = array(
+		'post_type' => array('post'),
+		'posts_per_page' => $threats_to_display,
+		'cat' => array(68),
+		'orderby' => 'post_date',
+		'order' => 'desc',
+		'post__not_in' => $used_threats
+	);
+	$recent_threats_query = new WP_Query($recent_threat_query_params);
+
+	// IF THERE ARE SELECTED POSTS TO FEATURE, COLLECT THE RESULTS OF THE QUERY
+	if (!empty($recent_threats_query)) {
+		$all_recent_threats[] = $recent_threats_query->posts;
+	}
+
+	// THIS ARRAY CONTAINS THE ARRAY OF POSTS, SO GET INSIDE
+	$reduced_threats_list = array_slice($all_recent_threats[0], 0, $threats_to_display);
+	$threats_to_post = $reduced_threats_list;
+
+	// IF SELECTED FEATURED POSTS, MIX THEM UP AND APPEND THE REST
+	if (!empty($featured_threats)) {
+		shuffle($featured_threats);
+		$adjusted_threats = array_slice($reduced_threats_list, count($selected_threats));
+		foreach($featured_threats as $cur_featured_threat) {
+			array_unshift($adjusted_threats, $cur_featured_threat);
+		}
+		$threats_to_post = $adjusted_threats;
+	}
+	
+	return $threats_to_post;
 }
 
 // FLEXIBLE ROWS

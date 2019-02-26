@@ -138,11 +138,6 @@ function scaleCornerHero() {
 }
 scaleCornerHero();
 
-$(window).on('resize', function() {
-	scaleRibbonBanner();
-	scaleCornerHero();
-});
-
 
 // PRESS CLIPPINGS DROPDOWN
 var clipsListParent = $('.media-clips-entities-dropdown');
@@ -173,6 +168,34 @@ $.each(clipsListItems, function() {
 		}
 	});
 })
+
+
+// SCALE POST-IMAGE TO BE PROPORTIONAL TO 600x400
+function scalePostImages() {
+	var scale = 0.66666667;
+	var postImageBox = $('.post-image');
+
+	$.each(postImageBox, function() {
+		var curBox = $(this);
+		dynamicProportionHeight = $(this).width() * scale;
+		curBox.height(dynamicProportionHeight);
+		if (curBox.children('a').children('img').height() < dynamicProportionHeight) {
+			var dynamicProportionWidth = curBox.height() / scale;
+			curBox.children('a').children('img').css({
+				'height': curBox.height(),
+				'width': dynamicProportionWidth
+			});
+		}
+	})
+}
+scalePostImages();
+
+
+$(window).on('resize', function() {
+	scaleRibbonBanner();
+	scaleCornerHero();
+	scalePostImages();
+});
 
 }); // END READY
 })(jQuery);
