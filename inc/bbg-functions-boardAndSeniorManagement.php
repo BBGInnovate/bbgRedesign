@@ -73,7 +73,7 @@ function outputBoardMembers($showActive) {
 
 			$member_block  = '<div class="grid-half profile-clears"';
 			if ($is_under_secretary) {
-				$member_block .= ' style="clear: both; border-top: 1px solid #f1f1f1; padding-top: 1.5em"';
+				// $member_block .= ' style="clear: both; border-top: 1px solid #f1f1f1; padding-top: 1.5em"';
 			}
 			$member_block .= '>';
 
@@ -87,7 +87,7 @@ function outputBoardMembers($showActive) {
 				$member_photo .= 		get_the_title();
 				$member_photo .= 		'"';
 				if ($is_under_secretary) {
-					$member_photo .= ' style="width: 18%;"';
+					// $member_photo .= ' style="width: 18%;"';
 				}
 				$member_photo .= 	'>';
 				$member_photo .= '</a>';
