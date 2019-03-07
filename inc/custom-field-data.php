@@ -54,7 +54,7 @@ function get_soapbox_data() {
 		}
 
 		if ($profile_photoID) {
-			$profile_photo = wp_get_attachment_image_src($profile_photoID , 'medium-thumb');
+			$profile_photo = wp_get_attachment_image_src($profile_photoID);
 			$profile_photo = $profile_photo[0];
 		}
 
