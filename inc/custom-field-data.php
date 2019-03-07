@@ -22,12 +22,19 @@ function get_site_settings_data() {
 function get_soapbox_data() {
 	$soapbox_toggle = get_field('soapbox_toggle', 'option');
 	$soapbox_post = get_field('homepage_soapbox_post', 'option');
+	$soap_index = '';
 
-	if ($soapbox_post) {
-		$postIDsUsed[] = $soapbox_post[0] -> ID;
+	if (!empty($soapbox_post)) {
+		if (count($soapbox_post) > 1) {
+			// IF MULTIPLE STORIES ARE SELECTED, CHOOSE ONE RANDOMLY
+			$index_selector = array_rand($soapbox_post, 1);
+			$soap_index = $soapbox_post[$index_selector];
+		} else {
+			$postIDsUsed[] = $soapbox_post[0] -> ID;
+			$soap_index = $soapbox_post[0];
+		}
 	}
 
-	$soap_index = $soapbox_post[0];
 	$id = $soap_index -> ID;
 	$soap_category = wp_get_post_categories($id);
 	$soapPostPermalink = get_the_permalink($id);
