@@ -6714,6 +6714,14 @@ section.usa-section.bbg-banner__section {
   line-height: normal;
   text-transform: none;
   letter-spacing: 0; }
+  #new-home-test h2.aside-header,
+  #new-home-test h2 a:link.aside-header,
+  #new-home-test h2 a:visited.aside-header, #new-burke-test h2.aside-header,
+  #new-burke-test h2 a:link.aside-header,
+  #new-burke-test h2 a:visited.aside-header {
+    color: #333333;
+    text-transform: uppercase;
+    font-size: 1.8rem; }
 
 #new-home-test h3, #new-home-test .bbg__sidebar__table caption, .bbg__sidebar__table #new-home-test caption,
 #new-home-test h3 a:link,

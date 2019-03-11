@@ -116,7 +116,7 @@ function new_build_corner_hero_parts($corner_hero_data) {
 
 	// BUILD PARTS
 	if ($type == 'event' || $type == 'advisory') {
-		$corner_hero_header = 	'<h2>' . $corner_hero_data['label'] . '</h2>';
+		$corner_hero_header = 	'<h2 class="aside-header">' . $corner_hero_data['label'] . '</h2>';
 
 		$corner_hero_title  = '<h4>';
 		$corner_hero_title .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
@@ -230,25 +230,6 @@ function new_build_impact_markup($impact_id, $corner_hero_status) {
 	$impact_header = 	'<h4><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h4>';
 	$impact_content = 	'<p>' . wp_trim_words($cur_post->post_content, 30) . '</p>';
 
-	// if ($corner_hero_status == 'on') {
-	// 	$impact_markup  = '<article class="nest-container">';
-	// 	$impact_markup .= 	'<div class="inner-container">';
-	// 	$impact_markup .= 		'<div class="main-column">';
-	// 	$impact_markup .= 			$impact_linked_image;
-	// 	$impact_markup .= 		'</div>';
-	// 	$impact_markup .= 		'<div class="side-column">';
-	// 	$impact_markup .= 			$impact_header;
-	// 	$impact_markup .= 			$impact_content;
-	// 	$impact_markup .= 		'</div>';
-	// 	$impact_markup .= 	'</div>';
-	// 	$impact_markup .= '</article>';
-	// } else {
-	// 	$impact_markup  = '<article>';
-	// 	$impact_markup .= 	$impact_linked_image;
-	// 	$impact_markup .= 	$impact_header;
-	// 	$impact_markup .= 	$impact_content;
-	// 	$impact_markup .= '</article>';
-	// }
 	$impact_markup  = '<article>';
 	$impact_markup .= 	$impact_linked_image;
 	$impact_markup .= 	$impact_header;
