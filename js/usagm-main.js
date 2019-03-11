@@ -2,11 +2,11 @@
 $('document').ready(function() {
 
 // IF NO (MAIN) FEATURED IMAGE, ADD SPACE BELOW NAVBAR
-if (!($('#main').prev().hasClass('page-featured-media') || $('#main').prev().hasClass('feautre-banner'))) {
-	if ((top.location.pathname != '/new-homepage-test/')) {
-		$('#main').css('padding-top', '6rem');
-	}
-}
+// if (!($('#main').prev().hasClass('page-featured-media') || $('#main').prev().hasClass('feautre-banner'))) {
+// 	if ((top.location.pathname != '/new-homepage-test/')) {
+// 		$('#main').css('padding-top', '6rem');
+// 	}
+// }
 
 // KEEPS BACKGROUND IMAGES A CONSISTENT SIZE
 function sizeBGimages() {

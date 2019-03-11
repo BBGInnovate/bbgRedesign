@@ -13,6 +13,45 @@
 
 
 // HOMEPACE OPTIONS
+// NEW
+function new_build_soapbox_parts($soap_data) {
+	$article_class = $soap_data['article_class'];
+
+	// BUILD PARTS
+	if (!empty($soap_data['post_link'])) {
+		$soap_heading = '<h2><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
+	} else if (!empty($soap_data['header_text'])) {
+		$soap_heading = '<h2>' . $soap_data['header_text'] . '</h2>';
+	}
+
+	$soap_title .= '<h4>';
+	$soap_title .= 	'<a href="' . $soap_data['post_link'] . '">';
+	$soap_title .= 		$soap_data['title'];
+	$soap_title .= 	'</a>';
+	$soap_title .= '</h4>';
+
+	$soap_content .= '<p class="aside">';
+	$soap_content .= 	my_excerpt($soap_data['post_id']);
+	$soap_content .= '</p>';
+
+	if (!empty($soap_data['profile_image'])) {
+		$soap_image  = '<img src="' . $soap_data['profile_image'] . '">';
+		if ($soap_data['profile_name'] != "") {
+			$soap_image .= '<p class="aside">' . $soap_data['profile_name'] . '</p>';
+		}
+	}
+
+	$soapbox_content = array(
+		'class' => $article_class,
+		'heading' => $soap_heading,
+		'title' => $soap_title,
+		'image' => $soap_image,
+		'content' => $soap_content
+	);
+
+	return $soapbox_content;
+}
+// OLD
 function build_soapbox_parts($soap_data, $layout) {
 	$article_class = $soap_data['article_class'];
 
@@ -71,6 +110,53 @@ function build_soapbox_parts($soap_data, $layout) {
 	return $soapbox_markup;
 }
 
+// NEW
+function new_build_corner_hero_parts($corner_hero_data) {
+	$type = $corner_hero_data['type'];
+
+	// BUILD PARTS
+	if ($type == 'event' || $type == 'advisory') {
+		$corner_hero_header = 	'<h2>' . $corner_hero_data['label'] . '</h2>';
+
+		$corner_hero_title  = '<h4>';
+		$corner_hero_title .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
+		$corner_hero_title .= '</h4>';
+
+		$corner_hero_content = '<p>' . $corner_hero_data['excerpt'] . '</p>';
+
+		// INSERT PART INTO GRID
+		// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
+		$corner_hero_markup  = '<div class="inner-container soap-corner special-block">';
+		$corner_hero_markup .= 	'<div class="large-side">';
+		$corner_hero_markup .= 		$corner_hero_header;
+		$corner_hero_markup .= 		$corner_hero_title;
+		$corner_hero_markup .= 		$corner_hero_content;
+		$corner_hero_markup .= 	'</div>';
+		$corner_hero_markup .= '</div>';
+
+		return $corner_hero_markup;
+	}
+	else if ($type == 'quote') {
+		$entity_code = strtolower($corner_hero_data['quote_data']['network']);
+		if ($entity_code == 'rfe/rl') {
+			$entity_code = 'rferl';
+		}
+
+		$corner_hero_markup  = '<div class="inner-container soap-corner special-block" style="border-top: 4px solid '. $corner_hero_data['quote_data']['color'] . '">';
+		$corner_hero_markup .= 	'<div class="small-side">';
+		$corner_hero_markup .= 		'<img src="' . get_template_directory_uri() . '/img/logo_' . $entity_code . '--circle-200.png">';
+		$corner_hero_markup .= 	'</div>';
+		$corner_hero_markup .= 	'<div class="large-side">';
+		$corner_hero_markup .= 		'<p style="font-style:italic">' . $corner_hero_data['quote_data']['quote'] . '</p>';
+		$corner_hero_markup .= 		'<br><p class="aside">&mdash;' . $corner_hero_data['quote_data']['speaker'] . '</p>';
+		$corner_hero_markup .= 		'<p class="aside">' . $corner_hero_data['quote_data']['tagline'] . '</p>';
+		$corner_hero_markup .= 	'</div>';
+		$corner_hero_markup .= '</div>';
+
+		return $corner_hero_markup;
+	}
+}
+// OLD
 function build_corner_hero_parts($corner_hero_data) {
 	$type = $corner_hero_data['type'];
 
@@ -125,6 +211,53 @@ function build_corner_hero_parts($corner_hero_data) {
 	}
 }
 
+// NEW
+function new_build_impact_markup($impact_id, $corner_hero_status) {
+	$impact_markup_set = array();
+	$i = 0;
+	$cur_post = get_post($impact_id);
+
+	$impact_linked_image  = '<div class="post-image">';
+	$impact_linked_image .=  	'<a href="' . get_permalink($impact_id) . '">';
+	if (get_permalink($impact_id)) {
+		$impact_linked_image .= 		get_the_post_thumbnail($impact_id);
+	} else {
+		$impact_linked_image .= 		'<img class="post-image" src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="BBG Placeholder Image" />';
+	}
+	$impact_linked_image .= 	'</a>';
+	$impact_linked_image .=  '</div>';
+
+	$impact_header = 	'<h4><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h4>';
+	$impact_content = 	'<p>' . wp_trim_words($cur_post->post_content, 30) . '</p>';
+
+	// if ($corner_hero_status == 'on') {
+	// 	$impact_markup  = '<article class="nest-container">';
+	// 	$impact_markup .= 	'<div class="inner-container">';
+	// 	$impact_markup .= 		'<div class="main-column">';
+	// 	$impact_markup .= 			$impact_linked_image;
+	// 	$impact_markup .= 		'</div>';
+	// 	$impact_markup .= 		'<div class="side-column">';
+	// 	$impact_markup .= 			$impact_header;
+	// 	$impact_markup .= 			$impact_content;
+	// 	$impact_markup .= 		'</div>';
+	// 	$impact_markup .= 	'</div>';
+	// 	$impact_markup .= '</article>';
+	// } else {
+	// 	$impact_markup  = '<article>';
+	// 	$impact_markup .= 	$impact_linked_image;
+	// 	$impact_markup .= 	$impact_header;
+	// 	$impact_markup .= 	$impact_content;
+	// 	$impact_markup .= '</article>';
+	// }
+	$impact_markup  = '<article>';
+	$impact_markup .= 	$impact_linked_image;
+	$impact_markup .= 	$impact_header;
+	$impact_markup .= 	$impact_content;
+	$impact_markup .= '</article>';
+	
+	return $impact_markup;
+}
+// OLD
 function build_impact_markup($impact_data) {
 	$impact_markup_set = array();
 	$i = 0;

@@ -96,6 +96,128 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			</div><!-- END .grid-container -->
 		</section><!-- END USAGM NEWS -->
 
+		<?php
+			// SOAPBOX
+			$soapbox_result = new_get_soapbox_data();
+			$soapbox_parts = new_build_soapbox_parts($soapbox_result);
+
+			if (!empty($soapbox_parts)) {
+				$soapbox  = '<div class="outer-container">';
+				$soapbox .= 	'<div class="grid-container soapbox ' . $soapbox_parts['class'] . '">';
+				if (!empty($soapbox_parts['image'])) {
+					$soapbox .= 	'<div class="soapbox-image-side">';
+					$soapbox .= 		$soapbox_parts['image'];
+					$soapbox .= 	'</div>';
+					$soapbox .= 	'<div class="soapbox-content-side">';
+				}
+				$soapbox .= 		$soapbox_parts['heading'];
+				$soapbox .= 		$soapbox_parts['title'];
+				$soapbox .= 		$soapbox_parts['content'];
+				if (!empty($soapbox_parts['image'])) {
+					$soapbox .= 	'</div>';
+				}
+				$soapbox .= 	'</div>';
+				$soapbox .= '</div>';
+				echo $soapbox;
+			}
+		?>
+
+		<?php
+			// IMPACT STORIES AND EVENTS
+			$impact_option = get_field('corner_hero_toggle', 'options');
+			$corner_hero_data = get_corner_hero_data();
+
+			if ($impact_option == 'on') {
+				$impact_result = get_impact_stories_data(1);
+				$corner_hero_parts = new_build_corner_hero_parts($corner_hero_data);
+			}
+			else {
+				$impact_result = get_impact_stories_data(2);
+			}
+
+			if ($impact_option == 'on') {
+				$impact_and_events  = '<div class="outer-container">';
+				$impact_and_events .= 	'<div class="grid-container sidebar-grid--large-gutter">';
+				$impact_and_events .= 		'<div class="nest-container">';
+				$impact_and_events .= 			'<div class="inner-container">';
+				$impact_and_events .= 				'<div class="main-column">';
+				$impact_and_events .= 					'<h2>Impact Stories</h2>';
+				foreach ($impact_result as $impact_post) {
+					$impact_and_events .= 				new_build_impact_markup($impact_post, $impact_option);
+				}
+				$impact_and_events .= 				'</div>';
+				$impact_and_events .= 				'<div class="side-column divider-left">';
+				$impact_and_events .= 					$corner_hero_parts;
+				$impact_and_events .= 				'</div>';
+				$impact_and_events .= 			'</div>';
+				$impact_and_events .= 		'</div>';
+				$impact_and_events .= 	'</div>';
+				$impact_and_events .= '</div>';
+				echo $impact_and_events;
+			} else {
+				$impacts_only  = '<div class="outer-container">';
+				$impacts_only .= 	'<div class="grid-container">';
+				$impacts_only .= 		'<h2>Impact Stories</h2>';
+				$impacts_only .= 	'</div>';
+				foreach ($impact_result as $impact_post) {
+					$impacts_only .= '<div class="grid-half">';
+					$impacts_only .= 	new_build_impact_markup($impact_post, $impact_option);
+					$impacts_only .= '</div>';
+				}
+				$impacts_only .= 	'</div>';
+				$impacts_only .= '</div>';
+				echo $impacts_only;
+			}
+		?>
+
+		<!-- THREATS TO PRESS RIBBON -->
+		<?php		
+			$threat_article_list = get_threats_to_press_posts();
+
+			$threat_structure  = '<section id="homepage-threats">';
+			$threat_structure .= '<div class="outer-container">';
+			$threat_structure .= 	'<div class="grid-half" id="threats-main-column">';
+			$threat_structure .= 		'<h2>Threats to Press</h2>';
+			$threat_structure .= 		'<article>';
+			$threat_structure .= 			'<div class="article-image post-image"><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_post_thumbnail($threat_article_list[0]) . '</a></div>';
+			$threat_structure .= 			'<div class="article-info">';
+			$threat_structure .= 				'<h4><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_title($threat_article_list[0]) . '</a></h4>';
+			$threat_structure .= 			'</div>';
+			$threat_structure .= 		'</article>';
+			$threat_structure .= 	'</div>';
+			$threat_structure .= 	'<div class="grid-half" id="threats-side-column">';
+			$secondary_threats = array_shift($threat_article_list);
+			foreach ($threat_article_list as $recent_threat) {
+				$threat_structure .= 	'<article>';
+				$threat_structure .= 		'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
+				$threat_structure .= 	'</article>';
+			}
+			$threat_structure .= 	'</div>';
+			$threat_structure .= '</div>';
+			$threat_structure .= '</section>';
+			echo $threat_structure;
+		?>
+
+		<!-- NETWORK ENTITY LIST -->
+		<?php
+			// $entity_placement can be ["entity-main" | "entity-side"]
+			$entity_data = get_entity_data("entity-main");
+		?>
+
+		<!-- Quotation -->
+		<div class="outer-container">
+			<div class="grid-container">
+				<?php
+					$quote_result = getRandomQuote('allEntities', $postIDsUsed);
+					if ($quote_result) {
+						$postIDsUsed[] = $quote_result["ID"];
+						new_output_quote($quote_result);
+					}
+				?>
+			</div>
+		</div><!-- Quotation -->
+
+
 	</div> <!-- END #new-home-test -->
 </main>
 

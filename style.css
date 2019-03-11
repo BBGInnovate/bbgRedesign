@@ -6749,6 +6749,9 @@ section.usa-section.bbg-banner__section {
   .bbg__sidebar__table #new-burke-test caption a:visited .aside {
     display: inline; }
 
+#new-home-test #entities, #new-burke-test #entities {
+  border-bottom: 1px solid #EAEBF0; }
+
 #new-home-test #home-about, #new-burke-test #home-about {
   margin: 0 auto 6rem auto;
   border-bottom: 1px solid #EAEBF0; }
@@ -6789,6 +6792,48 @@ section.usa-section.bbg-banner__section {
   font-size: 14px;
   text-transform: uppercase;
   color: #3f7ad1; }
+
+#new-home-test .horizontal_article, #new-burke-test .horizontal_article {
+  position: relative; }
+  #new-home-test .horizontal_article .large-side, #new-burke-test .horizontal_article .large-side {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; }
+  #new-home-test .horizontal_article .small-side, #new-burke-test .horizontal_article .small-side {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px; }
+
+#new-home-test .soapbox, #new-burke-test .soapbox {
+  padding: 3rem;
+  background-color: #dce4ef; }
+  #new-home-test .soapbox > div, #new-burke-test .soapbox > div {
+    margin-bottom: 0; }
+  #new-home-test .soapbox .soapbox-image-side, #new-burke-test .soapbox .soapbox-image-side {
+    display: none; }
+  #new-home-test .soapbox .soapbox-content-side, #new-burke-test .soapbox .soapbox-content-side {
+    width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px;
+    margin-left: 0; }
+  @media screen and (min-width: 600px) {
+    #new-home-test .soapbox .soapbox-image-side, #new-burke-test .soapbox .soapbox-image-side {
+      display: block;
+      width: calc(16.66667% - 23.33333px);
+      float: left;
+      margin-left: 20px;
+      margin-left: 0; }
+      #new-home-test .soapbox .soapbox-image-side img, #new-burke-test .soapbox .soapbox-image-side img {
+        width: 100%;
+        margin-bottom: 0.3em; }
+      #new-home-test .soapbox .soapbox-image-side p, #new-burke-test .soapbox .soapbox-image-side p {
+        text-align: right;
+        margin-bottom: 0; }
+    #new-home-test .soapbox .soapbox-content-side, #new-burke-test .soapbox .soapbox-content-side {
+      width: calc(83.33333% - 36.66667px);
+      float: left;
+      margin-left: 20px;
+      margin-left: 20px; } }
 
 #new-home-test .ribbon-banner, #new-burke-test .ribbon-banner {
   padding: 2rem;

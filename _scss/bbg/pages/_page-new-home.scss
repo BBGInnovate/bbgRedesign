@@ -21,6 +21,7 @@
 	}
 
 	// STYLES
+	#entities {border-bottom: 1px solid #EAEBF0;}
 	#home-about {
 		margin: 0 auto 6rem auto;
 		border-bottom: 1px solid #EAEBF0;
@@ -66,6 +67,42 @@
 		color: $color-blue;
 	}
 	// END USAGM NEWS
+
+	// ARTICLE MODULE
+	.horizontal_article {
+		position: relative;
+		.large-side {@include grid-column(8);}
+		.small-side {@include grid-column(4);}
+	}
+
+
+	// SOAPBOX MODULE GLOBAL
+	.soapbox {
+		padding: 3rem;
+		background-color: $color-cool-blue-lightest;
+		> div {margin-bottom: 0;}
+		.soapbox-image-side {display: none;}
+		.soapbox-content-side {@include grid-column(12); margin-left: 0;}
+
+		// SOAPBOX MODULE LARGE SCREEN
+		@include media($medium-screen) {
+			.soapbox-image-side {
+				display: block;
+				@include grid-column(2);
+				margin-left: 0;
+				img {
+					width: 100%;
+					margin-bottom: 0.3em;
+				}
+				p {
+					text-align: right;
+					margin-bottom: 0;
+				}
+			}
+			.soapbox-content-side {@include grid-column(10); margin-left: 20px;}
+		}
+	}
+
 
 	// SOAPBOX, CORNER HERO
 	.ribbon-banner {
