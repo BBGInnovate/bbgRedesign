@@ -2681,7 +2681,7 @@ h2 a:visited {
   letter-spacing: 0.1rem;
   text-transform: uppercase;
   color: #b2201c;
-  margin: 0 0 3rem 0; }
+  margin: 0 0 2rem 0; }
 
 .bbg__ribbon h2 a:link {
   color: #ffffff; }
@@ -6713,7 +6713,7 @@ section.usa-section.bbg-banner__section {
   font-size: 34px;
   line-height: normal;
   text-transform: none;
-  letter-spacing: none; }
+  letter-spacing: 0; }
 
 #new-home-test h3, #new-home-test .bbg__sidebar__table caption, .bbg__sidebar__table #new-home-test caption,
 #new-home-test h3 a:link,
@@ -6879,6 +6879,27 @@ section.usa-section.bbg-banner__section {
     border: none;
     padding: 0;
     margin: 0; } }
+
+#new-home-test .homepage-quote, #new-burke-test .homepage-quote {
+  text-align: center; }
+  #new-home-test .homepage-quote .quote-image, #new-burke-test .homepage-quote .quote-image {
+    width: 100px;
+    border-radius: 50%; }
+  #new-home-test .homepage-quote .quote-line, #new-burke-test .homepage-quote .quote-line {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 2.2rem;
+    line-height: 2.6rem;
+    font-weight: 300;
+    color: #3f7ad1;
+    margin: 0 0 1.5rem 0; }
+  #new-home-test .homepage-quote .quote-name, #new-burke-test .homepage-quote .quote-name {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 1.9rem;
+    margin-bottom: 0; }
+  #new-home-test .homepage-quote .quote-credit, #new-burke-test .homepage-quote .quote-credit {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 1.4rem;
+    text-transform: uppercase; }
 
 @media screen and (min-width: 600px) {
   #new-home-test .all-entities .network-entity-chunk, #new-burke-test .all-entities .network-entity-chunk {

@@ -6,7 +6,7 @@
 		font-size: 34px;
 		line-height: normal;
 		text-transform: none;
-		letter-spacing: none;
+		letter-spacing: 0;
 	}
 	h3,
 	h3 a:link,
@@ -159,6 +159,34 @@
 		}
 	}
 	// END .corner-hero MODULE
+
+	
+	// QUOTE
+	.homepage-quote {
+		 text-align: center;
+		 .quote-image {
+			width: 100px;
+			border-radius: 50%;
+		}
+		.quote-line {
+			font-family: $font-sans;
+			font-size: 2.2rem;
+			line-height: 2.6rem;
+			font-weight: $font-light;
+			color: $color-blue;
+			margin: 0 0 1.5rem 0;
+		}
+		.quote-name {
+			font-family: $font-sans;
+			font-size: 1.9rem;
+			margin-bottom: 0;
+		}
+		.quote-credit {
+			font-family: $font-sans;
+			font-size: 1.4rem;
+			text-transform: uppercase;
+		}
+	}
 
 	@include media($medium-screen) {
 		.all-entities {
