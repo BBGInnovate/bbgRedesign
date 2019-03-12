@@ -13,9 +13,9 @@
 		border-bottom: 1px solid #ffffff;
 	}
 	.footer-link:nth-child(1) {border-top: 1px solid #ffffff;}
-	a.footer-link:link, a.footer-link:visited {color: #ffffff;}
+	a.footer-link:link, a.footer-link:visited {color: $color-tan-dark;}
 	a.footer-link:hover, a.footer-link:active {
-		color: $color-tan-dark;
+		color: #ffffff;
 		text-decoration: none;
 		background-color: #363636;
 	}

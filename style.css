@@ -2646,9 +2646,9 @@ form[id^=fscf_form] {
   #footer .footer-link:nth-child(1) {
     border-top: 1px solid #ffffff; }
   #footer a.footer-link:link, #footer a.footer-link:visited {
-    color: #ffffff; }
+    color: #c9c4ba; }
   #footer a.footer-link:hover, #footer a.footer-link:active {
-    color: #c9c4ba;
+    color: #ffffff;
     text-decoration: none;
     background-color: #363636; }
 
