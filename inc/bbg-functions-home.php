@@ -168,7 +168,7 @@ function build_vertical_post_main($article_data) {
 	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
 	$article_structure .= 		'<p class="date-meta">' . get_the_date() . '</p>';
 	if (!empty($article_data->post_excerpt)) {
-		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <span class="new-learn-more"><a href="' . get_the_permalink($article_data) . '">Read More</a></span></p>';
+		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
 	}
 	$article_structure .= 	'</div>';
 	$article_structure .= '</article>';

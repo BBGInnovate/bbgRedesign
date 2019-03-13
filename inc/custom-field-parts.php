@@ -13,8 +13,7 @@
 
 
 // HOMEPACE OPTIONS
-// NEW
-function new_build_soapbox_parts($soap_data) {
+function build_soapbox_parts($soap_data) {
 	$article_class = $soap_data['article_class'];
 
 	// BUILD PARTS
@@ -51,67 +50,8 @@ function new_build_soapbox_parts($soap_data) {
 
 	return $soapbox_content;
 }
-// OLD
-function build_soapbox_parts($soap_data, $layout) {
-	$article_class = $soap_data['article_class'];
 
-	// BUILD PARTS
-	if (!empty($soap_data['post_link'])) {
-		$soap_heading = '<h2><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
-	} else if (!empty($soap_data['header_text'])) {
-		$soap_heading = '<h2>' . $soap_data['header_text'] . '</h2>';
-	}
-
-	$soap_title .= '<h4>';
-	$soap_title .= 	'<a href="' . $soap_data['post_link'] . '">';
-	$soap_title .= 		$soap_data['title'];
-	$soap_title .= 	'</a>';
-	$soap_title .= '</h4>';
-
-	$soap_content .= '<p class="aside">';
-	$soap_content .= 	my_excerpt($soap_data['post_id']);
-	$soap_content .= '</p>';
-
-	if (!empty($soap_data['profile_image'])) {
-		$soap_image  = '<img src="' . $soap_data['profile_image'] . '">';
-		if ($soap_data['profile_name'] != "") {
-			$soap_image .= '<p class="aside">' . $soap_data['profile_name'] . '</p>';
-		}
-	}
-
-	// INSERT PART INTO GRID
-	// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
-	$soapbox_markup  = '<div class="inner-container soap-corner special-block ' . $article_class . '">';
-	if ($layout == 'image-top') {
-		$soapbox_markup .= 	'<div class="grid-container">';
-		$soapbox_markup .= 		$soap_heading;
-		$soapbox_markup .= 		'<div class="inner-container ceo-box">';
-		$soapbox_markup .= 			$soap_image;
-		$soapbox_markup .= 		'</div>';
-		$soapbox_markup .= 	'</div>';
-		$soapbox_markup .= 	'<div class="grid-container">';
-		$soapbox_markup .= 		$soap_title;
-		$soapbox_markup .= 		$soap_content;
-		$soapbox_markup .= 	'</div>';
-	}
-	
-	if ($layout == 'image-right') {
-		$soapbox_markup .= 		'<div class="large-side">';
-		$soapbox_markup .= 			$soap_heading;
-		$soapbox_markup .= 			$soap_title;
-		$soapbox_markup .= 			$soap_content;
-		$soapbox_markup .= 		'</div>';
-		$soapbox_markup .= 	'<div class="small-side ceo-box">';
-		$soapbox_markup .= 		$soap_image;
-		$soapbox_markup .= 	'</div>';
-	}
-	$soapbox_markup .= '</div>';
-
-	return $soapbox_markup;
-}
-
-// NEW
-function new_build_corner_hero_parts($corner_hero_data) {
+function build_corner_hero_parts($corner_hero_data) {
 	$type = $corner_hero_data['type'];
 
 	// BUILD PARTS
@@ -156,63 +96,8 @@ function new_build_corner_hero_parts($corner_hero_data) {
 		return $corner_hero_markup;
 	}
 }
-// OLD
-function build_corner_hero_parts($corner_hero_data) {
-	$type = $corner_hero_data['type'];
 
-	// BUILD PARTS
-	if ($type == 'event' || $type == 'advisory') {
-		$corner_hero_image = '<img src="' . content_url($path = '/uploads/2018/06/usagm-touch-image.png') . '">';
-
-		$corner_hero_header  = '<div class="bbg__article-icons-container">';
-		$corner_hero_header .= 	'<h2>' . $corner_hero_data['label'] . '</h2>';
-		$corner_hero_header .= 	'<div class="bbg__article-icon"></div>';
-		$corner_hero_header .= '</div>';
-
-		$corner_hero_title  = '<h4>';
-		$corner_hero_title .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
-		$corner_hero_title .= '</h4>';
-
-		$corner_hero_content = '<p>' . $corner_hero_data['excerpt'] . '</p>';
-
-		// INSERT PART INTO GRID
-		// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
-		$corner_hero_markup  = '<div class="inner-container soap-corner special-block">';
-		$corner_hero_markup .= 	'<div class="small-side">';
-		$corner_hero_markup .= 		$corner_hero_image;
-		$corner_hero_markup .= 	'</div>';
-		$corner_hero_markup .= 	'<div class="large-side">';
-		$corner_hero_markup .= 		$corner_hero_header;
-		$corner_hero_markup .= 		$corner_hero_title;
-		$corner_hero_markup .= 		$corner_hero_content;
-		$corner_hero_markup .= 	'</div>';
-		$corner_hero_markup .= '</div>';
-
-		return $corner_hero_markup;
-	}
-	else if ($type == 'quote') {
-		$entity_code = strtolower($corner_hero_data['quote_data']['network']);
-		if ($entity_code == 'rfe/rl') {
-			$entity_code = 'rferl';
-		}
-
-		$corner_hero_markup  = '<div class="inner-container soap-corner special-block" style="border-top: 4px solid '. $corner_hero_data['quote_data']['color'] . '">';
-		$corner_hero_markup .= 	'<div class="small-side">';
-		$corner_hero_markup .= 		'<img src="' . get_template_directory_uri() . '/img/logo_' . $entity_code . '--circle-200.png">';
-		$corner_hero_markup .= 	'</div>';
-		$corner_hero_markup .= 	'<div class="large-side">';
-		$corner_hero_markup .= 		'<p style="font-style:italic">' . $corner_hero_data['quote_data']['quote'] . '</p>';
-		$corner_hero_markup .= 		'<br><p class="aside">&mdash;' . $corner_hero_data['quote_data']['speaker'] . '</p>';
-		$corner_hero_markup .= 		'<p class="aside">' . $corner_hero_data['quote_data']['tagline'] . '</p>';
-		$corner_hero_markup .= 	'</div>';
-		$corner_hero_markup .= '</div>';
-
-		return $corner_hero_markup;
-	}
-}
-
-// NEW
-function new_build_impact_markup($impact_id, $corner_hero_status) {
+function build_impact_markup($impact_id, $corner_hero_status) {
 	$impact_markup_set = array();
 	$i = 0;
 	$cur_post = get_post($impact_id);
@@ -237,40 +122,6 @@ function new_build_impact_markup($impact_id, $corner_hero_status) {
 	$impact_markup .= '</article>';
 	
 	return $impact_markup;
-}
-// OLD
-function build_impact_markup($impact_data) {
-	$impact_markup_set = array();
-	$i = 0;
-	foreach($impact_data as $impact_id) {
-		$cur_post = get_post($impact_id);
-
-		$impact_linked_image  = '<div class="post-image">';
-		$impact_linked_image .=  	'<a href="' . get_permalink($impact_id) . '">';
-		if (get_permalink($impact_id)) {
-			$impact_linked_image .= 		get_the_post_thumbnail($impact_id);
-		} else {
-			$impact_linked_image .= 		'<img class="post-image" src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="BBG Placeholder Image" />';
-		}
-		$impact_linked_image .= 	'</a>';
-		$impact_linked_image .=  '</div>';
-
-		$impact_header = 	'<h4><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h4>';
-		$impact_content = 	'<p>' . wp_trim_words($cur_post->post_content, 70) . '</p>';
-
-		$impact_markup  = '<article>';
-		$impact_markup .= 	$impact_linked_image;
-		$impact_markup .= 	$impact_header;
-		$impact_markup .= 	$impact_content;
-		$impact_markup .= '</article>';
-
-		// DYNAMIC VARIABLE NAME FOR UNIQUE NAME TO POPULATE ARRAY
-		${"impact_block" . $i} = $impact_markup;
-
-		array_push($impact_markup_set, ${"impact_block" . $i});
-		$i++;
-	}
-	return $impact_markup_set;
 }
 
 function build_threat_parts($threat_data) {

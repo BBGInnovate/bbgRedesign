@@ -1,4 +1,32 @@
 // MENTIONS SECTION (STRUCTURE, STYLES)
+
+// QUOTE
+.homepage-quote {
+	 text-align: center;
+	 .quote-image {
+		width: 100px;
+		border-radius: 50%;
+	}
+	.quote-line {
+		font-family: $font-sans;
+		font-size: 2.2rem;
+		line-height: 2.6rem;
+		font-weight: $font-light;
+		color: $color-blue;
+		margin: 0 0 1.5rem 0;
+	}
+	.quote-name {
+		font-family: $font-sans;
+		font-size: 1.9rem;
+		margin-bottom: 0;
+	}
+	.quote-credit {
+		font-family: $font-sans;
+		font-size: 1.4rem;
+		text-transform: uppercase;
+	}
+}
+
 // 1. GLOBAL
 // 2. MEDIUM SCREEN
 // 3. MEDIUM LARGE SCREEN
@@ -8,14 +36,6 @@
 .page-post-featured-graphic {margin-bottom: 3rem;}
 .home-feature-primary-post {
 	.page-post-featured-graphic {margin-bottom: 1.5rem;}
-}
-
-.featured-row {
-	.home-feature-primary-post {@include grid-column(12);}
-	.home-recent-posts {
-		@include grid-column(12);
-		div:nth-child(2) {display: none;}
-	}
 }
 
 // MENTIONS SECTION (SOAPBOX, CORNER HERO, IMPACT STORIES)
@@ -82,44 +102,6 @@
 		.impacts-share {@include grid-column(7);}
 	}
 }
-// STYLE OF MENTIONS (SOAPBOX, CORNER HERO, IMPACT STORIES)
-.mentions {
-	.inner-container div:nt-child(1) {margin-bottom: 3rem;}
-	.soap-corner {
-		padding: 1.5rem;
-		margin-bottom: 3rem;
-		.mention-header {margin-bottom: 2rem;}
-		p {margin-bottom: 0;}
-		p.profile-name {
-			font-size: 1.3rem;
-			line-height: 1.6rem
-		}
-	}
-	.ceo-box {
-		p {
-			margin-bottom: 1.5rem;
-			text-align: right;
-		}
-
-	}
-	.corner-hero {
-		.corner-hero-side {
-			padding: 1.5rem;
-			margin-bottom: 3rem;
-			@include grid-collapse;
-			p {margin-bottom: 0;}
-			p.profile-name {font-size: 0.9em;}
-		}
-		.corner-hero-full {
-			margin-bottom: 3rem;
-			.corner-hero-image {display: none}
-		}
-	}
-	@include media($medium-screen) {
-		.soap-corner {padding: 1.5rem 0;}
-	}
-}
-// END MENTIONS SECTION
 
 // THREATS TO PRESS SECTION
 #homepage-threats {
@@ -152,6 +134,28 @@
 
 
 // 1. GLOBAL
+.full-width-banner {
+	.banner-image {
+		background-size: cover;
+		height: 500px;
+		margin-bottom: 10px;
+	}
+	.banner-caption {
+		text-align: right;
+		font-size: 1.2rem;
+		line-height: 2rem;
+		font-style: italic;
+		color: $color-taupe-light;
+		padding: 0 15px;
+	}
+}
+#mission {
+	margin: 0 auto 6rem auto;
+	border-bottom: 1px solid #EAEBF0;
+}
+#entities {border-bottom: 1px solid #EAEBF0;}
+
+// DO A SEARCH FOR THIS AND SEE IF YOU CAN DELETE IT
 .bbg-banner {
 	background-color: $color-gray-lightest;
 	@include backgroundCover();
@@ -247,32 +251,29 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 }
 
 // SOAPBOX
-.bbg__voice {
-	$voiceTypes: ceo, guest, featured;
+.soapbox {
+	padding: 3rem;
+	background-color: $color-cool-blue-lightest;
+	> div {margin-bottom: 0;}
+	.soapbox-image-side {display: none;}
+	.soapbox-content-side {@include grid-column(12); margin-left: 0;}
 
-	// CEO BOX
-	&--ceo {
-		background-color: $color-cool-blue-lightest;
-
-		.bbg__article-icon {
-			background-image: url('/wp-content/themes/bbgRedesign/img/site-icons/BBG_blog_red@4x.png');
-			background-image: url('/wp-content/themes/bbgRedesign/img/site-icons/BBG_blog_red.svg');
+	// SOAPBOX MODULE LARGE SCREEN
+	@include media($medium-screen) {
+		.soapbox-image-side {
+			display: block;
+			@include grid-column(2);
+			margin-left: 0;
+			img {
+				width: 100%;
+				margin-bottom: 0.3em;
+			}
+			p {
+				text-align: right;
+				margin-bottom: 0;
+			}
 		}
-	}
-	// "USIM MATTERS" BLOG POST
-	&--guest {
-		background-color: $color-green-lightest;
-
-		.bbg__article-icon {
-			background-image: url('/wp-content/themes/bbgRedesign/img/site-icons/BBG_blog_red@4x.png');
-			background-image: url('/wp-content/themes/bbgRedesign/img/site-icons/BBG_blog_red.svg');
-		}
-	}
-	// MEDIA ADVISORY AND OTHER FEATURED POSTS (KEEP DEFAULT ICON)
-	&--featured {
-		background-color: $color-gold-lightest;
-
-		.bbg__article-icon {display: none;}
+		.soapbox-content-side {@include grid-column(10); margin-left: 20px;}
 	}
 }
 
@@ -326,6 +327,7 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 	}
 }
 
+// ENTITIES
 #home-entities {
 	$entity-home-grid: (
 		columns: 5
@@ -337,6 +339,34 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 		}
 	}
 }
+
+// QUOTE
+.homepage-quote {
+	 text-align: center;
+	 .quote-image {
+		width: 100px;
+		border-radius: 50%;
+	}
+	.quote-line {
+		font-family: $font-sans;
+		font-size: 2.2rem;
+		line-height: 2.6rem;
+		font-weight: $font-light;
+		color: $color-blue;
+		margin: 0 0 1.5rem 0;
+	}
+	.quote-name {
+		font-family: $font-sans;
+		font-size: 1.9rem;
+		margin-bottom: 0;
+	}
+	.quote-credit {
+		font-family: $font-sans;
+		font-size: 1.4rem;
+		text-transform: uppercase;
+	}
+}
+
 
 // 2. MEDIUM SCREEN
 @include media($medium-screen) {

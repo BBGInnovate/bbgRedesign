@@ -21,9 +21,6 @@ require 'inc/custom-field-modules.php';
 require 'inc/bbg-functions-home.php';
 require 'inc/bbg-functions-assemble.php';
 
-$templateName = 'customBBGHome';
-
-
 // USAGM NEWS
 // GET RECENT POSTS, SEPARATE INTO MANAGEABLE ARRAYS FOR PLACEMENT
 $recent_posts = get_recent_posts(3);
@@ -41,36 +38,40 @@ foreach ($recent_posts as $cur_recent_post) {
 }
 
 
-/*** store a handful of page links that we'll use in a few places ***/
+// IMPACT STORIES LINKS
 $impactPermalink = get_permalink( get_page_by_path('our-work/impact-and-results'));
 $impactPortfolioPermalink = get_permalink( get_page_by_path('our-work/impact-and-results/impact-portfolio'));
 
-/*** add any posts from custom fields to our array that tracks post IDs that have already been used on the page ***/
-$postIDsUsed = array();
+// THREATS TO PRESS DATA
+$threatsToPressPost = get_field('homepage_threats_to_press_post', 'option');
+$threatsPermalink = get_permalink(get_page_by_path('threats-to-press'));
+$randomFeaturedThreatsID = false;
+if ($threatsToPressPost) {
+	$randKey = array_rand($threatsToPressPost);
+	$randomFeaturedThreatsID = $threatsToPressPost[$randKey];
+}
 
 get_header();
+echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">';
 ?>
 
 <?php
 	$banner_result = get_homepage_banner_data();
 
-	$banner_markup  = '<div class="page-featured-media">';
-	$banner_markup .= 	'<div class="bbg-banner" ';
-	$banner_markup .= 		'style="background-image: url(' . $banner_result['image_source'] . ') !important; background-position: ' . $banner_result['position'] . '">';
+	$banner_markup  = '<div class="full-width-banner">';
+	$banner_markup .= 	'<div class="banner-image" ';
+	$banner_markup .= 	'style="background-image: url(' . $banner_result['image_source'] . '); background-position: ' . $banner_result['position'] . '">';
 	$banner_markup .= 	'</div>';
-	$banner_markup .= 		'<div class="grid-container">';
-	$banner_markup .= 			'<p class="graphic-caption">';
-	$banner_markup .= 				$banner_result['caption'];
-	$banner_markup .= 			'</p>';
-	$banner_markup .= 		'</div>';
+	$banner_markup .= 	'<p class="banner-caption">';
+	$banner_markup .= 		$banner_result['caption'];
+	$banner_markup .= 	'</p>';
 	$banner_markup .= '</div>';
 	echo $banner_markup;
 ?>
 
 <main id="main" class="site-content" role="main">
 
-	<section id="mission" class="outer-container">
-		<h1 class="header-outliner">About USAGM</h1>
+	<div class="outer-container" id="mission">
 		<div class="grid-container">
 		<?php
 			$settings_result = get_site_settings_data();
@@ -81,7 +82,7 @@ get_header();
 			echo $mission;
 		?>
 		</div>
-	</section>
+	</div>
 
 	<?php // USAGM NEWS ?>
 	<section class="outer-container">
@@ -98,68 +99,99 @@ get_header();
 							echo $featured_post;
 						?>
 					</div>
-					<!-- <div class="side-column divider-left"> -->
-					<div class="side-column">
+					<div class="side-column divider-left">
 						<?php
 							foreach($secondary_recent_posts as $cur_secondary_post) {
 								$secondary_post_element = build_post_aside($cur_secondary_post);
 								echo $secondary_post_element;
 							}
 						?>
-						<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
-							<h2 class="screen-reader-text">Recent Posts Navigation</h2>
-							<div class="nav-links">
-								<div class="nav-previous">
-									<a href="<?php echo get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
-								</div>
-							</div>
-						</nav>
 					</div>
 				</div>
 			</div>
+			<nav class="navigation posts-navigation bbg__navigation__pagination" role="navigation">
+				<h2 class="screen-reader-text">Recent Posts Navigation</h2>
+				<div class="nav-links">
+					<div class="nav-previous">
+						<a href="<?php echo get_permalink(get_page_by_path('news-and-information')) ?>" >Previous posts</a>
+					</div>
+				</div>
+			</nav>
 		</div><!-- END .grid-container -->
 	</section><!-- END USAGM NEWS -->
 	
 	<?php
-		// PREP: SOAPBOX, CORNER HERO, IMPACT STORIES
-		$soap_result = get_soapbox_data();
-		$corner_hero_result = get_corner_hero_data();
+		// SOAPBOX
+		$soapbox_result = get_soapbox_data();
+		$soapbox_parts = build_soapbox_parts($soapbox_result);
 
-		$soap_layout = "";
-		$impact_quantity = "";
-		if (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) {
-			$soap_layout = 'image-right';
-			$impact_quantity = 1;
+		if (!empty($soapbox_parts)) {
+			$soapbox  = '<div class="outer-container">';
+			$soapbox .= 	'<div class="grid-container soapbox ' . $soapbox_parts['class'] . '">';
+			if (!empty($soapbox_parts['image'])) {
+				$soapbox .= 	'<div class="soapbox-image-side">';
+				$soapbox .= 		$soapbox_parts['image'];
+				$soapbox .= 	'</div>';
+				$soapbox .= 	'<div class="soapbox-content-side">';
+			}
+			$soapbox .= 		$soapbox_parts['heading'];
+			$soapbox .= 		$soapbox_parts['title'];
+			$soapbox .= 		$soapbox_parts['content'];
+			if (!empty($soapbox_parts['image'])) {
+				$soapbox .= 	'</div>';
+			}
+			$soapbox .= 	'</div>';
+			$soapbox .= '</div>';
+			echo $soapbox;
+		}
+	?>
+
+	<?php
+		// IMPACT STORIES AND EVENTS
+		$impact_option = get_field('corner_hero_toggle', 'options');
+		$corner_hero_data = get_corner_hero_data();
+
+		if ($impact_option == 'on') {
+			$impact_result = get_impact_stories_data(1);
+			$corner_hero_parts = build_corner_hero_parts($corner_hero_data);
+		}
+		else {
+			$impact_result = get_impact_stories_data(2);
+		}
+
+		if ($impact_option == 'on') {
+			$impact_and_events  = '<div class="outer-container">';
+			$impact_and_events .= 	'<div class="grid-container sidebar-grid--large-gutter">';
+			$impact_and_events .= 		'<div class="nest-container">';
+			$impact_and_events .= 			'<div class="inner-container">';
+			$impact_and_events .= 				'<div class="main-column">';
+			$impact_and_events .= 					'<h2>Impact Stories</h2>';
+			foreach ($impact_result as $impact_post) {
+				$impact_and_events .= 				build_impact_markup($impact_post, $impact_option);
+			}
+			$impact_and_events .= 				'</div>';
+			$impact_and_events .= 				'<div class="side-column divider-left">';
+			$impact_and_events .= 					$corner_hero_parts;
+			$impact_and_events .= 				'</div>';
+			$impact_and_events .= 			'</div>';
+			$impact_and_events .= 		'</div>';
+			$impact_and_events .= 	'</div>';
+			$impact_and_events .= '</div>';
+			echo $impact_and_events;
 		} else {
-			$soap_layout = 'image-top';
-			$impact_quantity = 1;
+			$impacts_only  = '<div class="outer-container">';
+			$impacts_only .= 	'<div class="grid-container">';
+			$impacts_only .= 		'<h2>Impact Stories</h2>';
+			$impacts_only .= 	'</div>';
+			foreach ($impact_result as $impact_post) {
+				$impacts_only .= '<div class="grid-half">';
+				$impacts_only .= 	build_impact_markup($impact_post, $impact_option);
+				$impacts_only .= '</div>';
+			}
+			$impacts_only .= 	'</div>';
+			$impacts_only .= '</div>';
+			echo $impacts_only;
 		}
-
-		$impact_result = get_impact_stories_data($impact_quantity);
-
-		$mentions_group = array();
-		if ($soap_result['toggle'] == 'on') {
-			$show_soap = true;
-			$soap_layout = (($soap_result['toggle'] == 'on') && ($corner_hero_result['toggle'] == 'on')) ? 'image-right' : 'image-top';
-			$soap_parts = build_soapbox_parts($soap_result, $soap_layout);
-			array_push($mentions_group, $soap_parts);
-		}
-		if ($corner_hero_result['toggle'] == 'on') {
-			$show_corner = true;
-			$corner_hero_parts = build_corner_hero_parts($corner_hero_result);
-			array_push($mentions_group, $corner_hero_parts);
-		}
-		
-		$impact_markup = build_impact_markup($impact_result);
-
-		// MARKUP: SOAPBOX, CORNER HERO, IMPACT STORIES
-		echo '<section class="outer-container mentions">';
-		if ($show_soap && $show_corner) {
-			assemble_mentions_share_space($mentions_group, $impact_markup);
-		} else {
-			assemble_mentions_full_width($mentions_group, $impact_markup);
-		}
-		echo '</section>';
 	?>
 
 	<!-- THREATS TO PRESS RIBBON -->
@@ -196,18 +228,18 @@ get_header();
 		$entity_data = get_entity_data("entity-main");
 	?>
 
-	<!-- Quotation -->
+	<?php // QUOTE ?>
 	<div class="outer-container">
 		<div class="grid-container">
 			<?php
-				$q = getRandomQuote('allEntities', $postIDsUsed);
-				if ($q) {
-					$postIDsUsed[] = $q["ID"];
-					outputQuote($q);
+				$quote_result = getRandomQuote('allEntities', $postIDsUsed);
+				if ($quote_result) {
+					$postIDsUsed[] = $quote_result["ID"];
+					output_quote($quote_result);
 				}
 			?>
 		</div>
-	</div><!-- Quotation -->
+	</div>
 
 </main>
 

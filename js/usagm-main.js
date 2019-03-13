@@ -131,13 +131,6 @@ function scaleRibbonBanner() {
 }
 scaleRibbonBanner();
 
-function scaleCornerHero() {
-	var cornerHeroCopy = $('#new-home-test .corner-hero-copy');
-	var cornerHeroCopyH = cornerHeroCopy.outerHeight();
-	$('#new-home-test .corner-hero .corner-hero-image').height(cornerHeroCopyH);
-}
-scaleCornerHero();
-
 
 // PRESS CLIPPINGS DROPDOWN
 var clipsListParent = $('.media-clips-entities-dropdown');
@@ -193,7 +186,6 @@ scalePostImages();
 
 $(window).on('resize', function() {
 	scaleRibbonBanner();
-	scaleCornerHero();
 	scalePostImages();
 });
 
