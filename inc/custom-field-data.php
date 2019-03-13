@@ -19,7 +19,6 @@ function get_site_settings_data() {
 }
 
 // HOMEPAGE OPTIONS
-// NEW
 function get_soapbox_data() {
 	$soapbox_toggle = get_field('soapbox_toggle', 'option');
 	$soapbox_post = get_field('homepage_soapbox_post', 'option');

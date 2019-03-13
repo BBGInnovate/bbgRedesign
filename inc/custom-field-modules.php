@@ -10,48 +10,6 @@
 // ABOUT (OFFICE)
 
 // HOMEPAGE OPTIONS
-function assemble_mentions_full_width($mention_data, $impact_group) {
-	$mention_full  = '<div class="custom-grid-container">';
-	$mention_full .= 	'<div class="inner-container">';
-	$mention_full .= 		'<div class="side-content-container">';
-	$mention_full .= 			'<div class="soap-corner-share-grid">';
-	// SOAPBOX AND/OR CORNER HERO
-	foreach($mention_data as $data) {
-		$mention_full .= 		$data;
-	}
-	$mention_full .= 			'</div>';
-	$mention_full .= 		'</div>';
-	$mention_full .= 		'<div class="main-content-container impact-share">';
-	// IMPACT STORY (ONLY ONE FOR THIS LAYOUT)
-	$mention_full .= 			'<h2>Impact Stories</h2>';
-	$mention_full .= 			$impact_group[0];
-	$mention_full .= 		'</div>';
-	$mention_full .= 	'</div>';
-	$mention_full .= '</div>';
-	echo $mention_full;
-}
-
-function assemble_mentions_share_space($mention_data, $impact_group) {
-	$mention_share  = '<div class="custom-grid-container">';
-	$mention_share .= 	'<div class="inner-container">';
-	$mention_share .= 		'<div class="side-content-container">';
-	$mention_share .= 			'<div class="soap-corner-share-grid">';
-	// SOAPBOX AND/OR CORNER HERO
-	foreach($mention_data as $data) {
-		$mention_share .= 		$data;
-	}
-	$mention_share .= 			'</div>';
-	$mention_share .= 		'</div>';
-	$mention_share .= 		'<div class="main-content-container impact-share">';
-	// IMPACT STORY (ONLY ONE FOR THIS LAYOUT)
-	$mention_share .= 			'<h2>Impact Stories</h2>';
-	$mention_share .= 			$impact_group[0];
-	$mention_share .= 		'</div>';
-	$mention_share .= 	'</div>';
-	$mention_share .= '</div>';
-	echo $mention_share;
-}
-
 function assemble_threats_to_press_ribbon($threat_data) {
 	$theat_ribbon  = '<div class="bbg__ribbon threats-ribbon">';
 	$theat_ribbon .= 	'<div class="outer-container">';
