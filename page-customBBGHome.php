@@ -95,14 +95,14 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				<div class="inner-container">
 					<div class="main-column">
 						<?php
-							$featured_post = build_vertical_post_main($feature_recent_post);
+							$featured_post = build_vertical_post($feature_recent_post);
 							echo $featured_post;
 						?>
 					</div>
 					<div class="side-column divider-left">
 						<?php
 							foreach($secondary_recent_posts as $cur_secondary_post) {
-								$secondary_post_element = build_post_aside($cur_secondary_post);
+								$secondary_post_element = build_aside_post($cur_secondary_post);
 								echo $secondary_post_element;
 							}
 						?>
@@ -149,12 +149,12 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	<?php
 		// IMPACT STORIES AND EVENTS
 		$impact_option = get_field('corner_hero_toggle', 'options');
+		$corner_hero_label = get_field('corner_hero_label', 'options');
 		$corner_hero_data = get_corner_hero_data();
 		$impact_page_page = 'our-work/impact-and-results/impact-portfolio/';
 
 		if ($impact_option == 'on') {
 			$impact_result = get_impact_stories_data(1);
-			$corner_hero_parts = build_corner_hero_parts($corner_hero_data);
 		}
 		else {
 			$impact_result = get_impact_stories_data(2);
@@ -172,7 +172,8 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			}
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 				'<div class="side-column divider-left">';
-			$impact_and_events .= 					$corner_hero_parts;
+			$impact_and_events .= 					'<h2>' . $corner_hero_label . '</h2>';
+			$impact_and_events .= 					build_vertical_post($corner_hero_data);
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 			'</div>';
 			$impact_and_events .= 		'</div>';

@@ -21,14 +21,12 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 
 
 // Vendor -------------- //
-
 @import 'lib/bourbon/bourbon';
 @import 'lib/neat/neat';
 @import 'lib/normalize';
 
 
 // Core -------------- //
-
 @import 'core/defaults';
 @import 'core/variables';
 @import 'bbg/variables-bbg';
@@ -53,7 +51,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 
 
 // Components -------------- //
-
 @import 'components/accordions';
 @import 'components/alerts';
 @import 'components/disclaimer';
@@ -65,8 +62,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 
 
 // BBG -------------- //
-
-/*@import 'bbg/variables-bbg'; MOVED ABOVE TO UPDATE FONTS */
 @import 'bbg/site/footer';
 @import 'bbg/elements/typography';
 @import 'bbg/elements/list';

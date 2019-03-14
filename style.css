@@ -2628,7 +2628,6 @@ form[id^=fscf_form] {
     position: absolute;
     top: 0; }
 
-/*@import 'bbg/variables-bbg'; MOVED ABOVE TO UPDATE FONTS */
 #footer {
   text-align: center;
   padding: 3rem 0;
@@ -2682,12 +2681,6 @@ h2 a:visited {
   letter-spacing: 0;
   color: #b2201c;
   margin-top: 0; }
-  h2.aside-header,
-  h2 a:link.aside-header,
-  h2 a:visited.aside-header {
-    color: #333333;
-    text-transform: uppercase;
-    font-size: 1.8rem; }
 
 .bbg__ribbon h2 a:link {
   color: #ffffff; }
@@ -6255,27 +6248,6 @@ div.banner_readmore h6 a:visited {
   .bbg__infobox article {
     margin-bottom: 1rem; }
 
-.homepage-quote {
-  text-align: center; }
-  .homepage-quote .quote-image {
-    width: 100px;
-    border-radius: 50%; }
-  .homepage-quote .quote-line {
-    font-family: "Alegreya Sans", sans-serif;
-    font-size: 2.2rem;
-    line-height: 2.6rem;
-    font-weight: 300;
-    color: #3f7ad1;
-    margin: 0 0 1.5rem 0; }
-  .homepage-quote .quote-name {
-    font-family: "Alegreya Sans", sans-serif;
-    font-size: 1.9rem;
-    margin-bottom: 0; }
-  .homepage-quote .quote-credit {
-    font-family: "Alegreya Sans", sans-serif;
-    font-size: 1.4rem;
-    text-transform: uppercase; }
-
 .page-post-featured-graphic {
   margin-bottom: 3rem; }
 
@@ -6326,8 +6298,9 @@ div.banner_readmore h6 a:visited {
   padding: 0 15px; }
 
 #mission {
-  margin: 0 auto 6rem auto;
-  border-bottom: 1px solid #EAEBF0; }
+  margin: 0 auto 6rem auto; }
+  #mission .grid-container {
+    border-bottom: 1px solid #EAEBF0; }
 
 #entities {
   border-bottom: 1px solid #EAEBF0; }

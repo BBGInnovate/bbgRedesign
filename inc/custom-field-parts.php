@@ -51,55 +51,6 @@ function build_soapbox_parts($soap_data) {
 	return $soapbox_content;
 }
 
-function build_corner_hero_parts($corner_hero_data) {
-	$type = $corner_hero_data['type'];
-
-	// BUILD PARTS
-	if ($type == 'event' || $type == 'advisory') {
-		$corner_hero_header = 	'<h2 class="aside-header">' . $corner_hero_data['label'] . '</h2>';
-
-		$corner_hero_image  = '<a href="' . $corner_hero_data['p_link'] . '">';
-		$corner_hero_image .= 	$corner_hero_data['image'];
-		$corner_hero_image .= '</a>';
-
-		$corner_hero_title  = '<h4>';
-		$corner_hero_title .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
-		$corner_hero_title .= '</h4>';
-
-		$corner_hero_content = '<p>' . $corner_hero_data['excerpt'] . '</p>';
-
-		// INSERT PART INTO GRID
-		// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
-		$corner_hero_markup  = '<div class="inner-container soap-corner special-block">';
-		$corner_hero_markup .= 	$corner_hero_header;
-		$corner_hero_markup .= 	$corner_hero_image;
-		$corner_hero_markup .= 	$corner_hero_title;
-		$corner_hero_markup .= 	$corner_hero_content;
-		$corner_hero_markup .= '</div>';
-
-		return $corner_hero_markup;
-	}
-	else if ($type == 'quote') {
-		$entity_code = strtolower($corner_hero_data['quote_data']['network']);
-		if ($entity_code == 'rfe/rl') {
-			$entity_code = 'rferl';
-		}
-
-		$corner_hero_markup  = '<div class="inner-container soap-corner special-block" style="border-top: 4px solid '. $corner_hero_data['quote_data']['color'] . '">';
-		$corner_hero_markup .= 	'<div class="small-side">';
-		$corner_hero_markup .= 		'<img src="' . get_template_directory_uri() . '/img/logo_' . $entity_code . '--circle-200.png">';
-		$corner_hero_markup .= 	'</div>';
-		$corner_hero_markup .= 	'<div class="large-side">';
-		$corner_hero_markup .= 		'<p style="font-style:italic">' . $corner_hero_data['quote_data']['quote'] . '</p>';
-		$corner_hero_markup .= 		'<br><p class="aside">&mdash;' . $corner_hero_data['quote_data']['speaker'] . '</p>';
-		$corner_hero_markup .= 		'<p class="aside">' . $corner_hero_data['quote_data']['tagline'] . '</p>';
-		$corner_hero_markup .= 	'</div>';
-		$corner_hero_markup .= '</div>';
-
-		return $corner_hero_markup;
-	}
-}
-
 function build_impact_markup($impact_id, $corner_hero_status) {
 	$impact_markup_set = array();
 	$i = 0;

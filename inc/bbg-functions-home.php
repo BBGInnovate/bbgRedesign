@@ -159,10 +159,12 @@ function get_recent_posts($qty) {
 
 
 // ARTICLE STRUCTURES
-function build_vertical_post_main($article_data) {
+function build_vertical_post($article_data) {
 	$article_structure  = '<article>';
 	if (!empty(get_the_permalink($article_data))) {
-		$article_structure .= 	'<div class="post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+		$article_structure .= '<div class="post-image">';
+		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a>';
+		$article_structure .= '</div>';
 	}
 	$article_structure .= 	'<div class="article-info">';
 	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
@@ -174,7 +176,7 @@ function build_vertical_post_main($article_data) {
 	$article_structure .= '</article>';
 	return $article_structure;
 }
-function build_post_aside($article_data) {
+function build_aside_post($article_data) {
 	$article_structure  = '<article class="article-aside">';
 	$article_structure .= 	'<div class="nest-container">';
 	$article_structure .= 		'<div class="inner-container">';

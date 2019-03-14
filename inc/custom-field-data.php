@@ -185,8 +185,8 @@ function get_corner_hero_data() {
 		if (has_category('Media Advisory', $featuredEvent)) {
 			$cornerHeroClass = 'bbg__advisory-announcement';
 		}
-		$id = $cornerHeroPost -> ID;
-		$cornerHeroPermalink = get_the_permalink($id);
+		$corner_hero_id = $cornerHeroPost -> ID;
+		// $cornerHeroPermalink = get_the_permalink($corner_hero_id);
 
 		/* permalinks for future posts by default don't return properly. fix that. */
 		if ($cornerHeroPost -> post_status == 'future') {
@@ -196,19 +196,20 @@ function get_corner_hero_data() {
 			$cornerHeroPermalink = get_permalink($my_post);
 		}
 
-		$cornerHeroTitle = $cornerHeroPost -> post_title;
-		$corner_hero_image = get_the_post_thumbnail($cornerHeroPost);
-		$excerpt = my_excerpt($id);
-		$corner_hero_package = array(
-			'toggle' => $toggle,
-			'type' => $c_type,
-			'class' => $cornerHeroClass,
-			'p_link' => $cornerHeroPermalink,
-			'label' => $cornerHeroLabel,
-			'title' => $cornerHeroTitle,
-			'image' => $corner_hero_image,
-			'excerpt' => $excerpt
-		);
+		// $cornerHeroTitle = $cornerHeroPost -> post_title;
+		// $corner_hero_image = get_the_post_thumbnail($cornerHeroPost);
+		// $excerpt = my_excerpt($corner_hero_id);
+		// $corner_hero_package = array(
+		// 	'toggle' => $toggle,
+		// 	'type' => $c_type,
+		// 	'class' => $cornerHeroClass,
+		// 	'p_link' => $cornerHeroPermalink,
+		// 	'label' => $cornerHeroLabel,
+		// 	'title' => $cornerHeroTitle,
+		// 	'image' => $corner_hero_image,
+		// 	'excerpt' => $excerpt
+		// );
+		$corner_hero_package = get_post($corner_hero_id);
 
 		return $corner_hero_package;
 	}
