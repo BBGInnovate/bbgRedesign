@@ -167,8 +167,9 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$impact_and_events .= 			'<div class="inner-container">';
 			$impact_and_events .= 				'<div class="main-column">';
 			$impact_and_events .= 					'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
-			foreach ($impact_result as $impact_post) {
-				$impact_and_events .= 				build_impact_markup($impact_post, $impact_option);
+			foreach ($impact_result as $impact_post_id) {
+				$impact_post = get_post($impact_post_id);
+				$impact_and_events .= build_vertical_post($impact_post);
 			}
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 				'<div class="side-column divider-left">';
@@ -185,9 +186,11 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$impacts_only .= 	'<div class="grid-container">';
 			$impacts_only .= 		'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			$impacts_only .= 	'</div>';
-			foreach ($impact_result as $impact_post) {
+			foreach ($impact_result as $impact_post_id) {
+				$impact_post = get_post($impact_post_id);
+
 				$impacts_only .= '<div class="grid-half">';
-				$impacts_only .= 	build_impact_markup($impact_post, $impact_option);
+				$impacts_only .= 	build_vertical_post($impact_post);
 				$impacts_only .= '</div>';
 			}
 			$impacts_only .= 	'</div>';

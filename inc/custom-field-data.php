@@ -242,19 +242,21 @@ function get_impact_stories_data($qty) {
 		'order' => 'desc',
 		'post__in' => $impactPostIDs
 	);
-	query_posts($qParams);
-
-	$post_id_group = array();
-	if (have_posts()) {
-		while (have_posts()) { 
-			the_post();
-			$includePortfolioDescription = false;
-			$postIDsUsed[] = get_the_ID();
-			array_push($post_id_group, get_the_ID());
-		}
-	}
-	wp_reset_query();
-	return $post_id_group;
+	// query_posts($qParams);
+	$impact_query = new WP_Query($qParams);
+$post_group = $impact_query->posts;
+	// $post_id_group = array();
+	// if (have_posts()) {
+	// 	while (have_posts()) { 
+	// 		the_post();
+	// 		$includePortfolioDescription = false;
+	// 		$postIDsUsed[] = get_the_ID();
+	// 		array_push($post_id_group, get_the_ID());
+	// 	}
+	// }
+	// wp_reset_query();
+	// return $post_id_group;
+	return $post_group;
 }
 
 function get_threats_to_press_posts() {

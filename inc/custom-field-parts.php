@@ -51,33 +51,6 @@ function build_soapbox_parts($soap_data) {
 	return $soapbox_content;
 }
 
-function build_impact_markup($impact_id, $corner_hero_status) {
-	$impact_markup_set = array();
-	$i = 0;
-	$cur_post = get_post($impact_id);
-
-	$impact_linked_image  = '<div class="post-image">';
-	$impact_linked_image .=  	'<a href="' . get_permalink($impact_id) . '">';
-	if (get_permalink($impact_id)) {
-		$impact_linked_image .= 		get_the_post_thumbnail($impact_id);
-	} else {
-		$impact_linked_image .= 		'<img class="post-image" src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="BBG Placeholder Image" />';
-	}
-	$impact_linked_image .= 	'</a>';
-	$impact_linked_image .=  '</div>';
-
-	$impact_header = 	'<h4><a href="' . get_permalink($impact_id) . '">' . $cur_post->post_title . '</a></h4>';
-	$impact_content = 	'<p>' . wp_trim_words($cur_post->post_content, 30) . '</p>';
-
-	$impact_markup  = '<article>';
-	$impact_markup .= 	$impact_linked_image;
-	$impact_markup .= 	$impact_header;
-	$impact_markup .= 	$impact_content;
-	$impact_markup .= '</article>';
-	
-	return $impact_markup;
-}
-
 function build_threat_parts($threat_data) {
 	$threat_markup_set = array();
 	$i = 0;
