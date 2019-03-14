@@ -1,35 +1,4 @@
 <?php
-function select_impact_story_id_at_random($used) {
-	$qParams = array(
-		'post_type'=> 'post',
-		'post_status' => 'publish',
-		'cat' => get_cat_id('impact'),
-		'post__not_in' => $used,
-		'posts_per_page' => 12,
-		'orderby' => 'post_date',
-		'order' => 'desc',
-	);
-
-	$custom_query = new WP_Query( $qParams );
-	$allIDs = [];
-	if ($custom_query -> have_posts()) {
-		while ( $custom_query -> have_posts() ) {
-			$custom_query -> the_post();
-			$allIDs[] = get_the_ID();
-		}
-	}
-
-	if (count( $allIDs ) > 2) {
-		shuffle( $allIDs );
-		$ids = [];
-		$ids[] = array_pop($allIDs);
-		$ids[] = array_pop($allIDs);
-	} else {
-		$ids = $allIDs;
-	}
-	return $ids;
-}
-
 // CUSTOM FIELD DATA
 function get_homepage_banner_data() {
 	$homepageBannerType = get_field('homepage_banner_type', 'option');
@@ -104,11 +73,7 @@ function get_homepage_banner_data() {
 	}
 }
 
-
-
-
-
-// NEW HOME PAGE FUNCTIONS
+// USAGM NEWS
 function get_recent_posts($qty) {
 	$used_posts = array();
 	$all_recent_posts = array();
@@ -157,40 +122,35 @@ function get_recent_posts($qty) {
 	return $all_recent_posts;
 }
 
+// IMPACT STORIES
+function select_impact_story_id_at_random($used) {
+	$qParams = array(
+		'post_type'=> 'post',
+		'post_status' => 'publish',
+		'cat' => get_cat_id('impact'),
+		'post__not_in' => $used,
+		'posts_per_page' => 12,
+		'orderby' => 'post_date',
+		'order' => 'desc',
+	);
 
-// ARTICLE STRUCTURES
-function build_vertical_post($article_data) {
-	$article_structure  = '<article>';
-	if (!empty(get_the_permalink($article_data))) {
-		$article_structure .= '<div class="post-image">';
-		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a>';
-		$article_structure .= '</div>';
+	$custom_query = new WP_Query( $qParams );
+	$allIDs = [];
+	if ($custom_query -> have_posts()) {
+		while ( $custom_query -> have_posts() ) {
+			$custom_query -> the_post();
+			$allIDs[] = get_the_ID();
+		}
 	}
-	$article_structure .= 	'<div class="article-info">';
-	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
-	$article_structure .= 		'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
-	if (!empty($article_data->post_excerpt)) {
-		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
-	}
-	$article_structure .= 	'</div>';
-	$article_structure .= '</article>';
-	return $article_structure;
-}
 
-function build_aside_post($article_data) {
-	$article_structure  = '<article class="article-aside">';
-	$article_structure .= 	'<div class="nest-container">';
-	$article_structure .= 		'<div class="inner-container">';
-	if (!empty(get_the_permalink($article_data))) {
-		$article_structure .= 			'<div class="article-image post-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+	if (count( $allIDs ) > 2) {
+		shuffle( $allIDs );
+		$ids = [];
+		$ids[] = array_pop($allIDs);
+		$ids[] = array_pop($allIDs);
+	} else {
+		$ids = $allIDs;
 	}
-	$article_structure .= 			'<div class="article-desc article-info">';
-	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
-	$article_structure .= 				'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
-	$article_structure .= 			'</div>';
-	$article_structure .= 		'</div>';
-	$article_structure .= 	'</div>';
-	$article_structure .= '</article>';
-	return $article_structure;
+	return $ids;
 }
 ?>
