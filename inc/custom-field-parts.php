@@ -58,6 +58,10 @@ function build_corner_hero_parts($corner_hero_data) {
 	if ($type == 'event' || $type == 'advisory') {
 		$corner_hero_header = 	'<h2 class="aside-header">' . $corner_hero_data['label'] . '</h2>';
 
+		$corner_hero_image  = '<a href="' . $corner_hero_data['p_link'] . '">';
+		$corner_hero_image .= 	$corner_hero_data['image'];
+		$corner_hero_image .= '</a>';
+
 		$corner_hero_title  = '<h4>';
 		$corner_hero_title .= 	'<a href="' . $corner_hero_data['p_link'] . '" rel="bookmark">"' . $corner_hero_data['title'] . '"</a>';
 		$corner_hero_title .= '</h4>';
@@ -67,11 +71,10 @@ function build_corner_hero_parts($corner_hero_data) {
 		// INSERT PART INTO GRID
 		// OUTER DIV MUST HAVE CLASS OF 'inner-container' TO BE ABLE TO FIT PARENT
 		$corner_hero_markup  = '<div class="inner-container soap-corner special-block">';
-		$corner_hero_markup .= 	'<div class="large-side">';
-		$corner_hero_markup .= 		$corner_hero_header;
-		$corner_hero_markup .= 		$corner_hero_title;
-		$corner_hero_markup .= 		$corner_hero_content;
-		$corner_hero_markup .= 	'</div>';
+		$corner_hero_markup .= 	$corner_hero_header;
+		$corner_hero_markup .= 	$corner_hero_image;
+		$corner_hero_markup .= 	$corner_hero_title;
+		$corner_hero_markup .= 	$corner_hero_content;
 		$corner_hero_markup .= '</div>';
 
 		return $corner_hero_markup;

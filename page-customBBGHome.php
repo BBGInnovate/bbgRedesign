@@ -150,6 +150,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		// IMPACT STORIES AND EVENTS
 		$impact_option = get_field('corner_hero_toggle', 'options');
 		$corner_hero_data = get_corner_hero_data();
+		$impact_page_page = 'our-work/impact-and-results/impact-portfolio/';
 
 		if ($impact_option == 'on') {
 			$impact_result = get_impact_stories_data(1);
@@ -165,7 +166,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$impact_and_events .= 		'<div class="nest-container">';
 			$impact_and_events .= 			'<div class="inner-container">';
 			$impact_and_events .= 				'<div class="main-column">';
-			$impact_and_events .= 					'<h2>Impact Stories</h2>';
+			$impact_and_events .= 					'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			foreach ($impact_result as $impact_post) {
 				$impact_and_events .= 				build_impact_markup($impact_post, $impact_option);
 			}
@@ -181,7 +182,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		} else {
 			$impacts_only  = '<div class="outer-container">';
 			$impacts_only .= 	'<div class="grid-container">';
-			$impacts_only .= 		'<h2>Impact Stories</h2>';
+			$impacts_only .= 		'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			$impacts_only .= 	'</div>';
 			foreach ($impact_result as $impact_post) {
 				$impacts_only .= '<div class="grid-half">';
@@ -201,7 +202,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		$threat_structure  = '<section id="homepage-threats">';
 		$threat_structure .= '<div class="outer-container">';
 		$threat_structure .= 	'<div class="grid-half" id="threats-main-column">';
-		$threat_structure .= 		'<h2>Threats to Press</h2>';
+		$threat_structure .= 		'<h2><a href="' . get_permalink(get_page_by_path('threats-to-press-2')) . '">Threats to Press</a></h2>';
 		$threat_structure .= 		'<article>';
 		$threat_structure .= 			'<div class="article-image post-image"><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_post_thumbnail($threat_article_list[0]) . '</a></div>';
 		$threat_structure .= 			'<div class="article-info">';

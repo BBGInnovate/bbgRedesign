@@ -38,69 +38,9 @@
 	.page-post-featured-graphic {margin-bottom: 1.5rem;}
 }
 
-// MENTIONS SECTION (SOAPBOX, CORNER HERO, IMPACT STORIES)
-// STRUCTURE
-.mentions {
-	.ceo-box {
-		img {margin-bottom: 1rem;}
-		p {margin-bottom: 1.5rem;}
-	}
-	.soap-corner-full {
-		@include grid-column(12);
-		.small-side {display: none;}
-		.large-side {@include grid-container;}
-	}
-	.soap-corner-share-grid {
-		@include grid-column(12);
-		.small-side {display: none;}
-		.large-side {@include grid-container;}
-	}
-	.impacts-share {@include grid-column(12);}
-	.split-grid {@include grid-column(12);}
-	.split-grid:nth-child(2) {display: none;}
-
-	@include media($medium-screen) {
-		.soap-corner-full {
-			@include grid-column(12);
-			.small-side {
-				display: block;
-				@include grid-column(2);
-			}
-			.large-side {@include grid-column(10);}
-		}
-		.soap-corner-share-grid {
-			@include grid-column(12);
-			.small-side {
-				display: block;
-				@include grid-column(3);
-			}
-			.large-side {@include grid-column(9);}
-		}
-		.impacts-share {@include grid-column(12);}
-		.split-grid {@include grid-column(6);}
-		.split-grid:nth-child(2) {display: block;}
-	}
-	@include media($medium-large-screen) {
-		.soap-corner-share-grid {
-			.small-side {@include grid-column(4);}
-			.large-side {@include grid-column(8);}
-			// ====================================
-			// FIX FOR IPAD 5.1.1 CHROME AND SAFARI
-			// ====================================
-			@media screen and (-webkit-min-device-pixel-ratio) {
-				.small-side {
-					display: inline-block;
-					width: 23.357%;
-				}
-				.large-side {
-					display: inline-block;
-					width: 54.375%;
-				}
-			}
-			// END FIX ============================
-		}
-		.impacts-share {@include grid-column(7);}
-	}
+// SOAPBOX
+.soap-corner {
+	img {margin-bottom: 1.5rem;}
 }
 
 // THREATS TO PRESS SECTION
@@ -114,7 +54,8 @@
 	margin-bottom: 7.5rem;
 
 	.outer-container {margin-bottom: 0;}
-	h2, h4 {color: $white;}
+	h2 {a:link, a:visited {color: $white;}}
+	h4 {color: $white;}
 	h4 {a:link, a:visited {color: $white;}}
 	#threats-main-column {
 		padding: 2em;

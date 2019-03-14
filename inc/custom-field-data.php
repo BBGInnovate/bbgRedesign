@@ -186,7 +186,7 @@ function get_corner_hero_data() {
 			$cornerHeroClass = 'bbg__advisory-announcement';
 		}
 		$id = $cornerHeroPost -> ID;
-		$cornerHeroPermalink = get_the_permalink( $id );
+		$cornerHeroPermalink = get_the_permalink($id);
 
 		/* permalinks for future posts by default don't return properly. fix that. */
 		if ($cornerHeroPost -> post_status == 'future') {
@@ -197,6 +197,7 @@ function get_corner_hero_data() {
 		}
 
 		$cornerHeroTitle = $cornerHeroPost -> post_title;
+		$corner_hero_image = get_the_post_thumbnail($cornerHeroPost);
 		$excerpt = my_excerpt($id);
 		$corner_hero_package = array(
 			'toggle' => $toggle,
@@ -205,6 +206,7 @@ function get_corner_hero_data() {
 			'p_link' => $cornerHeroPermalink,
 			'label' => $cornerHeroLabel,
 			'title' => $cornerHeroTitle,
+			'image' => $corner_hero_image,
 			'excerpt' => $excerpt
 		);
 
