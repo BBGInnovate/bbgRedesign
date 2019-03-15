@@ -3108,6 +3108,53 @@ a:focus .bbg__article-share__icon {
     .bbg__article-share__text {
       display: inline-block; } }
 
+.article-teaser {
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 2rem; }
+  .article-teaser .article-image {
+    overflow: hidden;
+    margin-bottom: 1.5rem; }
+
+.image-title-article .article-image {
+  width: calc(41.66667% - 28.33333px);
+  float: left;
+  margin-left: 20px; }
+
+.image-title-article .article-info {
+  width: calc(58.33333% - 31.66667px);
+  float: left;
+  margin-left: 20px; }
+
+@media screen and (min-width: 600px) {
+  .image-title-article .article-image {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px; }
+  .image-title-article .article-info {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; } }
+
+@media screen and (min-width: 700px) {
+  .image-title-article .article-image {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
+  .image-title-article .article-info {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; } }
+
+@media screen and (min-width: 900px) {
+  .image-title-article .article-image {
+    width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px; }
+  .image-title-article .article-info {
+    width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px; } }
+
 /** ---------------
  * TABLES
  ------------------ */
@@ -4526,11 +4573,6 @@ e.g. on the intern testimonial page */
   float: left;
   margin-left: 20px; }
 
-.sidebar-grid--large-gutter article {
-  border-bottom: 1px solid #f1f1f1;
-  padding-top: 2rem;
-  margin-bottom: 2rem; }
-
 @media screen and (min-width: 900px) {
   .sidebar-grid--large-gutter > .inner-container > div:nth-child(2) {
     padding-left: 4rem; }
@@ -4909,16 +4951,6 @@ e.g. on the intern testimonial page */
   .bbg-grid--1-2-3:nth-child(3n+1) {
     clear: left; } }
 
-article {
-  margin-bottom: 3rem; }
-  article .post-image {
-    overflow: hidden; }
-    article .post-image img, article .post-image *[class*="image"] {
-      width: 100%;
-      margin-bottom: 0; }
-  article .article-info p {
-    margin-bottom: 1rem; }
-
 .article-aside .article-image {
   width: calc(33.33333% - 26.66667px);
   float: left;
@@ -5076,7 +5108,7 @@ ol li:before {
 .date-meta {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 0.9em;
-  font-width: 400;
+  font-weight: 400;
   color: #666666;
   margin-bottom: 1rem; }
 

@@ -20,11 +20,6 @@
 .sidebar-grid--large-gutter {
 	.main-column {@include grid-column(12);}
 	.side-column {@include grid-column(12);}
-	article {
-		border-bottom: 1px solid #f1f1f1;
-		padding-top: 2rem;
-		margin-bottom: 2rem;
-	}
 }
 
 @include media($medium-large-screen) {

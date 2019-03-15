@@ -164,9 +164,9 @@ $.each(clipsListItems, function() {
 
 
 // SCALE POST-IMAGE TO BE PROPORTIONAL TO 600x400
-function scalePostImages() {
+function scaleArticleImages() {
 	var scale = 0.66666667;
-	var postImageBox = $('.post-image');
+	var postImageBox = $('.article-image');
 
 	$.each(postImageBox, function() {
 		var curBox = $(this);
@@ -181,12 +181,12 @@ function scalePostImages() {
 		}
 	})
 }
-scalePostImages();
+scaleArticleImages();
 
 
 $(window).on('resize', function() {
 	scaleRibbonBanner();
-	scalePostImages();
+	scaleArticleImages();
 });
 
 }); // END READY

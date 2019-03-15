@@ -89,20 +89,19 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		<div class="grid-container">
 			<h2 class="new_heading"><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
 		</div>
-
 		<div class="grid-container sidebar-grid--large-gutter">
 			<div class="nest-container">
 				<div class="inner-container">
 					<div class="main-column">
 						<?php
-							$featured_post = build_vertical_post($feature_recent_post);
+							$featured_post = build_vertical_article($feature_recent_post);
 							echo $featured_post;
 						?>
 					</div>
 					<div class="side-column divider-left">
 						<?php
 							foreach($secondary_recent_posts as $cur_secondary_post) {
-								$secondary_post_element = build_aside_post($cur_secondary_post);
+								$secondary_post_element = build_image_title_article($cur_secondary_post);
 								echo $secondary_post_element;
 							}
 						?>
@@ -117,8 +116,9 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 					</div>
 				</div>
 			</nav>
-		</div><!-- END .grid-container -->
-	</section><!-- END USAGM NEWS -->
+		</div>
+	</section>
+
 	
 	<?php
 		// SOAPBOX
@@ -161,7 +161,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		}
 
 		if ($impact_option == 'on') {
-			$impact_and_events  = '<div class="outer-container">';
+			$impact_and_events  = '<section class="outer-container">';
 			$impact_and_events .= 	'<div class="grid-container sidebar-grid--large-gutter">';
 			$impact_and_events .= 		'<div class="nest-container">';
 			$impact_and_events .= 			'<div class="inner-container">';
@@ -169,20 +169,20 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$impact_and_events .= 					'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			foreach ($impact_result as $impact_post_id) {
 				$impact_post = get_post($impact_post_id);
-				$impact_and_events .= build_vertical_post($impact_post);
+				$impact_and_events .= build_vertical_article($impact_post);
 			}
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 				'<div class="side-column divider-left">';
 			$impact_and_events .= 					'<h2>' . $corner_hero_label . '</h2>';
-			$impact_and_events .= 					build_vertical_post($corner_hero_data);
+			$impact_and_events .= 					build_vertical_article($corner_hero_data);
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 			'</div>';
 			$impact_and_events .= 		'</div>';
 			$impact_and_events .= 	'</div>';
-			$impact_and_events .= '</div>';
+			$impact_and_events .= '</section>';
 			echo $impact_and_events;
 		} else {
-			$impacts_only  = '<div class="outer-container">';
+			$impacts_only  = '<section class="outer-container">';
 			$impacts_only .= 	'<div class="grid-container">';
 			$impacts_only .= 		'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			$impacts_only .= 	'</div>';
@@ -194,7 +194,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				$impacts_only .= '</div>';
 			}
 			$impacts_only .= 	'</div>';
-			$impacts_only .= '</div>';
+			$impacts_only .= '</section>';
 			echo $impacts_only;
 		}
 	?>
