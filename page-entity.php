@@ -656,7 +656,7 @@ get_header();
 			$quote_result = getRandomQuote($entityCategorySlug, array());
 			if ($quote_result) {
 				echo '<div class="bbg__entity__pullquote">';
-				outputQuote($quote_result);
+				output_quote($quote_result);
 				echo '</div>';
 			}
 		?>

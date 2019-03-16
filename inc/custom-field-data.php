@@ -210,7 +210,7 @@ function get_corner_hero_data() {
 		$q = getRandomQuote('allEntities', $postIDsUsed);
 		if ($q) {
 			$postIDsUsed[] = $q['ID'];
-			$quote = outputQuote($q, 'mention');
+			$quote = output_quote($q, 'mention');
 		}
 		$quote_package = array('toggle' => $toggle, 'type' => $c_type, 'quote_data' => $quote);
 		return $quote_package;
