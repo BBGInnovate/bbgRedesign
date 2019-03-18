@@ -1,6 +1,7 @@
 // THE FUNCTIONS PAGE FOR THESE ARTICLES ARE IN inc/article-structures-markup.php
 
 // GLOBAL STYLE FOR ARTICLE TEASERS
+.archive-column {@include grid-column(8);}
 .article-teaser {
 	border-bottom: 1px solid #f1f1f1;
 	margin-bottom: 2rem;
@@ -11,9 +12,37 @@
 }
 
 .vertical-article {/* NO ADDITIONAL STYLES NEEDED FOR STANDARD GRID */}
+.horizontal-half-article {/* USE .grid-half FOR STRUCTURE */}
 
-.horizontal-half-article {}
-.horizontal-one_third-image-article {}
+.horizontal-one-third-image-article {
+	@include media($medium-screen) {
+		.article-image {@include grid-column(4);}
+		.article-info {@include grid-column(8);}
+	}
+	@include media($medium-medium-screen) {
+		.article-image {@include grid-column(3);}
+		.article-info {@include grid-column(9);}
+	}
+	@include media($medium-large-screen) {
+		.article-image {@include grid-column(4);}
+		.article-info {@include grid-column(8);}
+	}
+}
+
+.horizontal-small-image-article {
+	@include media($medium-screen) {
+		.article-image {@include grid-column(4);}
+		.article-info {@include grid-column(8);}
+	}
+	@include media($medium-medium-screen) {
+		.article-image {@include grid-column(3);}
+		.article-info {@include grid-column(9);}
+	}
+	@include media($medium-large-screen) {
+		.article-image {@include grid-column(3);}
+		.article-info {@include grid-column(9);}
+	}
+}
 
 .image-title-article {
 	.article-image {@include grid-column(5);}
