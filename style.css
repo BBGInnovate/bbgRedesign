@@ -3109,9 +3109,15 @@ a:focus .bbg__article-share__icon {
       display: inline-block; } }
 
 .archive-column {
-  width: calc(66.66667% - 33.33333px);
+  width: calc(100% - 40px);
   float: left;
   margin-left: 20px; }
+
+@media screen and (min-width: 900px) {
+  .archive-column {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; } }
 
 .article-teaser {
   border-bottom: 1px solid #f1f1f1;
@@ -3119,6 +3125,13 @@ a:focus .bbg__article-share__icon {
   .article-teaser .article-image {
     overflow: hidden;
     margin-bottom: 1.5rem; }
+
+.main-head-article .feature-article-image {
+  height: 400px;
+  overflow: hidden; }
+  .main-head-article .feature-article-image img {
+    width: 100%;
+    height: auto; }
 
 .vertical-article {
   /* NO ADDITIONAL STYLES NEEDED FOR STANDARD GRID */ }
@@ -3223,6 +3236,46 @@ a:focus .bbg__article-share__icon {
     margin-left: 20px; }
   .image-title-article .article-info {
     width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px; } }
+
+.horizontal-image-title-only .article-image {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+.horizontal-image-title-only .article-info {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+@media screen and (min-width: 600px) {
+  .horizontal-image-title-only .article-image {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px; }
+  .horizontal-image-title-only .article-info {
+    width: calc(66.66667% - 33.33333px);
+    float: left;
+    margin-left: 20px; } }
+
+@media screen and (min-width: 700px) {
+  .horizontal-image-title-only .article-image {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
+  .horizontal-image-title-only .article-info {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; } }
+
+@media screen and (min-width: 900px) {
+  .horizontal-image-title-only .article-image {
+    width: calc(16.66667% - 23.33333px);
+    float: left;
+    margin-left: 20px; }
+  .horizontal-image-title-only .article-info {
+    width: calc(83.33333% - 36.66667px);
     float: left;
     margin-left: 20px; } }
 
