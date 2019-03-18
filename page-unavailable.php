@@ -194,15 +194,15 @@ require 'inc/custom-field-modules.php';
 					<h2>Mission</h2>
 					<p>The mission of USAGM is to inform, engage, and connect people around the world in support of freedom and democracy.</p>
 
-					<p class="aside">For more information, please contact BBG Public Affairs at <a href="tel:1-202-203-4400">(202) 203-4400</a> or by e-mail at <a href="mailto:publicaffairs@bbg.gov">pubaff@bbg.gov</a>.</p>
+					<p class="aside">For more information, please contact USAGM Public Affairs at <a href="tel:1-202-203-4400">(202) 203-4400</a> or by e-mail at <a href="mailto:publicaffairs@usagm.gov">pubaff@bbg.gov</a>.</p>
 				</div>
 				<div class="side-content-container">
 					<article>
 						<h5>Find us on social media</h5>
-						<a href="https://www.facebook.com/BBGgov/">
+						<a href="https://www.facebook.com/USAGMgov/">
 							<span class="bbg__article-share__icon facebook"></span>
 						</a>
-						<a href="https://twitter.com/BBGgov">
+						<a href="https://twitter.com/USAGMgov">
 							<span class="bbg__article-share__icon twitter"></span>
 						</a>
 					</article>
