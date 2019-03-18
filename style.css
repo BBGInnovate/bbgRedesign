@@ -6408,6 +6408,7 @@ div.banner_readmore h6 a:visited {
     background-image: linear-gradient(#333333, #222222);
     height: 100%; }
     #homepage-threats #threats-side-column article {
+      margin-bottom: 3rem;
       border-bottom: 2px solid #222222; }
 
 .full-width-banner .banner-image {
