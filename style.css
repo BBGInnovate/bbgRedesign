@@ -6413,7 +6413,7 @@ div.banner_readmore h6 a:visited {
 
 .full-width-banner .banner-image {
   background-size: cover;
-  height: 500px;
+  height: 300px;
   margin-bottom: 10px; }
 
 .full-width-banner .banner-caption {
@@ -6423,6 +6423,14 @@ div.banner_readmore h6 a:visited {
   font-style: italic;
   color: #aca299;
   padding: 0 15px; }
+
+@media screen and (min-width: 600px) {
+  .full-width-banner .banner-image {
+    height: 400px; } }
+
+@media screen and (min-width: 700px) {
+  .full-width-banner .banner-image {
+    height: 500px; } }
 
 #mission {
   margin: 0 auto 6rem auto; }

@@ -51,7 +51,7 @@
 .full-width-banner {
 	.banner-image {
 		background-size: cover;
-		height: 500px;
+		height: 300px;
 		margin-bottom: 10px;
 	}
 	.banner-caption {
@@ -62,7 +62,15 @@
 		color: $color-taupe-light;
 		padding: 0 15px;
 	}
+	@include media($medium-screen) {
+		.banner-image {height: 400px;}
+	}
+	@include media($medium-medium-screen) {
+		.banner-image {height: 500px;}
+	}
 }
+
+
 #mission {
 	margin: 0 auto 6rem auto;
 	.grid-container {border-bottom: 1px solid #EAEBF0;}
