@@ -5,7 +5,7 @@ function build_main_head_article() {
 	$article_structure  = '<article class="main-head-article article-teaser">';
 	if (!empty(get_the_permalink($article_data))) {
 		$article_structure .= '<div class="feature-article-image">';
-		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a>';
+		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data, 'large') . '</a>';
 		$article_structure .= '</div>';
 	}
 	$article_structure .= 	'<div class="article-info">';
@@ -23,7 +23,7 @@ function build_vertical_article($article_data) {
 	$article_structure  = '<article class="vertical-article article-teaser">';
 	if (!empty(get_the_permalink($article_data))) {
 		$article_structure .= '<div class="article-image">';
-		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a>';
+		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data, 'large') . '</a>';
 		$article_structure .= '</div>';
 	}
 	$article_structure .= 	'<div class="article-info">';
@@ -44,7 +44,7 @@ function build_horizontal_half_article($article_data) {
 	$article_structure .= 			'<div class="grid-half">';
 	if (!empty(get_the_permalink($article_data))) {
 		$article_structure .= 			'<div class="article-image">';
-		$article_structure .= 				'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a>';
+		$article_structure .= 				'<a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data, 'large') . '</a>';
 		$article_structure .= 			'</div>';
 	}
 	$article_structure .= 			'</div>';
@@ -70,7 +70,7 @@ function build_horizontal_one_third_image_article($article_data) {
 	$article_structure .= 	'<div class="nest-container">';
 	$article_structure .= 		'<div class="inner-container">';
 	if (!empty(get_the_permalink($article_data))) {
-		$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+		$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data, 'large') . '</a></div>';
 	}
 	$article_structure .= 			'<div class="article-desc article-info">';
 	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
@@ -91,7 +91,7 @@ function build_horizontal_small_image_article($article_data) {
 	$article_structure .= 		'<div class="inner-container">';
 	if (get_the_post_thumbnail($article_data)) {
 		if (!empty(get_the_permalink($article_data))) {
-			$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+			$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data, 'large') . '</a></div>';
 		}
 	}
 	$article_structure .= 			'<div class="article-desc article-info">';
@@ -127,7 +127,7 @@ function build_image_title_article($article_data) {
 	$article_structure .= 	'<div class="nest-container">';
 	$article_structure .= 		'<div class="inner-container">';
 	if (!empty(get_the_permalink($article_data))) {
-		$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+		$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data, 'large') . '</a></div>';
 	}
 	$article_structure .= 			'<div class="article-desc article-info">';
 	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
@@ -145,7 +145,7 @@ function build_horizontal_image_title_only_article($article_data) {
 	$article_structure .= 		'<div class="inner-container">';
 	if (!empty(get_the_post_thumbnail($article_data))) {
 		if (!empty(get_the_permalink($article_data))) {
-			$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data) . '</a></div>';
+			$article_structure .= 			'<div class="article-image"><a href="' . get_the_permalink($article_data) . '">' . get_the_post_thumbnail($article_data, 'large') . '</a></div>';
 		}
 	}
 	$article_structure .= 			'<div class="article-desc article-info">';
