@@ -169,17 +169,23 @@ function scaleArticleImages() {
 	var postImageBox = $('.article-image');
 
 	$.each(postImageBox, function() {
-		var curBox = $(this);
-		dynamicProportionHeight = $(this).width() * scale;
-		curBox.height(dynamicProportionHeight);
-		if (curBox.children('a').children('img').height() < dynamicProportionHeight) {
-			var dynamicProportionWidth = curBox.height() / scale;
-			curBox.children('a').children('img').css({
-				'height': curBox.height(),
-				'width': dynamicProportionWidth
+		var curImgDiv = $(this),
+			imgDivWidth = curImgDiv.width(),
+			imgDivHeight = curImgDiv.height();
+		var curImg = curImgDiv.children('a').children('img'),
+			imgWidth = curImg.width(),
+			imgHeight = curImg.height();
+		var curProperHeight = imgDivWidth * scale,
+			curProperWidth;
+
+		if (imgDivHeight != curProperHeight) {
+			var curProperWidth = curProperHeight / scale
+			curImg.css({
+				'height' : curProperHeight,
+				'width' : curProperWidth
 			});
 		}
-	})
+	});
 }
 scaleArticleImages();
 
