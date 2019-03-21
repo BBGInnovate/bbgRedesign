@@ -37,6 +37,8 @@ function build_vertical_article($article_data) {
 	$article_structure .= 		'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
+	} else {
+		$article_structure .= 	'<p class="excerpt">' . wp_trim_words($article_data->post_content, 60) . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
 	}
 	$article_structure .= 	'</div>';
 	$article_structure .= '</article>';

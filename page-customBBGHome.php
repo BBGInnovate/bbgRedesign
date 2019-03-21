@@ -190,7 +190,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				$impact_post = get_post($impact_post_id);
 
 				$impacts_only .= '<div class="grid-half">';
-				$impacts_only .= 	build_vertical_post($impact_post);
+				$impacts_only .= 	build_vertical_article($impact_post);
 				$impacts_only .= '</div>';
 			}
 			$impacts_only .= 	'</div>';

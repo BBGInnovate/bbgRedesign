@@ -3125,6 +3125,8 @@ a:focus .bbg__article-share__icon {
   .article-teaser .article-image {
     overflow: hidden;
     margin-bottom: 1.5rem; }
+    .article-teaser .article-image img {
+      margin-bottom: 0; }
 
 .main-head-article .feature-article-image {
   height: auto;
@@ -5221,9 +5223,6 @@ ol li:before {
     display: inline-block; } }
 
 /* FILE CONTENTS */
-.alm-btn-wrap .alm-load-more-btn {
-  background: #3f7ad1 !important; }
-
 .date-meta {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 0.9em;
