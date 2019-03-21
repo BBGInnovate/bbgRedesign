@@ -6426,6 +6426,8 @@ div.banner_readmore h6 a:visited {
     padding: 2em; }
     #homepage-threats #threats-main-column article {
       margin-bottom: 0; }
+      #homepage-threats #threats-main-column article img {
+        margin-bottom: 0; }
   #homepage-threats #threats-side-column {
     padding: 2em;
     background-image: linear-gradient(#333333, #222222);

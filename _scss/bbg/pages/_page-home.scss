@@ -21,7 +21,6 @@
 	background-position: left;
 	background-size: contain;
 	background-color: #222222;
-	// height: 100%;
 	margin-bottom: 7.5rem;
 
 	.outer-container {margin-bottom: 0;}
@@ -32,6 +31,7 @@
 		padding: 2em;
 		article {
 			margin-bottom: 0;
+			img {margin-bottom: 0;}
 		}
 	}
 	#threats-side-column {
