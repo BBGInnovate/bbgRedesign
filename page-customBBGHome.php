@@ -200,7 +200,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	?>
 
 	<!-- THREATS TO PRESS RIBBON -->
-	<?php		
+	<?php
 		$threat_article_list = get_threats_to_press_posts($recent_posts['used_posts']);
 
 		$threat_structure  = '<section class="threats-box" id="homepage-threats">';

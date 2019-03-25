@@ -186,7 +186,6 @@ function get_corner_hero_data() {
 			$cornerHeroClass = 'bbg__advisory-announcement';
 		}
 		$corner_hero_id = $cornerHeroPost -> ID;
-		// $cornerHeroPermalink = get_the_permalink($corner_hero_id);
 
 		/* permalinks for future posts by default don't return properly. fix that. */
 		if ($cornerHeroPost -> post_status == 'future') {
@@ -247,7 +246,7 @@ function get_threats_to_press_posts($used_homepage_posts) {
 		$featured_threat_array = array();
 		$featured_threats_args = array(
 			'post__in' => $selected_threats_posts,
-			'post__not_in' => $used_homepage_posts,
+			'post__not_in' => array($used_homepage_posts),
 		);
 		$featured_threats_query = new WP_Query($featured_threats_args);
 		$featured_threat_array[] = $featured_threats_query->posts;
@@ -271,7 +270,7 @@ function get_threats_to_press_posts($used_homepage_posts) {
 		'cat' => array(68),
 		'orderby' => 'post_date',
 		'order' => 'desc',
-		'post__not_in' => $used_threats_posts
+		'post__not_in' => $used_homepage_posts
 	);
 	$recent_threats_query = new WP_Query($recent_threat_query_params);
 	$all_recent_threats[] = $recent_threats_query->posts;
@@ -324,6 +323,9 @@ function get_umbrella_main_data() {
 }
 
 function get_umbrella_content_data($umbrella_content_type, $grid_class) {
+	$force_content_labels = '';
+	$file_ext = '';
+	$file_size = '';
 	if ($umbrella_content_type == 'umbrella_content_internal') {
 		$column_title = get_sub_field('umbrella_content_internal_column_title');
 		$page_object = get_sub_field('umbrella_content_internal_link');

@@ -110,6 +110,7 @@ function build_ribbon_parts($ribbon_data) {
 }
 
 function build_marquee_parts($marquee_data) {
+	$link = $marquee_data['link'];
 	if (!empty($marquee_data['heading'])) {
 		if (!empty($marquee_data['link'])) {
 			$header = '<h3><a href="' . $marquee_data['link'] . '">' . $marquee_data['heading'] . '</a></h3>';
@@ -128,6 +129,8 @@ function build_marquee_parts($marquee_data) {
 }
 
 function build_umbrella_main_parts($umbrella_main_data) {
+	$header = '';
+	$overhead_text = '';
 	if ($umbrella_main_data['header'] != "") {
 		if (!empty($umbrella_main_data['intro_text'])) {
 			$header  = '<h3>' . 	$umbrella_main_data['header'] . '</h3>';
@@ -147,6 +150,8 @@ function build_umbrella_main_parts($umbrella_main_data) {
 
 function build_umbrella_content_parts($content_data) {
 	$link_target = '';
+	$description = '';
+	$column_title = '';
 	if ($content_data['column_type'] == 'umbrella_content_external' || $content_data['column_type'] == 'umbrella_content_file') {
 		$link_target = ' target="_blank"';
 	}

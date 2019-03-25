@@ -115,6 +115,7 @@ function get_recent_posts($qty) {
 	$recent_post_query = new WP_Query($recent_posts_args);
 	$recent_query_array = $recent_post_query->posts;
 	foreach ($recent_query_array as $recent_query) {
+		$used_posts[] =  $recent_query -> ID;
 		$all_recent_posts[] = $recent_query;
 	}
 
@@ -122,7 +123,6 @@ function get_recent_posts($qty) {
 		'posts' => $all_recent_posts,
 		'used_posts' => $used_posts
 	);
-	
 	return $post_package;
 }
 
