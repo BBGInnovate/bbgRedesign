@@ -35,7 +35,11 @@ echo '<article id="'. get_the_ID() . '">';
 	$post_image .= '</a>';
 	echo $post_image;
 
-	echo buildLabel(implode(get_post_class($classNames))); //check bbg-functions-utilities
+	if (!empty($classNames)) {
+		echo buildLabel(implode(get_post_class($classNames))); //check bbg-functions-utilities
+	} else {
+		echo buildLabel(implode(get_post_class())); //check bbg-functions-utilities
+	}
 
 	$link_header  = '<h4>';
 	$link_header .= 	'<a href="' . $postPermalink . '">';

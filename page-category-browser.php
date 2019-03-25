@@ -214,9 +214,9 @@ get_header();
 
 					if ((is_page('deep-dive-series') && $counter == 1) || ($counter > 1 && $currentPage == 1 || $currentPage > 1)) {
 						echo '<div class="grid-third">';
-						$post_image = '<a href="' . $postPermalink . '" rel="bookmark" tabindex="-1">';
+						$post_image = '<a href="' . get_the_permalink() . '" rel="bookmark" tabindex="-1">';
 						if (has_post_thumbnail()) {
-							$post_image .= the_post_thumbnail('medium-thumb');
+							$post_image .= get_the_post_thumbnail(get_the_ID(), 'medium-thumb');
 						} else {
 							$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
 						}

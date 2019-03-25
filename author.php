@@ -80,7 +80,7 @@ if ($isCEO) {
 		global $author_primary_post;
 		global $postIDsUsed;
 
-		if ($featuredPostID == 0) {
+		if (!empty($featuredPostID) && ($featuredPostID == 0)) {
 			$author_primary_post_query = array(
 				'post_type' => array('post'),
 				'posts_per_page' => 1,
@@ -200,7 +200,7 @@ get_header();
 			echo $author_avatar;
 
 			get_primary_post_data();
-			if ($author_primary_post -> have_posts()) {
+			if (!empty($author_primary_post) && $author_primary_post -> have_posts()) {
 				$author_featured_post  = '<div class="outer-container">';
 				$author_featured_post .= 	'<div class="grid-container">';
 				$author_featured_post .= 		'<h2><a href="/category/from-the-ceo">From the CEO</a></h2>';

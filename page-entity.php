@@ -292,7 +292,7 @@ if (count($pressReleases)) {
 		$url = $pr['url'];
 		$title = $pr['title'];
 
-		$press_markup .= '<div>';
+		$press_markup  = '<div>';
 		$press_markup .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
 		$press_markup .= 	'<p>' . $pr['excerpt'] . '</p>';
 		$press_markup .= '</div>';
@@ -327,7 +327,11 @@ if ($custom_query -> have_posts()) {
 		$awardTitle = get_post_meta( $id, 'standardpost_award_title', true );
 		$orgTerms = get_field( 'standardpost_award_organization', $id );
 	    $organizations = array();
-	    $organizations[] = $orgTerms -> name;
+	    if (!empty($organizations)) {
+	    	$organizations[] = $orgTerms -> name;
+	    } else {
+	    	$organizations = '';
+	    }
 
 
 		$recipients = get_post_meta( $id, 'standardpost_award_recipient' );
@@ -345,7 +349,7 @@ if ($custom_query -> have_posts()) {
 }
 wp_reset_postdata();
 $s = "";
-if ( count($awards) ) {
+if (count($awards)) {
 	foreach ( $awards as $a ) {
 		$id = $a['id'];
 		$url = $a['url'];
@@ -355,10 +359,12 @@ if ( count($awards) ) {
 		$organizations = $a['organizations'];
 		$recipients = $a['recipients'];
 
-		$awards_markup .= '<div>';
+		$awards_markup  = '<div>';
 		$awards_markup .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
 		$awards_markup .= 	'<p>';
-		$awards_markup .= 		'<span>' . $awardTitle . ', ' . join($organizations) . '</span>';
+		if (!empty($organizations)) {
+			$awards_markup .= 		'<span>' . $awardTitle . ', ' . join($organizations) . '</span>';
+		}
 		$awards_markup .= 		'(' . join($awardYears) . ')';
 		$awards_markup .= 	'</p>';
 		$awards_markup .= 	'<p>' . $a['excerpt'] . '</p>';
@@ -375,7 +381,7 @@ $page_content = str_replace("[awards]", $awards_markup, $page_content);
 $threats = array();
 $threatsCategoryObj = get_category_by_slug("threats-to-press");
 $threatsCategoryID = $threatsCategoryObj->term_id;
-if ($entity_category_slug != "") {
+if (!empty($entity_category_slug)) {
 	if (is_object($entityCategoryObj)) {
 		$entityCategoryID = $entityCategoryObj->term_id;
 		$qParams = array(
@@ -479,10 +485,10 @@ get_header();
 			<article>
 				<div id="social-share">
 					<h5>Share</h5>
-					<a href="<?php echo $fbUrl; ?>">
+					<a href="<?php echo get_field('entity_facebook'); ?>" target="_blank">
 						<span class="bbg__article-share__icon facebook"></span>
 					</a>
-					<a href="<?php echo $twitterURL; ?>">
+					<a href="https://twitter.com/<?php echo get_field('entity_twitter_handle'); ?>" target="_blank">
 						<span class="bbg__article-share__icon twitter"></span>
 					</a>
 				</div>
@@ -625,8 +631,12 @@ get_header();
 				$contact_box .= 	'<div class="bbg__contact-card">';
 				$contact_box .= 		$address;
 				$contact_box .= 		'<ul class="no-list-style">';
-				$contact_box .= 			$phone_li;
-				$contact_box .= 			$email_li;
+				if (!empty($phone_li)) {
+					$contact_box .= 			$phone_li;
+				}
+				if (!empty($email_li)) {
+					$contact_box .= 			$email_li;
+				}
 				$contact_box .= 			$learnMore;
 				$contact_box .= 		'</ul>';
 				$contact_box .= 	'</div>';

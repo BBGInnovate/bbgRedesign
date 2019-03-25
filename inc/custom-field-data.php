@@ -326,6 +326,8 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 	$force_content_labels = '';
 	$file_ext = '';
 	$file_size = '';
+	$layout = '';
+	$law_name = '';
 	if ($umbrella_content_type == 'umbrella_content_internal') {
 		$column_title = get_sub_field('umbrella_content_internal_column_title');
 		$page_object = get_sub_field('umbrella_content_internal_link');
@@ -523,6 +525,8 @@ function get_office_highlights_data() {
 			}
 		}
 		$office_highlights_query = new WP_Query($office_highlight_param);
+	} else {
+		$office_highlights_query = '';
 	}
 	return $office_highlights_query;
 }

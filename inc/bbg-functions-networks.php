@@ -56,7 +56,7 @@ function getNetworkExcerptJS() {
 	return $entity_script;
 }
 
-function outputBroadcasters($cols) {
+function outputBroadcasters($cols = '') {
 	$entityParentPage = get_page_by_path('networks');
 	$qParams = array(
 		'post_type' => array('page'),
@@ -106,7 +106,11 @@ function outputBroadcasters($cols) {
 }
 
 function broadcasters_list_shortcode($atts) {
-	return outputBroadcasters($atts['placement']);
+	if (!empty($atts['placement'])) {
+		return outputBroadcasters($atts['placement']);
+	} else {
+		return outputBroadcasters();
+	}
 }
 add_shortcode('broadcasters_list', 'broadcasters_list_shortcode');
 

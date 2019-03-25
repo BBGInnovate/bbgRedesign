@@ -347,13 +347,17 @@ function bbginnovate_modify_the_loop(&$query) {
 			get_cat_id('Media Advisory')
 		);
 
-		if (!($query->is_archive()) || strtolower($query->query['category_name']) != 'special-days') {
-			array_push($termsToExclude, get_cat_id('Special Days'));
+		if (!empty($query->query['category_name'])) {
+			if (!($query->is_archive()) || strtolower($query->query['category_name']) != 'special-days') {
+				array_push($termsToExclude, get_cat_id('Special Days'));
+			}
 		}
 
 		//don't allow impact stories on the news page either
-		if (!($query->is_archive()) || (strpos(strtolower($query->query['category_name']), 'impact') === false) ) {
-			array_push($termsToExclude, get_cat_id('Impact'));
+		if (!empty($query->query['category_name'])) {
+			if (!($query->is_archive()) || (strpos(strtolower($query->query['category_name']), 'impact') === false) ) {
+				array_push($termsToExclude, get_cat_id('Impact'));
+			}
 		}
 
 		$tax_query = array(

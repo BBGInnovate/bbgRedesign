@@ -113,7 +113,7 @@ function outputBoardMembers($showActive) {
 
 				$member_block .= $member_position;
 			} else {
-				$memeber_content .= '<h4 class="bbg__profile-excerpt__name">';
+				$memeber_content  = '<h4 class="bbg__profile-excerpt__name">';
 				$memeber_content .= 	'<a href="' . get_the_permalink() . '">' . $board_member_name . '</a>';
 				$memeber_content .= '</h4>';
 				$memeber_content .= '<p style="margin-top: 0;">' . get_the_excerpt() . '</p>';
@@ -215,7 +215,7 @@ function outputSeniorManagement($type) {
 		}
 	}
 	
-	$s .= '<div class="nest-container">';
+	$s  = '<div class="nest-container">';
 	$s .= 	$mgmg_profile_block;
 	$s .= '</div>';
 

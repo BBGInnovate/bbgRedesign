@@ -40,7 +40,7 @@ if (have_posts()) {
 	if ($isActing) {
 		$occupation = "Acting ";
 	}
-	$occupation .= get_post_meta($id, 'occupation', true);
+	$occupation = get_post_meta($id, 'occupation', true);
 	$email = get_post_meta($id, 'email', true);
 	$phone = get_post_meta($id, 'phone', true);
 	$twitterProfileHandle = get_post_meta($id, 'twitter_handle', true);

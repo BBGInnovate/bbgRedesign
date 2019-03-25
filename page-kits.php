@@ -48,7 +48,9 @@ if (is_object($awardCategoryObj)) {
 			$awardTitle = get_post_meta($id, 'standardpost_award_title', true);
 			$orgTerms = get_field('standardpost_award_organization', $id);
 		    $organizations = array();
-		    $organizations[] = $orgTerms -> name;
+		    if (!empty($organizations)) {
+		    	$organizations[] = $orgTerms -> name;
+		    }
 			$entity = get_post_meta($id, 'standardpost_award_recipient');
 			$description = get_post_meta($id, 'standardpost_award_description');
 
@@ -179,6 +181,7 @@ function get_kits_umbrella_main_data() {
 	return $kits_main_data;
 }
 function get_kits_umbrella_content_data($layout_type) {
+	$file = '';
 	if ($layout_type == 'kits_internal_page') {
 		$column_title = get_sub_field('kits_column_title');
 		$thumbnail = get_sub_field('kits_thumbnail');

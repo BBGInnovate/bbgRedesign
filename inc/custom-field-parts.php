@@ -149,7 +149,9 @@ function build_umbrella_main_parts($umbrella_main_data) {
 }
 
 function build_umbrella_content_parts($content_data) {
+	$item_title = '';
 	$link_target = '';
+	$image = '';
 	$description = '';
 	$column_title = '';
 	if ($content_data['column_type'] == 'umbrella_content_external' || $content_data['column_type'] == 'umbrella_content_file') {

@@ -1,6 +1,7 @@
 <?php
 // test function, original is underneath
 function get_feature_media_data($home_page = NULL) {
+	$id = get_the_ID();
 	$feature_gallery = get_post_meta(get_the_ID(), 'featured_gallery_add', true);
 	$banner_position = get_field('adjust_the_banner_image', '', true);
 	$banner_position_css_override = get_field('adjust_the_banner_image_css', '', true);
@@ -37,7 +38,7 @@ function get_feature_media_data($home_page = NULL) {
 	}
 	elseif (has_post_thumbnail()) {
 		$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($id), 'post_type' => 'attachment'));
-		$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+		$src = wp_get_attachment_image_src(get_post_thumbnail_id($id), array(700, 450), false, '');
 		$featuredImageClass = "";
 		$featuredImageCutline = "";
 
