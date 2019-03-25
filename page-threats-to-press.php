@@ -19,9 +19,9 @@ if (have_posts()) {
 		$page_content = get_the_content();
 		$page_title = get_the_title();
 		$page_excerpt = get_the_excerpt();
-		$ogDescription = $page_excerpt;
-		$page_content = apply_filters('the_content', $page_content);
-		$page_content = str_replace(']]>', ']]&gt;', $page_content);
+		// $ogDescription = $page_excerpt;
+		// $page_content = apply_filters('the_content', $page_content);
+		// $page_content = str_replace(']]>', ']]&gt;', $page_content);
 		$page_id = get_the_ID();
 	}
 }
@@ -263,14 +263,15 @@ echo $threats_map_json;
 		<div class="grid-container">
 			<?php
 				echo '<h2>' . $page_title . '</h2>';
-				echo '<p>' . $page_content . '</p>';
+				echo '<p class="lead-in">' . $page_content . '</p>';
 			?>
+		</div>
+	</section>
 
 	<?php
 		// NEWS AND UPDATES
-		$threat_structure  = '<section class="threats-box">';
-		$threat_structure .= 	'<div class="outer-container">';
-		$threat_structure .= 		'<div class="grid-half" id="threats-main-column">';
+		$threat_structure  = '<section class="outer-container threats-box" style="border: 1px solid pink">';
+		$threat_structure .= 	'<div class="grid-half" id="threats-main-column" style="border: 1px solid blue">';
 		$threat_structure .= 			'<article>';
 		$threat_structure .= 				'<div class="article-image">';
 		$threat_structure .= 					'<a href="' . get_the_permalink($threats_posts[0]) . '">';
@@ -281,21 +282,18 @@ echo $threats_map_json;
 		$threat_structure .= 					'<h4><a href="' . get_the_permalink($threats_posts[0]) . '">' . get_the_title($threats_posts[0]) . '</a></h4>';
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 			'</article>';
-		$threat_structure .= 		'</div>';
-		$threat_structure .= 		'<div class="grid-half" id="threats-side-column">';
+		$threat_structure .= 	'</div>';
+		$threat_structure .= 	'<div class="grid-half" id="threats-side-column" style="border: 1px solid blue">';
 		$secondary_threats = array_shift($threats_posts);
 		foreach ($threats_posts as $recent_threat) {
 			$threat_structure .= 		'<article>';
 			$threat_structure .= 			'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
 			$threat_structure .= 		'</article>';
 		}
-		$threat_structure .= 		'</div>';
 		$threat_structure .= 	'</div>';
 		$threat_structure .= '</section>';
 		echo $threat_structure;
 	?>
-		</div>
-	</section>
 
 	<?php
 		$featuredJournalists = "";

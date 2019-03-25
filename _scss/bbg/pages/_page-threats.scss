@@ -2,22 +2,24 @@
 	.outer-container {margin-bottom: 0;}
 	article {border-bottom: 1px solid #f1f1f1;}
 	#threats-main-column {
-		margin-left: 0;
-		padding: 2em 0 2em 0;
+		margin-bottom: 1.5rem;
+		// margin-left: 0;
+		// padding: 2em 0 2em 0;
 		article {
 			margin-bottom: 0;
 			img {margin-bottom: 0;}
 		}
 	}
 	#threats-side-column {
-		margin-left: 0;
-		padding: 2em 0 2em 0;
+		// margin-left: 0;
+		// padding: 2em 0 2em 0;
 		article {
 			margin-bottom: 3rem;
 		}
-		@include media($medium-medium-screen) {
-			margin-left: 20px;
-		}
+	}
+
+	@include media($medium-medium-screen) {
+		
 	}
 }
 
