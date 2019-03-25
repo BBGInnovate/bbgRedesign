@@ -270,8 +270,8 @@ echo $threats_map_json;
 
 	<?php
 		// NEWS AND UPDATES
-		$threat_structure  = '<section class="outer-container threats-box" style="border: 1px solid pink">';
-		$threat_structure .= 	'<div class="grid-half" id="threats-main-column" style="border: 1px solid blue">';
+		$threat_structure  = '<section class="outer-container threats-box">';
+		$threat_structure .= 	'<div class="grid-half" id="threats-main-column">';
 		$threat_structure .= 			'<article>';
 		$threat_structure .= 				'<div class="article-image">';
 		$threat_structure .= 					'<a href="' . get_the_permalink($threats_posts[0]) . '">';
@@ -283,7 +283,7 @@ echo $threats_map_json;
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 			'</article>';
 		$threat_structure .= 	'</div>';
-		$threat_structure .= 	'<div class="grid-half" id="threats-side-column" style="border: 1px solid blue">';
+		$threat_structure .= 	'<div class="grid-half" id="threats-side-column">';
 		$secondary_threats = array_shift($threats_posts);
 		foreach ($threats_posts as $recent_threat) {
 			$threat_structure .= 		'<article>';
