@@ -95,7 +95,6 @@ function get_recent_posts($qty) {
 			'orderby' => 'post_date',
 			'order' => 'desc',
 			'category__not_in' => array(3, 36, 38, 45, 55, 56, 68, 1046, 1244),
-			'post__not_in' => $used_id,
 			'tax_query' => array(
 				'relation' => 'OR',
 				array(
@@ -118,8 +117,13 @@ function get_recent_posts($qty) {
 	foreach ($recent_query_array as $recent_query) {
 		$all_recent_posts[] = $recent_query;
 	}
+
+	$post_package = array(
+		'posts' => $all_recent_posts,
+		'used_posts' => $used_posts
+	);
 	
-	return $all_recent_posts;
+	return $post_package;
 }
 
 // IMPACT STORIES

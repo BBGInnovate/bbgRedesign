@@ -23,13 +23,13 @@ function build_soapbox_parts($soap_data) {
 		$soap_heading = '<h2>' . $soap_data['header_text'] . '</h2>';
 	}
 
-	$soap_title .= '<h4>';
+	$soap_title  = '<h4>';
 	$soap_title .= 	'<a href="' . $soap_data['post_link'] . '">';
 	$soap_title .= 		$soap_data['title'];
 	$soap_title .= 	'</a>';
 	$soap_title .= '</h4>';
 
-	$soap_content .= '<p class="aside">';
+	$soap_content  = '<p class="aside">';
 	$soap_content .= 	my_excerpt($soap_data['post_id']);
 	$soap_content .= '</p>';
 

@@ -28,7 +28,7 @@ $recent_post_counter = 0;
 $feature_recent_post = '';
 $secondary_recent_posts = array();
 
-foreach ($recent_posts as $cur_recent_post) {
+foreach ($recent_posts['posts'] as $cur_recent_post) {
 	if ($recent_post_counter == 0) {
 		$feature_recent_post = $cur_recent_post;
 	} else {
@@ -201,7 +201,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 
 	<!-- THREATS TO PRESS RIBBON -->
 	<?php		
-		$threat_article_list = get_threats_to_press_posts();
+		$threat_article_list = get_threats_to_press_posts($recent_posts['used_posts']);
 
 		$threat_structure  = '<section class="threats-box" id="homepage-threats">';
 		$threat_structure .= 	'<div class="outer-container">';
