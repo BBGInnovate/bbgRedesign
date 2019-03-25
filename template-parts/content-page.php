@@ -62,14 +62,21 @@ endif;
 				$parent_link_markup .= 	'<a href"' . $parent_link_data . '">' . $parent -> post_title . '</a>';
 				$parent_link_markup .= '</h2>';
 
-				$page_header .= $parent_link_markup;
+				if (!empty($page_header)) {
+					$page_header .= $parent_link_markup;
+				}
 			}
 
 			$page_header  = 	'<h2>' . get_the_title() . '</h2>';
 			echo $page_header;
 		?>
-
-		<div class="entry-content bbg__article-content <?php echo $featuredImageClass; ?>">
+		<?php
+			if (!empty($featuredImageClass)) {
+				echo '<div class="entry-content bbg__article-content' . $featuredImageClass . '">';
+			} else {
+				echo '<div class="entry-content bbg__article-content">';
+			}
+		?>
 			<?php
 			$pageTagline = get_field('page_tagline');
 			if ( $pageTagline ) {
@@ -110,7 +117,7 @@ endif;
 				if ($includeSidebar && $sidebarTitle != "") {
 					echo $sidebar;
 				}
-				if ($secondaryColumnContent != "") {
+				if (!empty($secondaryColumnContent)) {
 					echo $secondaryColumnContent;
 				}
 				echo $sidebarDownloads;

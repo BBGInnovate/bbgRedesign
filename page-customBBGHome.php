@@ -203,30 +203,30 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	<?php		
 		$threat_article_list = get_threats_to_press_posts();
 
-		$threat_structure  = '<section id="homepage-threats">';
-		$threat_structure .= '<div class="outer-container">';
-		$threat_structure .= 	'<div class="grid-half" id="threats-main-column">';
-		$threat_structure .= 		'<h2><a href="' . get_permalink(get_page_by_path('threats-to-press-2')) . '">Threats to Press</a></h2>';
-		$threat_structure .= 		'<article>';
-		$threat_structure .= 			'<div class="article-image">';
-		$threat_structure .= 				'<a href="' . get_the_permalink($threat_article_list[0]) . '">';
-		$threat_structure .= 					'<img src="' . get_the_post_thumbnail_url($threat_article_list[0], 'large') . '" alt="Image link to ' . get_the_title($threat_article_list[0]) . ' post">';
-		$threat_structure .= 				'</a>';
-		$threat_structure .= 			'</div>';
-		$threat_structure .= 			'<div class="article-info">';
-		$threat_structure .= 				'<h4><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_title($threat_article_list[0]) . '</a></h4>';
-		$threat_structure .= 			'</div>';
-		$threat_structure .= 		'</article>';
-		$threat_structure .= 	'</div>';
-		$threat_structure .= 	'<div class="grid-half" id="threats-side-column">';
+		$threat_structure  = '<section class="threats-box" id="homepage-threats">';
+		$threat_structure .= 	'<div class="outer-container">';
+		$threat_structure .= 		'<div class="grid-half" id="threats-main-column">';
+		$threat_structure .= 			'<h2><a href="' . get_permalink(get_page_by_path('threats-to-press-2')) . '">Threats to Press</a></h2>';
+		$threat_structure .= 			'<article>';
+		$threat_structure .= 				'<div class="article-image">';
+		$threat_structure .= 					'<a href="' . get_the_permalink($threat_article_list[0]) . '">';
+		$threat_structure .= 						'<img src="' . get_the_post_thumbnail_url($threat_article_list[0], 'large') . '" alt="Image link to ' . get_the_title($threat_article_list[0]) . ' post">';
+		$threat_structure .= 					'</a>';
+		$threat_structure .= 				'</div>';
+		$threat_structure .= 				'<div class="article-info">';
+		$threat_structure .= 					'<h4><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_title($threat_article_list[0]) . '</a></h4>';
+		$threat_structure .= 				'</div>';
+		$threat_structure .= 			'</article>';
+		$threat_structure .= 		'</div>';
+		$threat_structure .= 		'<div class="grid-half" id="threats-side-column">';
 		$secondary_threats = array_shift($threat_article_list);
 		foreach ($threat_article_list as $recent_threat) {
-			$threat_structure .= 	'<article>';
-			$threat_structure .= 		'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
-			$threat_structure .= 	'</article>';
+			$threat_structure .= 		'<article>';
+			$threat_structure .= 			'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
+			$threat_structure .= 		'</article>';
 		}
+		$threat_structure .= 		'</div>';
 		$threat_structure .= 	'</div>';
-		$threat_structure .= '</div>';
 		$threat_structure .= '</section>';
 		echo $threat_structure;
 	?>

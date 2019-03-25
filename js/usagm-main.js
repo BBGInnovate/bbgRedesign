@@ -176,10 +176,9 @@ function scaleArticleImages() {
 			imgWidth = curImg.width(),
 			imgHeight = curImg.height();
 		var curProperHeight = imgDivWidth * scale,
-			curProperWidth;
+			curProperWidth = curProperHeight / scale;
 
 		if (imgDivHeight != curProperHeight) {
-			var curProperWidth = curProperHeight / scale
 			curImg.css({
 				'height' : curProperHeight,
 				'width' : curProperWidth

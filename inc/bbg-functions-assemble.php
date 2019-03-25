@@ -75,12 +75,14 @@ function get_feature_media_data($home_page = NULL) {
 		$featured_data = $post_featured_image;
 	}
 
-	$featured_setup  = '<div class="feautre-banner">';
-	$featured_setup .= 		$featured_data;
-	$featured_setup .= '</div>';
-
 	if (!empty($featured_data)) {
+		$featured_setup  = '<div class="feautre-banner">';
+		$featured_setup .= 		$featured_data;
+		$featured_setup .= '</div>';
+
 		return $featured_setup;
+	} else {
+		return '';
 	}
 }
 

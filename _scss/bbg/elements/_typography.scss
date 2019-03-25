@@ -104,6 +104,14 @@ p.lead-in {
     a:link, a:visited {color: $black6;}
     a:hover, a:active {color: $color-cool-blue;}
 }
+p.banner-caption {
+    text-align: right;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-style: italic;
+    color: $color-taupe-light;
+    padding: 0 15px;
+}
 
 ul, ol {padding-left: 1em;}
 ul.unstyled-list {padding-left: 0;}

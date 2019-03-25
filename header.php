@@ -273,7 +273,7 @@ gtag('config', 'UA-124338348-1');
 				$search_box .= 	'</form>';
 				$search_box .= '</div>';
 
-				$social_box .= '<div class="social-header">';
+				$social_box  = '<div class="social-header">';
 				$social_box .= 	'<ul class="unstyled-list">';
 				$social_box .= 		'<li id="facebook-social"><a href="' . $facebook_settings_link . '" target="_blank"><i class="fab fa-facebook"></i></a></li>';
 				$social_box .= 		'<li id="twitter-social"><a href="' . $twitter_settings_link . '" target="_blank"><i class="fab fa-twitter"></i></a></li>';

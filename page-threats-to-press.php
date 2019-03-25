@@ -8,150 +8,125 @@
   template name: Threats to Press
  */
 
-function getThreatsCustomPosts($cutoffDate) {
-	/* get two of the most recent 6 impact posts for use on the homepage */
-	$qParams = array(
-		'post_type'=> 'threat_to_press',
-		'post_status' => 'publish',
-		'orderby' => 'post_date',
-		'order' => 'desc',
-		'posts_per_page' => -1,
-		'date_query' => array(
-	        array(
-	            'after' => "$cutoffDate"
-	        )
-	    )
-	);
-
-	$custom_query = new WP_Query( $qParams );
-	
-	$threats = array();
-	if ( $custom_query->have_posts() ) :
-		while ( $custom_query->have_posts() ) : $custom_query->the_post();
-			$id = get_the_ID();
-			$country = get_post_meta( $id, 'threats_to_press_country', true );
-			$targetNames = get_post_meta( $id, 'threats_to_press_target_names', true );
-			$networks = get_post_meta( $id, 'threats_to_press_network', true );
-			$coordinates = get_post_meta( $id, 'threats_to_press_coordinates', true );
-			$status = get_post_meta( $id, 'threats_to_press_status', true );
-			$link = get_post_meta( $id, 'threats_to_press_link', true );
-			
-			$t = array(
-				'country' => $country,
-				'name' => $targetNames,
-				'date' => get_the_date(),
-				'year' => get_the_date('Y'),
-				'niceDate' => get_the_date('M d, Y'), 
-				'status' => $status,
-				'description' => get_the_excerpt(),
-				'mugshot' => '',
-				'network' => $networks,
-				'link' => $link,
-				'latitude' => $coordinates['lat'],
-				'longitude' => $coordinates['lng'],
-				'headline' => get_the_title()
-			);
-			$threats[] = $t;
-		endwhile;
-	endif;
-	wp_reset_postdata();
-	wp_reset_query();
-	return $threats;
+// PAGE INFORMATION
+$page_content = "";
+$page_title = "";
+$page_excerpt = "";
+$page_id = 0;
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
+		$page_content = get_the_content();
+		$page_title = get_the_title();
+		$page_excerpt = get_the_excerpt();
+		$ogDescription = $page_excerpt;
+		$page_content = apply_filters('the_content', $page_content);
+		$page_content = str_replace(']]>', ']]&gt;', $page_content);
+		$page_id = get_the_ID();
+	}
 }
-
-$pageContent = "";
-$pageTitle = "";
-$pageExcerpt = "";
-$id = 0;
-if ( have_posts() ) :
-	while ( have_posts() ) : the_post();
-		$pageContent = get_the_content();
-		$pageTitle = get_the_title();
-		$pageExcerpt = get_the_excerpt();
-		$ogDescription = $pageExcerpt;
-		$pageContent = apply_filters( 'the_content', $pageContent );
-		$pageContent = str_replace( ']]>', ']]&gt;', $pageContent );
-		$id = get_the_ID();
-	endwhile;
-endif;
 wp_reset_postdata();
 wp_reset_query();
 
+$threats_category = get_category_by_slug('threats-to-press');
+$threatsPermalink = get_category_link( $threats_category->term_id );
 
-/* Map options */
-$trailingDays = get_post_meta($id, 'threats_to_press_map_trailing_days', true);
-$maxClusterRadius = get_post_meta($id, 'threats_to_press_map_maximum_cluster_radius', true);
-$cutoffDate = get_field('threats_to_press_map_cutoff_date', $id, true);
 
-/* Adding optional quotation to the bottom of the page */
-$includeQuotation = get_field('quotation_include', '', true);
-$quotation = "";
-if ($includeQuotation) {
-	$quotationText = get_field('quotation_text', '', false);
-	$quotationSpeaker = get_field('quotation_speaker', '', false);
-	$quotationTagline = get_field('quotation_tagline', '', false);
 
-	$quoteMugshotID = get_field('quotation_mugshot', '', false);
-	$quoteMugshot = "";
+// MAP INFORMATION
+$cutoff_date = get_field('threats_to_press_map_cutoff_date', $page_id, true);
+$threats_posts_map_args = array(
+	'post_type'=> 'threat_to_press',
+	'post_status' => 'publish',
+	'orderby' => 'post_date',
+	'order' => 'desc',
+	'posts_per_page' => -1,
+	'date_query' => array(
+        array(
+            'after' => $cutoff_date
+        )
+    )
+);
+$threats_posts_map_query = new WP_Query($threats_posts_map_args);
 
-	if ($quoteMugshotID) {
-		$quoteMugshot = wp_get_attachment_image_src( $quoteMugshotID , 'mugshot');
-		$quoteMugshot = $quoteMugshot[0];
+$threats_map_data_package = array();
+if ($threats_posts_map_query->have_posts()) {
+	while ($threats_posts_map_query->have_posts()) { 
+		$threats_posts_map_query->the_post();
+
+		$map_threat_id = get_the_ID();
+		$country = get_post_meta($map_threat_id, 'threats_to_press_country', true);
+		$target_names = get_post_meta($map_threat_id, 'threats_to_press_target_names', true);
+		$networks = get_post_meta($map_threat_id, 'threats_to_press_network', true);
+		$coordinates = get_post_meta($map_threat_id, 'threats_to_press_coordinates', true);
+		$status = get_post_meta($map_threat_id, 'threats_to_press_status', true);
+		$link = get_post_meta($map_threat_id, 'threats_to_press_link', true);
+		
+		$threat_map_data = array(
+			'country' => $country,
+			'name' => $target_names,
+			'date' => get_the_date(),
+			'year' => get_the_date('Y'),
+			'nice_date' => get_the_date('M d, Y'), 
+			'status' => $status,
+			'description' => get_the_excerpt(),
+			'mugshot' => '',
+			'network' => $networks,
+			'link' => $link,
+			'latitude' => $coordinates['lat'],
+			'longitude' => $coordinates['lng'],
+			'headline' => get_the_title()
+		);
+		$threats_map_data_package[] = $threat_map_data;
 	}
-
-	$quotation  = '<img class="quote-image"  src="' . $quoteMugshot .'">';
-	$quotation .= '<h4 class="quote-text">“'. $quotationText .'”</h4>';
-	$quotation .= '<p  class="quote-byline">';
-	$quotation .= 	$quotationSpeaker .'<br>';
-	$quotation .= 	'<span class="occupation">'. $quotationTagline .'</span>';
-	$quotation .= '</p>';
 }
+wp_reset_postdata();
+wp_reset_query();
 
+$threats_map_caption = get_field( 'threats_to_press_map_caption' );
+$trailingDays = get_post_meta($page_id, 'threats_to_press_map_trailing_days', true);
+$maxClusterRadius = get_post_meta($page_id, 'threats_to_press_map_maximum_cluster_radius', true);
+
+$threats_map_json  = '<script type="text/javascript">';
+$threats_map_json .= 	'threats=' . json_encode(new ArrayValue($threats_map_data_package), JSON_PRETTY_PRINT, 10) . ';';
+$threats_map_json .= '</script>';
+
+
+
+// GET POSTS OF THREATS TO PRESS FOR PAGE
+$threats_posts_args = array(
+	'post_type' => array('post'),
+	'cat' => get_cat_id('Threats to Press'),
+	'posts_per_page' => 6,
+	'post_status' => array('publish')
+);
+$threats_posts_query = new WP_Query($threats_posts_args);
+$threats_posts = $threats_posts_query->posts;
+
+
+// GET FALLEN JOURNALIST INFORMATION
 $wall = "";
 $journalist = "";
-$journalistName = "";
+$journalist_name = "";
 $mugshot = "";
 $altText = "";
 
-$postsPerPage = 6;
-$qParams = array(
-	'post_type' => array('post')
-	,'cat' => get_cat_id('Threats to Press')
-	,'posts_per_page' => $postsPerPage
-	,'post_status' => array('publish')
-);
+$fallen_journalists = get_field('fallen_journalists_section');
 
-$custom_query_args = $qParams;
-$custom_query = new WP_Query( $custom_query_args );
-
-//echo "showing " . count($threatsFilteredByDate) . " threats <BR>";
-$threats = getThreatsCustomPosts($cutoffDate);
-$threatsJSON = "<script type='text/javascript'>\n";
-$threatsJSON .= "threats=" . json_encode(new ArrayValue($threats), JSON_PRETTY_PRINT, 10) . ";";
-$threatsJSON .="</script>";
-get_header();
-echo $threatsJSON;
-
-$threatsMapCaption = get_field( 'threats_to_press_map_caption' );
-$threatsCat = get_category_by_slug( 'threats-to-press' );
-$threatsPermalink = get_category_link( $threatsCat->term_id );
-
-$fallenJournalists = get_field('fallen_journalists_section');
-$wall = "";
-if($fallenJournalists) {
-	foreach($fallenJournalists as $j) {
-		$id = $j->ID;
-		$mugshot = "/wp-content/media/2016/07/blankMugshot.png";
-		$date = get_field('profile_date_of_passing', $id, true); 
-		$datePrecision = get_field('profile_date_of_passing_precision', $id, true); 
-		if ( $datePrecision == "month" ) {
-			$dateObj = explode( "/", $date );
-			$date = $dateObj[0] . "/" . $dateObj[2];
+if ($fallen_journalists) {
+	foreach ($fallen_journalists as $cur_fallen_journalist) {
+		$cur_fallen_journalist_id = $cur_fallen_journalist->ID;
+		$mugshot = '/wp-content/media/2016/07/blankMugshot.png';
+		$date = get_field('profile_date_of_passing', $cur_fallen_journalist_id, true); 
+		$date_precision = get_field('profile_date_of_passing_precision', $cur_fallen_journalist_id, true); 
+		if ($date_precision == 'month') {
+			$dateObj = explode('/', $date);
+			$date = $dateObj[0] . '/' . $dateObj[2];
 		}
-		$link = get_the_permalink($id);
-		$name = get_the_title($id);
+		$link = get_the_permalink($cur_fallen_journalist_id);
+		$name = get_the_title($cur_fallen_journalist_id);
 		/*** Get the profile photo mugshot ***/
-		$profilePhotoID = get_post_meta( $id, 'profile_photo', true );
+		$profilePhotoID = get_post_meta( $cur_fallen_journalist_id, 'profile_photo', true );
 		$profilePhoto = "";
 		if ($profilePhotoID) {
 			$profilePhoto = wp_get_attachment_image_src( $profilePhotoID , 'mugshot');
@@ -162,16 +137,16 @@ if($fallenJournalists) {
 
 		//JBF 2/8/2017: not using link until we fill out profiles.
 		if ($link != "") {
-			$journalistName = '<a href="' . $link . '">' . $name . "</a>";
+			$journalist_name = '<a href="' . $link . '">' . $name . "</a>";
 			$imgSrc = '<a href="' . $link . '">' . $imgSrc . "</a>";
 		} else {
-			$journalistName = $name;
+			$journalist_name = $name;
 		}
 
 		$journalist  = "";
 		$journalist .= '<div class="bbg__profile-grid__profile">';
 		$journalist .= 	$imgSrc;
-		$journalist .= 	'<h4 class="bbg__profile-grid__profile__name">' . $journalistName . '</h4>';
+		$journalist .= 	'<h4 class="bbg__profile-grid__profile__name">' . $journalist_name . '</h4>';
 		$journalist .= 	'<h5 class="bbg__profile-grid__profile__dates">Killed ' . $date . '</h5>';
 		$journalist .= 	'<p class="bbg__profile-grid__profile__description"></p>';
 		$journalist .= '</div>';
@@ -180,8 +155,38 @@ if($fallenJournalists) {
 }
 wp_reset_postdata();
 wp_reset_query();
-?>
 
+
+// CUSTOM QUOTATION SPECIFIC TO THIS PAGE (IN WORDPRESS BACKEND)
+$include_custom_quotation = get_field('quotation_include', '', true);
+$quotation = "";
+if ($include_custom_quotation) {
+	$quotation_text = get_field('quotation_text', '', false);
+	$quotation_speaker = get_field('quotation_speaker', '', false);
+	$quotation_tagline = get_field('quotation_tagline', '', false);
+
+	$quote_mugshot_id = get_field('quotation_mugshot', '', false);
+	$quote_mugshot = "";
+
+	if ($quote_mugshot_id) {
+		$quote_mugshot = wp_get_attachment_image_src($quote_mugshot_id , 'mugshot');
+		$quote_mugshot = $quote_mugshot[0];
+	}
+
+	$quotation  = '<img class="quote-image"  src="' . $quote_mugshot .'">';
+	$quotation .= '<h4 class="quote-text">'. $quotation_text .'</h4>';
+	$quotation .= '<p  class="quote-byline">';
+	$quotation .= 	$quotation_speaker .'<br>';
+	$quotation .= 	'<span class="occupation">'. $quotation_tagline .'</span>';
+	$quotation .= '</p>';
+}
+
+
+get_header();
+
+// DISPLAY MAP
+echo $threats_map_json;
+?>
 
 <style>
 	.map-legends, .map-tooltip {
@@ -212,6 +217,9 @@ wp_reset_query();
 		margin-bottom:5px;
 	}
 	/*** temp fix for this page ***/
+	#mapFilters label {margin-left: 15px;}
+	.leaflet-right {display: none;}
+
 	@media screen and (max-width: 599px) {
 		.bbg-grid--1-2-2 { 
 			padding-top:1rem;
@@ -219,52 +227,73 @@ wp_reset_query();
 	}
 </style>
 
-<main id="main" role="main">
+<div id="map-threats" class="bbg__map--banner" style="margin-bottom: 10px;"></div>
+<div id="threats-map-controls" class="outer-container">
+	<div class="grid-container">
+		<p class="aside"><?php echo $threats_map_caption ?></p>
+		<div align="center" id="mapFilters" class="u--show-medium-large">
+			<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
+			<input type="radio" name="trainingYear" id="trainingYear_2019" value="2019" /><label for="trainingYear_2019"> 2019</label>
+			<input type="radio" name="trainingYear" id="trainingYear_2018" value="2018" /><label for="trainingYear_2018"> 2018</label>
+			<input type="radio" name="trainingYear" id="trainingYear_2017" value="2017" /><label for="trainingYear_2017"> 2017</label>
+			<input type="radio" name="trainingYear" id="trainingYear_2016" value="2016" /><label for="trainingYear_2016"> 2016</label>
+			<input type="radio" name="trainingYear" id="trainingYear_2015" value="2015" /><label for="trainingYear_2015"> 2015</label>
+			<input type="radio" name="trainingYear" id="trainingYear_2014" value="2014" /><label for="trainingYear_2014"> 2014</label>
+			<input type="radio" name="trainingYear" id="trainingYear_2013" value="2013" /><label for="trainingYear_2013"> 2013</label>
+		</div>
 
-<?php if ( $custom_query->have_posts() ) : ?>
-	<div style="position: relative;">
-		<div id="map-threats" class="bbg__map--banner"></div>
-			<img id="resetZoom" src="/wp-content/themes/bbgRedesign/img/home.png" class="bbg__map__button"/>
-			<div class="usa-grid">
-				<p class="bbg__article-header__caption"><?php echo $threatsMapCaption ?></p>
-			</div>
-			<style> 
-				#mapFilters label {margin-left: 15px;}
-				.leaflet-right {display: none;}
-			</style>
-		
-			<div align="center" id="mapFilters" class="u--show-medium-large">
-				<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
-				<input type="radio" name="trainingYear" id="trainingYear_2019" value="2019" /><label for="trainingYear_2019"> 2019</label>
-				<input type="radio" name="trainingYear" id="trainingYear_2018" value="2018" /><label for="trainingYear_2018"> 2018</label>
-				<input type="radio" name="trainingYear" id="trainingYear_2017" value="2017" /><label for="trainingYear_2017"> 2017</label>
-				<input type="radio" name="trainingYear" id="trainingYear_2016" value="2016" /><label for="trainingYear_2016"> 2016</label>
-				<input type="radio" name="trainingYear" id="trainingYear_2015" value="2015" /><label for="trainingYear_2015"> 2015</label>
-				<input type="radio" name="trainingYear" id="trainingYear_2014" value="2014" /><label for="trainingYear_2014"> 2014</label>
-				<input type="radio" name="trainingYear" id="trainingYear_2013" value="2013" /><label for="trainingYear_2013"> 2013</label>
-			</div>
-
-			<div align="center" id="mapFilters" class="u--hide-medium-large">
-				<p class="paragraph-header">Select a year</p>
-				<select name="trainingSelect">
-					<option value="all">All</option>
-					<option value="2019">2019</option>
-					<option value="2018">2018</option>
-					<option value="2017">2017</option>
-					<option value="2016">2016</option>
-					<option value="2015">2015</option>
-					<option value="2014">2014</option>
-					<option value="2013">2013</option>
-				</select>
-			</div>
+		<div align="center" id="mapFilters" class="u--hide-medium-large">
+			<p class="paragraph-header">Select a year</p>
+			<select name="trainingSelect">
+				<option value="all">All</option>
+				<option value="2019">2019</option>
+				<option value="2018">2018</option>
+				<option value="2017">2017</option>
+				<option value="2016">2016</option>
+				<option value="2015">2015</option>
+				<option value="2014">2014</option>
+				<option value="2013">2013</option>
+			</select>
+		</div>
 	</div>
+</div>
 
+<main id="main" role="main">
 	<section class="outer-container" style="margin-top: 3rem;">
 		<div class="grid-container">
-			<h2><?php echo $pageTitle; ?></h2>
 			<?php
-				echo '<p>' . $theContent . '</p>';
+				echo '<h2>' . $page_title . '</h2>';
+				echo '<p>' . $page_content . '</p>';
 			?>
+
+	<?php
+		// NEWS AND UPDATES
+		$threat_structure  = '<section class="threats-box">';
+		$threat_structure .= 	'<div class="outer-container">';
+		$threat_structure .= 		'<div class="grid-half" id="threats-main-column">';
+		$threat_structure .= 			'<article>';
+		$threat_structure .= 				'<div class="article-image">';
+		$threat_structure .= 					'<a href="' . get_the_permalink($threats_posts[0]) . '">';
+		$threat_structure .= 						'<img src="' . get_the_post_thumbnail_url($threats_posts[0], 'large') . '" alt="Image link to ' . get_the_title($threats_posts[0]) . ' post">';
+		$threat_structure .= 					'</a>';
+		$threat_structure .= 				'</div>';
+		$threat_structure .= 				'<div class="article-info">';
+		$threat_structure .= 					'<h4><a href="' . get_the_permalink($threats_posts[0]) . '">' . get_the_title($threats_posts[0]) . '</a></h4>';
+		$threat_structure .= 				'</div>';
+		$threat_structure .= 			'</article>';
+		$threat_structure .= 		'</div>';
+		$threat_structure .= 		'<div class="grid-half" id="threats-side-column">';
+		$secondary_threats = array_shift($threats_posts);
+		foreach ($threats_posts as $recent_threat) {
+			$threat_structure .= 		'<article>';
+			$threat_structure .= 			'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
+			$threat_structure .= 		'</article>';
+		}
+		$threat_structure .= 		'</div>';
+		$threat_structure .= 	'</div>';
+		$threat_structure .= '</section>';
+		echo $threat_structure;
+	?>
 		</div>
 	</section>
 
@@ -315,53 +344,14 @@ wp_reset_query();
 				}
 			}
 		}
+		echo $featuredJournalists;
 	?>
-
-	<section class="outer-container">
-		<div class="grid-container">
-			<?php echo '<h5 class="bbg__label"><a href="' . $threatsPermalink . '">News + updates</a></h5>'; ?>
-		</div>
-			<?php
-				$counter = 0;
-				while ( $custom_query->have_posts() ) : $custom_query->the_post();
-					$counter++;
-					//Add a check here to only show featured if it's not paginated.
-					if ($counter == 1) {
-						echo '<div class="inner-container">';
-						echo '<div class="main-content-container">';
-
-					} elseif( $counter == 2 ){
-						echo '</div><!-- left column -->';
-						echo '<div class="side-content-container">';
-						echo '<header class="page-header">';
-						echo '</header>';
-
-						//These values are used for every excerpt >=4
-						$includeImage = false;
-						$includeMeta = false;
-						$includeExcerpt = false;
-					}
-					get_template_part( 'template-parts/content-excerpt-list', get_post_format() );
-
-				?>
-			<?php endwhile; 
-				wp_reset_postdata();
-				wp_reset_query();
-			?>
-			</div><!-- .bbg-grid right column -->
-	</section>
-	<?php endif; ?>
-
-	<?php echo $featuredJournalists; ?>
 
 	<div class="outer-container bbg__memorial">
 		<div class="grid-container">
-				<h3>Fallen journalists</h3>
-		<!-- </div> -->
+			<h3>Fallen journalists</h3>
 			<div class="usa-grid">
-			<!-- <div id="memorialWall"> -->
 				<?php echo $wall; ?>
-			<!-- </div> -->
 			</div>
 		</div>
 	</div>
@@ -486,7 +476,7 @@ wp_reset_query();
 						'marker-color': markerColor
 					})
 				});
-				marker.bindPopup(titleLink + t.description + '<BR><BR>' + t.niceDate);
+				marker.bindPopup(titleLink + t.description + '<BR><BR>' + t.nice_date);
 				killedMarkers.addLayer(marker);
 				//marker.addTo(map);
 
@@ -512,7 +502,7 @@ wp_reset_query();
 					})
 				});
 
-				marker.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.niceDate + '</div>' + t.description);
+				marker.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.nice_date + '</div>' + t.description);
 				var targetLayer = layers[t.year];
 				marker.addTo(targetLayer);
 
@@ -523,7 +513,7 @@ wp_reset_query();
 						'marker-color': markerColor
 					})
 				});
-				marker2.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.niceDate + '</div>' + t.description);
+				marker2.bindPopup(titleLink + '<div class="mapBubbleDate">' + t.nice_date + '</div>' + t.description);
 				marker2.addTo(layersNoCluster[t.year])
 			}
 		}
@@ -626,9 +616,7 @@ wp_reset_query();
 		markers.on('click', zoomLevel);
 		*/
 	</script>
-</main><!-- #main -->
+</main>
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>
-
-

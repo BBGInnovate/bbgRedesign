@@ -23,24 +23,13 @@
 	background-color: #222222;
 	margin-bottom: 7.5rem;
 
-	.outer-container {margin-bottom: 0;}
 	h2 {a:link, a:visited {color: $white;}}
 	h4 {color: $white;}
 	h4 {a:link, a:visited {color: $white;}}
-	#threats-main-column {
-		padding: 2em;
-		article {
-			margin-bottom: 0;
-			img {margin-bottom: 0;}
-		}
-	}
-	#threats-side-column {
-		padding: 2em;
-		background-image: linear-gradient(#333333, #222222);
-		height: 100%;
 
+	#threats-side-column {
+		background-image: linear-gradient(#333333, #222222);
 		article {
-			margin-bottom: 3rem;
 			border-bottom: 2px solid #222222;
 		}
 	}
@@ -53,14 +42,6 @@
 		background-size: cover;
 		height: 300px;
 		margin-bottom: 10px;
-	}
-	.banner-caption {
-		text-align: right;
-		font-size: 1.2rem;
-		line-height: 2rem;
-		font-style: italic;
-		color: $color-taupe-light;
-		padding: 0 15px;
 	}
 	@include media($medium-screen) {
 		.banner-image {height: 400px;}
