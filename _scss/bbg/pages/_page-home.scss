@@ -27,6 +27,7 @@
 	h4 {color: $white;}
 	h4 {a:link, a:visited {color: $white;}}
 
+	#threats-main-column {article {border-bottom: none;}}
 	#threats-side-column {
 		background-image: linear-gradient(#333333, #222222);
 		article {

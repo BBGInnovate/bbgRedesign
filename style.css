@@ -6428,6 +6428,8 @@ div.banner_readmore h6 a:visited {
     color: #ffffff; }
   #homepage-threats h4 a:link, #homepage-threats .bbg__board__committee-list li a a:link, .bbg__board__committee-list li #homepage-threats a a:link, #homepage-threats h4 a:visited, #homepage-threats .bbg__board__committee-list li a a:visited, .bbg__board__committee-list li #homepage-threats a a:visited {
     color: #ffffff; }
+  #homepage-threats #threats-main-column article {
+    border-bottom: none; }
   #homepage-threats #threats-side-column {
     background-image: linear-gradient(#333333, #222222); }
     #homepage-threats #threats-side-column article {
