@@ -13,12 +13,6 @@ require 'inc/bbg-functions-assemble.php';
 if (have_posts()) {
 	the_post();
 
-	// GATHER FIELD DATA
-	// $metaAuthor = get_the_author();
-	// $metaKeywords = strip_tags(get_the_tag_list('',', ',''));
-	// $ogTitle = get_the_title();
-	// $ogDescription = get_the_excerpt();
-
 	// SET PAGE TYPE VARS
 	$eventPageHeader = "Event";
 	$isBoardMeeting = false;
@@ -111,9 +105,9 @@ include get_template_directory() . "/inc/shared_sidebar.php";
 get_header();
 ?>
 
-<main id="main" role="main">
+<main id="main" role="main" style="padding-top: 3rem;">
 	<?php
-		while ( have_posts() ) : the_post(); 
+		while (have_posts()) : the_post(); 
 			$projectCategoryID = get_cat_id('Project');
 			$isProject = has_category($projectCategoryID);
 
@@ -133,7 +127,14 @@ get_header();
 			<div class="outer-container">
 				<div class="grid-container">
 					<?php
+						$category_title = '';
+						if(in_category( 'Board Meetings' )) {
+							$category_title = "Board Meetings";
+						} else if(in_category( 'Event' )) {
+							$category_title = "Event";
+						}
 						$post_header  = '<header>';
+						$post_header .= 	'<h2>' . $category_title . '</h2>';
 						$post_header .= 	'<h3>' . get_the_title() . '</h3>';
 						$post_header .= '</header>';
 						echo $post_header;
@@ -146,9 +147,9 @@ get_header();
 					<div class="inner-container">
 						<div class="main-content-container page-content">
 						<?php
-							$featured_media_result = get_feature_media_data();
-							if ($featured_media_result != "") {
-								echo $featured_media_result;
+							$post_thumbnail_url = get_the_post_thumbnail_url();
+							if (!empty($post_thumbnail_url)) {
+								echo '<img src="' . $post_thumbnail_url . '" alt="' . get_the_title() . '">';
 							}
 						?>
 						<?php
@@ -163,31 +164,31 @@ get_header();
 							}
 							the_content();
 
-							if (!$isPressRelease && $isBoardMeeting && !isset($_GET['success'])):
-								if ($commentFormIsClosed):
-									echo "<p>The deadline for public comments for this meeting has passed.</p>";
-								else:
-						?>
-								<h3>Public Comments Form</h3>
-								<p>Public comments related to U.S. international media are now being accepted for review by the board. Comments intended for the <?php echo $postDate; ?> meeting of the board must be submitted by <b><?php echo $commentFormCloseStr; ?></b>.</p>
-								<p>Comments received after that date will be forwarded to the board for the following meeting.</p>
-
-								<p>The public comments you provide to the Broadcasting Board of Governors are collected by the agency voluntarily and may be publicly disclosed on the Internet and/or via requests submitted to the BBG under the Freedom of Information Act.</p>
-
-								<p>By providing public comments, you are consenting to their use and consideration by the Board and to their possible public dissemination. Personal contact information will not be made available to the public and will only be used by agency staff to engage with submitters regarding their own comments.</p>
-						<?php
-								$redirectLink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-								if (strpos($redirectLink, "?")) {
-									$redirectLink .= "&";
-								} else {
-									$redirectLink .= "?";
+							if (!$isPressRelease && $isBoardMeeting && !isset($_GET['success'])) {
+								if ($commentFormIsClosed) {
+									echo '<p>The deadline for public comments for this meeting has passed.</p>';
 								}
-								$redirectLink .= "success = true";
-								echo do_shortcode("[si-contact-form form ='2' redirect = '$redirectLink']");
-								echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/js/meeting-comment-form.js"></script>';
-								endif;
-							endif;
+								else {
+									echo '<h3>Public Comments Form</h3>';
+									echo '<p>Public comments related to U.S. international media are now being accepted for review by the board. Comments intended for the ' . $postDate . ' meeting of the board must be submitted by <b><?php echo $commentFormCloseStr; ?></b>.</p>';
+									echo '<p>Comments received after that date will be forwarded to the board for the following meeting.</p>';
+
+									echo '<p>The public comments you provide to the Broadcasting Board of Governors are collected by the agency voluntarily and may be publicly disclosed on the Internet and/or via requests submitted to the BBG under the Freedom of Information Act.</p>';
+
+									echo '<p>By providing public comments, you are consenting to their use and consideration by the Board and to their possible public dissemination. Personal contact information will not be made available to the public and will only be used by agency staff to engage with submitters regarding their own comments.</p>';
+
+									$redirectLink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+									if (strpos($redirectLink, "?")) {
+										$redirectLink .= "&";
+									} else {
+										$redirectLink .= "?";
+									}
+									$redirectLink .= "success = true";
+									echo do_shortcode("[si-contact-form form ='2' redirect = '$redirectLink']");
+									echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/js/meeting-comment-form.js"></script>';
+								}
+							}
 						?>
 						</div>
 				
