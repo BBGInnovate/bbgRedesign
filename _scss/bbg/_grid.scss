@@ -37,6 +37,29 @@
 // ------------------------------------------------------------------------
 
 
+// THREE COLUMN LAYOUT. FOR ICONS, PROFILE IMAGES
+// ------------------------------------------------------------------------
+$icon-content-grid: (
+	columns: 6,
+	gutter: 30px,
+);
+
+.icon-side-content-container {
+	@include grid-column(12);
+	img {width: 25%;}
+}
+.icon-main-content-container {@include grid-column(12);}
+
+@include media($medium-large-screen) {
+	.icon-side-content-container {
+		@include grid-column(1, $icon-content-grid);
+		img {width: auto; margin-bottom: 3rem;}
+	}
+	.icon-main-content-container {
+		@include grid-column(5, $icon-content-grid);
+	}
+}
+// ------------------------------------------------------------------------
 
 // 1. FULL, NESTED GRIDS
 .outer-container {
@@ -92,10 +115,6 @@ $sidebar-grid: (
 	gutter: 30px,
 	media: 1200px,
 );
-$icon-content-grid: (
-	columns: 6,
-	gutter: 30px,
-);
 
 
 .main-content-container {@include grid-column(12);}
@@ -123,11 +142,6 @@ $icon-content-grid: (
 .small-main-content-container {@include grid-column(6);}
 .small-side-content-container {@include grid-column(6);}
 
-.icon-side-content-container {
-	@include grid-column(12);
-	img {width: 25%;}
-}
-.icon-main-content-container {@include grid-column(12);}
 
 @include media($small-screen) {
 	.small-main-content-container {@include grid-column(9);}
@@ -163,11 +177,6 @@ $icon-content-grid: (
 	.small-side-content-container {@include grid-column(5);}
 	.small-main-content-container {@include grid-column(7);}
 
-	.icon-side-content-container {
-		@include grid-column(1, $icon-content-grid);
-		img {width: auto; margin-bottom: 3rem;}
-	}
-	.icon-main-content-container {@include grid-column(5, $icon-content-grid);}
 	// ====================================
 	// FIX FOR IPAD 5.1.1 CHROME AND SAFARI
 	// ====================================

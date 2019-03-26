@@ -4746,6 +4746,31 @@ e.g. on the intern testimonial page */
   .sidebar-grid--large-gutter .divider-right {
     border-right: 1px solid #f1f1f1; } }
 
+.icon-side-content-container {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+  .icon-side-content-container img {
+    width: 25%; }
+
+.icon-main-content-container {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+@media screen and (min-width: 900px) {
+  .icon-side-content-container {
+    width: calc(16.66667% - 35px);
+    float: left;
+    margin-left: 30px; }
+    .icon-side-content-container img {
+      width: auto;
+      margin-bottom: 3rem; }
+  .icon-main-content-container {
+    width: calc(83.33333% - 55px);
+    float: left;
+    margin-left: 30px; } }
+
 .outer-container {
   max-width: 1200px;
   margin: 0 auto 7.5rem auto; }
@@ -4870,18 +4895,6 @@ e.g. on the intern testimonial page */
   float: left;
   margin-left: 20px; }
 
-.icon-side-content-container {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-  .icon-side-content-container img {
-    width: 25%; }
-
-.icon-main-content-container {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px; }
-
 @media screen and (min-width: 481px) {
   .small-main-content-container {
     width: calc(75% - 35px);
@@ -4938,18 +4951,7 @@ e.g. on the intern testimonial page */
   .small-main-content-container {
     width: calc(58.33333% - 31.66667px);
     float: left;
-    margin-left: 20px; }
-  .icon-side-content-container {
-    width: calc(16.66667% - 35px);
-    float: left;
-    margin-left: 30px; }
-    .icon-side-content-container img {
-      width: auto;
-      margin-bottom: 3rem; }
-  .icon-main-content-container {
-    width: calc(83.33333% - 55px);
-    float: left;
-    margin-left: 30px; } }
+    margin-left: 20px; } }
 
 @media screen and (min-width: 900px) and (-webkit-min-device-pixel-ratio) {
   .main-content-container {
