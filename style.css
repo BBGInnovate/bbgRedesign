@@ -6466,12 +6466,14 @@ div.banner_readmore h6 a:visited {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 400px;
-  max-height: 500px;
+  height: 250px;
   margin-bottom: 1.5rem;
   max-width: 9999px;
   position: relative;
   width: 100%; }
+  @media screen and (min-width: 900px) {
+    .bbg-banner {
+      height: 500px; } }
   .bbg-banner a:focus {
     box-shadow: none;
     background: none; }

@@ -39,7 +39,9 @@
     height: 250px;
     width: 100%;
 
-    @include media($medium-large-screen) {height: 500px;}
+    @include media($medium-large-screen) {
+        height: 500px;
+    }
 }
 
 

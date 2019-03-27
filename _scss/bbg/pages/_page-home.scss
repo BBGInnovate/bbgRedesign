@@ -67,12 +67,15 @@
 .bbg-banner {
 	background-color: $color-gray-lightest;
 	@include backgroundCover();
-	height: 400px;
-	max-height: 500px;
+	height: 250px;
 	margin-bottom: 1.5rem;
 	max-width: 9999px;
 	position: relative;
 	width: 100%;
+
+	@include media($medium-large-screen) {
+        height: 500px;
+    }
 
 	a:focus {
 		box-shadow: none;
