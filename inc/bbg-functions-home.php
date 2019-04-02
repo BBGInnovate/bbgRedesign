@@ -81,7 +81,14 @@ function get_recent_posts($qty) {
 	$selected_featured_post = get_field('homepage_featured_post', 'option');
 	if (!empty($selected_featured_post)) {
 		$selection_array = $selected_featured_post;
-		$used_posts = $selected_featured_post[0]->ID;
+		$selected_post_ids[] = $selected_featured_post[0]->ID;
+		if (count($used_posts) > 1) {
+			foreach ($selected_post_ids as $sel_post_id) {
+				$used_posts[] = $sel_post_id;
+			}
+		} else {
+			$used_posts[] = $selected_post_ids[0];
+		}
 		$all_recent_posts = $selection_array;
 		$qty--;
 	}
@@ -94,6 +101,7 @@ function get_recent_posts($qty) {
 			'post_type' => array('post'),
 			'orderby' => 'post_date',
 			'order' => 'desc',
+			'post__not_in' => $selected_post_ids,
 			'category__not_in' => array(3, 35, 36, 38, 45, 55, 56, 68, 1046, 1244),
 			'tax_query' => array(
 				'relation' => 'OR',
@@ -115,7 +123,7 @@ function get_recent_posts($qty) {
 	$recent_post_query = new WP_Query($recent_posts_args);
 	$recent_query_array = $recent_post_query->posts;
 	foreach ($recent_query_array as $recent_query) {
-		$used_posts[] =  $recent_query -> ID;
+		$used_posts[] = $recent_query->ID;
 		$all_recent_posts[] = $recent_query;
 	}
 
