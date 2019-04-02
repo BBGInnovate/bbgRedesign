@@ -184,7 +184,7 @@ get_header();
 									}
 									$redirectLink .= "success = true";
 									echo do_shortcode("[si-contact-form form ='2' redirect = '$redirectLink']");
-									echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/js/meeting-comment-form.js"></script>';
+									echo '<script src="' . get_template_directory_uri() . '/js/meeting-comment-form.js"></script>';
 								}
 							}
 						?>

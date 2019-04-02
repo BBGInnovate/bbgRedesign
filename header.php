@@ -130,7 +130,7 @@ foreach ($settings_social_media_list as $social_platform) {
 
 <?php wp_head(); ?>
 
-<script type="text/javascript">
+<script>
 	bbgConfig = {};
 	bbgConfig.MAPBOX_API_KEY = '<?php echo MAPBOX_API_KEY; ?>';
 	bbgConfig.template_directory_uri = '<?php echo get_template_directory_uri() . "/"; ?>';
@@ -185,7 +185,7 @@ foreach ($settings_social_media_list as $social_platform) {
 
 	<?php if (!is_user_logged_in()): ?>
 	<!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
-	<script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=BBG&pua=ua-33523145-2" id="_fed_an_ua_tag" ></script>
+	<script async src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=BBG&pua=ua-33523145-2" id="_fed_an_ua_tag" ></script>
 	<?php endif; ?>
 	<link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,500,700,700i" rel="stylesheet">
 
@@ -204,7 +204,7 @@ gtag('config', 'UA-124338348-1');
 <body <?php body_class(); ?>>
 
 <!-- Loading tealium script asynchronously -->
-<script type="text/javascript">
+<script>
     (function(a,b,c,d){
     a='//tags.tiqcdn.com/utag/bbg/main/prod/utag.js';
     b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;

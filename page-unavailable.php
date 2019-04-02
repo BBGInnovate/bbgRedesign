@@ -90,16 +90,16 @@ O:::::::OOO:::::::ODDD:::::DDDDD:::::DDDD:::::DDDDD:::::DII::::::II
 
 <link rel="stylesheet" href="/wp-content/themes/bbgRedesign/style.css">
 
-<script type="text/javascript" src="https://www.bbg.gov/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
-<script type="text/javascript" src="https://www.bbg.gov/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
-<script type="text/javascript" src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/lightbox2/js/lightbox.min.js?ver=4.5.3"></script>
-<script type="text/javascript" src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/wpembedfb.min.js?ver=4.5.3"></script>
-<script type="text/javascript">
+<script src="https://www.bbg.gov/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
+<script src="https://www.bbg.gov/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
+<script src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/lightbox2/js/lightbox.min.js?ver=4.5.3"></script>
+<script src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/wpembedfb.min.js?ver=4.5.3"></script>
+<script>
 /* <![CDATA[ */
 var WEF = {"local":"en_US","version":"v2.6","fb_id":""};
 /* ]]> */
 </script>
-<script type="text/javascript" src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/fb.min.js?ver=4.5.3"></script>
+<script src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/fb.min.js?ver=4.5.3"></script>
 <link rel="https://api.w.org/" href="https://www.bbg.gov/wp-json/">
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.bbg.gov/xmlrpc.php?rsd">
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.bbg.gov/wp-includes/wlwmanifest.xml">
@@ -108,7 +108,7 @@ var WEF = {"local":"en_US","version":"v2.6","fb_id":""};
 <link rel="alternate" type="application/json+oembed" href="https://www.bbg.gov/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bbg.gov%2Fwho-we-are%2F">
 <link rel="alternate" type="text/xml+oembed" href="https://www.bbg.gov/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bbg.gov%2Fwho-we-are%2F&amp;format=xml">
 
-<script type="text/javascript">
+<script>
 	bbgConfig = {};
 	bbgConfig.template_directory_uri = 'https://www.bbg.gov/wp-content/themes/bbgRedesign/';
 </script>

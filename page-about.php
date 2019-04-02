@@ -212,7 +212,7 @@ if (is_page('media-development')) {
 		));
 		$geojsonStr = json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
-		echo '<script type="text/javascript">';
+		echo '<script>';
 		echo 	'var geojson = ' . $geojsonStr . ';';
 		echo '</script>';
 	}
@@ -352,7 +352,7 @@ get_header();
 		.marker-cluster-large div {background-color: rgba(255, 0, 0, 1);}
 	</style>
 
-	<script type="text/javascript">
+	<script>
 	(function($) {
 		var mbToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 		var tilesetUrl = 'https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}@2x.png?access_token=' + mbToken;

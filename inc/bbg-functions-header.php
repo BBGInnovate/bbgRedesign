@@ -17,7 +17,7 @@ function display_splash_overlay() {
 	$splash .= 		'</p></a>';
 	$splash .= 	'</div>';
 	$splash .= '</div>';
-	$splash .= '<script type="text/javascript">';
+	$splash .= '<script>';
 	$splash .= 	'jQuery(document).ready(function() {';
 	$splash .= 		'jQuery(".ck-set").click(function(e) {';
 	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
@@ -79,7 +79,7 @@ function display_site_wide_banner_if() {
 		$alert_complex .= 			'<div class="bbg__banner-table__cell--right">';
 		$alert_complex .= 				'<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>';
 		$alert_complex .= '</div></div>';
-		$alert_complex .= '<script type="text/javascript">';
+		$alert_complex .= '<script>';
 		$alert_complex .= 	'jQuery(document).ready(function() {';
 		$alert_complex .= 		'jQuery("#dismissBanner").click(function(e) {';
 		$alert_complex .= 			'setCookie( "richBannerDismissed", 1, 7);';

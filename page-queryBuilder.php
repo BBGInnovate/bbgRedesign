@@ -132,7 +132,7 @@ if ( isset($_GET['qtags']) || isset($_GET['qcats']) ) {
 
         ?>
        
-          <script type="text/javascript">
+          <script>
             // A $( document ).ready() block.
             jQuery( document ).ready(function() {
                 jQuery("#qcats").select2();

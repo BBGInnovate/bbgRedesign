@@ -235,7 +235,7 @@ endif;
 	}
 </style>
 
-<script type="text/javascript">
+<script>
 L.mapbox.accessToken = '<?php echo 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw'; ?>';
 
 var map = L.mapbox.map('map', 'mapbox.emerald')

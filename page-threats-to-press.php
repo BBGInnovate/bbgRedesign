@@ -87,7 +87,7 @@ $threats_map_caption = get_field( 'threats_to_press_map_caption' );
 $trailingDays = get_post_meta($page_id, 'threats_to_press_map_trailing_days', true);
 $maxClusterRadius = get_post_meta($page_id, 'threats_to_press_map_maximum_cluster_radius', true);
 
-$threats_map_json  = '<script type="text/javascript">';
+$threats_map_json  = '<script>';
 $threats_map_json .= 	'threats=' . json_encode(new ArrayValue($threats_map_data_package), JSON_PRETTY_PRINT, 10) . ';';
 $threats_map_json .= '</script>';
 
@@ -399,7 +399,7 @@ echo $threats_map_json;
 		*/
 	</style>
 
-	<script type="text/javascript">
+	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 		var initialCenter = [28.304380682962783, 22.148437500000004];
 		

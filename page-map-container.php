@@ -131,7 +131,7 @@ function getMapData() {
 	$entityStr = json_encode(new ArrayValue($entities), JSON_PRETTY_PRINT);
 	$serviceStr = json_encode(new ArrayValue($servicesByName), JSON_PRETTY_PRINT);
 
-	$js_map_attributes  = '<script type="text/javascript">';
+	$js_map_attributes  = '<script>';
 	$js_map_attributes .= 	'var entitiesByName = ' . $entityStr . ';';
 	$js_map_attributes .= 	'var servicesByName = ' . $serviceStr . ';';
 	$js_map_attributes .= 	'var countriesByName = ' . $countryStr . ';';
@@ -143,7 +143,7 @@ getMapData();
 ?>
 
 
-<script type="text/javascript">
+<script>
 // setting a variable with the base url to pass into the entity map
 var template_directory_uri = '<?php echo get_template_directory_uri(); ?>';
 

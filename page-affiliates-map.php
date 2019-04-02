@@ -196,7 +196,7 @@ get_header();
 	.marker-cluster-web-large div {color: #ffffffff; background-color: #000000;}
 </style>
 
-<script type="text/javascript">
+<script>
 	//var tilesetUrl = 'https://api.mapbox.com/styles/v1/mapbox/emerald-v8/tiles/{z}/{x}/{y}?access_token=<?php //echo MAPBOX_API_KEY; ?>';
 	selectedPlatform = "all";
 	// var mbToken = '<?php //echo MAPBOX_API_KEY; ?>'
