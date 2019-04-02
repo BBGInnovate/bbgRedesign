@@ -136,13 +136,11 @@ get_header();
 						$post_header  = '<header>';
 						$post_header .= 	'<h2>' . $category_title . '</h2>';
 						$post_header .= 	'<h3>' . get_the_title() . '</h3>';
+						$post_header .= 	'<p class="date-meta">' . get_the_date('F j, Y') . '</p>';
 						$post_header .= '</header>';
 						echo $post_header;
 					?>
 				</div>
-			</div>
-
-			<div class="outer-container">
 				<div class="custom-grid-container">
 					<div class="inner-container">
 						<div class="main-content-container page-content">

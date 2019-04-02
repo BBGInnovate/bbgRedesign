@@ -135,11 +135,15 @@ if (in_category($categories_to_show_entities))  {
 	if (in_category($entity_categories)) {
 		foreach ($entity_categories as $eCat) {
 			if (in_category($eCat)) {
-				$broadcastersPage = get_page_by_title('Our Networks');
+				$broadcasters_page = get_page_by_title('Our Networks');
+				$broadcasters_page_id = '';
+				if (!empty($broadcasters_page)) {
+					$broadcasters_page_id = $broadcasters_page -> ID;
+				}
 				$args = array(
 					'post_type' => 'page',
 					'posts_per_page' => 1,
-					'post_parent' => $broadcastersPage -> ID,
+					'post_parent' => $broadcasters_page_id,
 					'name' => str_replace('-press-release', '', $eCat)
 				);
 				$custom_query = new WP_Query($args);
@@ -275,7 +279,7 @@ if ($media_dev_map) {
 	echo "</script>";
 }
 
-if ($addFeaturedMap) {
+if (!empty($addFeaturedMap)) {
 	$featuredMapItems = get_field( 'featured_map_items', get_the_ID(), true);
 	$features = [];
 
@@ -645,7 +649,7 @@ if ($media_dev_map) {
 <?php } ?>
 
 <?php
-if ($addFeaturedMap && $media_dev_map == "") {
+if (!empty($addFeaturedMap) && $media_dev_map == "") {
 ?>
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
