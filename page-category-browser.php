@@ -46,7 +46,7 @@ $videoUrl = get_field('featured_video_url', '', true);
 $hasIntroFeature = FALSE;
 if ($videoUrl != "") {
 	$hasIntroFeature = true;
-} elseif (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
+} elseif (has_post_thumbnail()) {
 	$hasIntroFeature = true;
 }
 
@@ -163,9 +163,9 @@ get_header();
 	<?php
 		if ($custom_query -> have_posts()) {
 			if (!is_page('deep-dive-series')) {
-				$page_title  = '<div class="outer-container">';
+				$page_title = '<div class="outer-container">';
 			} else {
-				$page_title .= 	'<div class="outer-container" style="margin-bottom: 1.5rem;">';
+				$page_title = 	'<div class="outer-container" style="margin-bottom: 1.5rem;">';
 			}
 			$page_title .= 	'<div class="grid-container">';
 			$page_title .= 		'<h2>' . get_the_title() . '</h2>';
