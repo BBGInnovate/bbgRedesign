@@ -77,6 +77,8 @@ function get_homepage_banner_data() {
 function get_recent_posts($qty) {
 	$used_posts = array();
 	$all_recent_posts = array();
+	// THE BELLOW ARRAY ONLY GETS FILLED IF THERE IS A SELECTED POST TO FEATURE
+	$selected_post_ids = array();
 
 	$selected_featured_post = get_field('homepage_featured_post', 'option');
 	if (!empty($selected_featured_post)) {
