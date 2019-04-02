@@ -161,7 +161,7 @@ get_header();
 </main><!-- #main -->
 
 <?php
-	echo "<script type='text/javascript'>\n";
+	echo "<script>";
 	echo "geojson = $geojsonStr";
 	echo "</script>";
 	//echo $geojsonStr;

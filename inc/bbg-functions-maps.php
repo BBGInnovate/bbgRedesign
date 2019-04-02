@@ -65,8 +65,8 @@
 	<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
 	<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
 
-	<script type='text/javascript' src='<?php echo get_stylesheet_directory_uri(); ?>/data/threats.js'></script>
-	<script type='text/javascript' src='<?php echo get_stylesheet_directory_uri(); ?>/js/map-pressfreedom.js'></script>
+	<script src='<?php echo get_stylesheet_directory_uri(); ?>/data/threats.js'></script>
+	<script src='<?php echo get_stylesheet_directory_uri(); ?>/js/map-pressfreedom.js'></script>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- <h2>Press Freedom Scores</h2>
@@ -83,7 +83,7 @@
 				</div>
 	</div>
 <?php 
-	echo "<script type='text/javascript'>\n";
+	echo "<script>";
 	echo "freeNotFree = $freeNotFreeStr";
 	echo "</script>";
 	$str = ob_get_clean();

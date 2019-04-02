@@ -93,7 +93,7 @@ if ( $includeSignup ) {
 		$signupForm .= "</form>";
 
 		$signupForm .= "<!-- Error messages: DO NOT DELETE -->";
-		$signupForm .= "<script type='text/javascript'>";
+		$signupForm .= "<script>";
 		$signupForm .= "var localizedErrMap = {};";
 		$signupForm .= "localizedErrMap['required'] = 		'This field is required.';";
 		$signupForm .= "localizedErrMap['ca'] = 			'An unexpected error occurred while attempting to send email.';";
@@ -109,7 +109,7 @@ if ( $includeSignup ) {
 		$signupForm .= "localizedErrMap['selectcountry'] = 	'Select a country';";
 		$signupForm .= "var postURL = 'https://visitor2.constantcontact.com/api/signup';";
 		$signupForm .= "</script>";
-		$signupForm .= "<script type='text/javascript' src='https://static.ctctcdn.com/h/contacts-embedded-signup-assets/1.0.2/js/signup-form.js'>";
+		$signupForm .= "<script src='https://static.ctctcdn.com/h/contacts-embedded-signup-assets/1.0.2/js/signup-form.js'>";
 		$signupForm .= "</script>";
 		$signupForm .= "<!--End CTCT Sign-Up Form-->";
 
