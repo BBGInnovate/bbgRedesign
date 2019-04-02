@@ -267,7 +267,7 @@ function get_threats_to_press_posts($used_homepage_posts) {
 	$recent_threat_query_params = array(
 		'post_type' => array('post'),
 		'posts_per_page' => $threats_to_display,
-		'cat' => array(68),
+		'cat' => 68,
 		'orderby' => 'post_date',
 		'order' => 'desc',
 		'post__not_in' => $used_homepage_posts
