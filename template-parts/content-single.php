@@ -274,7 +274,7 @@ if ($media_dev_map) {
 	));
 	$medGeojsonStr=json_encode(new ArrayValue($medGeojsonObj), JSON_PRETTY_PRINT, 10);
 
-	echo "<script type='text/javascript'>\n";
+	echo '<script type="text/javascript">';
 	echo 	"var med_geojson = $medGeojsonStr;";
 	echo "</script>";
 }
@@ -328,7 +328,7 @@ if (!empty($addFeaturedMap)) {
 	));
 	$geojsonStr = json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
-	echo '<script>';
+	echo '<script type="text/javascript">';
 	echo 	'geojson = $geojsonStr';
 	echo '</script>';
 }
@@ -612,7 +612,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 if ($media_dev_map) {
 ?>
 
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
+<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 <script type="text/javascript">
 	L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
@@ -651,7 +651,7 @@ if ($media_dev_map) {
 <?php
 if (!empty($addFeaturedMap) && $media_dev_map == "") {
 ?>
-	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
+	<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 	<script type="text/javascript">
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
@@ -713,7 +713,7 @@ if ($includeMap && $mapLocation) {
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 
-	<script type="text/javascript">
+	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 		var map = L.mapbox.map('map', 'mapbox.streets')
 		<?php echo '.setView(['. $lat . ', ' . $lng . '], ' . $zoom . ');'; ?>
