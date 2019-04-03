@@ -105,7 +105,7 @@ get_header();
 			<div class="nest-container">
 				<div class="inner-container">
 					<div class="icon-side-content-container">
-						<img src="<?php echo $profilePhoto; ?>">
+						<img src="<?php echo $profilePhoto; ?>" alt="Profile photo">
 					</div>
 					<div class="icon-main-content-container">
 						<?php

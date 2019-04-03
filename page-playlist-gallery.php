@@ -57,7 +57,7 @@ get_header();
 					<article class="bbg-blog__excerpt--featured has-post-thumbnail ">
 						<header class="entry-header bbg-blog__excerpt-header--featured usa-grid-full">
 							<div class="single-post-thumbnail clear bbg__article-header__thumbnail--large">
-								<a target="_blank" href="<?php echo $link; ?>" rel="bookmark" tabindex="-1"><img width="1040" height="624" <?php echo ar_responsive_image($thumbnailID,'medium-thumb',1200); ?> class="attachment-large-thumb size-large-thumb"></a>
+								<a target="_blank" href="<?php echo $link; ?>" rel="bookmark" tabindex="-1"><img width="1040" height="624" <?php echo ar_responsive_image($thumbnailID,'medium-thumb',1200); ?> class="attachment-large-thumb size-large-thumb" alt=""></a>
 							</div>
 							<div class="usa-grid">
 								<h2 class="entry-title bbg-blog__excerpt-title--featured"><a target="_blank" href="<?php echo $link; ?>" rel="bookmark"><?php echo $title; ?></a></h2>
@@ -79,7 +79,7 @@ get_header();
 						<header class="entry-header bbg-portfolio__excerpt-header">
 							<div class="single-post-thumbnail clear bbg__excerpt-header__thumbnail--medium">
 							<?php
-								echo '<a target="_blank" href="' . $link . '"><img src="' . $thumbnailSrc . '"/></a>';
+								echo '<a target="_blank" href="' . $link . '"><img src="' . $thumbnailSrc . '" alt=""></a>';
 							?>
 							</div>
 							<h3 class="entry-title bbg-portfolio__excerpt-title"><a target="_blank"  href='<?php echo $link; ?>'><?php echo $title; ?></a></h3>

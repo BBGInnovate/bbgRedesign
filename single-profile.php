@@ -85,7 +85,7 @@ get_header(); ?>
 			<div class="nest-container">
 				<div class="inner-container">
 					<div class="icon-side-content-container">
-						<img src="<?php echo $profile_photo_url; ?>">
+						<img src="<?php echo $profile_photo_url; ?>" alt="Profile photo">
 						<?php
 							if ($email != ""){
 								$email_link  = 	'<a href="mailto:' . $email . '" title="Email ' . get_the_title() . '">';

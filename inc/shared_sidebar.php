@@ -84,7 +84,7 @@ if ($includeSidebar) {
 				$external_links  = '<article>';
 				if ($sidebarLinkImage && $sidebarLinkImage != "") {
 					$external_links .= '<a target="blank" href="' . $sidebarLinkLink . '">';
-					$external_links .= 		'<img class="aside" src="' . $sidebarLinkImage['sizes']['medium'] . '">';
+					$external_links .= 		'<img class="aside" src="' . $sidebarLinkImage['sizes']['medium'] . '" alt="Image link">';
 					$external_links .= '</a>';
 				}
 				$external_links .= 		'<h6>';
@@ -127,7 +127,7 @@ if ($includeSidebar) {
 				$sidebarImage = "";
 				if ($sidebarPhotoImage && $sidebarPhotoImage != "") {
 					$sidebarPhotoImageSrc = $sidebarPhotoImage['sizes']['medium'];
-					$sidebarImage = '<img src="' . $sidebarPhotoImageSrc . '">';
+					$sidebarImage = '<img src="' . $sidebarPhotoImageSrc . '" alt="Sidebar image">';
 				}
 
 				/*

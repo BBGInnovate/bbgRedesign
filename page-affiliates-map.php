@@ -116,7 +116,7 @@ get_header();
 		<section class="map-banner" style="position: relative; z-index: 0;">
 			<div id="map" class="bbg__map--banner"></div>
 
-			<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button"/>
+			<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button" alt="Reset zoom image">
 
 			<div align="center" id="mapFilters" class="u--show-medium-large">
 				<input type="radio" checked name="deliveryPlatform" id="delivery_all" value="all" /><label for="delivery_all"> All</label>

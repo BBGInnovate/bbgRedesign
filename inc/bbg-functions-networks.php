@@ -88,7 +88,7 @@ function outputBroadcasters($cols = '') {
 
 				$entity_markup .= '<div class="inner-container">';
 				$entity_markup .= 	'<div class="entity-image-side">';
-				$entity_markup .= 		'<img src="' . $imgSrc . '">';
+				$entity_markup .= 		'<img src="' . $imgSrc . '" alt="Entity image">';
 				$entity_markup .= 	'</div>';
 				$entity_markup .= 	'<div class="entity-text-side">';
 				$entity_markup .= 		'<h4 class="entity-title">';

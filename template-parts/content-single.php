@@ -57,7 +57,7 @@ if ($relatedProfileID) {
 	$profileExcerpt = my_excerpt($relatedProfileID);
 
 	$relatedProfile  = '<div class="bbg__sidebar__primary">';
-	$relatedProfile .= 		'<a href="' . $profileLink . '"><img class="bbg__sidebar__primary-image" src="'.$profilePhoto.'"/></a>';
+	$relatedProfile .= 		'<a href="' . $profileLink . '"><img class="bbg__sidebar__primary-image" src="'.$profilePhoto.'" alt="Profile photo"></a>';
 	$relatedProfile .= 		'<h3 class="bbg__sidebar__primary-headline"><a href="' . $profileLink . '">' . $profileName . '</a></h3>';
 	$relatedProfile .= 		'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
 	$relatedProfile .= 		'<p class="">' . $profileExcerpt . '</p>';
@@ -231,7 +231,7 @@ if($journos) {
 					if ($profilePhoto) {
 						$profilePhoto = wp_get_attachment_image_src($profilePhoto, 'Full');
 						$profilePhoto = $profilePhoto[0];
-						$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-featured__profile__mugshot"/></a>';
+						$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-featured__profile__mugshot" alt="Mugshot"></a>';
 					}
 
 					$featuredJournalists .= '<div class="bbg__profile-excerpt--sidebar">';
@@ -303,7 +303,7 @@ if (!empty($addFeaturedMap)) {
 		if ($featuredMapItemLink != "") {
 			$popupBody .= $map_header;
 			$popupBody .= '<div class="u--show-medium-large">';
-			$popupBody .= 	'<img src="' . $featuredMapItemImageUrl . '">';
+			$popupBody .= 	'<img src="' . $featuredMapItemImageUrl . '" alt="Featured map item">';
 			$popupBody .= '</div>';
 			$popupBody .= $featuredMapItemDescription;
 		}
@@ -371,7 +371,7 @@ if (!empty($media_dev_addtl_images)) {
 	// var_dump($media_dev_addtl_images);
 	foreach($media_dev_addtl_images as $addtl_dev_image) {
 		foreach($addtl_dev_image as $media_image) {
-			$addtl_image_set .= '<div><img src="' . $media_image['url'] . '"></div>';
+			$addtl_image_set .= '<div><img src="' . $media_image['url'] . ' alt="Additional media image"></div>';
 		}
 	}
 
@@ -487,7 +487,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 											$firstClass = "bbg__entity-logo__press-release-first-of-many";
 										}
 										$entity_icons  = '<a href="' . $entityLink . '" title="Learn more">';
-										$entity_icons .= 	'<img src="'. $entityLogo . '" class="bbg__entity-logo__press-release ' . $firstClass . '">';
+										$entity_icons .= 	'<img src="'. $entityLogo . '" class="bbg__entity-logo__press-release ' . $firstClass . '" alt="Entity logo">';
 										$entity_icons .= '</a>';
 										echo $entity_icons;
 									}
@@ -522,7 +522,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 									if ($awardLogo) {
 										$awardLogoImage = wp_get_attachment_image_src( $awardLogo , 'small-thumb-uncropped');
 										$awardLogoImage = $awardLogoImage[0];
-										$awardLogoImage = '<img src="' . $awardLogoImage . '" class="bbg__profile-excerpt__photo"/>';
+										$awardLogoImage = '<img src="' . $awardLogoImage . '" class="bbg__profile-excerpt__photo" alt="Award logo">';
 									}
 									$award_markup  = '<div class="usa-grid-full bbg__contact-box">';
 									$award_markup .= 	'<h3>About ' . $awardOrganization . '</h3>';

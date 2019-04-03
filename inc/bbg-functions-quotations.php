@@ -114,7 +114,7 @@
 			// 	$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkColor . '">' . $quoteNetwork . '</div>';
 			// }
 			if ($mugshot != '') {
-				$quote .= 		'<img src="' . $mugshot . '" class="quote-image"/>';
+				$quote .= 		'<img src="' . $mugshot . '" class="quote-image" alt="' . $speaker . ' image">';
 			}
 			$quote .= 	'<p class="quote-line">&ldquo;' . $quoteText . '&rdquo;</p>';
 			$quote .= 	'<p class="quote-name">' . $speaker . '</p>';
@@ -162,7 +162,7 @@
 				$quote .= '<div class="bbg__quotation-attribution__container">';
 					$quote .= '<p class="bbg__quotation-attribution">';
 					if ( $mugshot != '' ) {
-						$quote .= '<img src="' . $mugshot . '" class="bbg__quotation-attribution__mugshot"/>';
+						$quote .= '<img src="' . $mugshot . '" class="bbg__quotation-attribution__mugshot" alt="Mugshot">';
 					}
 					$quote .= '<span class="bbg__quotation-attribution__text">';
 					if ( $callToAction != '' ) {

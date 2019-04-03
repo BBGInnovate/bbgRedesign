@@ -132,7 +132,7 @@ get_header();
 
 	$hotspot_page_title  = '<div class="outer-container">';
 	$hotspot_page_title .= 	'<div class="bbg__profile-photo">';
-	$hotspot_page_title .= 		'<img class="bbg__profile-photo__image" src="' . $mapImageSrc . '">';
+	$hotspot_page_title .= 		'<img class="bbg__profile-photo__image" src="' . $mapImageSrc . '" alt="">';
 	$hotspot_page_title .= 	'</div>';
 	$hotspot_page_title .= 	'<div class="bbg__profile-title">';
 	$hotspot_page_title .= 		'<h2>' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
@@ -149,7 +149,7 @@ get_header();
 			<div class="nest-container">
 				<div class="inner-container">
 					<div class="icon-side-content-container">
-						<?php echo '<img src="' . $mapImageSrc . '">'; ?>
+						<?php echo '<img src="' . $mapImageSrc . ' alt=''">'; ?>
 					</div>
 
 					<div class="icon-main-content-container">
@@ -212,7 +212,7 @@ get_header();
 								?>
 								<div class="inner-container">
 									<div class="small-side-content-container">
-										<img width="20" height="20" style="height:20px !important; width:20px !important; max-width:none; margin-bottom:0;" src="<?php if ($entityLogo) { echo $entityLogo; } ?>" />
+										<img width="20" height="20" style="height:20px !important; width:20px !important; max-width:none; margin-bottom:0;" src="<?php if ($entityLogo) { echo $entityLogo; } ?>" alt="Entity logo">
 										<a title="<?php echo $serviceInEnglish; ?>"  target="_blank" href="<?php echo $link; ?>" class="bbg__jobs-list__title"><?php echo $serviceName; ?></a>
 									</div>
 									<div class="small-main-content-container">

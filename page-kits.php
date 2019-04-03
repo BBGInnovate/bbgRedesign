@@ -706,7 +706,7 @@ get_header();
 
 									if ($thumbSrc) {
 										echo '<a href="' . $fileURL . '" target="_blank">';
-										echo '<img src="' . $thumbSrc[0] . '">';
+										echo '<img src="' . $thumbSrc[0] . '" alt="">';
 										echo '</a>';
 									}
 									echo $pageExcerpt;

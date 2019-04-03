@@ -145,7 +145,7 @@ if ($ceremony_post -> have_posts()) {
 					$grid_box_set  = '<a href="' . $entity_winner['candidate_profile'] . '">';
 					$grid_box_set .= 	'<div class="grid-box-chunk" style="background-image: url(' . $entity_winner['grid_image'] . ');">';
 					$grid_box_set .= 		'<div class="grid-box-text">';
-					$grid_box_set .= 			'<img src=' . $entity_winner['icon_url'] . '>';
+					$grid_box_set .= 			'<img src=' . $entity_winner['icon_url'] . ' alt="Entity winner image">';
 					$grid_box_set .= 			'<p>' . $entity_winner['grid_text'] . '</p>';
 					$grid_box_set .= 		'</div>';
 					$grid_box_set .= 	'</div>';
@@ -177,7 +177,7 @@ if ($ceremony_post -> have_posts()) {
 	<div class="outer-container">
 		<div class="grid-container">
 			<div class="usagm-quotation">
-				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot"/>
+				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot" alt="John Lansing image">
 				<h4 class="quote-text">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</h4>
 				<p class="quote-byline">
 					John Lansing<br>

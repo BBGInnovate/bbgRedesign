@@ -115,9 +115,9 @@ add_shortcode( 'pressFreedomMap', 'pressFreedomMap' );
 
 			$popupBody = "";
 			if ($featuredMapItemLink != "") {
-				$popupBody .= "<h5><a style='font-weight: bold; ' href='$featuredMapItemLink'>$featuredMapItemTitle</a></h5><div class='u--show-medium-large'><img src='$featuredMapItemImageUrl'></div><BR>$featuredMapItemDescription";
+				$popupBody .= "<h5><a style='font-weight: bold; ' href='$featuredMapItemLink'>$featuredMapItemTitle</a></h5><div class='u--show-medium-large'><img src='$featuredMapItemImageUrl' alt='Featured map item'></div><BR>$featuredMapItemDescription";
 			} else {
-				$popupBody .= "<h5><span style='font-weight: bold;'>$featuredMapItemTitle</span></h5><div class='u--show-medium-large'><img src='$featuredMapItemImageUrl'></div><BR>$featuredMapItemDescription";
+				$popupBody .= "<h5><span style='font-weight: bold;'>$featuredMapItemTitle</span></h5><div class='u--show-medium-large'><img src='$featuredMapItemImageUrl' alt='Featured map item'></div><BR>$featuredMapItemDescription";
 			}
 
 			$features[] = array(

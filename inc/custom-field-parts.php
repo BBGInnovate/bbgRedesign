@@ -34,7 +34,7 @@ function build_soapbox_parts($soap_data) {
 	$soap_content .= '</p>';
 
 	if (!empty($soap_data['profile_image'])) {
-		$soap_image  = '<img src="' . $soap_data['profile_image'] . '">';
+		$soap_image  = '<img src="' . $soap_data['profile_image'] . '" alt="Profile image">';
 		if ($soap_data['profile_name'] != "") {
 			$soap_image .= '<p class="aside">' . $soap_data['profile_name'] . '</p>';
 		}
@@ -175,7 +175,7 @@ function build_umbrella_content_parts($content_data) {
 
 	if ($content_data['thumb_src']) {
 		$image  = '<div class="hd_scale">';
-		$image .= 	'<img src="' . $content_data['thumb_src'] . '">';
+		$image .= 	'<img src="' . $content_data['thumb_src'] . '" alt="Thumbnail image">';
 		$image .= '</div>';
 	}
 
@@ -212,7 +212,7 @@ function build_entity_parts($entity_data) {
 
 		if (!empty($fullName)) {
 			$entity_image  = '<a href="' . $link . '" tabindex="-1">';
-			$entity_image .= 	'<img src="' . $imgSrc . '">';
+			$entity_image .= 	'<img src="' . $imgSrc . '" alt="' . $abbreviation . ' logo">';
 			$entity_image .= '</a>';
 
 			$entity_title = 	'<h3><a href="' . $link . '">' . $fullName . '</a></h3>';

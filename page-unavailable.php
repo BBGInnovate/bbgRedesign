@@ -242,7 +242,7 @@ require 'inc/custom-field-modules.php';
 									$entity_markup .= 	'<div class="inner-container">';
 									$entity_markup .= 		'<div class="entity-icon">';
 									$entity_markup .=  			'<a href="' . $link . '" tabindex="-1">';
-									$entity_markup .= 				'<img src="' . $imgSrc . '">';
+									$entity_markup .= 				'<img src="' . $imgSrc . '" alt="Entity image">';
 									$entity_markup .=  			'</a>';
 									$entity_markup .= 		'</div>';
 									$entity_markup .= 		'<div class="entity-desc">';

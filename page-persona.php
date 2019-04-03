@@ -113,7 +113,7 @@ get_header(); ?>
 								$decision = apply_filters('the_content',$decision);
 
 								echo '<h4>The Lead</h4>';
-								echo '<img width="200" style="float:right;" src="' . $avatar["url"] . '"> ';
+								echo '<img width="200" style="float:right;" src="' . $avatar["url"] . '" alt="Avatar image"> ';
 								echo $lead;
 								echo "<h4>The Investigation</h4>";
 								echo $investigation;

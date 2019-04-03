@@ -106,7 +106,7 @@ if ( $custom_query->have_posts() ) :
 				//we need to give the width and height so that the scrolling happens properly the first time image laods
 				$w = $trainingPhoto['sizes']['medium-width'];
 				$h = $trainingPhoto['sizes']['medium-height'];
-				$popupBody .= "<div class='u--show-medium-large'><BR><BR><img src='$trainingPhotoUrl'></div>";
+				$popupBody .= "<div class='u--show-medium-large'><BR><BR><img src='$trainingPhotoUrl' alt='Trainging photo'></div>";
 			} else {
 				//$mediumFeature = get_the_post_thumbnail( $id, 'medium' );
 				$mediumFeature = wp_get_attachment_image_src( get_post_thumbnail_id( $id), "medium" );
@@ -115,7 +115,7 @@ if ( $custom_query->have_posts() ) :
 				$w = $trainingPhoto = $mediumFeature[1];
 				$h = $trainingPhoto = $mediumFeature[2];
 
-				$popupBody .= "<div class='u--show-medium-large'><BR><BR><img src='$trainingPhotoUrl'></div>";
+				$popupBody .= "<div class='u--show-medium-large'><BR><BR><img src='$trainingPhotoUrl' alt='Trainging photo'></div>";
 			}
 			$popupBody .= "<BR><BR>" . $mapDescription . " &nbsp;&nbsp;<a style='font-weight:bold;' href='$storyLink' target='_blank'>Read More &gt; &gt;</a>";
 
@@ -210,7 +210,7 @@ get_header(); ?>
 			<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>
 		</div>
 		
-		<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button"/>
+		<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button" alt="Reset zoom image">
 
 		<style> 
 			#mapFilters label { margin-left:15px; }

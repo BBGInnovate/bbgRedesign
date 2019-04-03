@@ -438,7 +438,7 @@ get_header();
 			<div class="nest-container">
 				<div class="inner-container">
 					<section class="icon-side-content-container">
-						<img src="<?php echo $entityLogo; ?>">
+						<img src="<?php echo $entityLogo; ?>" alt="<?php echo $abbreviation; ?> image">
 						<div id="reach-entity">
 							<div class="entity-left-article">
 								<h5>Website</h5>
@@ -562,7 +562,7 @@ get_header();
 					$rss_markup .= 		'<div class="post-image">';
 					if ($o['image'] != "") {
 						$rss_markup .= 		'<a href="' . $o['url'] . '">';
-						$rss_markup .= 			'<img src="' . $o['image'] . '">';
+						$rss_markup .= 			'<img src="' . $o['image'] . '" alt="">';
 						$rss_markup .= 		'</a>';
 					}
 					$rss_markup .= 		'</div>';

@@ -273,7 +273,7 @@
 						<div class="bbg__quotation ">
 							<h2 class="bbg__quotation-text--large">“Historians now acknowledge that the Voice of America, Radio Free Europe were major contributors to the bringing down the then Soviet Union. There’s no doubt about it.”</h2>
 							<div class="bbg__quotation-attribution__container">
-								<p class="bbg__quotation-attribution"><img src="https://bbgredesign.voanews.com/wp-content/media/2016/05/mugshot_John-McCain-100.jpg" class="bbg__quotation-attribution__mugshot"><span class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">U.S. Senator John&nbs;McCain (R-AZ)</span><span class="bbg__quotation-attribution__credit"></span></span></p>
+								<p class="bbg__quotation-attribution"><img src="https://bbgredesign.voanews.com/wp-content/media/2016/05/mugshot_John-McCain-100.jpg" class="bbg__quotation-attribution__mugshot" alt=""><span class="bbg__quotation-attribution__text"><span class="bbg__quotation-attribution__name">U.S. Senator John&nbs;McCain (R-AZ)</span><span class="bbg__quotation-attribution__credit"></span></span></p>
 							</div>
 						</div>
 					</div>

@@ -32,7 +32,7 @@
 			$s .= 	'<a href="' . $permalink . '">' . $internOffice . '</a>';
 			if ($profilePhoto != "") {
 				$s .= '<a href="' . $permalink . '">';
-				$s .= '<img class="bbg__mugshot"  src="' . $profilePhoto . '"  />';
+				$s .= '<img class="bbg__mugshot"  src="' . $profilePhoto . '"  alt="Profile photo">';
 				$s .= '</a>';
 			}
 			$s .= '<p>' . get_the_excerpt() . ' <a href=' . $permalink . '>READ MORE</a></p>';

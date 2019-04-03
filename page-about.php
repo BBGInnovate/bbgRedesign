@@ -139,14 +139,14 @@ if (is_page('media-development')) {
 				// ASSIGN WIDTH AND HEIGHT FOR PROPER SCROLLING
 				$w = $training_photo['sizes']['medium-width'];
 				$h = $training_photo['sizes']['medium-height'];
-				$popupBody .= '<div class="u--show-medium-large"><br><br><img src="' . $training_photo_url . '"></div>';
+				$popupBody .= '<div class="u--show-medium-large"><br><br><img src="' . $training_photo_url . '" alt="Training photo"></div>';
 			} else {
 				$mediumFeature = wp_get_attachment_image_src( get_post_thumbnail_id( $id), "medium" );
 				$training_photo_url = $mediumFeature[0];
 				$w = $training_photo = $mediumFeature[1];
 				$h = $training_photo = $mediumFeature[2];
 
-				$popupBody .= '<div class="u--show-medium-large"><br><br><img src="' . $training_photo_url . '"></div>';
+				$popupBody .= '<div class="u--show-medium-large"><br><br><img src="' . $training_photo_url . '" alt="Training photo"></div>';
 			}
 			$popupBody .= '<br><br>' . $mapDescription . ' &nbsp;&nbsp;<a style="font-weight: bold;" href="' . $story_link . '" target="_blank">Read More &gt; &gt;</a>';
 

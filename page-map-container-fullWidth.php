@@ -68,7 +68,7 @@ echo getNetworkExcerptJS();
 				</div>
 
 				<div class="bbg__map-area__container " style="postion: relative;">
-					<img id="loading" src="<?php echo get_template_directory_uri(); ?>/img/loading.gif" />
+					<img id="loading" src="<?php echo get_template_directory_uri(); ?>/img/loading.gif" alt="loader">
 					<div id="chartdiv"></div>
 				</div>
 

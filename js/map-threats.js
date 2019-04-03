@@ -47,7 +47,7 @@ function showInfo(data) {
 		}
 
 		if (data[i].Mugshot && data[i].Mugshot != "") {
-			description = "<img src='" + data[i].Mugshot + "' class='bbg__map__infobox__mugshot'/>" + description;
+			description = "<img src='" + data[i].Mugshot + "' class='bbg__map__infobox__mugshot' alt='mugshot' />" + description;
 		}
 
 		if (data[i].Link && data[i].Link != "") {

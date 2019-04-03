@@ -120,7 +120,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 	<div class="bbg__ribbon inner-ribbon bbg__ribbon--thin">
 		<div class="outer-container">
 			<div class="side-content-container">
-				<img src="<?php echo $burkeBioImage; ?>">
+				<img src="<?php echo $burkeBioImage; ?>" alt="Burke bio image">
 			</div>
 			<div class="main-content-container">
 				<h2>BBG History</h2>
@@ -133,7 +133,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 	<div class="outer-container">
 		<div class="grid-container">
 			<div class="usagm-quotation">
-				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot"/>
+				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot" alt="John Lansing image">
 				<h4 class="quote-text">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</h4>
 				<p class="quote-byline">
 					John Lansing<br>

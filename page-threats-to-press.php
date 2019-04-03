@@ -173,7 +173,7 @@ if ($include_custom_quotation) {
 		$quote_mugshot = $quote_mugshot[0];
 	}
 
-	$quotation  = '<img class="quote-image"  src="' . $quote_mugshot .'">';
+	$quotation  = '<img class="quote-image"  src="' . $quote_mugshot .'" alt="Mugshot">';
 	$quotation .= '<h4 class="quote-text">'. $quotation_text .'</h4>';
 	$quotation .= '<p  class="quote-byline">';
 	$quotation .= 	$quotation_speaker .'<br>';
@@ -326,7 +326,7 @@ echo $threats_map_json;
 						if ($profilePhoto) {
 							$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
 							$profilePhoto = $profilePhoto[0];
-							$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo"></a>';
+							$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo" alt="Profile photo"></a>';
 						}
 
 						$featuredJournalists .= '<div class="grid-half profile-clears">';
