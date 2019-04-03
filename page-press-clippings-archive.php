@@ -216,6 +216,7 @@ get_header();
 							'unit'                      => 'pt', 
 							'format'                    => 'flat',
 							'separator'                 => ', ',
+							'topic_count_text_callback' => default_topic_count_text,
 							'echo'                      => true,
 							'show_count'                  => 0,
 						);
