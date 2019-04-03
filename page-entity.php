@@ -681,10 +681,10 @@ get_header();
 /* if the map is set, then load the necessary JS and CSS files */
 if ($includeMap) {
 ?>
-	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
+	<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 
-	<script>
+	<script type="text/javascript">
 	L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 	var map = L.mapbox.map('map', 'mapbox.streets')
 		//.setView([38.91338, -77.03236], 16);

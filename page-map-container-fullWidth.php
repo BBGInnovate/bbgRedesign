@@ -25,9 +25,9 @@ echo getNetworkExcerptJS();
 	.btn-default.selected {background:green;}
 </style>
 
-	<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/ammap.js'></script>
-	<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/mapdata-worldLow.js'></script>
-	<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/map-entity-reach-oldapi.js'></script>
+	<script type="text/javascript" src='<?php echo get_template_directory_uri(); ?>/js/vendor/ammap.js'></script>
+	<script type="text/javascript" src='<?php echo get_template_directory_uri(); ?>/js/mapdata-worldLow.js'></script>
+	<script type="text/javascript" src='<?php echo get_template_directory_uri(); ?>/js/map-entity-reach-oldapi.js'></script>
 
 	<div id="primary" class="content-area">
 		<main id="main" role="main">

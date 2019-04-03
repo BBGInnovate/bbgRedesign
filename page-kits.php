@@ -234,7 +234,7 @@ get_header();
 	}
 </style>
 
-<script>
+<script type="text/javascript">
 	/* show/hide the constant contact signup form */
 	function toggleForm() {
 		btnSignup = document.getElementById( 'btnSignup' );

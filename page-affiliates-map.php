@@ -161,7 +161,7 @@ get_header();
 </main><!-- #main -->
 
 <?php
-	echo "<script type='text/javascript'>\n";
+	echo '<script type="text/javascript">';
 	echo "geojson = $geojsonStr";
 	echo "</script>";
 	//echo $geojsonStr;
@@ -170,12 +170,12 @@ get_header();
 
 <?php /* include map stuff */ ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.js"></script>
 <link rel="stylesheet" href="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/MarkerCluster.Default.css" />
-<script src="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/leaflet.markercluster-src.js"></script>
-<script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>
-<script src="https://cdn.rawgit.com/jseppi/Leaflet.MakiMarkers/master/Leaflet.MakiMarkers.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/leaflet.markercluster-src.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/jseppi/Leaflet.MakiMarkers/master/Leaflet.MakiMarkers.js"></script>
 
 <style>
 	[class*="marker-cluster-"] {background:rgba(0, 0, 0, 0);}
@@ -196,7 +196,7 @@ get_header();
 	.marker-cluster-web-large div {color: #ffffffff; background-color: #000000;}
 </style>
 
-<script>
+<script type="text/javascript">
 	//var tilesetUrl = 'https://api.mapbox.com/styles/v1/mapbox/emerald-v8/tiles/{z}/{x}/{y}?access_token=<?php //echo MAPBOX_API_KEY; ?>';
 	selectedPlatform = "all";
 	// var mbToken = '<?php //echo MAPBOX_API_KEY; ?>'

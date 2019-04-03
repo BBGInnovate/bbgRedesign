@@ -243,7 +243,7 @@ add_action( 'admin_enqueue_scripts', 'enqueueAdminStyles' );
 
 function loggedInAlerts() {
 	if ( is_user_logged_in() ) {
-		echo '<script>';
+		echo '<script type="text/javascript">';
 		echo 'jQuery(".bbg__site-alert").css("top","30px");';
 		echo '</script>';
 	}
@@ -251,7 +251,7 @@ function loggedInAlerts() {
 
 function adminFooter() {
 
-	echo '<script>';
+	echo '<script type="text/javascript">';
 	echo 'jQuery(document).ready(function() {';
 	echo 'jQuery("label").qtip();';
 	echo '});';

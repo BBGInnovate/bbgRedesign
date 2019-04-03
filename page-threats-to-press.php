@@ -87,7 +87,7 @@ $threats_map_caption = get_field( 'threats_to_press_map_caption' );
 $trailingDays = get_post_meta($page_id, 'threats_to_press_map_trailing_days', true);
 $maxClusterRadius = get_post_meta($page_id, 'threats_to_press_map_maximum_cluster_radius', true);
 
-$threats_map_json  = '<script>';
+$threats_map_json  = '<script type="text/javascript">';
 $threats_map_json .= 	'threats=' . json_encode(new ArrayValue($threats_map_data_package), JSON_PRETTY_PRINT, 10) . ';';
 $threats_map_json .= '</script>';
 
@@ -363,15 +363,15 @@ echo $threats_map_json;
 	</div>
 
 
-	<script src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
+	<script type="text/javascript" src='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.js'></script>
 	<link href='https://api.mapbox.com/mapbox.js/v3.0.1/mapbox.css' rel='stylesheet' />
 
 
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/leaflet.markercluster.js'></script>
+	<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/leaflet.markercluster.js'></script>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/MarkerCluster.css' rel='stylesheet' />
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.0.3/MarkerCluster.Default.css' rel='stylesheet' />
-	<!-- <script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>-->
-	<script src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/master/src/subgroup.js"></script>
+	<!-- <script type="text/javascript" src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>-->
+	<script type="text/javascript" src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/master/src/subgroup.js"></script>
 
 	<style>
 		.marker-cluster-small, .marker-cluster-small div, .marker-cluster-medium, .marker-cluster-medium div  {
@@ -399,7 +399,7 @@ echo $threats_map_json;
 		*/
 	</style>
 
-	<script>
+	<script type="text/javascript">
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 		var initialCenter = [28.304380682962783, 22.148437500000004];
 		

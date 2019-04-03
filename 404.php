@@ -96,9 +96,9 @@ if ($custom_query->have_posts()) :
 		));
 		$geojsonStr = json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
-		echo "<script type='text/javascript'>\n";
+		echo '<script type="text/javascript">';
 		echo 	"geojson = $geojsonStr";
-		echo "</script>";
+		echo '</script>';
 endif;
 ?>
 
@@ -119,7 +119,7 @@ endif;
 	}
 </style>
 
-<script>
+<script type="text/javascript">
 L.mapbox.accessToken = '<?php echo 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw'; ?>';
 
 var map = L.mapbox.map('map', 'mapbox.emerald')

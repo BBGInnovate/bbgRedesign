@@ -130,7 +130,7 @@ foreach ($settings_social_media_list as $social_platform) {
 
 <?php wp_head(); ?>
 
-<script>
+<script type="text/javascript">
 	bbgConfig = {};
 	bbgConfig.MAPBOX_API_KEY = '<?php echo MAPBOX_API_KEY; ?>';
 	bbgConfig.template_directory_uri = '<?php echo get_template_directory_uri() . "/"; ?>';
@@ -191,7 +191,7 @@ foreach ($settings_social_media_list as $social_platform) {
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124338348-1"></script>
-<script>
+<script type="text/javascript">
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
@@ -204,7 +204,7 @@ gtag('config', 'UA-124338348-1');
 <body <?php body_class(); ?>>
 
 <!-- Loading tealium script asynchronously -->
-<script>
+<script type="text/javascript">
     (function(a,b,c,d){
     a='//tags.tiqcdn.com/utag/bbg/main/prod/utag.js';
     b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
@@ -260,7 +260,7 @@ gtag('config', 'UA-124338348-1');
 		<!-- NAVIGATION BAR -->
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
 			<h1 class="header-outliner">Navigation</h1>
-			<a class="site-brand" href="<?php echo get_home_url(); ?>/home"><img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-RGB-hires.png"></a>
+			<a class="site-brand" href="<?php echo get_home_url(); ?>/home"><img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-RGB-hires.png" alt="USAGM Logo"></a>
 
 			<?php
 				$search_box  = '<div class="bbg__main-navigation__search">';

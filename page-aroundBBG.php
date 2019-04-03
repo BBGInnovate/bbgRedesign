@@ -326,7 +326,7 @@ get_header();
 			}
 			?>
 
-			<scripts>
+			<script type="text/javascript">
 				jQuery(document).ready(function(){
 					setTimeout(function() {window.location.reload();}, 300000);
 				});

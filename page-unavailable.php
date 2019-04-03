@@ -90,16 +90,16 @@ O:::::::OOO:::::::ODDD:::::DDDDD:::::DDDD:::::DDDDD:::::DII::::::II
 
 <link rel="stylesheet" href="/wp-content/themes/bbgRedesign/style.css">
 
-<script src="https://www.bbg.gov/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
-<script src="https://www.bbg.gov/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
-<script src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/lightbox2/js/lightbox.min.js?ver=4.5.3"></script>
-<script src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/wpembedfb.min.js?ver=4.5.3"></script>
-<script>
+<script type="text/javascript" src="https://www.bbg.gov/wp-includes/js/jquery/jquery.js?ver=1.12.4"></script>
+<script type="text/javascript" src="https://www.bbg.gov/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1"></script>
+<script type="text/javascript" src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/lightbox2/js/lightbox.min.js?ver=4.5.3"></script>
+<script type="text/javascript" src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/wpembedfb.min.js?ver=4.5.3"></script>
+<script type="text/javascript">
 /* <![CDATA[ */
 var WEF = {"local":"en_US","version":"v2.6","fb_id":""};
 /* ]]> */
 </script>
-<script src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/fb.min.js?ver=4.5.3"></script>
+<script type="text/javascript" src="https://www.bbg.gov/wp-content/plugins/wp-embed-facebook/lib/js/fb.min.js?ver=4.5.3"></script>
 <link rel="https://api.w.org/" href="https://www.bbg.gov/wp-json/">
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.bbg.gov/xmlrpc.php?rsd">
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.bbg.gov/wp-includes/wlwmanifest.xml">
@@ -108,7 +108,7 @@ var WEF = {"local":"en_US","version":"v2.6","fb_id":""};
 <link rel="alternate" type="application/json+oembed" href="https://www.bbg.gov/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bbg.gov%2Fwho-we-are%2F">
 <link rel="alternate" type="text/xml+oembed" href="https://www.bbg.gov/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bbg.gov%2Fwho-we-are%2F&amp;format=xml">
 
-<script>
+<script type="text/javascript">
 	bbgConfig = {};
 	bbgConfig.template_directory_uri = 'https://www.bbg.gov/wp-content/themes/bbgRedesign/';
 </script>
@@ -118,13 +118,13 @@ var WEF = {"local":"en_US","version":"v2.6","fb_id":""};
 ================================================== -->
 
 	<!--[if lt IE 9]>
-	  <script src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/html5shiv.js"></script>
-	  <script src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/respond.js"></script>
-	  <script src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/selectivizr-min.js"></script>
+	  <script type="text/javascript" src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/html5shiv.js"></script>
+	  <script type="text/javascript" src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/respond.js"></script>
+	  <script type="text/javascript" src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/selectivizr-min.js"></script>
 	<![endif]-->
 
 	<!-- picturefill - polyfill for srcset sizes on older and/or mobile browsers -->
-	<script src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/picturefill.min.js"></script>
+	<script type="text/javascript" src="https://www.bbg.gov/wp-content/themes/bbgRedesign/js/vendor/picturefill.min.js"></script>
 
 
 <!-- Favicons
@@ -275,7 +275,7 @@ require 'inc/custom-field-modules.php';
 	<div class="outer-container">
 		<div id="grid-container">
 			<a class="site-brand" href="<?php echo get_home_url(); ?>/home">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-White-hires.png">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-White-hires.png" alt="USAGM Logo">
 			</a>
 		</div>
 	</div>
