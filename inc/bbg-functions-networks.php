@@ -49,7 +49,7 @@ function getNetworkExcerptJS() {
 	$entityJson = json_encode(new ArrayValue($entity_group), JSON_PRETTY_PRINT);
 	$entityJson = str_replace("\/", "/", $entityJson);
 
-	$entity_script = '<script>';
+	$entity_script = '<script type="text/javascript">';
 	$entity_script .= 	'entities=' . $entityJson . ';';
 	$entity_script .= '</script>';
 

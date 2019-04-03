@@ -274,7 +274,7 @@ if ($media_dev_map) {
 	));
 	$medGeojsonStr=json_encode(new ArrayValue($medGeojsonObj), JSON_PRETTY_PRINT, 10);
 
-	echo "<script>";
+	echo "<script type='text/javascript'>\n";
 	echo 	"var med_geojson = $medGeojsonStr;";
 	echo "</script>";
 }
@@ -614,7 +614,7 @@ if ($media_dev_map) {
 
 <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
-<script>
+<script type="text/javascript">
 	L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 	var map = L.mapbox.map('map-featured', 'mapbox.streets')
 	<?php echo '.setView(['. $media_dev_lat . ', ' . $media_dev_lng . '], ' . $zoom . ');'; ?>
@@ -653,7 +653,7 @@ if (!empty($addFeaturedMap) && $media_dev_map == "") {
 ?>
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
-	<script>
+	<script type="text/javascript">
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 		var map = L.mapbox.map('map-featured', 'mapbox.emerald')
 	    var markers = L.mapbox.featureLayer();
@@ -713,7 +713,7 @@ if ($includeMap && $mapLocation) {
 	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 
-	<script>
+	<script type="text/javascript">
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 		var map = L.mapbox.map('map', 'mapbox.streets')
 		<?php echo '.setView(['. $lat . ', ' . $lng . '], ' . $zoom . ');'; ?>

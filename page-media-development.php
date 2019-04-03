@@ -181,7 +181,7 @@ if ( $custom_query->have_posts() ) :
 		));
 		$geojsonStr=json_encode(new ArrayValue($geojsonObj), JSON_PRETTY_PRINT, 10);
 
-		echo "<script>";
+		echo "<script type='text/javascript'>\n";
 		echo "geojson = $geojsonStr";
 		echo "</script>";
 		//echo $geojsonStr;

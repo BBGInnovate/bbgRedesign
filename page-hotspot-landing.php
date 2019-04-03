@@ -40,9 +40,9 @@ echo getNetworkExcerptJS();
 	border-style: solid;
 }
 </style>
-<script src='<?php echo get_template_directory_uri(); ?>/js/vendor/ammap.js'></script>
-<script src='<?php echo get_template_directory_uri(); ?>/js/mapdata-worldLow.js'></script>
-<script src='<?php echo get_template_directory_uri(); ?>/js/map-hotspot.js'></script>
+<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/ammap.js'></script>
+<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/mapdata-worldLow.js'></script>
+<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/map-hotspot.js'></script>
 
 <main id="main" role="main">
 	<div class="usa-grid-full">
