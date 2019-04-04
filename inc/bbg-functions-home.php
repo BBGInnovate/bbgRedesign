@@ -83,16 +83,20 @@ function get_recent_posts($qty) {
 	$selected_featured_post = get_field('homepage_featured_post', 'option');
 	if (!empty($selected_featured_post)) {
 		$selection_array = $selected_featured_post;
-		$selected_post_ids[] = $selected_featured_post[0]->ID;
-		if (count($used_posts) > 1) {
-			foreach ($selected_post_ids as $sel_post_id) {
-				$used_posts[] = $sel_post_id;
+		
+		// IF MULTIPLE STORIES ARE SELECTED
+		if (count($selection_array) > 1) {
+			foreach($selected_featured_post as $cur) {
+				$selected_post_ids[] = $cur->ID;
+				$used_posts[] = $cur->ID;
 			}
 		} else {
+			$selected_post_ids[] = $selected_featured_post[0]->ID;
 			$used_posts[] = $selected_post_ids[0];
 		}
+
 		$all_recent_posts = $selection_array;
-		$qty--;
+		$qty -= count($used_posts);
 	}
 
 	if ($qty != 0) {
@@ -121,12 +125,12 @@ function get_recent_posts($qty) {
 				)
 			)
 		);
-	}
-	$recent_post_query = new WP_Query($recent_posts_args);
-	$recent_query_array = $recent_post_query->posts;
-	foreach ($recent_query_array as $recent_query) {
-		$used_posts[] = $recent_query->ID;
-		$all_recent_posts[] = $recent_query;
+		$recent_post_query = new WP_Query($recent_posts_args);
+		$recent_query_array = $recent_post_query->posts;
+		foreach ($recent_query_array as $recent_query) {
+			$used_posts[] = $recent_query->ID;
+			$all_recent_posts[] = $recent_query;
+		}
 	}
 
 	$post_package = array(
