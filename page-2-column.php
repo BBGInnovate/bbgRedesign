@@ -63,7 +63,7 @@ function display_foia_reports() {
 		$counter++;
 	}
 	
-	echo '</ul><p style="text-align: right;"><a href="https://www.bbg.gov/foia/">Visit the main FOIA page</a></p>';
+	echo '</ul><p style="text-align: right;"><a href="https://www.usagm.gov/foia/">Visit the main FOIA page</a></p>';
 }
 
 if (have_posts()) {
