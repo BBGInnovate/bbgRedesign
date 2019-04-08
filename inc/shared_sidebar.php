@@ -37,7 +37,8 @@ if ($includeSidebar) {
 				$filesize = formatBytes(filesize($file));
 
 				// GET FILE NAME IF NOT ENTERED IN CUSTOM FIELD
-				if ($sidebarDownloadTitle == "") {
+				if (empty($sidebarDownloadTitle)) {
+					echo $sidebarDownloadTitle;
 					$sidebarDownloadTitle = $sidebarDownloadLinkObj['post_title'];
 				}
 
