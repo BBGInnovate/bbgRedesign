@@ -148,7 +148,7 @@ function setMegaNav() {
 		$('.menu-usagm-container').css('padding-bottom', '0');
 	}
 }
-console.log('off');
+
 setMegaNav();
 $(window).on('resize', function() {
 	setMegaNav();
