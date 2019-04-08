@@ -114,33 +114,41 @@ function toggleFocus() {
 setTimeout(function() {
 	$('.bbg-banner').css('z-index', 0);
 }, 700);
+
+// DROPS DOWN THE DESKTOP MENU
+// This runs on a class that is dynamically assigned to desktop widths and removed on mobile widths
 var subnavH;
+var navPad = false;
 subnavH = $('.nav-menu').outerHeight() - $('.bbg__top-nav__link-text').height();
 function setMegaNav() {
 	if ($(window).width() >= 875) {
 		$('.sub-menu').hide();
+		$('.nav-menu').addClass('desktop-navigation');
 		setTimeout(function() {
-			$('.nav-menu').mouseenter(function() {
+			$('.desktop-navigation').mouseenter(function() {
 				clearTimeout($(this).data('timeoutId'));
 				$('.menu-usagm-container').css('padding-bottom', '1.5rem');
+				navPad = true;
 				$('.sub-menu').slideDown(200);
 			}).mouseleave(function() {
 				timeoutId = setTimeout(function() {
 					$('.sub-menu').slideUp(200);
 					$('.menu-usagm-container').css('padding-bottom', '0');
+					navPad = false;
 				}, 500);
-				$('.nav-menu').data('timeoutId', timeoutId);
+				$('.desktop-navigation').data('timeoutId', timeoutId);
 			});
 		}, 500);
 	}
 	else {
+		$('.nav-menu').removeClass('desktop-navigation');
 		// KEEP SUB-NAV VISIBLE WHILE IN MOBILE WIDTHS
 		$('.sub-menu').show();
-		$('.sub-menu').css('display', 'block');
-		$('.nav-menu').off('mouseenter');
 		$('.nav-menu').off('mouseleave');
+		$('.menu-usagm-container').css('padding-bottom', '0');
 	}
 }
+console.log('off');
 setMegaNav();
 $(window).on('resize', function() {
 	setMegaNav();
