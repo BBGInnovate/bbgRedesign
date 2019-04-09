@@ -177,7 +177,7 @@ get_header();
 
 						if (!empty($press_clippings_data)) {
 							foreach ($press_clippings_data as $press_clip) {
-								if ($press_clip_type) {
+								if (!empty($press_clip_type)) {
 									$cur_cited_post = build_press_clipping_article_list($press_clip, $press_clip_type);
 								} else {
 									$cur_cited_post = build_press_clipping_article_list($press_clip);
@@ -216,7 +216,6 @@ get_header();
 							'unit'                      => 'pt', 
 							'format'                    => 'flat',
 							'separator'                 => ', ',
-							'topic_count_text_callback' => default_topic_count_text,
 							'echo'                      => true,
 							'show_count'                  => 0,
 						);

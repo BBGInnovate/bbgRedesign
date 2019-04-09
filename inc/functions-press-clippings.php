@@ -18,9 +18,15 @@ function request_media_query_data($query_args) {
 			$date = new DateTime($press_post_date);
 			$press_post_date = $date->format('F d, Y');
 
+			if (!empty($press_post_outlet)) {
+				$outlet_name = $press_post_outlet[0]->name;
+			} else {
+				$outlet_name = '';
+			}
+
 			$cited_post_data = array(
 				'title' => get_the_title(),
-				'outlet_name' => $press_post_outlet[0]->name,
+				'outlet_name' => $outlet_name,
 				'story_link' => get_post_meta($press_post_id, 'media_clip_story_url', true),
 				'date' => $press_post_date,
 				'description' => wp_trim_words(get_the_content(), 40),
