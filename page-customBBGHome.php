@@ -58,7 +58,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 <?php
 	$banner_result = get_homepage_banner_data();
 
-	$banner_markup  = '<div class="full-width-banner">';
+	$banner_markup  = '<div id="home-feature-banner" class="feautre-banner">';
 	$banner_markup .= 	'<div class="banner-image" ';
 	$banner_markup .= 	'style="background-image: url(' . $banner_result['image_source'] . '); background-position: ' . $banner_result['position'] . '">';
 	$banner_markup .= 	'</div>';

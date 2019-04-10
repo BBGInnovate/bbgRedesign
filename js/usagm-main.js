@@ -2,11 +2,12 @@
 $('document').ready(function() {
 
 // IF NO (MAIN) FEATURED IMAGE, ADD SPACE BELOW NAVBAR
-// if (!($('#main').prev().hasClass('page-featured-media') || $('#main').prev().hasClass('feautre-banner'))) {
-// 	if ((top.location.pathname != '/new-homepage-test/')) {
-// 		$('#main').css('padding-top', '6rem');
-// 	}
-// }
+if ($('.feautre-banner').length < 1) {
+	$('#site-navigation').css({
+		'border-bottom' : '1px solid #f1f1f1',
+		'margin-bottom' : '30px'
+	});
+}
 
 // KEEPS BACKGROUND IMAGES A CONSISTENT SIZE
 function sizeBGimages() {
@@ -71,10 +72,6 @@ function setResponsiveHeight() {
 setTimeout(function() {
 	setResponsiveHeight();
 }, 200);
-
-$(window).on('resize', function() {
-	setResponsiveHeight();
-})
 
 // MAKE SURE ALL SIDEBAR PARAGRAPHS HAVE CLASS OF ASIDE
 if ($('.sidebar-section').length > 0) {
@@ -192,6 +189,7 @@ scaleArticleImages();
 $(window).on('resize', function() {
 	scaleRibbonBanner();
 	scaleArticleImages();
+	setResponsiveHeight();
 });
 
 }); // END READY

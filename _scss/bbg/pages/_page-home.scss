@@ -42,18 +42,17 @@
 
 
 // 1. GLOBAL
-.full-width-banner {
-	.banner-image {
-		background-size: cover;
-		height: 300px;
-		margin-bottom: 10px;
-	}
-	@include media($medium-screen) {
-		.banner-image {height: 400px;}
-	}
-	@include media($medium-medium-screen) {
-		.banner-image {height: 500px;}
-	}
+#home-feature-banner {margin-bottom: 3rem;}
+.banner-image {
+	background-size: cover;
+	height: 300px;
+	margin-bottom: 10px;
+}
+@include media($medium-screen) {
+	.banner-image {height: 400px;}
+}
+@include media($medium-medium-screen) {
+	.banner-image {height: 500px;}
 }
 
 

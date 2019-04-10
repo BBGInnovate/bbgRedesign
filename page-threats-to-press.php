@@ -8,6 +8,26 @@
   template name: Threats to Press
  */
 
+$args = array(
+    'post_type' => 'page',
+    'posts_per_page' => -1,
+    'meta_query' => array(
+        array(
+            'key' => '_wp_page_template',
+            'value' => 'page-threats-archive.php'
+        )
+    )
+);
+$the_pages = new WP_Query( $args );
+
+if( $the_pages->have_posts() ){
+    while( $the_pages->have_posts() ){
+        $the_pages->the_post();
+        echo get_the_title() . '<br>';
+    }
+}
+wp_reset_postdata();
+
 // PAGE INFORMATION
 $page_content = "";
 $page_title = "";

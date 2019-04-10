@@ -3605,21 +3605,24 @@ object {
 .menu-usagm-container {
   position: absolute;
   z-index: 1000;
-  width: 100%;
+  left: -15px;
+  width: 110%;
   margin-top: 10px;
   background-color: rgba(255, 255, 255, 0.95); }
 
 .site-brand img {
   width: 290px; }
 
+button#bbg__menu-toggle {
+  margin-right: 0; }
+
 .bbg__main-navigation {
   position: relative;
   display: block;
-  width: 100%;
+  margin: 0 15px;
   padding: 1.5rem 0 1rem 0; }
   .bbg__main-navigation .site-brand {
-    display: inline;
-    margin-left: 1.5rem; }
+    display: inline; }
   .bbg__main-navigation ul {
     width: 100%;
     margin-top: 0;
@@ -3675,7 +3678,8 @@ object {
     margin-bottom: 80px; }
   .bbg__main-navigation button#nav-search-bu {
     float: right;
-    background-color: transparent; }
+    background-color: transparent;
+    margin-top: 10px; }
   .bbg__main-navigation .bbg__main-navigation__search {
     position: absolute;
     display: block;
@@ -3785,6 +3789,7 @@ object {
   display: block;
   width: 100%;
   height: 50px;
+  margin-right: 15px;
   background-color: #ffffff; }
 
 .menu-item-has-children > a {
@@ -3904,6 +3909,10 @@ object {
     color: #d5d1c4; } }
 
 @media screen and (min-width: 900px) {
+  .bbg__main-navigation button#nav-search-bu {
+    margin-top: 0; }
+  .bbg__main-navigation.toggled .bbg__main-navigation__search {
+    width: auto; }
   .bbg__main-navigation .social-header {
     top: -11.5rem;
     bottom: auto;
@@ -3965,6 +3974,8 @@ object {
   .bbg__main-navigation ul {
     font-size: 0.9em; }
   .bbg__main-navigation .nav-menu {
+    position: relative;
+    z-index: 100;
     margin-bottom: 0px; }
   .bbg__main-navigation__toggler:focus {
     background-color: transparent; }
@@ -6440,17 +6451,20 @@ div.banner_readmore h6 a:visited {
     #homepage-threats #threats-side-column article {
       border-bottom: 2px solid #222222; }
 
-.full-width-banner .banner-image {
+#home-feature-banner {
+  margin-bottom: 3rem; }
+
+.banner-image {
   background-size: cover;
   height: 300px;
   margin-bottom: 10px; }
 
 @media screen and (min-width: 600px) {
-  .full-width-banner .banner-image {
+  .banner-image {
     height: 400px; } }
 
 @media screen and (min-width: 700px) {
-  .full-width-banner .banner-image {
+  .banner-image {
     height: 500px; } }
 
 #mission {
