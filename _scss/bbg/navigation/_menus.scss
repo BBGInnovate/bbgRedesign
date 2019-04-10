@@ -26,7 +26,7 @@ button#bbg__menu-toggle {margin-right: 0;}
 	position: relative;
 	display: block;
 	width: 100%;
-	// margin: 0 015px;
+	// margin: 0 15px;
 	padding: 1.5rem 0 1rem 0;
 	
 	.site-brand {
@@ -355,6 +355,9 @@ button#bbg__menu-toggle {margin-right: 0;}
 @include media($medium-large-screen) {
 	.bbg__main-navigation button#nav-search-bu {margin-top: 0;}
 	.bbg__main-navigation.toggled .bbg__main-navigation__search {width: auto;}
+	.bbg__main-navigation {
+		width: auto;
+	}
 	.bbg__main-navigation {
 		.social-header {
 			top: -11.5rem;

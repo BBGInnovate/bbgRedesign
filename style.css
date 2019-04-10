@@ -3914,6 +3914,8 @@ button#bbg__menu-toggle {
     margin-top: 0; }
   .bbg__main-navigation.toggled .bbg__main-navigation__search {
     width: auto; }
+  .bbg__main-navigation {
+    width: auto; }
   .bbg__main-navigation .social-header {
     top: -11.5rem;
     bottom: auto;
