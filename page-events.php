@@ -16,7 +16,6 @@ http://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
 ****/
 
 $featuredEvent = get_field('homepage_featured_event', 'option');
-$showFeaturedEvent = get_field('show_homepage_event', 'option');
 
 $currentPage =  (get_query_var('paged')) ? get_query_var('paged') : 1;
 
@@ -35,20 +34,20 @@ if ($currentPage > 1) {
 $hasTeamFilter = false;
 
 // QUERY TO GET FIRST POST - EITHER FEATURED OR FIRST REVERSE CHRON
-if ($showFeaturedEvent && $featuredEvent && has_category('event', $featuredEvent)) {
-	$qParamsFirst=array(
+if ($featuredEvent && has_category('event', $featuredEvent)) {
+	$qParamsFirst = array(
 		'p' => $featuredEvent->ID,
 		'post_status' => array('publish', 'future')
 	);
 } else {
-	$qParamsFirst=array(
+	$qParamsFirst = array(
 		'post_type' => array('post'),
 		'cat' => get_cat_id('Event'),
 		'posts_per_page' => 1,
 		'post_status' => array('publish')
 	);
 }
- 
+
 $featured_event_query = new WP_Query($qParamsFirst);
 while ($featured_event_query->have_posts()) {
 	$featured_event_query->the_post(); 
@@ -56,7 +55,7 @@ while ($featured_event_query->have_posts()) {
 }
 
 // QUERY PAST EVENTS FOR MAIN PAGE LOOP
-$qParams = array(
+$past_event_parameters = array(
 	'post_type' => array('post'),
 	'cat' => get_cat_id('Event'),
 	'posts_per_page' => $postsPerPage,
@@ -64,9 +63,7 @@ $qParams = array(
 	'post_status' => array('publish'),
 	'post__not_in' => $postIDsUsed
 );
-// KR EDIT
-// var_dump($qParams);
-$past_events_query_args = $qParams;
+$past_events_query_args = $past_event_parameters;
 $past_events_query = new WP_Query($past_events_query_args);
 
 $totalPages = 1;
@@ -109,28 +106,29 @@ if (!is_paged()) {
 wp_reset_query();
 wp_reset_postdata();
 
+get_header();
+?>
 
-get_header(); ?>
+<?php
+	if (!is_paged()) {
+		while ($featured_event_query->have_posts()) {
+			$featured_event_query->the_post();
+			$featured_post_id = get_the_ID();
+			$banner_position = get_field('adjust_the_banner_image', $featured_post_id, true);
+			$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($featured_post_id), 'post_type' => 'attachment'));
+			$src = wp_get_attachment_image_src(get_post_thumbnail_id($featured_post_id), array(700, 450), false, '');
+
+			$post_featured_image  = '<div class="feautre-banner">';
+			$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
+			$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
+			$post_featured_image .= 	'</div>';
+			$post_featured_image .= '</div>';
+			echo $post_featured_image;
+		}
+	}
+?>
 
 <main id="main" role="main">
-	<?php
-		if (!is_paged()) {
-			while ($featured_event_query->have_posts()) {
-				$featured_event_query->the_post();
-				$featured_post_id = get_the_ID();
-				$banner_position = get_field('adjust_the_banner_image', $featured_post_id, true);
-				$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($featured_post_id), 'post_type' => 'attachment'));
-				$src = wp_get_attachment_image_src(get_post_thumbnail_id($featured_post_id), array(700, 450), false, '');
-
-				$post_featured_image  = '<div class="page-post-featured-graphic">';
-				$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
-				$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
-				$post_featured_image .= 	'</div>';
-				$post_featured_image .= '</div>';
-				echo $post_featured_image;
-			}
-		}
-	?>
 	
 	<div class="outer-container">
 		<div class="grid-container">
