@@ -1150,9 +1150,13 @@ add_action('acf/init', 'my_acf_init');
 // FOIA GROUP
 // CHECK IF FOIA REPORT MATCH
 function foia_regex_check($str) {
-	$foia_regex = ['/^BBG-20[0-9]{2}-Q[1-4]\.zip/', 
-				   '/^FOIA-20[0-9]{2}-Annual-Report-Raw-Data\.csv/', 
-				   '/^BBG\.FY[0-9]{2}\.FINAL\.xml/'];
+	$foia_regex = [
+		'/^USAGM-20[0-9]{2}-Q[1-4]\.zip/',
+		'/^BBG-20[0-9]{2}-Q[1-4]\.zip/',
+		'/^FOIA-20[0-9]{2}-Annual-Report-Raw-Data\.csv/',
+		'/^USAGM\.FY[0-9]{2}\.FINAL\.xml/',
+		'/^BBG\.FY[0-9]{2}\.FINAL\.xml/'
+	];
 	foreach($foia_regex as $cur_regex) {
 		if (preg_match($cur_regex, $str)) {
 			return true;
