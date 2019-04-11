@@ -9,145 +9,121 @@
 /* we go through the loop once and reset it in order to get some vars for our og tags */
 
 require 'inc/bbg-functions-assemble.php';
+include get_template_directory() . '/inc/shared_sidebar.php';
+
 
 if (have_posts()) {
 	the_post();
 
-	// SET PAGE TYPE VARS
-	$eventPageHeader = "Event";
-	$isBoardMeeting = false;
-	$isPressRelease = false;
-	if (in_category("Board Meetings")) {
-		$eventPageHeader = "Board Meeting";
-		$isBoardMeeting = true;
-	}
-	if (in_category("Press Release")) {
-		$isPressRelease = true;
-	}
+	$page_id = get_the_ID();
+	$page_title = get_the_title();
+	$post_date = get_the_date('F j, Y');
+	$post_thumbnail_url = get_the_post_thumbnail_url();
+	$page_content = apply_filters('the_content', get_the_content());
 
-	// GET POST THUMBNAIL
-	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'Full' );
-	$ogImage = $thumb['0'];
-	$socialImageID = get_post_meta( $post->ID, 'social_image',true );
-	if ($socialImageID) {
-		$socialImage = wp_get_attachment_image_src( $socialImageID , 'Full');
-		$ogImage = $socialImage[0];
-	}
+	$project_category_id = get_cat_id('Project');
+	$isProject = has_category($project_category_id);
 
-	// ADJUST BANNER IMAGE STYLE
-	$bannerPosition = get_post_meta( get_the_ID(), 'adjust_the_banner_image', true);
-	$bannerPositionCSS = get_field( 'adjust_the_banner_image_css', '', true);
-	$bannerAdjustStr = "";
-	if ($bannerPositionCSS) {
-		$bannerAdjustStr = $bannerPositionCSS;
-	} else if ($bannerPosition) {
-		$bannerAdjustStr = $bannerPosition;
+	$twitterText  = html_entity_decode(get_the_title());
+	$twitterText .= ' by @bbggov ' . get_permalink();
+
+	$twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitterText);
+	$fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode(get_permalink());
+
+	// SET PAGE TYPE VARIABLES
+	$event_page_header = 'Event';
+	$is_board_meeting = false;
+	$is_press_release = false;
+	if (in_category('Board Meetings')) {
+		$event_page_header = 'Board Meeting';
+		$is_board_meeting = true;
+	}
+	if (in_category('Press Release')) {
+		$is_press_release = true;
 	}
 
-	$today = new DateTime("now", new DateTimeZone('America/New_York'));
-	$todayStr = $today->format('Y-m-d H:i:s');
+	// EVENT FIELDS - MEETING REGISTRATION AND COMMENTS
+	$today = new DateTime('now', new DateTimeZone('America/New_York'));
+	$today_string = $today->format('Y-m-d H:i:s');
 
-	$meetingRegistrationCloseTime = get_post_meta( get_the_ID(), 'board_meeting_registration_close_time', true );
-	$commentFormCloseTime = get_post_meta( get_the_ID(), 'board_meeting_comment_form_close_time', true );
-	$registrationIsClosed = false;
-	if ($meetingRegistrationCloseTime) {
-		$registrationIsClosed = ($meetingRegistrationCloseTime <  $todayStr);
+	$meeting_registration_close_time = get_post_meta($page_id, 'board_meeting_registration_close_time', true);
+	$comment_form_close_time = get_post_meta($page_id, 'board_meeting_comment_form_close_time', true);
+	$registration_is_closed = false;
+	if ($meeting_registration_close_time) {
+		$registration_is_closed = ($meeting_registration_close_time <  $today_string);
 		//get a display friendly version of this date for later
-		$meetingRegistrationCloseDateObj = DateTime::createFromFormat('Y-m-d H:i:s', $meetingRegistrationCloseTime);
-		$meetingRegistrationCloseDateStr = $meetingRegistrationCloseDateObj->format("F j, Y");
+		$meeting_registration_close_date_object = DateTime::createFromFormat('Y-m-d H:i:s', $meeting_registration_close_time);
+		$meeting_registration_close_date_string = $meeting_registration_close_date_object->format("F j, Y");
 	}
 
-	$commentFormIsClosed = false;
-	if ($commentFormCloseTime) {
-		$commentFormIsClosed = ($commentFormCloseTime <  $todayStr);
-		$commentFormCloseDateObj = DateTime::createFromFormat('Y-m-d H:i:s', $commentFormCloseTime);
+	$comment_form_is_closed = false;
+	if ($comment_form_close_time) {
+		$comment_form_is_closed = ($comment_form_close_time <  $today_string);
+		$comment_form_close_date_object = DateTime::createFromFormat('Y-m-d H:i:s', $comment_form_close_time);
 		//get a display friendly version of this date for later
-		$commentFormCloseStr = $commentFormCloseDateObj->format("F j, Y");
+		$comment_form_close_string = $comment_form_close_date_object->format('F j, Y');
 	}
 
-	// GET MEETING DATA
-	$meetingLocation = get_post_meta(get_the_ID(), 'board_meeting_location', true);
-	$meetingTime = get_post_meta(get_the_ID(), 'board_meeting_time', true);
-	$meetingSummary = get_post_meta(get_the_ID(), 'board_meeting_summary', true);
-	$meetingContactTagline = get_post_meta(get_the_ID(), 'board_meeting_contact_tagline', true);
-	if (!$meetingContactTagline || $meetingContactTagline == "") {
-		$meetingContactTagline = "For more information, please contact BBG Public Affairs at (202) 203-4400 or by e-mail at pubaff@bbg.gov.";
+	//EVENT FIELDS - MEETING DATA
+	$meeting_location = get_post_meta($page_id, 'board_meeting_location', true);
+	$meeting_time = get_post_meta($page_id, 'board_meeting_time', true);
+	$meeting_summary = get_post_meta($page_id, 'board_meeting_summary', true);
+	$meeting_contact_tagline = get_post_meta($page_id, 'board_meeting_contact_tagline', true);
+	if (!$meeting_contact_tagline || $meeting_contact_tagline == "") {
+		$meeting_contact_tagline = 'For more information, please contact BBG Public Affairs at (202) 203-4400 or by e-mail at pubaff@bbg.gov.';
 	}
-	if ($meetingTime != '') {
-		$meetingTime = $meetingTime;
+	if ($meeting_time != '') {
+		$meeting_time = $meeting_time;
 	}
-	$meetingSpeakers = get_post_meta(get_the_ID(), 'board_meeting_speakers', true);
+	$meeting_speakers = get_post_meta($page_id, 'board_meeting_speakers', true);
 
-	// CREATE EVENTBRITE IFRAME
-	$eventBriteButtonStr = "";
-	$eventbriteUrl = get_post_meta( get_the_ID(), 'board_meeting_eventbrite_url', true );
-	if ($eventbriteUrl && $eventbriteUrl != "" && !$isPressRelease) {
-		if (!$registrationIsClosed) {
-			$eventBriteButtonStr = "<a target='_blank' class='usa-button style='color:white;text-decoration:none;' href='" . $eventbriteUrl . "'>Register for this Event</a>";
+	//EVENT FIELDS - EVENTBRITE IFRAME
+	$event_brite_button_string = '';
+	$eventbrite_url = get_post_meta($page_id, 'board_meeting_eventbrite_url', true);
+	if ($eventbrite_url && !empty($eventbrite_url) && !$is_press_release) {
+		if (!$registration_is_closed) {
+			$event_brite_button_string  = '<a target="_blank" class="usa-button" style="color:white; text-decoration:none;" href="' . $eventbrite_url . '">Register for this Event</a>';
 		} else {
-			$eventBriteButtonStr = "<p style='font-style:italic;' class='registrationClosed'>Registration for this event has closed.</p>";
+			$event_brite_button_string = '<p class="registrationClosed" style="font-style:italic;">Registration for this event has closed.</p>';
 		}
 	}
 	rewind_posts();
 }
 
-//Add shared sidebar
-include get_template_directory() . "/inc/shared_sidebar.php";
-
 //Add featured video
-$videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
+$video_url = get_post_meta($page_id, 'featured_video_url', true);
 
 // Add support for sidebar dropdown
-$listsInclude = get_field( 'sidebar_dropdown_include', '', true);
-
-include get_template_directory() . "/inc/shared_sidebar.php";
+$lists_include = get_field('sidebar_dropdown_include', '', true);
 
 get_header();
 ?>
 
 <main id="main" role="main" style="padding-top: 3rem;">
-	<?php
-		while (have_posts()) : the_post(); 
-			$projectCategoryID = get_cat_id('Project');
-			$isProject = has_category($projectCategoryID);
+	<section class="outer-container">
+		<div class="grid-container">
+			<?php
+				if(in_category( 'Board Meetings' )) {
+					echo '<h2>Board Meetings</h2>';
+				} else if(in_category( 'Event' )) {
+					echo '<h2>Event</h2>';
+				}
+			?>
+		</div>
 
-			//Default adds a space above header if there's no image set
-			$featuredImageClass = " bbg__article--no-featured-image";
-
-			//the title/headline field, followed by the URL and the author's twitter handle
-			$twitterText  = html_entity_decode(get_the_title());
-			$twitterText .= " by @bbggov " . get_permalink();
-
-			$twitterURL = "//twitter.com/intent/tweet?text=" . rawurlencode($twitterText);
-			$fbUrl = "//www.facebook.com/sharer/sharer.php?u=" . urlencode(get_permalink());
-			$postDate = get_the_date();
-		?>
-
-		<article id="post-<?php the_ID(); ?>" <?php post_class( "bbg__article" ); ?>>
-			<div class="outer-container">
-				<div class="grid-container">
-					<?php
-						$category_title = '';
-						if(in_category( 'Board Meetings' )) {
-							$category_title = "Board Meetings";
-						} else if(in_category( 'Event' )) {
-							$category_title = "Event";
-						}
-						$post_header  = '<header>';
-						$post_header .= 	'<h2>' . $category_title . '</h2>';
-						$post_header .= 	'<h3>' . get_the_title() . '</h3>';
-						$post_header .= 	'<p class="date-meta">' . get_the_date('F j, Y') . '</p>';
-						$post_header .= '</header>';
-						echo $post_header;
-					?>
-				</div>
-				<div class="custom-grid-container">
-					<div class="inner-container">
-						<div class="main-content-container page-content">
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="main-column">
 						<?php
-							$post_thumbnail_url = get_the_post_thumbnail_url();
+							$post_header  = '<header>';
+							$post_header .= 	'<h3>' . $page_title . '</h3>';
+							$post_header .= 	'<p class="date-meta">' . $post_date . '</p>';
+							$post_header .= '</header>';
+							echo $post_header;
+
 							if (!empty($post_thumbnail_url)) {
-								echo '<img src="' . $post_thumbnail_url . '" alt="' . get_the_title() . '">';
+								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
 							}
 						?>
 						<?php
@@ -160,15 +136,16 @@ get_header();
 								$success_alert .= '</div>';
 								echo $success_alert;
 							}
-							the_content();
 
-							if (!$isPressRelease && $isBoardMeeting && !isset($_GET['success'])) {
-								if ($commentFormIsClosed) {
+							echo $page_content;
+
+							if (!$is_press_release && $is_board_meeting && !isset($_GET['success'])) {
+								if ($comment_form_is_closed) {
 									echo '<p>The deadline for public comments for this meeting has passed.</p>';
 								}
 								else {
 									echo '<h3>Public Comments Form</h3>';
-									echo '<p>Public comments related to U.S. international media are now being accepted for review by the board. Comments intended for the ' . $postDate . ' meeting of the board must be submitted by <b><?php echo $commentFormCloseStr; ?></b>.</p>';
+									echo '<p>Public comments related to U.S. international media are now being accepted for review by the board. Comments intended for the ' . $post_date . ' meeting of the board must be submitted by <b>' . $comment_form_close_string . '</b>.</p>';
 									echo '<p>Comments received after that date will be forwarded to the board for the following meeting.</p>';
 
 									echo '<p>The public comments you provide to the Broadcasting Board of Governors are collected by the agency voluntarily and may be publicly disclosed on the Internet and/or via requests submitted to the BBG under the Freedom of Information Act.</p>';
@@ -177,31 +154,19 @@ get_header();
 
 									$redirectLink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-									if (strpos($redirectLink, "?")) {
-										$redirectLink .= "&";
+									if (strpos($redirectLink, '?')) {
+										$redirectLink .= '&';
 									} else {
-										$redirectLink .= "?";
+										$redirectLink .= '?';
 									}
-									$redirectLink .= "success = true";
-									echo do_shortcode("[si-contact-form form ='2' redirect = '$redirectLink']");
+									$redirectLink .= 'success = true';
+									echo do_shortcode('[si-contact-form form ="2" redirect = "$redirectLink"]');
 									echo '<script type="text/javascript" src="' . get_template_directory_uri() . '/js/meeting-comment-form.js"></script>';
 								}
 							}
 						?>
-						</div>
-				
-				<!-- SIDEBAR -->
-				<div class="side-content-container">
-						<?php
-							$event_info  = '<h5><a href="/news/events/">Event</a></h5>';
-							$event_info .= '<p class="aside">' . $postDate . ', ' . $meetingTime . '<br><br>';
-							$event_info .= $meetingLocation . '</p>';
-							$event_info .= $eventBriteButtonStr;
-							$event_info .= '<p class="bbg-tagline bbg-tagline--main">';
-							$event_info .= 	$meetingContactTagline;
-							$event_info .= '</p>';
-							echo $event_info;
-						?>
+					</div>
+					<div class="side-column divider-left">
 						<div class="share-social">
 							<h5>Share</h5>
 							<a href="<?php echo $fbUrl; ?>">
@@ -212,6 +177,17 @@ get_header();
 								<span class="bbg__article-share__icon twitter"></span>
 							</a>
 						</div>
+						<?php
+							$event_info  = '<h5><a href="/news/events/">Event Information</a></h5>';
+							$event_info .= '<p class="aside">' . $post_date . ', ' . $meeting_time . '<br><br>';
+							$event_info .= $meeting_location . '</p>';
+							$event_info .= $event_brite_button_string;
+							$event_info .= '<p class="bbg-tagline bbg-tagline--main">';
+							$event_info .= 	$meeting_contact_tagline;
+							$event_info .= '</p>';
+							echo $event_info;
+						?>
+
 						<!-- SPEAKERS -->
 						<?php
 							if (have_rows('board_meeting_speakers')) {
@@ -304,13 +280,27 @@ get_header();
 							}
 							echo $sidebarDownloads;
 						?>
-
+					</div>
 				</div>
-		</article><!-- #post-## -->
-	<?php endwhile; // END POST LOOP ?>
+			</div>
+		</div>
+	</section>
 </main><!-- #main -->
 
-	<section class="usa-grid">
-		<?php get_sidebar(); ?>
-	</section>
+<script type="text/javascript">
+(function($) {
+$('document').ready(function() {
+	// MAKE SMALL POST FEATURE IMAGES THE WIDTH OF THE MAIN COLUMN
+	var mainColumn = $('.main-column');
+	var thumbnailImage = $('.main-column').children('img');
+	if (thumbnailImage.width() < mainColumn.width()) {
+		thumbnailImage.css({
+			'width' : mainColumn.width(),
+			'height' : 'auto'
+		});
+	}
+}); // END READY
+})(jQuery);
+</script>
+
 <?php get_footer(); ?>
