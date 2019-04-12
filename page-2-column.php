@@ -23,10 +23,10 @@ $listsInclude = get_field('sidebar_dropdown_include', '', true);
 // 
 // THIS COULD BELONG IN A BUILD INCLUDE FILE
 function display_foia_reports() {
-	$foia_url = WP_CONTENT_URL . '/uploads/foia-reports/'; // LOCAL
-	$foia_path = 'wp-content/uploads/foia-reports'; // LOCAL
-	// $foia_url = WP_CONTENT_URL . '/media/foia-reports/'; // LIVE // MAY DELETE? CANT MUST SEND FILES TO UPLOADS?
-	// $foia_path = 'wp-content/media/foia-reports'; // LIVE // MAY DELETE? CANT MUST SEND FILES TO UPLOADS?
+	// $foia_url = WP_CONTENT_URL . '/uploads/foia-reports/'; // LOCAL
+	// $foia_path = 'wp-content/uploads/foia-reports'; // LOCAL
+	$foia_url = WP_CONTENT_URL . '/media/foia-reports/'; // LIVE
+	$foia_path = 'wp-content/media/foia-reports'; // LIVE
 	$filenames = preg_grep('/^([^.])/', scandir($foia_path));
 
 	function get_nums($x) {
