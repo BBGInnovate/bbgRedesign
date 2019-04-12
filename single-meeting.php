@@ -201,58 +201,80 @@ get_header();
 										if (get_sub_field('bbg_speaker_name')) {
 											$profiles = get_sub_field('bbg_speaker_name');
 
-											echo "<ul class='usa-unstyled-list unstyled-list'>";
+											echo '<ul class="usa-unstyled-list unstyled-list" style="width: 100%">';
 
+											$i = 0;
 											foreach ($profiles as $profile) {
-												$pID = $profile->ID;
-												$profile_id = get_post_meta($pID);
-												$includeProfile = false;
+												$i++;
+												$profile_id = $profile->ID;
+												$profile_name = get_the_title($profile_id);
+												$profile_bio = get_sub_field('bbg_speaker_bio');
+												$occupation = get_post_meta($profile_id, 'occupation', true);
+												$profile_link = get_page_link($profile_id);
 
-												if ($profile_id) {
-													$includeProfile = true;
+												$name_of_internal_speaker = '<h6>' . $profile_name . '</h6>';
+												$title_of_internal_speaker = '<p class="aside">' . $occupation . '</p>';
+												$link_of_internal_speaker = '<p class="aside"><a href="' . $profile_link . '" target="_blank">View Profile</a></p>';
 
-													$twitterProfileHandle = get_post_meta($pID, 'twitter_handle', true);
-													$profileName = get_the_title( $pID );
-													$occupation = get_post_meta($pID, 'occupation', true);
-													$profileLink = get_page_link($pID);
-
-													$profile_list  = '<li>';
-													$profile_list .= 	'<h6><a href="' . $profileLink . '">' . $profileName . '</a></h6>';
-													$profile_list .= 	'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
-													$profile_list .= '</li>';
+												$internal_speaker_list = '';
+												if (!empty($profile_bio)) {
+													$internal_speaker_list .= '<li class="usa-accordion speaker-accordion">';
+													$internal_speaker_list .= 		'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $name_of_internal_speaker . $title_of_internal_speaker . ' <i class="fas fa-plus"></i></button>';
+													$internal_speaker_list .= 		'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
+													$internal_speaker_list .= 			'<p class="aside speaker-bio">' . $profile_bio . '</p>';
+													$internal_speaker_list .= 	$link_of_internal_speaker;
+													$internal_speaker_list .= 		'</div>';
+													$internal_speaker_list .= '</li>';
+												} else {
+													$internal_speaker_list  = '<li>';
+													$internal_speaker_list .= 	$name_of_internal_speaker;
+													$internal_speaker_list .= 	$title_of_internal_speaker;
+													$internal_speaker_list .= '</li>';
 												}
 
-												if ($includeProfile) {
-													echo $profile_list;
-												}
+												echo $internal_speaker_list;
 											}
-											echo "</ul>";
+											echo '</ul>';
 										}
 									} else if (get_row_layout() == 'board_meeting_speakers_external') {
 										if (get_sub_field('meeting_speaker')) {
 											$profiles = get_sub_field('meeting_speaker');
+											echo '<ul class="usa-unstyled-list unstyled-list">';
 
-											echo "<ul class='usa-unstyled-list usa-unstyled-list unstyled-list'>";
-
+											$i = 0;
 											foreach ($profiles as $profile) {
-												$speakerName = $profile["meeting_speaker_name"];
-												$speakerTitle = $profile["meeting_speaker_title"];
-												$speakerLink = $profile["meeting_speaker_url"];
+												$i++;
+												$speaker_name = $profile["meeting_speaker_name"];
+												$speaker_title = $profile["meeting_speaker_title"];
+												$speaker_bio = $profile["meeting_speaker_bio"];
+												$speaker_link = $profile["meeting_speaker_url"];
 
-												$external_speaker_list  = '<li>';
-												$external_speaker_list .= 	'<h6>';
-												if ($speakerName && $speakerLink != "") {
-													$external_speaker_list .= 		'<a href="' . $speakerLink . '">' . $speakerName . '</a>';
-												} else {
-													$external_speaker_list .= $speakerName;
+												$name_of_external_speaker = '<h6>' . $speaker_name . '</h6>';
+												$title_of_external_speaker = '<p class="aside">' . $speaker_title . '</p>';
+												if (!empty($speaker_link)) {
+													$link_of_external_speaker = '<p class="aside speaker-link"><a href="' . $speaker_link . '" target="_blank">' . $speaker_link . '</a></p>';
 												}
-												$external_speaker_list .= 	'</h6>';
-												$external_speaker_list .= 	'<span class="bbg__profile-excerpt__occupation">' . $speakerTitle . '</span>';
-												$external_speaker_list .= '</li>';
 
+												$external_speaker_list = '';
+												if (!empty($speaker_bio)) {
+													$external_speaker_list .= '<li class="usa-accordion speaker-accordion">';
+													$external_speaker_list .= 		'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $name_of_external_speaker . $title_of_external_speaker . ' <i class="fas fa-plus"></i></button>';
+													$external_speaker_list .= 		'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
+													$external_speaker_list .= 			'<p class="aside speaker-bio">' . $speaker_bio . '</p>';
+													if (!empty($speaker_link)) {
+														$external_speaker_list .= 	$link_of_external_speaker;
+													}
+													$external_speaker_list .= 		'</div>';
+													$external_speaker_list .= '</li>';
+												} else {
+													$external_speaker_list .= '<li>';
+													$external_speaker_list .= 	$name_of_external_speaker;
+													$external_speaker_list .= 	$title_of_external_speaker;
+													$external_speaker_list .= '</li>';
+												}
 												echo $external_speaker_list;
 											}
-											echo "</ul>";
+											echo '</ul>';
 										}
 									}
 								endwhile;
@@ -299,6 +321,18 @@ $('document').ready(function() {
 			'height' : 'auto'
 		});
 	}
+
+	// SWAP OUT PLUS SIGN FOR MINUS FOR SPEAKER ACCORDIONS
+	var accordionButton = $('.speaker-accordion').children('button');
+	accordionButton.on('click', function() {
+		if ($(this).attr('aria-expanded') == 'false') {
+			$(this).children('.fas').removeClass('fa-plus');
+			$(this).children('.fas').addClass('fa-minus');
+		} else {
+			$(this).children('.fas').removeClass('fa-minus');
+			$(this).children('.fas').addClass('fa-plus');
+		}
+	});
 }); // END READY
 })(jQuery);
 </script>

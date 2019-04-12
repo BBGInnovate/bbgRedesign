@@ -5263,6 +5263,29 @@ ol li:before {
   color: #3f7ad1;
   text-decoration: none; }
 
+.usa-accordion.speaker-accordion {
+  padding-right: 30px; }
+  .usa-accordion.speaker-accordion button {
+    position: relative;
+    width: 100%; }
+    .usa-accordion.speaker-accordion button .fas {
+      position: absolute;
+      top: 15px;
+      right: -22px;
+      color: #000000; }
+  .usa-accordion.speaker-accordion li {
+    background-color: #ffffff; }
+  .usa-accordion.speaker-accordion .usa-accordion-content {
+    padding: 0; }
+  .usa-accordion.speaker-accordion p {
+    margin-bottom: 0; }
+  .usa-accordion.speaker-accordion .speaker-bio {
+    font-size: 1.4rem;
+    color: #999999;
+    margin: 0.5rem 0; }
+  .usa-accordion.speaker-accordion .speaker-link {
+    margin-bottom: 1.5rem; }
+
 .page-post-featured-graphic:not(div.home-featured-primary-post) {
   margin-bottom: 3em; }
 

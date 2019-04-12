@@ -104,7 +104,7 @@ if ($includeSidebar) {
 				$sidebarInternalTitle = get_sub_field('sidebar_internal_title', false);
 				$sidebarInternalLocation = get_sub_field('sidebar_internal_location');
 				$sidebarInternalDescription = get_sub_field('sidebar_internal_description', false);
-// kr
+
 				$internal_links  = '<article>';
 				$internal_links .= 	'<h6>';
 				$internal_links .= 		'<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
