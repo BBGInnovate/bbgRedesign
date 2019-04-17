@@ -140,7 +140,7 @@ get_header();
 			<div class="inner-container">
 				<div class="main-content-container">
 					<?php
-						echo '<h2>' . $pageTitle . '</h2>';
+						echo '<h2 class="section-header">' . $pageTitle . '</h2>';
 						echo $page_content;
 					?>
 				</div>

@@ -55,10 +55,10 @@ endif;
 		<?php
 			if($post -> post_parent) {
 				// REFERENCE: https://wordpress.org/support/topic/link-to-parent-page
-				$parent = $wpdb -> get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+				$parent = $wpdb -> get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
 				$parent_link_data = get_permalink($post -> post_parent) ;
 
-				$parent_link_markup  = '<h2>';
+				$parent_link_markup  = '<h2 class="section-header">';
 				$parent_link_markup .= 	'<a href"' . $parent_link_data . '">' . $parent -> post_title . '</a>';
 				$parent_link_markup .= '</h2>';
 
@@ -67,7 +67,7 @@ endif;
 				}
 			}
 
-			$page_header  = 	'<h2>' . get_the_title() . '</h2>';
+			$page_header  = 	'<h2 class="section-header">' . get_the_title() . '</h2>';
 			echo $page_header;
 		?>
 		<?php

@@ -168,7 +168,7 @@ get_header();
 				$page_title = 	'<div class="outer-container" style="margin-bottom: 1.5rem;">';
 			}
 			$page_title .= 	'<div class="grid-container">';
-			$page_title .= 		'<h2>' . get_the_title() . '</h2>';
+			$page_title .= 		'<h2 class="section-header">' . get_the_title() . '</h2>';
 			$page_title .= 		$page_tag_line;
 			$page_title .= 	'</div>';
 			$page_title .= '</div>';

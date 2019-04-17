@@ -164,7 +164,7 @@ for (serviceName in servicesByName) {
 
 	<div class="outer-container">
 		<div class="grid-container">
-			<?php echo '<h2>' . get_the_title() . '</h2>'; ?>
+			<?php echo '<h2 class="section-header">' . get_the_title() . '</h2>'; ?>
 			<?php echo '<p>' . get_the_excerpt() . '</p>'; ?>
 		</div>
 	</div>

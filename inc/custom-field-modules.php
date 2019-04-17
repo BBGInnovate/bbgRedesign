@@ -14,7 +14,7 @@ function assemble_threats_to_press_ribbon($threat_data) {
 	$theat_ribbon  = '<div class="bbg__ribbon threats-ribbon">';
 	$theat_ribbon .= 	'<div class="outer-container">';
 	$theat_ribbon .= 		'<div class="grid-container">';
-	$theat_ribbon .= 			'<h2>Threats to Press</h2>';
+	$theat_ribbon .= 			'<h2 class="section-header">Threats to Press</h2>';
 	$theat_ribbon .= 		'</div>';
 	foreach ($threat_data as $data) {
 		$theat_ribbon .= 			$data;
@@ -104,7 +104,7 @@ function assemble_entity_section($entity_data) {
 	$entity_markup  = 	'<section class="outer-container" id="entities">';
 	$entity_markup .= 		'<div class="grid-container">';
 	$entity_markup .= 			'<h1 class="header-outliner">Entities</h1>';
-	$entity_markup .= 			'<h2><a href="' . get_permalink(get_page_by_path('networks')) . '">Our Networks</a></h2>';
+	$entity_markup .= 			'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path('networks')) . '">Our Networks</a></h2>';
 	$entity_markup .= 			'<p class="lead-in">Every week, more than ' . do_shortcode('[audience]') . ' listeners, viewers and internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual USAGM international broadcasters.</p>';
 	$entity_markup .= 		'</div>';
 	$entity_markup .= 	'<div class="outer-container">';

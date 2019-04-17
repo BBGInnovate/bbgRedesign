@@ -546,7 +546,7 @@ if ( ! function_exists( 'bbginnovate_post_categories' ) ) :
 					$link = get_category_link($selectedCategory -> term_id);
 				}
 				if ($link) {
-					$output  = '<h2>';
+					$output  = '<h2 class="section-header">';
 					$output .= 		'<a href="' . $link . '" title="' . esc_attr(sprintf(__( 'View all posts in %s', 'bbginnovate' ), $selectedCategory -> name )) . '">' . $selectedCategory -> cat_name . '</a>';
 					$output .= '</h2>';
 				}

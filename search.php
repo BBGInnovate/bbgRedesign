@@ -24,7 +24,7 @@ get_header();
 			<?php
 				if (have_posts()) {
 					echo '<header>';
-					echo 	'<h2>';
+					echo 	'<h2 class="section-header">';
 					printf(esc_html__('Search Results for: %s', 'bbginnovate'), '<span>' . get_search_query() . '</span>' );
 					echo 	'</h2>';
 					echo '</header>';

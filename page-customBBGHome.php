@@ -87,7 +87,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	<?php // USAGM NEWS ?>
 	<section class="outer-container">
 		<div class="grid-container">
-			<h2 class="new_heading"><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
+			<h2 class="section-header"><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
 		</div>
 		<div class="grid-container sidebar-grid--large-gutter">
 			<div class="nest-container">
@@ -149,9 +149,15 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	<?php
 		// IMPACT STORIES AND EVENTS
 		$impact_option = get_field('corner_hero_toggle', 'options');
+		$homepage_hero_corner = get_field('homepage_hero_corner', 'options');
 		$corner_hero_label = get_field('corner_hero_label', 'options');
 		$corner_hero_data = get_corner_hero_data();
 		$impact_page_page = 'our-work/impact-and-results/impact-portfolio/';
+		if ($homepage_hero_corner == 'event') {
+			$corner_hero_section_header = '<h2 class="section-header"><a href="' . get_permalink(get_page_by_path('news-and-information/events/')) . '">' . $corner_hero_label . '</a></h2>';
+		} else {
+			$corner_hero_section_header = '<h2 class="section-header">' . $corner_hero_label . '</h2>';
+		}
 
 		if ($impact_option == 'on') {
 			$impact_result = get_impact_stories_data(1);
@@ -166,14 +172,14 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$impact_and_events .= 		'<div class="nest-container">';
 			$impact_and_events .= 			'<div class="inner-container">';
 			$impact_and_events .= 				'<div class="main-column">';
-			$impact_and_events .= 					'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
+			$impact_and_events .= 					'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			foreach ($impact_result as $impact_post_id) {
 				$impact_post = get_post($impact_post_id);
 				$impact_and_events .= build_vertical_article($impact_post);
 			}
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 				'<div class="side-column divider-left">';
-			$impact_and_events .= 					'<h2>' . $corner_hero_label . '</h2>';
+			$impact_and_events .= 					$corner_hero_section_header;
 			$impact_and_events .= 					build_vertical_article($corner_hero_data);
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 			'</div>';
@@ -184,7 +190,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		} else {
 			$impacts_only  = '<section class="outer-container">';
 			$impacts_only .= 	'<div class="grid-container">';
-			$impacts_only .= 		'<h2><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
+			$impacts_only .= 		'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			$impacts_only .= 	'</div>';
 			foreach ($impact_result as $impact_post_id) {
 				$impact_post = get_post($impact_post_id);
@@ -206,7 +212,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		$threat_structure  = '<section class="threats-box" id="homepage-threats">';
 		$threat_structure .= 	'<div class="outer-container">';
 		$threat_structure .= 		'<div class="grid-half" id="threats-main-column">';
-		$threat_structure .= 			'<h2><a href="' . get_permalink(get_page_by_path('threats-to-press-2')) . '">Threats to Press</a></h2>';
+		$threat_structure .= 			'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path('threats-to-press-2')) . '">Threats to Press</a></h2>';
 		$threat_structure .= 			'<article>';
 		$threat_structure .= 				'<div class="article-image">';
 		$threat_structure .= 					'<a href="' . get_the_permalink($threat_article_list[0]) . '">';

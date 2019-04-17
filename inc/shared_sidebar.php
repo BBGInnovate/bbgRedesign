@@ -515,8 +515,8 @@ if ($listsInclude) {
 						$download_list .= 	'<span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
 						$download_list .= '<h6>';
 					}
+					$s .= $download_list;
 				}
-				$s .= $download_list;
 			}
 			elseif (get_row_layout() == 'sidebar_dropdown_internal_links') {
 				$sidebarInternalTitle = get_sub_field('sidebar_internal_title');

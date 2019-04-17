@@ -85,7 +85,7 @@ get_header();
 <main id="main" role="main">
 	<div class="outer-container">
 		<div class="grid-container">
-			<h2>Threats to Press</h2>
+			<h2 class="section-header">Threats to Press</h2>
 		</div>
 	</div>
 

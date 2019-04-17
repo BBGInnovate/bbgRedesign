@@ -273,7 +273,7 @@ get_header();
 			<div class="outer-container">
 				<div class="grid-container">
 					<header class="page-header">
-						<?php echo '<h2>' . get_the_title() . '</h2>'; ?>
+						<?php echo '<h2 class="section-header">' . get_the_title() . '</h2>'; ?>
 					</header>
 				</div>
 			</div>
@@ -409,7 +409,7 @@ get_header();
 						echo 		'<div class="inner-container">';
 						echo 			'<div class="grid-third bbg__secondary-stories">';
 						if ($advisory) {
-							echo 			'<h2>Latest press release</h2>';
+							echo 			'<h2 class="section-header">Latest press release</h2>';
 						}
 						/**** START FETCH related news based on page title ****/
 						if ($pageName == "Press Room") {
@@ -627,7 +627,7 @@ get_header();
 							}
 							echo 		'<div class="main-content-container">';
 							if (!empty($labelLink)) {
-								echo 		'<h2><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h2>';
+								echo 		'<h2 class="section-header"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h2>';
 							} else {
 								echo 		'<h2 class="bbg__label">' . $labelText . '</h2>';
 							}

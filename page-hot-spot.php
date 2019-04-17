@@ -135,7 +135,7 @@ get_header();
 	$hotspot_page_title .= 		'<img class="bbg__profile-photo__image" src="' . $mapImageSrc . '" alt="">';
 	$hotspot_page_title .= 	'</div>';
 	$hotspot_page_title .= 	'<div class="bbg__profile-title">';
-	$hotspot_page_title .= 		'<h2>' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
+	$hotspot_page_title .= 		'<h2 class="section-header">' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
 	$hotspot_page_title .= 		'<h5 class="entry-category bbg__profile-tagline">';
 	$hotspot_page_title .= 			'<a href="' . get_permalink(get_page_by_path('hot-spots')) . '">Hot Spots</a>';
 	$hotspot_page_title .= 		'</h5>';
@@ -154,11 +154,10 @@ get_header();
 
 					<div class="icon-main-content-container">
 					<?php
-						$hotspot_page_title  = '<h2>' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
+						$hotspot_page_title  = '<h2 class="section-header">' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
 						$hotspot_page_title .= 	'<h5 class="entry-category bbg__profile-tagline">';
 						$hotspot_page_title .= 		'<a href="' . get_permalink(get_page_by_path('hot-spots')) . '">Hot Spots</a>';
 						$hotspot_page_title .= 	'</h5>';
-						$hotspot_page_title .= '</h2>';
 						echo $hotspot_page_title;
 
 						// PAGE CONTENT

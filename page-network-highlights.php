@@ -39,7 +39,7 @@ get_header();
 	<div class="outer-container">
 		<div class="grid-container">
 			<header class="page-header">
-				<h2><?php echo $page_title; ?></h2>
+				<h2 class="section-header"><?php echo $page_title; ?></h2>
 				<?php echo $pageTagline; ?>
 			</header>
 		</div>

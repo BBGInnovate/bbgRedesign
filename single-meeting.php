@@ -104,9 +104,9 @@ get_header();
 		<div class="grid-container">
 			<?php
 				if(in_category( 'Board Meetings' )) {
-					echo '<h2>Board Meetings</h2>';
+					echo '<h2 class="section-header">Board Meetings</h2>';
 				} else if(in_category( 'Event' )) {
-					echo '<h2>Event</h2>';
+					echo '<h2 class="section-header">Event</h2>';
 				}
 			?>
 		</div>

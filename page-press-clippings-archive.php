@@ -137,7 +137,7 @@ get_header();
 	<?php //HEADER OPITON FOR PLAIN ARCHIVE ?>
 		<section class="outer-container">
 			<header class="grid-container">
-				<h2><?php echo $page_title; ?></h2>
+				<h2 class="section-header"><?php echo $page_title; ?></h2>
 			</header>
 		</section>
 	<?php } ?>
@@ -152,26 +152,26 @@ get_header();
 							// HEADER OPTIONS FOR PRESS CLIPS TYPES
 							if (is_array($press_clip_type)) {
 								if ($press_clip_type[0] == 'about') {
-									echo 	'<h2>Press Clippings ' . $press_clip_type[0] . ' ' . $press_clip_type[1] . '</h2>';
+									echo 	'<h2 class="section-header">Press Clippings ' . $press_clip_type[0] . ' ' . $press_clip_type[1] . '</h2>';
 								} else if ($press_clip_type[0] == 'citation') {
-									echo 	'<h2>Press Clippings with ' . $press_clip_type[1] . ' ' . $press_clip_type[0] . 's</h2>';
+									echo 	'<h2 class="section-header">Press Clippings with ' . $press_clip_type[1] . ' ' . $press_clip_type[0] . 's</h2>';
 								}
 							} else if ($press_clip_type == 'interest' && empty($cur_outlet_id)) {
-								echo '<h2>Press Clippings Of Interest</h2>';
+								echo '<h2 class="section-header">Press Clippings Of Interest</h2>';
 							}
 							// HEADER OPTIONS FOR PRESS CLIPS TYPE FROM OUTLETS
 							if (!empty($cur_outlet_id)) {
 								if ($press_clip_type == 'about') {
-									echo 	'<h2>Press Clippings ' . $press_clip_type . ' ' . $press_clip_entity . ' from ' . $cur_outlet_name . '</h2>';;
+									echo 	'<h2 class="section-header">Press Clippings ' . $press_clip_type . ' ' . $press_clip_entity . ' from ' . $cur_outlet_name . '</h2>';;
 								} else if ($press_clip_type == 'citation') {
-									echo 	'<h2>Press Clippings with ' . $press_clip_entity . ' ' . $press_clip_type . 's from ' . $cur_outlet_name . '</h2>';;
+									echo 	'<h2 class="section-header">Press Clippings with ' . $press_clip_entity . ' ' . $press_clip_type . 's from ' . $cur_outlet_name . '</h2>';;
 								} else if ($press_clip_type == 'interest') {
-									echo 	'<h2>Press Clippings Of Interest from ' . $cur_outlet_name . '</h2>';
+									echo 	'<h2 class="section-header">Press Clippings Of Interest from ' . $cur_outlet_name . '</h2>';
 								}
 							}
 						}
 						else if (!empty($cur_outlet_id) && empty($press_clip_type)) {
-							echo 	'<h2>Press Clippings from ' . $cur_outlet_name . '</h2>';
+							echo 	'<h2 class="section-header">Press Clippings from ' . $cur_outlet_name . '</h2>';
 						}
 						echo '</heading>';
 

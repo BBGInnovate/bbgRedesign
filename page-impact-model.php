@@ -48,7 +48,7 @@ get_header();
 						//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
 						$parent = $wpdb->get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
 						$parent_link = get_permalink($post->post_parent);
-						echo '<h2><a href="' . $parent_link . '">' . $parent->post_title . '</a></h2>';
+						echo '<h2 class="section-header"><a href="' . $parent_link . '">' . $parent->post_title . '</a></h2>';
 					?>
 					<?php } ?>
 				</header><!-- .entry-header -->

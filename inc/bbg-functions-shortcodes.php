@@ -553,7 +553,7 @@
 		}
 		
 		$infobox_markup  = '<div class="' . $classes . '">';
-		$infobox_markup .= 	'<h2>' . $boxTitle . '</h2>';
+		$infobox_markup .= 	'<h2 class="section-header">' . $boxTitle . '</h2>';
 		$infobox_markup .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
 		$infobox_markup .= 	'<p>' . $excerpt . '</p>';
 		$infobox_markup .= 	'<div style="text-align:right;">';

@@ -123,7 +123,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 				<img src="<?php echo $burkeBioImage; ?>" alt="Burke bio image">
 			</div>
 			<div class="main-content-container">
-				<h2>BBG History</h2>
+				<h2 class="section-header">BBG History</h2>
 				<h4><a href="<?php echo $burkeBioLink; ?>">David Burke</a></h4>
 				<p>David W. Burke was named to the first Broadcasting Board of Governors (BBG) by President Clinton in 1995 and served as its first chairman. <a href="<?php echo $burkeBioLink; ?>" class="bbg__kits__intro__more--link">Learn More »</a></p>
 			</div>

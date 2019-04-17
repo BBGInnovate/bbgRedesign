@@ -134,9 +134,9 @@ get_header();
 		<div class="grid-container">
 			<?php 
 				if ($hasTeamFilter) {
-					echo '<h2>' . $teamCategory->cat_name . ' events' . '</h2>';
+					echo '<h2 class="section-header">' . $teamCategory->cat_name . ' events' . '</h2>';
 				} else {
-					echo '<h2>Events</h2>';
+					echo '<h2 class="section-header">Events</h2>';
 				}
 			?>
 		</div>

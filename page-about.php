@@ -244,7 +244,7 @@ get_header();
 	// PAGE CONTENT
 	$body_copy  = '<div class="outer-container">';
 	$body_copy .= 	'<div class="grid-container">';
-	$body_copy .= 		'<h2>' . get_the_title() . '</h2>';
+	$body_copy .= 		'<h2 class="section-header">' . get_the_title() . '</h2>';
 	$body_copy .= 	'</div>';
 	if ($page_content != "") {
 		$body_copy .= '<div class="grid-container page-content">';

@@ -95,7 +95,7 @@ get_header();
 			<div class="inner-container">
 				<div class="main-content-container">
 					<?php
-						echo '<h2>' . get_the_title() . '</h2>';
+						echo '<h2 class="section-header">' . get_the_title() . '</h2>';
 
 						echo '<div class="page-content">';
 						echo 	'<p>' . $page_content . '</p>';

@@ -472,7 +472,7 @@ get_header();
 						</div>
 					</section>
 					<section class="icon-main-content-container">
-						<?php echo '<h2>' . $entity_full_name . '</h2>'; ?>
+						<?php echo '<h2 class="section-header">' . $entity_full_name . '</h2>'; ?>
 						<div class="page-content">
 							<?php echo $page_content; ?>
 						</div>

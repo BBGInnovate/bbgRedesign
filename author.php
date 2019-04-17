@@ -19,7 +19,7 @@ $add_separator = FALSE;
 // AUTHOR PROFILE
 // ================================================================================
 $profile_page_url = "";
-if (isset( $user_meta['author_profile_page'])) {
+if (isset($user_meta['author_profile_page'])) {
 	$profile_page_url = esc_url(get_page_link($user_meta['author_profile_page'][0]));
 }
 
@@ -33,13 +33,13 @@ $avatar = get_avatar($author_id, apply_filters('change_avatar_css', 100));
 $user_meta = get_user_meta($author_id);
 
 $description = "";
-if ( isset( $user_meta['description'] ) ) {
+if (isset($user_meta['description'])) {
 	$description = $user_meta['description'][0];
 }
 // ================================================================================
 
 $isCEO = false;
-if (stristr($occupation, "ceo")) {
+if (stristr($occupation, 'ceo')) {
 	$isCEO = true;
 }
 
@@ -61,8 +61,9 @@ $featuredPostID = 0;
 if (isset($user_meta['author_profile_page'])) {
 	$profilePageID =  $user_meta['author_profile_page'][0];
 
-	$tweets = get_field( 'profile_related_author_page_tweets', $profilePageID, true);
-	$featuredPostID = get_field( 'profile_related_author_page_featured_post', $profilePageID, true);
+	$tweets = get_field('profile_related_author_page_tweets', $profilePageID, true);
+	$featuredPostID = get_field('profile_related_author_page_featured_post', $profilePageID, true);
+
 	if (count($tweets)) {
 		$randKey = array_rand($tweets);
 		$latestTweetsStr = $tweets[$randKey]['profile_related_author_page_tweet'];
@@ -71,7 +72,6 @@ if (isset($user_meta['author_profile_page'])) {
 	*/
 	}
 }
-
 if ($isCEO) {
 	$postIDsUsed = [];
 	// GET PRIMARY POST DATA (IF NOT SELECTED)
@@ -203,7 +203,7 @@ get_header();
 			if (!empty($author_primary_post) && $author_primary_post -> have_posts()) {
 				$author_featured_post  = '<div class="outer-container">';
 				$author_featured_post .= 	'<div class="grid-container">';
-				$author_featured_post .= 		'<h2><a href="/category/from-the-ceo">From the CEO</a></h2>';
+				$author_featured_post .= 		'<h2 class="section-header"><a href="/category/from-the-ceo">From the CEO</a></h2>';
 				while ($author_primary_post -> have_posts()) { 
 					$author_primary_post -> the_post();
 					$postIDsUsed[] = get_the_ID();
@@ -225,7 +225,7 @@ get_header();
 				$blogLink = '/category/from-the-ceo+blog/';
 				echo '<div class="outer-container">';
 				echo 	'<div class="grid-container">';
-				echo 		'<h3><a href="' . $blogLink . '">Blog</a></h3>';
+				echo 		'<h3 class="section-subheader"><a href="' . $blogLink . '">Blog</a></h3>';
 				echo 	'</div>';
 				echo 	'<div class="custom-grid-container" >';
 				echo 		'<div class="inner-container">';
@@ -265,7 +265,7 @@ get_header();
 			$author_ribbon .= 			'<div style="background-image: url(/wp-content/media/2017/07/lansingspeaks.jpg);"></div>';
 			$author_ribbon .= 		'</div>';
 			$author_ribbon .= 		'<div class="main-content-container">';
-			$author_ribbon .= 			'<h2>On the record</h2>';
+			$author_ribbon .= 			'<h2 class="section-header">On the record</h2>';
 			$author_ribbon .= 			'<h3><a href="">Speeches and Remarks</a></h3>';
 			$author_ribbon .= 			'<p>View transcripts of CEO Lansing’s remarks and statements at each of his appearances since he joined the BBG in September 2015. <span class="learn-more"><a href="/ceo-speeches-remarks/">View All</a></span></p>';
 			$author_ribbon .= 		'</div>';

@@ -2670,19 +2670,19 @@ form[id^=fscf_form] {
 .header-outliner {
   display: none; }
 
-h2,
-h2 a:link,
-h2 a:visited {
+.section-header,
+.section-header a:link,
+.section-header a:visited {
   font-family: "Carrara-Regular", serif;
-  font-size: 34px;
+  font-size: 3.4rem;
+  line-height: 4.6rem;
   font-weight: 300;
-  line-height: normal;
   text-transform: none;
   letter-spacing: 0;
   color: #b2201c;
   margin-top: 0; }
 
-.bbg__ribbon h2 a:link {
+.bbg__ribbon .section-header a:link {
   color: #ffffff; }
 
 .special-block h2,
@@ -2711,6 +2711,16 @@ h3 a:visited,
   h3 a:visited .aside,
   .bbg__sidebar__table caption a:visited .aside {
     display: inline; }
+
+h3.section-subheader, .bbg__sidebar__table caption.section-subheader {
+  font-family: "Carrara-Regular", serif;
+  font-size: 2.7rem;
+  line-height: 3.7rem;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #283166;
+  margin-top: 0; }
 
 h4, .bbg__board__committee-list li a,
 h4 a:link,

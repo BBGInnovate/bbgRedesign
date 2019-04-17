@@ -31,7 +31,7 @@ get_header();
 
 	<div class="outer-container">
 		<div class="grid-container">
-			<h2><?php echo single_post_title(); ?></h2>
+			<h2 class="section-header"><?php echo single_post_title(); ?></h2>
 		</div>
 		<?php
 			echo '<div class="grid-container">';

@@ -82,7 +82,7 @@ get_header();
 
 	<div class="outer-container">
 		<div class="grid-container">
-			<?php echo '<h2>' . $page_title . '</h2>'; ?>
+			<?php echo '<h2 class="section-header">' . $page_title . '</h2>'; ?>
 		</div>
 	</div>
 

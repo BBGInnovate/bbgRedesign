@@ -282,7 +282,7 @@ echo $threats_map_json;
 	<section class="outer-container" style="margin-top: 3rem;">
 		<div class="grid-container">
 			<?php
-				echo '<h2>' . $page_title . '</h2>';
+				echo '<h2 class="section-header">' . $page_title . '</h2>';
 				echo '<p class="lead-in">' . $page_content . '</p>';
 			?>
 		</div>

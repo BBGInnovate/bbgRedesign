@@ -96,7 +96,7 @@ if ($ceremony_post -> have_posts()) {
 
 	<div class="outer-container">
 		<div class="grid-container">
-			<?php echo '<h2><a href="' . get_the_permalink($ceremony_id) . '">' . get_the_title($ceremony_id) . '</a></h2>'; ?>
+			<?php echo '<h2 class="section-header"><a href="' . get_the_permalink($ceremony_id) . '">' . get_the_title($ceremony_id) . '</a></h2>'; ?>
 		</div>
 		<!-- TWO COLUMNS FOR LATEST CEREMONY INTRO -->
 		<div class="custom-grid-container">
@@ -158,7 +158,7 @@ if ($ceremony_post -> have_posts()) {
 
 	<div class="outer-container">
 		<div class="grid-container">
-			<?php echo '<h2>BBG History</h2>'; ?>
+			<?php echo '<h2 class="section-header">BBG History</h2>'; ?>
 		</div>
 		<div class="bbg__ribbon inner-ribbon">
 			<div class="outer-container">

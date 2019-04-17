@@ -33,14 +33,6 @@ get_header();
 while (have_posts()) {
 	the_post();
 	get_template_part('template-parts/content', 'single'); 
-
-	echo '<div class="outer-container bbg__article-footer">';
-	echo 	'<div class="grid-container bbg__article-footer">';
-	if (!in_category('Project') && (comments_open() || get_comments_number())) {
-		comments_template();
-	}
-	echo 	'</div>';
-	echo '</div>';
 }
 
 get_sidebar();
