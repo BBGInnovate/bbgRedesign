@@ -2682,37 +2682,9 @@ form[id^=fscf_form] {
   color: #b2201c;
   margin-top: 0; }
 
-.bbg__ribbon .section-header a:link {
-  color: #ffffff; }
-
-.special-block h2,
-.special-block h2 a:link,
-.special-block h2 a:visited {
-  font-size: 1.8rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem; }
-
-h3, .bbg__sidebar__table caption,
-h3 a:link,
-.bbg__sidebar__table caption a:link,
-h3 a:visited,
-.bbg__sidebar__table caption a:visited {
-  font-family: "Alegreya Sans", sans-serif;
-  font-size: 2.4rem;
-  line-height: 2.6rem;
-  font-weight: 300;
-  color: #3f7ad1;
-  margin: 0 0 0.5rem 0; }
-  h3 .aside, .bbg__sidebar__table caption .aside,
-  h3 a:link .aside,
-  .bbg__sidebar__table caption a:link .aside,
-  h3 a:visited .aside,
-  .bbg__sidebar__table caption a:visited .aside {
-    display: inline; }
-
-h3.section-subheader, .bbg__sidebar__table caption.section-subheader {
+.section-subheader,
+.section-subheader a:link,
+.section-subheader a:visited {
   font-family: "Carrara-Regular", serif;
   font-size: 2.7rem;
   line-height: 3.7rem;
@@ -2721,6 +2693,30 @@ h3.section-subheader, .bbg__sidebar__table caption.section-subheader {
   letter-spacing: 0;
   color: #283166;
   margin-top: 0; }
+
+.article-title,
+.article-title a:link,
+.article-title a:visited {
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 2.4rem;
+  line-height: 2.6rem;
+  font-weight: 300;
+  color: #3f7ad1;
+  margin: 0 0 0.5rem 0; }
+  .article-title .aside,
+  .article-title a:link .aside,
+  .article-title a:visited .aside {
+    display: inline; }
+
+.sidebar-article-title,
+.sidebar-article-title a:link,
+.sidebar-article-title a:visited {
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 1.7rem;
+  line-height: 2.1rem;
+  font-weight: 300;
+  color: #3f7ad1;
+  margin: 0 0 0.5rem 0; }
 
 h4, .bbg__board__committee-list li a,
 h4 a:link,
@@ -2757,12 +2753,12 @@ h6,
 h6 a:link,
 h6 a:visited,
 .paragraph-header {
-  font-family: "Alegreya Sans", sans-serif;
-  font-size: 1.5rem;
-  line-height: 1.8rem;
+  font-family: "Carrara-Regular", serif;
+  font-size: 2rem;
+  line-height: 2.6rem;
   font-weight: 700;
   text-transform: none;
-  color: #284f91;
+  color: #545454;
   margin: 0 0 0.5rem 0; }
   h6 .aside,
   h6 p.aside,
@@ -2828,6 +2824,18 @@ ul li:before {
   content: "";
   display: none;
   padding-right: 0; }
+
+.bbg__ribbon .section-header a:link {
+  color: #ffffff; }
+
+.special-block h2,
+.special-block h2 a:link,
+.special-block h2 a:visited {
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem; }
 
 .side-content-container ul li,
 .side-content-container ol li,

@@ -41,7 +41,7 @@ include get_template_directory() . '/inc/shared_sidebar.php';
 						$parent_link = get_permalink($post->post_parent);
 						echo'<h2 class="section-header"><a href="' . $parent_link . '">' . $parent->post_title . '</a></h2>';
 					}
-					echo '<h3>' . get_the_title() . '</h3>';
+					echo '<h3 class="article-title">' . get_the_title() . '</h3>';
 
 					echo '<div>';
 					$lawName = get_field('law_name');

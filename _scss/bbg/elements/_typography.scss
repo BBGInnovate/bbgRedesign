@@ -17,34 +17,9 @@
     margin-top: 0;
 }
 
-.bbg__ribbon {
-    .section-header {
-        a:link {color: $white;}
-    }
-}
-.special-block h2, 
-.special-block h2 a:link, 
-.special-block h2 a:visited, {
-    font-size: 1.8rem;
-    font-weight: 400;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-}
-
-h3,
-h3 a:link,
-h3 a:visited {
-    font-family: $font-sans;
-    font-size: 2.4rem;
-    line-height: 2.6rem;
-    font-weight: $font-light;
-    color: $color-blue;
-    margin: 0 0 0.5rem 0;
-    .aside {display: inline;}
-}
-
-h3.section-subheader {
+.section-subheader,
+.section-subheader a:link,
+.section-subheader a:visited {
     font-family: $font-serif;
     font-size: 2.7rem;
     line-height: 3.7rem;
@@ -53,6 +28,28 @@ h3.section-subheader {
     letter-spacing: 0;
     color: $color-blue-darkest;
     margin-top: 0;
+}
+
+.article-title,
+.article-title a:link,
+.article-title a:visited {
+    font-family: $font-sans;
+    font-size: 2.4rem;
+    line-height: 2.6rem;
+    font-weight: $font-light;
+    color: $color-blue;
+    margin: 0 0 0.5rem 0;
+    .aside {display: inline;}
+}
+.sidebar-article-title,
+.sidebar-article-title a:link,
+.sidebar-article-title a:visited {
+    font-family: $font-sans;
+    font-size: 1.7rem;
+    line-height: 2.1rem;
+    font-weight: $font-light;
+    color: $color-blue;
+    margin: 0 0 0.5rem 0;
 }
 
 h4,
@@ -82,12 +79,12 @@ h6,
 h6 a:link,
 h6 a:visited,
 .paragraph-header {
-    font-family: $font-sans;
-    font-size: 1.5rem;
-    line-height: 1.8rem;
+    font-family: $font-serif;
+    font-size: 2rem;
+    line-height: 2.6rem;
     font-weight: $font-bold;
     text-transform: none;
-    color: $color-blue-darker;
+    color: #545454;
     margin: 0 0 0.5rem 0;
 
     .aside, 
@@ -145,6 +142,21 @@ ul li:before {
     content: "";
     display: none;
     padding-right: 0;
+}
+
+.bbg__ribbon {
+    .section-header {
+        a:link {color: $white;}
+    }
+}
+.special-block h2, 
+.special-block h2 a:link, 
+.special-block h2 a:visited, {
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
 }
 
 .side-content-container ul li, 

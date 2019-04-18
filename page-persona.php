@@ -98,9 +98,9 @@ get_header(); ?>
 							<?php
 								if ( $post->post_parent ) {
 									//borrowed from: https://wordpress.org/support/topic/link-to-parent-page
-									$parent = $wpdb->get_row( "SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent" );
+									$parent = $wpdb->get_row("SELECT post_title FROM $wpdb->posts WHERE ID = $post->post_parent");
 									$parent_link = get_permalink($post->post_parent);
-									the_title( '<h3 class="entry-title">', '</h3>' );
+									the_title( '<h3 class="section-subheader">', '</h3>' );
 								} else {
 									$headlineStr = "<h3 class='bbg__entry__secondary-title'>" . $headline . "</h3>";
 								}

@@ -117,7 +117,7 @@ get_header();
 					<div class="main-column">
 						<?php
 							$post_header  = '<header>';
-							$post_header .= 	'<h3>' . $page_title . '</h3>';
+							$post_header .= 	'<h3 class="article-title">' . $page_title . '</h3>';
 							$post_header .= 	'<p class="date-meta">' . $post_date . '</p>';
 							$post_header .= '</header>';
 							echo $post_header;
@@ -212,7 +212,7 @@ get_header();
 												$occupation = get_post_meta($profile_id, 'occupation', true);
 												$profile_link = get_page_link($profile_id);
 
-												$name_of_internal_speaker = '<h6>' . $profile_name . '</h6>';
+												$name_of_internal_speaker = '<h3 class="sidebar-article-title">' . $profile_name . '</h3>';
 												$title_of_internal_speaker = '<p class="aside">' . $occupation . '</p>';
 												$link_of_internal_speaker = '<p class="aside"><a href="' . $profile_link . '" target="_blank">View Profile</a></p>';
 
@@ -249,7 +249,7 @@ get_header();
 												$speaker_bio = $profile["meeting_speaker_bio"];
 												$speaker_link = $profile["meeting_speaker_url"];
 
-												$name_of_external_speaker = '<h6>' . $speaker_name . '</h6>';
+												$name_of_external_speaker = '<h3 class="sidebar-article-title">' . $speaker_name . '</h3>';
 												$title_of_external_speaker = '<p class="aside">' . $speaker_title . '</p>';
 												if (!empty($speaker_link)) {
 													$link_of_external_speaker = '<p class="aside speaker-link"><a href="' . $speaker_link . '" target="_blank">' . $speaker_link . '</a></p>';

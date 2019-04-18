@@ -199,7 +199,7 @@ get_header();
 						if ($featured_media_result != "") {
 							$featured_post .= $featured_media_result;
 						}
-						$featured_post .= 		'<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+						$featured_post .= 		'<h3 class="article-title"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
 						$featured_post .= 		'<p>' . get_the_excerpt() . '</p><br><br>';
 						$featured_post .= 	'</div>';
 						$featured_post .= '</div>';
@@ -223,15 +223,15 @@ get_header();
 						$post_image .= '</a>';
 						echo $post_image;
 
-						$link_header  = '<h4>';
+						$link_header  = '<h3 class="article-title">';
 						$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
 						$link_header .= 		get_the_title();
 						$link_header .= 	'</a>';
-						$link_header .= '</h4>';
+						$link_header .= '</h3>';
 						echo $link_header;
 
 						if (is_page('deep-dive-series')) {
-							echo '<p class="aside" style="margin-bottom: 1.5rem;">' . get_the_date() . '</p>';
+							echo '<p style="margin-bottom: 1.5rem;">' . get_the_date() . '</p>';
 							echo get_the_excerpt();
 						} else {
 							echo wp_trim_words(get_the_excerpt(), 10);

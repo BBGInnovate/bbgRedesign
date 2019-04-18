@@ -92,7 +92,7 @@
 		$custom_query = new WP_Query( $qParams );
 
 		$employee_block  = '<div style="margin-top: 3rem;">';
-		$employee_block .= 	'<h3>Employee spotlight</h3>';
+		$employee_block .= 	'<h3 class="section-subheader">Employee spotlight</h3>';
 		$employee_block .= '</div>';
 		$employee_block .= '<div class="nest-container">';
 		$employee_block .= 	'<div class="inner-container">';

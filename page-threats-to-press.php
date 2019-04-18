@@ -8,26 +8,6 @@
   template name: Threats to Press
  */
 
-$args = array(
-    'post_type' => 'page',
-    'posts_per_page' => -1,
-    'meta_query' => array(
-        array(
-            'key' => '_wp_page_template',
-            'value' => 'page-threats-archive.php'
-        )
-    )
-);
-$the_pages = new WP_Query( $args );
-
-if( $the_pages->have_posts() ){
-    while( $the_pages->have_posts() ){
-        $the_pages->the_post();
-        echo get_the_title() . '<br>';
-    }
-}
-wp_reset_postdata();
-
 // PAGE INFORMATION
 $page_content = "";
 $page_title = "";
@@ -166,9 +146,8 @@ if ($fallen_journalists) {
 		$journalist  = "";
 		$journalist .= '<div class="bbg__profile-grid__profile">';
 		$journalist .= 	$imgSrc;
-		$journalist .= 	'<h4 class="bbg__profile-grid__profile__name">' . $journalist_name . '</h4>';
-		$journalist .= 	'<h5 class="bbg__profile-grid__profile__dates">Killed ' . $date . '</h5>';
-		$journalist .= 	'<p class="bbg__profile-grid__profile__description"></p>';
+		$journalist .= 	'<h4 class="article-title">' . $journalist_name . '</h4>';
+		$journalist .= 	'<p class="aside">Killed ' . $date . '</p>';
 		$journalist .= '</div>';
 		$wall .= $journalist;
 	}
@@ -290,7 +269,7 @@ echo $threats_map_json;
 
 	<?php
 		// NEWS AND UPDATES
-		$threat_structure  = '<section class="outer-container threats-box">';
+		$threat_structure  = '<div class="outer-container threats-box">';
 		$threat_structure .= 	'<div class="grid-half" id="threats-main-column">';
 		$threat_structure .= 			'<article>';
 		$threat_structure .= 				'<div class="article-image">';
@@ -299,7 +278,7 @@ echo $threats_map_json;
 		$threat_structure .= 					'</a>';
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 				'<div class="article-info">';
-		$threat_structure .= 					'<h4><a href="' . get_the_permalink($threats_posts[0]) . '">' . get_the_title($threats_posts[0]) . '</a></h4>';
+		$threat_structure .= 					'<h4 class="article-title"><a href="' . get_the_permalink($threats_posts[0]) . '">' . get_the_title($threats_posts[0]) . '</a></h4>';
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 			'</article>';
 		$threat_structure .= 	'</div>';
@@ -307,11 +286,11 @@ echo $threats_map_json;
 		$secondary_threats = array_shift($threats_posts);
 		foreach ($threats_posts as $recent_threat) {
 			$threat_structure .= 		'<article>';
-			$threat_structure .= 			'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
+			$threat_structure .= 			'<h4 class="article-title"><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
 			$threat_structure .= 		'</article>';
 		}
 		$threat_structure .= 	'</div>';
-		$threat_structure .= '</section>';
+		$threat_structure .= '</div>';
 		echo $threat_structure;
 	?>
 
@@ -327,7 +306,7 @@ echo $threats_map_json;
 				if (have_rows('featured_journalist')) {
 					$featuredJournalists .= '<div class="outer-container">';
 					$featuredJournalists .= 	'<div class="grid-container">';
-					$featuredJournalists .= 		'<h3>' . $featuredJournalistsSectionLabel . '</h3>';
+					$featuredJournalists .= 		'<h3 class="section-subheader">' . $featuredJournalistsSectionLabel . '</h3>';
 					$featuredJournalists .=  		'<div class="nest-container">';
 					$featuredJournalists .=  			'<div class="inner-container">';
 
@@ -351,8 +330,8 @@ echo $threats_map_json;
 
 						$featuredJournalists .= '<div class="grid-half profile-clears">';
 						$featuredJournalists .= 	$profilePhoto;
-						$featuredJournalists .= 	'<h4 class="bbg__profile-excerpt__name"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
-						$featuredJournalists .= 	'<p class="bbg__profile-excerpt__text">' . $profileOccupation . $profileExcerpt . '</p>';
+						$featuredJournalists .= 	'<h4 class="article-title"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
+						$featuredJournalists .= 	'<p class="paragraph-header">' . $profileOccupation . $profileExcerpt . '</p>';
 						$featuredJournalists .= '</div>';
 					}
 					$featuredJournalists .= 			'</div>';
@@ -367,7 +346,7 @@ echo $threats_map_json;
 
 	<div class="outer-container bbg__memorial">
 		<div class="grid-container">
-			<h3>Fallen journalists</h3>
+			<h3 class="section-subheader">Fallen journalists</h3>
 			<div class="usa-grid">
 				<?php echo $wall; ?>
 			</div>

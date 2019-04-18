@@ -60,7 +60,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 
 	<div class="outer-container" id="winners">
 		<div class="grid-container">
-			<h4>Meet the winners</h3>
+			<h2 class="section-subheader">Meet the winners</h2>
 			<p>The BBG networks nominates an exemplary journalist, production team, bureau, or language service for work done in the previous calendar year.</p>
 			<p><a href="/burke-awards/burke-awards-archive/2017-winners/" class="bbg__kits__intro__more--link" style="float: right; margin: 1rem 0;">View the complete list of <?php echo $activeYear ?> honorees »</a></p>
 		</div>
@@ -124,7 +124,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 			</div>
 			<div class="main-content-container">
 				<h2 class="section-header">BBG History</h2>
-				<h4><a href="<?php echo $burkeBioLink; ?>">David Burke</a></h4>
+				<h3 class="article-title"><a href="<?php echo $burkeBioLink; ?>">David Burke</a></h3>
 				<p>David W. Burke was named to the first Broadcasting Board of Governors (BBG) by President Clinton in 1995 and served as its first chairman. <a href="<?php echo $burkeBioLink; ?>" class="bbg__kits__intro__more--link">Learn More »</a></p>
 			</div>
 		</div>
@@ -133,8 +133,9 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 	<div class="outer-container">
 		<div class="grid-container">
 			<div class="usagm-quotation">
+				<h2 class="header-outliner">John Lansing Quote</h2>
 				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot" alt="John Lansing image">
-				<h4 class="quote-text">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</h4>
+				<p class="article-title">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</p>
 				<p class="quote-byline">
 					John Lansing<br>
 					<span class="occupation">BBG CEO and Director</span>

@@ -91,7 +91,7 @@ get_header();
 		$featuredImageClass = " bbg__article--no-featured-image";
 
 		//the title/headline field, followed by the URL and the author's twitter handle
-		$twitterText = "";
+		$twitterText  = "";
 		$twitterText .= "Profile of " . html_entity_decode(get_the_title());
 		$twitterText .= " by @bbggov " . get_permalink();
 		$twitterURL = "//twitter.com/intent/tweet?text=" . rawurlencode($twitterText);
@@ -109,14 +109,14 @@ get_header();
 					</div>
 					<div class="icon-main-content-container">
 						<?php
-							$profile_head  = '<h2 class="profile-name">';
+							$profile_head  = '<h2 class="section-header">';
 							$profile_head .= 	get_the_title();
 							$profile_head .= '</h2>';
 							echo $profile_head;
 
-							$profile_occupation  = '<h6 class="profile-occupation">';
+							$profile_occupation  = '<p class="lead-in">';
 							$profile_occupation .= 	$occupation;
-							$profile_occupation .= '</h6>';
+							$profile_occupation .= '</p>';
 							echo $profile_occupation;
 
 							$main_content  = '<div class="page-content">';

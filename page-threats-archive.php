@@ -23,8 +23,9 @@ $qParams = array(
 $custom_query = new WP_Query($qParams);
 
 $threats = array();
-if ( $custom_query->have_posts() ) :
-	while ( $custom_query->have_posts() ) : $custom_query->the_post();
+if ($custom_query->have_posts()) {
+	while ($custom_query->have_posts()) {
+		$custom_query->the_post();
 		$id = get_the_ID();
 		$country = get_post_meta( $id, 'threats_to_press_country', true );
 		$targetNames = get_post_meta( $id, 'threats_to_press_target_names', true );
@@ -49,8 +50,8 @@ if ( $custom_query->have_posts() ) :
 			'headline' => get_the_title()
 		);
 		$threats[] = $threat_post_data;
-	endwhile;
-endif;
+	}
+}
 wp_reset_postdata();
 wp_reset_query();
 
@@ -92,7 +93,7 @@ get_header();
 	<?php if (count($threats)) : ?>
 		<div class="outer-container">
 			<div class="grid-container">
-				<h3><?php echo $pageTitle; ?></h3>
+				<h3 class="section-subheader"><?php echo $pageTitle; ?></h3>
 				<?php
 					foreach ($threats as $threat_post) {
 						$imgSrc = '';
@@ -100,16 +101,16 @@ get_header();
 							$imgSrc = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png'; //
 						}
 
-						echo '<article>';
+						echo '<div>';
 						echo 	'<header class="bbg__article-icons-container">';
 						echo 		'<div class="bbg__article-icon" style="background-position: left 0.25rem; background-image: url(' . $imgSrc . ');"></div>';
-						echo 		'<h4>' . $threat_post['headline'] . '</h4>';
+						echo 		'<h4 class="article-title">' . $threat_post['headline'] . '</h4>';
 						echo 	'</header>';
 						echo 	'<div class="aside">';
 						echo 		'<time>' . $threat_post['niceDate'] . '</time>';
 						echo 	'</div>';
 						echo 	'<p>' . $threat_post['description'] . '</p>';
-						echo '</article>';
+						echo '</div>';
 					}
 				?>
 			</div>

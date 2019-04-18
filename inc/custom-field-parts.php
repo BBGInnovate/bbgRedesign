@@ -133,9 +133,9 @@ function build_umbrella_main_parts($umbrella_main_data) {
 	$overhead_text = '';
 	if ($umbrella_main_data['header'] != "") {
 		if (!empty($umbrella_main_data['intro_text'])) {
-			$header  = '<h3>' . 	$umbrella_main_data['header'] . '</h3>';
+			$header  = '<h3 class="section-subheader">' . 	$umbrella_main_data['header'] . '</h3>';
 		} else {
-			$header  = '<h3 class="no-margin-bottom">' . 	$umbrella_main_data['header'] . '</h3>';
+			$header  = '<h3 class="section-subheader no-margin-bottom">' . 	$umbrella_main_data['header'] . '</h3>';
 		}
 	}
 	if ($umbrella_main_data['intro_text'] != "") {
@@ -159,7 +159,7 @@ function build_umbrella_content_parts($content_data) {
 	}
 
 	if ($content_data['column_title']) {
-		$column_title = '<h3>' . $content_data['column_title'] . '</h3>';
+		$column_title = '<h3 class="section-subheader">' . $content_data['column_title'] . '</h3>';
 	}
 
 	if ($content_data['item_title']) {
@@ -215,7 +215,7 @@ function build_entity_parts($entity_data) {
 			$entity_image .= 	'<img src="' . $imgSrc . '" alt="' . $abbreviation . ' logo">';
 			$entity_image .= '</a>';
 
-			$entity_title = 	'<h3><a href="' . $link . '">' . $fullName . '</a></h3>';
+			$entity_title = 	'<h3 class="section-subheader"><a href="' . $link . '">' . $fullName . '</a></h3>';
 			$entity_content = 	'<p class="">' . $description . '</p>';
 			
 			$entity_pieces = array(

@@ -88,18 +88,18 @@ $future_events_query = new WP_Query($future_events_query_args);
 $upcomingEvents = "";
 if (!is_paged()) {
 	if ($future_events_query->have_posts()) {
-		$upcomingEvents = '<h3>Upcoming events</h3>';
+		$upcomingEvents = '<h3 class="section-subheader">Upcoming events</h3>';
 		while ($future_events_query->have_posts()) {
 			$future_events_query->the_post(); 
-			$upcomingEvents .= '<article id="post-' .get_the_ID() . '" class="' . implode(" ", get_post_class()) . '">';
+			$upcomingEvents .= '<div id="post-' .get_the_ID() . '" class="' . implode(" ", get_post_class()) . '">';
 			global $post;
 			$my_post = clone $post;
 			$my_post->post_status = 'published';
 			$my_post->post_name = sanitize_title($my_post->post_name ? $my_post->post_name : $my_post->post_title, $my_post->ID);
 			$permalink = get_permalink($my_post);
-			$upcomingEvents .= '<h4><a href="' . $permalink . '">' . get_the_title() . '</a><h4>';
+			$upcomingEvents .= '<h4 class="article-title"><a href="' . $permalink . '">' . get_the_title() . '</a><h4>';
 			$upcomingEvents .= '<p>' . get_the_excerpt() . '</p>';
-			$upcomingEvents .= '</article>';
+			$upcomingEvents .= '</div>';
 		}
 	}
 }

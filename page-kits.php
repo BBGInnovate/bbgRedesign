@@ -9,21 +9,22 @@
    template name: Info Kits
  */
 
-include get_template_directory() . "/inc/bbg-functions-assemble.php";
-include get_template_directory() . "/inc/constant-contact_sign-up.php";
+include get_template_directory() . '/inc/bbg-functions-assemble.php';
+include get_template_directory() . '/inc/constant-contact_sign-up.php';
 
 function isOdd($pageTotal) {
 	return ($pageTotal % 2) ? true : false;
 }
 
-if ( have_posts() ) :
-	while ( have_posts() ) : the_post();
+if (have_posts()) {
+	while (have_posts()) {
+		the_post();
 		$pageName = get_the_title();
 		$pageContent = get_the_content();
 		$pageContent = apply_filters('the_content', $pageContent);
    		$pageContent = str_replace(']]>', ']]&gt;', $pageContent);
-	endwhile;
-endif;
+	}
+}
 wp_reset_postdata();
 wp_reset_query();
 
@@ -74,7 +75,7 @@ $advisory = false;
 // Get all posts with advisory category
 $mediaAdvisoryCategoryObj = get_category_by_slug('media-advisory');
 
-if ($pageName != "Office of Congressional Affairs" && is_object($mediaAdvisoryCategoryObj)) {
+if ($pageName != 'Office of Congressional Affairs' && is_object($mediaAdvisoryCategoryObj)) {
 	// set up award category query parameters
 	$mediaAdvisoryCategoryID = $mediaAdvisoryCategoryObj -> term_id;
 	$mediaParams = array(
@@ -516,7 +517,7 @@ get_header();
 				<!-- 2A **** 3-COL ROW: BBG by the numbers -->
 				<div class="outer-container bbg__kits__section--row">
 					<div class="grid-container bbg__kits__section--tiles">
-						<h3>USAGM by the numbers</h3>
+						<h3 class="section-subheader">USAGM by the numbers</h3>
 						<!-- DISTRIBUTION tile -->
 						<div class="nest-container">
 							<div class="inner-container">
@@ -734,10 +735,10 @@ get_header();
 
 								$award_block  = '<div class="outer-container">';
 								$award_block .= 	'<div class="grid-half">';
-								$award_block .= 		'<h3>Recent Awards</h3>';
+								$award_block .= 		'<h3 class="section-subheader">Recent Awards</h3>';
 								$award_block .= 		'<h4><a href="' . $url . '">' . $title . '</a></h4>';
 								// $award_block .= 		'<h4>' . join($awardYears) . ' ' . join($organizations) . '</h4>';
-								$award_block .= 		'<a href="' . $awardCategoryLink . '" class="bbg__kits__intro__more--link">View all awards »</a>';
+								$award_block .= 		'<a href="' . $awardCategoryLink . '" class="read-more">View all awards »</a>';
 								$award_block .= 	'</div>';
 							}
 
@@ -749,9 +750,9 @@ get_header();
 							$focusPageExcerpt = str_replace(']]>', ']]&gt;', $focusPageExcerpt);
 
 							$award_block .= 	'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
-							$award_block .= 		'<h3>' . $focusPageTitle . '</h3>';
+							$award_block .= 		'<h3 class="section-subheader">' . $focusPageTitle . '</h3>';
 							$award_block .= 		'<p>' . $focusPageExcerpt . '</p>';
-							$award_block .= 		'<a href="' . $focusPageURL . '" class="bbg__kits__intro__more--link">Read more »</a>';
+							$award_block .= 		'<a href="' . $focusPageURL . '" class="read-more">Read more</a>';
 							$award_block .= 	'</div>';
 							$award_block .= '</div>';
 							echo $award_block;
@@ -766,7 +767,7 @@ get_header();
 							}
 							$kit_umbrella  = '<div class="outer-container">';
 							$kit_umbrella .= 	'<div class="grid-container">';
-							$kit_umbrella .= 		'<h3>' . $kits_umbrella_main_data['header'] . '</h3>';
+							$kit_umbrella .= 		'<h3 class="section-subheader">' . $kits_umbrella_main_data['header'] . '</h3>';
 							$kit_umbrella .= 		'<div class="nest-container">';
 							$kit_umbrella .= 			'<div class="inner-container">';
 							$kit_umbrella .= 				'<div class="grid-container">';

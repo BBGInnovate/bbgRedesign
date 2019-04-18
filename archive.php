@@ -34,7 +34,7 @@ if ($featured_media_result != "") {
 				if ((!is_paged() && $counter == 1 || is_category('BBG360'))) {
 					echo '<div class="outer-container">';
 					echo 	'<div class="grid-container">';
-					echo 		'<h3><a href="'. get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+					echo 		'<h3 class="article-title"><a href="'. get_the_permalink() . '">' . get_the_title() . '</a></h3>';
 					echo 		'<span class="lead-in">' . get_the_excerpt() . '</span>';
 					echo 	'</div>';
 					echo '</div>';
@@ -59,11 +59,11 @@ if ($featured_media_result != "") {
 				if ($counter > 1) {
 					$article_markup  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
 					if ($in_sidebar == false) {
-						$article_markup .= '<h3><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
+						$article_markup .= '<h3 class="article-title"><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
 						$article_markup .= '<p class="aside date-meta">' . get_the_date() . '</p>';
 						$article_markup .= '<p>' . get_the_excerpt() . '</p>';
 					} else {
-						$article_markup .= '<h6><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h6>';
+						$article_markup .= '<h3 class="sidebar-article-title"><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
 					}
 					$article_markup .= '</article>';
 					echo $article_markup;

@@ -23,7 +23,7 @@ wp_reset_query();
 
 $pageTagline = get_post_meta( get_the_ID(), 'page_tagline', true );
 if ($pageTagline && $pageTagline!=""){
-	$pageTagline = '<h6 class="bbg__page-header__tagline">' . $pageTagline . '</h6>';
+	$pageTagline = '<p class="lead-in">' . $pageTagline . '</p>';
 }
 
 get_header();
@@ -99,9 +99,9 @@ get_header();
 				$s  = '<div class="grid-container">';
 				$entityPermalink = get_permalink(get_page_by_path('networks/' . $e));
 				if ($e == 'bbg') {
-					$s .= 	'<h3><a href="' . $entityPermalink . '">USAGM</a></h3>';
+					$s .= 	'<h3 class="section-subheader"><a href="' . $entityPermalink . '">USAGM</a></h3>';
 				} else {
-					$s .= 	'<h3><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
+					$s .= 	'<h3 class="section-subheader"><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
 				}
 				$s .= 	'<div class="nest-container">';
 				$s .= 		'<div class="inner-container">';
@@ -120,11 +120,10 @@ get_header();
 
 
 						if ($counter == 1) {
-							// $s .= 	$pr['thumb'];
 							$s .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
 							$s .= 	'<p>' . $pr['excerpt'] . '</p>';
 						} else {
-							$s .= 	'<h6><a href="' . $url . '">' . $title . '</a></h6>';
+							$s .= 	'<h3 class="sidebar-article-title"><a href="' . $url . '">' . $title . '</a></h3>';
 						}
 						if ($counter == 1 || $counter == 5) {
 							if ($counter == 5) {

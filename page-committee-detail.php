@@ -11,7 +11,7 @@
 require 'inc/bbg-functions-assemble.php';
 
 $committeeReportID = get_post_meta(get_the_ID(), "committee_report", true);
-$committeeResolutionID = get_post_meta(get_the_ID(), "committee_establishment_resolution", true); 
+$committeeResolutionID = get_post_meta(get_the_ID(), "committee_establishment_resolution", true);
 
 $committeeReport = false;
 if ($committeeReportID != "") {
@@ -22,7 +22,9 @@ if ($committeeReportID != "") {
 $committeeResolution = false;
 if ($committeeResolutionID != "") {
 	$committeeResolutionPost = get_post($committeeResolutionID);
-	$committeeResolution = array('title' => $committeeResolutionPost->post_title, 'url' => $committeeResolutionPost->guid);
+	if (!empty($committeeResolutionPost)) {
+		$committeeResolution = array('title' => $committeeResolutionPost->post_title, 'url' => $committeeResolutionPost->guid);
+	}
 }
 
 $members = array();
@@ -79,19 +81,14 @@ get_header();
 ?>
 
 <main id="main" role="main">
-
-	<div class="outer-container">
-		<div class="grid-container">
-			<?php echo '<h2 class="section-header">' . $page_title . '</h2>'; ?>
-		</div>
-	</div>
-
 	<div class="outer-container">
 		<div class="grid-container">
 			<?php
+				echo '<h2 class="section-header">' . $page_title . '</h2>';
+
 				echo $page_content;
 
-				$members_list  = '<h3>Committee Members</h3>';
+				$members_list  = '<h3 class="section-subheader">Committee Members</h3>';
 				$members_list .= '<ul>';
 				foreach ($members as $member) {
 					$members_list .= '<li>';
@@ -106,7 +103,7 @@ get_header();
 				echo $members_list;
 
 				if ($committeeResolution || $committeeReport) {
-					echo '<h3>Committee Docs</h3>';
+					echo '<h3 class="section-subheader">Committee Docs</h3>';
 					echo '<ul>';
 					if ($committeeResolution) {
 						$url = $committeeResolution['url'];
