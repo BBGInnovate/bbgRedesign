@@ -157,9 +157,9 @@ get_header();
 
 								$past_event  = '<article id="'. get_the_ID() . '">';
 								$past_event .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
-								$past_event .= 	'<h6>';
+								$past_event .= 	'<h4 class="article-title">';
 								$past_event .= 		'<a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
-								$past_event .= 	'</h6>';
+								$past_event .= 	'</h4>';
 								$past_event .= '</article>';
 								echo $past_event;
 							}
