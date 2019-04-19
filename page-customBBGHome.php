@@ -13,34 +13,6 @@
   template name: Custom BBG Home
  */
 
-
-
-
-
-$args = array(
-    'post_type' => 'page',
-    'posts_per_page' => -1,
-    'meta_query' => array(
-        array(
-            'key' => '_wp_page_template',
-            'value' => 'page-impact-model.php'
-        )
-    )
-);
-$the_pages = new WP_Query( $args );
-
-if( $the_pages->have_posts() ){
-    while( $the_pages->have_posts() ){
-        $the_pages->the_post();
-        echo get_the_title() . '<br>';
-    }
-}
-wp_reset_postdata();
-
-
-
-
-
 // FUNCTION THAT BUILD SECTIONS
 require 'inc/custom-field-data.php';
 require 'inc/custom-field-parts.php';
@@ -122,14 +94,14 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				<div class="inner-container">
 					<div class="main-column">
 						<?php
-							$featured_post = build_vertical_article($feature_recent_post);
+							$featured_post = build_article_standard_vertical($feature_recent_post);
 							echo $featured_post;
 						?>
 					</div>
 					<div class="side-column divider-left">
 						<?php
 							foreach($secondary_recent_posts as $cur_secondary_post) {
-								$secondary_post_element = build_image_title_article($cur_secondary_post);
+								$secondary_post_element = build_article_collapsible_image_title($cur_secondary_post);
 								echo $secondary_post_element;
 							}
 						?>
@@ -203,12 +175,12 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$impact_and_events .= 					'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			foreach ($impact_result as $impact_post_id) {
 				$impact_post = get_post($impact_post_id);
-				$impact_and_events .= build_vertical_article($impact_post);
+				$impact_and_events .= build_article_standard_vertical($impact_post);
 			}
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 				'<div class="side-column divider-left">';
 			$impact_and_events .= 					$corner_hero_section_header;
-			$impact_and_events .= 					build_vertical_article($corner_hero_data);
+			$impact_and_events .= 					build_article_standard_vertical($corner_hero_data);
 			$impact_and_events .= 				'</div>';
 			$impact_and_events .= 			'</div>';
 			$impact_and_events .= 		'</div>';
@@ -224,7 +196,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				$impact_post = get_post($impact_post_id);
 
 				$impacts_only .= '<div class="grid-half">';
-				$impacts_only .= 	build_vertical_article($impact_post);
+				$impacts_only .= 	build_article_standard_vertical($impact_post);
 				$impacts_only .= '</div>';
 			}
 			$impacts_only .= 	'</div>';

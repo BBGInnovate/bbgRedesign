@@ -75,6 +75,35 @@ if (have_posts()) {
 	rewind_posts();
 }
 
+// SECTION FOR CEO
+$ceo = get_post_meta($id, 'ceo', true);
+if (isset($ceo)) {
+	function get_ceo_article_arguments() {
+		$ceo_params = array(
+			'post_type' => array('post'),
+			'posts_per_page' => 2,
+			'orderby' => 'date',
+			'order' => 'DESC',
+			'tax_query' => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'post_tag',
+					'field' => 'slug',
+					'terms' => array( 'john-lansing' ),
+					'operator' => 'IN'
+				),
+				array(
+					'taxonomy' => 'category',
+					'field' => 'slug',
+					'terms' => array('appearance','bbg-in-the-news'),
+					'operator' => 'IN'
+				)
+			)
+		);
+		return $ceo_params;
+	}
+}
+
 get_header();
 ?>
 
@@ -109,31 +138,19 @@ get_header();
 					</div>
 					<div class="icon-main-content-container">
 						<?php
-							$profile_head  = '<h2 class="section-header">';
-							$profile_head .= 	get_the_title();
-							$profile_head .= '</h2>';
-							echo $profile_head;
-
-							$profile_occupation  = '<p class="lead-in">';
-							$profile_occupation .= 	$occupation;
-							$profile_occupation .= '</p>';
-							echo $profile_occupation;
-
-							$main_content  = '<div class="page-content">';
-							$main_content .= 	$page_content;
-							$main_content .= '</div>';
-							echo $main_content;
-
-							$modification_date  = '<p class="bbg-tagline" style="text-align: right;">';
-							$modification_date .= 	'Last modified: ' . get_the_modified_date('F d, Y');
-							$modification_date .= '</p>';
-
-							echo $modification_date;
+							$profile_information  = '<h2 class="section-header">' . get_the_title() . '</h2>';
+							$profile_information .= '<p class="lead-in">' . $occupation . '</p>';
+							$profile_information .= '<div class="page-content">';
+							$profile_information .= 	$page_content;
+							// $profile_information .= 	 '<p class="bbg-tagline" style="text-align: right;">';
+							// $profile_information .= 		'Last modified: ' . get_the_modified_date('F d, Y');
+							// $profile_information .= 	'</p>';
+							$profile_information .= '</div>';
+							echo $profile_information;
 						?>
 
-
-						<!-- section for content below biography -->
 						<?php
+							// CONTENT BELOW BIOGRAPHY
 							$content_below_bio = get_field('profile_content_below_biography', $id);
 							if ($content_below_bio != "") {
 								echo '<div class="bbg__profile__content__section">';
@@ -142,46 +159,24 @@ get_header();
 							}
 						?>
 
-						<!-- section for CEO -->
 						<?php
-							$ceo = get_post_meta($id, 'ceo', true);
-							if  ($ceo) {
-								$tax_query = array(
-									'relation' => 'AND',
-									array(
-										'taxonomy' => 'post_tag',
-										'field' => 'slug',
-										'terms' => array( 'john-lansing' ),
-										'operator' => 'IN'
-									),
-									array(
-										'taxonomy' => 'category',
-										'field' => 'slug',
-										'terms' => array('appearance','bbg-in-the-news'),
-										'operator' => 'IN'
-									)
-								);
-								$qParams2 = array(
-									'post_type' => array('post'),
-									'posts_per_page' => 2,
-									'tax_query' => $tax_query,
-									'orderby' => 'date',
-									'order' => 'DESC'
-								);
+							// SECTION FOR CEO
+							if ($ceo) {
+								$ceo_articles = get_ceo_article_arguments();
+								if (!empty($ceo_articles)) {
+									$categoryUrl = 'https://www.bbg.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news';
+									$categoryLabel = 'News & Appearances';
+									$ceo_post_query = new WP_Query($ceo_articles);
+									$ceo_article_array = $ceo_post_query->posts;
 
-								$categoryUrl = "https://www.bbg.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news";
-								$categoryLabel = "News & Appearances";
-								$custom_query = new WP_Query($qParams2);
-								if ($custom_query -> have_posts()) {
-									echo '<div class="">';
-									echo 	'<h3><a href="' . $categoryUrl . '">' . $categoryLabel . '</a></h3>';
-									while ($custom_query -> have_posts())  {
-										$custom_query -> the_post();
-										get_template_part('template-parts/content-portfolio', get_post_format());
+									echo '<div class="ceo-news-posts">';
+									echo 	'<h3 class="section-subheader"><a href="' . $categoryUrl . '">' . $categoryLabel . '</a></h3>';
+									foreach($ceo_article_array as $ceo_article_data) {
+										$ceo_news_post = build_article_standard_vertical($ceo_article_data);
+										echo $ceo_news_post;
 									}
 									echo '</div>';
 								}
-								wp_reset_postdata();
 							}
 						?>
 
@@ -305,7 +300,7 @@ get_header();
 							$title = get_the_title();
 
 							echo '<li>';
-							echo 	'<a href="' . $link . '">' . $title . '</a>';
+							echo 	'<h3 class="sidebar-article-title"><a href="' . $link . '">' . $title . '</a></h3>';
 							echo '</li>';
 						}
 						echo '</ul>';

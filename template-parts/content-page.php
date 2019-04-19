@@ -80,7 +80,7 @@ endif;
 			<?php
 			$pageTagline = get_field('page_tagline');
 			if ( $pageTagline ) {
-				echo "<h3>" . $pageTagline . "</h3>";
+				echo '<h3 class="article-title">' . $pageTagline . '</h3>';
 			}
 			the_content();
 			?>

@@ -25,7 +25,7 @@ function build_main_head_article($article_data) {
 	return $article_structure;
 }
 
-function build_vertical_article($article_data) {
+function build_article_standard_vertical($article_data) {
 	$article_structure  = '<article class="vertical-article article-teaser">';
 	if (!empty(get_the_post_thumbnail_url($article_data))) {
 		$article_structure .= '<div class="article-image">';
@@ -154,7 +154,7 @@ function build_no_image_article($article_data) {
 	return $article_structure;
 }
 
-function build_image_title_article($article_data) {
+function build_article_collapsible_image_title($article_data) {
 	$article_structure  = '<article class="image-title-article article-teaser">';
 	$article_structure .= 	'<div class="nest-container">';
 	$article_structure .= 		'<div class="inner-container">';

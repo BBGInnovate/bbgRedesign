@@ -458,7 +458,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 			else {
 				// $header_markup .= bbginnovate_post_categories();
 			}
-			$header_markup .= '<h3>' . get_the_title() . '</h3>';
+			$header_markup .= '<h3 class="article-title">' . get_the_title() . '</h3>';
 			$header_markup .= '<div class="date-meta">';
 			$header_markup .= 	bbginnovate_posted_on();
 			$header_markup .= '</div>';

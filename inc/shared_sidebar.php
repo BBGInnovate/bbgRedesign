@@ -49,10 +49,8 @@ if ($includeSidebar) {
 
 				$sidebar_download  = '<article>';
 				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
-				$sidebar_download .= 	'<h6>';
-				$sidebar_download .= 		'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
-				$sidebar_download .= 		'<span class="bbg__file-size"><br>(' . $ext . ', ' . $filesize . ')</span>';
-				$sidebar_download .= 	'</h6>';
+				$sidebar_download .= 	'<h3 class="sidebar-article-title"><a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a></h3>';
+				$sidebar_download .= 	'<span class="bbg__file-size"><br>(' . $ext . ', ' . $filesize . ')</span>';
 				
 				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
 					$sidebar_download .= '<p class="sans">';

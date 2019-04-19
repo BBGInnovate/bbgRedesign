@@ -5261,6 +5261,9 @@ ol li:before {
     display: inline-block; } }
 
 /* FILE CONTENTS */
+.page-content {
+  margin-bottom: 3rem; }
+
 .date-meta {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 0.9em;
