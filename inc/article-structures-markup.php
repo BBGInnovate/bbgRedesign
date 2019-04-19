@@ -2,7 +2,7 @@
 // STYLES FOR THESE ARTICLE TEASERS ARE IN _scss/bbg/components/_article-structure-style.scss
 
 function build_main_head_article($article_data) {
-	$article_structure  = '<article class="main-head-article article-teaser">';
+	$article_structure  = '<div class="main-head-article article-teaser">';
 	if (!empty(get_the_post_thumbnail_url($article_data))) {
 		$article_structure .= '<div class="feature-article-image">';
 		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">';
@@ -21,7 +21,7 @@ function build_main_head_article($article_data) {
 		$article_structure .= 	'<p class="content-teaser">' . strip_tags($shortened_text, '<a>') . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
 	}
 	$article_structure .= 	'</div>';
-	$article_structure .= '</article>';
+	$article_structure .= '</div>';
 	return $article_structure;
 }
 

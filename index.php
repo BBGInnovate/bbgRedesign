@@ -32,7 +32,6 @@ get_header();
 	<div class="outer-container">
 		<div class="grid-container">
 			<h2 class="section-header"><?php echo single_post_title(); ?></h2>
-		</div>
 		<?php
 			echo '<div class="grid-container">';
 			echo 	build_main_head_article($feature_post[0]);
@@ -43,6 +42,7 @@ get_header();
 			echo 	do_shortcode('[ajax_load_more post__not_in="'. $post__not_in .'"]');
 			echo '</div>';
 		?>
+		</div>
 	</div>
 </main>
 
