@@ -89,11 +89,11 @@ function build_ribbon_parts($ribbon_data) {
 		$ribbon_label = '<h2 class="section-header">' . $ribbon_data['label'] . '</h2>';
 	}
 	if ($ribbon_data['headline_link'] != "") {
-		$ribbon_headline  = '<h4>';
+		$ribbon_headline  = '<h3 class="article-title">';
 		$ribbon_headline .= 	'<a href="' . get_permalink($ribbon_data['headline_link']) . '">' . $ribbon_data['headline'] . '</a>';
-		$ribbon_headline .= '</h4>';
+		$ribbon_headline .= '</h3>';
 	} else {
-		$ribbon_headline = '<h4>' . $ribbon_data['headline'] . '</h4>';
+		$ribbon_headline = '<h3 class="article-title">' . $ribbon_data['headline'] . '</h3>';
 	}
 	$ribbon_summary = $ribbon_data['summary'];
 	if (!empty($ribbon_data['image_url'])) {
@@ -135,7 +135,7 @@ function build_umbrella_main_parts($umbrella_main_data) {
 		if (!empty($umbrella_main_data['intro_text'])) {
 			$header  = '<h3 class="section-subheader">' . 	$umbrella_main_data['header'] . '</h3>';
 		} else {
-			$header  = '<h3 class="section-subheader no-margin-bottom">' . 	$umbrella_main_data['header'] . '</h3>';
+			$header  = '<h3 class="section-subheader">' . 	$umbrella_main_data['header'] . '</h3>';
 		}
 	}
 	if ($umbrella_main_data['intro_text'] != "") {
@@ -163,14 +163,14 @@ function build_umbrella_content_parts($content_data) {
 	}
 
 	if ($content_data['item_title']) {
-		$item_title  = '<h4>';
+		$item_title  = '<h4 class="article-title">';
 		$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>';
 		$item_title .= 		$content_data['item_title'];
 		$item_title .= 	'</a>';
 		if ($content_data['column_type'] == 'umbrella_content_file') {
 			$item_title .= ' <p class="sans">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
 		}
-		$item_title .= '</h4>';
+		$item_title .= '</h>';
 	}
 
 	if ($content_data['thumb_src']) {
@@ -283,7 +283,7 @@ function build_office_highlights_parts($office_highlights_data) {
 				$office_highlights_data -> the_post();
 
 				$highlight_image = get_the_post_thumbnail();
-				$hightlight_title = '<a href="' . get_the_permalink() . '"><h4>' . get_the_title() . '</h4></a>';
+				$hightlight_title = '<h4 class="article-title"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>';
 				$hightlight_meta = '<p class="date-meta">' . get_the_date() . '</p>';
 				$hightlight_excerpt = '<p class="sans">' . wp_trim_words(get_the_excerpt(), 50) . '</p>';
 

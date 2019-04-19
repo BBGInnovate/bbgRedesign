@@ -349,9 +349,9 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 				$title = $title_override;
 			} else {
 				if ($secondary_headline) {
-					$title = $secondary_headline;	
+					$title = $secondary_headline;
 				} else {
-					$title = $page_object[0]->post_title;	
+					$title = $page_object[0]->post_title;
 				}
 			}
 		}

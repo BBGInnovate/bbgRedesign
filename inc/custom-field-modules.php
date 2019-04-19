@@ -76,7 +76,7 @@ function assemble_umbrella_content_section($umbrella_parts) {
 
 function assemble_ribbon_module($ribbon_parts) {
 	if (!empty($ribbon_parts)) {
-		$ribbon_box  = '<div class="bbg__ribbon inner-ribbon">';
+		$ribbon_box  = '<article class="bbg__ribbon inner-ribbon">';
 		$ribbon_box .= 	'<div class="outer-container">';
 		if (!empty($ribbon_parts['image'])) {
 			$ribbon_box .= 		'<div class="side-content-container">';
@@ -91,7 +91,7 @@ function assemble_ribbon_module($ribbon_parts) {
 		$ribbon_box .= 			$ribbon_parts['summary'];
 		$ribbon_box .= 		'</div>';
 		$ribbon_box .= 	'</div>';
-		$ribbon_box .= '</div>';
+		$ribbon_box .= '</article>';
 		return $ribbon_box;
 	}
 }
@@ -133,6 +133,7 @@ function assemble_entity_section($entity_data) {
 // ABOUT (OFFICE)
 function assemble_office_contact_module($office_contact_parts) {
 	$office_contact_block  = '<article class="office-side">';
+	$office_contact_block .= 	'<h3 class="header-outliner">Office Director</h3>';
 	foreach ($office_contact_parts as $contact) {
 		$office_contact_block .= '<div class="office-contact">';
 		$office_contact_block .= 	$contact['office_name'];
@@ -149,11 +150,10 @@ function assemble_office_highlights_module($office_highlights_parts) {
 	$highlights_module = "";
 	if (!empty($office_highlights_parts)) {
 		$highlights_module  = '<div class="office-highlights">';
-		$highlights_module .= 	'<h5>Recent Highlights</h5>';
+		$highlights_module .= 	'<h3 class="section-subheader">Recent Highlights</h3>';
 		$counter = 0;
 		foreach ($office_highlights_parts as $office_highlight) {
 			if ($counter == 0) {
-				$highlights_module .= '<article>';
 				$highlights_module .= 	'<div class="nest-container">';
 				$highlights_module .= 		'<div class="inner-container">';
 				$highlights_module .= 			'<div class="side-content-container">';
@@ -166,13 +166,12 @@ function assemble_office_highlights_module($office_highlights_parts) {
 				$highlights_module .= 			'</div>';
 				$highlights_module .= 		'</div>';
 				$highlights_module .= 	'</div>';
-				$highlights_module .= '</article>';
 			} else {
-				$highlights_module .= '<article>';
+				$highlights_module .= '<div>';
 				$highlights_module .= 	$office_highlight['title'];
 				$highlights_module .= 	$office_highlight['meta'];
 				$highlights_module .= 	$office_highlight['excerpt'];
-				$highlights_module .= '</article>';
+				$highlights_module .= '</div>';
 			}
 			$counter++;
 		}
