@@ -192,7 +192,7 @@ get_header();
 			$author_avatar .= 		'</div>';
 			$author_avatar .= 		'<div class="avatar-information">';
 			$author_avatar .= 			'<h3 class="article-title"><a href="' . $profile_page_url . '">' . $author_name . '</a></h3>';
-			$author_avatar .= 			'<p class="avatar-title aside">' . $occupation . '</p>';
+			$author_avatar .= 			'<p class="avatar-title sans">' . $occupation . '</p>';
 			$author_avatar .= 		'<p class="avatar-description">' . $description . '</p>';
 			$author_avatar .= 		'</div>';
 			$author_avatar .= 	'</div>';

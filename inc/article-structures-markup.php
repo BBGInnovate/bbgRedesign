@@ -11,7 +11,7 @@ function build_main_head_article($article_data) {
 		$article_structure .= '</div>';
 	}
 	$article_structure .= 	'<div class="article-info">';
-	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
+	$article_structure .= 		'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3> ';
 	$article_structure .= 		'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
@@ -35,7 +35,7 @@ function build_vertical_article($article_data) {
 		$article_structure .= '</div>';
 	}
 	$article_structure .= 	'<div class="article-info">';
-	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
+	$article_structure .= 		'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
 	$article_structure .= 		'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
@@ -64,7 +64,7 @@ function build_horizontal_half_article($article_data) {
 	$article_structure .= 			'</div>';
 	$article_structure .= 			'<div class="grid-half">';
 	$article_structure .= 				'<div class="article-info">';
-	$article_structure .= 					'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
+	$article_structure .= 					'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3> ';
 	$article_structure .= 					'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 				'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
@@ -93,7 +93,7 @@ function build_horizontal_one_third_image_article($article_data) {
 		$article_structure .= 		'</div>';
 	}
 	$article_structure .= 			'<div class="article-desc article-info">';
-	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
+	$article_structure .= 				'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
@@ -121,7 +121,7 @@ function build_horizontal_small_image_article($article_data) {
 		$article_structure .= 		'</div>';
 	}
 	$article_structure .= 			'<div class="grid-container article-desc article-info">';
-	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
+	$article_structure .= 				'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
@@ -140,7 +140,7 @@ function build_horizontal_small_image_article($article_data) {
 function build_no_image_article($article_data) {
 	$article_structure  = '<article class="no-image-article article-teaser">';
 	$article_structure .= 	'<div class="article-info">';
-	$article_structure .= 		'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4> ';
+	$article_structure .= 		'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3> ';
 	$article_structure .= 		'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 	'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
@@ -166,7 +166,7 @@ function build_image_title_article($article_data) {
 		$article_structure .= 		'</div>';
 	}
 	$article_structure .= 			'<div class="article-desc article-info">';
-	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
+	$article_structure .= 				'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	$article_structure .= 			'</div>';
 	$article_structure .= 		'</div>';
@@ -187,7 +187,7 @@ function build_horizontal_image_title_only_article($article_data) {
 		$article_structure .= 		'</div>';
 	}
 	$article_structure .= 			'<div class="article-desc article-info">';
-	$article_structure .= 				'<h4><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h4>';
+	$article_structure .= 				'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	$article_structure .= 			'</div>';
 	$article_structure .= 		'</div>';

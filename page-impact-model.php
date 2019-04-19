@@ -117,26 +117,26 @@ get_header();
 							<h5 class="paragraph-header">Reach Audiences</h5>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/04a_inform_reach.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Weekly reach</p>
+								<p class="sans">Weekly reach</p>
 							</div>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/04b_inform_visits.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Weekly digital visits</p>
+								<p class="sans">Weekly digital visits</p>
 							</div>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/04c_inform_targeted.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Weekly reach of target segment*</p>
+								<p class="sans">Weekly reach of target segment*</p>
 							</div>
 						</div>
 						<div class="grid-half">
 							<h4 class="article-title">Provide Value</h4>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/05a_inform_unique.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Provide exceptional or unique information</p>
+								<p class="sans">Provide exceptional or unique information</p>
 							</div>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/05b_inform_credibility.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Audience finds information or service trustworthy / credible.</p>
+								<p class="sans">Audience finds information or service trustworthy / credible.</p>
 							</div>
 						</div>
 					</div>
@@ -154,33 +154,33 @@ get_header();
 							<h5 class="paragraph-header">Engage Audiences</h5>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/06a_engage_digital.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Digital engagement</p>
+								<p class="sans">Digital engagement</p>
 							</div>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/06b_engage_share.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Shared something or talked with someone as a result of reporting*</p>
+								<p class="sans">Shared something or talked with someone as a result of reporting*</p>
 							</div>
 						</div>
 						<div class="grid-third">
 							<h5 class="paragraph-header">Engage Media</h5>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/07a_engage_cocreate.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Content co-creation with affiliates*</p>
+								<p class="sans">Content co-creation with affiliates*</p>
 							</div>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/07b_engage_downloaded.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Content downloaded by affiliates*</p>
+								<p class="sans">Content downloaded by affiliates*</p>
 							</div>
 						</div>
 						<div class="grid-third">
 							<h5 class="paragraph-header">Create Loyalty</h5>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/08a_engage_loyalty.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Audience is likely to continue to use</p>
+								<p class="sans">Audience is likely to continue to use</p>
 							</div>
 							<div class="bbg__impact-model__subsection">
 								<img src="<?php echo get_template_directory_uri() ?>/img/impact/08b_engage_appointment.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="aside">Appointment listening or viewing*</p>
+								<p class="sans">Appointment listening or viewing*</p>
 							</div>
 						</div>
 					</div>
@@ -198,23 +198,23 @@ get_header();
 						<div class="grid-third bbg__impact-model__subsection">
 							<img src="<?php echo get_template_directory_uri() ?>/img/impact/09a_influence_people.png" alt="" class="bbg__impact-model__graphic" >
 							<h5 class="paragraph-header">People</h5>
-							<p class="aside">Increased audience understanding of current events</p>
+							<p class="sans">Increased audience understanding of current events</p>
 						</div>
 						<div class="grid-third bbg__impact-model__subsection">
 							<img src="<?php echo get_template_directory_uri() ?>/img/impact/09b_influence_media.png" alt="" class="bbg__impact-model__graphic" >
 							<h5 class="paragraph-header">Media</h5>
-							<p class="aside">Drive the news agenda/high profile news pickups*</p>
+							<p class="sans">Drive the news agenda/high profile news pickups*</p>
 						</div>
 						<div class="grid-third bbg__impact-model__subsection">
 							<img src="<?php echo get_template_directory_uri() ?>/img/impact/09c_influence_government.png" alt="" class="bbg__impact-model__graphic" >
 							<h5 class="paragraph-header">Government</h5>
-							<p class="aside">Attention from government officials*</p>
+							<p class="sans">Attention from government officials*</p>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="grid-container">
-				<p class="aside"  style="text-align: right;"><span style="font-size:3rem; vertical-align: -40%;">*</span> Optional indicator</p>
+				<p class="sans"  style="text-align: right;"><span style="font-size:3rem; vertical-align: -40%;">*</span> Optional indicator</p>
 			</div>
 		</section>
 

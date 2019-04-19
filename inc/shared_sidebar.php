@@ -19,7 +19,7 @@ if ($includeSidebar) {
 	}
 
 	if ($sidebarDescription != "") {
-		$sidebar_markup .= '<p class="aside">' . $sidebarDescription . '</p>';
+		$sidebar_markup .= '<p class="sans">' . $sidebarDescription . '</p>';
 	}
 
 	if (have_rows('sidebar_items')):
@@ -55,7 +55,7 @@ if ($includeSidebar) {
 				$sidebar_download .= 	'</h6>';
 				
 				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
-					$sidebar_download .= '<p class="aside">';
+					$sidebar_download .= '<p class="sans">';
 					$sidebar_download .= 	$sidebarDownloadDescription;
 					$sidebar_download .= '</p>';
 				}
@@ -69,7 +69,7 @@ if ($includeSidebar) {
 
 				$quote_markup  = '<article class="bbg__quotation">';
 				$quote_markup .= 	'<p>&quot;' . $sidebarQuotationText . '&quot;</p>';
-				$quote_markup .= 	'<p class="aside">';
+				$quote_markup .= 	'<p class="sans">';
 				$quote_markup .= 		'&mdash;' . $sidebarQuotationSpeaker . '<br>';
 				$quote_markup .= 		$sidebarQuotationSpeakerTitle;
 				$quote_markup .= 	'</p>';
@@ -85,7 +85,7 @@ if ($includeSidebar) {
 				$external_links  = '<article>';
 				if ($sidebarLinkImage && $sidebarLinkImage != "") {
 					$external_links .= '<a target="blank" href="' . $sidebarLinkLink . '">';
-					$external_links .= 		'<img class="aside" src="' . $sidebarLinkImage['sizes']['medium'] . '" alt="Image link">';
+					$external_links .= 		'<img class="sans" src="' . $sidebarLinkImage['sizes']['medium'] . '" alt="Image link">';
 					$external_links .= '</a>';
 				}
 				$external_links .= 		'<h6>';
@@ -93,7 +93,7 @@ if ($includeSidebar) {
 				$external_links .= 		'</h6>';
 
 				if ($sidebarLinkDescription != "") {
-					$external_links .= '<p class="aside">';
+					$external_links .= '<p class="sans">';
 					$external_links .= 		$sidebarLinkDescription;
 					$external_links .= '</p>';
 				}
@@ -145,12 +145,12 @@ if ($includeSidebar) {
 
 				$sidebarImageTitle = '';
 				if ($sidebarPhotoTitle && $sidebarPhotoTitle != "") {
-					$sidebarImageTitle = '<p class="aside" style="margin: 0;"><strong>' . $sidebarPhotoTitle . '</strong></p>';
+					$sidebarImageTitle = '<p class="sans" style="margin: 0;"><strong>' . $sidebarPhotoTitle . '</strong></p>';
 				}
 
 				$sidebarDescription = "";
 				if ($sidebarPhotoCaption && $sidebarPhotoCaption != ""){
-					$sidebarDescription = '<p class="aside">' . $sidebarPhotoCaption . '</p>';
+					$sidebarDescription = '<p class="sans">' . $sidebarPhotoCaption . '</p>';
 				}
 
 				$sidebar_markup .= '<article>' . $sidebarImage . $sidebarImageTitle . $sidebarDescription . '</article>';
@@ -195,7 +195,7 @@ if ($includeSidebar) {
 					}
 
 					$sidebar_markup .= '<h5>' . $label . '</h5>';
-					$sidebar_markup .= '<article class="aside">';
+					$sidebar_markup .= '<article class="sans">';
 					$counter = 0;
 					foreach ($relatedPosts as $relatedPost) {
 						$counter++;
@@ -264,7 +264,7 @@ if ($includeSidebar) {
 					}
 
 					if ($sectionDescription) {
-						$sidebar_markup .= '<p class="aside">' . $sectionDescription . '</p>';
+						$sidebar_markup .= '<p class="sans">' . $sectionDescription . '</p>';
 					}
 					$sidebar_markup .= '<style>div.usa-accordion-content {padding:1.5rem !important;}</style>';
 
@@ -395,11 +395,11 @@ if ($includeSidebar) {
 					if ($custom_query -> found_posts || $sectionDescription) {
 						$sidebar_markup .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $sectionTitle . '</h5>';
 						if ($sectionDescription) {
-							$sidebar_markup .= '<p class="aside">' . $sectionDescription . '</p>';
+							$sidebar_markup .= '<p class="sans">' . $sectionDescription . '</p>';
 						}
 						if ($custom_query -> found_posts) {
 							$i = 0;
-							$sidebar_markup .= '<p class="aside">';
+							$sidebar_markup .= '<p class="sans">';
 							while ( $custom_query->have_posts() )  {
 								$custom_query->the_post();
 								$i++;

@@ -51,7 +51,7 @@
 			}
 			.post-copy {
 				@include grid-column(6);
-				.aside {display: none;}
+				.sans {display: none;}
 			}
 		}
 	}
@@ -63,7 +63,7 @@
 				.post-image {@include grid-column(4);}
 				.post-copy {
 					@include grid-column(8);
-					.aside {
+					.sans {
 						display: block;
 						margin-bottom: 0;
 					}
@@ -95,7 +95,7 @@
 				.post-image {@include grid-column(4);}
 				.post-copy {
 					@include grid-column(8);
-					.aside {display: none;}
+					.sans {display: none;}
 				}
 			}
 		}

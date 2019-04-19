@@ -23,20 +23,20 @@ function build_soapbox_parts($soap_data) {
 		$soap_heading = '<h2 class="section-header">' . $soap_data['header_text'] . '</h2>';
 	}
 
-	$soap_title  = '<h4>';
+	$soap_title  = '<h3 class="article-title">';
 	$soap_title .= 	'<a href="' . $soap_data['post_link'] . '">';
 	$soap_title .= 		$soap_data['title'];
 	$soap_title .= 	'</a>';
-	$soap_title .= '</h4>';
+	$soap_title .= '</h3>';
 
-	$soap_content  = '<p class="aside">';
+	$soap_content  = '<p class="sans">';
 	$soap_content .= 	my_excerpt($soap_data['post_id']);
 	$soap_content .= '</p>';
 
 	if (!empty($soap_data['profile_image'])) {
 		$soap_image  = '<img src="' . $soap_data['profile_image'] . '" alt="Profile image">';
 		if ($soap_data['profile_name'] != "") {
-			$soap_image .= '<p class="aside">' . $soap_data['profile_name'] . '</p>';
+			$soap_image .= '<p class="sans">' . $soap_data['profile_name'] . '</p>';
 		}
 	}
 
@@ -168,7 +168,7 @@ function build_umbrella_content_parts($content_data) {
 		$item_title .= 		$content_data['item_title'];
 		$item_title .= 	'</a>';
 		if ($content_data['column_type'] == 'umbrella_content_file') {
-			$item_title .= ' <p class="aside">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
+			$item_title .= ' <p class="sans">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
 		}
 		$item_title .= '</h4>';
 	}
@@ -244,7 +244,7 @@ function build_ethics_file_parts($raw_ethics_data) {
 			$anchor_tag .= 		$ethics_data['title'];
 			$anchor_tag .= 	'</a>';
 
-			$description  = '<p class="aside">';
+			$description  = '<p class="sans">';
 			$description .= 	$ethics_data['description'];
 			$description .= '</p>';
 
@@ -261,8 +261,8 @@ function build_office_contact_parts($office_contact_data) {
 	foreach ($office_contact_data as $contact_chunk) {
 		$office_name = '<p>' . $contact_chunk['name'] . '</p>';
 		$office_title = '<p>' . $contact_chunk['title'] . '</p>';
-		$office_phone = '<p class="aside"><a href="tel:' . $contact_chunk['phone'] . '">' . $contact_chunk['phone'] . '</a></p>';
-		$office_email = '<p class="aside"><a href="tel:' . $contact_chunk['email'] . '">' . $contact_chunk['email'] . '</a></p>';
+		$office_phone = '<p class="sans"><a href="tel:' . $contact_chunk['phone'] . '">' . $contact_chunk['phone'] . '</a></p>';
+		$office_email = '<p class="sans"><a href="tel:' . $contact_chunk['email'] . '">' . $contact_chunk['email'] . '</a></p>';
 
 		array_push($contact_chunks, array(
 			'office_name' => $office_name,
@@ -284,8 +284,8 @@ function build_office_highlights_parts($office_highlights_data) {
 
 				$highlight_image = get_the_post_thumbnail();
 				$hightlight_title = '<a href="' . get_the_permalink() . '"><h4>' . get_the_title() . '</h4></a>';
-				$hightlight_meta = '<p class="aside date-meta">' . get_the_date() . '</p>';
-				$hightlight_excerpt = '<p class="aside">' . wp_trim_words(get_the_excerpt(), 50) . '</p>';
+				$hightlight_meta = '<p class="date-meta">' . get_the_date() . '</p>';
+				$hightlight_excerpt = '<p class="sans">' . wp_trim_words(get_the_excerpt(), 50) . '</p>';
 
 				array_push($office_hightlight_post_group, array(
 					'image' => $highlight_image,

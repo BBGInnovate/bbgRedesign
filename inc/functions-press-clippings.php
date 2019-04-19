@@ -139,7 +139,7 @@ function build_press_clipping_article_list($press_clip, $clip_type = NULL) {
 		// FROM OUTLET
 		$press_clipping_block .= 		'<a href="' . add_query_arg('outlet-name', strtolower(str_replace(' ', '-', $press_clip['outlet_name'])), '/press-clippings-archive/') . '">' . $press_clip['outlet_name'] . '</a> &nbsp;';
 	}
-	$press_clipping_block .= 		'<span class="aside">' . $press_clip['date'] . '</span>';
+	$press_clipping_block .= 		'<span class="sans">' . $press_clip['date'] . '</span>';
 	$press_clipping_block .= 	'</p>';
 	$press_clipping_block .= 	'<p>' . $press_clip['description'] . '</p>';
 	$press_clipping_block .= '</article>';

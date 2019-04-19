@@ -147,7 +147,7 @@ if ($fallen_journalists) {
 		$journalist .= '<div class="bbg__profile-grid__profile">';
 		$journalist .= 	$imgSrc;
 		$journalist .= 	'<h4 class="article-title">' . $journalist_name . '</h4>';
-		$journalist .= 	'<p class="aside">Killed ' . $date . '</p>';
+		$journalist .= 	'<p class="sans">Killed ' . $date . '</p>';
 		$journalist .= '</div>';
 		$wall .= $journalist;
 	}
@@ -229,7 +229,7 @@ echo $threats_map_json;
 <div id="map-threats" class="bbg__map--banner" style="margin-bottom: 10px;"></div>
 <div id="threats-map-controls" class="outer-container">
 	<div class="grid-container">
-		<p class="aside"><?php echo $threats_map_caption ?></p>
+		<p class="sans"><?php echo $threats_map_caption ?></p>
 		<div align="center" id="mapFilters" class="u--show-medium-large">
 			<input type="radio" checked name="trainingYear" id="delivery_all" value="all" /><label for="delivery_all"> All</label>
 			<input type="radio" name="trainingYear" id="trainingYear_2019" value="2019" /><label for="trainingYear_2019"> 2019</label>

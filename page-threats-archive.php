@@ -106,7 +106,7 @@ get_header();
 						echo 		'<div class="bbg__article-icon" style="background-position: left 0.25rem; background-image: url(' . $imgSrc . ');"></div>';
 						echo 		'<h4 class="article-title">' . $threat_post['headline'] . '</h4>';
 						echo 	'</header>';
-						echo 	'<div class="aside">';
+						echo 	'<div class="sans">';
 						echo 		'<time>' . $threat_post['niceDate'] . '</time>';
 						echo 	'</div>';
 						echo 	'<p>' . $threat_post['description'] . '</p>';

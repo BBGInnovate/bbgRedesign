@@ -77,11 +77,11 @@ setTimeout(function() {
 	setResponsiveHeight();
 }, 200);
 
-// MAKE SURE ALL SIDEBAR PARAGRAPHS HAVE CLASS OF ASIDE
+// MAKE SURE ALL SIDEBAR PARAGRAPHS HAVE CLASS OF P.SANS
 if ($('.sidebar-section').length > 0) {
 	$.each($('.sidebar-section p'), function() {
-		if (!$(this).hasClass('aside')) {
-			$(this).addClass('aside');
+		if (!$(this).hasClass('sans')) {
+			$(this).addClass('sans');
 		}
 	});
 }

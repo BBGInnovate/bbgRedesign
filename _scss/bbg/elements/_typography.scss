@@ -39,7 +39,7 @@
     font-weight: $font-light;
     color: $color-blue;
     margin: 0 0 0.5rem 0;
-    .aside {display: inline;}
+    p.sans {display: inline;}
 }
 .sidebar-article-title,
 .sidebar-article-title a:link,
@@ -61,7 +61,7 @@ h4 a:visited {
     font-weight: $font-light;
     color: $color-blue;
     margin: 0 0 0.5rem 0;
-    .aside {display: inline;}
+    .sans {display: inline;}
 }
 h5,
 h5 a:link,
@@ -87,8 +87,7 @@ h6 a:visited,
     color: #545454;
     margin: 0 0 0.5rem 0;
 
-    .aside, 
-    p.aside {
+    p.sans {
         font-family: $font-sans;
         font-weight: $font-normal;
         color: #545454;
@@ -104,6 +103,13 @@ p {
     margin: 0 0 3rem 0;
     color: #545454;
 }
+.aside, 
+p.sans {
+    font-family: $font-sans;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
 p.lead-in {
     font-family: $font-sans;
     font-size: 3rem;
@@ -161,13 +167,6 @@ ul li:before {
 
 .side-content-container ul li, 
 .side-content-container ol li, 
-
-.aside, 
-p.aside {
-    font-family: $font-sans;
-    font-size: 1.6rem;
-    line-height: 2rem;
-}
 
 .bbg__contact-card > ul li {list-style-type: none;}
 a:focus {background-color: #f2f2f2; text-decoration: underline;}

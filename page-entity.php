@@ -102,7 +102,7 @@ if ($audience != "") {
 }
 if ($appLink != "") {
 	$app_link_markup  = '<h5>Download the apps</h5>';
-	$app_link_markup .= '<p class="aside">' . $appLink . '<br><a href="https://www.bbg.gov/apps/">Visit the apps page</a></p>';
+	$app_link_markup .= '<p class="sans">' . $appLink . '<br><a href="https://www.bbg.gov/apps/">Visit the apps page</a></p>';
 }
 
 
@@ -131,7 +131,7 @@ $all_media_clips = new WP_Query($press_clip_query_args);
 // PRESS 3. CSS SPECIFIC TO PRESS CLIPPINGS
 $press_clippings_style  = '<style>';
 $press_clippings_style .= 	'.entity_press_clippings h6 {margin-bottom: 1rem}';
-$press_clippings_style .= 	'.entity_press_clippings h6 .aside {font-size: 0.9em; font-weight: 500;} ';
+$press_clippings_style .= 	'.entity_press_clippings h6 .sans {font-size: 0.9em; font-weight: 500;} ';
 $press_clippings_style .= '</style>';
 echo $press_clippings_style;
 
@@ -442,7 +442,7 @@ get_header();
 						<div id="reach-entity">
 							<div class="entity-left-article">
 								<h5>Website</h5>
-								<p class="aside"><?php echo strtolower($websiteName); ?></p>
+								<p class="sans"><?php echo strtolower($websiteName); ?></p>
 							</div>
 
 							<?php
@@ -568,7 +568,7 @@ get_header();
 					$rss_markup .= 		'</div>';
 					$rss_markup .= 		'<div class="post-copy">';
 					$rss_markup .= 			'<h6><a href="' . $o['url'] . '">' . $o['title'] . '</a></h6>';
-					$rss_markup .= 			'<p class="aside">' . $short_copy . '</p>';
+					$rss_markup .= 			'<p class="sans">' . $short_copy . '</p>';
 					$rss_markup .= 		'</div>';
 					$rss_markup .= 	'</div>';
 					$rss_markup .= '</div>';
@@ -607,7 +607,7 @@ get_header();
 				$cited_post_list .= 	'<h5>' . $cur_press_entity . ' Cited in the NEWS</h5>';
 				foreach ($press_clippings_data as $cited_post) {
 					$cited_post_list .= '<h6><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a> ';
-					$cited_post_list .= '<span class="aside">(' . $cited_post['outlet'] . ')</span></h6>';
+					$cited_post_list .= '<span class="sans">(' . $cited_post['outlet'] . ')</span></h6>';
 				}
 				$cited_post_list .= '<p><a class="read-more" href="' . add_query_arg('entity', $cur_press_entity, '/press-citing-listing/') . '">Click here to see full list</a></p>';
 				$cited_post_list .= '</article>';

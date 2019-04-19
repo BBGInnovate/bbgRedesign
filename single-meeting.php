@@ -179,7 +179,7 @@ get_header();
 						</div>
 						<?php
 							$event_info  = '<h5><a href="/news/events/">Event Information</a></h5>';
-							$event_info .= '<p class="aside">' . $post_date . ', ' . $meeting_time . '<br><br>';
+							$event_info .= '<p class="sans">' . $post_date . ', ' . $meeting_time . '<br><br>';
 							$event_info .= $meeting_location . '</p>';
 							$event_info .= $event_brite_button_string;
 							$event_info .= '<p class="bbg-tagline bbg-tagline--main">';
@@ -213,15 +213,15 @@ get_header();
 												$profile_link = get_page_link($profile_id);
 
 												$name_of_internal_speaker = '<h3 class="sidebar-article-title">' . $profile_name . '</h3>';
-												$title_of_internal_speaker = '<p class="aside">' . $occupation . '</p>';
-												$link_of_internal_speaker = '<p class="aside"><a href="' . $profile_link . '" target="_blank">View Profile</a></p>';
+												$title_of_internal_speaker = '<p class="sans">' . $occupation . '</p>';
+												$link_of_internal_speaker = '<p class="sans"><a href="' . $profile_link . '" target="_blank">View Profile</a></p>';
 
 												$internal_speaker_list = '';
 												if (!empty($profile_bio)) {
 													$internal_speaker_list .= '<li class="usa-accordion speaker-accordion">';
 													$internal_speaker_list .= 		'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $name_of_internal_speaker . $title_of_internal_speaker . ' <i class="fas fa-plus"></i></button>';
 													$internal_speaker_list .= 		'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
-													$internal_speaker_list .= 			'<p class="aside speaker-bio">' . $profile_bio . '</p>';
+													$internal_speaker_list .= 			'<p class="snas speaker-bio">' . $profile_bio . '</p>';
 													$internal_speaker_list .= 	$link_of_internal_speaker;
 													$internal_speaker_list .= 		'</div>';
 													$internal_speaker_list .= '</li>';
@@ -250,9 +250,9 @@ get_header();
 												$speaker_link = $profile["meeting_speaker_url"];
 
 												$name_of_external_speaker = '<h3 class="sidebar-article-title">' . $speaker_name . '</h3>';
-												$title_of_external_speaker = '<p class="aside">' . $speaker_title . '</p>';
+												$title_of_external_speaker = '<p class="sans">' . $speaker_title . '</p>';
 												if (!empty($speaker_link)) {
-													$link_of_external_speaker = '<p class="aside speaker-link"><a href="' . $speaker_link . '" target="_blank">' . $speaker_link . '</a></p>';
+													$link_of_external_speaker = '<p class="sans speaker-link"><a href="' . $speaker_link . '" target="_blank">' . $speaker_link . '</a></p>';
 												}
 
 												$external_speaker_list = '';
@@ -260,7 +260,7 @@ get_header();
 													$external_speaker_list .= '<li class="usa-accordion speaker-accordion">';
 													$external_speaker_list .= 		'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $name_of_external_speaker . $title_of_external_speaker . ' <i class="fas fa-plus"></i></button>';
 													$external_speaker_list .= 		'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
-													$external_speaker_list .= 			'<p class="aside speaker-bio">' . $speaker_bio . '</p>';
+													$external_speaker_list .= 			'<p class="sans speaker-bio">' . $speaker_bio . '</p>';
 													if (!empty($speaker_link)) {
 														$external_speaker_list .= 	$link_of_external_speaker;
 													}

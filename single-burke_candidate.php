@@ -154,7 +154,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 							}
 							$award_list .= '</h5>';
 
-							$award_list .= '<p class="aside">';
+							$award_list .= '<p class="sans">';
 							if ($burkeTitle) {
 								$award_list .= '<strong>' . $burkeTitle . '</strong><br/>';
 								if ($burkeService) {
@@ -171,13 +171,13 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 							}
 							$award_list .= '</p>';
 
-							$award_list .= '<p class="aside">' . $profile['burke_reason'] . '</p>';
+							$award_list .= '<p class="sans">' . $profile['burke_reason'] . '</p>';
 							$burkeRelated = $profile ['burke_associated_profiles'];
 							if ( $burkeRelated ) {
 								$award_list .= '<h6>Recognized with</h6>';
 								$award_list .= '<ul class="unstyled-list">';
 									foreach( $burkeRelated as $burkeRelProfile ) {
-										$award_list .= '<li class="aside"><a target="_blank" href="' . get_post_permalink( $burkeRelProfile -> ID ) . '">' . $burkeRelProfile->post_title . ' »</a></li>';
+										$award_list .= '<li class="sans"><a target="_blank" href="' . get_post_permalink( $burkeRelProfile -> ID ) . '">' . $burkeRelProfile->post_title . ' »</a></li>';
 									}
 								$award_list .= '</ul>';
 							}
@@ -208,24 +208,24 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 
 								if (count($workLinks) == 1 && $workLinks[0]['url']) {
 									$award_list .= '<h6>Award-winning work</h6>';
-									$award_list .= '<p class="aside"><a target="_blank" href="' . $workLinks[0]['url'] . '">' . $workLinks[0]['title'] . ' »</a></p>';
+									$award_list .= '<p class="sans"><a target="_blank" href="' . $workLinks[0]['url'] . '">' . $workLinks[0]['title'] . ' »</a></p>';
 								} elseif (count($workLinks) > 1) {
 									$award_list .= '<h6>Award-winning works</h6>';
 									$award_list .= '<ul class="unstyled-list" style="margin-bottom: 1rem;">';
 										foreach($workLinks as $workURL) {
-											$award_list .= '<li class="aside"><a target="_blank" href="' . $workURL['url'] . '">' . $workURL['title'] . ' »</a></li>';
+											$award_list .= '<li class="sans"><a target="_blank" href="' . $workURL['url'] . '">' . $workURL['title'] . ' »</a></li>';
 										}
 									$award_list .= '</ul>';
 								}
 								// output other links header
 								if (count($otherLinks) == 1 && $otherLinks[0]['url']) {
 									$award_list .= '<h6>Related link</h6>';
-									$award_list .= '<p class="aside"><a target="_blank" href="' . $otherLinks[0]['url'] . '">' . $otherLinks[0]['title'] . ' »</a></p>';
+									$award_list .= '<p class="sans"><a target="_blank" href="' . $otherLinks[0]['url'] . '">' . $otherLinks[0]['title'] . ' »</a></p>';
 								} elseif (count($otherLinks) > 1) {
 									$award_list .= '<h6>Related links</h6>';
 									$award_list .= '<ul class="unstyled-list" style="margin-bottom: 1rem;">';
 										foreach($otherLinks as $otherURL) {
-											$award_list .= '<li class="aside"><a target="_blank" href="' . $otherURL['url'] . '">' . $otherURL['title'] . ' »</a></li>';
+											$award_list .= '<li class="sans"><a target="_blank" href="' . $otherURL['url'] . '">' . $otherURL['title'] . ' »</a></li>';
 										}
 									$award_list .= '</ul>';
 								}

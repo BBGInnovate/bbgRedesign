@@ -50,7 +50,7 @@ $linkImage = sprintf('<a href="%s" rel="bookmark" tabindex="-1">', esc_url(get_p
 // MARKUP
 $excerpt_list  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
 if ($includeDate) { // FOR EVENT PAGE EXCERPTS ONLY
-	$excerpt_list .= 	'<p class="aside date-meta">' . get_the_date() . '</p>';
+	$excerpt_list .= 	'<p class="sans date-meta">' . get_the_date() . '</p>';
 }
 $excerpt_list .= 		'<h4>';
 $excerpt_list .= 			'<a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
@@ -65,7 +65,7 @@ if ('post' === get_post_type()) {
 }
 if ($includeExcerpt) {
 	$excerpt_list .= '<div class="entry-content bbg-blog__excerpt-content">';
-	$excerpt_list .= 	'<p class="aside">' . get_the_excerpt() . '</p>';
+	$excerpt_list .= 	'<p class="sans">' . get_the_excerpt() . '</p>';
 	$excerpt_list .= '</div>';
 }
 $excerpt_list .= '</article>';

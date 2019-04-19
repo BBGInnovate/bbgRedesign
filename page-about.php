@@ -195,7 +195,7 @@ if (is_page('media-development')) {
 					$story_link = $o['storyLink'];
 
 					$post_accordion .= 			'<h6><a href="' . $story_link . '">' . $title . '</a><h6>';
-					$post_accordion .= 			'<p class="aside">' . $country . '</p>';
+					$post_accordion .= 			'<p class="sans">' . $country . '</p>';
 				}
 				$post_accordion .= 			'</div>';
 				$post_accordion .= 		'</li>';

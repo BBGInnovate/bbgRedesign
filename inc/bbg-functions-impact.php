@@ -8,7 +8,7 @@
 		$s  = '';
 		$s .= '<article class="' . implode(" ", get_post_class("bbg__article")) . '">';
 		$s .=	'<a tabindex="-1" href="' . $url . '">' . $thumb . '</a>';
-		$s .=	'<p class="aside"><a href="' . $url . '">' . $title . '</a></p>';
+		$s .=	'<p class="sans"><a href="' . $url . '">' . $title . '</a></p>';
 		$s .= '</article><!-- .bbg-portfolio__excerpt -->';
 		return $s;
 	}
@@ -86,14 +86,14 @@
 			//https://www.bbg.gov/category/impact/inform/
 			$informLink = "/category/impact/inform/";
 			$s .= '<h6><a href="' . $informLink . '">Inform</a></h6>';
-			$s .= '<p class="aside">' . $informDesc . '</p>';
+			$s .= '<p class="sans">' . $informDesc . '</p>';
 			$s .= oneImpactStory($impacts['inform'][0]);
 		} 
 		if (count($impacts['engage'])) {
 			//https://www.bbg.gov/category/impact/engage,inform/
 			$engageLink = "/category/impact/engage,inform/";
 			$s .= '<h6><a href="'. $engageLink . '">Engage</a></h6>';
-			$s .= '<p class="aside">' . $engageDesc . '</p>';
+			$s .= '<p class="sans">' . $engageDesc . '</p>';
 			$s .= oneImpactStory($impacts['engage'][0]);
 
 		} 
@@ -101,7 +101,7 @@
 			//https://www.bbg.gov/category/impact/be-influential,engage,inform/
 			$beInfluentialLink = "/category/impact/be-influential,engage,inform/";
 			$s .= '<h6><a href="' . $beInfluentialLink . '">Be Influential</a></h6>';
-			$s .= '<p class="aside">' . $beInfluentialDesc . '</p>';
+			$s .= '<p class="sans">' . $beInfluentialDesc . '</p>';
 			$s .= oneImpactStory($impacts['be-influential'][0]);
 		}
 		return $s;

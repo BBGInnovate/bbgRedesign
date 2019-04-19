@@ -116,8 +116,8 @@ if ($ceremony_post -> have_posts()) {
 						<h5>Event</h5>
 						<h6>Burke Award Ceremony</h6>
 						<?php
-							echo '<p class="aside">' . $event_location[0] . '<br>' . $event_time[0] . '</p>';
-							echo '<p class="aside">' . $more_info[0] . '</p>';
+							echo '<p class="sans">' . $event_location[0] . '<br>' . $event_time[0] . '</p>';
+							echo '<p class="sans">' . $more_info[0] . '</p>';
 						?>
 					</article>
 
@@ -167,7 +167,7 @@ if ($ceremony_post -> have_posts()) {
 				</div>
 				<div class="main-content-container">
 					<h4>David W. Burke</h4>
-					<p class="aside">(Former Chairman of the Board)</p>
+					<p class="sans">(Former Chairman of the Board)</p>
 					<p>David W. Burke was named to the first Broadcasting Board of Governors (BBG) by President Clinton in 1995 and served as its first chairman, leaving the board in 1998. His BBG legacy includes the David Burke Distinguished Journalism Award, which recognizes the courage, integrity, and professionalism of individuals in reporting the news within the BBG broadcast entities. Burke arrived at the BBG as director and a trustee of various Dreyfus Funds. Previously, he served as President of CBS News and served as both Vice President and Executive Vice President of ABC News.</p>
 				</div>
 			</div>

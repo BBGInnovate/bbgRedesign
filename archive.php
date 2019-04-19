@@ -60,7 +60,7 @@ if ($featured_media_result != "") {
 					$article_markup  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
 					if ($in_sidebar == false) {
 						$article_markup .= '<h3 class="article-title"><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
-						$article_markup .= '<p class="aside date-meta">' . get_the_date() . '</p>';
+						$article_markup .= '<p class="date-meta">' . get_the_date() . '</p>';
 						$article_markup .= '<p>' . get_the_excerpt() . '</p>';
 					} else {
 						$article_markup .= '<h3 class="sidebar-article-title"><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
