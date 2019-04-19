@@ -41,6 +41,16 @@
     margin: 0 0 0.5rem 0;
     p.sans {display: inline;}
 }
+
+.sidebar-section-header {
+    font-family: $font-sans;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    font-weight: $font-bold;
+    text-transform: uppercase;
+    color: $color-taupe-dark;
+    margin: 0 0 1.5rem 0;
+}
 .sidebar-article-title,
 .sidebar-article-title a:link,
 .sidebar-article-title a:visited {

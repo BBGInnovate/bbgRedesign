@@ -97,7 +97,7 @@ if (!is_paged()) {
 			$my_post->post_status = 'published';
 			$my_post->post_name = sanitize_title($my_post->post_name ? $my_post->post_name : $my_post->post_title, $my_post->ID);
 			$permalink = get_permalink($my_post);
-			$upcomingEvents .= '<h4 class="article-title"><a href="' . $permalink . '">' . get_the_title() . '</a><h4>';
+			$upcomingEvents .= '<h4 class="article-title"><a href="' . $permalink . '">' . get_the_title() . '</a></h4>';
 			$upcomingEvents .= '<p>' . get_the_excerpt() . '</p>';
 			$upcomingEvents .= '</div>';
 		}
@@ -151,16 +151,16 @@ get_header();
 				<div class="side-content-container past-events">
 					<?php
 						if ($past_events_query->have_posts()) {
-							echo '<h5>Past events</h5>';
+							echo '<h3 class="sidebar-section-header">Past events</h3>';
 							while ($past_events_query->have_posts()) {
 								$past_events_query->the_post(); 
 
-								$past_event  = '<article id="'. get_the_ID() . '">';
+								$past_event  = '<div id="'. get_the_ID() . '">';
 								$past_event .= 	'<p class="date-meta">' . get_the_date() . '</p>';
 								$past_event .= 	'<h4 class="sidebar-article-title">';
 								$past_event .= 		'<a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
 								$past_event .= 	'</h4>';
-								$past_event .= '</article>';
+								$past_event .= '</div>';
 								echo $past_event;
 							}
 						}
@@ -177,6 +177,7 @@ get_header();
 				$prevLink = get_previous_posts_link('Newer Events');
 
 				$event_nav  = '<nav class="navigation posts-navigation" role="navigation">';
+				$event_nav .= 	'<h3 class="header-outliner">Events Navigation</h3>';
 				$event_nav .= 	'<div class="nav-links">';
 				if ($nextLink != "") {
 					$event_nav .= 	'<div class="nav-previous">';

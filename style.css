@@ -2708,6 +2708,15 @@ form[id^=fscf_form] {
   .article-title a:visited p.sans {
     display: inline; }
 
+.sidebar-section-header {
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #8b8278;
+  margin: 0 0 1.5rem 0; }
+
 .sidebar-article-title,
 .sidebar-article-title a:link,
 .sidebar-article-title a:visited {
