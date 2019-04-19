@@ -49,16 +49,6 @@ function mgmtProfileSizing() {
 }
 mgmtProfileSizing();
 
-
-if ($('.page-content').first().tagName == 'P') {
-	$('.page-content p').first().attr('class', 'lead-in');
-}
-$('.page-content').first().on('click', function() {
-	if(this.tagName == 'p'){
-		alert("It's a p!");
-	}
-})
-
 // GRID THIRDS
 if ($('.grid-third').length > 0) {
 	$.each($('.outer-container'), function() {
@@ -162,7 +152,6 @@ $.each(clipsListItems, function() {
 		}
 	});
 })
-
 
 // SCALE POST-IMAGE TO BE PROPORTIONAL TO 600x400
 function scaleArticleImages() {
