@@ -1590,7 +1590,7 @@ ul, ol {
     margin-bottom: 0.75em;
     margin-top: 0.75em; }
 
-h1 + ul, h1 + ol, h2 + ul, h2 + ol, h3 + ul, .bbg__sidebar__table caption + ul, h3 + ol, .bbg__sidebar__table caption + ol, h4 + ul, .bbg__board__committee-list li a + ul, h4 + ol, .bbg__board__committee-list li a + ol, h5 + ul, .bbg__sidebar__table th + ul, h5 + ol, .bbg__sidebar__table th + ol, h6 + ul, h6 + ol, p + ul, p + ol {
+h1 + ul, h1 + ol, h2 + ul, h2 + ol, h3 + ul, h3 + ol, h4 + ul, .bbg__board__committee-list li a + ul, h4 + ol, .bbg__board__committee-list li a + ol, h5 + ul, h5 + ol, h6 + ul, h6 + ol, p + ul, p + ol {
   margin-top: 0; }
 
 ul, ol {
@@ -1647,12 +1647,12 @@ table {
     border: 1px solid #5b616b;
     padding: 1.5rem; }
 
-.usa-table-borderless thead tr, .bbg__sidebar__table thead tr {
+.usa-table-borderless thead tr {
   background-color: transparent; }
-  .usa-table-borderless thead tr th, .bbg__sidebar__table thead tr th {
+  .usa-table-borderless thead tr th {
     border-top: 0; }
 
-.usa-table-borderless th, .bbg__sidebar__table th, .usa-table-borderless td, .bbg__sidebar__table td {
+.usa-table-borderless th, .usa-table-borderless td {
   border-left: 0;
   border-right: 0; }
 
@@ -1680,7 +1680,7 @@ a {
     box-shadow: none;
     outline: 0; }
 
-h1, h2, h3, .bbg__sidebar__table caption, h4, .bbg__board__committee-list li a, h5, .bbg__sidebar__table th, h6 {
+h1, h2, h3, h4, .bbg__board__committee-list li a, h5, h6 {
   clear: both;
   font-family: "Carrara-Regular", serif;
   line-height: 1.3;
@@ -1695,7 +1695,7 @@ h2 {
   font-size: 3rem;
   font-weight: 700; }
 
-h3, .bbg__sidebar__table caption {
+h3 {
   font-size: 2rem;
   font-weight: 700; }
 
@@ -1703,7 +1703,7 @@ h4, .bbg__board__committee-list li a {
   font-size: 1.7rem;
   font-weight: 700; }
 
-h5, .bbg__sidebar__table th {
+h5 {
   font-size: 1.5rem;
   font-weight: 700; }
 
@@ -1876,26 +1876,18 @@ p a,
       .usa-accordion > ul button h1,
       .usa-accordion > ul button h2,
       .usa-accordion > ul button h3,
-      .usa-accordion > ul button .bbg__sidebar__table caption,
-      .bbg__sidebar__table .usa-accordion > ul button caption,
       .usa-accordion > ul button h4,
       .usa-accordion > ul button .bbg__board__committee-list li a,
       .bbg__board__committee-list li .usa-accordion > ul button a,
       .usa-accordion > ul button h5,
-      .usa-accordion > ul button .bbg__sidebar__table th,
-      .bbg__sidebar__table .usa-accordion > ul button th,
       .usa-accordion > ul button h6,
       .usa-accordion-bordered > ul button h1,
       .usa-accordion-bordered > ul button h2,
       .usa-accordion-bordered > ul button h3,
-      .usa-accordion-bordered > ul button .bbg__sidebar__table caption,
-      .bbg__sidebar__table .usa-accordion-bordered > ul button caption,
       .usa-accordion-bordered > ul button h4,
       .usa-accordion-bordered > ul button .bbg__board__committee-list li a,
       .bbg__board__committee-list li .usa-accordion-bordered > ul button a,
       .usa-accordion-bordered > ul button h5,
-      .usa-accordion-bordered > ul button .bbg__sidebar__table th,
-      .bbg__sidebar__table .usa-accordion-bordered > ul button th,
       .usa-accordion-bordered > ul button h6 {
         margin: 0; }
     .usa-accordion > ul [aria-expanded=false],
@@ -1963,14 +1955,10 @@ p a,
   .usa-accordion-button h1,
   .usa-accordion-button h2,
   .usa-accordion-button h3,
-  .usa-accordion-button .bbg__sidebar__table caption,
-  .bbg__sidebar__table .usa-accordion-button caption,
   .usa-accordion-button h4,
   .usa-accordion-button .bbg__board__committee-list li a,
   .bbg__board__committee-list li .usa-accordion-button a,
   .usa-accordion-button h5,
-  .usa-accordion-button .bbg__sidebar__table th,
-  .bbg__sidebar__table .usa-accordion-button th,
   .usa-accordion-button h6 {
     margin: 0; }
 
@@ -2723,7 +2711,7 @@ form[id^=fscf_form] {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 1.7rem;
   line-height: 2.1rem;
-  font-weight: 300;
+  font-weight: 400;
   color: #3f7ad1;
   margin: 0 0 0.5rem 0; }
 
@@ -2745,11 +2733,9 @@ h4 a:visited,
   .bbg__board__committee-list li a a:visited .sans {
     display: inline; }
 
-h5, .bbg__sidebar__table th,
+h5,
 h5 a:link,
-.bbg__sidebar__table th a:link,
-h5 a:visited,
-.bbg__sidebar__table th a:visited {
+h5 a:visited {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 1.5rem;
   line-height: 1.8rem;
@@ -3338,21 +3324,18 @@ a:focus .bbg__article-share__icon {
  * TABLES
  ------------------ */
 .type-post .usa-table,
-.type-post .usa-table-borderless,
-.type-post .bbg__sidebar__table {
+.type-post .usa-table-borderless {
   margin: 0 auto 3rem auto;
   min-width: auto;
   max-width: 600px;
   width: 100%; }
   .type-post .usa-table.bbg-full-width,
-  .type-post .usa-table-borderless.bbg-full-width,
-  .type-post .bbg-full-width.bbg__sidebar__table {
+  .type-post .usa-table-borderless.bbg-full-width {
     min-width: 100%;
     max-width: auto; }
 
 .usa-table,
 .usa-table-borderless,
-.bbg__sidebar__table,
 .bbg__table-plain,
 .bbg__article__form--inline,
 .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__table--borderless {
@@ -3360,7 +3343,6 @@ a:focus .bbg__article-share__icon {
   @media screen and (min-width: 481px) {
     .usa-table,
     .usa-table-borderless,
-    .bbg__sidebar__table,
     .bbg__table-plain,
     .bbg__article__form--inline,
     .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__table--borderless {
@@ -3409,9 +3391,6 @@ table th, table td {
 
 .bbg__table__caption {
   margin-bottom: 0; }
-
-.bbg__sidebar__table {
-  font-size: 1.3rem; }
 
 /** ---------------
  * FORMS
@@ -4102,7 +4081,7 @@ button#bbg__menu-toggle {
 
 .avatar-container {
   text-align: center; }
-  .avatar-container h3, .avatar-container .bbg__sidebar__table caption, .bbg__sidebar__table .avatar-container caption {
+  .avatar-container h3 {
     margin-bottom: 0; }
   .avatar-container .avatar-image {
     margin-bottom: 0.5rem; }
@@ -4369,12 +4348,10 @@ button#bbg__menu-toggle {
     font-size: 1.8rem;
     margin: 0 auto 3rem auto; } }
 
-.bbg__article-content > h3, .bbg__sidebar__table .bbg__article-content > caption,
+.bbg__article-content > h3,
 .bbg__article-content > h4,
 .bbg__board__committee-list li .bbg__article-content > a,
-.bbg__article-content .bbg__profile__content > h3,
-.bbg__article-content .bbg__sidebar__table .bbg__profile__content > caption,
-.bbg__sidebar__table .bbg__article-content .bbg__profile__content > caption {
+.bbg__article-content .bbg__profile__content > h3 {
   margin-top: 2em;
   /*text-transform: uppercase;*/ }
 
@@ -4388,11 +4365,7 @@ button#bbg__menu-toggle {
 .bbg__article-content h2 + ul,
 .bbg__article-content h2 + ol,
 .bbg__article-content h3 + ul,
-.bbg__article-content .bbg__sidebar__table caption + ul,
-.bbg__sidebar__table .bbg__article-content caption + ul,
 .bbg__article-content h3 + ol,
-.bbg__article-content .bbg__sidebar__table caption + ol,
-.bbg__sidebar__table .bbg__article-content caption + ol,
 .bbg__article-content h4 + ul,
 .bbg__article-content .bbg__board__committee-list li a + ul,
 .bbg__board__committee-list li .bbg__article-content a + ul,
@@ -4400,11 +4373,7 @@ button#bbg__menu-toggle {
 .bbg__article-content .bbg__board__committee-list li a + ol,
 .bbg__board__committee-list li .bbg__article-content a + ol,
 .bbg__article-content h5 + ul,
-.bbg__article-content .bbg__sidebar__table th + ul,
-.bbg__sidebar__table .bbg__article-content th + ul,
 .bbg__article-content h5 + ol,
-.bbg__article-content .bbg__sidebar__table th + ol,
-.bbg__sidebar__table .bbg__article-content th + ol,
 .bbg__article-content h6 + ul,
 .bbg__article-content h6 + ol,
 .bbg__article-content p + ul,
@@ -6001,7 +5970,7 @@ img.usa-flag_icon {
   padding-top: 1rem;
   padding-right: 2rem;
   padding-left: 2rem; }
-  .bbg__banner-table__cell--middle h3, .bbg__banner-table__cell--middle .bbg__sidebar__table caption, .bbg__sidebar__table .bbg__banner-table__cell--middle caption, .bbg__banner-table__cell--middle h6 {
+  .bbg__banner-table__cell--middle h3, .bbg__banner-table__cell--middle h6 {
     color: #9bdaf1;
     text-transform: none; }
 
@@ -6918,7 +6887,7 @@ section.usa-section.bbg-banner__section {
     .icon-side-content-container #reach-entity .entity-left-article * {
       display: inline-block;
       margin-bottom: 0; }
-    .icon-side-content-container #reach-entity .entity-left-article h5, .icon-side-content-container #reach-entity .entity-left-article .bbg__sidebar__table th, .bbg__sidebar__table .icon-side-content-container #reach-entity .entity-left-article th {
+    .icon-side-content-container #reach-entity .entity-left-article h5 {
       margin-right: 1.5rem; }
 
 @media screen and (min-width: 900px) {
@@ -6930,7 +6899,7 @@ section.usa-section.bbg-banner__section {
     display: inherit; }
     .icon-side-content-container #reach-entity .entity-left-article * {
       margin-bottom: inherit; }
-    .icon-side-content-container #reach-entity .entity-left-article h5, .icon-side-content-container #reach-entity .entity-left-article .bbg__sidebar__table th, .bbg__sidebar__table .icon-side-content-container #reach-entity .entity-left-article th {
+    .icon-side-content-container #reach-entity .entity-left-article h5 {
       margin-right: 0; } }
 
 .side-content-container .side-recent-stories .post-group {
@@ -7145,7 +7114,7 @@ section.usa-section.bbg-banner__section {
 
 .bbg__profile-title {
   text-align: center; }
-  .bbg__profile-title h1, .bbg__profile-title h5, .bbg__profile-title .bbg__sidebar__table th, .bbg__sidebar__table .bbg__profile-title th {
+  .bbg__profile-title h1, .bbg__profile-title h5 {
     margin: 0;
     text-align: center; }
   @media screen and (min-width: 600px) {
@@ -7153,7 +7122,7 @@ section.usa-section.bbg-banner__section {
       margin: 20px 0 auto auto;
       max-width: 77%;
       text-align: left; }
-      .bbg__profile-title h1, .bbg__profile-title h5, .bbg__profile-title .bbg__sidebar__table th, .bbg__sidebar__table .bbg__profile-title th {
+      .bbg__profile-title h1, .bbg__profile-title h5 {
         clear: none;
         text-align: left; } }
 
@@ -7541,13 +7510,11 @@ div.appropriations-small > p.header {
 
 .bbg__impact-model .bbg__impact-model__subsection {
   margin-bottom: 3rem; }
-  .bbg__impact-model .bbg__impact-model__subsection h3, .bbg__impact-model .bbg__impact-model__subsection .bbg__sidebar__table caption, .bbg__sidebar__table .bbg__impact-model .bbg__impact-model__subsection caption,
+  .bbg__impact-model .bbg__impact-model__subsection h3,
   .bbg__impact-model .bbg__impact-model__subsection h4,
   .bbg__impact-model .bbg__impact-model__subsection .bbg__board__committee-list li a,
   .bbg__board__committee-list li .bbg__impact-model .bbg__impact-model__subsection a,
   .bbg__impact-model .bbg__impact-model__subsection h5,
-  .bbg__impact-model .bbg__impact-model__subsection .bbg__sidebar__table th,
-  .bbg__sidebar__table .bbg__impact-model .bbg__impact-model__subsection th,
   .bbg__impact-model .bbg__impact-model__subsection p {
     margin: 0 auto;
     max-width: 200px;
@@ -7716,7 +7683,7 @@ a.bbg__kits__intro__more--link {
     @media screen and (min-width: 900px) {
       .bbg__kits__section .bbg__article-content .bbg__kits__recent-posts {
         margin-bottom: 0; } }
-  .bbg__kits__section .bbg__article-content .bbg__kits__inquiries h3, .bbg__kits__section .bbg__article-content .bbg__kits__inquiries .bbg__sidebar__table caption, .bbg__sidebar__table .bbg__kits__section .bbg__article-content .bbg__kits__inquiries caption {
+  .bbg__kits__section .bbg__article-content .bbg__kits__inquiries h3 {
     margin-top: 0; }
   .bbg__kits__section .bbg__article-content .bbg__kits__inquiries .bbg__kits__inquiries__text--half {
     float: left;
@@ -8193,7 +8160,7 @@ html, body {
       text-decoration: none; }
     article a[href^="#"]:after {
       content: ""; }
-    article h1, article h2, article h3, article .bbg__sidebar__table caption, .bbg__sidebar__table article caption {
+    article h1, article h2, article h3 {
       page-break-after: avoid; }
   nav,
   button, .usa-button, .bbg__comments-list .reply {

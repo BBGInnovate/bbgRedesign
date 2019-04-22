@@ -64,13 +64,6 @@ table td {
 
 .bbg__table__caption {margin-bottom: 0;}
 
-.bbg__sidebar__table {
-	@extend .usa-table-borderless;
-	font-size: $small-font-size;
-	caption {@extend h3;}
-	th {@extend h5;}
-}
-
 
 /** ---------------
  * FORMS
