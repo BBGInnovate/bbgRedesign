@@ -144,7 +144,7 @@ ul li:not(.menu-item),
 ol li {
     font-family: $font-serif;
     font-size: 1.8rem;
-    line-height: 2.8rem;
+    line-height: 2.2rem;
     color: #545454;
     margin-bottom: 1.5rem;
 }
@@ -199,6 +199,17 @@ a:not(.bbg__article-share__icon) {
             }
         }
     }
+}
+
+.side-content-container {
+    a:link, a:visited {
+        font-family: $font-sans;
+        font-size: 1.6rem;
+        line-height: 1.8rem;
+        font-weight: $font-bold;
+        color: $color-blue-darker;
+    }
+    a:hover, a:active {}
 }
 
 // add class for right-angle quotes after links

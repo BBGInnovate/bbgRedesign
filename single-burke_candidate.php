@@ -92,7 +92,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 						}
 						array_multisort($orderByYear, SORT_DESC, $burkeProfileObj);
 
-						$candidata_and_win  = '<h3>' . get_the_title() . ', ';
+						$candidata_and_win  = '<h3 class="article-title">' . get_the_title() . ', ';
 
 						// Check if repeater field has data
 						// Check if profile won this year
@@ -130,6 +130,16 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 					?>
 				</div>
 				<div class="side-content-container">
+					<article>
+						<h5>Share</h5>
+						<a href="<?php echo $fbUrl; ?>">
+							<span class="bbg__article-share__icon facebook"></span>
+						</a>
+						<a href="<?php echo $twitterURL; ?>">
+							<span class="bbg__article-share__icon twitter"></span>
+						</a>
+					</article>
+
 					<?php
 						foreach (array_values($burkeProfileObj) as $i => $profile) {
 							$i = $i + 1; // add a number to the item key to start at 1
@@ -174,10 +184,14 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 							$award_list .= '<p class="sans">' . $profile['burke_reason'] . '</p>';
 							$burkeRelated = $profile ['burke_associated_profiles'];
 							if ( $burkeRelated ) {
-								$award_list .= '<h6>Recognized with</h6>';
+								$award_list .= '<h5>Recognized with</h5>';
 								$award_list .= '<ul class="unstyled-list">';
-									foreach( $burkeRelated as $burkeRelProfile ) {
-										$award_list .= '<li class="sans"><a target="_blank" href="' . get_post_permalink( $burkeRelProfile -> ID ) . '">' . $burkeRelProfile->post_title . ' »</a></li>';
+									foreach($burkeRelated as $burkeRelProfile) {
+										$award_list .= '<li class="sans">';
+										$award_list .= 	'<a target="_blank" href="' . get_post_permalink($burkeRelProfile->ID) . '">';
+										$award_list .= 		$burkeRelProfile->post_title;
+										$award_list .= 	'</a>';
+										$award_list .= '</li>';
 									}
 								$award_list .= '</ul>';
 							}
@@ -222,10 +236,10 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 									$award_list .= '<h6>Related link</h6>';
 									$award_list .= '<p class="sans"><a target="_blank" href="' . $otherLinks[0]['url'] . '">' . $otherLinks[0]['title'] . ' »</a></p>';
 								} elseif (count($otherLinks) > 1) {
-									$award_list .= '<h6>Related links</h6>';
+									$award_list .= '<h5>Related links</h5>';
 									$award_list .= '<ul class="unstyled-list" style="margin-bottom: 1rem;">';
 										foreach($otherLinks as $otherURL) {
-											$award_list .= '<li class="sans"><a target="_blank" href="' . $otherURL['url'] . '">' . $otherURL['title'] . ' »</a></li>';
+											$award_list .= '<li class="sans"><a target="_blank" href="' . $otherURL['url'] . '">' . $otherURL['title'] . '</a></li>';
 										}
 									$award_list .= '</ul>';
 								}
@@ -244,16 +258,6 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 						?>
 					</article>
 					<?php wp_reset_postdata();?>
-
-					<article>
-						<h5>Share</h5>
-						<a href="<?php echo $fbUrl; ?>">
-							<span class="bbg__article-share__icon facebook"></span>
-						</a>
-						<a href="<?php echo $twitterURL; ?>">
-							<span class="bbg__article-share__icon twitter"></span>
-						</a>
-					</article>
 				</div>
 			</div>
 		</div>

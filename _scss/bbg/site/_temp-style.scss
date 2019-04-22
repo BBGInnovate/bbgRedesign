@@ -109,7 +109,10 @@ button {
 	overflow: hidden;
 	margin-bottom: 1.5rem;
 }
-.side-content-container {overflow: hidden;}
+.side-content-container {
+	overflow: hidden;
+	img {margin-bottom: 0;}
+}
 .bbg__ribbon {
 	*[style*="background-image"] {
 		background-repeat: no-repeat;
