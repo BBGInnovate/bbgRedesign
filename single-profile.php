@@ -72,15 +72,8 @@ if (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
 
 get_header(); ?>
 
-
-
-
-
-
-
 <main id="main" role="main">
 	<div class="outer-container">
-		<div class="grid-container" style="padding: 3em;"></div>
 		<div class="main-content-container">
 			<div class="nest-container">
 				<div class="inner-container">
@@ -110,14 +103,14 @@ get_header(); ?>
 					</div>
 					<div class="icon-main-content-container">
 						<?php
-							$profile_head  = '<h2 class="profile-name">';
+							$profile_head  = '<h2 class="section-header">';
 							$profile_head .= 	$page_title;
 							$profile_head .= '</h2>';
 							echo $profile_head;
 
-							$profile_occupation  = '<h3 class="profile-occupation">';
+							$profile_occupation  = '<p class="lead-in">';
 							$profile_occupation .= 	$occupation;
-							$profile_occupation .= '</h3>';
+							$profile_occupation .= '</p>';
 							echo $profile_occupation;
 
 							$main_content  = '<div class="page-content">';
@@ -143,6 +136,10 @@ get_header(); ?>
 		</aside>
 	</div><!-- END GRID -->
 </main>
+
+<section class="usa-grid">
+        <?php get_sidebar(); ?>
+</section>
 
 <section class="usa-grid">
         <?php get_sidebar(); ?>
