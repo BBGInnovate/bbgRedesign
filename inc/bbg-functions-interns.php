@@ -29,19 +29,20 @@
 				$profilePhoto = wp_get_attachment_image_src($profilePhotoID , 'mugshot');
 				$profilePhoto = $profilePhoto[0];
 			}
-			$intern_block .= '<div class="past-intern-block">';
-			$intern_block .= 	'<a href="' . $permalink . '">' . $internOffice . '</a>';
+			$intern_block .= '<div class="internship-sidebar-block">';
+			$intern_block .= 	'<h3 class="sidebar-article-title"><a href="' . $permalink . '">' . $internOffice . '</a></h3>';
 			if ($profilePhoto != '') {
 				$intern_block .= '<a href="' . $permalink . '">';
 				$intern_block .= 	'<img class="bbg__mugshot"  src="' . $profilePhoto . '"  alt="' . $internName . ' Profile Photo">';
 				$intern_block .= '</a>';
 			}
-			$intern_block .= '<p>' . get_the_excerpt() . ' <a class="read-more" href=' . $permalink . '>Read More</a></p>';
+			$intern_block .= '<p>' . get_the_excerpt() . ' <a class="read-more" href=' . $permalink . '>Read More</a>';
 			if ($internSchool != '') {
-				$intern_block .= '<strong>—' . $internName . ',</strong> ' . $internDate . '<br/>' . $internSchool;
+				$intern_block .= '<br><br><strong>—' . $internName . ',</strong> ' . $internDate . '<br/>' . $internSchool;
 			} else {
-				$intern_block .= '<strong>—' . $internName . '</strong><br/>' .$internDate;
+				$intern_block .= '<br><br><strong>—' . $internName . '</strong><br/>' .$internDate;
 			}
+			$intern_block .= 	'</p>';
 			$intern_block .= '</div>';
 		}
 		return $intern_block;

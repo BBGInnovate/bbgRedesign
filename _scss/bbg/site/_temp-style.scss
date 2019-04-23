@@ -311,8 +311,13 @@ $custom-entity-fifth: (
 }
 
 // INTERNS
-.past-intern-block {
+.internship-sidebar-block {
 	margin-bottom: 3rem;
+	a.read-more:link {
+		font-family: $font-serif;
+		font-weight: 400;
+		color: $color-blue;
+	}
 }
 
 @include media($medium-screen) {

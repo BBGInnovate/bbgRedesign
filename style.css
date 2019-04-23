@@ -2698,11 +2698,19 @@ form[id^=fscf_form] {
 
 .sidebar-section-header {
   font-family: "Alegreya Sans", sans-serif;
-  font-size: 1.5rem;
-  line-height: 1.8rem;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
   font-weight: 700;
   text-transform: uppercase;
   color: #8b8278;
+  margin: 0 0 1.5rem 0; }
+
+.sidebar-section-subheader {
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 1.7rem;
+  line-height: 2.1rem;
+  font-weight: 700;
+  color: #283166;
   margin: 0 0 1.5rem 0; }
 
 .sidebar-article-title,
@@ -2862,13 +2870,6 @@ a:not(.bbg__article-share__icon):focus *[class*="thumbnail"] {
   a:not(.bbg__article-share__icon):focus *[class*="thumbnail"] > a:focus {
     background-color: transparent;
     text-decoration: none; }
-
-.side-content-container a:link, .side-content-container a:visited {
-  font-family: "Alegreya Sans", sans-serif;
-  font-size: 1.6rem;
-  line-height: 1.8rem;
-  font-weight: 700;
-  color: #284f91; }
 
 .side-content-container p a.usa-button:link, .side-content-container p .bbg__comments-list a.reply:link, .bbg__comments-list .side-content-container p a.reply:link, .side-content-container p a.usa-button:visited, .side-content-container p .bbg__comments-list a.reply:visited, .bbg__comments-list .side-content-container p a.reply:visited {
   color: #ffffff; }
@@ -5545,8 +5546,12 @@ img,
         font-size: 1.4rem;
         margin: 0; }
 
-.past-intern-block {
+.internship-sidebar-block {
   margin-bottom: 3rem; }
+  .internship-sidebar-block a.read-more:link {
+    font-family: "Carrara-Regular", serif;
+    font-weight: 400;
+    color: #3f7ad1; }
 
 @media screen and (min-width: 600px) {
   .grid-box-container .grid-box-chunk {
