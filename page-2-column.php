@@ -88,72 +88,75 @@ get_header();
 	}
 ?>
 
-<main id="main" class="bbg__2-column" role="main">
+<main id="main" role="main">
 
 	<div class="outer-container">
-		<div class="custom-grid-container">
-			<div class="inner-container">
-				<div class="main-content-container">
-					<?php
-						echo '<h2 class="section-header">' . get_the_title() . '</h2>';
+		<div class="grid-container">
+			<?php echo '<h2 class="section-header">' . get_the_title() . '</h2>'; ?>
+		</div>
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="main-column">
+						<?php
+							echo '<div class="page-content">';
+							echo 	'<p>' . $page_content . '</p>';
+							echo '</div>';
 
-						echo '<div class="page-content">';
-						echo 	'<p>' . $page_content . '</p>';
-						echo '</div>';
+							if (is_page('foia-reports')) {
+								display_foia_reports();
+							}
 
-						if (is_page('foia-reports')) {
-							display_foia_reports();
-						}
+							$relatedCategory = get_field('related_category_posts', $id);
+							if ($relatedCategory != "") {
+								$qParams2 = array(
+									'post_type' => array('post'),
+									'posts_per_page' => 2,
+									'cat' => $relatedCategory->term_id,
+									'orderby' => 'date',
+									'order' => 'DESC'
+								);
+								$categoryUrl = get_category_link($relatedCategory->term_id);
+								$custom_query = new WP_Query($qParams2);
 
-						$relatedCategory = get_field('related_category_posts', $id);
-						if ($relatedCategory != "") {
-							$qParams2 = array(
-								'post_type' => array('post'),
-								'posts_per_page' => 2,
-								'cat' => $relatedCategory->term_id,
-								'orderby' => 'date',
-								'order' => 'DESC'
-							);
-							$categoryUrl = get_category_link($relatedCategory->term_id);
-							$custom_query = new WP_Query($qParams2);
+								if ($custom_query->have_posts()) {
+									echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
+									echo '<div class="usa-grid-full">';
+										while ($custom_query->have_posts())  {
+											$custom_query->the_post();
+											get_template_part('template-parts/content-portfolio', get_post_format());
+										}
+									echo '</div>';
+								}
+								wp_reset_postdata();
+							}
+						?>
+					</div>
+					<div class="side-column divider-left">
+						<?php
+							$secondaryColumnLabel = get_field('secondary_column_label');
+							$secondaryColumnContent = get_field('secondary_column_content');
 
-							if ($custom_query->have_posts()) {
-								echo '<h6 class="bbg__label"><a href="' . $categoryUrl . '">' . $relatedCategory->name . '</a></h6>';
-								echo '<div class="usa-grid-full">';
-									while ($custom_query->have_posts())  {
-										$custom_query->the_post();
-										get_template_part('template-parts/content-portfolio', get_post_format());
-									}
+							if ($secondaryColumnContent != "") {
+								echo '<div class="sidebar-section">';
+								if ($secondaryColumnLabel != "") {
+									echo '<h2 class="sidebar-section-header">' . $secondaryColumnLabel . '</h2>';
+								}
+								echo $secondaryColumnContent;
 								echo '</div>';
 							}
-							wp_reset_postdata();
-						}
-					?>
-				</div>
-				<div class="side-content-container">
-					<?php
-						$secondaryColumnLabel = get_field('secondary_column_label');
-						$secondaryColumnContent = get_field('secondary_column_content');
-
-						if ($secondaryColumnContent != "") {
-							echo '<div class="sidebar-section">';
-							if ($secondaryColumnLabel != "") {
-								echo '<h2 class="sidebar-section-header">' . $secondaryColumnLabel . '</h2>';
+							if ($includeSidebar) {
+								echo '<div class="sidebar-section">';
+								echo 	$sidebar;
+								echo '</div>';
 							}
-							echo $secondaryColumnContent;
-							echo '</div>';
-						}
-						if ($includeSidebar) {
-							echo '<div class="sidebar-section">';
-							echo 	$sidebar;
-							echo '</div>';
-						}
-						if ($listsInclude) {
-							echo '<div class="sidebar-section">';
-							echo 	$sidebarDownloads;
-							echo '</div>';
-						}
-					?>
+							if ($listsInclude) {
+								echo '<div class="sidebar-section">';
+								echo 	$sidebarDownloads;
+								echo '</div>';
+							}
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -176,12 +179,12 @@ get_header();
 	</div><!-- .usa-grid -->
 
 	<div class="bbg-post-footer">
-	<?php
-		// If comments are open or we have at least one comment, load up the comment template.
-		if ( comments_open() || get_comments_number() ) :
-			comments_template();
-		endif;
-	?>
+		<?php
+			// If comments are open or we have at least one comment, load up the comment template.
+			if ( comments_open() || get_comments_number() ) :
+				comments_template();
+			endif;
+		?>
 	</div>
 </main><!-- #main -->
 
