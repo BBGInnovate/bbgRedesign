@@ -82,7 +82,7 @@ if (have_posts()) {
 	$eventbrite_url = get_post_meta($page_id, 'board_meeting_eventbrite_url', true);
 	if ($eventbrite_url && !empty($eventbrite_url) && !$is_press_release) {
 		if (!$registration_is_closed) {
-			$event_brite_button_string  = '<a target="_blank" class="usa-button" style="color:white; text-decoration:none;" href="' . $eventbrite_url . '">Register for this Event</a>';
+			$event_brite_button_string  = '<a class="usa-button" href="' . $eventbrite_url . '" target="_blank">Register for this Event</a>';
 		} else {
 			$event_brite_button_string = '<p class="registrationClosed" style="font-style:italic;">Registration for this event has closed.</p>';
 		}

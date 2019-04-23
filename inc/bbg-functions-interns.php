@@ -1,18 +1,18 @@
 <?php 
 	function outputInterns() {
-		$qParams = array(
+		$intern_post_query = array(
 			'post_type' => array('post'),
 			'posts_per_page' => 5,
 			'category__and' =>  array(
-									get_cat_id("Intern Testimonial")
+									get_cat_id('Intern Testimonial')
 								),
 			'orderby', 'date',
 			'order', 'DESC'
 		);
-		$custom_query = new WP_Query($qParams);
-		$s = "";
-		while ($custom_query->have_posts())  {
-			$custom_query->the_post();
+		$intern_post_query = new WP_Query($intern_post_query);
+		$intern_block = '';
+		while ($intern_post_query->have_posts())  {
+			$intern_post_query->the_post();
 			$id = get_the_ID();
 			$internName = get_the_title();
 			$permalink = get_the_permalink();
@@ -23,29 +23,30 @@
 			$internDate = get_post_meta($id, 'internDate', true);
 
 			$profilePhotoID = get_post_meta($id, 'profile_photo', true);
-			$profilePhoto = "";
+			$profilePhoto = '';
+
 			if ($profilePhotoID) {
 				$profilePhoto = wp_get_attachment_image_src($profilePhotoID , 'mugshot');
 				$profilePhoto = $profilePhoto[0];
 			}
-			$s .= '<article class="full-width-block">';
-			$s .= 	'<a href="' . $permalink . '">' . $internOffice . '</a>';
-			if ($profilePhoto != "") {
-				$s .= '<a href="' . $permalink . '">';
-				$s .= '<img class="bbg__mugshot"  src="' . $profilePhoto . '"  alt="Profile photo">';
-				$s .= '</a>';
+			$intern_block .= '<div class="past-intern-block">';
+			$intern_block .= 	'<a href="' . $permalink . '">' . $internOffice . '</a>';
+			if ($profilePhoto != '') {
+				$intern_block .= '<a href="' . $permalink . '">';
+				$intern_block .= 	'<img class="bbg__mugshot"  src="' . $profilePhoto . '"  alt="' . $internName . ' Profile Photo">';
+				$intern_block .= '</a>';
 			}
-			$s .= '<p>' . get_the_excerpt() . ' <a href=' . $permalink . '>READ MORE</a></p>';
-			if ($internSchool != "") {
-				$s .= '<strong>—' . $internName . ',</strong> ' . $internDate . '<br/>' . $internSchool;
+			$intern_block .= '<p>' . get_the_excerpt() . ' <a class="read-more" href=' . $permalink . '>Read More</a></p>';
+			if ($internSchool != '') {
+				$intern_block .= '<strong>—' . $internName . ',</strong> ' . $internDate . '<br/>' . $internSchool;
 			} else {
-				$s .= '<strong>—' . $internName . '</strong><br/>' .$internDate;
+				$intern_block .= '<strong>—' . $internName . '</strong><br/>' .$internDate;
 			}
-			$s .= '</article>';
+			$intern_block .= '</div>';
 		}
-
-		return $s;
+		return $intern_block;
 	}
+
 	function intern_list_shortcode() {
 		return outputInterns();
 	}

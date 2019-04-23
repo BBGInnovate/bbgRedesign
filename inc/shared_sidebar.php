@@ -477,15 +477,15 @@ if ($listsInclude) {
 							$sidebarDownloadsLinkName = $name;
 						}
 
-						$download_select .= 	'<option value="' . $fileLink . '">';
-						$download_select .= 		$sidebarDownloadsLinkName;
-						$download_select .= 		' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
-						$download_select .= 	'</option>';
+						$download_select .= 		'<option value="' . $fileLink . '">';
+						$download_select .= 			$sidebarDownloadsLinkName;
+						$download_select .= 			' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
+						$download_select .= 		'</option>';
 					}
 
-					$download_select .= 	'</select>';
-					$download_select .= '</form>';
-					$download_select .= '<button class="usa-button downloadFile" id="downloadFile" style="width: 100%;">Download</button>';
+					$download_select .= 		'</select>';
+					$download_select .= 	'</form>';
+					$download_select .= 	'<button class="usa-button downloadFile" id="downloadFile" style="width: 100%;">Download</button>';
 					$download_select .= '</div>';
 					$s .= $download_select;
 				}

@@ -10,6 +10,10 @@
 // IMAGES
 // MODUES
 	// FIVE GRID BOX
+	// INTERNS
+	.past-intern-block {
+		margin-bottom: 3rem;
+	}
 
 
 .page-content {margin-bottom: 3rem;}
@@ -304,6 +308,11 @@ $custom-entity-fifth: (
 			}
 		}
 	}
+}
+
+// INTERNS
+.past-intern-block {
+	margin-bottom: 3rem;
 }
 
 @include media($medium-screen) {

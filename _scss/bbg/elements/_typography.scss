@@ -209,7 +209,9 @@ a:not(.bbg__article-share__icon) {
         font-weight: $font-bold;
         color: $color-blue-darker;
     }
-    a:hover, a:active {}
+    p {
+        a.usa-button:link, a.usa-button:visited {color: $color-white;}
+    }
 }
 
 // add class for right-angle quotes after links

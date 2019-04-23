@@ -116,9 +116,9 @@ if (have_rows('project_team_members')) {
 				$teamMemberName = '<a href="https://twitter.com/' . $teamMemberTwitterHandle . '">' . $teamMemberName . '</a>';
 			}
 
-			$single_roster .= '<p>';
-			$single_roster .= 	'<span class="bbg__project-team__name">' . $teamMemberName . ', </span>';
-			$single_roster .= 	'<span class="bbg__project-team__role">' . $teamMemberRole . '</span>';
+			$single_roster .= '<p class="sans">';
+			$single_roster .= 	'<span style="font-weight: 700;">' . $teamMemberName . '</span><br>';
+			$single_roster .= 	$teamMemberRole;
 			$single_roster .= '</p>';
 		}
 	}
