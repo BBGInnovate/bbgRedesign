@@ -208,9 +208,14 @@ get_header();
 												$i++;
 												$profile_id = $profile->ID;
 												$profile_name = get_the_title($profile_id);
+												$isActing = get_post_meta($profile_id, 'acting', true);
 												$profile_bio = get_sub_field('bbg_speaker_bio');
 												$occupation = get_post_meta($profile_id, 'occupation', true);
 												$profile_link = get_page_link($profile_id);
+
+												if ($isActing) {
+													$occupation = "Acting " . $occupation;
+												}
 
 												$name_of_internal_speaker = '<h3 class="sidebar-article-title">' . $profile_name . '</h3>';
 												$title_of_internal_speaker = '<p class="sans">' . $occupation . '</p>';
