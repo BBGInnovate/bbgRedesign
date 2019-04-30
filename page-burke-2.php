@@ -113,7 +113,7 @@ if ($ceremony_post -> have_posts()) {
 				</div>
 				<div class="side-content-container">
 					<article>
-						<h5>Event</h5>
+						<h2 class="sidebar-section-header">Event</h2>
 						<h6>Burke Award Ceremony</h6>
 						<?php
 							echo '<p class="sans">' . $event_location[0] . '<br>' . $event_time[0] . '</p>';
@@ -122,7 +122,7 @@ if ($ceremony_post -> have_posts()) {
 					</article>
 
 					<article>
-						<h5>Past Winners</h5>
+						<h2 class="sidebar-section-header">Past Winners</h2>
 						<?php
 							$burke_archive_page = new WP_Query(array('page_id' => 39519));
 							if ($burke_archive_page -> have_posts()) {

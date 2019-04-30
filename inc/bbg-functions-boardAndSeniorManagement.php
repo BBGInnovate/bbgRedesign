@@ -96,14 +96,14 @@ function outputBoardMembers($showActive) {
 			}
 
 			if (!$is_under_secretary) {
-				$member_name  = '<h4 class="bbg__profile-excerpt__name">';
+				$member_name  = '<p class="article-title">';
 				$member_name .= 	'<a href="' . get_the_permalink() . '">';
 				if ($is_secretary && $is_acting) {
 					$member_name .= 	'Acting ';
 				}
 				$member_name .= 		$board_member_name;
 				$member_name .= 	'</a>';
-				$member_name .= '</h4>';
+				$member_name .= '</p>';
 
 				$member_block .= $member_name;
 			}
@@ -113,9 +113,9 @@ function outputBoardMembers($showActive) {
 
 				$member_block .= $member_position;
 			} else {
-				$memeber_content  = '<h4 class="bbg__profile-excerpt__name">';
+				$memeber_content  = '<p class="article-title">';
 				$memeber_content .= 	'<a href="' . get_the_permalink() . '">' . $board_member_name . '</a>';
-				$memeber_content .= '</h4>';
+				$memeber_content .= '</p>';
 				$memeber_content .= '<p style="margin-top: 0;">' . get_the_excerpt() . '</p>';
 
 				$member_block .= $memeber_content;

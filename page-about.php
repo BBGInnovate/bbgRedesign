@@ -113,7 +113,7 @@ if (is_page('media-development')) {
 			$training_date = get_post_meta( $id, 'media_dev_date', true);
 			$training_photo = get_field( 'media_dev_photo', $id, true);
 			$mapDescription = get_post_meta( $id, 'media_dev_description', true);
-			$map_headline = "<h5><a target='blank' href='". $story_link ."'>" . $training_name . '</a></h5>';
+			$map_headline = '<h5><a target="_blank" href="' . $story_link . '">' . $training_name . '</a></h5>';
 
 			$years = explode(",", $training_year);
 			for ($i = 0; $i < count($years); $i++) {

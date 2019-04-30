@@ -214,23 +214,23 @@ get_header();
 			</div>
 		</div>
 		<!-- BEGIN SIDEBAR -->
-		<aside class="side-content-container">
-			<article class="social-share">
-				<h5>Share</h5>
+		<div class="side-content-container">
+			<aside class="social-share">
+				<h2 class="sidebar-section-header">Share</h2>
 				<a href="<?php echo $fbUrl; ?>" target="_blank">
 					<i class="fab fa-facebook-square"></i>
 				</a>
 				<a href="<?php echo $twitterURL; ?>" target="_blank">
 					<i class="fab fa-twitter-square"></i>
 				</a>
-			</article>
+			</aside>
 
 			<?php
 				// CONTACT INFORMATION
 				// EMAIL EXAMPLE Nasserie Carew, CURRENTLY NO PHONE NUMBERS USED ON PROFILES
 				if ($email != "" || $phone != "") {
-					echo '<article>';
-					echo 	'<h5>Contact</h5>';
+					echo '<aside>';
+					echo 	'<h2 class="sidebar-section-header">Contact</h2>';
 					echo 	'<ul class="bbg__article-share">';
 					if ($email != "") {
 						$email_address .= '<li>';
@@ -250,21 +250,21 @@ get_header();
 
 					}
 					echo 	'</ul>';
-					echo '</article>';
+					echo '</aside>';
 				}
 
 				// IF TWITTER HANDLE, SHOW IT, SHOW RECENT TWEETS IF ENABLED ON PAGE
 				// LATEST TWEETS ex. CEO John Lansing, Amanda Bennet
 				if ($twitterProfileHandle != "") {
-					$twitter_markup  = '<article>';
-					$twitter_markup .= 	'<h5>Follow on Twitter</h5>';
+					$twitter_markup  = '<aside>';
+					$twitter_markup .= 	'<h2 class="sidebar-section-header">Follow on Twitter</h2>';
 					$twitter_markup .= 	'<a href="https://twitter.com/' . $twitterProfileHandle . '" target="_blank" title="Follow ' . get_the_title() . ' on Twitter">';
 					$twitter_markup .= 		'<i class="fab fa-twitter"></i> @' . $twitterProfileHandle;
 					$twitter_markup .= 	'</a>';
-					$twitter_markup .= '</article>';
-					$twitter_markup .= '<article style="background-color: #e1f3f8;">';
+					$twitter_markup .= '</aside>';
+					$twitter_markup .= '<aside style="background-color: #e1f3f8;">';
 					$twitter_markup .= 	$latestTweetsStr;
-					$twitter_markup .= '</article>';
+					$twitter_markup .= '</aside>';
 					echo $twitter_markup;
 				}
 
@@ -292,30 +292,20 @@ get_header();
 					$custom_query = new WP_Query($qParams2);
 
 					if ($custom_query -> have_posts()) {
-						echo '<h5>Related posts  <!--(tag "$relatedLinksTag")--></h5>';
-						echo '<ul>';
+						echo '<h2 class="sidebar-section-header">Related posts  <!--(tag "$relatedLinksTag")--></h2>';
 						while ($custom_query -> have_posts())  {
 							$custom_query -> the_post();
-							$link = get_the_permalink();
-							$title = get_the_title();
 
-							echo '<li>';
-							echo 	'<h3 class="sidebar-article-title"><a href="' . $link . '">' . $title . '</a></h3>';
-							echo '</li>';
+							echo '<p class="sidebar-article-title"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></p>';
 						}
-						echo '</ul>';
 						$viewAllLink = get_term_link($relatedLinksTag, 'post_tag');
 						echo "<a class='bbg__read-more' href='" . $viewAllLink . "'>VIEW ALL »</a>";
 					}
 					wp_reset_postdata();
 				}
 			?>
-		</aside>
+		</div>
 	</div><!-- END GRID -->
 </main>
-
-<section class="outer-container">
-	<?php get_sidebar(); ?>
-</section>
 
 <?php get_footer(); ?>

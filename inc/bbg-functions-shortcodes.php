@@ -67,10 +67,10 @@
 			wp_reset_postdata();
         }
 
-		$about = "<h4>About " . $fullName . "</h4>";
-		$about .= "<div class='bbg__tagline'>";
-			$about .= $boilerplate;
-		$about .= "</div>";
+		$about  = '<h4 class="section-subheader">About ' . $fullName . '</h4>';
+		$about .= '<div class="bbg__tagline">';
+		$about .= 	$boilerplate;
+		$about .= '</div>';
 
 	    return $about;
 	}
@@ -552,14 +552,14 @@
 			$classes .= ' bbg-grid--1-3-3 usa-width-one-third ';
 		}
 		
-		$infobox_markup  = '<div class="' . $classes . '">';
+		$infobox_markup  = '<aside class="' . $classes . '">';
 		$infobox_markup .= 	'<h2 class="section-header">' . $boxTitle . '</h2>';
-		$infobox_markup .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+		$infobox_markup .= 	'<h3 class="article-title"><a href="' . $url . '">' . $title . '</a></h3>';
 		$infobox_markup .= 	'<p>' . $excerpt . '</p>';
 		$infobox_markup .= 	'<div style="text-align:right;">';
 		$infobox_markup .= 		'<a href="' . $categoryLink . '" class="bbg__kits__intro__more--link">' . $archiveLinkText . '</a>';
 		$infobox_markup .= 	'</div>';
-		$infobox_markup .= '</div>';
+		$infobox_markup .= '</aside>';
 		
 		return $infobox_markup;
 	}

@@ -168,7 +168,7 @@ get_header();
 					</div>
 					<div class="side-column divider-left">
 						<div class="share-social">
-							<h5>Share</h5>
+							<h3 class="sidebar-section-header">Share</h3>
 							<a href="<?php echo $fbUrl; ?>">
 								<span class="bbg__article-share__icon facebook"></span>
 							</a>
@@ -178,7 +178,7 @@ get_header();
 							</a>
 						</div>
 						<?php
-							$event_info  = '<h5><a href="/news/events/">Event Information</a></h5>';
+							$event_info  = '<h3 class="sidebar-section-header"><a href="/news/events/">Event Information</a></h3>';
 							$event_info .= '<p class="sans">' . $post_date . ', ' . $meeting_time . '<br><br>';
 							$event_info .= $meeting_location . '</p>';
 							$event_info .= $event_brite_button_string;
@@ -193,7 +193,7 @@ get_header();
 							if (have_rows('board_meeting_speakers')) {
 								$speakersLabel = get_field('board_meeting_speaker_label');
 								
-								echo '<h5>' . $speakersLabel . '</h5>';
+								echo '<h3 class="sidebar-section-header">' . $speakersLabel . '</h3>';
 								while (have_rows('board_meeting_speakers')) : the_row();
 
 									// SHOW INTERNAL SPEAKER LIST
@@ -217,7 +217,7 @@ get_header();
 													$occupation = "Acting " . $occupation;
 												}
 
-												$name_of_internal_speaker = '<h3 class="sidebar-article-title">' . $profile_name . '</h3>';
+												$name_of_internal_speaker = '<p class="sidebar-article-title">' . $profile_name . '</p>';
 												$title_of_internal_speaker = '<p class="sans">' . $occupation . '</p>';
 												$link_of_internal_speaker = '<p class="sans"><a href="' . $profile_link . '" target="_blank">View Profile</a></p>';
 
@@ -254,7 +254,7 @@ get_header();
 												$speaker_bio = $profile["meeting_speaker_bio"];
 												$speaker_link = $profile["meeting_speaker_url"];
 
-												$name_of_external_speaker = '<h3 class="sidebar-article-title">' . $speaker_name . '</h3>';
+												$name_of_external_speaker = '<p class="sidebar-article-title">' . $speaker_name . '</p>';
 												$title_of_external_speaker = '<p class="sans">' . $speaker_title . '</p>';
 												if (!empty($speaker_link)) {
 													$link_of_external_speaker = '<p class="sans speaker-link"><a href="' . $speaker_link . '" target="_blank">' . $speaker_link . '</a></p>';

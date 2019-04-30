@@ -45,19 +45,16 @@ echo getNetworkExcerptJS();
 <script type="text/javascript" src='<?php echo get_template_directory_uri(); ?>/js/map-hotspot.js'></script>
 
 <main id="main" role="main">
-	<div class="usa-grid-full">
-		<div class="usa-grid">
+	<div class="outer-container">
+		<div class="grid-container">
 			<header class="page-header">
-				
-				<h5 class="bbg__label--mobile large"><a href="<?php echo $parent_link; ?>">Section Title<?php //echo $parent->post_title; ?></a></h5>
-				<?php echo "<h1 class='entry-title'>$pageTitle</h1>"; ?>
-			</header><!-- .page-header -->
-			<h3 id="site-intro" class="lead-in"><?php echo $pageContent; ?></h3>
-
-		</div><!-- div.usa-grid -->
-	</div><!-- div.usa-grid-full -->
-	<section class="usa-section">
-		<div class="usa-grid">
+				<?php echo '<h2 class="section-header">' . $pageTitle . '</h2>'; ?>
+			</header>
+			<p class="lead-in"><?php echo $pageContent; ?></p>
+		</div>
+	</div>
+	<section class="outer-container">
+		<div class="grid-container">
 			<div class="btn-group entity-buttons u--show-medium-large" role="group" aria-label="..." style="clear: none;">
 				<button type="button" title="ALL" class=" btn-default all" value="all"><span class="bbg__map__button-text">ALL</span></button><!--
 				--><button type="button" title="COUNTERING VIOLENT EXTREMISM" class=" btn-default cve" value="cve"><span class="bbg__map__button-text">COUNTERING VIOLENT EXTREMISM</span></button><!--
@@ -81,7 +78,7 @@ echo getNetworkExcerptJS();
 			<div class="bbg__map-area__container " style="postion: relative;">
 				<div id="chartdiv"></div>
 			</div>
-			<div style="margin-top:1rem;" class="u--show-medium-large"><em>Hover over a country to highlight other countries in its primary hot spot.  Use the buttons at the top to view hot spots one at a time.</em></div><BR>
+			<div class="sans">Hover over a country to highlight other countries in its primary hot spot.  Use the buttons at the top to view hot spots one at a time.</div>
 
 			<div align="left" class="u--hide-medium-large">
 				<div align="center" >

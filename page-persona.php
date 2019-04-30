@@ -158,7 +158,7 @@ get_header(); ?>
 								}
 							?>
 
-							<h5 class="bbg__label small bbg__sidebar__download__label">What happened</h5>
+							<h2 class="sidebar-section-header">What happened</h2>
 							<div class="usa-accordion bbg__committee-list">
 								<ul class="usa-unstyled-list">
 									<li>
@@ -179,7 +179,7 @@ get_header(); ?>
 							<?php
 								if ( $secondaryColumnContent != "" ) {
 									if ( $secondaryColumnLabel != "" ) {
-										echo '<h5 class="bbg__label small">' . $secondaryColumnLabel . '</h5>';
+										echo '<h2 class="section-subheader">' . $secondaryColumnLabel . '</h2>';
 									}
 									echo $secondaryColumnContent;
 								}

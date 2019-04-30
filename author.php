@@ -251,7 +251,7 @@ get_header();
 				echo 			'</div>';
 				// SIDE TWITTER SECION
 				echo 			'<div class="side-content-container">';
-				echo 				'<h5><a target="_blank" href="https://twitter.com/' . $twitterHandle . '">Featured Tweet</a></h5>';
+				echo 				'<h2 class="sidebar-section-header"><a target="_blank" href="https://twitter.com/' . $twitterHandle . '">Featured Tweet</a></h2>';
 				echo 				$latestTweetsStr;
 				echo 			'</div>';
 				echo 		'</div>';

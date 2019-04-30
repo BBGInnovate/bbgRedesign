@@ -220,7 +220,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		$threat_structure .= 					'</a>';
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 				'<div class="article-info">';
-		$threat_structure .= 					'<h4><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_title($threat_article_list[0]) . '</a></h4>';
+		$threat_structure .= 					'<h3 class="article-title"><a href="' . get_the_permalink($threat_article_list[0]) . '">' . get_the_title($threat_article_list[0]) . '</a></h3>';
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 			'</article>';
 		$threat_structure .= 		'</div>';
@@ -228,7 +228,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		$secondary_threats = array_shift($threat_article_list);
 		foreach ($threat_article_list as $recent_threat) {
 			$threat_structure .= 		'<article>';
-			$threat_structure .= 			'<h4><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
+			$threat_structure .= 			'<h3 class="article-title"><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h3>';
 			$threat_structure .= 		'</article>';
 		}
 		$threat_structure .= 		'</div>';

@@ -3,7 +3,7 @@
 .testing_staging {color: green;}
 .header-outliner {display: none;}
 
-// THESE ARE ESSETIALLY H2-H6
+// SYTLE HEADERS WITH THESE CLASSES
 .section-header,
 .section-header a:link,
 .section-header a:visited {
@@ -34,15 +34,30 @@
 .article-title a:link,
 .article-title a:visited {
     font-family: $font-sans;
-    font-size: 2.4rem;
-    line-height: 2.6rem;
+    font-size: 2.6rem;
+    line-height: 3rem;
     font-weight: $font-light;
     color: $color-blue;
     margin: 0 0 0.5rem 0;
+    text-decoration: none;
     p.sans {display: inline;}
 }
+.article-title a:hover, .article-title a:active {text-decoration: underline;}
 
-.sidebar-section-header {
+.article-section-header,
+.article-section-header a:link,
+.article-section-header a:visited {
+    font-family: $font-sans;
+    font-size: 2rem;
+    font-weight: $font-light;
+    color: $color-cool-blue;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+}
+
+.sidebar-section-header,
+.sidebar-section-header a:link,
+.sidebar-section-header a:visited {
     font-family: $font-sans;
     font-size: 1.6rem;
     line-height: 1.9rem;
@@ -73,13 +88,13 @@
 h4,
 h4 a:link,
 h4 a:visited {
-    font-family: $font-sans;
-    font-size: 2.2rem;
-    line-height: 2.6rem;
-    font-weight: $font-light;
-    color: $color-blue;
-    margin: 0 0 0.5rem 0;
-    .sans {display: inline;}
+    // font-family: $font-sans;
+    // font-size: 2.2rem;
+    // line-height: 2.6rem;
+    // font-weight: $font-light;
+    // color: $color-blue;
+    // margin: 0 0 0.5rem 0;
+    // .sans {display: inline;}
 }
 h5,
 h5 a:link,
@@ -96,7 +111,9 @@ h5 a:visited {
 h6,
 h6 a:link,
 h6 a:visited,
-.paragraph-header {
+.paragraph-header,
+.paragraph-header a:link,
+.paragraph-header a:visited {
     font-family: $font-serif;
     font-size: 2rem;
     line-height: 2.6rem;
@@ -113,6 +130,7 @@ h6 a:visited,
         line-height: 2rem;
     }
 }
+// END HEADER STYLES
 
 p {
     font-family: $font-serif;
@@ -121,6 +139,8 @@ p {
     margin: 0 0 3rem 0;
     color: #545454;
 }
+p a:link, p a:visited {text-decoration: none;}
+p a:hover, p a:active {text-decoration: underline;}
 .aside, 
 p.sans {
     font-family: $font-sans;
@@ -209,13 +229,6 @@ a:not(.bbg__article-share__icon) {
 }
 
 .side-content-container {
-    // a:link, a:visited {
-    //     font-family: $font-sans;
-    //     font-size: 1.6rem;
-    //     line-height: 1.8rem;
-    //     font-weight: $font-bold;
-    //     color: $color-blue-darker;
-    // }
     p {
         a.usa-button:link, a.usa-button:visited {color: $color-white;}
     }

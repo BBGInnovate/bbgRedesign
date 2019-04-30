@@ -53,7 +53,7 @@ if ($featured_media_result != "") {
 					if (is_category('Board Meetings')) {
 						$moreLabel = "More Board Meetings";
 					}
-					echo 	'<h5>' . $moreLabel . '</h5>';
+					echo 	'<h2 class="sidebar-section-header">' . $moreLabel . '</h2>';
 				}
 
 				if ($counter > 1) {

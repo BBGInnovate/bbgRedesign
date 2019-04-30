@@ -148,7 +148,7 @@ get_header();
 					<?php
 						if ($secondaryColumnContent != "") {
 							if ($secondaryColumnLabel != "") {
-								echo '<h5>' . $secondaryColumnLabel . '</h5>';
+								echo '<h2 class="sidebar-section-header">' . $secondaryColumnLabel . '</h2>';
 							}
 							echo $secondaryColumnContent;
 						}

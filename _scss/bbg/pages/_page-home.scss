@@ -24,12 +24,15 @@
 	margin-bottom: 7.5rem;
 
 	h2 {a:link, a:visited {color: $white;}}
-	h4 {color: $white;}
-	h4 {a:link, a:visited {color: $white;}}
+	h3 {color: $white;}
+	h3 {a:link, a:visited {color: $white;}}
 
 	#threats-main-column {
 		padding-top: 2em;
-		article {border-bottom: none;}
+		article {
+			border-bottom: none;
+			.article-image {margin-bottom: 1rem;}
+		}
 	}
 	#threats-side-column {
 		padding: 2em;

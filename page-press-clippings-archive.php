@@ -133,98 +133,98 @@ get_header();
 ?>
 
 <main id="main"  role="main">
-	<?php if (empty($press_clip_type) && empty($cur_outlet_id)) { ?>
-	<?php //HEADER OPITON FOR PLAIN ARCHIVE ?>
-		<section class="outer-container">
-			<header class="grid-container">
-				<h2 class="section-header"><?php echo $page_title; ?></h2>
-			</header>
-		</section>
-	<?php } ?>
-
-	<div class="outer-container">
-		<div class="custom-grid-container">
-			<div class="inner-container">
-				<section class="main-content-container">
-					<?php
-					echo '<heading>';
-						if (!empty($press_clip_type)) {
-							// HEADER OPTIONS FOR PRESS CLIPS TYPES
-							if (is_array($press_clip_type)) {
+	<section class="outer-container">
+		<div class="grid-container">
+			<?php
+				echo '<heading>';
+				if (!empty($press_clip_type)) {
+					$clip_type = $press_clip_type[0];
+					$clip_entity = $press_clip_type[1];
+					// HEADER OPTIONS FOR PRESS CLIPS TYPES
+					if (is_array($press_clip_type)) {
+						if ($clip_type == 'about') {
+							echo 	'<h2 class="section-header">Press Clippings ' . $clip_type . ' ' . strtoupper($clip_entity) . '</h2>';
+						} else if ($clip_type == 'citation') {
+							echo 	'<h2 class="section-header">Press Clippings with ' . strtoupper($clip_entity) . ' ' . $clip_type . 's</h2>';
+						}
+					} else if ($press_clip_type == 'interest' && empty($cur_outlet_id)) {
+						echo '<h2 class="section-header">Press Clippings Of Interest</h2>';
+					}
+					// HEADER OPTIONS FOR PRESS CLIPS TYPE FROM OUTLETS
+					if (!empty($cur_outlet_id)) {
+						if ($press_clip_type == 'about') {
+							echo 	'<h2 class="section-header">Press Clippings ' . $press_clip_type . ' ' . strtoupper($press_clip_entity) . ' from ' . $cur_outlet_name . '</h2>';
+						} else if ($press_clip_type == 'citation') {
+							echo 	'<h2 class="section-header">Press Clippings with ' . strtoupper($press_clip_entity) . ' ' . $press_clip_type . 's from ' . $cur_outlet_name . '</h2>';;
+						} else if ($press_clip_type == 'interest') {
+							echo 	'<h2 class="section-header">Press Clippings Of Interest from ' . $cur_outlet_name . '</h2>';
+						}
+					}
+				}
+				else if (!empty($cur_outlet_id) && empty($press_clip_type)) {
+					echo 	'<h2 class="section-header">Press Clippings from ' . $cur_outlet_name . '</h2>';
+				}
+				else {
+					echo '<h2 class="section-header">' . $page_title . '</h2>';
+				}
+				echo '</heading>';
+			?>
+		</div>
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="main-column">
+						<?php
+							if (!empty($press_clippings_data)) {
+								foreach ($press_clippings_data as $press_clip) {
+									if (!empty($press_clip_type)) {
+										$cur_cited_post = build_press_clipping_article_list($press_clip, $press_clip_type);
+									} else {
+										$cur_cited_post = build_press_clipping_article_list($press_clip);
+									}
+									echo $cur_cited_post;
+								}
+								if ($press_clippings_data >= 5) {
+									next_posts_link('Older Entries', $press_clip['query_var']->max_num_pages);
+									previous_posts_link('Newer Entries');
+								}
+							} else {
+								$entity = strtoupper($press_clip_type[1]);
 								if ($press_clip_type[0] == 'about') {
-									echo 	'<h2 class="section-header">Press Clippings ' . $press_clip_type[0] . ' ' . $press_clip_type[1] . '</h2>';
+									echo '<p class="leadin">There are currently no press clippings about ' . $entity . '<p>';
 								} else if ($press_clip_type[0] == 'citation') {
-									echo 	'<h2 class="section-header">Press Clippings with ' . $press_clip_type[1] . ' ' . $press_clip_type[0] . 's</h2>';
-								}
-							} else if ($press_clip_type == 'interest' && empty($cur_outlet_id)) {
-								echo '<h2 class="section-header">Press Clippings Of Interest</h2>';
-							}
-							// HEADER OPTIONS FOR PRESS CLIPS TYPE FROM OUTLETS
-							if (!empty($cur_outlet_id)) {
-								if ($press_clip_type == 'about') {
-									echo 	'<h2 class="section-header">Press Clippings ' . $press_clip_type . ' ' . $press_clip_entity . ' from ' . $cur_outlet_name . '</h2>';;
-								} else if ($press_clip_type == 'citation') {
-									echo 	'<h2 class="section-header">Press Clippings with ' . $press_clip_entity . ' ' . $press_clip_type . 's from ' . $cur_outlet_name . '</h2>';;
-								} else if ($press_clip_type == 'interest') {
-									echo 	'<h2 class="section-header">Press Clippings Of Interest from ' . $cur_outlet_name . '</h2>';
+									echo '<p class="leadin">There are currently no press clippings with ' . $entity . ' citations<p>';
+								} else if ($press_clip_type[0] == 'interst') {
+									echo '<p class="leadin">There are currently no press clippings from ' . $entity . ' of interest<p>';
 								}
 							}
-						}
-						else if (!empty($cur_outlet_id) && empty($press_clip_type)) {
-							echo 	'<h2 class="section-header">Press Clippings from ' . $cur_outlet_name . '</h2>';
-						}
-						echo '</heading>';
+						?>
+					</div>
+					<aside class="side-column divider-left">
+						<?php
+							echo '<h2 class="sidebar-section-header">Press Clipping Collections</h2>';
+							$clip_types = array('About Networks', 'Citations', 'Of Interest');
+							$entity_dropdown = build_media_clips_entity_dropdown($clip_types);
+							echo $entity_dropdown;
 
-						if (!empty($press_clippings_data)) {
-							foreach ($press_clippings_data as $press_clip) {
-								if (!empty($press_clip_type)) {
-									$cur_cited_post = build_press_clipping_article_list($press_clip, $press_clip_type);
-								} else {
-									$cur_cited_post = build_press_clipping_article_list($press_clip);
-								}
-								echo $cur_cited_post;
-							}
-							if ($press_clippings_data >= 5) {
-								next_posts_link('Older Entries', $press_clip['query_var']->max_num_pages);
-								previous_posts_link('Newer Entries');
-							}
-						} else {
-							$entity = strtoupper($press_clip_type[1]);
-							if ($press_clip_type[0] == 'about') {
-								echo '<p class="leadin">There are currently no press clippings about ' . $entity . '<p>';
-							} else if ($press_clip_type[0] == 'citation') {
-								echo '<p class="leadin">There are currently no press clippings with ' . $entity . ' citations<p>';
-							} else if ($press_clip_type[0] == 'interst') {
-								echo '<p class="leadin">There are currently no press clippings from ' . $entity . ' of interest<p>';
-							}
-						}
-					?>
-				</section>
-
-				<aside class="side-content-container">
-					<?php
-						echo '<h5>Press Clipping Collections</h5>';
-						$clip_types = array('About Networks', 'Citations', 'Of Interest');
-						$entity_dropdown = build_media_clips_entity_dropdown($clip_types);
-						echo $entity_dropdown;
-
-						echo '<h5>Media Outlet Tags</h5>';
-						$tax_cloud_args = array(
-							'taxonomy' 					=> 'outlet',
-							'smallest' 					=> 8,
-							'largest' 					=> 22,
-							'unit'                      => 'pt', 
-							'format'                    => 'flat',
-							'separator'                 => ', ',
-							'echo'                      => true,
-							'show_count'                  => 0,
-						);
-						wp_tag_cloud($tax_cloud_args);
-					?>
-				</aside>
+							echo '<h2 class="sidebar-section-header">Media Outlet Tags</h2>';
+							$tax_cloud_args = array(
+								'taxonomy' 					=> 'outlet',
+								'smallest' 					=> 8,
+								'largest' 					=> 22,
+								'unit'                      => 'pt', 
+								'format'                    => 'flat',
+								'separator'                 => ', ',
+								'echo'                      => true,
+								'show_count'                  => 0,
+							);
+							wp_tag_cloud($tax_cloud_args);
+						?>
+					</aside>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </main>
 
 <?php get_footer(); ?>

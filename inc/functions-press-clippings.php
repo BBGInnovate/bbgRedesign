@@ -86,21 +86,21 @@ function build_media_clips_entity_dropdown($reference = NULL) {
 			$cat_param = 'citation-';
 		}
 		$entity_dropdown .= 	'<li>';
-		$entity_dropdown .= 		'<h6>';
+		$entity_dropdown .= 		'<h3 class="sidebar-section-subheader">';
 		if ($ref != 'Of Interest') {
 			$entity_dropdown .= 		'<a href="javascript:void(0)">' . strtoupper($ref) . ' <i class="fas fa-angle-down"></i></a>';
 		} else {
 			$entity_dropdown .= 		'<a href="' . add_query_arg('clip-type', 'interest', '/press-clippings-archive/') . '">' . strtoupper($ref) . '</a>';
 		}
-		$entity_dropdown .= 		'</h6>';
+		$entity_dropdown .= 		'</h3>';
 		if ($ref != 'Of Interest') {
 			$entity_dropdown .= 	'<ul class="clipping_nest_list">';
 			if ($ref == 'About Networks') {
-				$entity_dropdown .= 	'<li><a href="' . add_query_arg('clip-type', 'about-usagm', '/press-clippings-archive/') . '">USAGM / BBG</a></li>';
+				$entity_dropdown .= 	'<li class="sidebar-article-title"><a href="' . add_query_arg('clip-type', 'about-usagm', '/press-clippings-archive/') . '">USAGM / BBG</a></li>';
 			}
 			// LOOP ENTITIES FROM THE QUERY ABOVE
 			foreach ($entity_set as $entity_item) {
-				$entity_dropdown .= 	'<li><a href="' . add_query_arg('clip-type', $cat_param . $entity_item['abbr'], '/press-clippings-archive/') . '">';
+				$entity_dropdown .= 	'<li class="sidebar-article-title"><a href="' . add_query_arg('clip-type', $cat_param . $entity_item['abbr'], '/press-clippings-archive/') . '">';
 				if ($entity_item['abbr'] == 'rferl') {
 					$entity_dropdown .= 	'RFE/RL';
 				} else {
@@ -114,7 +114,7 @@ function build_media_clips_entity_dropdown($reference = NULL) {
 
 		array_push($menu_set, $entity_dropdown);
 	}
-	$entity_dropdown .= 		'<li><h6><a href="' . get_template_directory_uri() . '/press-clippings-archive">ARCHIVE</a></h6>';
+	$entity_dropdown .= 		'<li><h3 class="sidebar-section-subheader"><a href="' . get_template_directory_uri() . '/press-clippings-archive">ARCHIVE</a></h3>';
 	$entity_dropdown .= 	'</ul>';
 	$entity_dropdown .= '</div>';
 
@@ -124,25 +124,28 @@ function build_media_clips_entity_dropdown($reference = NULL) {
 
 // BUILD THE ARTICLE DIV BLOCKS
 function build_press_clipping_article_list($press_clip, $clip_type = NULL) {
-	$press_clipping_block  = '<article>';
-	$press_clipping_block .= 	'<h4><a href="' . $press_clip['story_link'] . '" target="_blank">' . $press_clip['title'] . '</a></h4>';
-	$press_clipping_block .= 	'<p class="paragraph-header">';
+	
+	$press_clipping_block  = '<div>';
+	$press_clipping_block .= 	'<h3 class="article-title"><a href="' . $press_clip['story_link'] . '" target="_blank">' . $press_clip['title'] . '</a></h3>';
 	if (!empty($clip_type)) {
 		if (is_array($clip_type)) {
 			// FROM OUTLET WITH 'ABOUT' OR 'CITATION' CATEGORY
-			$press_clipping_block .= 		'<a href="' . add_query_arg(array('outlet-name' => strtolower(str_replace(' ', '-', $press_clip['outlet_name'])), 'clip-type' => $clip_type[0], 'clip-entity' => $clip_type[1]), '/press-clippings-archive/') .'">' . $press_clip['outlet_name'] . '</a> &nbsp;';
+			$press_clipping_block .= '<span class="article-section-header">';
+			$press_clipping_block .= 	'<a href="' . add_query_arg(array('outlet-name' => strtolower(str_replace(' ', '-', $press_clip['outlet_name'])), 'clip-type' => $clip_type[0], 'clip-entity' => $clip_type[1]), '/press-clippings-archive/') .'">';
+			$press_clipping_block .= 		$press_clip['outlet_name'];
+			$press_clipping_block .= 	'</a>';
+			$press_clipping_block .= '</span>';
 		} else {
 			// FROM OUTLET WITH 'OF INTEREST' CATEGORY
-			$press_clipping_block .= 		'<a href="' . add_query_arg(array('outlet-name' => strtolower(str_replace(' ', '-', $press_clip['outlet_name'])), 'clip-type' => $clip_type), '/press-clippings-archive/') .'">' . $press_clip['outlet_name'] . '</a> &nbsp;';
+			$press_clipping_block .= 		'<span class="article-section-header"><a href="' . add_query_arg(array('outlet-name' => strtolower(str_replace(' ', '-', $press_clip['outlet_name'])), 'clip-type' => $clip_type), '/press-clippings-archive/') .'">' . $press_clip['outlet_name'] . '</a></span>';
 		}
 	} else {
 		// FROM OUTLET
-		$press_clipping_block .= 		'<a href="' . add_query_arg('outlet-name', strtolower(str_replace(' ', '-', $press_clip['outlet_name'])), '/press-clippings-archive/') . '">' . $press_clip['outlet_name'] . '</a> &nbsp;';
+		$press_clipping_block .= 		'<span class="article-section-header"><a href="' . add_query_arg('outlet-name', strtolower(str_replace(' ', '-', $press_clip['outlet_name'])), '/press-clippings-archive/') . '">' . $press_clip['outlet_name'] . '</a></span>';
 	}
-	$press_clipping_block .= 		'<span class="sans">' . $press_clip['date'] . '</span>';
-	$press_clipping_block .= 	'</p>';
+	$press_clipping_block .= 	'<p class="date-meta">' . $press_clip['date'] . '</p>';
 	$press_clipping_block .= 	'<p>' . $press_clip['description'] . '</p>';
-	$press_clipping_block .= '</article>';
+	$press_clipping_block .= '</div>';
 
 	return $press_clipping_block;
 }

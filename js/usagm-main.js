@@ -131,9 +131,9 @@ clipsListItems.children('ul').hide();
 var touchNestedList = false;
 $.each(clipsListItems, function() {
 	$(this).on('click', function() {
-		if (($(this).children('h6').siblings('ul').css('display') == 'none') && touchNestedList == false) {
-			$(this).children('h6').siblings('ul').show();
-			$(this).children('h6').children('i').attr('class', 'fas fa-angle-up');
+		if (($(this).children('h3').siblings('ul').css('display') == 'none') && touchNestedList == false) {
+			$(this).children('h3').siblings('ul').show();
+			$(this).children('h3').children('a').children('i').attr('class', 'fas fa-angle-up');
 			$(this).css({
 				'margin-bottom' : '10px',
 				'background-color' : '#f9f9f9'
@@ -145,9 +145,9 @@ $.each(clipsListItems, function() {
 					touchNestedList = false;
 				}, 2000);
 			})
-		} else if (($(this).children('h6').siblings('ul').css('display') != 'none') && (touchNestedList == false)) {
-			$(this).children('h6').siblings('ul').hide();
-			$(this).children('h6').children('i').attr('class', 'fas fa-angle-down');
+		} else if (($(this).children('h3').siblings('ul').css('display') != 'none') && (touchNestedList == false)) {
+			$(this).children('h3').siblings('ul').hide();
+			$(this).children('h3').children('a').children('i').attr('class', 'fas fa-angle-down');
 			$(this).removeAttr('style');
 		}
 	});

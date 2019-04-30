@@ -41,7 +41,7 @@
 			$custom_query = new WP_Query( $qParamsContactCard );
 			if ( $custom_query->have_posts() ) :
 				echo '<div class="usa-grid-full bbg__contact-box">';
-				echo '<h3 class="bbg__contact-box__title">Find out more</h3>';
+				echo '<h5 class="article-title">Find out more</h5>';
 				while ( $custom_query->have_posts() ) : $custom_query->the_post();
 					//now let's get the custom fields associated with our related contact posts
 					$id = get_the_ID();

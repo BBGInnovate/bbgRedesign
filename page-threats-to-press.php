@@ -258,18 +258,15 @@ echo $threats_map_json;
 </div>
 
 <main id="main" role="main">
-	<section class="outer-container" style="margin-top: 3rem;">
-		<div class="grid-container">
-			<?php
-				echo '<h2 class="section-header">' . $page_title . '</h2>';
-				echo '<p class="lead-in">' . $page_content . '</p>';
-			?>
-		</div>
-	</section>
+
 
 	<?php
 		// NEWS AND UPDATES
-		$threat_structure  = '<div class="outer-container threats-box">';
+		$threat_structure  = '<section class="outer-container threats-box">';
+		$threat_structure .= 	'<div class="grid-container">';
+		$threat_structure .= 		'<h2 class="section-header">' . $page_title . '</h2>';
+		$threat_structure .= 		'<p class="lead-in">' . $page_content . '</p>';
+		$threat_structure .= 	'</div>';
 		$threat_structure .= 	'<div class="grid-half" id="threats-main-column">';
 		$threat_structure .= 			'<article>';
 		$threat_structure .= 				'<div class="article-image">';
@@ -278,7 +275,7 @@ echo $threats_map_json;
 		$threat_structure .= 					'</a>';
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 				'<div class="article-info">';
-		$threat_structure .= 					'<h4 class="article-title"><a href="' . get_the_permalink($threats_posts[0]) . '">' . get_the_title($threats_posts[0]) . '</a></h4>';
+		$threat_structure .= 					'<h2 class="article-title"><a href="' . get_the_permalink($threats_posts[0]) . '">' . get_the_title($threats_posts[0]) . '</a></h2>';
 		$threat_structure .= 				'</div>';
 		$threat_structure .= 			'</article>';
 		$threat_structure .= 	'</div>';
@@ -286,11 +283,11 @@ echo $threats_map_json;
 		$secondary_threats = array_shift($threats_posts);
 		foreach ($threats_posts as $recent_threat) {
 			$threat_structure .= 		'<article>';
-			$threat_structure .= 			'<h4 class="article-title"><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h4>';
+			$threat_structure .= 			'<h2 class="article-title"><a href="' . get_the_permalink($recent_threat) . '">' . get_the_title($recent_threat) . '</a></h2>';
 			$threat_structure .= 		'</article>';
 		}
 		$threat_structure .= 	'</div>';
-		$threat_structure .= '</div>';
+		$threat_structure .= '</section>';
 		echo $threat_structure;
 	?>
 
@@ -304,9 +301,9 @@ echo $threats_map_json;
 				$featuredJournalistsSectionLabel = get_sub_field('featured_journalists_section_label');
 
 				if (have_rows('featured_journalist')) {
-					$featuredJournalists .= '<div class="outer-container">';
+					$featuredJournalists .= '<section class="outer-container">';
 					$featuredJournalists .= 	'<div class="grid-container">';
-					$featuredJournalists .= 		'<h3 class="section-subheader">' . $featuredJournalistsSectionLabel . '</h3>';
+					$featuredJournalists .= 		'<h2 class="section-subheader">' . $featuredJournalistsSectionLabel . '</h2>';
 					$featuredJournalists .=  		'<div class="nest-container">';
 					$featuredJournalists .=  			'<div class="inner-container">';
 
@@ -320,24 +317,23 @@ echo $threats_map_json;
 						$profileUrl = get_permalink($relatedPages->ID);
 						$profileExcerpt = my_excerpt($relatedPages->ID);
 
-						$profileOccupation = '<span class="bbg__profile-excerpt__occupation">' . $profileOccupation .'</span>';
-
 						if ($profilePhoto) {
 							$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
 							$profilePhoto = $profilePhoto[0];
 							$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo" alt="Profile photo"></a>';
 						}
 
-						$featuredJournalists .= '<div class="grid-half profile-clears">';
-						$featuredJournalists .= 	$profilePhoto;
-						$featuredJournalists .= 	'<h4 class="article-title"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
-						$featuredJournalists .= 	'<p class="paragraph-header">' . $profileOccupation . $profileExcerpt . '</p>';
-						$featuredJournalists .= '</div>';
+						$featuredJournalists .= 			'<div class="grid-half profile-clears">';
+						$featuredJournalists .= 				$profilePhoto;
+						$featuredJournalists .= 				'<h4 class="article-title"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
+						$featuredJournalists .= 				'<p class="sans">' . $profileOccupation . '</p>';
+						$featuredJournalists .= 				'<p>' . $profileExcerpt . '</p>';
+						$featuredJournalists .= 			'</div>';
 					}
 					$featuredJournalists .= 			'</div>';
 					$featuredJournalists .= 		'</div>';
 					$featuredJournalists .= 	'</div>';
-					$featuredJournalists .= '</div>';
+					$featuredJournalists .= '</section>';
 				}
 			}
 		}

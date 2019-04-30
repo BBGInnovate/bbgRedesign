@@ -10,14 +10,13 @@
 
 require 'inc/bbg-functions-assemble.php';
 
-// $challenges = get_field( 'hot_spot_challenges', '', true ); // THIS IS THE ONLY INSTANCE)
 $tag = get_field('hot_spot_tag', '', true);
-// $priorities = get_field( 'hot_spot_strategic_priorities', '', true ); // THIS IS THE ONLY INSTANCE)
-// $programming = get_field( 'hot_spot_special_programming', '', true ); // THIS IS THE ONLY INSTANCE)
-$mapImage = get_field( 'hot_spot_map_image', '', true );
+$tag_slug = $tag->slug;
+
+$mapImage = get_field('hot_spot_map_image', '', true);
 $mapImageSrc = $mapImage['sizes']['medium'];
 
-$featuredImagesData = get_field( 'hot_spot_rotating_featured_images', '', true );
+$featuredImagesData = get_field('hot_spot_rotating_featured_images', '', true);
 $randomFeaturedImage = $featuredImagesData[array_rand($featuredImagesData)];
 
 $pressFreedomIntro = get_field('site_setting_press_freedom_intro', 'options', 'false');
@@ -30,7 +29,7 @@ $threat_query_args = array(
 	'post_status' => array('publish'),
 	'orderby' => 'date',
 	'order' => 'DESC',
-	'tag' => $tag->slug
+	'tag' => $tag_slug
 );
 
 $used_post_id_group = array();
@@ -75,7 +74,7 @@ function network_news_posts() {
 	$network_news_args = array(
 		'post_type' => array('post'),
 		'posts_per_page' => 3,
-		'tag' => $tag -> slug,
+		'tag' => $tag_slug,
 		'orderby' => 'date',
 		'order' => 'DESC',
 		'post__not_in' => $used_post_id_group
@@ -112,52 +111,40 @@ if (have_posts()) {
 	}
 }
 
+$featuredImageSrc = $randomFeaturedImage['hot_spot_rotating_featured_image']['sizes']['large-thumb'];
+$featuredImageBackgroundPosition = $randomFeaturedImage['hot_spot_rotating_featured_image_background_position'];
+
 get_header();
+
+$post_featured_image  = '<div class="feautre-banner">';
+$post_featured_image .= 	'<div class="page-post-featured-graphic">';
+$post_featured_image .= 		'<div class="bbg__article-header__banner" ';
+$post_featured_image .= 			'style="background-image: url(' . $featuredImageSrc . '); background-position: ' . $featuredImageBackgroundPosition . '">';
+$post_featured_image .= 		'</div>';
+$post_featured_image .= 	'</div>';
+$post_featured_image .= '</div>';
+
+echo $post_featured_image;
 ?>
 
 
 <main id="main" role="main">
 
-<?php
-	$featuredImageSrc = $randomFeaturedImage['hot_spot_rotating_featured_image']['sizes']['large-thumb'];
-	$featuredImageBackgroundPosition = $randomFeaturedImage['hot_spot_rotating_featured_image_background_position'];
-
-	$hotspot_featured_media  = '<div class="page-post-featured-graphic">';
-	$hotspot_featured_media .= 	'<div class="bbg__article-header__banner--profile" style="';
-	$hotspot_featured_media .= 		'background-image: url(' . $featuredImageSrc . ');';
-	$hotspot_featured_media .= 		'background-position: ' . $featuredImageBackgroundPosition . '">';
-	$hotspot_featured_media .= 	'</div>';
-	$hotspot_featured_media .= 	'</div>';
-	echo $hotspot_featured_media;
-
-	$hotspot_page_title  = '<div class="outer-container">';
-	$hotspot_page_title .= 	'<div class="bbg__profile-photo">';
-	$hotspot_page_title .= 		'<img class="bbg__profile-photo__image" src="' . $mapImageSrc . '" alt="">';
-	$hotspot_page_title .= 	'</div>';
-	$hotspot_page_title .= 	'<div class="bbg__profile-title">';
-	$hotspot_page_title .= 		'<h2 class="section-header">' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
-	$hotspot_page_title .= 		'<h5 class="entry-category bbg__profile-tagline">';
-	$hotspot_page_title .= 			'<a href="' . get_permalink(get_page_by_path('hot-spots')) . '">Hot Spots</a>';
-	$hotspot_page_title .= 		'</h5>';
-	$hotspot_page_title .= 	'</div>';
-	$hotspot_page_title .= '</div>';
-	// echo $hotspot_page_title;
-?>
 	<div class="outer-container">
 		<div class="main-content-container">
 
 			<div class="nest-container">
 				<div class="inner-container">
 					<div class="icon-side-content-container">
-						<?php echo '<img src="' . $mapImageSrc . ' alt=''">'; ?>
+						<?php echo '<img src="' . $mapImageSrc . '" alt="">'; ?>
 					</div>
 
 					<div class="icon-main-content-container">
 					<?php
-						$hotspot_page_title  = '<h2 class="section-header">' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
-						$hotspot_page_title .= 	'<h5 class="entry-category bbg__profile-tagline">';
+						$hotspot_page_title  = 	'<h2 class="section-header">';
 						$hotspot_page_title .= 		'<a href="' . get_permalink(get_page_by_path('hot-spots')) . '">Hot Spots</a>';
-						$hotspot_page_title .= 	'</h5>';
+						$hotspot_page_title .= 	'</h2>';
+						$hotspot_page_title .= '<h2 class="section-subheader">' . str_replace("Private:", "Draft:", get_the_title()) . '</h2>';
 						echo $hotspot_page_title;
 
 						// PAGE CONTENT
@@ -189,17 +176,16 @@ get_header();
 				<div class="nest-container">
 					<div class="inner-container">
 						<div class="grid-container">
-							<h5>Languages Served</h5>
+							<h3 class="sidebar-section-header">Languages Served</h3>
 						</div>
 
 						<?php while(have_rows('hot_spot_languages')): the_row(); ?>
 							<div class="grid-container">
 								<h6><?php the_sub_field('hot_spot_language_name'); ?></h6>
 							</div>
-							<?php 
-								if( have_rows('hot_spot_language_sites') ): 
-							?>
+
 								<?php 
+								if( have_rows('hot_spot_language_sites') ): 
 									while(have_rows('hot_spot_language_sites')): 
 										the_row();
 										$link = get_sub_field('hot_spot_site_url');
@@ -229,7 +215,7 @@ get_header();
 			<?php 
 				if (have_rows('hot_spot_press_freedom_numbers')):
 					echo '<article>';
-					echo '<h5>Press Freedom</h5>';
+					echo '<h3 class="sidebar-section-header">Press Freedom</h3>';
 					echo $pressFreedomIntro;
 					echo '<ul>';
 					while ( have_rows('hot_spot_press_freedom_numbers') ) : the_row();
@@ -243,11 +229,11 @@ get_header();
 			?>
 
 			<?php
-				$xxx = network_news_posts();
-				if (count($xxx) > 0) {
+				$network_posts = network_news_posts();
+				if (count($network_posts) > 0) {
 					echo '<article class="inner-container">';
-					echo 	'<h5>News from our Networks</h5>';
-					foreach ($xxx as $news_post) {
+					echo 	'<h3 class="sidebar-section-header">News from our Networks</h3>';
+					foreach ($network_posts as $news_post) {
 						$network_article  = '<div class="nest-container">';
 						$network_article .= 	'<div class="inner-container">';
 						$network_article .= 		'<div class="side-content-container">';

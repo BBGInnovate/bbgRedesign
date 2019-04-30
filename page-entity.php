@@ -52,7 +52,7 @@ $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPag
 
 $entityMission = get_post_meta($id, 'entity_mission', true);
 $entity_link_groups = getEntityLinks_taxonomy($entityCategorySlug);
-$site_select = '<h5>Explore the ' . $abbreviation . ' websites</h5>';
+$site_select = '<h3 class="sidebar-section-header">Explore the ' . $abbreviation . ' websites</h3>';
 if (count($entity_link_groups) < 4) {
 	$site_select .= '<ul class="bbg__rss__list">';
 	foreach ($entity_link_groups as $entity_link) {
@@ -101,7 +101,7 @@ if ($audience != "") {
 	$audience = '<li><span class="paragraph-header">Audience estimate: </span>' . $audience . '</li>';
 }
 if ($appLink != "") {
-	$app_link_markup  = '<h5>Download the apps</h5>';
+	$app_link_markup  = '<h3 class="sidebar-section-header">Download the apps</h3>';
 	$app_link_markup .= '<p class="sans">' . $appLink . '<br><a href="https://www.bbg.gov/apps/">Visit the apps page</a></p>';
 }
 
@@ -441,14 +441,14 @@ get_header();
 						<img src="<?php echo $entityLogo; ?>" alt="<?php echo $abbreviation; ?> image">
 						<div id="reach-entity">
 							<div class="entity-left-article">
-								<h5>Website</h5>
+								<h3 class="sidebar-section-header">Website</h3>
 								<p class="sans"><?php echo strtolower($websiteName); ?></p>
 							</div>
 
 							<?php
 								if (!empty($facebook) || !empty($twitterProfileHandle) || !empty($instagram)) {
 									echo '<div class="entity-left-article">';
-									echo 	'<h5>Social Media</h5>';
+									echo 	'<h3 class="sidebar-section-header">Social Media</h3>';
 									echo 	'<p>';
 									if (!empty($facebook)) {
 										echo '<a href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
@@ -471,20 +471,20 @@ get_header();
 							?>
 						</div>
 					</section>
-					<section class="icon-main-content-container">
+					<div class="icon-main-content-container">
 						<?php echo '<h2 class="section-header">' . $entity_full_name . '</h2>'; ?>
 						<div class="page-content">
 							<?php echo $page_content; ?>
 						</div>
-					</section>
+					</div>
 				</div>
 			</div>
 		</div>
 		<!-- BEGIN SIDEBAR -->
-		<aside class="side-content-container">
-			<article>
+		<div class="side-content-container">
+			<div>
 				<div id="social-share">
-					<h5>Share</h5>
+					<h3 class="sidebar-section-header">Share</h3>
 					<a href="<?php echo get_field('entity_facebook'); ?>" target="_blank">
 						<span class="bbg__article-share__icon facebook"></span>
 					</a>
@@ -492,21 +492,21 @@ get_header();
 						<span class="bbg__article-share__icon twitter"></span>
 					</a>
 				</div>
-			</article>
+			</div>
 
-			<article>
+			<div>
 			<?php
 				if ($entityMission!="") { 
 					echo $entityMission;
 				}
 			?>
-			</article>
+			</div>
 
 		<!-- FAST FACTS -->
 		<?php
-			echo '<article>';
+			echo '<div>';
 			if ($budget != "" || $employees != "" || $languages != "" || $audience != "" || $app_link_markup != "") {
-				echo '<h5>Fast facts</h5>';
+				echo '<h3 class="sidebar-section-header">Fast facts</h3>';
 			}
 			echo 	'<ul class="unstyled-list">';
 			echo 		$budget;
@@ -514,21 +514,21 @@ get_header();
 			echo 		$languages;
 			echo 		$audience;
 			echo 	'</ul>';
-			echo '</article>';
+			echo '</div>';
 
 			$ethics_data = get_journalistic_code_of_ethics_data();
 			$ethics_parts = build_ethics_file_parts($ethics_data);
 			if (!empty($ethics_parts)) {
-				echo '<article>';
-				echo '<h5>Journalistic Standards</h5>';
+				echo '<div>';
+				echo '<h3 class="sidebar-section-header">Journalistic Standards</h3>';
 				foreach($ethics_parts as $ethic) {
 					echo $ethic;
 				}
-				echo '</article>';
+				echo '</div>';
 			}
 
-			echo '<article>';
-			echo 	'<h5>Press Clippings</h5>';
+			echo '<div>';
+			echo 	'<h3 class="sidebar-section-header">Press Clippings</h3>';
 			echo 	'<div class="media-clips-entities-dropdown">';
 			echo 		'<ul class="unstyled-list" style="margin-top: 0;">';
 			echo 			'<li>';
@@ -543,15 +543,15 @@ get_header();
 			echo 			'</li>';
 			echo 		'</ul>';
 			echo 	'</div>';
-			echo '</article>';
+			echo '</div>';
 
-			echo '<article>';
+			echo '<div>';
 			echo 	$app_link_markup;
-			echo '</article>';
+			echo '</div>';
 
 			if (count($rssItems)) {
-				$rss_markup  = '<article class="inner-container side-recent-stories">';
-				$rss_markup .= 	'<h5>Recent stories from ' . $websiteName . '</h5>';
+				$rss_markup  = '<div class="inner-container side-recent-stories">';
+				$rss_markup .= 	'<h3 class="sidebar-section-header">Recent stories from ' . $websiteName . '</h3>';
 				$maxRelatedStories = 3;
 				for ($i = 0; $i < min($maxRelatedStories, count($rssItems)); $i++) {
 					$o = $rssItems[$i];
@@ -573,7 +573,7 @@ get_header();
 					$rss_markup .= 	'</div>';
 					$rss_markup .= '</div>';
 				}
-				$rss_markup .= '</article>';
+				$rss_markup .= '</div>';
 
 				echo $rss_markup;
 
@@ -592,37 +592,37 @@ get_header();
 					}
 					$threats_markup .= '</ul>';
 
-					echo '<article>';
+					echo '<div>';
 					echo 	$threats_markup;
-					echo '</article>';
+					echo '</div>';
 				}
 			}
 
 			// SHOW CITED POSTS
 			if (!empty($press_clippings_data)) {
-				$cited_post_list  = '<article class="entity_press_clippings">';
+				$cited_post_list  = '<div class="entity_press_clippings">';
 				// SWITCH BACK FOR HEADER SO IT'S MORE STYLED
 				if ($cur_press_entity == "rferl") {$cur_press_entity = "rfe/rl";}
 
-				$cited_post_list .= 	'<h5>' . $cur_press_entity . ' Cited in the NEWS</h5>';
+				$cited_post_list .= 	'<h3 class="sidebar-section-header">' . $cur_press_entity . ' Cited in the News</h3>';
 				foreach ($press_clippings_data as $cited_post) {
 					$cited_post_list .= '<h6><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a> ';
 					$cited_post_list .= '<span class="sans">(' . $cited_post['outlet'] . ')</span></h6>';
 				}
 				$cited_post_list .= '<p><a class="read-more" href="' . add_query_arg('entity', $cur_press_entity, '/press-citing-listing/') . '">Click here to see full list</a></p>';
-				$cited_post_list .= '</article>';
+				$cited_post_list .= '</div>';
 				echo $cited_post_list;
 			}
 
 			// SEARCH ENTITY WEBSITE
-			echo '<article>';
+			echo '<div>';
 			echo 	$site_select;
-			echo '</article>';
+			echo '</div>';
 
 			// CONTACT INFORMATION
 			if ($includeContactBox) {
-				$contact_box  = '<article class="inner-container">';
-				$contact_box .= 	'<h5>Contact information</h5>';
+				$contact_box  = '<div class="inner-container">';
+				$contact_box .= 	'<h3 class="sidebar-section-header">Contact information</h3>';
 				if ($includeMap) {
 					$contact_box .= '<div class="bbg__contact-card bbg__contact-card--include-map">';
 					$contact_box .= 	'<div id="map" class="bbg__contact-card__map"></div>';
@@ -640,11 +640,11 @@ get_header();
 				$contact_box .= 			$learnMore;
 				$contact_box .= 		'</ul>';
 				$contact_box .= 	'</div>';
-				$contact_box .= '</article>';
+				$contact_box .= '</div>';
 				echo $contact_box;
 			}
 		?>
-		</aside>
+		</div>
 	</div>
 
 	<div class="outer-container">
