@@ -15,7 +15,7 @@ if ($includeSidebar) {
 
 	$sidebar_markup = '';
 	if ($sidebarTitle != '') {
-		$sidebar_markup .= '<h5>' . $sidebarTitle . '</h5>';
+		$sidebar_markup .= '<h3 class="sidebar-section-header">' . $sidebarTitle . '</h3>';
 	}
 
 	if ($sidebarDescription != "") {
@@ -156,7 +156,7 @@ if ($includeSidebar) {
 				$accordion = '';
 				$accordionTitle = get_sub_field('sidebar_accordion_title');
 				if ($accordionTitle != "") {
-					$accordion .= '<h5>' . $accordionTitle . '</h5>';
+					$accordion .= '<h3 class="sidebar-section-header">' . $accordionTitle . '</h3>';
 				}
 				if(have_rows('sidebar_accordion_items')) {
 					$accordion .= '<style>';
@@ -192,7 +192,7 @@ if ($includeSidebar) {
 						$label .= "s";
 					}
 
-					$sidebar_markup .= '<h5>' . $label . '</h5>';
+					$sidebar_markup .= '<h3 class="sidebar-section-header">' . $label . '</h3>';
 					$sidebar_markup .= '<article class="sans">';
 					$counter = 0;
 					foreach ($relatedPosts as $relatedPost) {
@@ -217,7 +217,7 @@ if ($includeSidebar) {
 						$widgetLink = "https://twitter.com/hashtag/$widgetHashtag";
 						$widgetLinkLabel = '#' . $widgetHashtag;
 					}
-					$sidebar_markup .= '<h5>Follow on Twitter</h5>';
+					$sidebar_markup .= '<h3 class="sidebar-section-header">Follow on Twitter</h3>';
 					$sidebar_markup .= '<ul class="bbg__article-share unstyled-list">';
 					$sidebar_markup .= 	'<li class="bbg__article-share__link twitter">';
 					$sidebar_markup .= 		'<a href="' . $widgetLink . '" title="Follow on Twitter"><span class="bbg__article-share__icon twitter"></span><span class="">' . $widgetLinkLabel . '</span></a>';
@@ -255,10 +255,10 @@ if ($includeSidebar) {
 					}
 				}
 				if (!count($tagIDs)) {
-					$sidebar_markup .= "Dynamic accordion requires at least one tag.<BR>";
+					$sidebar_markup .= 'Dynamic accordion requires at least one tag.<BR>';
 				} else {
 					if ($accordionTitle != "") {
-						$sidebar_markup .= "<h5 class='bbg__label small bbg__sidebar__download__label'>$accordionTitle</h5>";
+						$sidebar_markup .= '<h3 class="sidebar-section-header">' . $accordionTitle . '</h3>';
 					}
 
 					if ($sectionDescription) {
@@ -391,7 +391,7 @@ if ($includeSidebar) {
 
 					$custom_query = new WP_Query($qParams);
 					if ($custom_query -> found_posts || $sectionDescription) {
-						$sidebar_markup .= '<h5 class="bbg__label small bbg__sidebar__download__label">' . $sectionTitle . '</h5>';
+						$sidebar_markup .= '<h3 class="sidebar-section-header">' . $sectionTitle . '</h3>';
 						if ($sectionDescription) {
 							$sidebar_markup .= '<p class="sans">' . $sectionDescription . '</p>';
 						}
@@ -445,7 +445,7 @@ if ($listsInclude) {
 
 		$s = '';
 		if ($dropdownTitle && $dropdownTitle != "") {
-			$s = '<h5>' . $dropdownTitle . '</h5>';
+			$s = '<h3 class="sidebar-section-header">' . $dropdownTitle . '</h3>';
 		}
 
 		while (have_rows('sidebar_dropdown_content')) : the_row();
@@ -456,7 +456,7 @@ if ($listsInclude) {
 				$sidebarDownloadsTotal = count( $sidebarDownloadsRows);
 
 				$download_select  = '<div class="sidebar-section">';
-				$download_select .= 	'<h5>' . $sidebarDownloadsTitle . '</h5>';
+				$download_select .= 	'<h3 class="sidebar-section-header">' . $sidebarDownloadsTitle . '</h3>';
 
 				if ($sidebarDownloadsTotal >= 2) {
 					$download_select .= '<form style="max-width: 100%;">';
@@ -524,7 +524,7 @@ if ($listsInclude) {
 				$sidebar_internal_links  = '<div class="sidebar-section">';
 
 				if (count($sidebarInternalRows) < 5) {
-					$sidebar_internal_links .= '<h5>' . $sidebarInternalTitle . '</h5>';
+					$sidebar_internal_links .= '<h3 class="sidebar-section-header">' . $sidebarInternalTitle . '</h3>';
 
 					foreach( $sidebarInternalRows as $link ) {
 						$sidebarInternalLinkName = $link['internal_links_title'];

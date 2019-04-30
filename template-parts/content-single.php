@@ -335,43 +335,41 @@ if (!empty($addFeaturedMap)) {
 
 $media_dev_sponsors = "";
 if (have_rows('media_dev_sponsors')) {
-	$media_dev_sponsors .= '<h5>Funders</h5>';
+	$media_dev_sponsors .= '<aside>';
+	$media_dev_sponsors .= 	'<h3 class="sidebar-section-header">Funders</h3>';
 	if(have_rows('media_dev_sponsors')) {
-		$media_dev_sponsors .= '<ul>';
 		while (have_rows('media_dev_sponsors')) {
 			the_row();
-			$sponsorName = get_sub_field('media_dev_participant_name');
-
-			$media_dev_sponsors .= '<li><h6>' . $sponsorName . '</h6>';
+			$sponsor_name = get_sub_field('media_dev_participant_name');
+			$media_dev_sponsors .= '<p class="sidebar-article-title">' . $sponsor_name . '</p>';
 		}
-		$media_dev_sponsors .= '</ul>';
 	}
+	$media_dev_sponsors .= '</aside>';
 }
 
 $media_dev_presenters = "";
 if (have_rows('media_dev_presenters')) {
-	$media_dev_sponsors .= '<h5>Presenters</h5>';
-	$media_dev_presenters .= '<ul class="unstyled-list">';
+	$media_dev_presenters .= '<aside>';
+	$media_dev_presenters .= 	'<h3 class="sidebar-section-header">Presenters</h3>';
 	while (have_rows('media_dev_presenters')) {
 		the_row();
 		$presenterName = get_sub_field('media_dev_participant_name');
 		$presenterTitle = get_sub_field('media_dev_participant_job_title');
 
-		$media_dev_presenters .= '<li>';
-		$media_dev_presenters .= 	'<h6>' . $presenterName . '</h6>';
-		$media_dev_presenters .= 	'<span class="bbg__profile-excerpt__occupation">' . $presenterTitle . '</span>';
-		$media_dev_presenters .= '</li>';
+		$media_dev_presenters .= '<p class="sidebar-article-title">' . $presenterName . '</p>';
+		$media_dev_presenters .= '<p class="sans">' . $presenterTitle . '</p>';
 	}
-	$media_dev_presenters .= '</ul>';
+	$media_dev_presenters .= '</aside>';
 }
 
 $media_dev_addtl_images = get_field('media_dev_additional_images');
 if (!empty($media_dev_addtl_images)) {
 	$addtl_images = '';
-	// var_dump($media_dev_addtl_images);
-	foreach($media_dev_addtl_images as $addtl_dev_image) {
-		foreach($addtl_dev_image as $media_image) {
-			$addtl_image_set .= '<div><img src="' . $media_image['url'] . ' alt="Additional media image"></div>';
+	if (!empty($addtl_images)) {
+		foreach($media_dev_addtl_images as $addtl_dev_image) {
+			foreach($addtl_dev_image as $media_image) {
+				$addtl_image_set .= '<div><img src="' . $media_image['url'] . ' alt="Additional media image"></div>';
+			}
 		}
 	}
 
@@ -536,7 +534,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 							$contactPostIDs = get_post_meta( $post->ID, 'contact_post_id', true );
 							renderContactCard($contactPostIDs);
 
-							if (!empty($media_dev_addtl_images)) {
+							if (!empty($addtl_image_set)) {
 								echo $addtl_image_set;
 							}
 						?>
@@ -546,20 +544,20 @@ if ($numLogos > 0 && $numLogos < 3) {
 				</div>
 			</div>
 			<!-- BEGIN SIDEBAR -->
-			<aside class="side-content-container">
+			<div class="side-content-container">
 	<?php } else { // TWO COLUMNS ?>
 					</div> <!-- END .main-content-container -->
 					<div class="side-content-container">
 	<?php } ?>
-			<h5>Share </h5>
-			<article>
+			<aside>
+				<h3 class="sidebar-section-header">Share </h3>
 				<a href="<?php echo $fbUrl; ?>">
 					<span class="bbg__article-share__icon facebook"></span>
 				</a>
 				<a href="<?php echo $twitterURL; ?>">
 					<span class="bbg__article-share__icon twitter"></span>
 				</a>
-			</article>
+			</aside>
 			<?php
 				if ($includeRelatedProfile) {
 					echo $relatedProfile;
@@ -571,7 +569,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 				echo getInterviewees();
 
 				if ($includeMap  && $mapLocation) {
-					$sidebar_map  = '<h5>' . $mapHeadline . '</h5>';
+					$sidebar_map  = '<h3 class="sidebar-section-header">' . $mapHeadline . '</h3>';
 					$sidebar_map .= '<div id="map" class="bbg__locator-map">';
 					$sidebar_map .= 	'<p>' . $mapDescription . '</p>';
 					$sidebar_map .= '</div>';
@@ -597,7 +595,7 @@ if ($numLogos > 0 && $numLogos < 3) {
 			?>
 
 	<?php if ($page_columns == 3) { ?>
-			</aside>
+			</div>
 		</div><!-- .outer-container -->
 	<?php } else { ?>
 					</div>
@@ -608,16 +606,14 @@ if ($numLogos > 0 && $numLogos < 3) {
 </article><!-- #post-## -->
 </div><!-- END #main -->
 
-<?php
-if ($media_dev_map) {
-?>
+<?php if (!empty($media_dev_map) && !empty($mapHeadline)) { ?>
 
 <script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
 <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
 <script type="text/javascript">
 	L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
 	var map = L.mapbox.map('map-featured', 'mapbox.streets')
-	<?php echo '.setView(['. $media_dev_lat . ', ' . $media_dev_lng . '], ' . $zoom . ');'; ?>
+	<?php echo '.setView(['. $media_dev_map['lat'] . ', ' . $media_dev_map['lng'] . '], ' . $zoom . ');'; ?>
 	// MEDIA DEV JS
 	map.scrollWheelZoom.disable();
 	var markers = L.mapbox.featureLayer();
@@ -633,7 +629,7 @@ if ($media_dev_map) {
 		geometry: {
 			type: 'Point',
 			coordinates: [
-				<?php echo $media_dev_lng . ', ' . $media_dev_lat; ?>
+				<?php echo $media_dev_map['lng'] . ', ' . $media_dev_map['lat']; ?>
 			]
 		},
 		properties: {

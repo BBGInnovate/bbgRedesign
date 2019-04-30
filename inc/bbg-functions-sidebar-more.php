@@ -69,7 +69,7 @@
 				}
 
 				$interviewees_list .= '<div>';
-				$interviewees_list .= 	'<h5>' . $interviewees_label . '</h5>';
+				$interviewees_list .= 	'<h3 class="sidebar-section-header">' . $interviewees_label . '</h3>';
 				$interviewees_list .= 	'<ul class="unstyled-list">';
 				foreach ($list_items as $interview_item) {
 					$interviewees_list .= 		$interview_item;

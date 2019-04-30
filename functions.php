@@ -552,7 +552,9 @@ if ( ! function_exists( 'bbginnovate_post_categories' ) ) :
 				}
 			}
 		}
-		return $output;
+		if (!empty($output)) {
+			return $output;
+		}
 	}
 endif;
 

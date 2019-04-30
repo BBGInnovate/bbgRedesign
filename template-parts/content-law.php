@@ -56,7 +56,7 @@ include get_template_directory() . '/inc/shared_sidebar.php';
 
 				<!-- SOCIAL MEDIA -->
 				<article>
-					<h5>Share</h5>
+					<h3 class="sidebar-section-header">Share</h3>
 					<a href="<?php echo $fbUrl; ?>">
 						<span class="bbg__article-share__icon facebook"></span>
 					</a>
