@@ -80,22 +80,22 @@ if ($includeSidebar) {
 				$sidebarLinkImage = get_sub_field('sidebar_link_image');
 				$sidebarLinkDescription = get_sub_field('sidebar_link_description', false);
 
-				$external_links  = '<article>';
+				$external_links  = '<aside>';
 				if ($sidebarLinkImage && $sidebarLinkImage != "") {
 					$external_links .= '<a target="blank" href="' . $sidebarLinkLink . '">';
 					$external_links .= 		'<img class="sans" src="' . $sidebarLinkImage['sizes']['medium'] . '" alt="Image link">';
 					$external_links .= '</a>';
 				}
-				$external_links .= 		'<h6>';
+				$external_links .= 		'<h4 class="sidebar-article-title">';
 				$external_links .= 			'<a target="blank" href="' . $sidebarLinkLink . '">' . $sidebarLinkTitle . '</a>';
-				$external_links .= 		'</h6>';
+				$external_links .= 		'</h4>';
 
 				if ($sidebarLinkDescription != "") {
 					$external_links .= '<p class="sans">';
 					$external_links .= 		$sidebarLinkDescription;
 					$external_links .= '</p>';
 				}
-				$external_links .= '</article>';
+				$external_links .= '</aside>';
 
 				$sidebar_markup .= $external_links;
 			} else if (get_row_layout() == 'sidebar_internal_link') {
@@ -103,8 +103,8 @@ if ($includeSidebar) {
 				$sidebarInternalLocation = get_sub_field('sidebar_internal_location');
 				$sidebarInternalDescription = get_sub_field('sidebar_internal_description', false);
 
-				$internal_links  = '<article>';
-				$internal_links .= 	'<h6>';
+				$internal_links  = '<aside>';
+				$internal_links .= 	'<h4 class="sidebar-article-title">';
 				$internal_links .= 		'<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
 				if ($sidebarInternalTitle && $sidebarInternalTitle != "") {
 					$internal_links .= $sidebarInternalTitle;
@@ -112,11 +112,11 @@ if ($includeSidebar) {
 					$internal_links .= $sidebarInternalLocation -> post_title;
 				}
 				$internal_links .= 		'</a>';
-				$internal_links .= 	'</h6>';
+				$internal_links .= 	'</h4>';
 				if (!empty($sidebarInternalDescription)) {
 					$internal_links .= 	$sidebarInternalDescription;
 				}
-				$internal_links .= '</article>';
+				$internal_links .= '</aside>';
 				$sidebar_markup .= $internal_links;
 			} else if (get_row_layout() == 'sidebar_photo') {
 				$sidebarPhotoImage = get_sub_field('sidebar_photo_image');
@@ -508,10 +508,10 @@ if ($listsInclude) {
 							$sidebarDownloadsLinkName = $name;
 						}
 
-						$download_list .= '<h6>';
+						$download_list .= '<h4 class="sidebar-article-title">';
 						$download_list .= 	'<a target="_blank" href="' . $fileLink . '">' . $sidebarDownloadsLinkName . '</a>';
 						$download_list .= 	'<span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
-						$download_list .= '<h6>';
+						$download_list .= '<h4>';
 					}
 					$s .= $download_list;
 				}
@@ -535,9 +535,9 @@ if ($listsInclude) {
 							$title = $sidebarInternalLinkObj->post_title;
 							$sidebarInternalLinkName = $title;
 						}
-						$sidebar_internal_links .= '<h6>';
+						$sidebar_internal_links .= '<h4 class="sidebar-article-title">';
 						$sidebar_internal_links .= 	'<a href="' . $url . '">' . $sidebarInternalLinkName . '</a>';
-						$sidebar_internal_links .= '</h6>';
+						$sidebar_internal_links .= '</h4>';
 					}
 					$s .= $sidebar_internal_links;
 				} else {

@@ -1,78 +1,87 @@
 <?php
-
-	function getJobs() {
-		$jobsFilepath = get_template_directory() . "/external-feed-cache/jobcache.json";
+	function get_jobs() {
+		$jobsFilepath = get_template_directory() . '/external-feed-cache/jobcache.json';
 		if ( fileExpired( $jobsFilepath, 90 )  ) {  //1440 min = 1 day
-			$jobsUrl = 'https://data.usajobs.gov/api/search?Organization=IB00';
-			$apiKey = USAJOBS_API_KEY;	//USAJOBS_API_KEY is set in wp-config.php
+			$jobs_url = 'https://data.usajobs.gov/api/search?Organization=IB00';
+			$api_key = USAJOBS_API_KEY;	// USAJOBS_API_KEY is set in wp-config.php
 			$host = 'data.usajobs.gov';
 			$ch = curl_init();
 			$timeout = 5;
-			curl_setopt( $ch, CURLOPT_URL, $jobsUrl );
-			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-			curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, $timeout );
+			curl_setopt($ch, CURLOPT_URL, $jobs_url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 
-			curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
-				'Authorization-Key: ' . $apiKey,
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Authorization-Key: ' . $api_key,
 				'Host: ' . $host
 			));
 
 			$result = curl_exec($ch);
-			curl_close( $ch );
-			if ( $result !== false && $result != "" ) {
-				file_put_contents( $jobsFilepath, $result );
+			curl_close($ch);
+			if ($result !== false && $result != "") {
+				file_put_contents($jobsFilepath, $result);
 			} else {
-				$result = file_get_contents( $jobsFilepath );
+				$result = file_get_contents($jobsFilepath);
 			}
 		} else {
-			$result = file_get_contents( $jobsFilepath );
+			$result = file_get_contents($jobsFilepath);
 		}
-		$jobs = json_decode( $result, true );
+		$jobs = json_decode($result, true);
 		return $jobs;
 	}
 
-	function dCompare( $a, $b ) {
+	function dCompare($a, $b) {
 	    $t1 = ($a['endDateTimestamp']);
 	    $t2 = ($b['endDateTimestamp']);
 	    return $t1 - $t2;
 	}
 
 	function outputJoblist() {
-		$jobsObj = getJobs();
-		$s = "";
-		if ( $jobsObj['SearchResult']['SearchResultCount'] == 0 ) {
-			$s = "No federal job opportunities are currently available on <a href='https://www.usajobs.gov/'>USAjobs.gov</a>.<br />";
+		$jobs_object = get_jobs();
+		if ($jobs_object['SearchResult']['SearchResultCount'] == 0) {
+			$jobs_table = 'No federal job opportunities are currently available on <a href="https://www.usajobs.gov/">USAjobs.gov</a>.<br>';
 		} else {
-			$jobSearchLink = 'https://www.usajobs.gov/Search?keyword=Broadcasting+Board+of+Governors&amp;Location=&amp;AutoCompleteSelected=&amp;search=Search';
-			$s = "<p class='bbg__article-sidebar__tagline'>Includes job postings from Voice of America and Office of Cuba Broadcasting. All federal job opportunities are available on <a target='_blank' href='$jobSearchLink'>USAjobs.gov</a></p>";
-			$jobs = $jobsObj['SearchResult']['SearchResultItems'];
+			$job_search_link = 'https://www.usajobs.gov/Search?keyword=Broadcasting+Board+of+Governors&amp;Location=&amp;AutoCompleteSelected=&amp;search=Search';
+			$jobs_table = '<p class="bbg__article-sidebar__tagline">';
+			$jobs_table = 	'Includes job postings from Voice of America and Office of Cuba Broadcasting. All federal job opportunities are available on <a target="_blank" href="' . $job_search_link . '">USAjobs.gov</a>';
+			$jobs_table = '</p>';
+			$jobs = $jobs_object['SearchResult']['SearchResultItems'];
 			//sort by end date, and add formatted end date
-			$fixedJobs = array();
-			for ( $i = 0; $i < count( $jobs ); $i++ ) {
+			$fixed_jobs = array();
+			for ($i = 0; $i < count($jobs); $i++) {
 				$j = &$jobs[$i]['MatchedObjectDescriptor'];
-				$dateObj = date_parse($j['PositionEndDate']);
-				$endDateTimestamp = mktime( 0, 0, 0, $dateObj['month'], $dateObj['day'], $dateObj['year'] );
-				$j['formatted_end_date'] = date( 'm/d/Y', $endDateTimestamp );
+				$date_object = date_parse($j['PositionEndDate']);
+				$endDateTimestamp = mktime( 0, 0, 0, $date_object['month'], $date_object['day'], $date_object['year'] );
+				$j['formatted_end_date'] = date('m/d/Y', $endDateTimestamp);
 				$j['endDateTimestamp'] = $endDateTimestamp;
-				$fixedJobs[] = $j;
+				$fixed_jobs[] = $j;
 			}
-			$jobs = $fixedJobs;
-			usort( $jobs, 'dCompare' );
-			$s .= '<table class="usa-table-borderless bbg__jobs__table">';
-			$s .= '<thead><tr><th scope="col">Job</th><th scope="col">Closing date</th></tr></thead>';
-			$s .= '<tbody>';
+			$jobs = $fixed_jobs;
+			usort($jobs, 'dCompare');
+			$jobs_table  = '<table class="usa-table-borderless bbg__jobs__table">';
+			$jobs_table .= 	'<thead>';
+			$jobs_table .= 		'<tr>';
+			$jobs_table .= 			'<th scope="col"><span class="sidebar-paragraph-header">Job</span>';
+			$jobs_table .= 		'</th>';
+			$jobs_table .= 			'<th scope="col"><span class="sidebar-paragraph-header">Closing date</span></th>';
+			$jobs_table .= 		'</tr>';
+			$jobs_table .= 	'</thead>';
+			$jobs_table .= 	'<tbody>';
 
-			for ( $i = 0; $i < count( $jobs ); $i++ ) {
+			for ($i = 0; $i < count($jobs); $i++) {
 				$j = $jobs[$i];
 				$url = $j['PositionURI'];
 				$title = $j['PositionTitle'];
 				$endDate = $j['formatted_end_date'];
-				$s .= '<tr><td><a target="_blank" href="' . $url . '" class="bbg__jobs-list__title">' . $title . '</a></td><td>' . $endDate . '</td></tr>';
-
+				$jobs_table .= '<tr>';
+				$jobs_table .= 	'<td><span class="sidebar-article-title"><a target="_blank" href="' . $url . '">' . $title . '</a></span></td>';
+				$jobs_table .= 	'<td>' . $endDate . '</td>';
+				$jobs_table .= '</tr>';
 			}
-			$s .= '</tbody></table>';
+			$jobs_table .= 	'</tbody>';
+			$jobs_table .= '</table>';
 		}
-		return $s;
+		return $jobs_table;
 	}
 
 	// Add shortcode to output the jobs list
@@ -117,7 +126,7 @@
 
 				$employee  = '<div class="grid-third">';
 				$employee .= 	'<a href="' . $permalink . '"><img src="' . $profilePhoto . '"></a>';
-				$employee .= 	'<h4><a href="' . $permalink . '">' . $firstName . ' ' . $lastName . '</a></h4>';
+				$employee .= 	'<h4 class="article-title"><a href="' . $permalink . '">' . $firstName . ' ' . $lastName . '</a></h4>';
 				$employee .= 	'<p class="sans">' . $occupation . '</p>';
 				$employee .= '</div>';
 

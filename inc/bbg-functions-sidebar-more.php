@@ -42,9 +42,9 @@
 						$title = $profile -> occupation; // custom field
 
 						$internal_interviews  = '<li>';
-						$internal_interviews .= 	'<h6>';
+						$internal_interviews .= 	'<h4 class="sidebar-article-title">';
 						$internal_interviews .= 		'<a href="' . $url . '">' . $name . '</a>';
-						$internal_interviews .= 	'</h6>';
+						$internal_interviews .= 	'</h4>';
 						$internal_interviews .= 	'<span class="bbg__profile-excerpt__occupation">' . $title . '</span>';
 						$internal_interviews .= '</li>';
 						array_push($list_items, $internal_interviews);
@@ -59,9 +59,9 @@
 						$externalURL = $extName['interviewee_url'];
 
 						$external_interviews  = '<li>';
-						$external_interviews .= 	'<h6>';
+						$external_interviews .= 	'<h4 class="sidebar-article-title">';
 						$external_interviews .= 		'<a href="' . $externalURL . '">' . $externalName . '</a>';
-						$external_interviews .= 	'</h6>';
+						$external_interviews .= 	'</h4>';
 						$external_interviews .= 	'<span class="bbg__profile-excerpt__occupation">' . $externalTitle . '</span>';
 						$external_interviews .= '</li>';
 						array_push($list_items, $external_interviews);

@@ -71,7 +71,7 @@
     font-size: 1.7rem;
     line-height: 2.1rem;
     font-weight: $font-bold;
-    color: $color-blue-darkest;
+    color: $color-blue-darker;
     margin: 0 0 1.5rem 0;
 }
 .sidebar-article-title,
@@ -85,50 +85,15 @@
     margin: 0 0 0.5rem 0;
 }
 
-h4,
-h4 a:link,
-h4 a:visited {
-    // font-family: $font-sans;
-    // font-size: 2.2rem;
-    // line-height: 2.6rem;
-    // font-weight: $font-light;
-    // color: $color-blue;
-    // margin: 0 0 0.5rem 0;
-    // .sans {display: inline;}
-}
-h5,
-h5 a:link,
-h5 a:visited {
+.sidebar-paragraph-header,
+.sidebar-paragraph-header a:link,
+.sidebar-paragraph-header a:visited {
     font-family: $font-sans;
     font-size: 1.5rem;
     line-height: 1.8rem;
     font-weight: $font-bold;
-    text-transform: uppercase;
-    color: $color-taupe-dark;
-    margin: 0 0 1.5rem 0;
-}
-
-h6,
-h6 a:link,
-h6 a:visited,
-.paragraph-header,
-.paragraph-header a:link,
-.paragraph-header a:visited {
-    font-family: $font-serif;
-    font-size: 2rem;
-    line-height: 2.6rem;
-    font-weight: $font-bold;
-    text-transform: none;
-    color: #545454;
-    margin: 0 0 0.5rem 0;
-
-    p.sans {
-        font-family: $font-sans;
-        font-weight: $font-normal;
-        color: #545454;
-        font-size: 1.6rem;
-        line-height: 2rem;
-    }
+    color: $black6;
+    margin: 0 0 1rem 0;
 }
 // END HEADER STYLES
 

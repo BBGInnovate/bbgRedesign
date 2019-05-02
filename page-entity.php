@@ -84,21 +84,21 @@ $appLink = get_post_meta($id, 'entity_mobile_apps_link', true);
 $primaryLanguage = get_post_meta($id, 'entity_primary_language', true);
 
 if ($budget != "") {
-	$budget = '<li><span class="paragraph-header">Annual budget: </span>' . $budget . '</li>';
+	$budget = '<li><span class="sidebar-article-title">Annual budget: </span>' . $budget . '</li>';
 }
 if ($employees != "") {
 	$employees = number_format( floatval( $employees ), 0, '.', ',' );
-	$employees = '<li><span class="paragraph-header">Employees: </span>' . $employees . '</li>';
+	$employees = '<li><span class="sidebar-article-title">Employees: </span>' . $employees . '</li>';
 }
 if ($languages != "") {
 	if ($languages == "1"){
-		$languages = '<li><span class="paragraph-header">Language supported: </span>' . $primaryLanguage . '</li>';
+		$languages = '<li><span class="sidebar-article-title">Language supported: </span>' . $primaryLanguage . '</li>';
 	} else {
-		$languages = '<li><span class="paragraph-header">Languages supported: </span>' . $languages . '</li>';
+		$languages = '<li><span class="sidebar-article-title">Languages supported: </span>' . $languages . '</li>';
 	}
 }
 if ($audience != "") {
-	$audience = '<li><span class="paragraph-header">Audience estimate: </span>' . $audience . '</li>';
+	$audience = '<li><span class="sidebar-article-title">Audience estimate: </span>' . $audience . '</li>';
 }
 if ($appLink != "") {
 	$app_link_markup  = '<h3 class="sidebar-section-header">Download the apps</h3>';
@@ -130,8 +130,8 @@ $all_media_clips = new WP_Query($press_clip_query_args);
 
 // PRESS 3. CSS SPECIFIC TO PRESS CLIPPINGS
 $press_clippings_style  = '<style>';
-$press_clippings_style .= 	'.entity_press_clippings h6 {margin-bottom: 1rem}';
-$press_clippings_style .= 	'.entity_press_clippings h6 .sans {font-size: 0.9em; font-weight: 500;} ';
+$press_clippings_style .= 	'.entity_press_clippings .sidebar-article-title {margin-bottom: 1rem}';
+$press_clippings_style .= 	'.entity_press_clippings .sidebar-article-title .sans {font-size: 0.9em; font-weight: 500;} ';
 $press_clippings_style .= '</style>';
 echo $press_clippings_style;
 
@@ -482,7 +482,7 @@ get_header();
 		</div>
 		<!-- BEGIN SIDEBAR -->
 		<div class="side-content-container">
-			<div>
+			<aside>
 				<div id="social-share">
 					<h3 class="sidebar-section-header">Share</h3>
 					<a href="<?php echo get_field('entity_facebook'); ?>" target="_blank">
@@ -492,7 +492,7 @@ get_header();
 						<span class="bbg__article-share__icon twitter"></span>
 					</a>
 				</div>
-			</div>
+			</aside>
 
 			<div>
 			<?php
@@ -504,7 +504,7 @@ get_header();
 
 		<!-- FAST FACTS -->
 		<?php
-			echo '<div>';
+			echo '<aside>';
 			if ($budget != "" || $employees != "" || $languages != "" || $audience != "" || $app_link_markup != "") {
 				echo '<h3 class="sidebar-section-header">Fast facts</h3>';
 			}
@@ -514,36 +514,36 @@ get_header();
 			echo 		$languages;
 			echo 		$audience;
 			echo 	'</ul>';
-			echo '</div>';
+			echo '</aside>';
 
 			$ethics_data = get_journalistic_code_of_ethics_data();
 			$ethics_parts = build_ethics_file_parts($ethics_data);
 			if (!empty($ethics_parts)) {
-				echo '<div>';
+				echo '<aside>';
 				echo '<h3 class="sidebar-section-header">Journalistic Standards</h3>';
 				foreach($ethics_parts as $ethic) {
 					echo $ethic;
 				}
-				echo '</div>';
+				echo '</aside>';
 			}
 
-			echo '<div>';
+			echo '<aside>';
 			echo 	'<h3 class="sidebar-section-header">Press Clippings</h3>';
 			echo 	'<div class="media-clips-entities-dropdown">';
 			echo 		'<ul class="unstyled-list" style="margin-top: 0;">';
 			echo 			'<li>';
-			echo 				'<h6>';
+			echo 				'<h4 class="sidebar-section-header">';
 			echo 					'<a href="' . add_query_arg('clip-type', 'about-' . $abbreviation . '', '/press-clippings-archive/') . '">ABOUT ' . $abbreviation . '<i class="fas fa-angle-right"></i></a>';
-			echo 				'</h6>';
+			echo 				'</h4>';
 			echo 			'</li>';
 			echo 			'<li>';
-			echo 				'<h6>';
+			echo 				'<h4 class="sidebar-section-header">';
 			echo 					'<a href="' . add_query_arg('clip-type', 'citation-' . $abbreviation . '', '/press-clippings-archive/') . '">' . $abbreviation . ' CITATIONS<i class="fas fa-angle-right"></i></a>';
-			echo 				'</h6>';
+			echo 				'</h4>';
 			echo 			'</li>';
 			echo 		'</ul>';
 			echo 	'</div>';
-			echo '</div>';
+			echo '</aside>';
 
 			echo '<div>';
 			echo 	$app_link_markup;
@@ -567,7 +567,7 @@ get_header();
 					}
 					$rss_markup .= 		'</div>';
 					$rss_markup .= 		'<div class="post-copy">';
-					$rss_markup .= 			'<h6><a href="' . $o['url'] . '">' . $o['title'] . '</a></h6>';
+					$rss_markup .= 			'<h4 class="sidebar-article-title"><a href="' . $o['url'] . '">' . $o['title'] . '</a></h4>';
 					$rss_markup .= 			'<p class="sans">' . $short_copy . '</p>';
 					$rss_markup .= 		'</div>';
 					$rss_markup .= 	'</div>';
@@ -580,7 +580,7 @@ get_header();
 				if (count($threats)) {
 					$maxThreatsStories = 3;
 
-					$threats_markup  = '<h6 class="bbg__label small"><a href="/threats-to-press/">Threats to Press</a></h6>';
+					$threats_markup  = '<h4 class="sidebar-article-title" class="bbg__label small"><a href="/threats-to-press/">Threats to Press</a></h4>';
 					$threats_markup .= '<ul class="bbg__rss__list">';
 					for ($i = 0; $i < min($maxRelatedStories, count($threats)); $i++) {
 						$o = $threats[$i];
@@ -606,8 +606,8 @@ get_header();
 
 				$cited_post_list .= 	'<h3 class="sidebar-section-header">' . $cur_press_entity . ' Cited in the News</h3>';
 				foreach ($press_clippings_data as $cited_post) {
-					$cited_post_list .= '<h6><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a> ';
-					$cited_post_list .= '<span class="sans">(' . $cited_post['outlet'] . ')</span></h6>';
+					$cited_post_list .= '<h4 class="sidebar-article-title"><a href="' . $cited_post['story_link'] . '" target="_blank">' . $cited_post['title'] . '</a> ';
+					$cited_post_list .= '<span class="sans">(' . $cited_post['outlet'] . ')</span></h4>';
 				}
 				$cited_post_list .= '<p><a class="read-more" href="' . add_query_arg('entity', $cur_press_entity, '/press-citing-listing/') . '">Click here to see full list</a></p>';
 				$cited_post_list .= '</div>';

@@ -175,7 +175,7 @@ if (is_page('media-development')) {
 		}
 
 		$post_accordion  = '';
-		$post_accordion .= '<h5>Trainings by year</h5>';
+		$post_accordion .= '<h3 class="sidebar-section-header">Trainings by year</h3>';
 		for ($i = 2030; $i >= 2000; $i--) {
 			if (isset($trainingByYear[$i])) {
 				$post_accordion .= '<div class="usa-accordion bbg__committee-list">';
@@ -194,7 +194,7 @@ if (is_page('media-development')) {
 					$country = $o['country'];
 					$story_link = $o['storyLink'];
 
-					$post_accordion .= 			'<h6><a href="' . $story_link . '">' . $title . '</a><h6>';
+					$post_accordion .= 			'<p class="sidebar-article-title"><a href="' . $story_link . '">' . $title . '</a></p>';
 					$post_accordion .= 			'<p class="sans">' . $country . '</p>';
 				}
 				$post_accordion .= 			'</div>';

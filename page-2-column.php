@@ -138,22 +138,22 @@ get_header();
 							$secondaryColumnContent = get_field('secondary_column_content');
 
 							if ($secondaryColumnContent != "") {
-								echo '<div class="sidebar-section">';
+								echo '<aside>';
 								if ($secondaryColumnLabel != "") {
 									echo '<h2 class="sidebar-section-header">' . $secondaryColumnLabel . '</h2>';
 								}
 								echo $secondaryColumnContent;
-								echo '</div>';
+								echo '</aside>';
 							}
 							if ($includeSidebar) {
-								echo '<div class="sidebar-section">';
+								echo '<aside>';
 								echo 	$sidebar;
-								echo '</div>';
+								echo '</aside>';
 							}
 							if ($listsInclude) {
-								echo '<div class="sidebar-section">';
+								echo '<aside>';
 								echo 	$sidebarDownloads;
-								echo '</div>';
+								echo '</aside>';
 							}
 						?>
 					</div>
@@ -161,32 +161,6 @@ get_header();
 			</div>
 		</div>
 	</div>
+</main>
 
-	<div class="outer-container">
-		<footer class="entry-footer bbg-post-footer 1234">
-			<?php
-				edit_post_link(
-					sprintf(
-						/* translators: %s: Name of current post */
-						esc_html__('Edit %s', 'bbginnovate'),
-						the_title('<span class="screen-reader-text">"', '"</span>', false)
-					),
-					'<span class="edit-link">',
-					'</span>'
-				);
-			?>
-		</footer><!-- .entry-footer -->
-	</div><!-- .usa-grid -->
-
-	<div class="bbg-post-footer">
-		<?php
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-		?>
-	</div>
-</main><!-- #main -->
-
-<?php /*get_sidebar();*/ ?>
 <?php get_footer(); ?>

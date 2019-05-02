@@ -2726,7 +2726,7 @@ form[id^=fscf_form] {
   font-size: 1.7rem;
   line-height: 2.1rem;
   font-weight: 700;
-  color: #283166;
+  color: #284f91;
   margin: 0 0 1.5rem 0; }
 
 .sidebar-article-title,
@@ -2739,41 +2739,15 @@ form[id^=fscf_form] {
   color: #3f7ad1;
   margin: 0 0 0.5rem 0; }
 
-h5,
-h5 a:link,
-h5 a:visited {
+.sidebar-paragraph-header,
+.sidebar-paragraph-header a:link,
+.sidebar-paragraph-header a:visited {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 1.5rem;
   line-height: 1.8rem;
   font-weight: 700;
-  text-transform: uppercase;
-  color: #8b8278;
-  margin: 0 0 1.5rem 0; }
-
-h6,
-h6 a:link,
-h6 a:visited,
-.paragraph-header,
-.paragraph-header a:link,
-.paragraph-header a:visited {
-  font-family: "Carrara-Regular", serif;
-  font-size: 2rem;
-  line-height: 2.6rem;
-  font-weight: 700;
-  text-transform: none;
-  color: #545454;
-  margin: 0 0 0.5rem 0; }
-  h6 p.sans,
-  h6 a:link p.sans,
-  h6 a:visited p.sans,
-  .paragraph-header p.sans,
-  .paragraph-header a:link p.sans,
-  .paragraph-header a:visited p.sans {
-    font-family: "Alegreya Sans", sans-serif;
-    font-weight: 400;
-    color: #545454;
-    font-size: 1.6rem;
-    line-height: 2rem; }
+  color: #666666;
+  margin: 0 0 1rem 0; }
 
 p {
   font-family: "Carrara-Regular", serif;
@@ -2991,7 +2965,8 @@ a:not(.bbg__article-share__icon):focus *[class*="thumbnail"] {
     .media-clips-entities-dropdown ul li a {
       display: inline-block;
       width: 100%;
-      padding: 1.5rem; }
+      padding: 1.5rem;
+      margin-bottom: 0; }
     .media-clips-entities-dropdown ul li ul {
       padding: 0 1.5rem;
       margin-bottom: 0; }
