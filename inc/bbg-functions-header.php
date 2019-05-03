@@ -40,9 +40,11 @@ function display_splash_overlay() {
 	$splash .= 		'jQuery(".ck-set").click(function(e) {';
 	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
 	$splash .= 			'jQuery("#splash-bg").hide();';
+	$splash .= 			'jQuery("iframe").attr("src", "");';
 	$splash .= 		'});';
 	$splash .= 		'jQuery("#splash-link").click(function(e) {';
 	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
+	$splash .= 			'jQuery("iframe").attr("src", "");';
 	$splash .= 		'});';
 	$splash .= 	'});';
 	$splash .= '</script>';
