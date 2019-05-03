@@ -9,7 +9,7 @@ function display_splash_overlay() {
 	$splash .= 		'</a>';
 	
 	$splash .= 		'<div id="iframe-container">';
-	$splash .= 			'<iframe src="http://dev.usagm.com/wp-content/media/world_press_freedom_day_2019/Fallen_Journalists_Final_lossy.mp4" frameborder="0"></iframe>';
+	$splash .= 			'<iframe src="https://www.usagm.gov/wp-content/media/world_press_freedom_day_2019/Fallen_Journalists_Final_lossy.mp4" frameborder="0"></iframe>';
 	$splash .= 		'</div>';
 
 	$splash .= 		'<div id="splash-text">';
