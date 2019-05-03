@@ -3,24 +3,34 @@ function display_splash_overlay() {
 	$story_link_items = get_field('splash_story_link', 'options');
 
 	$splash  = '<div id="splash-bg">';
-	$splash .= 	'<div id="text-box" class="bbg__quotation">';
+
 	$splash .= 		'<a id="close-splash" class="ck-set" href="javascript:void(0)">';
-	$splash .= 			'<i id="dismissBanner" style="color:#CCC; cursor:pointer;" aria-role="button" class="fa fa-times-circle"></i>';
+	$splash .= 			'<i id="dismissBanner" class="far fa-times-circle"></i>';
 	$splash .= 		'</a>';
-	$splash .= 		'<h2 class="bbg__quotation-text--large">';
-	$splash .= 			get_field('splash_quote', 'option');
-	$splash .= 		'</h2>';
-	$splash .= 		'<a class="ck-set" href="';
-	$splash .= 			$story_link_items->guid;
-	$splash .= 			'"><p>';
-	$splash .= 			get_field('splash_link_text', 'option');
-	$splash .= 		'</p></a>';
-	$splash .= 	'</div>';
+	
+	$splash .= 		'<div id="iframe-container">';
+	$splash .= 			'<iframe src="http://dev.usagm.com/wp-content/media/world_press_freedom_day_2019/Fallen_Journalists_Final_lossy.mp4" frameborder="0"></iframe>';
+	$splash .= 		'</div>';
+
+	$splash .= 		'<div id="splash-text">';
+	$splash .= 			'<p id="splash-title">';
+	$splash .= 				'<span class="sc">W</span>orld <span class="sc">P</span>ress <span class="sc">F</span>reedom <span class="sc">D</span>ay';
+	$splash .= 			'</p>';
+	$splash .= 			'<p id="splash-quote">Throughout our agency’s history, we have never lost sight of our mission- to inform, engage and connect people around the world in support of freedom and democracy. Despite some very dark moments, we haven’t been silenced. We will continue to report the truth and find new ways to get independent reporting and programming to citizens worldwide who rely on it.</p>';
+	$splash .= 			'<p><a href="' . get_field('splash_link', 'option') . '">';
+	$splash .= 				"Read CEO John F. Lansing's complete statement";
+	$splash .= 			'</a></p>';
+	$splash .= 			'<img src="' . get_template_directory_uri() . '/img/USAGM-BBG-logo-horiz-White-hires.png" alt="USAGM Logo">';
+	$splash .= 		'</div>';
+
 	$splash .= '</div>';
+
 	$splash .= '<script type="text/javascript">';
 	$splash .= 	'jQuery(document).ready(function() {';
+	$splash .= 		'var bodyHeight = jQuery(document).height();';
+	$splash .= 		'jQuery("#splash-bg").height(bodyHeight);';
 	$splash .= 		'jQuery(".ck-set").click(function(e) {';
-	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
+	// $splash .= 			'setCookie("splashPageDismissed", 1, 7);';
 	$splash .= 			'jQuery("#splash-bg").hide();';
 	$splash .= 		'});';
 	$splash .= 	'});';

@@ -1,3 +1,4 @@
+// LIGHTBOX AND CLOSE BOX RULES
 #splash-bg {
 	position: absolute;
 	z-index: 10000;
@@ -7,27 +8,108 @@
 	height: 100%;
 	background-color: rgba(0,0,0,0.8);
 
-	#text-box {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		text-align: center;
-
-		h2 {color: #d6d7d9;}
-	}
-	a:link, a:visited {
-		color: #ffffff;
-		font-size: 1.1875em;
-		font-weight: 100;
-		text-decoration: underline;
-	}
 	#close-splash {
 		position: absolute;
-		top: -2em;
-		right: -2em;
-		font-size: 1em;
+		top: 0.5em;
+		right: 0.5em;
+		font-size: 2em;
 		color: #ffffff;
 		cursor: pointer;
 	}
 }
+// END LIGHTBOX AND CLOSE BOX RULES
+
+#iframe-container {
+	position: relative;
+	width: 80%;
+	padding-top: 0;
+	padding-bottom: 45%;
+	height: 0;
+	margin: 0 auto 9rem auto;
+
+	iframe {
+		position: absolute;
+		top: 6rem;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+#splash-text {
+	text-align: center;
+	width: 75%;
+	margin: 0 auto;
+
+	p#splash-title {
+		font-family: $font-sans;
+		text-transform: uppercase;
+		font-size: 4rem;
+		line-height: 4rem;
+		font-weight: 700;
+		color: #999999;
+		.sc {font-size: 120%;} // EMULATE SMALL CAPS, NO SMALL CAPS FACE IN THIS GOOGLE FONT
+	}
+	p {
+		font-family: $font-sans;
+		font-size: 2rem;
+		line-height: 3rem;
+		font-weight: 300;
+		color: $color-white;
+		a:link, a:visited {color: $color-taupe-dark; text-decoration: underline;}
+		a:hover, a:visited {color: $black-faint;}
+	}
+	p#splash-quote::before {content: '"';}
+	p#splash-quote::after {content: '"';}
+	img {
+		width: 80%;
+		margin: 0 auto;
+	}
+}
+
+
+@include media($medium-large-screen) {
+	#iframe-container {
+		width: 45%;
+		padding-top: 0;
+		padding-bottom: 25%;
+		margin: 0 auto 12rem auto;
+
+		iframe {top: 6rem;}
+	}
+	#splash-text {
+		p#splash-title {
+			font-size: 5rem;
+			line-height: 6rem;
+		}
+		p {
+			font-size: 3rem;
+			line-height: 4.5rem;
+		}
+		img {width: 40%;}
+	}
+}
+
+@include media($large-screen) {
+	#splash-text {
+		p#splash-title {
+			font-size: 6rem;
+			line-height: 7rem;
+		}
+	}
+}
+
+/* Safari 7.1+ */
+_::-webkit-full-page-media, _:future, :root .iframe-container {
+	@include media($medium-large-screen) {
+		width: 53%;
+	}
+}
+/* Safari 10.1+ */
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) {
+	.iframe-container { 
+		@include media($medium-large-screen) {
+			width: 53%;
+		}
+	}
+}}

@@ -7944,26 +7944,93 @@ a.bbg__kits__intro__more--link {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8); }
-  #splash-bg #text-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center; }
-    #splash-bg #text-box h2 {
-      color: #d6d7d9; }
-  #splash-bg a:link, #splash-bg a:visited {
-    color: #ffffff;
-    font-size: 1.1875em;
-    font-weight: 100;
-    text-decoration: underline; }
   #splash-bg #close-splash {
     position: absolute;
-    top: -2em;
-    right: -2em;
-    font-size: 1em;
+    top: 0.5em;
+    right: 0.5em;
+    font-size: 2em;
     color: #ffffff;
     cursor: pointer; }
+
+#iframe-container {
+  position: relative;
+  width: 80%;
+  padding-top: 0;
+  padding-bottom: 45%;
+  height: 0;
+  margin: 0 auto 9rem auto; }
+  #iframe-container iframe {
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+#splash-text {
+  text-align: center;
+  width: 75%;
+  margin: 0 auto; }
+  #splash-text p#splash-title {
+    font-family: "Alegreya Sans", sans-serif;
+    text-transform: uppercase;
+    font-size: 4rem;
+    line-height: 4rem;
+    font-weight: 700;
+    color: #999999; }
+    #splash-text p#splash-title .sc {
+      font-size: 120%; }
+  #splash-text p {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: 300;
+    color: #ffffff; }
+    #splash-text p a:link, #splash-text p a:visited {
+      color: #8b8278;
+      text-decoration: underline; }
+    #splash-text p a:hover, #splash-text p a:visited {
+      color: #e6e6e6; }
+  #splash-text p#splash-quote::before {
+    content: '"'; }
+  #splash-text p#splash-quote::after {
+    content: '"'; }
+  #splash-text img {
+    width: 80%;
+    margin: 0 auto; }
+
+@media screen and (min-width: 900px) {
+  #iframe-container {
+    width: 45%;
+    padding-top: 0;
+    padding-bottom: 25%;
+    margin: 0 auto 12rem auto; }
+    #iframe-container iframe {
+      top: 6rem; }
+  #splash-text p#splash-title {
+    font-size: 5rem;
+    line-height: 6rem; }
+  #splash-text p {
+    font-size: 3rem;
+    line-height: 4.5rem; }
+  #splash-text img {
+    width: 40%; } }
+
+@media screen and (min-width: 1201px) {
+  #splash-text p#splash-title {
+    font-size: 6rem;
+    line-height: 7rem; } }
+
+/* Safari 7.1+ */
+@media screen and (min-width: 900px) {
+  _::-webkit-full-page-media, _:future, :root .iframe-container {
+    width: 53%; } }
+
+/* Safari 10.1+ */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    @media screen and (min-width: 900px) {
+      .iframe-container {
+        width: 53%; } } } }
 
 html, body {
   height: 100%; }

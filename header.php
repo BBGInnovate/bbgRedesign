@@ -235,9 +235,10 @@ gtag('config', 'UA-124338348-1');
 					$moveUSAbannerBecauseOfAlert = ' bbg__site-alert--active';
 				}
 			}
-			if ($_SERVER['HTTP_HOST'] == "bbgredesign.voanews.com" && !is_user_logged_in()) {
-				display_development_alert_banner("This is the Development Server");
-			}
+			// SHOW DEV TOP BANNER TO AVOID CONFUSION
+			// if ($_SERVER['HTTP_HOST'] == "bbgredesign.voanews.com" && !is_user_logged_in()) {
+			// 	display_development_alert_banner("This is the Development Server");
+			// }
 		?>
 		
 		<!-- OFFICIAL SITE OF USA GOV -->
