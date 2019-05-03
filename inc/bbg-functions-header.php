@@ -37,9 +37,12 @@ function display_splash_overlay() {
 	$splash .= 	'jQuery(document).ready(function() {';
 	$splash .= 		'var bodyHeight = jQuery(document).height();';
 	$splash .= 		'jQuery("#splash-bg").height(bodyHeight);';
-	$splash .= 		'jQuery(".ck-set, #splash-link").click(function(e) {';
+	$splash .= 		'jQuery(".ck-set").click(function(e) {';
 	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
 	$splash .= 			'jQuery("#splash-bg,").hide();';
+	$splash .= 		'});';
+	$splash .= 		'jQuery("#splash-link").click(function(e) {';
+	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
 	$splash .= 		'});';
 	$splash .= 	'});';
 	$splash .= '</script>';
