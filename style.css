@@ -7946,7 +7946,7 @@ a.bbg__kits__intro__more--link {
   background-color: rgba(0, 0, 0, 0.8); }
   #splash-bg #close-splash {
     position: absolute;
-    top: 2em;
+    top: 0.5em;
     right: 0.5em;
     font-size: 2em;
     color: #ffffff;
@@ -7965,6 +7965,9 @@ a.bbg__kits__intro__more--link {
     left: 0;
     width: 100%;
     height: 100%; }
+    #iframe-container iframe video {
+      width: 100%;
+      height: 100%; }
 
 #splash-text {
   text-align: center;
@@ -7977,8 +7980,6 @@ a.bbg__kits__intro__more--link {
     line-height: 4rem;
     font-weight: 700;
     color: #999999; }
-    #splash-text p#splash-title .sc {
-      font-size: 120%; }
   #splash-text p {
     font-family: "Alegreya Sans", sans-serif;
     font-size: 2rem;
@@ -8017,17 +8018,6 @@ a.bbg__kits__intro__more--link {
     line-height: 7rem; } }
 
 /* Safari 7.1+ */
-@media screen and (min-width: 900px) {
-  _::-webkit-full-page-media, _:future, :root .iframe-container {
-    width: 53%; } }
-
-/* Safari 10.1+ */
-@media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) {
-    @media screen and (min-width: 900px) {
-      .iframe-container {
-        width: 53%; } } } }
-
 html, body {
   height: 100%; }
 

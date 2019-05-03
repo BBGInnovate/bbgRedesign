@@ -1,34 +1,56 @@
 <?php
 function display_splash_overlay() {
-	$story_link_items = get_field('splash_story_link', 'options');
+	$include_logo = get_field('include_agency_logo', 'option');
+	$splash_video_url = get_field('splash_video', 'option');
+	$splash_title = get_field('splash_title', 'option');
+	$splash_text = get_field('splash_text', 'option');
+	$splash_byline = get_field('splash_byline', 'option');
+	$splash_link = get_field('splash_link', 'option');
 
+	if (is_user_logged_in()) {
+		echo '<style>#splash-bg #close-splash {top: 2em;}</style>';
+	}
 	$splash  = '<div id="splash-bg">';
 
 	$splash .= 		'<a id="close-splash" class="ck-set" href="javascript:void(0)">';
 	$splash .= 			'<i id="dismissBanner" class="far fa-times-circle"></i>';
 	$splash .= 		'</a>';
 	
-	$splash .= 		'<div id="iframe-container">';
-	$splash .= 			'<iframe src="' . content_url() . '/media/world_press_freedom_day_2019/Fallen_Journalists_Final_lossy.mp4" frameborder="0"></iframe>';
-	$splash .= 		'</div>';
+	if (!empty($splash_video_url)) {
+		$splash .= 	'<div id="iframe-container">';
+		$splash .= 		'<iframe src="' . $splash_video_url . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+		$splash .= 	'</div>';
+	} else {
+		echo '<style>#splash-text {margin-top: 6em;}</style>';
+	}
 
 	$splash .= 		'<div id="splash-text">';
-	$splash .= 			'<p id="splash-title">';
-	$splash .= 				get_field('splash_title', 'option');
-	$splash .= 			'</p>';
-	$splash .= 			'<p id="splash-description">';
-	$splash .= 				get_field('splash_text', 'option');
-	$splash .= 			'</p>';
-	$splash .= 			'<p>';
-	if (!empty(get_field('splash_link', 'option'))) {
-		$splash .= 			'<a id="splash-link" href="' . get_field('splash_link', 'option') . '">';
+	if (!empty($splash_title)) {
+		$splash .= 		'<p id="splash-title">';
+		$splash .= 			$splash_title;
+		$splash .= 		'</p>';
 	}
-	$splash .= 				get_field('splash_byline', 'option');
-	if (!empty(get_field('splash_link', 'option'))) {
-		$splash .= 			'</a>';
+	if (!empty($splash_text)) {
+		$splash .= 			'<p id="splash-description">';
+		$splash .= 				$splash_text;
+		$splash .= 			'</p>';
 	}
-	$splash .= 			'</p>';
-	$splash .= 			'<img src="' . get_template_directory_uri() . '/img/USAGM-BBG-logo-horiz-White-hires.png" alt="USAGM Logo">';
+
+	if (!empty($splash_byline)) {
+		$splash .= 			'<p>';
+		if (!empty($splash_link)) {
+			$splash .= 			'<a id="splash-link" href="' . $splash_link . '">';
+		}
+		$splash .= 					$splash_byline;
+		if (!empty($splash_link)) {
+			$splash .= 			'</a>';
+		}
+		$splash .= 			'</p>';
+	}
+
+	if ($include_logo == 'yes') {
+		$splash .= 			'<img src="' . get_template_directory_uri() . '/img/USAGM-BBG-logo-horiz-White-hires.png" alt="USAGM Logo">';
+	}
 	$splash .= 		'</div>';
 
 	$splash .= '</div>';
