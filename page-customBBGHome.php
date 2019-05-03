@@ -212,7 +212,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		$threat_structure  = '<section class="threats-box" id="homepage-threats">';
 		$threat_structure .= 	'<div class="outer-container">';
 		$threat_structure .= 		'<div class="grid-half" id="threats-main-column">';
-		$threat_structure .= 			'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path('threats-to-press-2')) . '">Threats to Press</a></h2>';
+		$threat_structure .= 			'<h2 class="section-header"><a href="https://www.usagm.gov/news-and-information/threats-to-press/">Threats to Press</a></h2>';
 		$threat_structure .= 			'<article>';
 		$threat_structure .= 				'<div class="article-image">';
 		$threat_structure .= 					'<a href="' . get_the_permalink($threat_article_list[0]) . '">';

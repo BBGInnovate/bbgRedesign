@@ -17,9 +17,15 @@ function display_splash_overlay() {
 	$splash .= 				'<span class="sc">W</span>orld <span class="sc">P</span>ress <span class="sc">F</span>reedom <span class="sc">D</span>ay';
 	$splash .= 			'</p>';
 	$splash .= 			'<p id="splash-quote">Throughout our agency’s history, we have never lost sight of our mission- to inform, engage and connect people around the world in support of freedom and democracy. Despite some very dark moments, we haven’t been silenced. We will continue to report the truth and find new ways to get independent reporting and programming to citizens worldwide who rely on it.</p>';
-	$splash .= 			'<p><a href="' . get_field('splash_link', 'option') . '">';
-	$splash .= 				"Read CEO John F. Lansing's complete statement";
-	$splash .= 			'</a></p>';
+	$splash .= 			'<p>';
+	if (!empty(get_field('splash_link', 'option'))) {
+		$splash .= 			'<a href="' . get_field('splash_link', 'option') . '">';
+	}
+	$splash .= 				"&mdash;CEO John F. Lansing";
+	if (!empty(get_field('splash_link', 'option'))) {
+		$splash .= 			'</a>';
+	}
+	$splash .= 			'</p>';
 	$splash .= 			'<img src="' . get_template_directory_uri() . '/img/USAGM-BBG-logo-horiz-White-hires.png" alt="USAGM Logo">';
 	$splash .= 		'</div>';
 
@@ -30,7 +36,7 @@ function display_splash_overlay() {
 	$splash .= 		'var bodyHeight = jQuery(document).height();';
 	$splash .= 		'jQuery("#splash-bg").height(bodyHeight);';
 	$splash .= 		'jQuery(".ck-set").click(function(e) {';
-	// $splash .= 			'setCookie("splashPageDismissed", 1, 7);';
+	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
 	$splash .= 			'jQuery("#splash-bg").hide();';
 	$splash .= 		'});';
 	$splash .= 	'});';
