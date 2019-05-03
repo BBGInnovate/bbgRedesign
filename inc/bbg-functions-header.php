@@ -21,7 +21,7 @@ function display_splash_overlay() {
 	$splash .= 			'</p>';
 	$splash .= 			'<p>';
 	if (!empty(get_field('splash_link', 'option'))) {
-		$splash .= 			'<a href="' . get_field('splash_link', 'option') . '">';
+		$splash .= 			'<a id="splash-link" href="' . get_field('splash_link', 'option') . '">';
 	}
 	$splash .= 				get_field('splash_byline', 'option');
 	if (!empty(get_field('splash_link', 'option'))) {
@@ -37,9 +37,9 @@ function display_splash_overlay() {
 	$splash .= 	'jQuery(document).ready(function() {';
 	$splash .= 		'var bodyHeight = jQuery(document).height();';
 	$splash .= 		'jQuery("#splash-bg").height(bodyHeight);';
-	$splash .= 		'jQuery(".ck-set").click(function(e) {';
+	$splash .= 		'jQuery(".ck-set, #splash-link").click(function(e) {';
 	$splash .= 			'setCookie("splashPageDismissed", 1, 7);';
-	$splash .= 			'jQuery("#splash-bg").hide();';
+	$splash .= 			'jQuery("#splash-bg,").hide();';
 	$splash .= 		'});';
 	$splash .= 	'});';
 	$splash .= '</script>';
