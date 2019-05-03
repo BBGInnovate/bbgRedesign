@@ -10,7 +10,7 @@
 
 	#close-splash {
 		position: absolute;
-		top: 0.5em;
+		top: 2em;
 		right: 0.5em;
 		font-size: 2em;
 		color: #ffffff;
@@ -58,8 +58,8 @@
 		a:link, a:visited {color: $color-taupe-dark; text-decoration: underline;}
 		a:hover, a:visited {color: $black-faint;}
 	}
-	p#splash-quote::before {content: '"';}
-	p#splash-quote::after {content: '"';}
+	// p#splash-description::before {content: '"';}
+	// p#splash-description::after {content: '"';}
 	img {
 		width: 80%;
 		margin: 0 auto;

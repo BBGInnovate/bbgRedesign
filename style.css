@@ -7946,7 +7946,7 @@ a.bbg__kits__intro__more--link {
   background-color: rgba(0, 0, 0, 0.8); }
   #splash-bg #close-splash {
     position: absolute;
-    top: 0.5em;
+    top: 2em;
     right: 0.5em;
     font-size: 2em;
     color: #ffffff;
@@ -7990,10 +7990,6 @@ a.bbg__kits__intro__more--link {
       text-decoration: underline; }
     #splash-text p a:hover, #splash-text p a:visited {
       color: #e6e6e6; }
-  #splash-text p#splash-quote::before {
-    content: '"'; }
-  #splash-text p#splash-quote::after {
-    content: '"'; }
   #splash-text img {
     width: 80%;
     margin: 0 auto; }

@@ -9,19 +9,21 @@ function display_splash_overlay() {
 	$splash .= 		'</a>';
 	
 	$splash .= 		'<div id="iframe-container">';
-	$splash .= 			'<iframe src="https://www.usagm.gov/wp-content/media/world_press_freedom_day_2019/Fallen_Journalists_Final_lossy.mp4" frameborder="0"></iframe>';
+	$splash .= 			'<iframe src="' . content_url() . '/media/world_press_freedom_day_2019/Fallen_Journalists_Final_lossy.mp4" frameborder="0"></iframe>';
 	$splash .= 		'</div>';
 
 	$splash .= 		'<div id="splash-text">';
 	$splash .= 			'<p id="splash-title">';
-	$splash .= 				'<span class="sc">W</span>orld <span class="sc">P</span>ress <span class="sc">F</span>reedom <span class="sc">D</span>ay';
+	$splash .= 				get_field('splash_title', 'option');
 	$splash .= 			'</p>';
-	$splash .= 			'<p id="splash-quote">Throughout our agency’s history, we have never lost sight of our mission- to inform, engage and connect people around the world in support of freedom and democracy. Despite some very dark moments, we haven’t been silenced. We will continue to report the truth and find new ways to get independent reporting and programming to citizens worldwide who rely on it.</p>';
+	$splash .= 			'<p id="splash-description">';
+	$splash .= 				get_field('splash_text', 'option');
+	$splash .= 			'</p>';
 	$splash .= 			'<p>';
 	if (!empty(get_field('splash_link', 'option'))) {
 		$splash .= 			'<a href="' . get_field('splash_link', 'option') . '">';
 	}
-	$splash .= 				"&mdash;CEO John F. Lansing";
+	$splash .= 				get_field('splash_byline', 'option');
 	if (!empty(get_field('splash_link', 'option'))) {
 		$splash .= 			'</a>';
 	}
