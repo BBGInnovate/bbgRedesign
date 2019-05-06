@@ -2652,6 +2652,9 @@ form[id^=fscf_form] {
 .feature-spot {
   margin-left: calc(25% - 25px + 40px); }
 
+h3 {
+  clear: none; }
+
 .testing_staging {
   color: green; }
 

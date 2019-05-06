@@ -201,9 +201,9 @@ function outputSeniorManagement($type) {
 				$b .= 	'</a>';
 			}
 
-			$b .= 	'<h4>';
+			$b .= 	'<h3 class="article-title">';
 			$b .= 		'<a href="' . get_the_permalink($id) . '">' . $profileName . '</a>';
-			$b .= 	'</h4>';
+			$b .= 	'</h3>';
 
 			$b .= 	'<p class="bbg__profile-excerpt__text">';
 			$b .= 		'<span class="bbg__profile-excerpt__occupation">' . $actingTitle . $occupation . '</span>';
