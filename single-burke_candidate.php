@@ -24,17 +24,6 @@ if (have_posts()) {
 		$ogImage = $socialImage[0];
 	}
 
-	/**** CREATE $bannerAdjustStr *****/
-	$bannerPosition = get_post_meta(get_the_ID() , 'adjust_the_banner_image', true);
-	$bannerPositionCSS = get_field('adjust_the_banner_image_css', '', true);
-	$bannerAdjustStr = "";
-	if ($bannerPositionCSS) {
-		$bannerAdjustStr = $bannerPositionCSS;
-	}
-	else
-	if ($bannerPosition) {
-		$bannerAdjustStr = $bannerPosition;
-	}
 
 	rewind_posts();
 }
@@ -43,8 +32,10 @@ if (have_posts()) {
 	while (have_posts()) {
 		the_post();
 		$id = get_the_ID();
+		$page_title = get_the_title();
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
+		$post_thumbnail_url = get_the_post_thumbnail_url();
 		$ogDescription = get_the_excerpt();
 
 		$twitterText = '';
@@ -62,83 +53,79 @@ echo '<style>.bbg__main-navigation .menu-usagm-container {background-color: rgba
 echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;}</style>';
 ?>
 
-<?php
-	$featured_media_result = get_feature_media_data();
-	if ($featured_media_result != "") {
-		echo $featured_media_result;
-	}
-?>
 
 <main id="main" role="main">
-
-	<div class="outer-container">
+	<section class="outer-container">
 		<div class="grid-container">
 			<h2 class="section-header"><a href="<?php echo network_home_url()?>burke-awards/burke-honorees">Burke Awards honorees</a></h2>
 		</div>
-	</div>
-
-	<div class="outer-container">
-		<div class="custom-grid-container">
-			<div class="inner-container">
-				<div class="main-content-container">
-					<?php
-						$burkeProfileObj = get_field('burke_award_info');
-						$numRows = count ($burkeProfileObj);
-						// Create variable to sort the award array by year
-						// Populate and sort awards in reverse chronological order
-						$orderByYear = array();
-						foreach($burkeProfileObj as $i => $row) {
-							$orderByYear[$i] = $row['burke_ceremony_year'];
-						}
-						array_multisort($orderByYear, SORT_DESC, $burkeProfileObj);
-
-						$candidata_and_win  = '<h3 class="article-title">' . get_the_title() . ', ';
-
-						// Check if repeater field has data
-						// Check if profile won this year
-						foreach (array_values($burkeProfileObj) as $i => $profile) {
-							$burkeYear = $profile['burke_ceremony_year'];
-							$burkeWin = $profile['burke_is_winner'];
-							if (!$burkeWin) {
-								$burkeStatus = ' nominee';
-							} else {
-								$burkeStatus = ' winner';
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="main-column">
+						<?php
+							$burkeProfileObj = get_field('burke_award_info');
+							$numRows = count ($burkeProfileObj);
+							// Create variable to sort the award array by year
+							// Populate and sort awards in reverse chronological order
+							$orderByYear = array();
+							foreach($burkeProfileObj as $i => $row) {
+								$orderByYear[$i] = $row['burke_ceremony_year'];
 							}
+							array_multisort($orderByYear, SORT_DESC, $burkeProfileObj);
 
-							$candidata_and_win .= $burkeYear . $burkeStatus;
-							if ($numRows > 1 && $i + 1 < $numRows) {
-								$candidata_and_win .= ' | ';
-							}
-						}
-						$candidata_and_win .= '</h3>';
-						echo $candidata_and_win;
-						echo $page_content;
+							$candidata_and_win  = '<h3 class="article-title">' . get_the_title() . ', ';
 
-						$acceptance_vidoes = '';
-						foreach (array_values($burkeProfileObj) as $i => $profileVid) {
-							$burke_video_url = $profileVid['burke_acceptance_video_url'];
-							if ($burke_video_url) {
-								if ($numRows > 1) {
-									$acceptance_vidoes .= '<h4>Watch acceptance videos</h4>';
+							// Check if repeater field has data
+							// Check if profile won this year
+							foreach (array_values($burkeProfileObj) as $i => $profile) {
+								$burkeYear = $profile['burke_ceremony_year'];
+								$burkeWin = $profile['burke_is_winner'];
+								if (!$burkeWin) {
+									$burkeStatus = ' nominee';
 								} else {
-									$acceptance_vidoes .=  '<h4>Watch acceptance video</h4>';
+									$burkeStatus = ' winner';
 								}
-								$acceptance_vidoes .= apply_filters('the_content', $burke_video_url);
+
+								$candidata_and_win .= $burkeYear . $burkeStatus;
+								if ($numRows > 1 && $i + 1 < $numRows) {
+									$candidata_and_win .= ' | ';
+								}
 							}
-						}
-						echo $acceptance_vidoes;
-					?>
-				</div>
-				<div class="side-content-container">
-					<article>
-						<h5>Share</h5>
-						<a href="<?php echo $fbUrl; ?>">
-							<span class="bbg__article-share__icon facebook"></span>
-						</a>
-						<a href="<?php echo $twitterURL; ?>">
-							<span class="bbg__article-share__icon twitter"></span>
-						</a>
-					</article>
+							$candidata_and_win .= '</h3>';
+							echo $candidata_and_win;
+							
+							if (!empty($post_thumbnail_url)) {
+								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
+							}
+
+							echo $page_content;
+
+							$acceptance_vidoes = '';
+							foreach (array_values($burkeProfileObj) as $i => $profileVid) {
+								$burke_video_url = $profileVid['burke_acceptance_video_url'];
+								if ($burke_video_url) {
+									if ($numRows > 1) {
+										$acceptance_vidoes .= '<h4>Watch acceptance videos</h4>';
+									} else {
+										$acceptance_vidoes .=  '<h4>Watch acceptance video</h4>';
+									}
+									$acceptance_vidoes .= apply_filters('the_content', $burke_video_url);
+								}
+							}
+							echo $acceptance_vidoes;
+						?>
+					</div>
+					<div class="side-column divider-left">
+						<article>
+							<h3 class="sidebar-section-header">Share</h3>
+							<a href="<?php echo $fbUrl; ?>">
+								<span class="bbg__article-share__icon facebook"></span>
+							</a>
+							<a href="<?php echo $twitterURL; ?>">
+								<span class="bbg__article-share__icon twitter"></span>
+							</a>
+						</article>
 
 					<?php
 						foreach (array_values($burkeProfileObj) as $i => $profile) {
@@ -156,17 +143,17 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 							}
 
 							echo '<div id="award-' . $i . '" class="bbg__sidebar__primary">';
-							$award_list .= '<h5>' . $profile['burke_ceremony_year'];
+							$award_list .= '<h3 class="sidebar-section-header">' . $profile['burke_ceremony_year'];
 							if ($profile['burke_is_winner']) {
 								$award_list .= ' Winner';
 							} else {
 								$award_list .= ' Nominee';
 							}
-							$award_list .= '</h5>';
+							$award_list .= '</h3>';
 
-							$award_list .= '<p class="sans">';
+							$award_list .= '<p class="sidebar-section-subheader">';
 							if ($burkeTitle) {
-								$award_list .= '<strong>' . $burkeTitle . '</strong><br/>';
+								$award_list .= $burkeTitle . '<br/>';
 								if ($burkeService) {
 									$award_list .= $burkeNetwork . ', ' . $burkeService;
 								} else {
@@ -174,26 +161,24 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 								}
 							} else {
 								if ($burkeService) {
-									$award_list .= '<strong>' . $burkeNetwork . ', ' . $burkeService . '</strong>';
+									$award_list .= $burkeNetwork . ', ' . $burkeService;
 								} else {
-									$award_list .= '<strong>' . $burkeNetwork . '</strong>';
+									$award_list .= $burkeNetwork;
 								}
 							}
 							$award_list .= '</p>';
 
 							$award_list .= '<p class="sans">' . $profile['burke_reason'] . '</p>';
 							$burkeRelated = $profile ['burke_associated_profiles'];
-							if ( $burkeRelated ) {
-								$award_list .= '<h5>Recognized with</h5>';
-								$award_list .= '<ul class="unstyled-list">';
+							if ($burkeRelated) {
+								$award_list .= '<h3 class="sidebar-section-header">Recognized with</h3>';
 									foreach($burkeRelated as $burkeRelProfile) {
-										$award_list .= '<li class="sans">';
+										$award_list .= '<p class="sidebar-article-title">';
 										$award_list .= 	'<a target="_blank" href="' . get_post_permalink($burkeRelProfile->ID) . '">';
 										$award_list .= 		$burkeRelProfile->post_title;
 										$award_list .= 	'</a>';
-										$award_list .= '</li>';
+										$award_list .= '</p>';
 									}
-								$award_list .= '</ul>';
 							}
 
 							// set variable for sample work URL repeater
@@ -233,13 +218,13 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 								}
 								// output other links header
 								if (count($otherLinks) == 1 && $otherLinks[0]['url']) {
-									$award_list .= '<h6>Related link</h6>';
-									$award_list .= '<p class="sans"><a target="_blank" href="' . $otherLinks[0]['url'] . '">' . $otherLinks[0]['title'] . ' »</a></p>';
+									$award_list .= '<h3 class="sidebar-section-header">Related link</h3>';
+									$award_list .= '<p class="sidebar-article-title"><a target="_blank" href="' . $otherLinks[0]['url'] . '">' . $otherLinks[0]['title'] . ' »</a></p>';
 								} elseif (count($otherLinks) > 1) {
-									$award_list .= '<h5>Related links</h5>';
+									$award_list .= '<h3 class="sidebar-section-header">Related links</h3>';
 									$award_list .= '<ul class="unstyled-list" style="margin-bottom: 1rem;">';
 										foreach($otherLinks as $otherURL) {
-											$award_list .= '<li class="sans"><a target="_blank" href="' . $otherURL['url'] . '">' . $otherURL['title'] . '</a></li>';
+											$award_list .= '<li class="sidebar-article-title"><a target="_blank" href="' . $otherURL['url'] . '">' . $otherURL['title'] . '</a></li>';
 										}
 									$award_list .= '</ul>';
 								}
@@ -258,10 +243,11 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 						?>
 					</article>
 					<?php wp_reset_postdata();?>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </main>
 
 <?php get_footer(); ?>

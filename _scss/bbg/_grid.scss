@@ -36,7 +36,28 @@
 }
 // ------------------------------------------------------------------------
 
-
+// NEW THREE COLUMN FOR SMALL ICONS
+.icon-sidebar-grid--large-gutter {
+	.icon-column {@include grid-column(12);}
+	.main-column {@include grid-column(12);}
+	.side-column {@include grid-column(12);}
+}
+@include media($medium-large-screen) {
+	.icon-sidebar-grid--large-gutter {
+		> .inner-container > div:nth-child(2) {padding-left: 4rem;}
+		.icon-column {@include grid-column(1);}
+		.main-column {
+			@include grid-column(7);
+			padding-left: 3.5rem;
+		}
+		.side-column {
+			@include grid-column(4);
+			padding-left: 3rem;
+		}
+		.divider-left {border-left: 1px solid #f1f1f1;}
+		.divider-right {border-right: 1px solid #f1f1f1;}
+	}
+}
 // THREE COLUMN LAYOUT. FOR ICONS, PROFILE IMAGES
 // ------------------------------------------------------------------------
 $icon-content-grid: (

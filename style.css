@@ -4756,6 +4756,43 @@ e.g. on the intern testimonial page */
   .sidebar-grid--large-gutter .divider-right {
     border-right: 1px solid #f1f1f1; } }
 
+.icon-sidebar-grid--large-gutter .icon-column {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+.icon-sidebar-grid--large-gutter .main-column {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+.icon-sidebar-grid--large-gutter .side-column {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
+@media screen and (min-width: 900px) {
+  .icon-sidebar-grid--large-gutter > .inner-container > div:nth-child(2) {
+    padding-left: 4rem; }
+  .icon-sidebar-grid--large-gutter .icon-column {
+    width: calc(8.33333% - 21.66667px);
+    float: left;
+    margin-left: 20px; }
+  .icon-sidebar-grid--large-gutter .main-column {
+    width: calc(58.33333% - 31.66667px);
+    float: left;
+    margin-left: 20px;
+    padding-left: 3.5rem; }
+  .icon-sidebar-grid--large-gutter .side-column {
+    width: calc(33.33333% - 26.66667px);
+    float: left;
+    margin-left: 20px;
+    padding-left: 3rem; }
+  .icon-sidebar-grid--large-gutter .divider-left {
+    border-left: 1px solid #f1f1f1; }
+  .icon-sidebar-grid--large-gutter .divider-right {
+    border-right: 1px solid #f1f1f1; } }
+
 .icon-side-content-container {
   width: calc(100% - 40px);
   float: left;
@@ -6894,6 +6931,16 @@ section.usa-section.bbg-banner__section {
   font-size: 1.6rem;
   font-weight: normal;
   line-height: 1.7; }
+
+.entity-category-logo-container {
+  float: left;
+  width: 15%;
+  padding-right: 15px; }
+  .entity-category-logo-container img {
+    margin-bottom: 0px; }
+  @media screen and (min-width: 600px) {
+    .entity-category-logo-container {
+      width: 10%; } }
 
 .icon-side-content-container img {
   width: 69px;

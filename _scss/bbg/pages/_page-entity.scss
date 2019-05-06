@@ -1,4 +1,14 @@
 // NETWORK INFORMATION AT TOP (MOBILE), LEFT (DESKTOP)
+.entity-category-logo-container {
+	float: left;
+	width: 15%;
+	padding-right: 15px;
+	img {margin-bottom: 0px;}
+	@include media($medium-screen) {
+		width: 10%;
+	}
+}
+
 .icon-side-content-container {
 	img {
 		width: 69px;

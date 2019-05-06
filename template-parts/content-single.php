@@ -19,15 +19,17 @@ if (in_category('Press Release') && $includeDateline) {
 }
 
 // DATELINE GOES INSIDE FIRST PARAGRAPH TAG FOR FORMATTING
-$pageContent = get_the_content();
-$pageContent = apply_filters('the_content', $pageContent);
-$pageContent = do_shortcode($pageContent);
+$post_thumbnail_url = get_the_post_thumbnail_url();
+$page_title = get_the_title();
+$page_content = get_the_content();
+$page_content = apply_filters('the_content', $page_content);
+$page_content = do_shortcode($page_content);
 if ($dateline != "") {
 	$needle = '<p>';
 	$replaceNeedle = '<p>' . $dateline;
-	$pos = strpos($pageContent, $needle);
+	$pos = strpos($page_content, $needle);
 	if ($pos !== false) {
-		$pageContent = substr_replace($pageContent, $replaceNeedle, $pos, strlen($needle));
+		$page_content = substr_replace($page_content, $replaceNeedle, $pos, strlen($needle));
 	}
 }
 
@@ -131,42 +133,31 @@ $categories_to_show_entities = ['Press Release', 'Project', 'Media Advisory'];
 $entity_categories = ['voa', 'rfa', 'mbn', 'ocb', 'rferl'];
 
 $entity_logos = array();
+$entity_category_data = array();
 if (in_category($categories_to_show_entities))  {
 	if (in_category($entity_categories)) {
-		foreach ($entity_categories as $eCat) {
-			if (in_category($eCat)) {
-				$broadcasters_page = get_page_by_title('Our Networks');
-				$broadcasters_page_id = '';
-				if (!empty($broadcasters_page)) {
-					$broadcasters_page_id = $broadcasters_page -> ID;
-				}
-				$args = array(
+		foreach ($entity_categories as $entity_category) {
+			if (in_category($entity_category)) {
+				$entity_category_args = array(
 					'post_type' => 'page',
 					'posts_per_page' => 1,
-					'post_parent' => $broadcasters_page_id,
-					'name' => str_replace('-press-release', '', $eCat)
+					'title' => $entity_category
 				);
-				$custom_query = new WP_Query($args);
+				$entity_category_query = new WP_Query($entity_category_args);
 
-				if ($custom_query->have_posts()) {
-					while ($custom_query->have_posts())  {
-						$custom_query->the_post();
-						$id = get_the_ID();
-						$entityLogoID = get_post_meta($id, 'entity_logo', true);
-						$entityLogo = "";
-						$entityLink = get_the_permalink($id);
-						if ($entityLogoID) {
-							$entityLogoObj = wp_get_attachment_image_src($entityLogoID , 'Full');
-							$entityLogo = $entityLogoObj[0];
-						}
-						$entity_logos[] = array(
-							'logo' => $entityLogo,
-							'link' => $entityLink
-						);
-					}
+				if ($entity_category_query->have_posts()) {
+					$entity_category_query->the_post();
+					$entity_id = get_the_ID();
+					$entity_logo_information = get_field('entity_logo', $entity_id);
+					$entity_logo_url = $entity_logo_information['url'];
+					$entity_link = get_field('entity_site_url', $entity_id);
+
+					$entity_category_data = array(
+						'logo-url' => $entity_logo_url,
+						'site-url' => $entity_link
+					);
+					$entity_logos[] = $entity_category_data;
 				}
-				wp_reset_postdata();
-				wp_reset_query();
 			}
 		}
 	}
@@ -413,97 +404,60 @@ $twitterText .= ' ' . get_permalink();
 $twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitterText);
 $fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode(get_permalink());
 $hideFeaturedImage = false;
-
-// DETERMINES WHETHER GRID IS TWO OR THREE COLUMNS
-$numLogos = count($entity_logos);
-if ($numLogos > 0 && $numLogos < 3) {
-	$page_columns = 3;
-} else {
-	$page_columns = 2;
-}
 ?>
 
 <style>
 .leaflet-popup-pane {min-width: 300px !important;}
 </style>
 
-<?php
-	$featured_media_result = get_feature_media_data();
-	if (!empty($featured_media_result)) {
-		echo $featured_media_result;
-	}
-?>
 
-<div id="main">
-<article id="post-<?php the_ID(); ?>" <?php post_class("bbg__article"); ?>>
-
-	<div class="outer-container">
+<main id="main" role="main">
+	<section class="outer-container">
 		<div class="grid-container">
-		<?php
-			$header_markup = '<header>';
-			if (get_post_type() == "threat_to_press") {
-				$threat_link = get_permalink(get_page_by_path('threats-to-press'));
+			<?php
+				$parent_header = '';
+				if (get_post_type() == "threat_to_press") {
+					$threat_link = get_permalink(get_page_by_path('threats-to-press'));
 
-				$threats_header  = '<h5 class="entry-category bbg__label">';
-				$threats_header .= 		'<a href="' . $threat_link . '" title="Threats to Press">Threats to Press</a>';
-				$threats_header .= '</h5>';
-
-				$header_markup .= $threats_header;
-			}
-			else if (has_category('deep-dive-series')) {
-				$header_markup .= '<h2 class="section-header"><a href="our-work/strategy-and-results/deep-dive-series/">Deep Dive Series</a></h2>';
-			}
-			else {
-				// $header_markup .= bbginnovate_post_categories();
-			}
-			$header_markup .= '<h3 class="article-title">' . get_the_title() . '</h3>';
-			$header_markup .= '<div class="date-meta">';
-			$header_markup .= 	bbginnovate_posted_on();
-			$header_markup .= '</div>';
-			$header_markup .= '</header>';
-			echo $header_markup;
-		?>
+					$parent_header  = '<h2 class="section-header">';
+					$parent_header .= 	'<a href="' . $threat_link . '">Threats to Press</a>';
+					$parent_header .= '</h2>';
+				}
+				else if (has_category('deep-dive-series')) {
+					$parent_header .= '<h2 class="section-header"><a href="our-work/strategy-and-results/deep-dive-series/">Deep Dive Series</a></h2>';
+				}
+				echo $parent_header;
+			?>
 		</div>
-	<!-- </div> -->
 
-	<?php if ($page_columns == 3) { ?>
-		<!-- <div class="outer-container"> -->
-			<div class="main-content-container">
-				<div class="nest-container">
-					<div class="inner-container">
-						<div class="icon-side-content-container">
-							<?php
-								$numLogos = count($entity_logos);
-								if ($numLogos > 0 && $numLogos < 3) {
-									for ($i = 0; $i < $numLogos; $i++) {
-										$e = $entity_logos[$i];
-										$entityLink = $e['link'];
-										$entityLogo = $e['logo'];
-										$firstClass = "";
-										// UTILITY CLASS FOR ADDED SPACE WHEN MULTIPLE ICONS
-										if ($i == 0 && $numLogos > 0) {
-											$firstClass = "bbg__entity-logo__press-release-first-of-many";
-										}
-										$entity_icons  = '<a href="' . $entityLink . '" title="Learn more">';
-										$entity_icons .= 	'<img src="'. $entityLogo . '" class="bbg__entity-logo__press-release ' . $firstClass . '" alt="Entity logo">';
-										$entity_icons .= '</a>';
-										echo $entity_icons;
-									}
-								}
-							?>
-						</div>
-						<div class="icon-main-content-container">
-	<?php } else { // TWO COLUMNS ?>
-		<!-- <div class="outer-container"> -->
-			<div class="custom-grid-container">
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
 				<div class="inner-container">
-					<div class="main-content-container">
-	<?php } ?>
+					<div class="main-column">
 						<?php
+
+							echo '<header>';
+							echo 	'<h3 class="article-title">' . $page_title . '</h3>';
+							echo 	'<p class="date-meta">' . get_the_date() . '</p>';
+							echo '</header>';
+
+							if (!empty($post_thumbnail_url)) {
+								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
+							}
+
 							if ($isPodcast) {
 								echo $soundcloudPlayer;
 							}
-							echo $pageContent;
+							if (!empty($entity_logos)) {
+								echo '<div class="entity-category-logo-container">';
+								foreach($entity_logos as $entity_logo) {
+									echo '<a href="' . $entity_logo['site-url'] . '">';
+									echo 	'<img class="entity-catgory-logo" src="'. $entity_logo['logo-url'] . '" alt="Entity logo">';
+									echo '</a>';
+								}
+								echo '</div>';
+							}
+							echo $page_content;
 
 							if ($isPodcast) {
 								echo $podcastTranscript;
@@ -538,73 +492,59 @@ if ($numLogos > 0 && $numLogos < 3) {
 								echo $addtl_image_set;
 							}
 						?>
-	<?php if ($page_columns == 3) { ?>
-						</div>
 					</div>
-				</div>
-			</div>
-			<!-- BEGIN SIDEBAR -->
-			<div class="side-content-container">
-	<?php } else { // TWO COLUMNS ?>
-					</div> <!-- END .main-content-container -->
-					<div class="side-content-container">
-	<?php } ?>
-			<aside>
-				<h3 class="sidebar-section-header">Share </h3>
-				<a href="<?php echo $fbUrl; ?>">
-					<span class="bbg__article-share__icon facebook"></span>
-				</a>
-				<a href="<?php echo $twitterURL; ?>">
-					<span class="bbg__article-share__icon twitter"></span>
-				</a>
-			</aside>
-			<?php
-				if ($includeRelatedProfile) {
-					echo $relatedProfile;
-				}
+					<div class="side-column divider-left">
+						<aside>
+							<h3 class="sidebar-section-header">Share </h3>
+							<a href="<?php echo $fbUrl; ?>">
+								<span class="bbg__article-share__icon facebook"></span>
+							</a>
+							<a href="<?php echo $twitterURL; ?>">
+								<span class="bbg__article-share__icon twitter"></span>
+							</a>
+						</aside>
 
-				echo $featuredJournalists;
-				echo $advisoryExpertsStr;
+						<?php
+							if ($includeRelatedProfile) {
+								echo $relatedProfile;
+							}
 
-				echo getInterviewees();
+							echo $featuredJournalists;
+							echo $advisoryExpertsStr;
 
-				if ($includeMap  && $mapLocation) {
-					$sidebar_map  = '<h3 class="sidebar-section-header">' . $mapHeadline . '</h3>';
-					$sidebar_map .= '<div id="map" class="bbg__locator-map">';
-					$sidebar_map .= 	'<p>' . $mapDescription . '</p>';
-					$sidebar_map .= '</div>';
-					echo $sidebar_map;
-				}
-				if ($isAward) {
-					$award_info  = '<h5 class="bbg__label small bbg__sidebar__download__label">About the Award</h5>';
-					$award_info .= '<div class="bbg__sidebar__primary">';
-					$award_info .= 		getAwardInfo(get_the_ID(), true);
-					$award_info .= '</div>';
-					echo $award_info;
-				}
-				if ($includeSidebar) {
-					echo $sidebar;
-				}
-				if ($listsInclude) {
-					echo $sidebarDownloads;
-				}
-				echo $media_dev_sponsors;
-				echo $media_dev_presenters;
-				echo $team_roster;
-				echo getAccordion();
-			?>
+							echo getInterviewees();
 
-	<?php if ($page_columns == 3) { ?>
-			</div>
-		</div><!-- .outer-container -->
-	<?php } else { ?>
+							if ($includeMap  && $mapLocation) {
+								$sidebar_map  = '<h3 class="sidebar-section-header">' . $mapHeadline . '</h3>';
+								$sidebar_map .= '<div id="map" class="bbg__locator-map">';
+								$sidebar_map .= 	'<p>' . $mapDescription . '</p>';
+								$sidebar_map .= '</div>';
+								echo $sidebar_map;
+							}
+							if ($isAward) {
+								$award_info  = '<h5 class="bbg__label small bbg__sidebar__download__label">About the Award</h5>';
+								$award_info .= '<div class="bbg__sidebar__primary">';
+								$award_info .= 		getAwardInfo(get_the_ID(), true);
+								$award_info .= '</div>';
+								echo $award_info;
+							}
+							if ($includeSidebar) {
+								echo $sidebar;
+							}
+							if ($listsInclude) {
+								echo $sidebarDownloads;
+							}
+							echo $media_dev_sponsors;
+							echo $media_dev_presenters;
+							echo $team_roster;
+							echo getAccordion();
+						?>
 					</div>
 				</div>
 			</div>
 		</div><!-- .outer-container -->
-	<?php } ?>
-</article><!-- #post-## -->
-</div><!-- END #main -->
+	</section><!-- #post-## -->
+</main><!-- END #main -->
 
 <?php if (!empty($media_dev_map) && !empty($mapHeadline)) { ?>
 

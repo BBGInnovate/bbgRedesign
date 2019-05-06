@@ -72,12 +72,25 @@ if (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
 
 get_header(); ?>
 
-<main id="main" role="main">
-	<div class="outer-container">
-		<div class="main-content-container">
+<main id="main" role="main" style="padding-top: 3rem;">
+	<section class="outer-container">
+		<div class="grid-container">
+			<?php
+				$profile_head  = '<h2 class="section-header">';
+				$profile_head .= 	$page_title;
+				$profile_head .= '</h2>';
+				echo $profile_head;
+
+				$profile_occupation  = '<p class="lead-in">';
+				$profile_occupation .= 	$occupation;
+				$profile_occupation .= '</p>';
+				echo $profile_occupation;
+			?>
+		</div>
+		<div class="grid-container icon-sidebar-grid--large-gutter">
 			<div class="nest-container">
 				<div class="inner-container">
-					<div class="icon-side-content-container">
+					<div class="icon-column">
 						<img src="<?php echo $profile_photo_url; ?>" alt="Profile photo">
 						<?php
 							if ($email != ""){
@@ -101,48 +114,48 @@ get_header(); ?>
 							}
 						?>
 					</div>
-					<div class="icon-main-content-container">
+					<div class="main-column">
 						<?php
-							$profile_head  = '<h2 class="section-header">';
-							$profile_head .= 	$page_title;
-							$profile_head .= '</h2>';
-							echo $profile_head;
-
-							$profile_occupation  = '<p class="lead-in">';
-							$profile_occupation .= 	$occupation;
-							$profile_occupation .= '</p>';
-							echo $profile_occupation;
-
-							$main_content  = '<div class="page-content">';
-							$main_content .= 	$page_content;
-							$main_content .= '</div>';
-							echo $main_content;
+							echo $page_content;
 						?>
+					</div>
+					<div class="side-column divider-left">
+						<article class="social-share">
+							<h3 class="sidebar-section-header">Share</h3>
+							<a href="<?php echo $fbUrl; ?>" target="_blank">
+								<i class="fab fa-facebook-square"></i>
+							</a>
+							<a href="<?php echo $twitterURL; ?>" target="_blank">
+								<i class="fab fa-twitter-square"></i>
+							</a>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+
+<main id="main" role="main">
+	<div class="outer-container">
+		<div class="main-content-container">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="icon-side-content-container">
+
+					</div>
+					<div class="icon-main-content-container">
+
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- BEGIN SIDEBAR -->
 		<aside class="side-content-container">
-			<article class="social-share">
-				<h5>Share</h5>
-				<a href="<?php echo $fbUrl; ?>" target="_blank">
-					<i class="fab fa-facebook-square"></i>
-				</a>
-				<a href="<?php echo $twitterURL; ?>" target="_blank">
-					<i class="fab fa-twitter-square"></i>
-				</a>
-			</article>
+			
 		</aside>
 	</div><!-- END GRID -->
 </main>
-
-<section class="usa-grid">
-        <?php get_sidebar(); ?>
-</section>
-
-<section class="usa-grid">
-        <?php get_sidebar(); ?>
-</section>
 
 <?php get_footer(); ?>
