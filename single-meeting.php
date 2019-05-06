@@ -122,8 +122,12 @@ get_header();
 							$post_header .= '</header>';
 							echo $post_header;
 
-							if (!empty($post_thumbnail_url)) {
-								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
+							if (is_single('media-for-democracy-forum')) {
+								echo 	'<iframe id="ls_embed_1556905458" src="https://livestream.com/accounts/13470315/events/8666945/player?width=640&height=360&enableInfoAndActivity=true&defaultDrawer=&autoPlay=true&mute=false" width="640" height="360" frameborder="0" scrolling="no" allowfullscreen> </iframe><script type="text/javascript" data-embed_id="ls_embed_1556905458" src="https://livestream.com/assets/plugins/referrer_tracking.js"></script>';
+							} else {
+								if (!empty($post_thumbnail_url)) {
+									echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
+								}
 							}
 						?>
 						<?php
