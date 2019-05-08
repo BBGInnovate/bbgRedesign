@@ -21,6 +21,7 @@ if (in_category('Press Release') && $includeDateline) {
 // DATELINE GOES INSIDE FIRST PARAGRAPH TAG FOR FORMATTING
 $post_thumbnail_url = get_the_post_thumbnail_url();
 $page_title = get_the_title();
+$post_date = get_the_date();
 $page_content = get_the_content();
 $page_content = apply_filters('the_content', $page_content);
 $page_content = do_shortcode($page_content);
@@ -438,7 +439,7 @@ $hideFeaturedImage = false;
 
 							echo '<header>';
 							echo 	'<h3 class="article-title">' . $page_title . '</h3>';
-							echo 	'<p class="date-meta">' . get_the_date() . '</p>';
+							echo 	'<p class="date-meta">' . $post_date . '</p>';
 							echo '</header>';
 
 							if (!empty($post_thumbnail_url)) {
