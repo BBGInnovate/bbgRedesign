@@ -164,8 +164,13 @@ function get_corner_hero_data() {
 	}
 
 	$cornerHeroLabel = get_field('corner_hero_label', 'option');
-	if  ($cornerHeroLabel == '') {
+	if ($cornerHeroLabel == '') {
 		$cornerHeroLabel = 'This week';
+	}
+
+	$corner_hero_label_link = '';
+	if (!empty(get_field('corner_hero_link', 'option'))) {
+		$corner_hero_label_link = get_field('corner_hero_link', 'option');
 	}
 
 	$postIDsUsed = array();
@@ -195,7 +200,10 @@ function get_corner_hero_data() {
 			$cornerHeroPermalink = get_permalink($my_post);
 		}
 
-		$corner_hero_package = get_post($corner_hero_id);
+		$corner_hero_package = array(
+			'corner-hero-label-link' => $corner_hero_label_link,
+			'post-id' => get_post($corner_hero_id)
+		);
 
 		return $corner_hero_package;
 	}

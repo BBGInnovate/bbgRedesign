@@ -23,6 +23,17 @@ require 'inc/bbg-functions-assemble.php';
 
 // USAGM NEWS
 // GET RECENT POSTS, SEPARATE INTO MANAGEABLE ARRAYS FOR PLACEMENT
+$featured_post_label = get_field('featured_post_label', 'option');
+$featured_post_label_link = get_field('featured_post_label_link', 'option');
+
+if (!empty($featured_post_label) && !empty($featured_post_label_link)) {
+	$featured_post_header = '<h2 class="section-header"><a href="' . $featured_post_label_link . '">' . $featured_post_label . '</a></h2>';
+} else if (empty($featured_post_label_link)) {
+	$featured_post_header = '<h2 class="section-header">' . $featured_post_label . '</h2>';
+} else {
+	$featured_post_header = '';
+}
+
 $recent_posts = get_recent_posts(3);
 $recent_post_counter = 0;
 $feature_recent_post = '';
@@ -39,8 +50,8 @@ foreach ($recent_posts['posts'] as $cur_recent_post) {
 
 
 // IMPACT STORIES LINKS
-$impactPermalink = get_permalink( get_page_by_path('our-work/impact-and-results'));
-$impactPortfolioPermalink = get_permalink( get_page_by_path('our-work/impact-and-results/impact-portfolio'));
+$impactPermalink = get_permalink(get_page_by_path('our-work/impact-and-results'));
+$impactPortfolioPermalink = get_permalink(get_page_by_path('our-work/impact-and-results/impact-portfolio'));
 
 // THREATS TO PRESS DATA
 $threatsToPressPost = get_field('homepage_threats_to_press_post', 'option');
@@ -87,7 +98,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	<?php // USAGM NEWS ?>
 	<section class="outer-container">
 		<div class="grid-container">
-			<h2 class="section-header"><a href="<?php echo get_permalink(get_page_by_path('news-and-information')); ?>">USAGM News</a></h2>
+			<?php echo $featured_post_header; ?>
 		</div>
 		<div class="grid-container sidebar-grid--large-gutter">
 			<div class="nest-container">
@@ -153,8 +164,9 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		$corner_hero_label = get_field('corner_hero_label', 'options');
 		$corner_hero_data = get_corner_hero_data();
 		$impact_page_page = 'our-work/impact-and-results/impact-portfolio/';
-		if ($homepage_hero_corner == 'event') {
-			$corner_hero_section_header = '<h2 class="section-header"><a href="' . get_permalink(get_page_by_path('news-and-information/events/')) . '">' . $corner_hero_label . '</a></h2>';
+
+		if (!empty($corner_hero_data['corner-hero-label-link'])) {
+			$corner_hero_section_header = '<h2 class="section-header"><a href="' . $corner_hero_data['corner-hero-label-link'] . '">' . $corner_hero_label . '</a></h2>';
 		} else {
 			$corner_hero_section_header = '<h2 class="section-header">' . $corner_hero_label . '</h2>';
 		}
@@ -167,26 +179,26 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		}
 
 		if ($impact_option == 'on') {
-			$impact_and_events  = '<section class="outer-container">';
-			$impact_and_events .= 	'<div class="grid-container sidebar-grid--large-gutter">';
-			$impact_and_events .= 		'<div class="nest-container">';
-			$impact_and_events .= 			'<div class="inner-container">';
-			$impact_and_events .= 				'<div class="main-column">';
-			$impact_and_events .= 					'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
+			$impact_and_corner_hero  = '<section class="outer-container">';
+			$impact_and_corner_hero .= 	'<div class="grid-container sidebar-grid--large-gutter">';
+			$impact_and_corner_hero .= 		'<div class="nest-container">';
+			$impact_and_corner_hero .= 			'<div class="inner-container">';
+			$impact_and_corner_hero .= 				'<div class="main-column">';
+			$impact_and_corner_hero .= 					'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
 			foreach ($impact_result as $impact_post_id) {
 				$impact_post = get_post($impact_post_id);
-				$impact_and_events .= build_article_standard_vertical($impact_post);
+				$impact_and_corner_hero .= build_article_standard_vertical($impact_post);
 			}
-			$impact_and_events .= 				'</div>';
-			$impact_and_events .= 				'<div class="side-column divider-left">';
-			$impact_and_events .= 					$corner_hero_section_header;
-			$impact_and_events .= 					build_article_standard_vertical($corner_hero_data);
-			$impact_and_events .= 				'</div>';
-			$impact_and_events .= 			'</div>';
-			$impact_and_events .= 		'</div>';
-			$impact_and_events .= 	'</div>';
-			$impact_and_events .= '</section>';
-			echo $impact_and_events;
+			$impact_and_corner_hero .= 				'</div>';
+			$impact_and_corner_hero .= 				'<div class="side-column divider-left">';
+			$impact_and_corner_hero .= 					$corner_hero_section_header;
+			$impact_and_corner_hero .= 					build_article_standard_vertical($corner_hero_data['post-id']);
+			$impact_and_corner_hero .= 				'</div>';
+			$impact_and_corner_hero .= 			'</div>';
+			$impact_and_corner_hero .= 		'</div>';
+			$impact_and_corner_hero .= 	'</div>';
+			$impact_and_corner_hero .= '</section>';
+			echo $impact_and_corner_hero;
 		} else {
 			$impacts_only  = '<section class="outer-container">';
 			$impacts_only .= 	'<div class="grid-container">';
@@ -207,12 +219,17 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 
 	<!-- THREATS TO PRESS RIBBON -->
 	<?php
+		$threats_to_press_link = get_field('threats_to_press_link', 'option');
 		$threat_article_list = get_threats_to_press_posts($recent_posts['used_posts']);
 
 		$threat_structure  = '<section class="threats-box" id="homepage-threats">';
 		$threat_structure .= 	'<div class="outer-container">';
 		$threat_structure .= 		'<div class="grid-half" id="threats-main-column">';
-		$threat_structure .= 			'<h2 class="section-header"><a href="https://www.usagm.gov/news-and-information/threats-to-press/">Threats to Press</a></h2>';
+		if (!empty($threats_to_press_link)) {
+			$threat_structure .= 			'<h2 class="section-header"><a href="' . $threats_to_press_link . '">Threats to Press</a></h2>';
+		} else {
+			$threat_structure .= 			'<h2 class="section-header" style="color:#ffffff;">Threats to Press</h2>';
+		}
 		$threat_structure .= 			'<article>';
 		$threat_structure .= 				'<div class="article-image">';
 		$threat_structure .= 					'<a href="' . get_the_permalink($threat_article_list[0]) . '">';
