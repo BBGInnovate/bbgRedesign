@@ -122,24 +122,6 @@ button {
 	overflow: hidden;
 	img {margin-bottom: 0;}
 }
-.bbg__ribbon {
-	*[style*="background-image"] {
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center;
-		margin-bottom: 0
-	}
-	h2 {
-		float: left;
-		font-weight: 300;
-		color: $white;
-		padding: 1rem;
-		background-color: $color-red;
-	}
-	h4,
-	h4 a:link,
-	h4 a:visited {color: $color-blue;}
-}
 
 .umbrella-bg-image {
 	background-position: center center;
