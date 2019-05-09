@@ -39,7 +39,11 @@ if ($includeSidebar) {
 				// GET FILE NAME IF NOT ENTERED IN CUSTOM FIELD
 				if (empty($sidebarDownloadTitle)) {
 					echo $sidebarDownloadTitle;
-					$sidebarDownloadTitle = $sidebarDownloadLinkObj['post_title'];
+					if (!empty($sidebarDownloadLinkObj['post_title'])) {
+						$sidebarDownloadTitle = $sidebarDownloadLinkObj['post_title'];
+					} else {
+						$sidebarDownloadLinkObj['title'];
+					}
 				}
 
 				$sidebarImage = '';

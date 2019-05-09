@@ -122,12 +122,9 @@ get_header();
 							$post_header .= '</header>';
 							echo $post_header;
 
-							if (!empty($video_url)) {
-								echo '<iframe class="bbg-banner" scrolling="no" src="' . $video_url . '" ';
-								echo 	'frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';
-								echo '</iframe>';
-							} else if (!empty($post_thumbnail_url)) {
-								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
+							$featured_media_result = get_feature_media_data();
+							if ($featured_media_result != "") {
+								echo $featured_media_result;
 							}
 						?>
 						<?php
