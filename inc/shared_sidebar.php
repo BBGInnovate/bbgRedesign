@@ -46,13 +46,12 @@ if ($includeSidebar) {
 					}
 				}
 
-				$sidebarImage = '';
-				if ($sidebarDownloadThumbnail && $sidebarDownloadThumbnail != "") {
-					$sidebarImage = '<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download" style="margin-bottom: 0.5rem;">';
-				}
-
 				$sidebar_download  = '<article>';
-				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
+				if (!empty($sidebarDownloadThumbnail)) {
+					$sidebar_download = '<a target="_blank" href="' . $sidebarDownloadLink . '">';
+					$sidebar_download.= 	'<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download" style="margin-bottom: 0.5rem;">';
+					$sidebar_download.= '</a>';
+				}
 				$sidebar_download .= 	'<p class="sidebar-article-title"><a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
 				$sidebar_download .= 	'<br><span class="bbg__file-size">(' . $ext . ', ' . $filesize . ')</span></p>';
 				
