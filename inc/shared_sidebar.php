@@ -53,8 +53,8 @@ if ($includeSidebar) {
 
 				$sidebar_download  = '<article>';
 				$sidebar_download .= 	'<a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarImage . '</a>';
-				$sidebar_download .= 	'<h3 class="sidebar-article-title"><a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a></h3>';
-				$sidebar_download .= 	'<span class="bbg__file-size"><br>(' . $ext . ', ' . $filesize . ')</span>';
+				$sidebar_download .= 	'<p class="sidebar-article-title"><a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
+				$sidebar_download .= 	'<br><span class="bbg__file-size">(' . $ext . ', ' . $filesize . ')</span></p>';
 				
 				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
 					$sidebar_download .= '<p class="sans">';
@@ -84,22 +84,22 @@ if ($includeSidebar) {
 				$sidebarLinkImage = get_sub_field('sidebar_link_image');
 				$sidebarLinkDescription = get_sub_field('sidebar_link_description', false);
 
-				$external_links  = '<aside>';
+				$external_links  = '<article>';
 				if ($sidebarLinkImage && $sidebarLinkImage != "") {
 					$external_links .= '<a target="blank" href="' . $sidebarLinkLink . '">';
 					$external_links .= 		'<img class="sans" src="' . $sidebarLinkImage['sizes']['medium'] . '" alt="Image link">';
 					$external_links .= '</a>';
 				}
-				$external_links .= 		'<h4 class="sidebar-article-title">';
+				$external_links .= 		'<p class="sidebar-article-title">';
 				$external_links .= 			'<a target="blank" href="' . $sidebarLinkLink . '">' . $sidebarLinkTitle . '</a>';
-				$external_links .= 		'</h4>';
+				$external_links .= 		'</p>';
 
 				if ($sidebarLinkDescription != "") {
 					$external_links .= '<p class="sans">';
 					$external_links .= 		$sidebarLinkDescription;
 					$external_links .= '</p>';
 				}
-				$external_links .= '</aside>';
+				$external_links .= '</article>';
 
 				$sidebar_markup .= $external_links;
 			} else if (get_row_layout() == 'sidebar_internal_link') {
