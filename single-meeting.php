@@ -179,7 +179,7 @@ get_header();
 							</a>
 						</div>
 						<?php
-							$event_info  = '<h3 class="sidebar-section-header"><a href="/news/events/">Event Information</a></h3>';
+							$event_info  = '<h3 class="sidebar-section-header">Event Information</h3>';
 							$event_info .= '<p class="sans">' . $post_date . ', ' . $meeting_time . '<br><br>';
 							$event_info .= $meeting_location . '</p>';
 							$event_info .= $event_brite_button_string;
