@@ -21,6 +21,7 @@ if (in_category('Press Release') && $includeDateline) {
 // DATELINE GOES INSIDE FIRST PARAGRAPH TAG FOR FORMATTING
 $post_thumbnail_url = get_the_post_thumbnail_url();
 $page_title = get_the_title();
+$post_id = get_the_ID();
 $post_date = get_the_date();
 $page_content = get_the_content();
 $page_content = apply_filters('the_content', $page_content);
@@ -486,7 +487,7 @@ $hideFeaturedImage = false;
 								}
 							}
 							// CONTACT CARDS
-							$contactPostIDs = get_post_meta( $post->ID, 'contact_post_id', true );
+							$contactPostIDs = get_post_meta($post_id, 'contact_post_id', true);
 							renderContactCard($contactPostIDs);
 
 							if (!empty($addtl_image_set)) {
