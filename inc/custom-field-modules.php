@@ -154,6 +154,7 @@ function assemble_office_highlights_module($office_highlights_parts) {
 		$counter = 0;
 		foreach ($office_highlights_parts as $office_highlight) {
 			if ($counter == 0) {
+				$highlights_module .= '<article class="article-teaser">';
 				$highlights_module .= 	'<div class="nest-container">';
 				$highlights_module .= 		'<div class="inner-container">';
 				$highlights_module .= 			'<div class="side-content-container">';
@@ -166,12 +167,13 @@ function assemble_office_highlights_module($office_highlights_parts) {
 				$highlights_module .= 			'</div>';
 				$highlights_module .= 		'</div>';
 				$highlights_module .= 	'</div>';
+				$highlights_module .= '</article>';
 			} else {
-				$highlights_module .= '<div>';
+				$highlights_module .= '<article class="article-teaser">';
 				$highlights_module .= 	$office_highlight['title'];
 				$highlights_module .= 	$office_highlight['meta'];
 				$highlights_module .= 	$office_highlight['excerpt'];
-				$highlights_module .= '</div>';
+				$highlights_module .= '</article>';
 			}
 			$counter++;
 		}

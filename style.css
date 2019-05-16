@@ -6867,6 +6867,8 @@ section.usa-section.bbg-banner__section {
   margin-bottom: 1.5rem; }
   .office-page .office-highlights h4, .office-page .office-highlights .bbg__board__committee-list li a, .bbg__board__committee-list li .office-page .office-highlights a {
     margin-bottom: 0.5rem; }
+  .office-page .office-highlights .article-teaser:last-of-type {
+    border-bottom: none; }
 
 .office-page .office-contact {
   background-color: #e6e6e6;
