@@ -444,8 +444,8 @@ $hideFeaturedImage = false;
 							echo '</header>';
 
 							$featured_video = get_post_meta($post_id, 'featured_video_url');
-							$featured_video = featured_video($featured_video[0]);
 							if (!empty($featured_video)) {
+								$featured_video = featured_video($featured_video[0]);
 								$featured_video_markup  = '<iframe class="bbg-banner" scrolling="no" src="';
 								$featured_video_markup .= 	$featured_video['url'];
 								$featured_video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0 0 30px 0;">';
