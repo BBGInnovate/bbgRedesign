@@ -174,7 +174,6 @@ if ($custom_query->have_posts()) :
 			$mapHeadline = get_post_meta($id, 'map_headline', true);
 			$mapDescription = get_the_title();
 			$mapDate = get_the_date();
-
 			$mapDescription = $mapDescription . ' <span class="bbg__map__infobox__date">(' . $mapDate . ')</span>';
 
 			$pinColor = '#981b1e';
@@ -253,7 +252,7 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
 		}
 	});
 
-	for (var i = 1; i < geojson[0].features.length; i++) {
+	for (var i = 0; i < geojson[0].features.length; i++) {
 		var coords = geojson[0].features[i].geometry.coordinates;
 		var title = geojson[0].features[i].properties.title; //a[2];
 		var description = geojson[0].features[i].properties['description'];
