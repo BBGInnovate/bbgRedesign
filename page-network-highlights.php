@@ -189,20 +189,22 @@ if ($custom_query->have_posts()) :
 			} else {
 				$mapHeadline = '<h2 class="paragraph-header"><a href="' . $storyLink . '">' . $mapHeadline . '</a></h2>';
 			}
-			$features[] = array(
-				'type' => 'Feature',
-				'geometry' => array(
-					'type' => 'Point',
-					'coordinates' => array($location['lng'],$location['lat'])
-				),
-				'properties' => array(
-					'title' => $mapHeadline,
-					'description' => $mapDescription,
-					'marker-color' => $pinColor,
-					'marker-size' => 'large',
-					'marker-symbol' => ''
-				)
-			);
+			if (!empty($location)) {
+				$features[] = array(
+					'type' => 'Feature',
+					'geometry' => array(
+						'type' => 'Point',
+						'coordinates' => array($location['lng'],$location['lat'])
+					),
+					'properties' => array(
+						'title' => $mapHeadline,
+						'description' => $mapDescription,
+						'marker-color' => $pinColor,
+						'marker-size' => 'large',
+						'marker-symbol' => ''
+					)
+				);
+			}
 		endwhile;
 		$geojsonObj = array(array(
 			'type' => 'FeatureCollection',
@@ -256,24 +258,30 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
 		var coords = geojson[0].features[i].geometry.coordinates;
 		var title = geojson[0].features[i].properties.title; //a[2];
 		var description = geojson[0].features[i].properties['description'];
-		var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
-			icon: L.mapbox.marker.icon({
-				'marker-symbol': '',
-				'marker-color': geojson[0].features[i].properties['marker-color']
-			})
-		});
-		var popupText = title + description;
-		marker.bindPopup(popupText);
-		markers.addLayer(marker);
+		if (coords != '') {
+			var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
+				icon: L.mapbox.marker.icon({
+					'marker-symbol': '',
+					'marker-color': geojson[0].features[i].properties['marker-color']
+				})
+			});
+			var popupText = title + description;
+			marker.bindPopup(popupText);
+			markers.addLayer(marker);
+		}
 	}
 
-	map.addLayer(markers);
+	if (coords != '') {
+		map.addLayer(markers);
+	}
 
 	// Disable the map scroll/zoom so that you can scroll the page.
 	map.scrollWheelZoom.disable();
 
-	function centerMap(){
-		map.fitBounds(markers.getBounds());
+	function centerMap() {
+		if (coords != '') {
+			map.fitBounds(markers.getBounds());
+		}
 	}
 	centerMap();
 
