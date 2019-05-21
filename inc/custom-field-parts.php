@@ -159,7 +159,11 @@ function build_umbrella_content_parts($content_data) {
 	}
 
 	if ($content_data['column_title']) {
-		$column_title = '<h3 class="section-subheader">' . $content_data['column_title'] . '</h3>';
+		if (!empty($content_data['link'])) {
+			$column_title = '<h3 class="section-subheader"><a href="' . $content_data['link'] . '">' . $content_data['column_title'] . '</a></h3>';
+		} else {
+			$column_title = '<h3 class="section-subheader">' . $content_data['column_title'] . '</h3>';
+		}
 	}
 
 	if ($content_data['item_title']) {
