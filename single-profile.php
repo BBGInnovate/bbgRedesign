@@ -7,6 +7,7 @@
  * @package bbgRedesign
  */
 
+include get_template_directory() . '/inc/shared_sidebar.php';
 
 if (have_posts()) {
 	the_post();
@@ -120,7 +121,7 @@ get_header(); ?>
 						?>
 					</div>
 					<div class="side-column divider-left">
-						<article class="social-share">
+						<aside class="social-share">
 							<h3 class="sidebar-section-header">Share</h3>
 							<a href="<?php echo $fbUrl; ?>" target="_blank">
 								<i class="fab fa-facebook-square"></i>
@@ -128,34 +129,17 @@ get_header(); ?>
 							<a href="<?php echo $twitterURL; ?>" target="_blank">
 								<i class="fab fa-twitter-square"></i>
 							</a>
-						</article>
+						</aside>
+						<?php
+							if ($includeSidebar) {
+								echo $sidebar;
+							}
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-</main>
-
-
-<main id="main" role="main">
-	<div class="outer-container">
-		<div class="main-content-container">
-			<div class="nest-container">
-				<div class="inner-container">
-					<div class="icon-side-content-container">
-
-					</div>
-					<div class="icon-main-content-container">
-
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- BEGIN SIDEBAR -->
-		<aside class="side-content-container">
-			
-		</aside>
-	</div><!-- END GRID -->
 </main>
 
 <?php get_footer(); ?>
