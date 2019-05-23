@@ -6301,6 +6301,11 @@ div.banner_readmore h6 a:visited {
 .bbg__committee-list + .bbg__committee-list {
   margin-top: 0; }
 
+.bbg__committee-list .article-title button {
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit; }
+
 .bbg__board__committee-list {
   display: block;
   list-style-type: none;

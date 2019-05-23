@@ -872,6 +872,13 @@ div.banner_readmore h6 a:visited {
 
 //Fixing spacing on accordions
 .bbg__committee-list+.bbg__committee-list {margin-top: 0;}
+.bbg__committee-list {
+    .article-title button {
+        font-size: inherit;
+        font-weight: inherit;
+        color: inherit;
+    }
+}
 
 // Board committees
 .bbg__board__committee-list {
