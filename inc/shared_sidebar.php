@@ -46,21 +46,21 @@ if ($includeSidebar) {
 					}
 				}
 
-				$sidebar_download  = '<article>';
+				$sidebar_download  = '<aside>';
 				if (!empty($sidebarDownloadThumbnail)) {
-					$sidebar_download = '<a target="_blank" href="' . $sidebarDownloadLink . '">';
-					$sidebar_download.= 	'<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download" style="margin-bottom: 0.5rem;">';
-					$sidebar_download.= '</a>';
+					$sidebar_download .= '<a target="_blank" href="' . $sidebarDownloadLink . '">';
+					$sidebar_download .= 	'<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download" style="margin-bottom: 0.5rem;">';
+					$sidebar_download .= '</a>';
 				}
 				$sidebar_download .= 	'<p class="sidebar-article-title"><a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
-				$sidebar_download .= 	'<br><span class="bbg__file-size">(' . $ext . ', ' . $filesize . ')</span></p>';
+				$sidebar_download .= 	'<br><span class="date-meta">(' . $ext . ', ' . $filesize . ')</span></p>';
 				
 				if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
 					$sidebar_download .= '<p class="sans">';
 					$sidebar_download .= 	$sidebarDownloadDescription;
 					$sidebar_download .= '</p>';
 				}
-				$sidebar_download .= '</article>';
+				$sidebar_download .= '</aside>';
 
 				$sidebar_markup .= $sidebar_download;
 			} else if (get_row_layout() == 'sidebar_quote') {
@@ -68,13 +68,13 @@ if ($includeSidebar) {
 				$sidebarQuotationSpeaker = get_sub_field('sidebar_quotation_speaker');
 				$sidebarQuotationSpeakerTitle = get_sub_field('sidebar_quotation_speaker_title');
 
-				$quote_markup  = '<article class="bbg__quotation">';
+				$quote_markup  = '<aside class="bbg__quotation">';
 				$quote_markup .= 	'<p>&quot;' . $sidebarQuotationText . '&quot;</p>';
 				$quote_markup .= 	'<p class="sans">';
 				$quote_markup .= 		'&mdash;' . $sidebarQuotationSpeaker . '<br>';
 				$quote_markup .= 		$sidebarQuotationSpeakerTitle;
 				$quote_markup .= 	'</p>';
-				$quote_markup .= '</article>';
+				$quote_markup .= '</aside>';
 
 				$sidebar_markup .= $quote_markup;
 			} else if (get_row_layout() == 'sidebar_external_link') {
@@ -83,7 +83,7 @@ if ($includeSidebar) {
 				$sidebarLinkImage = get_sub_field('sidebar_link_image');
 				$sidebarLinkDescription = get_sub_field('sidebar_link_description', false);
 
-				$external_links  = '<article>';
+				$external_links  = '<aside>';
 				if ($sidebarLinkImage && $sidebarLinkImage != "") {
 					$external_links .= '<a target="blank" href="' . $sidebarLinkLink . '">';
 					$external_links .= 		'<img class="sans" src="' . $sidebarLinkImage['sizes']['medium'] . '" alt="Image link">';
@@ -98,7 +98,7 @@ if ($includeSidebar) {
 					$external_links .= 		$sidebarLinkDescription;
 					$external_links .= '</p>';
 				}
-				$external_links .= '</article>';
+				$external_links .= '</aside>';
 
 				$sidebar_markup .= $external_links;
 			} else if (get_row_layout() == 'sidebar_internal_link') {
@@ -154,7 +154,7 @@ if ($includeSidebar) {
 					$sidebarDescription = '<p class="sans">' . $sidebarPhotoCaption . '</p>';
 				}
 
-				$sidebar_markup .= '<article>' . $sidebarImage . $sidebarImageTitle . $sidebarDescription . '</article>';
+				$sidebar_markup .= '<aside>' . $sidebarImage . $sidebarImageTitle . $sidebarDescription . '</aside>';
 			} else if (get_row_layout() == 'sidebar_accordion') {
 				$accordion = '';
 				$accordionTitle = get_sub_field('sidebar_accordion_title');
@@ -196,7 +196,7 @@ if ($includeSidebar) {
 					}
 
 					$sidebar_markup .= '<h3 class="sidebar-section-header">' . $label . '</h3>';
-					$sidebar_markup .= '<article class="sans">';
+					$sidebar_markup .= '<aside class="sans">';
 					$counter = 0;
 					foreach ($relatedPosts as $relatedPost) {
 						$counter++;
@@ -205,7 +205,7 @@ if ($includeSidebar) {
 						}
 						$sidebar_markup .= getAwardInfo($relatedPost -> ID, false);
 					}
-					$sidebar_markup .=  '</article>';
+					$sidebar_markup .=  '</aside>';
 				}
 			} else if (get_row_layout() == 'sidebar_twitter_widget') {
 				$widgetID = get_sub_field('sidebar_twitter_widget_id');
