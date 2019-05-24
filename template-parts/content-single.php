@@ -26,6 +26,14 @@ $post_date = get_the_date();
 $page_content = get_the_content();
 $page_content = apply_filters('the_content', $page_content);
 $page_content = do_shortcode($page_content);
+
+$post_byline = '';
+if (!empty(get_post_meta($post_id, 'include_byline'))) {
+	$post_byline = get_post_meta($post_id, 'byline_override');
+	$post_byline = $post_byline[0];
+}
+
+
 if ($dateline != "") {
 	$needle = '<p>';
 	$replaceNeedle = '<p>' . $dateline;
@@ -440,7 +448,11 @@ $hideFeaturedImage = false;
 
 							echo '<header>';
 							echo 	'<h3 class="article-title">' . $page_title . '</h3>';
-							echo 	'<p class="date-meta">' . $post_date . '</p>';
+							echo 	'<p class="date-meta">';
+							if (!empty($post_byline)) {
+								echo 	$post_byline . '<br>';
+							}
+							echo 	$post_date . '</p>';
 							echo '</header>';
 
 							// $featured_video = get_post_meta($post_id, 'featured_video_url');
