@@ -3,11 +3,11 @@
 	// https://projects.propublica.org/api-docs/congress-api/
 	function get_congressional_committee($congress, $chamber, $committee_id, $subcommittee_id, $title) {
 		$committee_title = $title;
+		$api_url = 'https://api.propublica.org/congress/v1/' . $congress .'/'. $chamber . '/committees/' . $committee_id;
 		if (!empty($subcommittee_id)) {
-			$api_url = 'https://api.propublica.org/congress/v1/' . $congress .'/'. $chamber . '/committees/' . $committee_id .'/subcommittees/'. $subcommittee_id .'.json';
-		} else {
-			$api_url = 'https://api.propublica.org/congress/v1/' . $congress .'/'. $chamber . '/committees/' . $committee_id .'.json';
+			$api_url .= '/subcommittees/'. $subcommittee_id;
 		}
+		$api_url .= '.json';
 
 		// REQUEST DATA FROM API, RETURN STRING INSTEAD OF PRINTING ARRAY DIRECTLY TO SCREEN
 		$curl = curl_init();
