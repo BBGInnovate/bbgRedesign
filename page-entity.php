@@ -138,7 +138,7 @@ echo $press_clippings_style;
 
 
 // SOCIAL, CONTACT LINKS
-$twitterProfileHandle = get_post_meta($entity_page_id, 'entity_twitter_handle', true);
+$twitter_profile_handle = get_post_meta($entity_page_id, 'entity_twitter_handle', true);
 $facebook = get_post_meta($entity_page_id, 'entity_facebook', true);
 $instagram = get_post_meta($entity_page_id, 'entity_instagram', true);
 
@@ -442,23 +442,23 @@ get_header();
 							</div>
 
 							<?php
-								if (!empty($facebook) || !empty($twitterProfileHandle) || !empty($instagram)) {
-									echo '<div class="entity-left-article">';
+								if (!empty($facebook) || !empty($twitter_profile_handle) || !empty($instagram)) {
+									echo '<div class="entity-left-article social-media-icons">';
 									echo 	'<h3 class="sidebar-section-header">Social Media</h3>';
 									echo 	'<p>';
 									if (!empty($facebook)) {
-										echo '<a href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
-										echo 	'<span class="bbg__article-share__icon facebook"></span>';
+										echo '<a class="facebook-icon" href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
+										echo 	'<i class="fab fa-facebook-square"></i>';
 										echo '</a>';
 									}
-									if (!empty($twitterProfileHandle)) {
-										echo '<a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . get_the_title() . ' on Twitter">';
-										echo 	'<span class="bbg__article-share__icon twitter"></span>';
+									if (!empty($twitter_profile_handle)) {
+										echo '<a class="twitter-icon" href="https://twitter.com/' . $twitter_profile_handle . '" title="Follow ' . get_the_title() . ' on Twitter">';
+										echo 	'<i class="fab fa-twitter-square"></i>';
 										echo '</a>';
 									}
 									if (!empty($instagram)) {
-										echo '<a href="https://instagram.com/' . $instagram . '" title="Follow ' . get_the_title() . ' on Instagram">';
-										echo 	'<span class="bbg__article-share__icon instagram"></span>';
+										echo '<a class="instagram-icon" href="https://instagram.com/' . $instagram . '" title="Follow ' . get_the_title() . ' on Instagram">';
+										echo 	'<i class="fab fa-instagram"></i>';
 										echo '</a>';
 									}
 									echo 	'</p>';

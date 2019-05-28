@@ -3073,6 +3073,9 @@ a:focus .bbg__article-share__icon {
 .social-media-icons a.twitter-icon:link, .social-media-icons a.twitter-icon:visited {
   color: #00aced; }
 
+.social-media-icons a.instagram-icon:link, .social-media-icons a.instagram-icon:visited {
+  color: #ee0075; }
+
 .social-media-icons .fab {
   font-size: 2.5rem;
   margin-right: 1rem; }
