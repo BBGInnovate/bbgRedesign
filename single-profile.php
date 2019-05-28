@@ -51,13 +51,6 @@ if (!empty($intern_date)) {
 $projectCategoryID = get_cat_id('Project');
 $isProject = has_category($projectCategoryID);
 
-// SOCIAL MEDIA INFORMATION
-$twitterText = '';
-$twitterText .= 'Profile of ' . html_entity_decode($page_title);
-$twitterText .= ' by @bbggov ' . get_permalink(); 
-$twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitterText);
-$fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode(get_permalink());
-
 $hideFeaturedImage = get_post_meta(get_the_ID(), 'hide_featured_image', true);
 $thumbnail_image = '';
 if (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
@@ -121,16 +114,13 @@ get_header(); ?>
 						?>
 					</div>
 					<div class="side-column divider-left">
-						<aside class="social-share">
-							<h3 class="sidebar-section-header">Share</h3>
-							<a href="<?php echo $fbUrl; ?>" target="_blank">
-								<i class="fab fa-facebook-square"></i>
-							</a>
-							<a href="<?php echo $twitterURL; ?>" target="_blank">
-								<i class="fab fa-twitter-square"></i>
-							</a>
-						</aside>
 						<?php
+							// SHARE THIS PAGE
+							$share_icons = social_media_share_page($page_id);
+							if (!empty($share_icons)) {
+								echo $share_icons;
+							}
+							
 							if ($includeSidebar) {
 								echo $sidebar;
 							}

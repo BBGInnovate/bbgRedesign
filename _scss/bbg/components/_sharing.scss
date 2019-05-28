@@ -3,6 +3,16 @@ a:focus .bbg__article-share__icon {
 }
 
 /** ARTICLE SHARE AREA */
+// SOCIAL MEDIA ICONS FROM FONT AWESOME
+.social-media-icons {
+    a.facebook-icon:link, a.facebook-icon:visited {color: #3b5998;}
+    a.twitter-icon:link, a.twitter-icon:visited {color: #00aced;}
+    .fab {
+        font-size: 2.5rem;
+        margin-right: 1rem;
+    }
+}
+
 .bbg__article-sidebar {
 	.bbg__article-share {
 		@include media($medium-large-screen) {

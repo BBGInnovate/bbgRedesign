@@ -31,7 +31,7 @@ if (have_posts()) {
 if (have_posts()) {
 	while (have_posts()) {
 		the_post();
-		$id = get_the_ID();
+		$burke_candidate_id = get_the_ID();
 		$page_title = get_the_title();
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
@@ -117,17 +117,13 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 						?>
 					</div>
 					<div class="side-column divider-left">
-						<article>
-							<h3 class="sidebar-section-header">Share</h3>
-							<a href="<?php echo $fbUrl; ?>">
-								<span class="bbg__article-share__icon facebook"></span>
-							</a>
-							<a href="<?php echo $twitterURL; ?>">
-								<span class="bbg__article-share__icon twitter"></span>
-							</a>
-						</article>
-
 					<?php
+						// SHARE THIS PAGE
+						$share_icons = social_media_share_page($burke_candidate_id);
+						if (!empty($share_icons)) {
+							echo $share_icons;
+						}
+
 						foreach (array_values($burkeProfileObj) as $i => $profile) {
 							$i = $i + 1; // add a number to the item key to start at 1
 							$award_list = '';

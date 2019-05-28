@@ -14,7 +14,6 @@ include get_template_directory() . '/inc/shared_sidebar.php';
 
 if (have_posts()) {
 	the_post();
-
 	$page_id = get_the_ID();
 	$page_title = get_the_title();
 	$post_date = get_the_date('F j, Y');
@@ -23,12 +22,6 @@ if (have_posts()) {
 
 	$project_category_id = get_cat_id('Project');
 	$isProject = has_category($project_category_id);
-
-	$twitterText  = html_entity_decode(get_the_title());
-	$twitterText .= ' by @bbggov ' . get_permalink();
-
-	$twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitterText);
-	$fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode(get_permalink());
 
 	// SET PAGE TYPE VARIABLES
 	$event_page_header = 'Event';
@@ -168,17 +161,13 @@ get_header();
 						?>
 					</div>
 					<div class="side-column divider-left">
-						<div class="share-social">
-							<h3 class="sidebar-section-header">Share</h3>
-							<a href="<?php echo $fbUrl; ?>">
-								<span class="bbg__article-share__icon facebook"></span>
-							</a>
-
-							<a href="<?php echo $twitterURL; ?>">
-								<span class="bbg__article-share__icon twitter"></span>
-							</a>
-						</div>
 						<?php
+							// SHARE THIS PAGE
+							$share_icons = social_media_share_page($page_id);
+							if (!empty($share_icons)) {
+								echo $share_icons;
+							}
+
 							$event_info  = '<h3 class="sidebar-section-header">Event Information</h3>';
 							$event_info .= '<p class="sans">' . $post_date . ', ' . $meeting_time . '<br><br>';
 							$event_info .= $meeting_location . '</p>';

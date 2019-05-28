@@ -1187,4 +1187,27 @@ function foia_upload($file) {
 	return $file;
 }
 // END FOIA GROUP
+
+// SOCIAL MEDIA FUNCTIONS
+// SHARE CONTENT
+function social_media_share_page($page_id) {
+	// Title/Headline field, followed by the URL and the Author's Twitter Handle
+	$twitter_text  = html_entity_decode(get_the_title($page_id));
+	$twitter_text .= ' by @usagmgov ';
+	$twitter_text .= get_the_permalink($page_id);
+
+	$twitter_share_url = '//twitter.com/intent/tweet?text=' . rawurlencode($twitter_text);
+	$facebook_share_url = '//www.facebook.com/sharer/sharer.php?u=' . urlencode(get_the_permalink($page_id));
+
+	$share_markup  = '<aside class="social-media-icons">';
+	$share_markup .= 	'<h3 class="sidebar-section-header">Share</h3>';
+	$share_markup .= 	'<a class="facebook-icon" href="' . $facebook_share_url . '" target="_blank">';
+	$share_markup .= 		'<i class="fab fa-facebook-square"></i>';
+	$share_markup .= 	'</a>';
+	$share_markup .= 	'<a class="twitter-icon" href="' . $twitter_share_url . '" target="_blank">';
+	$share_markup .= 		'<i class="fab fa-twitter-square"></i>';
+	$share_markup .= 	'</a>';
+	$share_markup .= '</aside>';
+	return $share_markup;
+}
 ?>

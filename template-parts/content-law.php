@@ -7,22 +7,7 @@
  * @package bbginnovate
  */
 
-$twitter_text = html_entity_decode(get_the_title());
-$twitter_handle = get_the_author_meta('twitterHandle');
-$twitter_handle = str_replace('@', '', $twitter_handle);
-if ($twitter_handle && $twitter_handle != '') {
-	$twitter_text .= ' by @' . $twitter_handle;
-} else {
-	$author_display_name = get_the_author();
-	if ($author_display_name && $author_display_name!='') {
-		$twitter_text .= ' by ' . $author_display_name;
-	}
-}
-$twitter_text .= ' ' . get_permalink();
 $hashtags = '';
-
-$twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitter_text);
-$fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode( get_permalink() );
 
 $listsInclude = get_field('sidebar_dropdown_include', '', true);
 
@@ -53,19 +38,13 @@ include get_template_directory() . '/inc/shared_sidebar.php';
 				?>
 			</div>
 			<div class="side-content-container">
-
-				<!-- SOCIAL MEDIA -->
-				<article>
-					<h3 class="sidebar-section-header">Share</h3>
-					<a href="<?php echo $fbUrl; ?>">
-						<span class="bbg__article-share__icon facebook"></span>
-					</a>
-					<a href="<?php echo $twitterURL; ?>">
-						<span class="bbg__article-share__icon twitter"></span>
-					</a>
-				</article>
-
 				<?php
+					// SHARE THIS PAGE
+					$share_icons = social_media_share_page(get_the_ID());
+					if (!empty($share_icons)) {
+						echo $share_icons;
+					}
+
 					echo '<article class="bbg__article-sidebar">';
 					if ($includeSidebar && $sidebarTitle != "") {
 						echo $sidebar;

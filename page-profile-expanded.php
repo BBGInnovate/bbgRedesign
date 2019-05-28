@@ -6,7 +6,6 @@
  *
  * @package bbgRedesign
   template name: Profile
-
  */
 
 require 'inc/bbg-functions-assemble.php';
@@ -15,7 +14,7 @@ require 'inc/bbg-functions-assemble.php';
 if (have_posts()) {
 	the_post();
 
-	$id = get_the_ID();
+	$profile_id = get_the_ID();
 	$page_content = do_shortcode(get_the_content());
 	$page_content = apply_filters('the_content', $page_content);
 
@@ -26,28 +25,28 @@ if (have_posts()) {
 	$ogDescription = get_the_excerpt();
 
 	/**** CREATE OG:IMAGE *****/
-	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'Full');
+	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($profile_id), 'Full');
 	$ogImage = $thumb['0'];
 
-	$socialImageID = get_post_meta($id, 'social_image', true);
+	$socialImageID = get_post_meta($profile_id, 'social_image', true);
 	if ($socialImageID) {
 		$socialImage = wp_get_attachment_image_src($socialImageID , 'Full');
 		$ogImage = $socialImage[0];
 	}
 
 	/**** Get profile fields *****/
-	$occupation = get_post_meta($id, 'occupation', true);
-	$isActing = get_post_meta($id, 'acting', true);
-	$email = get_post_meta($id, 'email', true);
-	$phone = get_post_meta($id, 'phone', true);
-	$twitterProfileHandle = get_post_meta($id, 'twitter_handle', true);
-	$relatedLinksTag = get_post_meta($id, 'related_links_tag', true);
+	$occupation = get_post_meta($profile_id, 'occupation', true);
+	$isActing = get_post_meta($profile_id, 'acting', true);
+	$email = get_post_meta($profile_id, 'email', true);
+	$phone = get_post_meta($profile_id, 'phone', true);
+	$twitterProfileHandle = get_post_meta($profile_id, 'twitter_handle', true);
+	$relatedLinksTag = get_post_meta($profile_id, 'related_links_tag', true);
 
 	/**** CREATE $formerCSS - applies black and white to retired board members ***/
 	if ($isActing) {
 		$occupation = "Acting " . $occupation;
 	}
-	$active = get_post_meta( $id, 'active', true );
+	$active = get_post_meta( $profile_id, 'active', true );
 	$formerCSS = "";
 	if (!$active) {
 		$occupation = "(Former) " . $occupation;
@@ -55,7 +54,7 @@ if (have_posts()) {
 	}
 
 	/*** Get the profile photo mugshot ***/
-	$profilePhotoID = get_post_meta($id, 'profile_photo', true);
+	$profilePhotoID = get_post_meta($profile_id, 'profile_photo', true);
 	$profilePhoto = "";
 	if ( $profilePhotoID ) {
 		$profilePhoto = wp_get_attachment_image_src($profilePhotoID , 'mugshot');
@@ -65,7 +64,7 @@ if (have_posts()) {
 	/*** Generate the code for the latest tweets that we use in the sidebar ***/
 	$latestTweetsStr = "";
 	if ($twitterProfileHandle != "") {
-		$showLatestTweets = get_post_meta($id, 'show_latest_tweets', true);
+		$showLatestTweets = get_post_meta($profile_id, 'show_latest_tweets', true);
 		if ($showLatestTweets) {
 			$latestTweetsStr = '<a data-chrome="noheader nofooter noborders transparent noscrollbar" data-tweet-limit="2" class="twitter-timeline" href="https://twitter.com/' . $twitterProfileHandle . '" data-screen-name="' . $twitterProfileHandle . '" >Tweets by @' . $twitterProfileHandle . '</a><script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
 		}
@@ -76,7 +75,7 @@ if (have_posts()) {
 }
 
 // SECTION FOR CEO
-$ceo = get_post_meta($id, 'ceo', true);
+$ceo = get_post_meta($profile_id, 'ceo', true);
 if (isset($ceo)) {
 	function get_ceo_article_arguments() {
 		$ceo_params = array(
@@ -151,7 +150,7 @@ get_header();
 
 						<?php
 							// CONTENT BELOW BIOGRAPHY
-							$content_below_bio = get_field('profile_content_below_biography', $id);
+							$content_below_bio = get_field('profile_content_below_biography', $profile_id);
 							if ($content_below_bio != "") {
 								echo '<div class="bbg__profile__content__section">';
 								echo 	$content_below_bio;
@@ -183,7 +182,7 @@ get_header();
 						<!-- section for related blog posts. Previously was used for "from the ceo". Currently not used on any profiles. -->
 						<?php
 							//Add blog posts below the main content
-							$relatedCategory = get_field('profile_related_category', $id);
+							$relatedCategory = get_field('profile_related_category', $profile_id);
 
 							if ($relatedCategory != "") {
 								$qParams2 = array(
@@ -215,17 +214,13 @@ get_header();
 		</div>
 		<!-- BEGIN SIDEBAR -->
 		<div class="side-content-container">
-			<aside class="social-share">
-				<h2 class="sidebar-section-header">Share</h2>
-				<a href="<?php echo $fbUrl; ?>" target="_blank">
-					<i class="fab fa-facebook-square"></i>
-				</a>
-				<a href="<?php echo $twitterURL; ?>" target="_blank">
-					<i class="fab fa-twitter-square"></i>
-				</a>
-			</aside>
-
 			<?php
+				// SHARE THIS PAGE
+				$share_icons = social_media_share_page($profile_id);
+				if (!empty($share_icons)) {
+					echo $share_icons;
+				}
+
 				// CONTACT INFORMATION
 				// EMAIL EXAMPLE Nasserie Carew, CURRENTLY NO PHONE NUMBERS USED ON PROFILES
 				if ($email != "" || $phone != "") {

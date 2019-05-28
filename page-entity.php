@@ -20,7 +20,8 @@ require 'inc/bbg-functions-assemble.php';
 if (have_posts()) {
 	while (have_posts()) {
 		the_post();
-		$id = get_the_ID();
+		$entity_page_id = get_the_ID();
+		$page_link = get_the_permalink();
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
 		$ogDescription = get_the_excerpt();
@@ -29,13 +30,13 @@ if (have_posts()) {
 wp_reset_postdata();
 wp_reset_query();
 
-$entity_full_name = get_post_meta($id, 'entity_full_name', true);
-$abbreviation = get_post_meta($id, 'entity_abbreviation', true);
-$description = get_post_meta($id, 'entity_description', true);
-$siteUrl = get_post_meta($id, 'entity_site_url', true);
-$rssFeed = get_post_meta($id, 'entity_rss_feed', true);
-$entityLogoID = get_post_meta($id, 'entity_logo',true);
-$websiteName = get_post_meta($id, 'entity_website_name', true);
+$entity_full_name = get_post_meta($entity_page_id, 'entity_full_name', true);
+$abbreviation = get_post_meta($entity_page_id, 'entity_abbreviation', true);
+$description = get_post_meta($entity_page_id, 'entity_description', true);
+$siteUrl = get_post_meta($entity_page_id, 'entity_site_url', true);
+$rssFeed = get_post_meta($entity_page_id, 'entity_rss_feed', true);
+$entityLogoID = get_post_meta($entity_page_id, 'entity_logo',true);
+$websiteName = get_post_meta($entity_page_id, 'entity_website_name', true);
 
 $entityLogo = "";
 if ($entityLogoID) {
@@ -43,14 +44,14 @@ if ($entityLogoID) {
 	$entityLogo = $entityLogoObj[0];
 }
 
-$awardSlug = get_post_meta($id, 'entity_award_recipient_taxonomy_slug', true);
-$entityApiID = get_post_meta($id, 'entity_api_id', true);
-$entityCategorySlug = get_post_meta($id, 'entity_category_slug', true);
+$awardSlug = get_post_meta($entity_page_id, 'entity_award_recipient_taxonomy_slug', true);
+$entityApiID = get_post_meta($entity_page_id, 'entity_api_id', true);
+$entityCategorySlug = get_post_meta($entity_page_id, 'entity_category_slug', true);
 $entityCategoryObj = get_category_by_slug($entityCategorySlug);
 $entityAwardsPageLink = get_permalink( get_page_by_path('awards'));
 $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPageLink);
 
-$entityMission = get_post_meta($id, 'entity_mission', true);
+$entityMission = get_post_meta($entity_page_id, 'entity_mission', true);
 $entity_link_groups = getEntityLinks_taxonomy($entityCategorySlug);
 $site_select = '<h3 class="sidebar-section-header">Explore the ' . $abbreviation . ' websites</h3>';
 if (count($entity_link_groups) < 4) {
@@ -76,12 +77,12 @@ if (count($entity_link_groups) < 4) {
 }
 
 //Entity fast facts / by-the-numbers
-$budget = get_post_meta($id, 'entity_budget', true);
-$employees = get_post_meta($id, 'entity_employees', true);
-$languages = get_post_meta($id, 'entity_languages', true);
-$audience = get_post_meta($id, 'entity_audience', true);
-$appLink = get_post_meta($id, 'entity_mobile_apps_link', true);
-$primaryLanguage = get_post_meta($id, 'entity_primary_language', true);
+$budget = get_post_meta($entity_page_id, 'entity_budget', true);
+$employees = get_post_meta($entity_page_id, 'entity_employees', true);
+$languages = get_post_meta($entity_page_id, 'entity_languages', true);
+$audience = get_post_meta($entity_page_id, 'entity_audience', true);
+$appLink = get_post_meta($entity_page_id, 'entity_mobile_apps_link', true);
+$primaryLanguage = get_post_meta($entity_page_id, 'entity_primary_language', true);
 
 if ($budget != "") {
 	$budget = '<li><span class="sidebar-article-title">Annual budget: </span>' . $budget . '</li>';
@@ -137,19 +138,19 @@ echo $press_clippings_style;
 
 
 // SOCIAL, CONTACT LINKS
-$twitterProfileHandle = get_post_meta($id, 'entity_twitter_handle', true);
-$facebook = get_post_meta($id, 'entity_facebook', true);
-$instagram = get_post_meta($id, 'entity_instagram', true);
+$twitterProfileHandle = get_post_meta($entity_page_id, 'entity_twitter_handle', true);
+$facebook = get_post_meta($entity_page_id, 'entity_facebook', true);
+$instagram = get_post_meta($entity_page_id, 'entity_instagram', true);
 
 
 // CONTACT INFORMATION
-$email = get_post_meta($id, 'entity_email', true);
-$phone = get_post_meta($id, 'entity_phone', true);
-$street = get_post_meta($id, 'entity_street', true);
-$city = get_post_meta($id, 'entity_city', true);
-$state = get_post_meta($id, 'entity_state', true);
-$zip = get_post_meta($id, 'entity_zip', true);
-$learnMore = get_post_meta($id, 'entity_learn_more', true);
+$email = get_post_meta($entity_page_id, 'entity_email', true);
+$phone = get_post_meta($entity_page_id, 'entity_phone', true);
+$street = get_post_meta($entity_page_id, 'entity_street', true);
+$city = get_post_meta($entity_page_id, 'entity_city', true);
+$state = get_post_meta($entity_page_id, 'entity_state', true);
+$zip = get_post_meta($entity_page_id, 'entity_zip', true);
+$learnMore = get_post_meta($entity_page_id, 'entity_learn_more', true);
 
 $address = "";
 $map = "";
@@ -223,11 +224,11 @@ if ($address != "" || $phone_li != "" || $email_li != "") {
 
 // Default adds a space above header if there's no image set
 $featuredImageClass = " bbg__article--no-featured-image";
-$bannerPosition = get_post_meta($id, 'adjust_the_banner_image', true);
+$bannerPosition = get_post_meta($entity_page_id, 'adjust_the_banner_image', true);
 $videoUrl = "";
 
 /**** BEGIN CREATING rssItems array *****/
-$entityJson = getFeed($rssFeed, $id);
+$entityJson = getFeed($rssFeed, $entity_page_id);
 $rssItems = array();
 $itemContainer = false;
 $languageDirection = "";
@@ -262,11 +263,11 @@ if ($itemContainer) {
 /**** DONE CREATING rssItems array *****/
 
 /**** START FETCH related press releases ****/
-$prCategorySlug = get_post_meta( $id, 'entity_pr_category', true );
+$prCategorySlug = get_post_meta($entity_page_id, 'entity_pr_category', true);
 $pressReleases = array();
-if ( $prCategorySlug != "" ) {
-	$prCategoryObj = get_category_by_slug( $prCategorySlug );
-	if ( is_object($prCategoryObj) ) {
+if ($prCategorySlug != '') {
+	$prCategoryObj = get_category_by_slug($prCategorySlug);
+	if (is_object($prCategoryObj)) {
 		$prCategoryID = $prCategoryObj -> term_id;
 		$qParams = array(
 			'post_type' => array( 'post' ),
@@ -276,11 +277,11 @@ if ( $prCategorySlug != "" ) {
 			'order', 'DESC'
 		);
 		$custom_query = new WP_Query( $qParams );
-		if ( $custom_query -> have_posts() ) {
-			while ( $custom_query -> have_posts() )  {
+		if ($custom_query -> have_posts()) {
+			while ($custom_query -> have_posts())  {
 				$custom_query -> the_post();
-				$id = get_the_ID();
-				$pressReleases[] = array( 'url' => get_permalink($id), 'title' => get_the_title($id), 'excerpt' => get_the_excerpt());
+				$pr_page_id = get_the_ID();
+				$pressReleases[] = array( 'url' => get_permalink($pr_page_id), 'title' => get_the_title($pr_page_id), 'excerpt' => get_the_excerpt());
 			}
 		}
 		wp_reset_postdata();
@@ -319,13 +320,13 @@ $qParams = array(
 );
 $custom_query = new WP_Query($qParams);
 if ($custom_query -> have_posts()) {
-	while ( $custom_query -> have_posts() )  {
+	while ($custom_query -> have_posts())  {
 		$custom_query -> the_post();
-		$id = get_the_ID();
+		$award_post_id = get_the_ID();
 
-		$awardYears  = get_post_meta( $id, 'standardpost_award_year' );
-		$awardTitle = get_post_meta( $id, 'standardpost_award_title', true );
-		$orgTerms = get_field( 'standardpost_award_organization', $id );
+		$awardYears  = get_post_meta($award_post_id, 'standardpost_award_year');
+		$awardTitle = get_post_meta($award_post_id, 'standardpost_award_title', true);
+		$orgTerms = get_field('standardpost_award_organization', $award_post_id);
 	    $organizations = array();
 	    if (!empty($organizations)) {
 	    	$organizations[] = $orgTerms -> name;
@@ -334,11 +335,11 @@ if ($custom_query -> have_posts()) {
 	    }
 
 
-		$recipients = get_post_meta( $id, 'standardpost_award_recipient' );
+		$recipients = get_post_meta( $award_post_id, 'standardpost_award_recipient' );
 		$awards[] = array(
-			'id'=>$id,
-			'url'=>get_permalink($id),
-			'title'=> get_the_title($id),
+			'id'=> $award_post_id,
+			'url'=> get_permalink($award_post_id),
+			'title'=> get_the_title($award_post_id),
 			'excerpt'=> get_the_excerpt(),
 			'awardYears'=> $awardYears,
 			'awardTitle'=> $awardTitle,
@@ -351,7 +352,7 @@ wp_reset_postdata();
 $s = "";
 if (count($awards)) {
 	foreach ( $awards as $a ) {
-		$id = $a['id'];
+		$award_post_id = $a['id'];
 		$url = $a['url'];
 		$title = $a['title'];
 		$awardYears = $a['awardYears'];
@@ -405,21 +406,16 @@ if (!empty($entity_category_slug)) {
 		);
 		$custom_query = new WP_Query($qParams);
 		if ($custom_query -> have_posts()) {
-			while ( $custom_query -> have_posts() )  {
+			while ($custom_query -> have_posts())  {
 				$custom_query->the_post();
-				$id=get_the_ID();
-				$threats[]=array('url'=>get_permalink($id), 'title'=> get_the_title($id), 'excerpt'=>get_the_excerpt(), 'thumb'=>get_the_post_thumbnail( $id, 'small-thumb' ));
+				$entity_threat_id = get_the_ID();
+				$threats[] = array('url'=>get_permalink($entity_threat_id), 'title'=> get_the_title($entity_threat_id), 'excerpt'=>get_the_excerpt(), 'thumb'=>get_the_post_thumbnail($entity_threat_id, 'small-thumb'));
 			}
 		}
 		wp_reset_postdata();
 	}
 }
 /**** END FETCH threats to press ****/
-
-// COMMENTING THIS OUT BECAUSE IT BLOCKS ABBREVIATION IN PRESS CLIPPING SECTION
-// $abbreviation = strtolower(get_post_meta($id, 'entity_abbreviation', true));
-// $abbreviation = str_replace("/", "", $abbreviation);
-// $network_logo = get_template_directory_uri() . '/img/logo_' . $abbreviation . '--circle-200.png';
 
 get_header();
 ?>
@@ -482,25 +478,19 @@ get_header();
 		</div>
 		<!-- BEGIN SIDEBAR -->
 		<div class="side-content-container">
-			<aside>
-				<div id="social-share">
-					<h3 class="sidebar-section-header">Share</h3>
-					<a href="<?php echo get_field('entity_facebook'); ?>" target="_blank">
-						<span class="bbg__article-share__icon facebook"></span>
-					</a>
-					<a href="https://twitter.com/<?php echo get_field('entity_twitter_handle'); ?>" target="_blank">
-						<span class="bbg__article-share__icon twitter"></span>
-					</a>
-				</div>
-			</aside>
-
-			<div>
 			<?php
+				// SHARE THIS PAGE
+				$share_icons = social_media_share_page($entity_page_id);
+				if (!empty($share_icons)) {
+					echo $share_icons;
+				}
+
+				echo '<div>';
 				if ($entityMission!="") { 
 					echo $entityMission;
 				}
+				echo '</div>';
 			?>
-			</div>
 
 		<!-- FAST FACTS -->
 		<?php
@@ -532,12 +522,12 @@ get_header();
 			echo 	'<div class="media-clips-entities-dropdown">';
 			echo 		'<ul class="unstyled-list" style="margin-top: 0;">';
 			echo 			'<li>';
-			echo 				'<h4 class="sidebar-section-header">';
+			echo 				'<h4 class="sidebar-section-subheader">';
 			echo 					'<a href="' . add_query_arg('clip-type', 'about-' . $abbreviation . '', '/press-clippings-archive/') . '">ABOUT ' . $abbreviation . '<i class="fas fa-angle-right"></i></a>';
 			echo 				'</h4>';
 			echo 			'</li>';
 			echo 			'<li>';
-			echo 				'<h4 class="sidebar-section-header">';
+			echo 				'<h4 class="sidebar-section-subheader">';
 			echo 					'<a href="' . add_query_arg('clip-type', 'citation-' . $abbreviation . '', '/press-clippings-archive/') . '">' . $abbreviation . ' CITATIONS<i class="fas fa-angle-right"></i></a>';
 			echo 				'</h4>';
 			echo 			'</li>';
@@ -545,12 +535,12 @@ get_header();
 			echo 	'</div>';
 			echo '</aside>';
 
-			echo '<div>';
+			echo '<aside>';
 			echo 	$app_link_markup;
-			echo '</div>';
+			echo '</aside>';
 
 			if (count($rssItems)) {
-				$rss_markup  = '<div class="inner-container side-recent-stories">';
+				$rss_markup  = '<aside class="inner-container side-recent-stories">';
 				$rss_markup .= 	'<h3 class="sidebar-section-header">Recent stories from ' . $websiteName . '</h3>';
 				$maxRelatedStories = 3;
 				for ($i = 0; $i < min($maxRelatedStories, count($rssItems)); $i++) {
@@ -573,7 +563,7 @@ get_header();
 					$rss_markup .= 	'</div>';
 					$rss_markup .= '</div>';
 				}
-				$rss_markup .= '</div>';
+				$rss_markup .= '</aside>';
 
 				echo $rss_markup;
 
@@ -615,9 +605,9 @@ get_header();
 			}
 
 			// SEARCH ENTITY WEBSITE
-			echo '<div>';
+			echo '<aside>';
 			echo 	$site_select;
-			echo '</div>';
+			echo '</aside>';
 
 			// CONTACT INFORMATION
 			if ($includeContactBox) {

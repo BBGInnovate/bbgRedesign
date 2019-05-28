@@ -3067,6 +3067,16 @@ a:focus .bbg__article-share__icon {
   background-color: #757575; }
 
 /** ARTICLE SHARE AREA */
+.social-media-icons a.facebook-icon:link, .social-media-icons a.facebook-icon:visited {
+  color: #3b5998; }
+
+.social-media-icons a.twitter-icon:link, .social-media-icons a.twitter-icon:visited {
+  color: #00aced; }
+
+.social-media-icons .fab {
+  font-size: 2.5rem;
+  margin-right: 1rem; }
+
 @media screen and (min-width: 900px) {
   .bbg__article-sidebar .bbg__article-share {
     margin-left: initial; } }

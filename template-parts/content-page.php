@@ -8,18 +8,10 @@
  */
 
 include get_template_directory() . '/inc/shared_sidebar.php';
+$page_id = get_the_ID();
 
 $videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );
 $timelineUrl = get_post_meta( get_the_ID(), 'featured_timeline_url', true );
-
-// EXPERIMENTING WITH ADDING THE SOCIAL SHARE CODE TO PAGES
-// TITLE/HEADLINE, URL, AUTHOR'S TWITTER HANDLE
-$twitterText  = "";
-$twitterText .= html_entity_decode(get_the_title());
-$twitterText .= " by @bbggov " . get_permalink();
-
-$twitterURL = "//twitter.com/intent/tweet?text=" . rawurlencode( $twitterText );
-$fbUrl = "//www.facebook.com/sharer/sharer.php?u=" . urlencode( get_permalink() );
 
 // INCLUDE SIDEBAR LIST OF PEOPLE WHO WORKED ON THE PROJECT
 $teamRoster = "";
@@ -101,29 +93,25 @@ endif;
 		</footer><!-- .entry-footer -->
 	</div>
 	<div class="side-content-container">
-		<article>
-			<h3 class="sidebar-section-header">Share</h3>
-			<a href="<?php echo $fbUrl; ?>">
-				<span class="bbg__article-share__icon facebook"></span>
-			</a>
-			<a href="<?php echo $twitterURL; ?>">
-				<span class="bbg__article-share__icon twitter"></span>
-			</a>
-		</article>
+		<?php
+			// SHARE THIS PAGE
+			$share_icons = social_media_share_page($page_id);
+			if (!empty($share_icons)) {
+				echo $share_icons;
+			}
 
-		<article>
-			<?php
-				echo '<!-- Sidebar content -->';
-				if ($includeSidebar && $sidebarTitle != "") {
-					echo $sidebar;
-				}
-				if (!empty($secondaryColumnContent)) {
-					echo $secondaryColumnContent;
-				}
-				echo $sidebarDownloads;
-				echo $teamRoster;
+			echo '<!-- SIDEBAR CONTENT -->';
+			echo '<article>';
+			if ($includeSidebar && $sidebarTitle != "") {
+				echo $sidebar;
+			}
+			if (!empty($secondaryColumnContent)) {
+				echo $secondaryColumnContent;
+			}
+			echo 	$sidebarDownloads;
+			echo 	$teamRoster;
+			echo '</article>';
 			?>
-		</article>
 	</div>
 </div><!-- .usa-grid -->
 

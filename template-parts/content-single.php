@@ -405,14 +405,6 @@ if ($isPodcast) {
 	$soundcloudPlayer .= '</div>';
 }
 
-//the title/headline field, followed by the URL and the author's twitter handle
-$twitterText  = '';
-$twitterText .= html_entity_decode(get_the_title());
-$twitterText .= ' by @bbggov';
-$twitterText .= ' ' . get_permalink();
-
-$twitterURL = '//twitter.com/intent/tweet?text=' . rawurlencode($twitterText);
-$fbUrl = '//www.facebook.com/sharer/sharer.php?u=' . urlencode(get_permalink());
 $hideFeaturedImage = false;
 ?>
 
@@ -518,17 +510,13 @@ $hideFeaturedImage = false;
 						?>
 					</div>
 					<div class="side-column divider-left">
-						<aside>
-							<h3 class="sidebar-section-header">Share </h3>
-							<a href="<?php echo $fbUrl; ?>">
-								<span class="bbg__article-share__icon facebook"></span>
-							</a>
-							<a href="<?php echo $twitterURL; ?>">
-								<span class="bbg__article-share__icon twitter"></span>
-							</a>
-						</aside>
-
 						<?php
+							// SHARE THIS PAGE
+							$share_icons = social_media_share_page($post_id);
+							if (!empty($share_icons)) {
+								echo $share_icons;
+							}
+
 							if ($includeRelatedProfile) {
 								echo $relatedProfile;
 							}
