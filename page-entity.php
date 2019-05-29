@@ -144,39 +144,18 @@ $instagram = get_post_meta($entity_page_id, 'entity_instagram', true);
 
 
 // CONTACT INFORMATION
-$email = get_post_meta($entity_page_id, 'entity_email', true);
-$phone = get_post_meta($entity_page_id, 'entity_phone', true);
 $street = get_post_meta($entity_page_id, 'entity_street', true);
 $city = get_post_meta($entity_page_id, 'entity_city', true);
 $state = get_post_meta($entity_page_id, 'entity_state', true);
 $zip = get_post_meta($entity_page_id, 'entity_zip', true);
+$phone = get_post_meta($entity_page_id, 'entity_phone', true);
+$email = get_post_meta($entity_page_id, 'entity_email', true);
 $learnMore = get_post_meta($entity_page_id, 'entity_learn_more', true);
 
 $address = "";
 $map = "";
 $mapLink = "";
 $includeContactBox = false;
-
-if ($email != "") {
-	$email_li  = '<li>';
-	$email_li .= 	'Email: ';
-	$email_li .= 	'<a href="mailto:' . $email . '" title="Email ' . $abbreviation . '">';
-	$email_li .= 		$email;
-	$email_li .= 	'</a>';
-	$email_li .= '</li>';
-}
-if (!empty($phone)) {
-	$phone_li  = '<li>';
-	$phone_li .= 	'Tel: ';
-	$phone_li .= 	$phone;
-	$phone_li .= '</li>';
-}
-if (!empty($learnMore)) {
-	$learnMore  = '<li>';
-	$learnMore .= 	'<a href="'. $learnMore . '">Learn more</a> about ' . $abbreviation;
-	$learnMore .= '</li>';
-}
-
 
 if (!empty($street) && !empty($city) && !empty($state) && !empty($zip)) {
 	$address = $street . '<br/>' . $city . ', ' . $state . ' ' . $zip;
@@ -189,7 +168,7 @@ if (!empty($street) && !empty($city) && !empty($state) && !empty($zip)) {
 	$zoom = 14;
 	$map = 'http://maps.googleapis.com/maps/api/staticmap?center=' . $street . ',+' . $city . ',+' . $state . '+' . $zip . "&zoom=" . $zoom . "&scale=false&size=" . $size . "x" . $size . "&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C".$street.',+'.$city.',+'.$state . ');';
 	$mapLink = 'https://www.google.com/maps/place/' . $street . ',+' . $city . ',+' . $state . '+' . $zip . '/';
-	$address = '<p><a href="'. $mapLink . '">' . $address . '</a></p>';
+	$address = '<a href="'. $mapLink . '" target="_blank">' . $address . '</a>';
 }
 
 // ADD A MAP
@@ -218,7 +197,7 @@ if ($includeMap) {
 	//$map = "https://api.mapbox.com/v4/mapbox.emerald/" . $pin . $lng . ",". $lat . "," . $zoom . "/170x300.png?access_token=" . $key;
 }
 
-if ($address != "" || $phone_li != "" || $email_li != "") {
+if ($address != "" || $phone != "" || $email != "") {
 	$includeContactBox = true;
 }
 
@@ -619,16 +598,30 @@ get_header();
 					$contact_box .= '</div>';
 				}
 				$contact_box .= 	'<div class="bbg__contact-card">';
+				if (is_page('rferl')) {
+					if (is_page('rferl')) {
+					$contact_box .= 	'<h4 class="sidebar-section-subheader">Headquarters</h4>';
+					$contact_box .= 	'<p class="sans" style="margin-bottom: 1.5rem;">';
+					$contact_box .= 		'<a href="https://www.google.com/maps/place/Radio+Free+Europe+-+Radio+Liberty+-+Library/@50.0789865,14.4764293,17z/data=!3m1!4b1!4m5!3m4!1s0x470b936ea832e949:0x2d1da818fb7b6706!8m2!3d50.0789865!4d14.4786233" target="_blank">';
+					$contact_box .= 			'Vinohradska 159A<br>100 00 Prague 10<br>Czech Republic';
+					$contact_box .= 		'</a><br>';
+					$contact_box .= 		'Tel: +420.221.122.111';
+					$contact_box .= 	'</p>';
+				}
+					$contact_box .= 	'<h4 class="sidebar-section-subheader">Corporate Office</h4>';
+				}
+				$contact_box .= 	'<p class="sans">';
 				$contact_box .= 		$address;
-				$contact_box .= 		'<ul class="no-list-style">';
-				if (!empty($phone_li)) {
-					$contact_box .= 			$phone_li;
+				if (!empty($phone)) {
+					$contact_box .= 	'<br>Tel: ' . $phone;
 				}
-				if (!empty($email_li)) {
-					$contact_box .= 			$email_li;
+				if (!empty($email)) {
+					$contact_box .= 	'<br>Email: <a href="mailto:' . $email . '" title="Email ' . $abbreviation . '">' . $email . '</a>';
 				}
-				$contact_box .= 			$learnMore;
-				$contact_box .= 		'</ul>';
+				if (!empty($learnMore)) {
+					$contact_box .= 	'<br><br><a href="'. $learnMore . '">Learn more about ' . $abbreviation . '</a>';
+				}
+				$contact_box .= 		'</p>';
 				$contact_box .= 	'</div>';
 				$contact_box .= '</div>';
 				echo $contact_box;
