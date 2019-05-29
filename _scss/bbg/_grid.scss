@@ -233,9 +233,8 @@ $sidebar-grid: (
 }
 
 
-// TEST NEW GRIDS
+// SIDEBAR ENTITIES
 .sidebar-entities {
-	position: relative;
 	.entity-image-side {
 		@include span-columns(3);
 		img {margin-bottom: 0;}
@@ -245,10 +244,11 @@ $sidebar-grid: (
 		/* IN ORDER TO CENTER VERTICALLY, */
 		/* HEIGH IS DETERMINED BY JAVASCRIPT js/usagm-main.js */
 		@include span-columns(9);
-		.entity-title {
+		h4 {
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
+			margin-bottom: 0;
 		}
 	}
 }

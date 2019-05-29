@@ -1,6 +1,4 @@
 <?php
-
-
 function getNetworkExcerptJS() {
 	/* used on map container */
 	$entityParentPage = get_page_by_path('networks');
@@ -91,7 +89,7 @@ function outputBroadcasters($cols = '') {
 				$entity_markup .= 		'<img src="' . $imgSrc . '" alt="Entity image">';
 				$entity_markup .= 	'</div>';
 				$entity_markup .= 	'<div class="entity-text-side">';
-				$entity_markup .= 		'<h4 class="entity-title">';
+				$entity_markup .= 		'<h4 class="sidebar-section-subheader">';
 				$entity_markup .= 			'<a href="' . $link . '">' . $fullName . '</a>';
 				$entity_markup .= 		'</h4>';
 				$entity_markup .= 	'</div>';

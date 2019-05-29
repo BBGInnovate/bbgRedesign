@@ -5044,31 +5044,31 @@ e.g. on the intern testimonial page */
     float: left;
     margin-left: 20px; }
 
-.sidebar-entities {
-  position: relative; }
-  .sidebar-entities .entity-image-side {
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 23.23176%; }
-    .sidebar-entities .entity-image-side:last-child {
-      margin-right: 0; }
-    .sidebar-entities .entity-image-side img {
-      margin-bottom: 0; }
-  .sidebar-entities .entity-text-side {
-    position: relative;
-    /* IN ORDER TO CENTER VERTICALLY, */
-    /* HEIGH IS DETERMINED BY JAVASCRIPT js/usagm-main.js */
-    float: left;
-    display: block;
-    margin-right: 2.35765%;
-    width: 74.41059%; }
-    .sidebar-entities .entity-text-side:last-child {
-      margin-right: 0; }
-    .sidebar-entities .entity-text-side .entity-title {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%); }
+.sidebar-entities .entity-image-side {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 23.23176%; }
+  .sidebar-entities .entity-image-side:last-child {
+    margin-right: 0; }
+  .sidebar-entities .entity-image-side img {
+    margin-bottom: 0; }
+
+.sidebar-entities .entity-text-side {
+  position: relative;
+  /* IN ORDER TO CENTER VERTICALLY, */
+  /* HEIGH IS DETERMINED BY JAVASCRIPT js/usagm-main.js */
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 74.41059%; }
+  .sidebar-entities .entity-text-side:last-child {
+    margin-right: 0; }
+  .sidebar-entities .entity-text-side h4, .sidebar-entities .entity-text-side .bbg__board__committee-list li a, .bbg__board__committee-list li .sidebar-entities .entity-text-side a {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-bottom: 0; }
 
 @media screen and (min-width: 600px) {
   .sidebar-entities .entity-image-side {
