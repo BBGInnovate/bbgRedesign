@@ -442,7 +442,7 @@ $hideFeaturedImage = false;
 							echo 	'<h3 class="article-title">' . $page_title . '</h3>';
 							echo 	'<p class="date-meta">';
 							if (!empty($post_byline)) {
-								echo 	$post_byline . '<br>';
+								echo 	'by ' . $post_byline . '<br>';
 							}
 							echo 	$post_date . '</p>';
 							echo '</header>';
