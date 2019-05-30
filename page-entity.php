@@ -273,13 +273,13 @@ if (count($pressReleases)) {
 		$title = $pr['title'];
 
 		$press_markup  = '<div>';
-		$press_markup .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
+		$press_markup .= 	'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
 		$press_markup .= 	'<p>' . $pr['excerpt'] . '</p>';
 		$press_markup .= '</div>';
 	}
 	$press_markup .= '<div>';
 	$entityCategoryLink = get_category_link($entityCategoryObj -> term_id);
-	$press_markup .= 	'<p>';
+	$press_markup .= 	'<p class="read-more sans">';
 	$press_markup .= 		'<a href="' . $entityCategoryLink . '">View all ' . $abbreviation . '  highlights »</a>';
 	$press_markup .= 	'</p>';
 	$press_markup .= "</div>";
@@ -340,8 +340,8 @@ if (count($awards)) {
 		$recipients = $a['recipients'];
 
 		$awards_markup  = '<div>';
-		$awards_markup .= 	'<h4><a href="' . $url . '">' . $title . '</a></h4>';
-		$awards_markup .= 	'<p>';
+		$awards_markup .= 	'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
+		$awards_markup .= 	'<p class="date-meta">';
 		if (!empty($organizations)) {
 			$awards_markup .= 		'<span>' . $awardTitle . ', ' . join($organizations) . '</span>';
 		}
@@ -351,7 +351,9 @@ if (count($awards)) {
 		$awards_markup .= '</div>';
 	}
 	$awards_markup .= '<div>';
-	$awards_markup .= 	'<a href="' . $entityAwardsLinkFiltered . '">View all ' . $abbreviation . ' awards »</a>';
+	$awards_markup .= 	'<p class="read-more">';
+	$awards_markup .= 		'<a href="' . $entityAwardsLinkFiltered . '">View all ' . $abbreviation . ' awards »</a>';
+	$awards_markup .= 	'</p>';
 	$awards_markup .= '</div>';
 }
 $page_content = str_replace("[awards]", $awards_markup, $page_content);
