@@ -339,12 +339,16 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 	if ($umbrella_content_type == 'umbrella_content_internal') {
 		$column_title = get_sub_field('umbrella_content_internal_column_title');
 		$page_object = get_sub_field('umbrella_content_internal_link');
-		$id = $page_object[0]->ID;
-		$link = get_the_permalink($id);
+		if (!empty($page_object)) {
+			$id = $page_object[0]->ID;
+			$link = get_the_permalink($id);
+			$secondary_headline = get_post_meta($id, 'headline', true);
+			$law_name = get_post_meta($id, 'law_name', true);
+		} else {
+			$link = '';
+		}
 		$include_title = get_sub_field('umbrella_content_internal_include_item_title');
 		$title_override = get_sub_field('umbrella_content_internal_title');
-		$secondary_headline = get_post_meta($id, 'headline', true);
-		$law_name = get_post_meta($id, 'law_name', true);
 		$show_featured_image = get_sub_field('umbrella_content_internal_include_featured_image');
 		$show_excerpt = get_sub_field('umbrella_content_internal_include_excerpt');
 		$show_excerpt = get_sub_field('umbrella_content_internal_include_excerpt');
@@ -373,7 +377,7 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 		}
 
 		$description = "";
-		if ($show_excerpt) {
+		if ($show_excerpt && !empty($page_object)) {
 			$description = my_excerpt($id);
 		}
 	}
