@@ -20,51 +20,6 @@ $addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true 
 // 
 $headline = get_field('headline', '', true);
 $listsInclude = get_field('sidebar_dropdown_include', '', true);
-// 
-// THIS COULD BELONG IN A BUILD INCLUDE FILE
-function display_foia_reports() {
-	// $foia_url = WP_CONTENT_URL . '/uploads/foia-reports/'; // LOCAL
-	// $foia_path = 'wp-content/uploads/foia-reports'; // LOCAL
-	$foia_url = WP_CONTENT_URL . '/media/foia-reports/'; // LIVE
-	$foia_path = 'wp-content/media/foia-reports'; // LIVE
-	$filenames = preg_grep('/^([^.])/', scandir($foia_path));
-
-	function get_nums($x) {
-		if (preg_match("/[0-9]+/", $x, $date_nums)) {
-			if (strlen($date_nums[0]) == 2) {
-				$date_nums[0] = '20' . $date_nums[0];
-			}
-			return $date_nums[0];
-		}
-	}
-	$num_group = [];
-	foreach($filenames as $file) {
-		$nums = get_nums($file);
-		array_push($num_group, $nums);
-	}
-	$num_group = array_unique($num_group);
-	rsort($num_group);
-	$counter = 0;
-	foreach($num_group as $year) {
-		if ($counter != 0) {
-			echo '</ul>';
-		}
-		echo '<h4>'.$year.'</h4>';
-		echo '<ul>';
-		foreach($filenames as $file) {
-			$file_year = get_nums($file);
-			if ($file_year == $year) {
-				$dl_link  = '<li>';
-				$dl_link .= 	'<a href="' . $foia_url . $file . '">' . $file . '</a>';
-				$dl_link .= '</li>';
-				echo $dl_link;
-			}
-		}
-		$counter++;
-	}
-	
-	echo '</ul><p style="text-align: right;"><a href="https://www.usagm.gov/foia/">Visit the main FOIA page</a></p>';
-}
 
 if (have_posts()) {
 	while (have_posts()) {
@@ -102,10 +57,6 @@ get_header();
 							echo '<div class="page-content">';
 							echo 	'<p>' . $page_content . '</p>';
 							echo '</div>';
-
-							if (is_page('foia-reports')) {
-								display_foia_reports();
-							}
 
 							$relatedCategory = get_field('related_category_posts', $id);
 							if ($relatedCategory != "") {
