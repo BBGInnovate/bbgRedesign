@@ -2740,7 +2740,7 @@ h3 {
   line-height: 2.1rem;
   font-weight: 400;
   color: #3f7ad1;
-  margin: 0 0 0.5rem 0; }
+  margin: 0 0 1.5rem 0; }
 
 .sidebar-paragraph-header,
 .sidebar-paragraph-header a:link,
@@ -5551,6 +5551,11 @@ img,
   *[style*="background-image"] > a:focus {
     background-color: transparent;
     text-decoration: none; }
+
+.sidebar-related {
+  margin-bottom: 1.5rem; }
+  .sidebar-related img {
+    margin-bottom: 0; }
 
 .grid-box-container {
   background-color: #b2ccd1; }
