@@ -28,7 +28,7 @@ $page_content = apply_filters('the_content', $page_content);
 $page_content = do_shortcode($page_content);
 
 $post_byline = '';
-if (!empty(get_post_meta($post_id, 'include_byline'))) {
+if (get_field('include_byline', $post_id)) {
 	$post_byline = get_post_meta($post_id, 'byline_override');
 	$post_byline = $post_byline[0];
 }

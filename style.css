@@ -2798,7 +2798,6 @@ ul.unstyled-list {
 
 ul li:not(.menu-item),
 ol li {
-  font-family: "Carrara-Regular", serif;
   font-size: 1.8rem;
   line-height: 2.2rem;
   color: #545454;
@@ -2808,12 +2807,19 @@ ul li {
   list-style-type: none;
   list-style: disc;
   list-style-image: none;
+  padding-top: 0;
+  margin-top: 0;
   display: list-item; }
 
 ul li:before {
   content: "";
   display: none;
   padding-right: 0; }
+
+.side-column ol li,
+.side-column ul li {
+  font-size: 1.5rem;
+  margin-bottom: 1rem; }
 
 .bbg__ribbon .section-header a:link {
   color: #ffffff; }
