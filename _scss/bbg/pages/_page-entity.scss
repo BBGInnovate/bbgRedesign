@@ -24,7 +24,7 @@
 				display: inline-block;
 				margin-bottom: 0;
 			}
-			h5 {margin-right: 1.5rem;}
+			.sidebar-section-header {margin-right: 1.5rem;}
 		}
 	}
 }
@@ -39,7 +39,7 @@
 			display: inherit;
 			.entity-left-article {
 				* {margin-bottom: inherit;}
-				h5 {margin-right: 0;}
+				.sidebar-section-header {margin-right: 0;}
 			}
 		}
 	}

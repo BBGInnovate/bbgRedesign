@@ -6984,7 +6984,7 @@ section.usa-section.bbg-banner__section {
     .icon-side-content-container #reach-entity .entity-left-article * {
       display: inline-block;
       margin-bottom: 0; }
-    .icon-side-content-container #reach-entity .entity-left-article h5 {
+    .icon-side-content-container #reach-entity .entity-left-article .sidebar-section-header {
       margin-right: 1.5rem; }
 
 @media screen and (min-width: 900px) {
@@ -6996,7 +6996,7 @@ section.usa-section.bbg-banner__section {
     display: inherit; }
     .icon-side-content-container #reach-entity .entity-left-article * {
       margin-bottom: inherit; }
-    .icon-side-content-container #reach-entity .entity-left-article h5 {
+    .icon-side-content-container #reach-entity .entity-left-article .sidebar-section-header {
       margin-right: 0; } }
 
 .side-content-container .side-recent-stories .post-group {

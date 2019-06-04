@@ -424,9 +424,9 @@ get_header();
 
 							<?php
 								if (!empty($facebook) || !empty($twitter_profile_handle) || !empty($instagram)) {
-									echo '<div class="entity-left-article social-media-icons">';
+									echo '<div class="entity-left-article">';
 									echo 	'<h3 class="sidebar-section-header">Social Media</h3>';
-									echo 	'<p>';
+									echo 	'<p class="social-media-icons">';
 									if (!empty($facebook)) {
 										echo '<a class="facebook-icon" href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
 										echo 	'<i class="fab fa-facebook-square"></i>';
