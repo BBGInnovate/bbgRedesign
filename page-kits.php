@@ -75,7 +75,7 @@ $advisory = false;
 // Get all posts with advisory category
 $mediaAdvisoryCategoryObj = get_category_by_slug('media-advisory');
 
-if ($pageName != 'Office of Congressional Affairs' && is_object($mediaAdvisoryCategoryObj)) {
+if (is_object($mediaAdvisoryCategoryObj)) {
 	// set up award category query parameters
 	$mediaAdvisoryCategoryID = $mediaAdvisoryCategoryObj -> term_id;
 	$mediaParams = array(
@@ -85,12 +85,12 @@ if ($pageName != 'Office of Congressional Affairs' && is_object($mediaAdvisoryCa
 		'orderby' => 'date',
 		'order' => 'DESC'
 	);
-	$todayDateObj = new DateTime("now");
+	$todayDateObj = new DateTime('now');
 
 	// execute advisory query
 	$foundAdvisory = false;
 
-	$media_query = new WP_Query( $mediaParams );
+	$media_query = new WP_Query($mediaParams);
 
 	if ($media_query -> have_posts()) {
 		while ($media_query -> have_posts()) : $media_query -> the_post();
@@ -334,8 +334,6 @@ get_header();
 				// Pick which phone number to display based on page title
 				if ($pageName == "Press room" && $phoneMedia != "")  {
 					$phone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $phoneMedia_link . '">' . $phoneMedia . '</a></li>';
-				} elseif ($pageName == "Office of Congressional Affairs" && $phoneCongress != "")  {
-					$phone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $phoneCongress_link . '">' . $phoneCongress . '</a></li>';
 				} else {
 					$phone = '<li itemprop="telephone" aria-label="telephone"><span class="bbg__list-label">Tel: </span><a href="tel:' . $phone_link . '">' . $phone . '</a></li>';
 				}
@@ -343,8 +341,6 @@ get_header();
 				// Pick which email address to display based on page title
 				if ($pageName == "Press room" && $emailPress != "") {
 					$email = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $emailPress . '" title="Contact us">' . $emailPress . '</a></li>';
-				} elseif ($pageName == "Office of Congressional Affairs" && $emailCongress != "") {
-					$email = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $emailCongress . '" title="Contact us">' . $emailCongress . '</a></li>';
 				} else {
 					$email = '<li><span class="bbg__list-label">Email: </span><a itemprop="email" aria-label="email" href="mailto:' . $email . '" title="Contact us">' . $email . '</a></li>';
 				}
@@ -399,13 +395,9 @@ get_header();
 
 					<?php
 						echo '<!-- Recent news section -->';
-						// echo '<section id="recent-posts" class="usa-section bbg__home__recent-posts">';
 						if (!$advisory && $pageName == "Press room") {
 							echo '<h3>Recent press releases</h3>';
-						} elseif (!$advisory && $pageName == "Office of Congressional Affairs") {
-							echo '<h3>Recent highlights</h3>';
 						}
-						// echo 	'<div class="bbg__kits__recent-posts">';
 						echo 	'<div class="nest-container">';
 						echo 		'<div class="inner-container">';
 						echo 			'<div class="grid-third bbg__secondary-stories">';
@@ -415,8 +407,6 @@ get_header();
 						/**** START FETCH related news based on page title ****/
 						if ($pageName == "Press Room") {
 							query_posts($qParamsPressReleases);
-						} elseif ($pageName == "Office of Congressional Affairs") {
-							query_posts($qParamsCongressional);
 						}
 
 						if (have_posts()) {
@@ -472,8 +462,6 @@ get_header();
 										<?php
 											if ($pageName == "Press room") {
 												echo '<h3>Office of Public Affairs</h3>';
-											} elseif ($pageName == "Office of Congressional Affairs") {
-												echo '<h3>Office of Congressional Affairs</h3>';
 											} else {
 												echo '<h3>' . $pageName . ' Contact Information</h3>';
 											}
@@ -630,13 +618,13 @@ get_header();
 							if (!empty($labelLink)) {
 								echo 		'<h2 class="section-header"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h2>';
 							} else {
-								echo 		'<h2 class="bbg__label">' . $labelText . '</h2>';
+								echo 		'<h2 class="section-header">' . $labelText . '</h2>';
 							}
 
 							if (!empty($headlineLink)) {
-								echo 		'<h4><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h4>';
+								echo 		'<h3 class="article-title"><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h3>';
 							} else {
-								echo 		'<h4 class="bbg__announcement__headline">' . $headlineText . '</h4>';
+								echo 		'<h3 class="article-title">' . $headlineText . '</h3>';
 							}
 							echo $summary;
 
@@ -736,8 +724,7 @@ get_header();
 								$award_block  = '<div class="outer-container">';
 								$award_block .= 	'<div class="grid-half">';
 								$award_block .= 		'<h3 class="section-subheader">Recent Awards</h3>';
-								$award_block .= 		'<h4><a href="' . $url . '">' . $title . '</a></h4>';
-								// $award_block .= 		'<h4>' . join($awardYears) . ' ' . join($organizations) . '</h4>';
+								$award_block .= 		'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
 								$award_block .= 		'<a href="' . $awardCategoryLink . '" class="read-more">View all awards »</a>';
 								$award_block .= 	'</div>';
 							}
@@ -778,13 +765,13 @@ get_header();
 								$kit_umbrella_content_data = get_kits_umbrella_content_data($kits_row);
 								if (!empty($kit_umbrella_content_data)) {
 									$kit_umbrella .= 			'<div class="' . $grid_class . '">';
-									$kit_umbrella .= 				'<h4>' . $kit_umbrella_content_data['column_title'] . '</h4>';
+									$kit_umbrella .= 				'<h4 class="article-title">' . $kit_umbrella_content_data['column_title'] . '</h4>';
 									$kit_umbrella .= 				'<div class="hd_scale umbrella-bg-image" ';
 									$kit_umbrella .= 					'style="background-image: url(\'' . $kit_umbrella_content_data['thumbnail']['url'] . '\')">';
 									$kit_umbrella .= 				'</div>';
 									$kit_umbrella .= 				'<p>' . $kit_umbrella_content_data['description'] . '</p>';
 									if (!empty($kit_umbrella_content_data['file'])) {
-										$kit_umbrella .= 			'<p class="bbg__kits__section--tile__downloads"><a href="'. $kit_umbrella_content_data['file']['url'] . '">' . $kit_umbrella_content_data['file']['title'] . '</a> <span class="bbg__file">(' . $kit_umbrella_content_data['file']['subtype'] . ' ' . formatBytes($kit_umbrella_content_data['file']['filesize']) . ')</span></p>';
+										$kit_umbrella .= 			'<p><a href="'. $kit_umbrella_content_data['file']['url'] . '">' . $kit_umbrella_content_data['file']['title'] . '</a> <span class="bbg__file">(' . $kit_umbrella_content_data['file']['subtype'] . ' ' . formatBytes($kit_umbrella_content_data['file']['filesize']) . ')</span></p>';
 									} else {
 										$kit_umbrella .= 				'<p><a href="'. $kit_umbrella_content_data['link'] . '">' . $kit_umbrella_content_data['post_title'] . '</a></p>';
 									}
