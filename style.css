@@ -5553,7 +5553,11 @@ img,
     text-decoration: none; }
 
 .sidebar-related {
-  margin-bottom: 1.5rem; }
+  margin-bottom: 2.5rem; }
+  .sidebar-related .sidebar-article-title {
+    margin-bottom: 0.5rem; }
+  .sidebar-related p {
+    margin-bottom: 1.5rem; }
   .sidebar-related img {
     margin-bottom: 0; }
 

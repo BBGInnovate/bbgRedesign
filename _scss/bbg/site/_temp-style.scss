@@ -259,7 +259,9 @@ img,
 }
 
 .sidebar-related {
-	margin-bottom: 1.5rem;
+	margin-bottom: 2.5rem;
+	.sidebar-article-title {margin-bottom: 0.5rem;}
+	p {margin-bottom: 1.5rem;}
 	img {margin-bottom: 0;}
 }
 

@@ -115,8 +115,8 @@ if ($includeMap && $mapLocation) {
 // SIDEBAR: LIST OF PROJECT WORKERS
 $team_roster = "";
 if (have_rows('project_team_members')) {
-	$single_roster  = '<div class="bbg__project-team">';
-	$single_roster .= 	'<h5 class="bbg__project-team__header">Project team</h5>';
+	$single_roster  = '<div class="sidebar-related">';
+	$single_roster .= 	'<h3 class="sidebar-section-header">Project team</h3>';
 	while (have_rows('project_team_members')) {
 		the_row();
 		if (get_row_layout() == 'team_member') {
@@ -129,7 +129,7 @@ if (have_rows('project_team_members')) {
 			}
 
 			$single_roster .= '<p class="sans">';
-			$single_roster .= 	'<span style="font-weight: 700;">' . $teamMemberName . '</span><br>';
+			$single_roster .= 	'<span class="sidebar-article-title">' . $teamMemberName . '</span><br>';
 			$single_roster .= 	$teamMemberRole;
 			$single_roster .= '</p>';
 		}
