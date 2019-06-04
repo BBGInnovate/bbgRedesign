@@ -164,8 +164,10 @@ function build_article_collapsible_image_title($article_data) {
 		$article_structure .= 				'<img src="' . get_the_post_thumbnail_url($article_data, 'large') . '" alt="Image link to ' . get_the_title($article_data) . ' post">';
 		$article_structure .= 			'</a>';
 		$article_structure .= 		'</div>';
+		$article_structure .= 			'<div class="article-desc article-info">';
+	} else {
+		$article_structure .= 			'<div class="grid-container">';
 	}
-	$article_structure .= 			'<div class="article-desc article-info">';
 	$article_structure .= 				'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';
 	$article_structure .= 			'</div>';
