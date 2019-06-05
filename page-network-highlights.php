@@ -132,7 +132,7 @@ get_header();
 			  					if ($entityString == 'bbg') {
 			  						$entityString = "usagm";
 			  					}
-								$s .= 	'<div><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></div>';
+								$s .= 	'<p class="read-more"><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></p>';
 							}
 							$s .= '</div>';
 						}
