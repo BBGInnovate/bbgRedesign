@@ -455,7 +455,7 @@ $hideFeaturedImage = false;
 								$featured_video_markup .= 	$featured_video['url'];
 								$featured_video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0 0 30px 0;">';
 								$featured_video_markup .= '</iframe>';
-								echo $featured_video_markup;
+								// echo $featured_video_markup;
 							}
 							elseif (!empty($post_thumbnail_url)) {
 								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
