@@ -400,10 +400,12 @@ function custom_youtube_settings($code){
 add_filter('embed_handler_html', 'custom_youtube_settings');
 add_filter('embed_oembed_html', 'custom_youtube_settings');
 
-function featured_video ($url) {
+function featured_video($url) {
 	if(strpos($url, 'facebook.com')) {
-		$return = apply_filters('the_content',$url);
-		$video_package = array('extra_classes' => 'facebook', 'url' => $return);
+		$video_package  = '<div id="fb-root"></div>';
+		$video_package .= '<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>';
+		$video_package .= '<div class="fb-video" data-href="' . $url . '" data-show-text="false">';
+		$video_package .= '</div>';
 		return $video_package;
 	} else {
 		if(strpos($url, 'youtu.be') !== false) {
@@ -442,7 +444,6 @@ function featured_video ($url) {
 		$video_package = array('extra_classes' => $extraClass, 'url' => $url);
 		return $video_package;
 	}
-	// return $return;
 }
 
 function featured_timeline ($url) {

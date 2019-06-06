@@ -17,10 +17,14 @@ function display_splash_overlay() {
 	$splash .= 		'</a>';
 	
 	if (!empty($splash_video_url)) {
-		$video_data = featured_video($splash_video_url);
-		$splash .= 	'<div id="iframe-container">';
-		$splash .= 		'<iframe src="' . $video_data['url'] . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-		$splash .= 	'</div>';
+		if (strpos($splash_video_url, 'facebook.com') !== false) {
+			$splash .= featured_video($splash_video_url);
+		} else {
+			$video_data = featured_video($splash_video_url);
+			$splash .= 	'<div id="iframe-container">';
+			$splash .= 		'<iframe src="' . $video_data['url'] . '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+			$splash .= 	'</div>';
+		}
 	} else {
 		echo '<style>#splash-text {margin-top: 6em;}</style>';
 	}

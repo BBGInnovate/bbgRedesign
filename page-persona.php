@@ -17,7 +17,6 @@ if ($bannerPositionCSS) {
 	$bannerAdjustStr = $bannerPosition;
 }
 
-$videoUrl = get_field( 'featured_video_url', '', true );
 $addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
 $secondaryColumnLabel = get_field( 'secondary_column_label', '', true );
 $secondaryColumnContent = get_field( 'secondary_column_content', '', true );
@@ -70,11 +69,7 @@ get_header(); ?>
 					echo '</div>';
 				}
 
-				$hideFeaturedImage = FALSE;
-				if ( $videoUrl != "" ) {
-					echo featured_video($videoUrl);
-					$hideFeaturedImage = TRUE;
-				} elseif ( has_post_thumbnail() && ( $hideFeaturedImage != 1 ) ) {
+				if (has_post_thumbnail()) {
 					echo '<div class="usa-grid-full">';
 						$featuredImageClass = "";
 						$featuredImageCutline = "";

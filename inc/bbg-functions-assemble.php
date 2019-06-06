@@ -14,12 +14,12 @@ function get_feature_media_data($home_page = NULL) {
 
 	if ($video_url != "") {
 		$featured_data = "";
-		$video_data = featured_video($video_url);
 
 		$video_markup  = '<div class="page-featured-media">';
-		if ($video_data['extra_classes'] == 'facebook') {
-			$video_markup .= 	$video_data['url'];
+		if (strpos($video_url, 'facebook.com') !== false) {
+			$video_markup .= 	$featured_video = featured_video($video_url);
 		} else {
+			$video_data = featured_video($video_url);
 			$video_markup .= 	'<iframe class="bbg-banner" scrolling="no" src="';
 			$video_markup .= 		$video_data['url'];
 			$video_markup .= 		'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0px;">';

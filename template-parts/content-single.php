@@ -447,15 +447,18 @@ $hideFeaturedImage = false;
 							echo 	$post_date . '</p>';
 							echo '</header>';
 
-							// $featured_video = get_post_meta($post_id, 'featured_video_url');
 							$video_url = get_field('featured_video_url', '', true);
 							if ($video_url != "") {
-								$featured_video = featured_video($video_url);
-								$featured_video_markup  = '<iframe class="bbg-banner" scrolling="no" src="';
-								$featured_video_markup .= 	$featured_video['url'];
-								$featured_video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0 0 30px 0;">';
-								$featured_video_markup .= '</iframe>';
-								// echo $featured_video_markup;
+								if (strpos($video_url, 'facebook.com') !== false) {
+									echo $featured_video = featured_video($video_url);
+								} else {
+									$featured_video = featured_video($video_url);
+									$featured_video_markup  = '<iframe class="bbg-banner" scrolling="no" src="';
+									$featured_video_markup .= 	$featured_video['url'];
+									$featured_video_markup .= 	'" frameborder="0" allowfullscreen="" data-ratio="NaN" data-width="" data-height="" style="display: block; margin: 0 0 30px 0;">';
+									$featured_video_markup .= '</iframe>';
+									echo $featured_video_markup;
+								}
 							}
 							elseif (!empty($post_thumbnail_url)) {
 								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
