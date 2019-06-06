@@ -10,18 +10,62 @@
   template name: Network Highlights
  */
 
-$page_title = "";
 if (have_posts()) {
 	while (have_posts()) {
 		the_post();
+		$page_id = get_the_ID();
 		$page_title = get_the_title();
 	}
 }
 wp_reset_postdata();
 wp_reset_query();
 
+// GET PRESS RELEASES FOR EACH ENTITY
+$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn'];
+$entity_data = array();
+foreach ($entities as $cur_entity) {
+	$entity_title = $cur_entity;
+	$entity_slug = $cur_entity;
 
-$pageTagline = get_post_meta( get_the_ID(), 'page_tagline', true );
+	if ($entity_slug != "") {
+		$prCategoryObj = get_category_by_slug($entity_slug);
+		if (is_object($prCategoryObj)) {
+			$prCategoryID = $prCategoryObj->term_id;
+			$press_release_params = array(
+				'post_type' => array('post'),
+				'posts_per_page' => 5,
+				'category__and' => array(
+						$prCategoryID,
+						get_cat_ID('Press Release')
+				),
+				'orderby', 'date',
+				'order', 'DESC',
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'post_format',
+						'field' => 'slug',
+						'terms' => 'post-format-quote',
+						'operator' => 'NOT IN'
+					)
+				)
+			);
+			$press_release_query = new WP_Query($press_release_params);
+			if ($press_release_query->have_posts()) {
+				$entity_press_releases = $press_release_query->posts;
+			}
+			wp_reset_postdata();
+			wp_reset_query();
+
+			$entity_group = array(
+				'entity-title' => $entity_title,
+				'press-releases' => $entity_press_releases,
+			);
+			$entity_data[] = $entity_group;
+		}
+	}
+}
+
+$pageTagline = get_post_meta(get_the_ID(), 'page_tagline', true);
 if ($pageTagline && $pageTagline!=""){
 	$pageTagline = '<p class="lead-in">' . $pageTagline . '</p>';
 }
@@ -35,7 +79,6 @@ get_header();
 </div>
 
 <main id="main" role="main">
-
 	<div class="outer-container">
 		<div class="grid-container">
 			<header class="page-header">
@@ -46,108 +89,57 @@ get_header();
 	</div>
 
 	<div class="outer-container">
-		<div class="custom-grid-container">
-		<?php
-			$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn'];
-			foreach ($entities as $e) {
-				/**** START FETCH related press releases ****/
-				$entityString = $e;
-				if ($entityString == 'rferl'){
-					$entityString = 'RFE/RL';
-				}
-				$entitySlug = $e;
-				$pressReleases = array();
-				if ($entitySlug != "") {
-					$prCategoryObj = get_category_by_slug($entitySlug );
-					if (is_object($prCategoryObj)) {
-						$prCategoryID = $prCategoryObj->term_id;
-						$qParams = array(
-							'post_type' => array('post'),
-							'posts_per_page' => 5,
-							'category__and' => array(
-									$prCategoryID,
-									get_cat_ID('Press Release')
-							),
-							'orderby', 'date',
-							'order', 'DESC',
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'post_format',
-									'field' => 'slug',
-									'terms' => 'post-format-quote',
-									'operator' => 'NOT IN'
-								)
-							)
-						);
-						$custom_query = new WP_Query($qParams);
-						if ($custom_query -> have_posts()) {
-							while ($custom_query -> have_posts()) {
-								$custom_query->the_post();
-								$id = get_the_ID();
-								$pressReleases[] = array(
-									'url' => get_permalink($id),
-									'title' => get_the_title($id),
-									'excerpt' => get_the_excerpt(),
-									'thumb' => get_the_post_thumbnail($id, 'small-thumb')
-								);
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+					<?php
+						foreach($entity_data as $entity) {
+							$cat_slug = get_category_by_slug($entity['entity-title']);
+							$cat_id = $cat_slug->term_id;
+							if ($entity['entity-title'] == 'bbg') {
+								$entity['entity-title'] = 'usagm';
+							} else if ($entity['entity-title'] == 'rferl') {
+								$entity['entity-title'] = 'rfe/rl';
 							}
-						}
-						wp_reset_postdata();
-						wp_reset_query();
-					}
-				}
-				$s  = '<div class="grid-container">';
-				$entityPermalink = get_permalink(get_page_by_path('networks/' . $e));
-				if ($e == 'bbg') {
-					$s .= 	'<h3 class="section-subheader"><a href="' . $entityPermalink . '">USAGM</a></h3>';
-				} else {
-					$s .= 	'<h3 class="section-subheader"><a href="' . $entityPermalink . '">'. strtoupper($entityString) .'</a></h3>';
-				}
-				$s .= 	'<div class="nest-container">';
-				$s .= 		'<div class="inner-container">';
-				if (count($pressReleases)) {
-					$counter = 0;
-					foreach ($pressReleases as $pr) {
-						$counter++;
-						$url = $pr['url'];
-						$title = $pr['title'];
-
-						if ($counter == 1) {
-							$s .= '<div class="main-content-container">';
-						} else if ($counter == 2) {
-							$s .= '<div class="side-content-container">';
-						}
-
-
-						if ($counter == 1) {
-							$s .= 	'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
-							$s .= 	'<p>' . $pr['excerpt'] . '</p>';
-						} else {
-							$s .= 	'<h4 class="sidebar-article-title"><a href="' . $url . '">' . $title . '</a></h4>';
-						}
-						if ($counter == 1 || $counter == 5) {
-							if ($counter == 5) {
-								$idObj = get_category_by_slug($entitySlug);
-			  					$id = $idObj->term_id;
-			  					if ($entityString == 'bbg') {
-			  						$entityString = "usagm";
-			  					}
-								$s .= 	'<p class="read-more"><a href="' . get_category_link($id) . '">Read more ' . strtoupper($entityString) . ' news »</a></p>';
+							$press_release_markup  = '<div class="inner-container entity-press-release-group">';
+							$press_release_markup .= 	'<div class="main-column">';
+							$press_release_markup .= 		'<header>';
+							$press_release_markup .= 			'<a href="' . get_category_link($cat_id) . '">';
+							$press_release_markup .= 				'<h3 class="section-subheader">' . strtoupper($entity['entity-title']) . '</h3>';
+							$press_release_markup .= 			'</a>';
+							$press_release_markup .= 		'</header>';
+							$press_release_markup .= 		'<div class="entity-press-release">';
+							$press_release_markup .= 			'<header>';
+							$press_release_markup .= 				'<h4 class="article-title">';
+							$press_release_markup .=  					'<a href="' . get_the_permalink($entity['press-releases'][0]->ID) . '">' . $entity['press-releases'][0]->post_title . '</a>';
+							$press_release_markup .= 				'</h4>';
+							$press_release_markup .= 			'<header>';
+							$press_release_markup .= 			'<p class="date-meta">' . get_the_date('F j, Y', $entity['press-releases'][0]->ID) . '</p>';
+							$press_release_markup .= 			'<p>' . $entity['press-releases'][0]->post_excerpt . '</p>';
+							$press_release_markup .= 		'</div>';
+							$press_release_markup .= 	'</div>';
+							$press_release_markup .= 	'<div class="side-column divider-left">';
+							array_shift($entity['press-releases']);
+							foreach($entity['press-releases'] as $addtl_release) {
+								$press_release_markup .= 	'<div class="entity-press-release">';
+								$press_release_markup .= 		'<header>';
+								$press_release_markup .= 			'<h4 class="sidebar-article-title">';
+								$press_release_markup .=  				'<a href="' . get_the_permalink($addtl_release->ID) . '">' . $addtl_release->post_title . '</a>';
+								$press_release_markup .= 			'</h4>';
+								$press_release_markup .= 		'</header>';
+								$press_release_markup .= 		'<p class="date-meta">' . get_the_date('F j, Y', $addtl_release->ID) . '</p>';
+								$press_release_markup .= 	'</div>';
 							}
-							$s .= '</div>';
-						}
-					}
+							$press_release_markup .= 	'<p class="read-more"><a href="' . get_category_link($cat_id) . '">Read more ' . strtoupper($entity['entity-title']) . ' news</a></p>';
+							$press_release_markup .= 	'</div>';
+							$press_release_markup .= '</div>';
 
-				}
-				$s .= 		'</div>'; // END .inner-container
-				$s .= 	'</div>'; // END .nest-container
-				$s .= '</div>'; // END .grid-container
-				echo $s;
-			}
-		?>
+							echo $press_release_markup;
+						}
+					?>
+			</div>
 		</div>
 	</div>
-</main><!-- #main -->
+</main>
 
 
 <?php

@@ -5302,6 +5302,15 @@ ol li:before {
 aside {
   margin-bottom: 4rem; }
 
+.entity-press-release-group {
+  margin-bottom: 6rem; }
+  .entity-press-release-group .sidebar-article-title {
+    margin-bottom: 0; }
+  .entity-press-release-group .read-more {
+    border-top: 1px solid #f1f1f1;
+    padding-top: 0.5rem;
+    margin-bottom: 0; }
+
 .past-intern-block {
   margin-bottom: 3rem; }
 
