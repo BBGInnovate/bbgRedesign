@@ -179,7 +179,9 @@ function build_umbrella_content_parts($content_data) {
 
 	if ($content_data['thumb_src']) {
 		$image  = '<div class="hd_scale">';
-		$image .= 	'<img src="' . $content_data['thumb_src'] . '" alt="Thumbnail image">';
+		$image .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>';
+		$image .= 		'<img src="' . $content_data['thumb_src'] . '" alt="Thumbnail image">';
+		$image .= 	'</a>';
 		$image .= '</div>';
 	}
 
