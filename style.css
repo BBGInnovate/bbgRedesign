@@ -2745,7 +2745,7 @@ h3 {
 .sidebar-paragraph-header,
 .sidebar-paragraph-header a:link,
 .sidebar-paragraph-header a:visited {
-  font-family: "Alegreya Sans", sans-serif;
+  font-family: "Carrara-Regular", serif;
   font-size: 1.5rem;
   line-height: 1.8rem;
   font-weight: 700;
@@ -5333,28 +5333,32 @@ aside {
   color: #3f7ad1;
   text-decoration: none; }
 
-.usa-accordion.speaker-accordion {
+ul.meeting-speakers li {
+  margin-bottom: 2rem; }
+
+ul.meeting-speakers .usa-accordion.speaker-accordion {
   padding-right: 30px; }
-  .usa-accordion.speaker-accordion button {
+  ul.meeting-speakers .usa-accordion.speaker-accordion button {
     position: relative;
     width: 100%; }
-    .usa-accordion.speaker-accordion button .fas {
+    ul.meeting-speakers .usa-accordion.speaker-accordion button .fas {
       position: absolute;
       top: 15px;
       right: -22px;
       color: #999999; }
-  .usa-accordion.speaker-accordion li {
-    background-color: #ffffff; }
-  .usa-accordion.speaker-accordion .usa-accordion-content {
-    padding: 0; }
-  .usa-accordion.speaker-accordion p {
-    margin-bottom: 0; }
-  .usa-accordion.speaker-accordion .speaker-bio {
-    font-size: 1.4rem;
+  ul.meeting-speakers .usa-accordion.speaker-accordion .usa-accordion-content {
+    padding: 0;
+    margin-bottom: 1.5rem; }
+  ul.meeting-speakers .usa-accordion.speaker-accordion .speaker-bio {
+    font-size: 1.5rem;
     color: #999999;
     margin: 0.5rem 0; }
-  .usa-accordion.speaker-accordion .speaker-link {
+  ul.meeting-speakers .usa-accordion.speaker-accordion .speaker-link {
     margin-bottom: 1.5rem; }
+
+ul.meeting-speakers .speaker-name,
+ul.meeting-speakers .speaker-title {
+  margin-bottom: 0; }
 
 .page-post-featured-graphic:not(div.home-featured-primary-post) {
   margin-bottom: 3em; }

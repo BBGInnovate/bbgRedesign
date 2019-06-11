@@ -48,27 +48,34 @@ aside {
 }
 
 // SPEAKER ACCORDIONS ON EVENTS PAGES
-.usa-accordion.speaker-accordion  {
-	padding-right: 30px;
-	button {
-		position: relative;
-		width: 100%;
-		.fas {
-			position: absolute;
-			top: 15px;
-			right: -22px;
-			color: $black9;
+ul.meeting-speakers {
+	li {margin-bottom: 2rem;}
+
+	.usa-accordion.speaker-accordion  {
+		padding-right: 30px;
+		button {
+			position: relative;
+			width: 100%;
+			.fas {
+				position: absolute;
+				top: 15px;
+				right: -22px;
+				color: $black9;
+			}
 		}
+		.usa-accordion-content {
+			padding: 0;
+			margin-bottom: 1.5rem;
+		}
+		.speaker-bio {
+			font-size: 1.5rem;
+			color: #999999;
+			margin: 0.5rem 0;
+		}
+		.speaker-link {margin-bottom: 1.5rem;}
 	}
-	li {background-color: #ffffff;}
-	.usa-accordion-content {padding: 0;}
-	p {margin-bottom: 0;}
-	.speaker-bio {
-		font-size: 1.4rem;
-		color: #999999;
-		margin: 0.5rem 0;
-	}
-	.speaker-link {margin-bottom: 1.5rem;}
+	.speaker-name,
+	.speaker-title {margin-bottom: 0;}
 }
 
 .page-post-featured-graphic:not(div.home-featured-primary-post) {margin-bottom: 3em;}

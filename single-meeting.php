@@ -83,11 +83,78 @@ if (have_posts()) {
 	rewind_posts();
 }
 
-//Add featured video
+// FEATURED VIDEO
 $video_url = get_post_meta($page_id, 'featured_video_url', true);
 
-// Add support for sidebar dropdown
+// ADD SUPPORT FOR SIDEBAR DROPDOWN
 $lists_include = get_field('sidebar_dropdown_include', '', true);
+
+// GET ALL SPEAKERS
+if (have_rows('board_meeting_speakers')) {
+	$speaker_data_set = array();
+	$speaker_data = '';
+	$speaker_list = '';
+
+	$speakers_label = get_field('board_meeting_speaker_label');
+
+	while (have_rows('board_meeting_speakers')) {
+		the_row();
+		// SHOW INTERNAL SPEAKER LIST
+		if (get_row_layout() == 'board_meeting_speakers_internal') {
+			if (get_sub_field('bbg_speaker_name')) {
+				$profile_speaker = get_sub_field('bbg_speaker_name');
+				$i = 0;
+				foreach ($profile_speaker as $profile) {
+					$i++;
+					$profile_id = $profile->ID;
+					$profile_name = get_the_title($profile_id);
+					$isActing = get_post_meta($profile_id, 'acting', true);
+					$profile_bio = get_sub_field('bbg_speaker_bio');
+					$occupation = get_post_meta($profile_id, 'occupation', true);
+					$profile_link = get_page_link($profile_id);
+
+					if ($isActing) {
+						$occupation = 'Acting ' . $occupation;
+					}
+					$speaker_data = array(
+						'entry' => $i,
+						'name' => $profile_name,
+						'title' => $occupation,
+						'bio' => $profile_bio,
+						'link' => $profile_link
+					);
+					$speaker_list[] = $speaker_data;
+				}
+			}
+		} else if (get_row_layout() == 'board_meeting_speakers_external') {
+			if (get_sub_field('meeting_speaker')) {
+				$profile_speaker = get_sub_field('meeting_speaker');
+				$i = 0;
+				foreach ($profile_speaker as $profile) {
+					$i++;
+					$speaker_name = $profile["meeting_speaker_name"];
+					$speaker_title = $profile["meeting_speaker_title"];
+					$speaker_bio = $profile["meeting_speaker_bio"];
+					$speaker_link = $profile["meeting_speaker_url"];
+
+					$speaker_data = array(
+						'entry' => $i,
+						'name' => $speaker_name,
+						'title' => $speaker_title,
+						'bio' => $speaker_bio,
+						'link' => $speaker_link
+					);
+					$speaker_list[] = $speaker_data;
+				}
+			}
+		}
+	}
+	$speaker_data_set = array(
+		'field_label' => $speakers_label,
+		'speaker_list' => $speaker_list
+	);
+}
+
 
 get_header();
 ?>
@@ -178,101 +245,46 @@ get_header();
 							echo $event_info;
 						?>
 
-						<!-- SPEAKERS -->
+						<!-- SPEAKERS LIST -->
 						<?php
-							if (have_rows('board_meeting_speakers')) {
-								$speakersLabel = get_field('board_meeting_speaker_label');
-								
-								echo '<h3 class="sidebar-section-header">' . $speakersLabel . '</h3>';
-								while (have_rows('board_meeting_speakers')) : the_row();
-
-									// SHOW INTERNAL SPEAKER LIST
-									if (get_row_layout() == 'board_meeting_speakers_internal') {
-										if (get_sub_field('bbg_speaker_name')) {
-											$profiles = get_sub_field('bbg_speaker_name');
-
-											echo '<ul class="usa-unstyled-list unstyled-list" style="width: 100%">';
-
-											$i = 0;
-											foreach ($profiles as $profile) {
-												$i++;
-												$profile_id = $profile->ID;
-												$profile_name = get_the_title($profile_id);
-												$isActing = get_post_meta($profile_id, 'acting', true);
-												$profile_bio = get_sub_field('bbg_speaker_bio');
-												$occupation = get_post_meta($profile_id, 'occupation', true);
-												$profile_link = get_page_link($profile_id);
-
-												if ($isActing) {
-													$occupation = "Acting " . $occupation;
-												}
-
-												$name_of_internal_speaker = '<p class="sidebar-article-title">' . $profile_name . '</p>';
-												$title_of_internal_speaker = '<p class="sans">' . $occupation . '</p>';
-												$link_of_internal_speaker = '<p class="sans"><a href="' . $profile_link . '" target="_blank">View Profile</a></p>';
-
-												$internal_speaker_list = '';
-												if (!empty($profile_bio)) {
-													$internal_speaker_list .= '<li class="usa-accordion speaker-accordion">';
-													$internal_speaker_list .= 		'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $name_of_internal_speaker . $title_of_internal_speaker . ' <i class="fas fa-plus"></i></button>';
-													$internal_speaker_list .= 		'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
-													$internal_speaker_list .= 			'<p class="snas speaker-bio">' . $profile_bio . '</p>';
-													$internal_speaker_list .= 	$link_of_internal_speaker;
-													$internal_speaker_list .= 		'</div>';
-													$internal_speaker_list .= '</li>';
-												} else {
-													$internal_speaker_list  = '<li>';
-													$internal_speaker_list .= 	$name_of_internal_speaker;
-													$internal_speaker_list .= 	$title_of_internal_speaker;
-													$internal_speaker_list .= '</li>';
-												}
-
-												echo $internal_speaker_list;
-											}
-											echo '</ul>';
+							if (!empty($speaker_data_set)) {
+								$speaker_list = $speaker_data_set['speaker_list'];
+								$speaker_markup  = '<aside class="speaker-list">';
+								$speaker_markup .= 	'<h3 class="sidebar-section-header">' . $speaker_data_set['field_label'] . '</h3>';
+								$speaker_markup .= 	'<ul class="unstyled-list meeting-speakers">';
+								foreach($speaker_list as $speaker_data) {
+									if (!empty($speaker_data['bio'])) {
+										$speaker_markup .= '<li class="usa-accordion speaker-accordion">';
+										$speaker_markup .= 	'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $speaker_data['entry'] . '">';
+										$speaker_markup .= 		'<p class="speaker-name sidebar-paragraph-header">' . $speaker_data['name'] . '</p>';
+										if (!empty($speaker_data['title'])) {
+											$speaker_markup .= 	'<p class="speaker-title sans">' . $speaker_data['title'] . '</p>';
 										}
-									} else if (get_row_layout() == 'board_meeting_speakers_external') {
-										if (get_sub_field('meeting_speaker')) {
-											$profiles = get_sub_field('meeting_speaker');
-											echo '<ul class="usa-unstyled-list unstyled-list">';
-
-											$i = 0;
-											foreach ($profiles as $profile) {
-												$i++;
-												$speaker_name = $profile["meeting_speaker_name"];
-												$speaker_title = $profile["meeting_speaker_title"];
-												$speaker_bio = $profile["meeting_speaker_bio"];
-												$speaker_link = $profile["meeting_speaker_url"];
-
-												$name_of_external_speaker = '<p class="sidebar-article-title">' . $speaker_name . '</p>';
-												$title_of_external_speaker = '<p class="sans">' . $speaker_title . '</p>';
-												if (!empty($speaker_link)) {
-													$link_of_external_speaker = '<p class="sans speaker-link"><a href="' . $speaker_link . '" target="_blank">' . $speaker_link . '</a></p>';
-												}
-
-												$external_speaker_list = '';
-												if (!empty($speaker_bio)) {
-													$external_speaker_list .= '<li class="usa-accordion speaker-accordion">';
-													$external_speaker_list .= 		'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $i . '">' . $name_of_external_speaker . $title_of_external_speaker . ' <i class="fas fa-plus"></i></button>';
-													$external_speaker_list .= 		'<div id="collapsible-faq-' . $i . '" aria-hidden="true" class="usa-accordion-content">';
-													$external_speaker_list .= 			'<p class="sans speaker-bio">' . $speaker_bio . '</p>';
-													if (!empty($speaker_link)) {
-														$external_speaker_list .= 	$link_of_external_speaker;
-													}
-													$external_speaker_list .= 		'</div>';
-													$external_speaker_list .= '</li>';
-												} else {
-													$external_speaker_list .= '<li>';
-													$external_speaker_list .= 	$name_of_external_speaker;
-													$external_speaker_list .= 	$title_of_external_speaker;
-													$external_speaker_list .= '</li>';
-												}
-												echo $external_speaker_list;
-											}
-											echo '</ul>';
+										$speaker_markup .= 		' <i class="fas fa-plus"></i>';
+										$speaker_markup .= 	'</button>';
+										$speaker_markup .= 	'<div id="collapsible-faq-' . $speaker_data['entry'] . '" aria-hidden="true" class="usa-accordion-content">';
+										$speaker_markup .= 		'<p class="sans speaker-bio">';
+										$speaker_markup .= 			$speaker_data['bio'];
+										$speaker_markup .= 		'</p>';
+										if (!empty($speaker_data['link'])) {
+											$speaker_markup .= 		'<p class="sans">';
+											$speaker_markup .= 			'<a href="' . $speaker_data['link'] . '" target="_blank">View Profile</a>';
+											$speaker_markup .= 		'</p>';
 										}
+										$speaker_markup .= 	'</div>';
+										$speaker_markup .= '</li>';
+									} else {
+										$speaker_markup .= '<li>';
+										$speaker_markup .= 	'<p class="speaker-name sidebar-paragraph-header">' . $speaker_data['name'] . '</p>';
+										if (!empty($speaker_data['title'])) {
+											$speaker_markup .= 	'<p class="speaker-title sans">' . $speaker_data['title'] . '</p>';
+										}
+										$speaker_markup .= '</li>';
 									}
-								endwhile;
+								}
+								$speaker_markup .= 	'</ul>';
+								$speaker_markup .= '</aside>';
+								echo $speaker_markup;
 							}
 						?>
 
