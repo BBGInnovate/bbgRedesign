@@ -8,7 +8,7 @@
 		$s  = '';
 		$s .= '<article class="' . implode(" ", get_post_class("bbg__article")) . '">';
 		$s .=	'<a tabindex="-1" href="' . $url . '">' . $thumb . '</a>';
-		$s .=	'<p class="sans"><a href="' . $url . '">' . $title . '</a></p>';
+		$s .=	'<h5 class="sidebar-article-title"><a href="' . $url . '">' . $title . '</a></h5>';
 		$s .= '</article><!-- .bbg-portfolio__excerpt -->';
 		return $s;
 	}
@@ -79,20 +79,20 @@
 		$impactPortfolioPermalink = get_permalink( get_page_by_path( 'our-work/impact-and-results/impact-portfolio/' ) );
 
 		$s  = ''; 
-		$s .= '<h5><a href="' . $impactPortfolioPermalink .'">' . $label .'</a></h5>';
+		$s .= '<h3 class="sidebar-section-header"><a href="' . $impactPortfolioPermalink .'">' . $label .'</a></h3>';
 		
 
 		if (count($impacts['inform'])) {
 			//https://www.bbg.gov/category/impact/inform/
 			$informLink = "/category/impact/inform/";
-			$s .= '<h6><a href="' . $informLink . '">Inform</a></h6>';
+			$s .= '<h4 class="sidebar-section-subheader"><a href="' . $informLink . '">Inform</a></h4>';
 			$s .= '<p class="sans">' . $informDesc . '</p>';
 			$s .= oneImpactStory($impacts['inform'][0]);
 		} 
 		if (count($impacts['engage'])) {
 			//https://www.bbg.gov/category/impact/engage,inform/
 			$engageLink = "/category/impact/engage,inform/";
-			$s .= '<h6><a href="'. $engageLink . '">Engage</a></h6>';
+			$s .= '<h4 class="sidebar-section-subheader"><a href="'. $engageLink . '">Engage</a></h4>';
 			$s .= '<p class="sans">' . $engageDesc . '</p>';
 			$s .= oneImpactStory($impacts['engage'][0]);
 
@@ -100,7 +100,7 @@
 		if (count($impacts['be-influential'])) {
 			//https://www.bbg.gov/category/impact/be-influential,engage,inform/
 			$beInfluentialLink = "/category/impact/be-influential,engage,inform/";
-			$s .= '<h6><a href="' . $beInfluentialLink . '">Be Influential</a></h6>';
+			$s .= '<h4 class="sidebar-section-subheader"><a href="' . $beInfluentialLink . '">Be Influential</a></h4>';
 			$s .= '<p class="sans">' . $beInfluentialDesc . '</p>';
 			$s .= oneImpactStory($impacts['be-influential'][0]);
 		}
