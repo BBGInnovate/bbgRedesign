@@ -351,7 +351,7 @@ if (count($awards)) {
 		$awards_markup .= '</div>';
 	}
 	$awards_markup .= '<div>';
-	$awards_markup .= 	'<p class="read-more">';
+	$awards_markup .= 	'<p class="read-more sans">';
 	$awards_markup .= 		'<a href="' . $entityAwardsLinkFiltered . '">View all ' . $abbreviation . ' awards »</a>';
 	$awards_markup .= 	'</p>';
 	$awards_markup .= '</div>';
