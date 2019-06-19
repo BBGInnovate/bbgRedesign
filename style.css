@@ -2707,7 +2707,7 @@ h3 {
 .article-section-header a:link,
 .article-section-header a:visited {
   font-family: "Alegreya Sans", sans-serif;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 300;
   color: #82afd2;
   margin-bottom: 1.5rem;
@@ -2781,6 +2781,11 @@ p.lead-in {
     color: #666666; }
   p.lead-in a:hover, p.lead-in a:active {
     color: #82afd2; }
+
+p.paragraph-header {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem; }
 
 p.banner-caption {
   text-align: right;
@@ -5328,6 +5333,7 @@ aside {
   margin-bottom: 3rem; }
 
 .read-more {
+  font-family: "Alegreya Sans", sans-serif;
   font-size: 14px;
   text-transform: uppercase;
   color: #3f7ad1;

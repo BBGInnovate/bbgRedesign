@@ -447,7 +447,7 @@ $hideFeaturedImage = false;
 							echo 	$post_date . '</p>';
 							echo '</header>';
 
-							$video_url = get_field('featured_video_url', '', true);
+							$video_url = get_field('featured_video_url', $post_id);
 							if ($video_url != "") {
 								if (strpos($video_url, 'facebook.com') !== false) {
 									echo $featured_video = featured_video($video_url);

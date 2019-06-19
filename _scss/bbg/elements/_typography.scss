@@ -48,7 +48,7 @@ h3 {clear: none;}
 .article-section-header a:link,
 .article-section-header a:visited {
     font-family: $font-sans;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: $font-light;
     color: $color-cool-blue;
     margin-bottom: 1.5rem;
@@ -121,6 +121,11 @@ p.lead-in {
     color: #878787;
     a:link, a:visited {color: $black6;}
     a:hover, a:active {color: $color-cool-blue;}
+}
+p.paragraph-header {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 p.banner-caption {
     text-align: right;
