@@ -30,13 +30,21 @@ if (have_posts()) {
 wp_reset_postdata();
 wp_reset_query();
 
+
 $entity_full_name = get_post_meta($entity_page_id, 'entity_full_name', true);
 $abbreviation = get_post_meta($entity_page_id, 'entity_abbreviation', true);
 $description = get_post_meta($entity_page_id, 'entity_description', true);
 $siteUrl = get_post_meta($entity_page_id, 'entity_site_url', true);
-$rssFeed = get_post_meta($entity_page_id, 'entity_rss_feed', true);
 $entityLogoID = get_post_meta($entity_page_id, 'entity_logo',true);
 $websiteName = get_post_meta($entity_page_id, 'entity_website_name', true);
+
+
+// GET RSS FEED
+$rss_feed = get_post_meta($id, 'rss_feed', true);
+if (!empty($rss_feed)) {
+	include 'inc/rss-data-structure.php';
+	$rss_markup = create_rss_markup($rss_feed, $id, $websiteName);
+}
 
 $entityLogo = "";
 if ($entityLogoID) {
@@ -206,39 +214,6 @@ $featuredImageClass = " bbg__article--no-featured-image";
 $bannerPosition = get_post_meta($entity_page_id, 'adjust_the_banner_image', true);
 $videoUrl = "";
 
-/**** BEGIN CREATING rssItems array *****/
-$entityJson = getFeed($rssFeed, $entity_page_id);
-$rssItems = array();
-$itemContainer = false;
-$languageDirection = "";
-
-if ($entityJson != false) {
-	if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
-		$itemContainer = $entityJson->channel;
-	} else {
-		$itemContainer = $entityJson;
-	}
-} else {
-	$itemContainer = $entityJson;
-}
-if ($itemContainer) {
-	if (property_exists($itemContainer, 'language')) {
-		if ($itemContainer -> language == "ar"){
-			$languageDirection = " rtl";
-		}
-	}
-	foreach ($itemContainer -> item as $e) {
-		$title = $e -> title;
-		$url = $e -> link;
-		$description = $e -> description;
-		$enclosureUrl = "";
-		if (property_exists($e, 'enclosure') && property_exists($e -> enclosure, '@attributes') && property_exists($e -> enclosure -> {'@attributes'}, 'url') ) {
-			$enclosureUrl = ( $e -> enclosure -> {'@attributes'} -> url );
-		}
-		$rssItems[] = array( 'title' => $title, 'url' => $url, 'description' => $description, 'image' => $enclosureUrl );
-	}
-}
-/**** DONE CREATING rssItems array *****/
 
 /**** START FETCH related press releases ****/
 $prCategorySlug = get_post_meta($entity_page_id, 'entity_pr_category', true);
@@ -520,53 +495,29 @@ get_header();
 			// $press_clippings_markup .= '</aside>';
 			// echo $press_clippings_markup;
 
-			if (count($rssItems)) {
-				$rss_markup  = '<aside class="inner-container side-recent-stories">';
-				$rss_markup .= 	'<h3 class="sidebar-section-header">Recent stories from ' . $websiteName . '</h3>';
-				$maxRelatedStories = 3;
-				for ($i = 0; $i < min($maxRelatedStories, count($rssItems)); $i++) {
-					$o = $rssItems[$i];
-					$short_copy = wp_trim_words($o['description'], 15, ' ...');
-
-					$rss_markup .= '<div class="nest-container post-group">';
-					$rss_markup .= 	'<div class="inner-container">';
-					$rss_markup .= 		'<div class="post-image">';
-					if ($o['image'] != "") {
-						$rss_markup .= 		'<a href="' . $o['url'] . '">';
-						$rss_markup .= 			'<img src="' . $o['image'] . '" alt="">';
-						$rss_markup .= 		'</a>';
-					}
-					$rss_markup .= 		'</div>';
-					$rss_markup .= 		'<div class="post-copy">';
-					$rss_markup .= 			'<h4 class="sidebar-article-title"><a href="' . $o['url'] . '">' . $o['title'] . '</a></h4>';
-					$rss_markup .= 			'<p class="sans">' . $short_copy . '</p>';
-					$rss_markup .= 		'</div>';
-					$rss_markup .= 	'</div>';
-					$rss_markup .= '</div>';
-				}
-				$rss_markup .= '</aside>';
-
+			// DISPLAY RSS REED
+			if (!empty($rss_markup)) {
 				echo $rss_markup;
+			}
 
-				if (count($threats)) {
-					$maxThreatsStories = 3;
+			if (count($threats)) {
+				$maxThreatsStories = 3;
 
-					$threats_markup  = '<h4 class="sidebar-article-title" class="bbg__label small"><a href="/threats-to-press/">Threats to Press</a></h4>';
-					$threats_markup .= '<ul class="bbg__rss__list">';
-					for ($i = 0; $i < min($maxRelatedStories, count($threats)); $i++) {
-						$o = $threats[$i];
-						$threats_markup .= '<li class="bbg__rss__list-link">';
-						$threats_markup .= 	'<a href="' . $o['url'] . '">';
-						$threats_markup .= 		$o['title'];
-						$threats_markup .= 	'</a>';
-						$threats_markup .= '</li>';
-					}
-					$threats_markup .= '</ul>';
-
-					echo '<div>';
-					echo 	$threats_markup;
-					echo '</div>';
+				$threats_markup  = '<h4 class="sidebar-article-title" class="bbg__label small"><a href="/threats-to-press/">Threats to Press</a></h4>';
+				$threats_markup .= '<ul class="bbg__rss__list">';
+				for ($i = 0; $i < min($maxRelatedStories, count($threats)); $i++) {
+					$o = $threats[$i];
+					$threats_markup .= '<li class="bbg__rss__list-link">';
+					$threats_markup .= 	'<a href="' . $o['url'] . '">';
+					$threats_markup .= 		$o['title'];
+					$threats_markup .= 	'</a>';
+					$threats_markup .= '</li>';
 				}
+				$threats_markup .= '</ul>';
+
+				echo '<div>';
+				echo 	$threats_markup;
+				echo '</div>';
 			}
 
 			// SHOW CITED POSTS

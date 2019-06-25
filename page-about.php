@@ -79,69 +79,16 @@ if (have_rows('about_flexible_page_rows')) {
 	}
 }
 
-// RSS DATA
-/**** BEGIN CREATING rssItems array *****/
-$office_rss = get_post_meta($id, 'office_rss_feed', true);
-$entityJson = getFeed($office_rss, $id);
-$rssItems = array();
-$itemContainer = false;
-$languageDirection = "";
 
-if ($entityJson != false) {
-	if (property_exists($entityJson, 'channel') && property_exists($entityJson->channel, 'item')) {
-		$itemContainer = $entityJson->channel;
-	} else {
-		$itemContainer = $entityJson;
-	}
-} else {
-	$itemContainer = $entityJson;
+// GET RSS FEED
+$rss_feed = get_post_meta($id, 'rss_feed', true);
+if (!empty($rss_feed)) {
+	include 'inc/rss-data-structure.php';
+	$rss_markup = create_rss_markup($rss_feed, $id);
 }
 
-if ($itemContainer) {
-	if (property_exists($itemContainer, 'language')) {
-		if ($itemContainer -> language == "ar"){
-			$languageDirection = " rtl";
-		}
-	}
-	foreach ($itemContainer -> item as $e) {
-		$title = $e -> title;
-		$url = $e -> link;
-		$description = $e -> description;
-		$enclosureUrl = "";
-		if (property_exists($e, 'enclosure') && property_exists($e -> enclosure, '@attributes') && property_exists($e -> enclosure -> {'@attributes'}, 'url') ) {
-			$enclosureUrl = ( $e -> enclosure -> {'@attributes'} -> url );
-		}
-		$rssItems[] = array( 'title' => $title, 'url' => $url, 'description' => $description, 'image' => $enclosureUrl );
-	}
-}
-// DONE CREATING rssItems array
-if ($rssItems) {
-	$rss_markup  = '<aside class="inner-container side-recent-stories">';
-	$rss_markup .= 	'<h3 class="sidebar-section-header">Recent stories</h3>';
-	$maxRelatedStories = 3;
-	for ($i = 0; $i < min($maxRelatedStories, count($rssItems)); $i++) {
-		$o = $rssItems[$i];
-		$short_copy = wp_trim_words($o['description'], 15, ' ...');
 
-		$rss_markup .= '<div class="nest-container post-group">';
-		$rss_markup .= 	'<div class="inner-container">';
-		$rss_markup .= 		'<div class="post-image">';
-		if ($o['image'] != "") {
-			$rss_markup .= 		'<a href="' . $o['url'] . '">';
-			$rss_markup .= 			'<img src="' . $o['image'] . '" alt="">';
-			$rss_markup .= 		'</a>';
-		}
-		$rss_markup .= 		'</div>';
-		$rss_markup .= 		'<div class="post-copy">';
-		$rss_markup .= 			'<h4 class="sidebar-article-title"><a href="' . $o['url'] . '">' . $o['title'] . '</a></h4>';
-		$rss_markup .= 			'<p class="sans">' . $short_copy . '</p>';
-		$rss_markup .= 		'</div>';
-		$rss_markup .= 	'</div>';
-		$rss_markup .= '</div>';
-	}
-	$rss_markup .= '</aside>';
-}
-
+// FOR THE MEDIA DEVELOPMENT PAGE, DISPLAY A MAP OF THE TRAININGS
 if (is_page('media-development')) {
 	$qParams = array(
 		'post_type' => array('post'),
