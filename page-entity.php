@@ -498,27 +498,28 @@ get_header();
 				echo '</aside>';
 			}
 
-			echo '<aside>';
-			echo 	'<h3 class="sidebar-section-header">Press Clippings</h3>';
-			echo 	'<div class="media-clips-entities-dropdown">';
-			echo 		'<ul class="unstyled-list" style="margin-top: 0;">';
-			echo 			'<li>';
-			echo 				'<h4 class="sidebar-section-subheader">';
-			echo 					'<a href="' . add_query_arg('clip-type', 'about-' . $abbreviation . '', '/press-clippings-archive/') . '">ABOUT ' . $abbreviation . '<i class="fas fa-angle-right"></i></a>';
-			echo 				'</h4>';
-			echo 			'</li>';
-			echo 			'<li>';
-			echo 				'<h4 class="sidebar-section-subheader">';
-			echo 					'<a href="' . add_query_arg('clip-type', 'citation-' . $abbreviation . '', '/press-clippings-archive/') . '">' . $abbreviation . ' CITATIONS<i class="fas fa-angle-right"></i></a>';
-			echo 				'</h4>';
-			echo 			'</li>';
-			echo 		'</ul>';
-			echo 	'</div>';
-			echo '</aside>';
+			// $press_clippings_markup  = '<aside>';
+			// $press_clippings_markup .= 	'<h3 class="sidebar-section-header">Press Clippings</h3>';
+			// $press_clippings_markup .= 	'<div class="media-clips-entities-dropdown">';
+			// $press_clippings_markup .= 		'<ul class="unstyled-list" style="margin-top: 0;">';
+			// $press_clippings_markup .= 			'<li>';
+			// $press_clippings_markup .= 				'<h4 class="sidebar-section-subheader">';
+			// $press_clippings_markup .= 					'<a href="' . add_query_arg('clip-type', 'about-' . $abbreviation . '', '/press-clippings-archive/') . '">ABOUT ' . $abbreviation . '<i class="fas fa-angle-right"></i></a>';
+			// $press_clippings_markup .= 				'</h4>';
+			// $press_clippings_markup .= 			'</li>';
+			// $press_clippings_markup .= 			'<li>';
+			// $press_clippings_markup .= 				'<h4 class="sidebar-section-subheader">';
+			// $press_clippings_markup .= 					'<a href="' . add_query_arg('clip-type', 'citation-' . $abbreviation . '', '/press-clippings-archive/') . '">' . $abbreviation . ' CITATIONS<i class="fas fa-angle-right"></i></a>';
+			// $press_clippings_markup .= 				'</h4>';
+			// $press_clippings_markup .= 			'</li>';
+			// $press_clippings_markup .= 		'</ul>';
+			// $press_clippings_markup .= 	'</div>';
+			// $press_clippings_markup .= '</aside>';
 
-			echo '<aside>';
-			echo 	$app_link_markup;
-			echo '</aside>';
+			// $press_clippings_markup .= '<aside>';
+			// $press_clippings_markup .= 	$app_link_markup;
+			// $press_clippings_markup .= '</aside>';
+			// echo $press_clippings_markup;
 
 			if (count($rssItems)) {
 				$rss_markup  = '<aside class="inner-container side-recent-stories">';
