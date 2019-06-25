@@ -56,20 +56,21 @@
 		return $str;
 	}
 
-	/****** UTILITY FUNCTIONS - KEEP UP TOP ****/
+	// UTILITY FUNCTIONS - KEEP UP TOP
 	function fileExpired($filepath, $minutesToExpire) {
 		$expired = false;
-		if ( !file_exists( $filepath ) ) {
+		if (!file_exists($filepath)) {
 			$expired = true;
 		} else {
-			$secondsDiff = time() - filemtime( $filepath );
-			$minutesDiff = $secondsDiff/60;
+			$secondsDiff = time() - filemtime($filepath);
+			$minutesDiff = $secondsDiff / 60;
 			if ($minutesDiff > $minutesToExpire) {
 				$expired = true;
 			}
 		}
 		return  $expired;
 	}
+
 	function fetchUrl($url) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -79,19 +80,22 @@
 		curl_close($ch);
 		return $result;
 	}
-	function getFeed($url,$id) {
-		$feedFilepath = get_template_directory() . "/external-feed-cache/" . $id . ".xml";
-		if ( fileExpired($feedFilepath,60)) { //one hour expiration
-			$feedStr=fetchUrl($url);
+
+	// CREATE XML FILE WITH RSS DATA
+	function getFeed($url, $id) {
+		$feedFilepath = get_template_directory() . '/external-feed-cache/' . $id . '.xml';
+		if (fileExpired($feedFilepath, 60)) { //one hour expiration
+			$feedStr = fetchUrl($url);
 			file_put_contents($feedFilepath, $feedStr);
 		} else {
-			$feedStr=file_get_contents($feedFilepath);
+			$feedStr = file_get_contents($feedFilepath);
 		}
 		$xml = simplexml_load_string($feedStr);
-		$json = json_encode($xml,JSON_PRETTY_PRINT);
-		$json=json_decode($json);
+		$json = json_encode($xml, JSON_PRETTY_PRINT);
+		$json = json_decode($json);
 		return $json;
 	}
+
 	function parse_csv ($csv_string, $delimiter = ",", $skip_empty_lines = true, $trim_fields = true) {
 	    $enc = preg_replace('/(?<!")""/', '!!Q!!', $csv_string);
 	    $enc = preg_replace_callback(

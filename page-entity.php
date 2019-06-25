@@ -238,7 +238,6 @@ if ($itemContainer) {
 		$rssItems[] = array( 'title' => $title, 'url' => $url, 'description' => $description, 'image' => $enclosureUrl );
 	}
 }
-
 /**** DONE CREATING rssItems array *****/
 
 /**** START FETCH related press releases ****/
