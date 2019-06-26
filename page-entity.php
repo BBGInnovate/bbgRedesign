@@ -40,11 +40,12 @@ $websiteName = get_post_meta($entity_page_id, 'entity_website_name', true);
 
 
 // GET RSS FEED
-$rss_feed = get_post_meta($id, 'rss_feed', true);
-if (!empty($rss_feed)) {
+$rss_xml = get_post_meta($id, 'rss_xml', true);
+if (!empty($rss_xml)) {
 	include 'inc/rss-data-structure.php';
-	$rss_markup = create_rss_markup($rss_feed, $id, $websiteName);
+	$rss_markup = create_rss_markup($id, $rss_xml, $websiteName);
 }
+
 
 $entityLogo = "";
 if ($entityLogoID) {

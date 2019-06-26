@@ -81,21 +81,6 @@
 		return $result;
 	}
 
-	// CREATE XML FILE WITH RSS DATA
-	function getFeed($url, $id) {
-		$feedFilepath = get_template_directory() . '/external-feed-cache/' . $id . '.xml';
-		if (fileExpired($feedFilepath, 60)) { //one hour expiration
-			$feedStr = fetchUrl($url);
-			file_put_contents($feedFilepath, $feedStr);
-		} else {
-			$feedStr = file_get_contents($feedFilepath);
-		}
-		$xml = simplexml_load_string($feedStr);
-		$json = json_encode($xml, JSON_PRETTY_PRINT);
-		$json = json_decode($json);
-		return $json;
-	}
-
 	function parse_csv ($csv_string, $delimiter = ",", $skip_empty_lines = true, $trim_fields = true) {
 	    $enc = preg_replace('/(?<!")""/', '!!Q!!', $csv_string);
 	    $enc = preg_replace_callback(
