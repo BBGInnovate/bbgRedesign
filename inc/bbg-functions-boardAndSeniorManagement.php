@@ -152,7 +152,6 @@ function board_member_list_shortcode($atts) {
 add_shortcode('board_member_list', 'board_member_list_shortcode');
 
 
-
 function outputSeniorManagement($type) {
 	$mgmt_page = get_page_by_title('Management Team');
 	$mgmt_id = $mgmt_page -> ID;
@@ -225,4 +224,51 @@ function senior_management_list_shortcode($atts) {
 	return outputSeniorManagement($atts['type']);
 }
 add_shortcode('senior_management_list', 'senior_management_list_shortcode');
+
+
+function usagm_experts_list_shortcode() {
+	$usagm_experts_page = get_page_by_title('USAGM Experts');
+	$expert_id_list = get_field('usagm_experts', $usagm_experts_page -> ID);
+	$all_profiles = '';
+	
+	foreach ($expert_id_list as $cur_expert_id) {
+		$first_name = get_post_meta($cur_expert_id, 'first_name', true);
+		$last_name = get_post_meta($cur_expert_id, 'last_name', true);
+		$occupation = get_post_meta($cur_expert_id, 'occupation', true);
+		$email = get_post_meta($cur_expert_id, 'email', true);
+		$phone = get_post_meta($cur_expert_id, 'phone', true);
+		$twitter_profile_handle = get_post_meta($cur_expert_id, 'twitter_handle', true);
+		$profile_photo_id = get_post_meta($cur_expert_id, 'profile_photo', true);
+		$profile_name = $first_name . ' ' . $last_name;
+
+		if  ($profile_photo_id) {
+			$profile_photo = wp_get_attachment_image_src($profile_photo_id , 'mugshot');
+			$profile_photo = $profile_photo[0];
+		}
+
+		$expert_profile  = '<div class="grid-half profile-clears">';
+		if (!empty($profile_photo)) {
+			$expert_profile .= '<a href="' . get_the_permalink($cur_expert_id) . '">';
+			$expert_profile .= 	'<img src="' . $profile_photo . '" class="bbg__profile-excerpt__photo" alt="Photo of ' . $profile_name . '">';
+			$expert_profile .= '</a>';
+		}
+		$expert_profile .= 	'<h3 class="article-title">';
+		$expert_profile .= 		'<a href="' . get_the_permalink($cur_expert_id) . '">' . $profile_name . '</a>';
+		$expert_profile .= 	'</h3>';
+		$expert_profile .= 	'<p class="bbg__profile-excerpt__text">';
+		$expert_profile .= 		'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
+		$expert_profile .= 		my_excerpt($cur_expert_id);
+		$expert_profile .= 	'</p>';
+		$expert_profile .= '</div>';
+
+		$all_profiles .= $expert_profile;
+
+		$experts_markup  = '<div class="nest-container">';
+		$experts_markup .= 	$all_profiles;
+		$experts_markup .= '</div>';
+	}
+
+	return $experts_markup;
+}
+add_shortcode('usagm_experts_list', 'usagm_experts_list_shortcode')
 ?>
