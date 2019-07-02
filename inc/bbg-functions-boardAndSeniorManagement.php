@@ -230,7 +230,8 @@ function usagm_experts_list_shortcode() {
 	$usagm_experts_page = get_page_by_title('USAGM Experts');
 	$expert_id_list = get_field('usagm_experts', $usagm_experts_page -> ID);
 	$all_profiles = '';
-	
+
+
 	foreach ($expert_id_list as $cur_expert_id) {
 		$first_name = get_post_meta($cur_expert_id, 'first_name', true);
 		$last_name = get_post_meta($cur_expert_id, 'last_name', true);
@@ -240,6 +241,7 @@ function usagm_experts_list_shortcode() {
 		$twitter_profile_handle = get_post_meta($cur_expert_id, 'twitter_handle', true);
 		$profile_photo_id = get_post_meta($cur_expert_id, 'profile_photo', true);
 		$profile_name = $first_name . ' ' . $last_name;
+
 
 		if  ($profile_photo_id) {
 			$profile_photo = wp_get_attachment_image_src($profile_photo_id , 'mugshot');
@@ -270,5 +272,5 @@ function usagm_experts_list_shortcode() {
 
 	return $experts_markup;
 }
-add_shortcode('usagm_experts_list', 'usagm_experts_list_shortcode')
+add_shortcode('usagm_experts_list', 'usagm_experts_list_shortcode');
 ?>

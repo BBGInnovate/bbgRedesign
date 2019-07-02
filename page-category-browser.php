@@ -31,6 +31,13 @@ wp_reset_postdata();
 wp_reset_query();
 
 
+// AWARDS PAGE
+// 1a. GET SPECIFIC NETWORK FROM URL PARAMETER
+if (!empty($_GET['entity'])) {
+	$url_entity_param = htmlspecialchars($_GET['entity']);
+}
+
+
 /***** BEGIN PROJECT PAGINATION LOGIC
 There are some nuances to this. Note that we're not using the paged parameter because we don't have the same number of posts on every page. Instead we use the offset parameter. The 'posts_per_page' limits the number displayed on the current page and is used to calculate offset.
 http://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
@@ -91,6 +98,18 @@ if ($category_browser_type == "Page Children") {
 		'offset' => $offset,
 		'order' => 'DESC'
 	);
+	
+	// QUERY SPECIFIC AWARDS
+	if ($categoryBrowsePostType == 'award') {
+		$qParams['meta_query'] = array(
+			'relation' => 'OR',
+			array(
+				'key' => 'standardpost_award_recipient',
+				'value' => $url_entity_param,
+				'compare' => 'LIKE'
+			)
+		);
+	}
 
 	if ($categoryBrowsePostType == 'burke_candidate') {
 		$qParams['posts_per_page'] = -1;

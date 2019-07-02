@@ -57,7 +57,7 @@ $awardSlug = get_post_meta($entity_page_id, 'entity_award_recipient_taxonomy_slu
 $entityApiID = get_post_meta($entity_page_id, 'entity_api_id', true);
 $entityCategorySlug = get_post_meta($entity_page_id, 'entity_category_slug', true);
 $entityCategoryObj = get_category_by_slug($entityCategorySlug);
-$entityAwardsPageLink = get_permalink( get_page_by_path('awards'));
+$entityAwardsPageLink = get_permalink(get_page_by_path('awards'));
 $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPageLink);
 
 $entityMission = get_post_meta($entity_page_id, 'entity_mission', true);
@@ -216,7 +216,7 @@ $bannerPosition = get_post_meta($entity_page_id, 'adjust_the_banner_image', true
 $videoUrl = "";
 
 
-/**** START FETCH related press releases ****/
+// START FETCH RELATED PRESS RELEASES
 $prCategorySlug = get_post_meta($entity_page_id, 'entity_pr_category', true);
 $pressReleases = array();
 if ($prCategorySlug != '') {
@@ -224,9 +224,9 @@ if ($prCategorySlug != '') {
 	if (is_object($prCategoryObj)) {
 		$prCategoryID = $prCategoryObj -> term_id;
 		$qParams = array(
-			'post_type' => array( 'post' ),
-			'posts_per_page' => 5,
-			'category__and' => array( $prCategoryID ),
+			'post_type' => array('post'),
+			'posts_per_page' => 3,
+			'category__and' => array($prCategoryID),
 			'orderby', 'date',
 			'order', 'DESC'
 		);
@@ -241,13 +241,13 @@ if ($prCategorySlug != '') {
 		wp_reset_postdata();
 	}
 }
-$s = "";
+$press_markup = '';
 if (count($pressReleases)) {
 	foreach ( $pressReleases as $pr ) {
 		$url = $pr['url'];
 		$title = $pr['title'];
 
-		$press_markup  = '<div>';
+		$press_markup .= '<div>';
 		$press_markup .= 	'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
 		$press_markup .= 	'<p>' . $pr['excerpt'] . '</p>';
 		$press_markup .= '</div>';
@@ -259,13 +259,14 @@ if (count($pressReleases)) {
 	$press_markup .= 	'</p>';
 	$press_markup .= "</div>";
 }
+// PRESS RELEASE SHORTCODE
 $page_content = str_replace("[press releases]", $press_markup, $page_content);
-/**** END FETCH related press releases ****/
 
-/**** START FETCH AWARDS ****/
+
+// START FETCH AWARDS
 $awards = array();
 $qParams = array(
-	'posts_per_page' => 5,
+	'posts_per_page' => 3,
 	'post_type' => 'award',
 	'orderby' => 'date',
 	'order' => 'DESC',
@@ -303,18 +304,20 @@ if ($custom_query -> have_posts()) {
 	}
 }
 wp_reset_postdata();
-$s = "";
+$awards_markup = '';
 if (count($awards)) {
-	foreach ( $awards as $a ) {
-		$award_post_id = $a['id'];
-		$url = $a['url'];
-		$title = $a['title'];
-		$awardYears = $a['awardYears'];
-		$awardTitle = $a['awardTitle'];
-		$organizations = $a['organizations'];
-		$recipients = $a['recipients'];
+	foreach ($awards as $cur_award) {
+		$award_post_id = $cur_award['id'];
+		$url = $cur_award['url'];
+		$title = $cur_award['title'];
+		$awardYears = $cur_award['awardYears'];
+		$awardTitle = $cur_award['awardTitle'];
+		$organizations = $cur_award['organizations'];
+		$recipients = $cur_award['recipients'];
+		$excerpt = $cur_award['excerpt'];
 
-		$awards_markup  = '<div>';
+		// Concat this beginning variable to show more than one. It collects five posts now. See line 308. Same with press releases, line: 244
+		$awards_markup .= '<div>';
 		$awards_markup .= 	'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
 		$awards_markup .= 	'<p class="date-meta">';
 		if (!empty($organizations)) {
@@ -322,7 +325,7 @@ if (count($awards)) {
 		}
 		$awards_markup .= 		'(' . join($awardYears) . ')';
 		$awards_markup .= 	'</p>';
-		$awards_markup .= 	'<p>' . $a['excerpt'] . '</p>';
+		$awards_markup .= 	'<p>' . $excerpt . '</p>';
 		$awards_markup .= '</div>';
 	}
 	$awards_markup .= '<div>';
@@ -331,8 +334,11 @@ if (count($awards)) {
 	$awards_markup .= 	'</p>';
 	$awards_markup .= '</div>';
 }
+// AWARDS SHORTCODE
 $page_content = str_replace("[awards]", $awards_markup, $page_content);
 /**** END FETCH AWARDS ****/
+
+
 
 /**** START FETCH threats to press ****/
 $threats = array();
