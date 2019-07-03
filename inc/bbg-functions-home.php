@@ -102,6 +102,7 @@ function get_recent_posts($qty) {
 	if ($qty != 0) {
 		// CATEGORIES TO EXCLUDE
 		// 3 Event:, 35: Profile, 36: Intern Testimonial, 45: Statement 55: Media Advisory, 56: Media Developent Map, 68: Threats to Press, 1046: From the CEO, 1244: Special Days
+		// NESTED TAX_QUERY: DO NOT SHOW POSTS IN THE AWARD CATEGORY UNLESS THEY ARE ALSO IN THE PRESS RELEASE CATEGORY
 		$recent_posts_args = array(
 			'posts_per_page' => $qty,
 			'post_type' => array('post'),
@@ -110,7 +111,6 @@ function get_recent_posts($qty) {
 			'post__not_in' => $selected_post_ids,
 			'category__not_in' => array(3, 35, 36, 38, 45, 55, 56, 68, 1046, 1244),
 			'tax_query' => array(
-				'relation' => 'OR',
 				array(
 					'taxonomy' => 'post_format',
 					'field' => 'slug',
@@ -118,12 +118,21 @@ function get_recent_posts($qty) {
 					'operator' => 'NOT IN'
 				),
 				array(
-					'taxonomy' => 'category',
-					'field' => 'slug',
-					'terms' => array('press-release'),
-					'operator' => 'IN'
+					'relation' => 'OR',
+					array(
+						'taxonomy' => 'category',
+						'field' => 'slug',
+						'terms' => array('press-release'),
+						'operator' => 'IN'
+					),
+					array(
+						'taxonomy' => 'category',
+						'field' => 'slug',
+						'terms' => array('award'),
+						'operator' => 'NOT IN'
+					)
 				)
-			)
+			),
 		);
 		$recent_post_query = new WP_Query($recent_posts_args);
 		$recent_query_array = $recent_post_query->posts;

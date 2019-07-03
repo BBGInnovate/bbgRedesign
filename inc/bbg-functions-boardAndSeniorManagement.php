@@ -227,20 +227,27 @@ add_shortcode('senior_management_list', 'senior_management_list_shortcode');
 
 
 function usagm_experts_list_shortcode() {
-	$usagm_experts_page = get_page_by_title('USAGM Experts');
-	$expert_id_list = get_field('usagm_experts', $usagm_experts_page -> ID);
+	$usagm_experts_args = array (
+		'posts_per_page' => -1,
+		'post-type' => array('posts'),
+		'category_name' => 'usagm-experts'
+	);
+	$usagm_experts_query = new WP_Query($usagm_experts_args);
+	$usagm_experts_array = $usagm_experts_query->posts;
+
+	$expert_id_list = array();
 	$all_profiles = '';
-
-
-	foreach ($expert_id_list as $cur_expert_id) {
-		$first_name = get_post_meta($cur_expert_id, 'first_name', true);
-		$last_name = get_post_meta($cur_expert_id, 'last_name', true);
-		$occupation = get_post_meta($cur_expert_id, 'occupation', true);
-		$email = get_post_meta($cur_expert_id, 'email', true);
-		$phone = get_post_meta($cur_expert_id, 'phone', true);
-		$twitter_profile_handle = get_post_meta($cur_expert_id, 'twitter_handle', true);
-		$profile_photo_id = get_post_meta($cur_expert_id, 'profile_photo', true);
+	foreach ($usagm_experts_array as $expert_id) {
+		$first_name = get_post_meta($expert_id->ID, 'first_name', true);
+		$last_name = get_post_meta($expert_id->ID, 'last_name', true);
+		$occupation = get_post_meta($expert_id->ID, 'occupation', true);
+		$email = get_post_meta($expert_id->ID, 'email', true);
+		$phone = get_post_meta($expert_id->ID, 'phone', true);
+		$twitter_profile_handle = get_post_meta($expert_id->ID, 'twitter_handle', true);
+		$profile_photo_id = get_post_meta($expert_id->ID, 'profile_photo', true);
 		$profile_name = $first_name . ' ' . $last_name;
+		$profile_link = get_the_permalink($expert_id->ID);
+		$excerpt = my_excerpt($expert_id->ID);
 
 
 		if  ($profile_photo_id) {
@@ -250,25 +257,24 @@ function usagm_experts_list_shortcode() {
 
 		$expert_profile  = '<div class="grid-half profile-clears">';
 		if (!empty($profile_photo)) {
-			$expert_profile .= '<a href="' . get_the_permalink($cur_expert_id) . '">';
+			$expert_profile .= '<a href="' . $profile_link . '">';
 			$expert_profile .= 	'<img src="' . $profile_photo . '" class="bbg__profile-excerpt__photo" alt="Photo of ' . $profile_name . '">';
 			$expert_profile .= '</a>';
 		}
 		$expert_profile .= 	'<h3 class="article-title">';
-		$expert_profile .= 		'<a href="' . get_the_permalink($cur_expert_id) . '">' . $profile_name . '</a>';
+		$expert_profile .= 		'<a href="' . $profile_link . '">' . $profile_name . '</a>';
 		$expert_profile .= 	'</h3>';
 		$expert_profile .= 	'<p class="bbg__profile-excerpt__text">';
 		$expert_profile .= 		'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
-		$expert_profile .= 		my_excerpt($cur_expert_id);
+		$expert_profile .= 		$excerpt;
 		$expert_profile .= 	'</p>';
 		$expert_profile .= '</div>';
 
 		$all_profiles .= $expert_profile;
-
-		$experts_markup  = '<div class="nest-container">';
-		$experts_markup .= 	$all_profiles;
-		$experts_markup .= '</div>';
 	}
+	$experts_markup  = '<div class="nest-container">';
+	$experts_markup .= 	$all_profiles;
+	$experts_markup .= '</div>';
 
 	return $experts_markup;
 }
