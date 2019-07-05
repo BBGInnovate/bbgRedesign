@@ -130,13 +130,4 @@ function build_flexible_row($row_data) {
 		$marquee_markup .= '</section>';
 		return $marquee_markup;
 	}
-	// elseif ($row_data['type'] == 'office') {
-	// 	echo "you got the ";
-	// }
-	// elseif ($row_data['type'] == 'ribbon') {
-	// 	echo "you got the ";
-	// }
-	// elseif ($row_data['type'] == 'umbrella') {
-	// 	echo "you got the ";
-	// }
 }

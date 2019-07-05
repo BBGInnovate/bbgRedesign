@@ -100,7 +100,7 @@ if ($category_browser_type == "Page Children") {
 	);
 	
 	// QUERY SPECIFIC AWARDS
-	if ($categoryBrowsePostType == 'award') {
+	if ($categoryBrowsePostType == 'award' && !empty($url_entity_param)) {
 		$qParams['meta_query'] = array(
 			'relation' => 'OR',
 			array(
