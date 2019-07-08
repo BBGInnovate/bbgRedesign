@@ -153,7 +153,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			}
 			$soapbox .= 	'</div>';
 			$soapbox .= '</div>';
-			echo $soapbox;
+			// echo $soapbox;
 		}
 	?>
 
