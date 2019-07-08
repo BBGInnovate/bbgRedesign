@@ -134,26 +134,28 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	<?php
 		// SOAPBOX
 		$soapbox_result = get_soapbox_data();
-		$soapbox_parts = build_soapbox_parts($soapbox_result);
 
-		if (!empty($soapbox_parts)) {
-			$soapbox  = '<div class="outer-container">';
-			$soapbox .= 	'<div class="grid-container soapbox ' . $soapbox_parts['class'] . '">';
-			if (!empty($soapbox_parts['image'])) {
-				$soapbox .= 	'<div class="soapbox-image-side">';
-				$soapbox .= 		$soapbox_parts['image'];
+		if ($soapbox_result['toggle'] == 'on') {
+			$soapbox_parts = build_soapbox_parts($soapbox_result);
+			if (!empty($soapbox_parts)) {
+				$soapbox  = '<div class="outer-container">';
+				$soapbox .= 	'<div class="grid-container soapbox ' . $soapbox_parts['class'] . '">';
+				if (!empty($soapbox_parts['image'])) {
+					$soapbox .= 	'<div class="soapbox-image-side">';
+					$soapbox .= 		$soapbox_parts['image'];
+					$soapbox .= 	'</div>';
+					$soapbox .= 	'<div class="soapbox-content-side">';
+				}
+				$soapbox .= 		$soapbox_parts['heading'];
+				$soapbox .= 		$soapbox_parts['title'];
+				$soapbox .= 		$soapbox_parts['content'];
+				if (!empty($soapbox_parts['image'])) {
+					$soapbox .= 	'</div>';
+				}
 				$soapbox .= 	'</div>';
-				$soapbox .= 	'<div class="soapbox-content-side">';
+				$soapbox .= '</div>';
+				echo $soapbox;
 			}
-			$soapbox .= 		$soapbox_parts['heading'];
-			$soapbox .= 		$soapbox_parts['title'];
-			$soapbox .= 		$soapbox_parts['content'];
-			if (!empty($soapbox_parts['image'])) {
-				$soapbox .= 	'</div>';
-			}
-			$soapbox .= 	'</div>';
-			$soapbox .= '</div>';
-			// echo $soapbox;
 		}
 	?>
 
