@@ -23,7 +23,7 @@ get_header();
 <main id="main" role="main">
 	<section class="outer-container">
 		<div class="inner-container">
-			<p class="lead-in">But here are some recent BBG highlights from around the world.</p>
+			<p class="lead-in">But here are some recent USAGM highlights from around the world.</p>
 			<?php
 				/* translators: %1$s: smiley */
 				$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives.', 'bbginnovate' ), convert_smilies( ':)' ) ) . '</p>';
