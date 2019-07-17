@@ -227,10 +227,15 @@ add_shortcode('senior_management_list', 'senior_management_list_shortcode');
 
 
 function usagm_experts_list_shortcode() {
+	if (!empty($_GET['tag'])) {
+		$tag = htmlspecialchars($_GET['tag']);
+	} else {
+		$tag = '';
+	}
 	$usagm_experts_args = array (
 		'posts_per_page' => -1,
-		'post-type' => array('posts'),
-		'category_name' => 'usagm-experts'
+		'category_name' => 'usagm-experts',
+		'tag_slug__in' => $tag
 	);
 	$usagm_experts_query = new WP_Query($usagm_experts_args);
 	$usagm_experts_array = $usagm_experts_query->posts;
@@ -248,7 +253,6 @@ function usagm_experts_list_shortcode() {
 		$profile_name = $first_name . ' ' . $last_name;
 		$profile_link = get_the_permalink($expert_id->ID);
 		$excerpt = my_excerpt($expert_id->ID);
-
 
 		if  ($profile_photo_id) {
 			$profile_photo = wp_get_attachment_image_src($profile_photo_id , 'mugshot');
@@ -272,7 +276,18 @@ function usagm_experts_list_shortcode() {
 
 		$all_profiles .= $expert_profile;
 	}
-	$experts_markup  = '<div class="nest-container">';
+
+	$experts_markup  = '<p>Filter by: ';
+	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'voa', '/usagm-experts/') . '">VOA</a>, ';
+	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'ocb', '/usagm-experts/') . '">OCB</a>, ';
+	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'rferl', '/usagm-experts/') . '">RFE/RL</a>, ';
+	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'rfa', '/usagm-experts/') . '">RFA</a>, ';
+	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'mbn', '/usagm-experts/') . '">MBN</a>';
+	if (!empty($tag)) {
+		$experts_markup .= '<br><span class="date-meta"><a href="' . get_the_permalink() . '">Remove filter</a></span>';
+	}
+	$experts_markup .= '</p>';
+	$experts_markup .= '<div class="nest-container">';
 	$experts_markup .= 	$all_profiles;
 	$experts_markup .= '</div>';
 
