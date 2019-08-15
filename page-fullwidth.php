@@ -24,7 +24,7 @@ get_header();
 
 <?php
 	$featured_media_result = get_feature_media_data();
-	if ($featured_media_result != "") {
+	if ($featured_media_result != "" && !is_page('awards-archive')) {
 		echo $featured_media_result;
 	}
 ?>

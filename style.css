@@ -2707,9 +2707,9 @@ h3 {
 .article-section-header a:link,
 .article-section-header a:visited {
   font-family: "Alegreya Sans", sans-serif;
-  font-size: 2.2rem;
-  font-weight: 300;
-  color: #82afd2;
+  font-size: 1.9rem;
+  font-weight: 500;
+  color: #284f91;
   margin-bottom: 1.5rem;
   text-decoration: none; }
 
@@ -3345,6 +3345,81 @@ a:focus .bbg__article-share__icon {
     width: calc(66.66667% - 33.33333px);
     float: left;
     margin-left: 20px; } }
+
+.award-dropdown [class*="image"] {
+  margin-bottom: 0; }
+
+.award-dropdown ul li {
+  margin-bottom: 0;
+  line-height: 0;
+  cursor: pointer; }
+
+.award-dropdown .dropdown-item:first-of-type {
+  border-top: 1px solid #e9e9e9; }
+
+.award-dropdown .dropdown-item {
+  border-bottom: 1px solid #e9e9e9; }
+
+.award-dropdown .award-image {
+  width: calc(16.66667% - 23.33333px);
+  float: left;
+  margin-left: 20px; }
+  .award-dropdown .award-image img {
+    margin-bottom: 0; }
+
+.award-dropdown .award-title {
+  width: calc(75% - 35px);
+  float: left;
+  margin-left: 20px;
+  padding-top: 1rem; }
+  .award-dropdown .award-title .sidebar-article-title {
+    margin-bottom: 0; }
+
+.award-dropdown .award-toggle {
+  width: calc(8.33333% - 21.66667px);
+  float: left;
+  margin-left: 20px;
+  padding-top: 1.2rem; }
+  .award-dropdown .award-toggle i {
+    float: right;
+    margin-right: 1rem; }
+
+.about-the-award p,
+.about-the-award-archive p {
+  margin-bottom: 0px; }
+  .about-the-award p .detail,
+  .about-the-award-archive p .detail {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #999999; }
+
+.about-the-award-archive {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+  .about-the-award-archive img {
+    margin-bottom: 0; }
+
+.award-archive-block {
+  margin-bottom: 8rem; }
+  .award-archive-block .award-image {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px;
+    margin-left: 0; }
+    .award-archive-block .award-image img {
+      margin-bottom: 0; }
+  .award-archive-block .award-title {
+    width: calc(75% - 35px);
+    float: left;
+    margin-left: 20px; }
+  .award-archive-block .award-details {
+    width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px;
+    margin-left: 0; }
 
 /** ---------------
  * TABLES

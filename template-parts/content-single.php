@@ -376,12 +376,6 @@ if (!empty($media_dev_addtl_images)) {
 
 }
 
-// AWARD INFO
-// NOT YET IMPLEMENTED
-$awardCategoryID = get_cat_id('Award');
-$isAward = ('award' == get_post_type());
-echo "<!---this is an award-->";
-
 $isPodcast = has_category('podcast');
 
 $soundcloudPlayer = "";
@@ -437,7 +431,6 @@ $hideFeaturedImage = false;
 				<div class="inner-container">
 					<div class="main-column">
 						<?php
-
 							echo '<header>';
 							echo 	'<h3 class="article-title">' . $page_title . '</h3>';
 							echo 	'<p class="date-meta">';
@@ -481,28 +474,7 @@ $hideFeaturedImage = false;
 							if ($isPodcast) {
 								echo $podcastTranscript;
 							}
-							// AWARD INFO
-							if ($isAward) {
-								$awardDescription = get_post_meta( get_the_ID(), 'standardpost_award_description', true );
-								if (isset($awardDescription) && $awardDescription!= "") {
-									$awardOrganization = get_field( 'standardpost_award_organization', get_the_ID(), true);
-									$awardOrganization = $awardOrganization -> name;
 
-									$awardLogo = get_post_meta( get_the_ID(), 'standardpost_award_logo', true );
-									$awardLogoImage = "";
-									if ($awardLogo) {
-										$awardLogoImage = wp_get_attachment_image_src( $awardLogo , 'small-thumb-uncropped');
-										$awardLogoImage = $awardLogoImage[0];
-										$awardLogoImage = '<img src="' . $awardLogoImage . '" class="bbg__profile-excerpt__photo" alt="Award logo">';
-									}
-									$award_markup  = '<div class="usa-grid-full bbg__contact-box">';
-									$award_markup .= 	'<h3>About ' . $awardOrganization . '</h3>';
-									$award_markup .= 	$awardLogoImage;
-									$award_markup .= 	'<p><span class="bbg__tagline">' . $awardDescription . '</span></p>';
-									$award_markup .= '</div>';
-									echo $award_markup;
-								}
-							}
 							// CONTACT CARDS
 							$contactPostIDs = get_post_meta($post_id, 'contact_post_id', true);
 							renderContactCard($contactPostIDs);
@@ -514,10 +486,18 @@ $hideFeaturedImage = false;
 					</div>
 					<div class="side-column divider-left">
 						<?php
-							// SHARE THIS PAGE
-							$share_icons = social_media_share_page($post_id);
-							if (!empty($share_icons)) {
-								echo $share_icons;
+							// DISPLAY AWARDS IN DROPDOWN
+							// STANDALONE AWARDS
+							$standalone_title = get_field('standardpost_award_title', get_the_ID());
+							if (!empty($standalone_title)) {
+								$stand_alone_award_data = get_standalone_award(get_the_ID());
+								echo $stand_alone_award_data;
+							}
+							// PRESS RELEASE AWARDS
+							$pr_awards = get_field('press_release_awards', $post_id);
+							if ($pr_awards == 'yes') {
+								$press_release_awards_data = get_press_release_award(get_the_ID());
+								echo $press_release_awards_data;
 							}
 
 							if ($includeRelatedProfile) {
@@ -536,13 +516,7 @@ $hideFeaturedImage = false;
 								$sidebar_map .= '</div>';
 								echo $sidebar_map;
 							}
-							if ($isAward) {
-								$award_info  = '<h5 class="bbg__label small bbg__sidebar__download__label">About the Award</h5>';
-								$award_info .= '<div class="bbg__sidebar__primary">';
-								$award_info .= 		getAwardInfo(get_the_ID(), true);
-								$award_info .= '</div>';
-								echo $award_info;
-							}
+
 							if ($includeSidebar) {
 								echo $sidebar;
 							}
@@ -553,6 +527,12 @@ $hideFeaturedImage = false;
 							echo $media_dev_presenters;
 							echo $team_roster;
 							echo getAccordion();
+
+							// SHARE THIS PAGE
+							$share_icons = social_media_share_page($post_id);
+							if (!empty($share_icons)) {
+								echo $share_icons;
+							}
 						?>
 					</div>
 				</div>

@@ -17,7 +17,7 @@ require 'inc/bbg-functions-assemble.php';
 include 'inc/shared_sidebar.php';
 
 $addFeaturedGallery = get_post_meta( get_the_ID(), 'featured_gallery_add', true );
-// 
+
 $headline = get_field('headline', '', true);
 $listsInclude = get_field('sidebar_dropdown_include', '', true);
 

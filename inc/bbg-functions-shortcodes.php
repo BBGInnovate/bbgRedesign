@@ -648,100 +648,81 @@
 
 	add_shortcode('burkelist', 'burkelist_shortcode');
 
+// QUERY POSTS
+function pull_post_data($args) {
+	if (isset($args['paged'])) {
+		global $paged;
+	}
+	$awards_query_args = array(
+		'posts_per_page' => $args['posts_per_page'],
+		'paged' => $args['paged'],
+		'category_name' => $args['category_name'],
+	);
+	$awards_query = new WP_Query($awards_query_args);
+
+	return $awards_query;
+	// then make custom div blocks for either archive or drop down
+	// then put into 3 column function
+}
 
 
 function list_award_shortcode() {
-	$awards_query_args = array(
-		'posts_per_page' => -1,
-		'category_name' => 'award',
-		'tax_query' => array(
-			array(
-				'relation' => 'AND',
-				array(
-					'taxonomy' => 'category',
-					'field' => 'slug',
-					'terms' => array('press-release'),
-					'operator' => 'NOT IN'
-				)
-			)
-		)
+	global $paged;
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	$posts_per_page = 10;
+
+	$query_vars = array(
+		'paged' => $paged,
+		'posts_per_page' => $posts_per_page,
+		'category_name' => 'award'
 	);
-	if (!empty($_GET['entity'])) {
-		$url_entity_param = htmlspecialchars($_GET['entity']);
+	$award_posts = pull_post_data($query_vars);
 
-		$awards_query_args['meta_query'] = array(
-			'relation' => 'OR',
-			array(
-				'key' => 'standardpost_award_recipient',
-				'value' => $url_entity_param,
-				'compare' => 'LIKE'
-			)
-		);
+	$awards_container = array();
+	$awards_markup = array();
+
+	if ($award_posts->have_posts()) {
+		$total_found_posts = $award_posts->found_posts;
+		$total_page = ceil($total_found_posts / $posts_per_page);
+
+		while ($award_posts->have_posts()) {
+			$award_posts->the_post();
+			// DETERMINE WHETER THE AWARD HAS A PRESS RELEASE OR NOT
+			if (has_category('press-release', get_the_ID())) {
+				$press_award = get_press_release_award(get_the_ID(), true);
+				if (!empty($press_award)) {
+					// PRESS RELEASES COULD HAVE MORE THAN ONE AWARD, WHICH WOULD BE WRAPPED IN AN OUTER ARRAY. GET INSIDE IT
+					if (count($press_award) > 1) {
+						foreach ($press_award as $cur_press_award) {
+							$awards_container[] = $cur_press_award;
+						}
+					} else {
+						$awards_container[] = $press_award;
+					}
+				}
+			} else {
+				$standalone_award = get_standalone_award(get_the_ID(), true);
+				$awards_container[] = $standalone_award[0];
+			}
+		}
+		$archive_award_componentes = build_award_archive_blocks($awards_container);
 	}
 
-	$award_query = new WP_Query($awards_query_args);
-	$all_awards = $award_query->posts;
+	$award_markup  = '<div class="nest-container">';
+	$award_markup .= 	'<div class="inner-container">';
+	$award_markup  = 		$archive_award_componentes;
+	$award_markup .= 		'<div class="post-navigation">';
+	$award_markup .= 			'<div class="nav-next">';
+	$award_markup .= 				get_next_posts_link('Next page', $total_page);
+	$award_markup .= 			'</div>';
+	$award_markup .= 			'<div class="nav-previous">';
+	$award_markup .= 				get_previous_posts_link('Previous page');
+	$award_markup .= 			'</div>';
+	$award_markup .= 		'</div>';
+	$award_markup .= 	'</div>';
+	$award_markup .= '</div>';
 
-	$content = '';
-	if (!empty($all_awards)) {
-		if (!empty($url_entity_param)) {
-			$content = '<h3 class="section-subheader">' . strtoupper($url_entity_param) . ' Awards</h3>';
-			$heading = 'h4';
-		} else {
-			$heading = 'h3';
-		}
-		foreach ($all_awards as $award) {
-			$content .= '<div class="article-teaser">';
-			$content .= 	'<' . $heading . ' class="article-title">';
-			$content .= 		'<a href="' . $award->guid . '">';
-			$content .= 			$award->post_title;
-			$content .= 		'</a>';
-			$content .= 	'</' . $heading . '>';
-			$content .= 	'<p class="date-meta">' . get_the_date('F j, Y', $award->ID) . '</p>';
-			$content .= '</div>';
-		}
-
-		return $content;
-	} else {
-		$content .= 'There are currently no awards to show';
-	}
+	return $award_markup;
 }
 add_shortcode('list_award_archive', 'list_award_shortcode');
-
-
-
-function entity_awards_list_shortcode() {
-	$entity_dropdown  = '<div class="media-clips-entities-dropdown">';
-	$entity_dropdown .= 	'<ul class="unstyled-list">';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 			'<h3 class="sidebar-section-subheader">';
-	$entity_dropdown .= 				'<a href="' . add_query_arg('entity', 'voa', '/awards-archive/') . '">VOA</a>';
-	$entity_dropdown .= 			'</h3>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 			'<h3 class="sidebar-section-subheader">';
-	$entity_dropdown .= 				'<a href="' . add_query_arg('entity', 'rfe/rl', '/awards-archive/') . '">RFE/RL</a>';
-	$entity_dropdown .= 			'</h3>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 			'<h3 class="sidebar-section-subheader">';
-	$entity_dropdown .= 				'<a href="' . add_query_arg('entity', 'ocb', '/awards-archive/') . '">OCB</a>';
-	$entity_dropdown .= 			'</h3>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 			'<h3 class="sidebar-section-subheader">';
-	$entity_dropdown .= 				'<a href="' . add_query_arg('entity', 'rfa', '/awards-archive/') . '">RFA</a>';
-	$entity_dropdown .= 			'</h3>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 			'<h3 class="sidebar-section-subheader">';
-	$entity_dropdown .= 				'<a href="' . add_query_arg('entity', 'mbn', '/awards-archive/') . '">MBN</a>';
-	$entity_dropdown .= 			'</h3>';
-	$entity_dropdown .= 		'<li>';
-	$entity_dropdown .= 	'</ul>';
-	$entity_dropdown .= '</div>';
-
-	return $entity_dropdown;
-}
-add_shortcode('entity_awards_list', 'entity_awards_list_shortcode');
 ?>

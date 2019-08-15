@@ -110,9 +110,11 @@ function get_soapbox_data() {
 				$profile_name = "John Lansing";
 				break;
 			}
-			else if ($cat -> slug == "usim-matters") {
+			else if ($cat -> slug == "global-media-matters") {
 				$isSpeech = true;
 				$soap_class = "bbg__voice--guest";
+				$profile_photo = get_the_post_thumbnail_url($id);
+				$profile_name = '';
 			} else if ($cat -> slug == "speech" ||  $cat -> slug == "statement" || $cat -> slug == "media-advisory") {
 				$isMediaAdvisory = true;
 				$soap_class = "bbg__voice--featured";
@@ -130,7 +132,7 @@ function get_soapbox_data() {
 
 	// DEFAULT TO SOAPBOX CAPTION
 	$soap_contents_caption = get_field('homepage_soapbox_image_caption', 'option');
-	if ($soap_contents_caption != "") {
+	if ($soap_contents_caption != "" && $is_ceo_post) {
 		$profile_name = $soap_contents_caption;
 	}
 

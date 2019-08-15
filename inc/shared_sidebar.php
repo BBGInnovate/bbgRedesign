@@ -186,28 +186,8 @@ if ($includeSidebar) {
 
 					$sidebar_markup .= $accordion;
 				}
-			} else if (get_row_layout() == 'sidebar_related_award') {
-				$relatedPosts = get_sub_field('sidebar_related_award_post');
-				
-				if (is_array($relatedPosts) && count($relatedPosts) > 0) {
-					$label = "About the Award";
-					if (count($relatedPosts) > 1) {
-						$label .= "s";
-					}
-
-					$sidebar_markup .= '<h3 class="sidebar-section-header">' . $label . '</h3>';
-					$sidebar_markup .= '<div class="sans">';
-					$counter = 0;
-					foreach ($relatedPosts as $relatedPost) {
-						$counter++;
-						if ($counter > 1) {
-							$sidebar_markup .= "<br />";
-						}
-						$sidebar_markup .= getAwardInfo($relatedPost -> ID, false);
-					}
-					$sidebar_markup .=  '</div>';
-				}
-			} else if (get_row_layout() == 'sidebar_twitter_widget') {
+			}
+			else if (get_row_layout() == 'sidebar_twitter_widget') {
 				$widgetID = get_sub_field('sidebar_twitter_widget_id');
 				$widgetHashtag = get_sub_field('sidebar_twitter_widget_hashtag');
 				$widgetAuthor = get_sub_field('sidebar_twitter_widget_author');
