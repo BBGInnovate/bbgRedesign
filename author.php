@@ -267,7 +267,7 @@ get_header();
 			$author_ribbon .= 		'<div class="main-content-container">';
 			$author_ribbon .= 			'<h2 class="section-header">On the record</h2>';
 			$author_ribbon .= 			'<h3 class="article-title"><a href="">Speeches and Remarks</a></h3>';
-			$author_ribbon .= 			'<p>View transcripts of CEO Lansing’s remarks and statements at each of his appearances since he joined the BBG in September 2015. <span class="learn-more"><a href="/ceo-speeches-remarks/">View All</a></span></p>';
+			$author_ribbon .= 			'<p>View transcripts of CEO Lansing’s remarks and statements at each of his appearances since he joined the Agency in September 2015. <span class="learn-more"><a href="/ceo-speeches-remarks/">View All</a></span></p>';
 			$author_ribbon .= 		'</div>';
 			$author_ribbon .= 	'</div>';
 			$author_ribbon .= '</div>';

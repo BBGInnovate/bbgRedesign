@@ -163,7 +163,7 @@ get_header();
 							if ($ceo) {
 								$ceo_articles = get_ceo_article_arguments();
 								if (!empty($ceo_articles)) {
-									$categoryUrl = 'https://www.bbg.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news';
+									$categoryUrl = 'https://www.usagm.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news';
 									$categoryLabel = 'News & Appearances';
 									$ceo_post_query = new WP_Query($ceo_articles);
 									$ceo_article_array = $ceo_post_query->posts;
