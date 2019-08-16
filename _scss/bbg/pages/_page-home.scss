@@ -186,7 +186,18 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 				margin-bottom: 0;
 			}
 		}
-		.soapbox-content-side {@include grid-column(10); margin-left: 20px;}
+		.soapbox-content-side {
+			@include grid-column(10);
+			margin-left: 20px;
+			margin-bottom: 0;
+		}
+	}
+}
+.soapbox.bbg__voice--guest {
+	.soapbox-image-side {@include grid-column(4); margin-left: 0;}
+	.soapbox-content-side {
+		@include grid-column(8);
+		p {margin-bottom: 0;}
 	}
 }
 
