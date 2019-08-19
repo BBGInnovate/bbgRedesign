@@ -1173,4 +1173,20 @@ function social_media_share_page($page_id) {
 	$share_markup .= '</aside>';
 	return $share_markup;
 }
+
+
+
+
+function my_login_logo_one() { 
+?> 
+	<style type="text/css"> 
+		body.login div#login h1 a {
+			background-image: url(http://dev.usagm.com/USAGM-Logo.png);
+			background-size: 286px;
+			width: 268px;
+			height: 133px;
+		} 
+	</style>
+ <?php 
+} add_action( 'login_enqueue_scripts', 'my_login_logo_one' );
 ?>
