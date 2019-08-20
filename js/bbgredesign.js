@@ -83,6 +83,8 @@ jQuery(document).ready(function() {
             jQuery('#downloadFile').css({'background-color':'#0071bc', 'cursor':'pointer'});
             jQuery('.usa-button').hover(function() {
               jQuery('#downloadFile').css('background-color', '#205493');
+            }, function() {
+              jQuery('#downloadFile').css({'background-color':'#0071bc'});
             });
           }
           else {
