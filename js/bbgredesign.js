@@ -69,9 +69,33 @@ jQuery(document).ready(function() {
     /* used on the 2-column page, dropdown nav for sidebar */
     // file downloads
    if (jQuery('#downloadFile').length && jQuery('#file_download_list').length) {
-        jQuery('button.downloadFile').click(function() {
-            url=jQuery(this).parent().find('#file_download_list').val();
-            window.open(url,'_blank');
+        // CHANGE COLOR AND "DISABLE" BUTTON UNTIL USER SELECTS AN OPTION
+        function disableDownloadButtonColor() {
+          jQuery('#downloadFile').css({'background-color':'#e1e1e1', 'cursor':'default'});
+          jQuery('.usa-button').hover(function() {
+            jQuery('#downloadFile').css('background-color', '#e1e1e1');
+          });
+        }
+        disableDownloadButtonColor();
+
+        jQuery('#file_download_list').change(function() {
+          if (jQuery('#file_download_list').val() !== 'Select a calendar year') {
+            jQuery('#downloadFile').css({'background-color':'#0071bc', 'cursor':'pointer'});
+            jQuery('.usa-button').hover(function() {
+              jQuery('#downloadFile').css('background-color', '#205493');
+            });
+          }
+          else {
+            disableDownloadButtonColor();
+          }
+
+          // WHEN USER CLICKS DOWNLOAD, MAKE SURE THERE IS AN OPTION SELECTED TO DOWNLOAD
+          jQuery('button.downloadFile').click(function() {
+            if (jQuery('#file_download_list').val() !== 'Select a calendar year') {
+              url=jQuery(this).parent().find('#file_download_list').val();
+              window.open(url, '_blank');
+            }
+          });
         });
     }
 
