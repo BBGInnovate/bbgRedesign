@@ -128,14 +128,14 @@
 		$id = $q -> ID;
 		$body = $q -> post_content;
 		$title = $q -> post_title;
-		$calloutMugshot = get_field( 'callout_mugshot', $id, true);
-		$calloutNetwork = get_post_meta( $id, 'callout_network', true );
-		$callToAction = get_post_meta( $id, 'callout_call_to_action', true );
-		$callToActionLabel = get_post_meta( $id, 'callout_action_label', true );
-		$callToActionLink = get_post_meta( $id, 'callout_action_link', true );
+		$calloutMugshot = get_field('callout_mugshot', $id, true);
+		$calloutNetwork = get_post_meta($id, 'callout_network', true);
+		$callToAction = get_post_meta($id, 'callout_call_to_action', true);
+		$callToActionLabel = get_post_meta($id, 'callout_action_label', true);
+		$callToActionLink = get_post_meta($id, 'callout_action_link', true);
 
 		$mugshot = $calloutMugshot['url'];
-		if ( isset ( $calloutMugshot['sizes']) && isset( $calloutMugshot['sizes']['mugshot'] )) {
+		if (isset ( $calloutMugshot['sizes']) && isset($calloutMugshot['sizes']['mugshot'])) {
 			$mugshot = $calloutMugshot['sizes']['mugshot'];
 		}
 
@@ -153,7 +153,8 @@
 		$networkBackgroundColor = $colors[$calloutNetwork];
 
 		$quote = ''; 
-		$quote .= '<div class="bbg__quotation">';
+		$quote .= '<div class="outer-container">';
+		$quote .= 	'<div class="grid-container bbg__quotation">';
 			$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkBackgroundColor . '">' . $calloutNetwork . '</div>';
 			$quote .= '<h2 class="bbg__quotation-text--large"><strong>' . $title . '</strong></h2><p>' . $body . '</p>';
 
@@ -179,6 +180,7 @@
 				$quote .= '</div>';
 			}
 			
+		$quote .= 	'</div>';
 		$quote .= '</div>';
 		echo $quote;
 	}
