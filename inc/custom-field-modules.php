@@ -56,10 +56,12 @@ function assemble_marquee_module($umbrella_parts) {
 	return $marquee;
 }
 
-function assemble_umbrella_content_section($umbrella_parts) {
+function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 	if (!empty($umbrella_parts)) {
 		$umbrella_content_block  = '<div class="outer-container">';
-		$umbrella_content_block .= 	'<div class="grid-container">';
+		if (!$special_grouping) {
+			$umbrella_content_block .= 	'<div class="grid-container">';
+		}
 		foreach($umbrella_parts as $umbrella_chunk) {
 			$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
 			$umbrella_content_block .= 	$umbrella_chunk['column_title'];
@@ -68,7 +70,9 @@ function assemble_umbrella_content_section($umbrella_parts) {
 			$umbrella_content_block .= 	$umbrella_chunk['description'];
 			$umbrella_content_block .= '</div>';
 		}
-		$umbrella_content_block .= 	'</div>';
+		if (!$special_grouping) {
+			$umbrella_content_block .= 	'</div>';
+		}
 		$umbrella_content_block .= '</div>';
 		return $umbrella_content_block;
 	}

@@ -437,7 +437,7 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 
 // ENTITY FIELDS
 function get_entity_data($grid_class) {
-	// $grid_class can be ["entity-main" | "entity-side"]
+	// $grid_class can be ["grid-five" | "entity-side"]
 	$entityParentPage = get_page_by_path('networks');
 	$entity_id_group = array();
 	$qParams = array(

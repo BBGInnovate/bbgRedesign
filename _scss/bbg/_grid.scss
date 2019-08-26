@@ -112,20 +112,28 @@ $icon-content-grid: (
 // 2. EVEN BLOCKS
 .grid-half {@include grid-column(12);}
 .grid-third {@include grid-column(12);}
+.grid-four {@include grid-column(12); margin-right: 0;}
+.grid-five {margin-left: 20px;}
 @include media($medium-screen) {
 	.grid-half {@include grid-column(12);}
 	.grid-third {@include grid-column(12); clear: none;}
+	.grid-four {@include grid-column(12);}
 }
 @include media($medium-medium-screen) {
 	.grid-half {@include grid-column(6);}
 	.grid-third {@include grid-column(6);}
 	.grid-third:nth-child(odd) {clear: left;}
+	.grid-four {@include grid-column(6);}
 }
 @include media($medium-large-screen) {
 	.grid-third {@include grid-column(4);}
 	.grid-third:nth-child(3n+1) {clear: left;}
 	.grid-third:nth-child(2n+1) {clear: none;}
+	.grid-four {@include grid-column(3);}
+	$five-columns: (columns: 5);
+	.grid-five {@include grid-column(1, $five-columns);}
 }
+
 
 // 3. SIDEBARS
 // CUSTOM SIDEBAR GRID

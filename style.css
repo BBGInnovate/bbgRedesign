@@ -4962,6 +4962,15 @@ e.g. on the intern testimonial page */
   float: left;
   margin-left: 20px; }
 
+.grid-four {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px;
+  margin-right: 0; }
+
+.grid-five {
+  margin-left: 20px; }
+
 @media screen and (min-width: 600px) {
   .grid-half {
     width: calc(100% - 40px);
@@ -4971,7 +4980,11 @@ e.g. on the intern testimonial page */
     width: calc(100% - 40px);
     float: left;
     margin-left: 20px;
-    clear: none; } }
+    clear: none; }
+  .grid-four {
+    width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px; } }
 
 @media screen and (min-width: 700px) {
   .grid-half {
@@ -4983,7 +4996,11 @@ e.g. on the intern testimonial page */
     float: left;
     margin-left: 20px; }
   .grid-third:nth-child(odd) {
-    clear: left; } }
+    clear: left; }
+  .grid-four {
+    width: calc(50% - 30px);
+    float: left;
+    margin-left: 20px; } }
 
 @media screen and (min-width: 900px) {
   .grid-third {
@@ -4993,7 +5010,15 @@ e.g. on the intern testimonial page */
   .grid-third:nth-child(3n+1) {
     clear: left; }
   .grid-third:nth-child(2n+1) {
-    clear: none; } }
+    clear: none; }
+  .grid-four {
+    width: calc(25% - 25px);
+    float: left;
+    margin-left: 20px; }
+  .grid-five {
+    width: calc(20% - 24px);
+    float: left;
+    margin-left: 20px; } }
 
 .sidebar-section {
   margin-bottom: 3rem; }

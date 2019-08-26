@@ -38,18 +38,31 @@ if (have_rows('about_flexible_page_rows')) {
 	while (have_rows('about_flexible_page_rows')) {
 		the_row();
 		if (get_row_layout() == 'umbrella') {
-			// GET UMBRELLA'S MAIN DATA
+			// GET UMBRELLA'S MAIN DATA			
 			$main_umbrella_data = get_umbrella_main_data();
 			$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
 			// DETERMINE GRID
 			$content_counter = count(get_sub_field('umbrella_content'));
-			$grid_class = 'bbg-grid--1-2-2';
-			if (isOdd($content_counter)) {
-				$grid_class = 'bbg-grid--1-2-3';
+			$umbrella_column_grouping = get_sub_field('umbrella_grouping');
+			if ($umbrella_column_grouping != 'default') {
+				$special_umbrella_group = true;
+			} else {
+				$special_umbrella_group = false;
 			}
+
+			if ($umbrella_column_grouping == 'default') {
+				$grid_class = 'bbg-grid--1-2-2';
+				if (isOdd($content_counter)) {
+					$grid_class = 'bbg-grid--1-2-3';
+				}
+			} elseif ($umbrella_column_grouping == 'four') {
+				$grid_class = 'grid-four';
+			} elseif ($umbrella_column_grouping == 'five') {
+				$grid_class = 'grid-five';
+			}
+
 			$umbrella_main_data_group = assemble_umbrella_main($main_umbrella_parts);
 			array_push($umbrella_group, $umbrella_main_data_group);
-			// echo $umbrella_main_data_group;
 			// GET UMBRELLA'S CONTENT DATA
 			$content_parts_group = array();
 			while (have_rows('umbrella_content')) {
@@ -59,7 +72,7 @@ if (have_rows('about_flexible_page_rows')) {
 				$content_parts_result = build_umbrella_content_parts($content_data_result);
 				array_push($content_parts_group, $content_parts_result);
 			}
-			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group);
+			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group, $special_umbrella_group);
 			array_push($umbrella_group, $umbrella_content_markup);
 			array_push($all_flex_rows, $umbrella_group);
 			$umbrella_group = array();
