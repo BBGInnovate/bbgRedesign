@@ -166,6 +166,7 @@ function get_corner_hero_data() {
 	}
 
 	$cornerHeroLabel = get_field('corner_hero_label', 'option');
+
 	if ($cornerHeroLabel == '') {
 		$cornerHeroLabel = 'This week';
 	}
@@ -211,7 +212,7 @@ function get_corner_hero_data() {
 	}
 	else if ($homepage_hero_corner == 'callout' && $featuredCallout) {
 		$c_type = 'callout';
-		outputCallout($featuredCallout);
+		outputCallout($featuredCallout, $cornerHeroLabel);
 	}
 	else {
 		// EITHER USER SELECTED "quotes" or NO VALID CALLOUT, EVENT, ADVISORY SELECTED 

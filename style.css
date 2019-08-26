@@ -6197,11 +6197,10 @@ div.banner_readmore h6 a:visited {
   display: none; }
 
 .bbg__quotation .bbg__quotation-text--large {
-  font-size: 2.5rem;
-  font-weight: 100; }
-  @media screen and (min-width: 600px) {
-    .bbg__quotation .bbg__quotation-text--large {
-      font-size: 3rem; } }
+  font-size: 2rem;
+  font-weight: 100;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem; }
 
 .bbg__quotation .bbg__quotation-attribution__mugshot {
   border-radius: 50%;

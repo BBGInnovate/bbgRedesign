@@ -193,7 +193,9 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			}
 			$impact_and_corner_hero .= 				'</div>';
 			$impact_and_corner_hero .= 				'<div class="side-column divider-left">';
-			// $impact_and_corner_hero .= 					$corner_hero_section_header;
+			if ($homepage_hero_corner != 'callout') {
+				$impact_and_corner_hero .= 				$corner_hero_section_header;
+			}
 			$impact_and_corner_hero .= 					build_article_standard_vertical($corner_hero_data['post-id']);
 			$impact_and_corner_hero .= 				'</div>';
 			$impact_and_corner_hero .= 			'</div>';

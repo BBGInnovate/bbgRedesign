@@ -40,9 +40,11 @@ function build_article_standard_vertical($article_data) {
 	if (!empty($article_data->post_excerpt)) {
 		$article_structure .= 		'<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
 	} else {
-		$content = wpautop($article_data->post_content);
-		$shortened_text = substr($content, 0, strpos($content, '</p>') + 4);
-		$article_structure .= 	'<p class="content-teaser">' . strip_tags($shortened_text, '<a>') . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
+		if (!empty($article_data->post_content)) {
+			$content = wpautop($article_data->post_content);
+			$shortened_text = substr($content, 0, strpos($content, '</p>') + 4);
+			$article_structure .= 	'<p class="content-teaser">' . strip_tags($shortened_text, '<a>') . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
+		}
 	}
 	$article_structure .= 	'</div>';
 	$article_structure .= '</article>';

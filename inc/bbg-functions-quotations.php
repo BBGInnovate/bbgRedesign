@@ -124,7 +124,7 @@
 		}
 	}
 
-	function outputCallout( $q ) {
+	function outputCallout($q, $header) {
 		$id = $q -> ID;
 		$body = $q -> post_content;
 		$title = $q -> post_title;
@@ -155,8 +155,12 @@
 		$quote = ''; 
 		$quote .= '<div class="outer-container">';
 		$quote .= 	'<div class="grid-container bbg__quotation">';
+		if (!empty($header)) {
+			$quote .= '<h2 class="bbg__quotation-text--large">' . $header . '</h2>';
+		}
 			$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkBackgroundColor . '">' . $calloutNetwork . '</div>';
-			$quote .= '<h2 class="bbg__quotation-text--large"><strong>' . $title . '</strong></h2><p>' . $body . '</p>';
+			$quote .= '<h3 class="article-title">' . $title . '</h3>';
+			$quote .= '<p>' . $body . '</p>';
 
 			if ($mugshot != '' ||  $callToAction != '' || $callToActionLabel != '') {
 				$quote .= '<hr style="width:50%; text-align:center;">';
