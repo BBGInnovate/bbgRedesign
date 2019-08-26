@@ -173,14 +173,14 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$corner_hero_section_header = '<h2 class="section-header">' . $corner_hero_label . '</h2>';
 		}
 
-		if ($impact_option == 'on') {
+		if (($impact_option == 'on') && ($homepage_hero_corner != 'callout')) {
 			$impact_result = get_impact_stories_data(1);
 		}
 		else {
 			$impact_result = get_impact_stories_data(2);
 		}
 
-		if ($impact_option == 'on') {
+		if (($impact_option == 'on') && ($homepage_hero_corner != 'callout')) {
 			$impact_and_corner_hero  = '<section class="outer-container">';
 			$impact_and_corner_hero .= 	'<div class="grid-container sidebar-grid--large-gutter">';
 			$impact_and_corner_hero .= 		'<div class="nest-container">';
@@ -193,9 +193,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			}
 			$impact_and_corner_hero .= 				'</div>';
 			$impact_and_corner_hero .= 				'<div class="side-column divider-left">';
-			if ($homepage_hero_corner != 'callout') {
-				$impact_and_corner_hero .= 				$corner_hero_section_header;
-			}
+			$impact_and_corner_hero .= 					$corner_hero_section_header;
 			$impact_and_corner_hero .= 					build_article_standard_vertical($corner_hero_data['post-id']);
 			$impact_and_corner_hero .= 				'</div>';
 			$impact_and_corner_hero .= 			'</div>';
