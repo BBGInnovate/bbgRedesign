@@ -163,8 +163,11 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 		// IMPACT STORIES AND EVENTS
 		$impact_option = get_field('corner_hero_toggle', 'options');
 		$homepage_hero_corner = get_field('homepage_hero_corner', 'options');
+		$corner_hero_toggle = get_field('corner_hero_toggle', 'options');
 		$corner_hero_label = get_field('corner_hero_label', 'options');
-		$corner_hero_data = get_corner_hero_data();
+		if ($corner_hero_toggle == 'on') {
+			$corner_hero_data = get_corner_hero_data();
+		}
 		$impact_page_page = 'our-work/impact-and-results/impact-portfolio/';
 
 		if (!empty($corner_hero_data['corner-hero-label-link'])) {
