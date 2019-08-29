@@ -260,6 +260,14 @@ get_header();
 	if ($featured_media_result != "") {
 		echo $featured_media_result;
 	}
+
+	// AFFILIATES MAP TO ONLY APPEAR ON Growing our affiliate partnerships PAGE
+	// TEST ON DEV (IDs WILL BE DIFFERENT)
+	$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	$dev_site = (strpos($url, 'dev.usagm') ? true : false);
+	if (is_page(46507) || ($dev_site && is_page(45544))) {
+		require 'inc/affiliates-map.php';
+	}
 ?>
 
 <main id="main" role="main">
