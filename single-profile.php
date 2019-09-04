@@ -67,69 +67,65 @@ if (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
 get_header(); ?>
 
 <main id="main" role="main" style="padding-top: 3rem;">
-	<section class="outer-container">
-		<div class="grid-container">
-			<?php
-				$profile_head  = '<h2 class="section-header">';
-				$profile_head .= 	$page_title;
-				$profile_head .= '</h2>';
-				echo $profile_head;
-
-				$profile_occupation  = '<p class="lead-in">';
-				$profile_occupation .= 	$occupation;
-				$profile_occupation .= '</p>';
-				echo $profile_occupation;
-			?>
-		</div>
-		<div class="grid-container icon-sidebar-grid--large-gutter">
+	<div class="outer-container">
+		<div class="main-content-container">
 			<div class="nest-container">
 				<div class="inner-container">
-					<div class="icon-column">
+					<div class="icon-side-content-container">
 						<img src="<?php echo $profile_photo_url; ?>" alt="Profile photo">
-						<?php
-							if ($email != ""){
-								$email_link  = 	'<a href="mailto:' . $email . '" title="Email ' . get_the_title() . '">';
-								$email_link .= 		'<span class="bbg__article-share__icon email"></span>';
-								$email_link .= 		'<span class="bbg__article-share__text">'.$email.'</span>';
-								$email_link .= 	'</a>';
-								echo $email_link;
-							}
-							if ($twitterProfileHandle != ""){
-								$twitter_link  = 	'<a href="https://twitter.com/'.$twitterProfileHandle.'" title="Follow '. $page_title .' on Twitter">';
-								$twitter_link .= 		'<i class="fab fa-twitter-square"></i> &nbsp;';
-								$twitter_link .= 		'<span class="bbg__article-share__text">@' . $twitterProfileHandle . '</span>';
-								$twitter_link .= 	'</a>';
-								echo $twitter_link;
-							}
-							if ($phone != ""){
-								$phone_string  = 	'<span class="bbg__article-share__icon phone"></span>';
-								$phone_string .= 	'<span class="bbg__article-share__text">'.$phone.'</span>';
-								echo $phone_string;
-							}
-						?>
 					</div>
-					<div class="main-column">
+					<div class="icon-main-content-container">
 						<?php
+							$profile_head  = '<h2 class="section-header">';
+							$profile_head .= 	$page_title;
+							$profile_head .= '</h2>';
+							echo $profile_head;
+
+							$profile_occupation  = '<p class="lead-in">';
+							$profile_occupation .= 	$occupation;
+							$profile_occupation .= '</p>';
+							echo $profile_occupation;
+
 							echo $page_content;
-						?>
-					</div>
-					<div class="side-column divider-left">
-						<?php
-							// SHARE THIS PAGE
-							$share_icons = social_media_share_page($page_id);
-							if (!empty($share_icons)) {
-								echo $share_icons;
-							}
-							
-							if ($includeSidebar) {
-								echo $sidebar;
-							}
 						?>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+		<div class="side-column divider-left">
+			<?php
+				echo '<aside>';
+				echo '<h3 class="sidebar-section-header">Contact</h3>';
+				if ($email != "") {
+					$email_link  = 	'<a href="mailto:' . $email . '" title="Email ' . get_the_title() . '">';
+					$email_link .= 		'<span class="bbg__article-share__text">' . $email . '</span>';
+					$email_link .= 	'</a>';
+					echo $email_link;
+				}
+				if ($twitterProfileHandle != "") {
+					$twitter_link  = 	'<br><a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . $page_title . ' on Twitter">';
+					$twitter_link .= 		'<span class="bbg__article-share__text">@' . $twitterProfileHandle . '</span>';
+					$twitter_link .= 	'</a>';
+					echo $twitter_link;
+				}
+				if ($phone != "") {
+					$phone_string = '<br><span class="bbg__article-share__text">' . $phone . '</span>';
+					echo $phone_string;
+				}
+				echo '</aside>';
+
+				// SHARE THIS PAGE
+				$share_icons = social_media_share_page($page_id);
+				if (!empty($share_icons)) {
+					echo $share_icons;
+				}
+				
+				if ($includeSidebar) {
+					echo $sidebar;
+				}
+			?>
+		</div>
+	</div>
 </main>
 
 <?php get_footer(); ?>
