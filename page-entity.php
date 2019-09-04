@@ -223,10 +223,12 @@ if ($prCategorySlug != '') {
 	$prCategoryObj = get_category_by_slug($prCategorySlug);
 	if (is_object($prCategoryObj)) {
 		$prCategoryID = $prCategoryObj -> term_id;
+		// CATEGORIES TO EXCLUDE: 2280: USAGM Experts (dev testing 2276)
 		$qParams = array(
 			'post_type' => array('post'),
 			'posts_per_page' => 3,
 			'category__and' => array($prCategoryID),
+			'category__not_in' => array(2280),
 			'orderby', 'date',
 			'order', 'DESC'
 		);
@@ -243,7 +245,7 @@ if ($prCategorySlug != '') {
 }
 $press_markup = '';
 if (count($pressReleases)) {
-	foreach ( $pressReleases as $pr ) {
+	foreach ($pressReleases as $pr) {
 		$url = $pr['url'];
 		$title = $pr['title'];
 
@@ -257,7 +259,7 @@ if (count($pressReleases)) {
 	$press_markup .= 	'<p class="read-more sans">';
 	$press_markup .= 		'<a href="' . $entityCategoryLink . '">View all ' . $abbreviation . '  highlights »</a>';
 	$press_markup .= 	'</p>';
-	$press_markup .= "</div>";
+	$press_markup .= '</div>';
 }
 // PRESS RELEASE SHORTCODE
 $page_content = str_replace("[press releases]", $press_markup, $page_content);
@@ -371,7 +373,12 @@ if (!empty($entity_category_slug)) {
 			while ($custom_query -> have_posts())  {
 				$custom_query->the_post();
 				$entity_threat_id = get_the_ID();
-				$threats[] = array('url'=>get_permalink($entity_threat_id), 'title'=> get_the_title($entity_threat_id), 'excerpt'=>get_the_excerpt(), 'thumb'=>get_the_post_thumbnail($entity_threat_id, 'small-thumb'));
+				$threats[] = array(
+					'url'=>get_permalink($entity_threat_id), 
+					'title'=> get_the_title($entity_threat_id), 
+					'excerpt'=>get_the_excerpt(), 
+					'thumb'=>get_the_post_thumbnail($entity_threat_id, 'small-thumb')
+				);
 			}
 		}
 		wp_reset_postdata();
