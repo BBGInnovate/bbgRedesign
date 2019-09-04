@@ -50,27 +50,20 @@ if (isset($_GET['showPodcasts'])) {
 }
 
 // TWITTER INFORMATION
-$twitterHandle = "";
+$twitterProfileHandle = "";
 if (isset( $user_meta['twitterHandle'])) {
-	$twitterHandle = $user_meta['twitterHandle'][0];
+	$twitterProfileHandle = $user_meta['twitterHandle'][0];
 }
+
 $tweets = [];
 $profilePageID = "";
 $latestTweetsStr = "";
 $featuredPostID = 0;
 if (isset($user_meta['author_profile_page'])) {
 	$profilePageID =  $user_meta['author_profile_page'][0];
-
-	$tweets = get_field('profile_related_author_page_tweets', $profilePageID, true);
 	$featuredPostID = get_field('profile_related_author_page_featured_post', $profilePageID, true);
 
-	if (count($tweets)) {
-		$randKey = array_rand($tweets);
-		$latestTweetsStr = $tweets[$randKey]['profile_related_author_page_tweet'];
-		/* THE HTML OF A TWEET SHOULD LOOK LIKE THIS
-		$latestTweetsStr = '<blockquote class="twitter-tweet" data-theme="light"><p lang="en" dir="ltr">Our Impact Model measures 40+ indicators beyond audience size to hold our activities accountable. <a href="https://twitter.com/hashtag/BBGannualReport?src=hash">#BBGannualReport</a> <a href="https://t.co/r8geNg47OP">https://t.co/r8geNg47OP</a> <a href="https://t.co/e6T3Zea443">pic.twitter.com/e6T3Zea443</a></p>&mdash; BBG (@BBGgov) <a href="https://twitter.com/BBGgov/status/881886454485528576">July 3, 2017</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
-	*/
-	}
+	$latestTweetsStr = '<a data-chrome="noheader nofooter noborders transparent noscrollbar" data-tweet-limit="1" class="twitter-timeline" href="https://twitter.com/' . $twitterProfileHandle . '" data-screen-name="' . $twitterProfileHandle . '" >Tweets by @' . $twitterProfileHandle . '</a><script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>';
 }
 if ($isCEO) {
 	$postIDsUsed = [];
@@ -225,7 +218,7 @@ get_header();
 				$blogLink = '/category/from-the-ceo+blog/';
 				echo '<div class="outer-container">';
 				echo 	'<div class="grid-container">';
-				echo 		'<h3 class="section-subheader"><a href="' . $blogLink . '">Blog</a></h3>';
+				echo 		'<h2 class="section-header"><a href="' . $blogLink . '">Blog</a></h2>';
 				echo 	'</div>';
 				echo 	'<div class="custom-grid-container" >';
 				echo 		'<div class="inner-container">';
@@ -239,7 +232,7 @@ get_header();
 
 					echo 					'<div class="grid-half">';
 					echo 						'<a href="' . get_the_permalink() . '">' . get_the_post_thumbnail() . '</a>';
-					echo 						'<h4><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h4>';
+					echo 						'<h3 class="article-title"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
 					echo 						'<p>' . get_the_excerpt() . '</p>';
 					echo 					'</div>';
 				}
@@ -251,8 +244,16 @@ get_header();
 				echo 			'</div>';
 				// SIDE TWITTER SECION
 				echo 			'<div class="side-content-container">';
-				echo 				'<h2 class="sidebar-section-header"><a target="_blank" href="https://twitter.com/' . $twitterHandle . '">Featured Tweet</a></h2>';
-				echo 				$latestTweetsStr;
+				echo 				'<aside>';
+				echo 					'<h2 class="sidebar-section-header">Follow on Twitter</h2>';
+				// echo 					'<h2 class="sidebar-section-header"><a target="_blank" href="https://twitter.com/' . $twitterProfileHandle . '">Featured Tweet</a></h2>';
+				echo 					'<a href="https://twitter.com/' . $twitterProfileHandle . '" target="_blank" title="Follow ' . get_the_title() . ' on Twitter">';
+				echo 						'<i class="fab fa-twitter"></i> @' . $twitterProfileHandle;
+				echo 					'</a>';
+				echo 				'</aside>';
+				echo 				'<aside style="background-color: #e1f3f8;">';
+				echo 					$latestTweetsStr;
+				echo 				'<aside>';
 				echo 			'</div>';
 				echo 		'</div>';
 				echo 	'</div>';
@@ -266,7 +267,7 @@ get_header();
 			$author_ribbon .= 		'</div>';
 			$author_ribbon .= 		'<div class="main-content-container">';
 			$author_ribbon .= 			'<h2 class="section-header">On the record</h2>';
-			$author_ribbon .= 			'<h3 class="article-title"><a href="">Speeches and Remarks</a></h3>';
+			$author_ribbon .= 			'<h3 class="article-title"><a href="/ceo-speeches-remarks/">Transcripts</a></h3>';
 			$author_ribbon .= 			'<p>View transcripts of CEO Lansing’s remarks and statements at each of his appearances since he joined the Agency in September 2015. <span class="learn-more"><a href="/ceo-speeches-remarks/">View All</a></span></p>';
 			$author_ribbon .= 		'</div>';
 			$author_ribbon .= 	'</div>';
