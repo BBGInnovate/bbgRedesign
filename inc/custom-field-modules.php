@@ -27,12 +27,16 @@ function assemble_threats_to_press_ribbon($threat_data) {
 // ABOUT FLEXIBLE ROWS
 function assemble_umbrella_main($main) {
 	if (!empty($main['section_header']) || !empty($main['intro_text'])) {
-		$umbrella_main  = '<div class="inner-container">';
+		$umbrella_main  = '<div class="inner-container"';
+		if (!empty($main['bg_color'])) {
+			$umbrella_main .= ' style="background-color:' . $main['bg_color'] . '; padding-top: 15px;"';
+		}
+		$umbrella_main .= '>';
 		$umbrella_main .= 	'<div class="grid-container">';
 		$umbrella_main .= 		$main['section_header'];
 		$umbrella_main .= 		$main['intro_text'];
 		$umbrella_main .= 	'</div>';
-		$umbrella_main .= '</div>';
+		// $umbrella_main .= '</div>';
 		return $umbrella_main;
 	}
 }
@@ -74,6 +78,7 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 			$umbrella_content_block .= 	'</div>';
 		}
 		$umbrella_content_block .= '</div>';
+		$umbrella_content_block .= '</div>'; // THIS SERVES AS DIV ENDING FOR .inner-container TO UMBRELLA MAIN CONTENT OPENING IN assemble_umbrella_main() ABOVE
 		return $umbrella_content_block;
 	}
 }

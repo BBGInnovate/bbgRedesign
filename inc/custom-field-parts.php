@@ -142,6 +142,7 @@ function build_umbrella_main_parts($umbrella_main_data) {
 		$overhead_text  = '<p class="lead-in">' . $umbrella_main_data['intro_text'] . '</p>';
 	}
 	$umbrella_main_package = array(
+		'bg_color' => $umbrella_main_data['bg_color'],
 		'section_header' => $header, 
 		'intro_text' => $overhead_text
 	);

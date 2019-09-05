@@ -324,7 +324,14 @@ function get_ribbon_data() {
 }
 
 function get_umbrella_main_data() {
+	$new_umbrella_bg = get_sub_field('change_umbrella_background_color');
+	if ($new_umbrella_bg == 'yes') {
+		$bg_color = get_sub_field('umbrella_background_color');
+	} else {
+		$bg_color = '';
+	}
 	$umbrella_data = array(
+		'bg_color' => $bg_color,
 		'header' => get_sub_field('umbrella_section_heading'),
 		'header_link' => get_sub_field('umbrella_section_heading_link'),
 		'intro_text' => get_sub_field('umbrella_section_intro_text'),
