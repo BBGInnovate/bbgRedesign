@@ -7,6 +7,7 @@
  * @package bbgRedesign
  */
 
+require 'inc/bbg-functions-assemble.php';
 include get_template_directory() . '/inc/shared_sidebar.php';
 
 if (have_posts()) {
@@ -52,21 +53,29 @@ $projectCategoryID = get_cat_id('Project');
 $isProject = has_category($projectCategoryID);
 
 $hideFeaturedImage = get_post_meta(get_the_ID(), 'hide_featured_image', true);
-$thumbnail_image = '';
-if (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
-	$featuredImageCutline="";
-	$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
-	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
 
-	if ($thumbnail_image && isset($thumbnail_image[0])) {
-		$featuredImageCutline=$thumbnail_image[0]->post_excerpt;
-	}
-	$thumbnail_image = true;
-}
+$thumbnail_image = '';
+// if (has_post_thumbnail() && ($hideFeaturedImage != 1)) {
+// 	$featuredImageCutline="";
+// 	$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id(get_the_ID()), 'post_type' => 'attachment'));
+// 	$src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(700, 450), false, '');
+
+// 	if ($thumbnail_image && isset($thumbnail_image[0])) {
+// 		$featuredImageCutline=$thumbnail_image[0]->post_excerpt;
+// 	}
+// 	$thumbnail_image = true;
+// }
 
 get_header(); ?>
 
-<main id="main" role="main" style="padding-top: 3rem;">
+<?php
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
+	}
+?>
+
+<main id="main" role="main">
 	<div class="outer-container">
 		<div class="main-content-container">
 			<div class="nest-container">
