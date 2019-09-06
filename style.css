@@ -4925,6 +4925,9 @@ e.g. on the intern testimonial page */
     content: "";
     display: block; }
 
+.outer-container.about-flexible-row {
+  margin-bottom: 3.5rem; }
+
 .custom-grid-container {
   max-width: 1200px;
   margin: 0 auto 3em auto; }
@@ -6581,7 +6584,7 @@ div.banner_readmore h6 a:visited {
 
 .bbg__ribbon {
   background-color: #f3f3f3;
-  margin-bottom: 7.5rem; }
+  margin-bottom: 2rem; }
   .bbg__ribbon *[style*="background-image"] {
     background-repeat: no-repeat;
     background-size: cover;

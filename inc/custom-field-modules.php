@@ -63,7 +63,7 @@ function assemble_marquee_module($umbrella_parts) {
 
 function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 	if (!empty($umbrella_parts)) {
-		$umbrella_content_block  = '<div class="outer-container">';
+		$umbrella_content_block  = '<div class="outer-container about-flexible-row">';
 		if (!$special_grouping) {
 			$umbrella_content_block .= 	'<div class="grid-container">';
 		}

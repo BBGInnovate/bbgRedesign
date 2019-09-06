@@ -347,7 +347,7 @@ get_header();
 	elseif (!is_page('who-we-are') && !empty($all_flex_rows)) {
 		foreach ($all_flex_rows as $flex_row) {
 			if (is_array($flex_row)) {
-				echo '<div class="outer-container">';
+				echo '<div class="outer-container about-flexible-row">';
 				foreach ($flex_row as $row) {
 					echo $row;
 				}
