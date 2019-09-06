@@ -303,15 +303,29 @@ function get_threats_to_press_posts($used_homepage_posts) {
 
 // FLEXIBLE ROWS
 function get_marquee_data() {
+	$bg_color_option = get_sub_field('change_marquee_background_color');
+	if (!empty($bg_color_option)) {
+		$bg_color = get_sub_field('marquee_background_color');
+	} else {
+		$bg_color = '';
+	}
+
 	$marquee_data = array(
 		'heading' => get_sub_field('marquee_heading'),
 		'link' => get_sub_field('marquee_link'),
-		'content' => get_sub_field('marquee_content')
+		'content' => get_sub_field('marquee_content'),
+		'bg_color' => $bg_color
 	);
 	return $marquee_data;
 }
 
 function get_ribbon_data() {
+	$ribbon_bg_option = get_sub_field('change_ribbon_background_color');
+	if ($ribbon_bg_option == 'yes') {
+		$ribbon_bg_color = get_sub_field('ribbon_background_color');
+	} else {
+		$ribbon_bg_color = '';
+	}
 	$ribbon_data_package = array(
 		'label' => get_sub_field('about_ribbon_label'),
 		'label_link' => get_sub_field('about_ribbon_label_link'),
@@ -319,7 +333,8 @@ function get_ribbon_data() {
 		'headline_link' => get_sub_field('about_ribbon_headline_link'),
 		'summary' => get_sub_field('about_ribbon_summary'),
 		'image_url' => get_sub_field('about_ribbon_image'),
-		'image_position' => get_sub_field('ribbon_image_position')
+		'image_position' => get_sub_field('ribbon_image_position'),
+		'bg_color' => $ribbon_bg_color
 	);
 	return $ribbon_data_package;
 }

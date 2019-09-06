@@ -105,7 +105,8 @@ function build_ribbon_parts($ribbon_data) {
 		'headline' => $ribbon_headline,
 		'summary' => $ribbon_summary,
 		'image' => $ribbon_image,
-		'image_position' => $ribbon_data['image_position']
+		'image_position' => $ribbon_data['image_position'],
+		'bg_color' => $ribbon_data['bg_color']
 	);
 	return $ribbon_package;
 }
@@ -127,7 +128,8 @@ function build_marquee_parts($marquee_data) {
 	$marquee_parts_package = array(
 		'header' => $header,
 		'link' => $link,
-		'content' => $marquee_content
+		'content' => $marquee_content,
+		'bg_color' => $marquee_data['bg_color']
 	);
 	return $marquee_parts_package;
 }

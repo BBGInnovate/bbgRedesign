@@ -43,13 +43,19 @@ function assemble_umbrella_main($main) {
 }
 
 function assemble_marquee_module($umbrella_parts) {
+	$bg_color = $umbrella_parts['bg_color'];
+	
 	if (is_page('who-we-are')) {
 		$marquee  = '<div class="inner-container red-special">';
 		$marquee .= 	$umbrella_parts['content'];
 		$marquee .= '</div>';
 	} else {
 		$marquee  = '<div class="outer-container">';
-		$marquee .= 	'<div class="grid-container box-special">';
+		$marquee .= 	'<div class="grid-container box-special"';
+		if (!empty($bg_color)) {
+			$marquee .= ' style="background-color: ' . $bg_color .'"';
+		}
+		$marquee .= 	'>';
 		$marquee .= 		'<a href="' . $umbrella_parts['link'] . '">';
 		$marquee .= 			$umbrella_parts['header'];
 		$marquee .= 		'</a>';
@@ -88,8 +94,13 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 function assemble_ribbon_module($ribbon_parts) {
 	$ribbon_box = '';
 	$ribbon_pos = $ribbon_parts['image_position'];
+	$bg_color = $ribbon_parts['bg_color'];
 
-	$ribbon_box  = '<article class="bbg__ribbon inner-ribbon">';
+	$ribbon_box  = '<article class="bbg__ribbon inner-ribbon"';
+	if (!empty($bg_color)) {
+		$ribbon_box .= ' style="background-color: ' . $bg_color . '"';
+	}
+	$ribbon_box .= '>';
 	$ribbon_box .= 	'<div class="outer-container">';
 	if (!empty($ribbon_parts) && $ribbon_pos == 'left') {
 		if (!empty($ribbon_parts['image'])) {
