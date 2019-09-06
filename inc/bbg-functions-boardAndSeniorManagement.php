@@ -246,13 +246,15 @@ function usagm_experts_list_shortcode() {
 		$first_name = get_post_meta($expert_id->ID, 'first_name', true);
 		$last_name = get_post_meta($expert_id->ID, 'last_name', true);
 		$occupation = get_post_meta($expert_id->ID, 'occupation', true);
+		$profile_expertise = get_post_meta($expert_id->ID, 'profile_expertise', true);
+		$profile_language = get_post_meta($expert_id->ID, 'profile_language', true);
+		$profile_location = get_post_meta($expert_id->ID, 'profile_location', true);
 		$email = get_post_meta($expert_id->ID, 'email', true);
 		$phone = get_post_meta($expert_id->ID, 'phone', true);
 		$twitter_profile_handle = get_post_meta($expert_id->ID, 'twitter_handle', true);
 		$profile_photo_id = get_post_meta($expert_id->ID, 'profile_photo', true);
 		$profile_name = $first_name . ' ' . $last_name;
 		$profile_link = get_the_permalink($expert_id->ID);
-		$excerpt = my_excerpt($expert_id->ID);
 
 		if  ($profile_photo_id) {
 			$profile_photo = wp_get_attachment_image_src($profile_photo_id , 'mugshot');
@@ -268,9 +270,17 @@ function usagm_experts_list_shortcode() {
 		$expert_profile .= 	'<h3 class="article-title">';
 		$expert_profile .= 		'<a href="' . $profile_link . '">' . $profile_name . '</a>';
 		$expert_profile .= 	'</h3>';
-		$expert_profile .= 	'<p class="bbg__profile-excerpt__text">';
+		$expert_profile .= 	'<p>';
 		$expert_profile .= 		'<span class="bbg__profile-excerpt__occupation">' . $occupation . '</span>';
-		$expert_profile .= 		$excerpt;
+		if (!empty($profile_expertise)) {
+			$expert_profile .= 	'<strong>Expertise:</strong> ' .$profile_expertise;
+		}
+		if (!empty($profile_language)) {
+			$expert_profile .= 	'<br><strong>Language(s):</strong> ' . $profile_language;
+		}
+		if (!empty($profile_location)) {
+			$expert_profile .= 	'<br><strong>Location:</strong> ' . $profile_location;
+		}
 		$expert_profile .= 	'</p>';
 		$expert_profile .= '</div>';
 

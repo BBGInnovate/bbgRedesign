@@ -36,6 +36,7 @@ function assemble_umbrella_main($main) {
 		$umbrella_main .= 		$main['section_header'];
 		$umbrella_main .= 		$main['intro_text'];
 		$umbrella_main .= 	'</div>';
+		$umbrella_main = do_shortcode($umbrella_main);
 		// $umbrella_main .= '</div>';
 		return $umbrella_main;
 	}
@@ -56,7 +57,7 @@ function assemble_marquee_module($umbrella_parts) {
 		$marquee .= 	'</div>';
 		$marquee .= '</div>';
 	}
-
+	$marquee = do_shortcode($marquee);
 	return $marquee;
 }
 
@@ -73,6 +74,7 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 			$umbrella_content_block .= 	$umbrella_chunk['item_title'];
 			$umbrella_content_block .= 	$umbrella_chunk['description'];
 			$umbrella_content_block .= '</div>';
+			$umbrella_content_block = do_shortcode($umbrella_content_block);
 		}
 		if (!$special_grouping) {
 			$umbrella_content_block .= 	'</div>';
@@ -101,6 +103,8 @@ function assemble_ribbon_module($ribbon_parts) {
 		$ribbon_box .= 		'</div>';
 		$ribbon_box .= 	'</div>';
 		$ribbon_box .= '</article>';
+
+		$ribbon_box = do_shortcode($ribbon_box);
 		return $ribbon_box;
 	}
 }
