@@ -117,8 +117,11 @@ function build_marquee_parts($marquee_data) {
 		} else {
 			$header = '<h3>' . $marquee_data['heading'] . '</h3>';
 		}
+	} else {
+		$header = '';
 	}
 	$marquee_content = '<p>' . $marquee_data['content'] . '</p>';
+	$marquee_content = do_shortcode($marquee_content);
 
 	$marquee_parts_package = array(
 		'header' => $header,
