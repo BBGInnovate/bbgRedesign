@@ -318,7 +318,8 @@ function get_ribbon_data() {
 		'headline' => get_sub_field('about_ribbon_headline'),
 		'headline_link' => get_sub_field('about_ribbon_headline_link'),
 		'summary' => get_sub_field('about_ribbon_summary'),
-		'image_url' => get_sub_field('about_ribbon_image')
+		'image_url' => get_sub_field('about_ribbon_image'),
+		'image_position' => get_sub_field('ribbon_image_position')
 	);
 	return $ribbon_data_package;
 }

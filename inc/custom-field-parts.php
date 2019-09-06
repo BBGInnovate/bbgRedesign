@@ -104,7 +104,8 @@ function build_ribbon_parts($ribbon_data) {
 		'label' => $ribbon_label,
 		'headline' => $ribbon_headline,
 		'summary' => $ribbon_summary,
-		'image' => $ribbon_image
+		'image' => $ribbon_image,
+		'image_position' => $ribbon_data['image_position']
 	);
 	return $ribbon_package;
 }

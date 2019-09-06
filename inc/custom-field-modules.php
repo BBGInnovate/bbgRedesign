@@ -86,9 +86,12 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 }
 
 function assemble_ribbon_module($ribbon_parts) {
-	if (!empty($ribbon_parts)) {
-		$ribbon_box  = '<article class="bbg__ribbon inner-ribbon">';
-		$ribbon_box .= 	'<div class="outer-container">';
+	$ribbon_box = '';
+	$ribbon_pos = $ribbon_parts['image_position'];
+
+	$ribbon_box  = '<article class="bbg__ribbon inner-ribbon">';
+	$ribbon_box .= 	'<div class="outer-container">';
+	if (!empty($ribbon_parts) && $ribbon_pos == 'left') {
 		if (!empty($ribbon_parts['image'])) {
 			$ribbon_box .= 		'<div class="side-content-container">';
 			$ribbon_box .= 			$ribbon_parts['image'];
@@ -101,12 +104,21 @@ function assemble_ribbon_module($ribbon_parts) {
 		$ribbon_box .= 			$ribbon_parts['headline'];
 		$ribbon_box .= 			$ribbon_parts['summary'];
 		$ribbon_box .= 		'</div>';
-		$ribbon_box .= 	'</div>';
-		$ribbon_box .= '</article>';
-
-		$ribbon_box = do_shortcode($ribbon_box);
-		return $ribbon_box;
+	} else if (!empty($ribbon_parts) && $ribbon_pos == 'right') {
+		$ribbon_box .= 		'<div class="main-content-container">';
+		$ribbon_box .= 			$ribbon_parts['label'];
+		$ribbon_box .= 			$ribbon_parts['headline'];
+		$ribbon_box .= 			$ribbon_parts['summary'];
+		$ribbon_box .= 		'</div>';
+		$ribbon_box .= 		'<div class="side-content-container">';
+		$ribbon_box .= 			$ribbon_parts['image'];
+		$ribbon_box .= 		'</div>';
 	}
+	$ribbon_box .= 	'</div>';
+	$ribbon_box .= '</article>';
+
+	$ribbon_box = do_shortcode($ribbon_box);
+	return $ribbon_box;
 }
 
 // ENTITY
