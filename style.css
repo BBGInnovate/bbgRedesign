@@ -3162,6 +3162,9 @@ a:focus .bbg__article-share__icon {
     float: left;
     margin-left: 20px; } }
 
+.marquee h3 {
+  margin-top: 0; }
+
 .article-teaser {
   border-bottom: 1px solid #f1f1f1;
   margin-bottom: 2rem; }

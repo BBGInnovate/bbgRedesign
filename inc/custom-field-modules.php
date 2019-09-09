@@ -50,7 +50,7 @@ function assemble_marquee_module($umbrella_parts) {
 		$marquee .= 	$umbrella_parts['content'];
 		$marquee .= '</div>';
 	} else {
-		$marquee  = '<div class="outer-container">';
+		$marquee  = '<div class="outer-container marquee">';
 		$marquee .= 	'<div class="grid-container box-special"';
 		if (!empty($bg_color)) {
 			$marquee .= ' style="background-color: ' . $bg_color .'"';
