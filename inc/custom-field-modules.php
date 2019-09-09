@@ -56,9 +56,7 @@ function assemble_marquee_module($umbrella_parts) {
 			$marquee .= ' style="background-color: ' . $bg_color .'"';
 		}
 		$marquee .= 	'>';
-		$marquee .= 		'<a href="' . $umbrella_parts['link'] . '">';
-		$marquee .= 			$umbrella_parts['header'];
-		$marquee .= 		'</a>';
+		$marquee .= 		$umbrella_parts['header'];
 		$marquee .= 		$umbrella_parts['content'];
 		$marquee .= 	'</div>';
 		$marquee .= '</div>';

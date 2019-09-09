@@ -114,8 +114,8 @@ function build_ribbon_parts($ribbon_data) {
 function build_marquee_parts($marquee_data) {
 	$link = $marquee_data['link'];
 	if (!empty($marquee_data['heading'])) {
-		if (!empty($marquee_data['link'])) {
-			$header = '<h3><a href="' . $marquee_data['link'] . '">' . $marquee_data['heading'] . '</a></h3>';
+		if (!empty($link)) {
+			$header = '<h3><a href="' . $link . '">' . $marquee_data['heading'] . '</a></h3>';
 		} else {
 			$header = '<h3>' . $marquee_data['heading'] . '</h3>';
 		}
@@ -175,9 +175,11 @@ function build_umbrella_content_parts($content_data) {
 
 	if ($content_data['item_title']) {
 		$item_title  = '<h4 class="article-title">';
-		$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>';
-		$item_title .= 		$content_data['item_title'];
-		$item_title .= 	'</a>';
+		if (!empty($content_data['link'])) {
+			$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>' . $content_data['item_title'] . '</a>';
+		} else {
+			$item_title .= 		$content_data['item_title'];
+		}
 		if ($content_data['column_type'] == 'umbrella_content_file') {
 			$item_title .= ' <p class="sans">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
 		}
