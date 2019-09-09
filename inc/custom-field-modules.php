@@ -73,10 +73,20 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 		}
 		foreach($umbrella_parts as $umbrella_chunk) {
 			$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
-			$umbrella_content_block .= 	$umbrella_chunk['column_title'];
-			$umbrella_content_block .= 	$umbrella_chunk['image'];
-			$umbrella_content_block .= 	$umbrella_chunk['item_title'];
-			$umbrella_content_block .= 	$umbrella_chunk['description'];
+			if (!empty($umbrella_chunk['column_title'])) {
+				$umbrella_content_block .= 	'<div>';
+				$umbrella_content_block .= 		$umbrella_chunk['column_title'];
+				$umbrella_content_block .= 	'</div>';
+			}
+			if (!empty($umbrella_chunk['image'])) {
+				$umbrella_content_block .= 	'<div>';
+				$umbrella_content_block .= 		$umbrella_chunk['image'];
+				$umbrella_content_block .= 	'</div>';
+			}
+			$umbrella_content_block .= 	'<div class="umbrella-content-group">';
+			$umbrella_content_block .= 		$umbrella_chunk['item_title'];
+			$umbrella_content_block .= 		$umbrella_chunk['description'];
+			$umbrella_content_block .= 	'</div>';
 			$umbrella_content_block .= '</div>';
 			$umbrella_content_block = do_shortcode($umbrella_content_block);
 		}

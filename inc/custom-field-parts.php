@@ -183,7 +183,7 @@ function build_umbrella_content_parts($content_data) {
 		if ($content_data['column_type'] == 'umbrella_content_file') {
 			$item_title .= ' <p class="sans">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
 		}
-		$item_title .= '</h>';
+		$item_title .= '</h4>';
 	}
 
 	if ($content_data['thumb_src']) {

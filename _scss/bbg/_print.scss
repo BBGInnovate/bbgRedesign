@@ -188,11 +188,25 @@
 	}
 
 	// REPORT CARD
-	.feautre-banner {display: none;}
+	.feautre-banner {
+		display: block;
+		max-width: 8in;
+		margin: 0 auto;
+	}
+
 	.outer-container {
 		max-width: 8in; // set max width
 		margin: 0 auto 3rem auto; // set auto margins on left and right
-		.hd_scale {display: none;}
+		.about-flexible-row {
+			display: inline-block;
+			.hd_scale {display: block;}
+			.grid-four, .grid-five, .bbg-grid--1-2-3 {
+				display: grid;
+				grid-column-gap: 15px;
+				grid-template-columns: 20% 75%;
+				grid-column-gap: 5%;
+			}
+		}
 		p.lead-in {font-size: 2.5rem; line-height: 3.5rem;}
 	}
 	.bbg__ribbon {

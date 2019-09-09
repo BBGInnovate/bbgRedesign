@@ -8526,12 +8526,21 @@ html, body {
     .bbg__article .bbg__article-sidebar .bbg__sidebar__primary-image {
       display: none; }
   .feautre-banner {
-    display: none; }
+    display: block;
+    max-width: 8in;
+    margin: 0 auto; }
   .outer-container {
     max-width: 8in;
     margin: 0 auto 3rem auto; }
-    .outer-container .hd_scale {
-      display: none; }
+    .outer-container .about-flexible-row {
+      display: inline-block; }
+      .outer-container .about-flexible-row .hd_scale {
+        display: block; }
+      .outer-container .about-flexible-row .grid-four, .outer-container .about-flexible-row .grid-five, .outer-container .about-flexible-row .bbg-grid--1-2-3 {
+        display: grid;
+        grid-column-gap: 15px;
+        grid-template-columns: 20% 75%;
+        grid-column-gap: 5%; }
     .outer-container p.lead-in {
       font-size: 2.5rem;
       line-height: 3.5rem; }
