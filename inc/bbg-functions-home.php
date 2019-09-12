@@ -109,7 +109,7 @@ function get_recent_posts($qty) {
 			'orderby' => 'post_date',
 			'order' => 'desc',
 			'post__not_in' => $selected_post_ids,
-			'category__not_in' => array(3, 35, 36, 38, 45, 55, 56, 68, 1045, 1046, 1244),
+			'category__not_in' => array(35, 36, 38, 45, 55, 56, 68, 1045, 1046, 1244),
 			'tax_query' => array(
 				array(
 					'taxonomy' => 'post_format',
@@ -129,6 +129,21 @@ function get_recent_posts($qty) {
 						'taxonomy' => 'category',
 						'field' => 'slug',
 						'terms' => array('award'),
+						'operator' => 'NOT IN'
+					)
+				),
+				array(
+					'relation' => 'OR',
+					array(
+						'taxonomy' => 'category',
+						'field' => 'slug',
+						'terms' => array('board-meeting'),
+						'operator' => 'IN'
+					),
+					array(
+						'taxonomy' => 'category',
+						'field' => 'slug',
+						'terms' => array('event'),
 						'operator' => 'NOT IN'
 					)
 				)
