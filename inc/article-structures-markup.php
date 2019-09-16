@@ -28,11 +28,11 @@ function build_main_head_article($article_data) {
 function build_article_standard_vertical($article_data) {
 	$article_structure  = '<article class="vertical-article article-teaser">';
 	if (!empty(get_the_post_thumbnail_url($article_data))) {
-		$article_structure .= '<div class="article-image">';
-		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">';
-		$article_structure .= 		 '<img src="' . get_the_post_thumbnail_url($article_data, 'large') . '" alt="Image link to ' . get_the_title($article_data) . ' post">';
-		$article_structure .= 	'</a>';
-		$article_structure .= '</div>';
+		$image_url = get_the_post_thumbnail_url($article_data, 'large');
+
+		$article_structure .= '<a href="' . get_the_permalink($article_data) . '">';
+		$article_structure .= 	'<div class="article-image" style="background-image: url(' . $image_url . ');"></div>';
+		$article_structure .= '</a>';
 	}
 	$article_structure .= 	'<div class="article-info">';
 	$article_structure .= 		'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';

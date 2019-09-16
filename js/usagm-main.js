@@ -157,6 +157,7 @@ $.each(clipsListItems, function() {
 function scaleArticleImages() {
 	var scale = 0.66666667;
 	var postImageBox = $('.article-image');
+	var postImage = $('.article-image img');
 
 	$.each(postImageBox, function() {
 		var curImgDiv = $(this),
@@ -167,13 +168,25 @@ function scaleArticleImages() {
 			imgHeight = curImg.height();
 		var curProperHeight = imgDivWidth * scale,
 			curProperWidth = curProperHeight / scale;
+			
+		curImgDiv.css({
+			'width' : imgDivWidth,
+			'height' : curProperHeight,
+			'overflow' : 'hidden',
+			'background-size': 'cover',
+			'background-position' : 'center center'
+		});
 
-		if (imgDivHeight != curProperHeight) {
-			curImg.css({
-				'height' : curProperHeight,
-				'width' : curProperWidth
-			});
-		}
+
+
+		// if (imgDivHeight != curProperHeight) {
+		// 	curImgDiv.css({
+		// 		'height' : curProperHeight,
+		// 		'width' : curProperWidth,
+		// 		'overflow' : 'hidden',
+		// 		'background-position': 'center center'
+		// 	});
+		// }
 	});
 }
 scaleArticleImages();
