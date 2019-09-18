@@ -168,7 +168,8 @@ function scaleArticleImages() {
 			'widht' : imageParent.width(),
 			'height' : curProperHeight,
 			'background-size': 'cover',
-			'background-position' : 'center center'
+			'background-position' : 'center center',
+			'margin-bottom' : '0px'
 		});
 	});
 }
