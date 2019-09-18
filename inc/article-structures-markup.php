@@ -30,9 +30,11 @@ function build_article_standard_vertical($article_data) {
 	if (!empty(get_the_post_thumbnail_url($article_data))) {
 		$image_url = get_the_post_thumbnail_url($article_data, 'large');
 
-		$article_structure .= '<a href="' . get_the_permalink($article_data) . '">';
-		$article_structure .= 	'<div class="article-image" style="background-image: url(' . $image_url . ');"></div>';
-		$article_structure .= '</a>';
+		$article_structure .= '<div class="article-image">';
+		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">';
+		$article_structure .= 		'<div class="article-image-bg" style="background-image: url(' . $image_url . ');"></div>';
+		$article_structure .= 	'</a>';
+		$article_structure .= '</div>';
 	}
 	$article_structure .= 	'<div class="article-info">';
 	$article_structure .= 		'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
@@ -161,14 +163,15 @@ function build_article_collapsible_image_title($article_data) {
 	$article_structure .= 	'<div class="nest-container">';
 	$article_structure .= 		'<div class="inner-container">';
 	if (!empty(get_the_post_thumbnail_url($article_data))) {
+		$image_url = get_the_post_thumbnail_url($article_data, 'large');
 		$article_structure .= 		'<div class="article-image">';
 		$article_structure .= 			'<a href="' . get_the_permalink($article_data) . '">';
-		$article_structure .= 				'<img src="' . get_the_post_thumbnail_url($article_data, 'large') . '" alt="Image link to ' . get_the_title($article_data) . ' post">';
+		$article_structure .= 				'<div class="article-image-bg" style="background-image: url(' . $image_url . ');"></div>';
 		$article_structure .= 			'</a>';
 		$article_structure .= 		'</div>';
-		$article_structure .= 			'<div class="article-desc article-info">';
+		$article_structure .= 		'<div class="article-desc article-info">';
 	} else {
-		$article_structure .= 			'<div class="grid-container">';
+		$article_structure .= 		'<div class="grid-container">';
 	}
 	$article_structure .= 				'<h3 class="article-title"><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
 	$article_structure .= 				'<p class="date-meta">' . get_the_date('F j, Y', $article_data) . '</p>';

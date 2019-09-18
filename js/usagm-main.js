@@ -156,37 +156,20 @@ $.each(clipsListItems, function() {
 // SCALE POST-IMAGE TO BE PROPORTIONAL TO 600x400
 function scaleArticleImages() {
 	var scale = 0.66666667;
-	var postImageBox = $('.article-image');
-	var postImage = $('.article-image img');
+	var postImageBox = $('.article-teaser');
 
 	$.each(postImageBox, function() {
 		var curImgDiv = $(this),
-			imgDivWidth = curImgDiv.width(),
-			imgDivHeight = curImgDiv.height();
-		var curImg = curImgDiv.children('a').children('img'),
-			imgWidth = curImg.width(),
-			imgHeight = curImg.height();
-		var curProperHeight = imgDivWidth * scale,
-			curProperWidth = curProperHeight / scale;
-			
-		curImgDiv.css({
-			'width' : imgDivWidth,
+			imageParent = curImgDiv.find('.article-image'),
+			teaserImage = imageParent.find('.article-image-bg');
+		var curProperHeight = imageParent.width() * scale;
+		
+		teaserImage.css({
+			'widht' : imageParent.width(),
 			'height' : curProperHeight,
-			'overflow' : 'hidden',
 			'background-size': 'cover',
 			'background-position' : 'center center'
 		});
-
-
-
-		// if (imgDivHeight != curProperHeight) {
-		// 	curImgDiv.css({
-		// 		'height' : curProperHeight,
-		// 		'width' : curProperWidth,
-		// 		'overflow' : 'hidden',
-		// 		'background-position': 'center center'
-		// 	});
-		// }
 	});
 }
 scaleArticleImages();
