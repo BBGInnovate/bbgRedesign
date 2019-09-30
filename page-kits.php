@@ -34,7 +34,8 @@ $awardCategoryObj = get_category_by_slug('award');
 if (is_object($awardCategoryObj)) {
 	$awardCategoryID = $awardCategoryObj -> term_id;
 	$award_params = array(
-		'post_type' => array('award'),
+		'post_type' => array('post'),
+		'cat' => 47,
 		'posts_per_page' => 1,
 		'orderby' => 'date',
 		'order' => 'DESC'
