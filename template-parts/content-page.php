@@ -6,8 +6,8 @@
  *
  * @package bbginnovate
  */
-
 include get_template_directory() . '/inc/shared_sidebar.php';
+include get_template_directory() . '/inc/sidebar-dropdown.php';
 $page_id = get_the_ID();
 
 $videoUrl = get_post_meta( get_the_ID(), 'featured_video_url', true );

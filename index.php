@@ -14,7 +14,8 @@
 
 $feature_post_arg = array(
 	'post_type' => 'post',
-	'posts_per_page' => 1
+	'posts_per_page' => 1,
+	'category__not_in' => array(2276),
 );
 $feature_post_query = new WP_Query($feature_post_arg);   
 $feature_post = $feature_post_query->posts;
@@ -39,7 +40,8 @@ get_header();
 
 			echo '<div class="grid-container">';
 			// AJAX LOAD MORE PLUGIN
-			echo 	do_shortcode('[ajax_load_more post__not_in="'. $post__not_in .'"]');
+			// EXCLUDE USAGM EXPERTS FROM APPEARING IN THIS LIST
+			echo 	do_shortcode('[ajax_load_more post__not_in="'. $post__not_in .'" category__not_in="2280" ]');
 			echo '</div>';
 		?>
 		</div>

@@ -10,6 +10,7 @@
 
 require 'inc/bbg-functions-assemble.php';
 include get_template_directory() . '/inc/shared_sidebar.php';
+include get_template_directory() . '/inc/sidebar-dropdown.php';
 
 
 if (have_posts()) {
@@ -249,42 +250,8 @@ get_header();
 						<?php
 							if (!empty($speaker_data_set)) {
 								$speaker_list = $speaker_data_set['speaker_list'];
-								$speaker_markup  = '<aside class="speaker-list">';
-								$speaker_markup .= 	'<h3 class="sidebar-section-header">' . $speaker_data_set['field_label'] . '</h3>';
-								$speaker_markup .= 	'<ul class="unstyled-list meeting-speakers">';
-								foreach($speaker_list as $speaker_data) {
-									if (!empty($speaker_data['bio'])) {
-										$speaker_markup .= '<li class="usa-accordion speaker-accordion">';
-										$speaker_markup .= 	'<button class="usa-button-unstyled" aria-expanded="false" aria-controls="collapsible-faq-' . $speaker_data['entry'] . '">';
-										$speaker_markup .= 		'<p class="speaker-name sidebar-paragraph-header">' . $speaker_data['name'] . '</p>';
-										if (!empty($speaker_data['title'])) {
-											$speaker_markup .= 	'<p class="speaker-title sans">' . $speaker_data['title'] . '</p>';
-										}
-										$speaker_markup .= 		' <i class="fas fa-plus"></i>';
-										$speaker_markup .= 	'</button>';
-										$speaker_markup .= 	'<div id="collapsible-faq-' . $speaker_data['entry'] . '" aria-hidden="true" class="usa-accordion-content">';
-										$speaker_markup .= 		'<p class="sans speaker-bio">';
-										$speaker_markup .= 			$speaker_data['bio'];
-										$speaker_markup .= 		'</p>';
-										if (!empty($speaker_data['link'])) {
-											$speaker_markup .= 		'<p class="sans">';
-											$speaker_markup .= 			'<a href="' . $speaker_data['link'] . '" target="_blank">View Profile</a>';
-											$speaker_markup .= 		'</p>';
-										}
-										$speaker_markup .= 	'</div>';
-										$speaker_markup .= '</li>';
-									} else {
-										$speaker_markup .= '<li>';
-										$speaker_markup .= 	'<p class="speaker-name sidebar-paragraph-header">' . $speaker_data['name'] . '</p>';
-										if (!empty($speaker_data['title'])) {
-											$speaker_markup .= 	'<p class="speaker-title sans">' . $speaker_data['title'] . '</p>';
-										}
-										$speaker_markup .= '</li>';
-									}
-								}
-								$speaker_markup .= 	'</ul>';
-								$speaker_markup .= '</aside>';
-								echo $speaker_markup;
+								$speaker_dropdown_list = build_sidebar_dropdown($speakers_label, $speaker_list);
+								echo $speaker_dropdown_list;
 							}
 						?>
 
