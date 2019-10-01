@@ -156,21 +156,27 @@ $.each(clipsListItems, function() {
 // SCALE POST-IMAGE TO BE PROPORTIONAL TO 600x400
 function scaleArticleImages() {
 	var scale = 0.66666667;
-	var postImageBox = $('.article-teaser');
+	var postImageBox = $('.article-teaser, .feature-article-image');
 
 	$.each(postImageBox, function() {
 		var curImgDiv = $(this),
 			imageParent = curImgDiv.find('.article-image'),
-			teaserImage = imageParent.find('.article-image-bg');
+			teaserImage = $(this).find('.article-image-bg');
 		var curProperHeight = imageParent.width() * scale;
+		if (curImgDiv.hasClass('feature-article-image')) {
+			curProperHeight = $('.feature-article-image').height();
+			console.log(curProperHeight);
+		}
 		
 		teaserImage.css({
 			'widht' : imageParent.width(),
 			'height' : curProperHeight,
 			'background-size': 'cover',
-			'background-position' : 'center center',
 			'margin-bottom' : '0px'
 		});
+		if (!curImgDiv.hasClass('feature-article-image')) {
+			teaserImage.css({'background-position' : 'center center'});
+		}
 	});
 }
 scaleArticleImages();

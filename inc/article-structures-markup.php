@@ -4,9 +4,11 @@
 function build_main_head_article($article_data) {
 	$article_structure  = '<div class="main-head-article article-teaser">';
 	if (!empty(get_the_post_thumbnail_url($article_data))) {
+		$img_pos = get_post_meta($article_data -> ID, 'adjust_the_banner_image');
+		$img_pos = $img_pos[0];
 		$article_structure .= '<div class="feature-article-image">';
 		$article_structure .= 	'<a href="' . get_the_permalink($article_data) . '">';
-		$article_structure .= 		 '<img src="' . get_the_post_thumbnail_url($article_data, 'large') . '" alt="Image link to ' . get_the_title($article_data) . ' post">';
+		$article_structure .= 		'<div class="article-image-bg" style="background-image: url(' . get_the_post_thumbnail_url($article_data, 'large') . '); background-position: ' . $img_pos . ';"></div>';
 		$article_structure .= 	'</a>';
 		$article_structure .= '</div>';
 	}
