@@ -76,29 +76,55 @@ if (have_posts()) {
 
 // SECTION FOR CEO
 $ceo = get_post_meta($profile_id, 'ceo', true);
+
 if (isset($ceo)) {
-	function get_ceo_article_arguments() {
-		$ceo_params = array(
-			'post_type' => array('post'),
-			'posts_per_page' => 2,
-			'orderby' => 'date',
-			'order' => 'DESC',
-			'tax_query' => array(
-				'relation' => 'AND',
-				array(
-					'taxonomy' => 'post_tag',
-					'field' => 'slug',
-					'terms' => array( 'john-lansing' ),
-					'operator' => 'IN'
-				),
-				array(
-					'taxonomy' => 'category',
-					'field' => 'slug',
-					'terms' => array('appearance','bbg-in-the-news'),
-					'operator' => 'IN'
+	function get_ceo_article_arguments($slug) {
+		// CHECK FOR JOHN LANSING OR GRANT TURNER
+		if ($slug == 'john-lansing-chief-executive-officer-and-director') {
+			$ceo_params = array(
+				'post_type' => array('post'),
+				'posts_per_page' => 2,
+				'orderby' => 'date',
+				'order' => 'DESC',
+				'tax_query' => array(
+					'relation' => 'AND',
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'john-lansing' ),
+						'operator' => 'IN'
+					),
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'bbg-ceo' ),
+						'operator' => 'IN'
+					)
 				)
-			)
-		);
+			);
+		} else if ($slug == 'grant-turner') {
+			$ceo_params = array(
+				'post_type' => array('post'),
+				'posts_per_page' => 2,
+				'orderby' => 'date',
+				'order' => 'DESC',
+				'tax_query' => array(
+					'relation' => 'AND',
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'grant-turner' ),
+						'operator' => 'IN'
+					),
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'bbg-ceo' ),
+						'operator' => 'IN'
+					)
+				)
+			);
+		}
 		return $ceo_params;
 	}
 }
@@ -160,13 +186,17 @@ get_header();
 
 						<?php
 							// SECTION FOR CEO
-							if ($ceo) {
-								$ceo_articles = get_ceo_article_arguments();
-								if (!empty($ceo_articles)) {
+							if ($ceo ) {
+								global $post;
+								$post_slug = $post->post_name;
+								$ceo_articles = get_ceo_article_arguments($post_slug);
+								$ceo_post_query = new WP_Query($ceo_articles);
+								$ceo_article_array = $ceo_post_query->posts;
+								if (!empty($ceo_article_array)) {
 									$categoryUrl = 'https://www.usagm.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news';
 									$categoryLabel = 'News & Appearances';
-									$ceo_post_query = new WP_Query($ceo_articles);
-									$ceo_article_array = $ceo_post_query->posts;
+									// $ceo_post_query = new WP_Query($ceo_articles);
+									// $ceo_article_array = $ceo_post_query->posts;
 
 									echo '<div class="ceo-news-posts">';
 									echo 	'<h3 class="section-subheader"><a href="' . $categoryUrl . '">' . $categoryLabel . '</a></h3>';
