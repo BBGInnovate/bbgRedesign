@@ -541,6 +541,7 @@ function get_office_contact_data() {
 }
 
 function get_office_highlights_data() {
+	// EXCLUES: PROFILES(id:35)
 	if (get_field('include_office_page_highlights') == 'yes') {
 		$highlight_tags = get_field('office_page_highlights');
 
@@ -549,7 +550,8 @@ function get_office_highlights_data() {
 			'post_type' => array('post'),
 			'posts_per_page' => 3,
 			'order-by' => 'date',
-			'posts__not_in' => $used_office_highlights
+			'posts__not_in' => $used_office_highlights,
+			'category__not_in' => array(35)
 		);
 
 		$office_tag_ids = array();
