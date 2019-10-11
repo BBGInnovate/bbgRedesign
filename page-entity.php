@@ -615,9 +615,10 @@ get_header();
 		<?php
 			$quote_result = getRandomQuote($entityCategorySlug, array());
 			if ($quote_result) {
-				echo '<div class="bbg__entity__pullquote">';
-				output_quote($quote_result);
-				echo '</div>';
+				$quotes  =  '<div class="bbg__entity__pullquote">';
+				$quotes .= output_quote($quote_result);
+				$quotes .= '</div>';
+				echo $quotes;
 			}
 		?>
 	</div>

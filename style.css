@@ -3424,6 +3424,74 @@ a:focus .bbg__article-share__icon {
     margin-left: 20px;
     margin-left: 0; }
 
+.homepage-quote {
+  text-align: center; }
+  .homepage-quote .quote-image {
+    width: 100px;
+    border-radius: 50%; }
+  .homepage-quote .quote-line {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 2.2rem;
+    line-height: 2.6rem;
+    font-weight: 300;
+    color: #3f7ad1;
+    margin: 0 0 1.5rem 0; }
+  .homepage-quote .quote-name {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 1.9rem;
+    margin-bottom: 0; }
+  .homepage-quote .quote-credit {
+    font-family: "Alegreya Sans", sans-serif;
+    font-size: 1.4rem;
+    text-transform: uppercase; }
+
+.quote-slider {
+  position: relative; }
+  .quote-slider .quote-sliding-plate {
+    position: absolute;
+    top: 0;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 0 0 15px 0; }
+    .quote-slider .quote-sliding-plate p {
+      margin-bottom: 0; }
+    .quote-slider .quote-sliding-plate .homepage-quote {
+      vertical-align: top;
+      display: inline-block;
+      padding: 15px;
+      overflow: hidden;
+      text-align: left; }
+      .quote-slider .quote-sliding-plate .homepage-quote img {
+        display: none; }
+      .quote-slider .quote-sliding-plate .homepage-quote .quote-line {
+        font-size: 1.75rem;
+        margin-bottom: 15px; }
+      .quote-slider .quote-sliding-plate .homepage-quote .quote-name {
+        font-size: 1.9rem;
+        font-weight: 100; }
+  .quote-slider .slider-nav {
+    width: 100%;
+    position: absolute; }
+    .quote-slider .slider-nav * {
+      display: inline-block; }
+    .quote-slider .slider-nav p {
+      text-transform: uppercase;
+      font-family: "Alegreya Sans", sans-serif;
+      font-weight: 700;
+      font-size: 0.8em;
+      margin-bottom: 0; }
+    .quote-slider .slider-nav .disabled {
+      color: #999999;
+      cursor: auto; }
+    .quote-slider .slider-nav .enabled {
+      color: #3f7ad1;
+      cursor: pointer; }
+    .quote-slider .slider-nav #prev {
+      width: 50%; }
+    .quote-slider .slider-nav #next {
+      width: 50%;
+      text-align: right; }
+
 /** ---------------
  * TABLES
  ------------------ */
@@ -6880,27 +6948,6 @@ section.usa-section.bbg-banner__section {
   width: calc(20% - 24px);
   float: left;
   margin-left: 20px; }
-
-.homepage-quote {
-  text-align: center; }
-  .homepage-quote .quote-image {
-    width: 100px;
-    border-radius: 50%; }
-  .homepage-quote .quote-line {
-    font-family: "Alegreya Sans", sans-serif;
-    font-size: 2.2rem;
-    line-height: 2.6rem;
-    font-weight: 300;
-    color: #3f7ad1;
-    margin: 0 0 1.5rem 0; }
-  .homepage-quote .quote-name {
-    font-family: "Alegreya Sans", sans-serif;
-    font-size: 1.9rem;
-    margin-bottom: 0; }
-  .homepage-quote .quote-credit {
-    font-family: "Alegreya Sans", sans-serif;
-    font-size: 1.4rem;
-    text-transform: uppercase; }
 
 @media screen and (min-width: 600px) {
   .bbg-banner .bbg-banner__container.usa-grid {

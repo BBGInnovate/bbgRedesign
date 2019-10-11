@@ -12,74 +12,54 @@ require 'inc/bbg-functions-assemble.php';
 ?>
 
 <?php
-$featured_media_result = get_feature_media_data();
-if ($featured_media_result != "") {
-	echo $featured_media_result;
+remove_filter('term_description','wpautop');
+$term = get_queried_object();
+$cat_image_url = get_field('category_image', $term);
+if ($cat_image_url != "") {
+	echo '<div class="page-post-featured-graphic">';
+	echo 	'<div class="bbg__article-header__banner" ';
+	echo 		'style="background-image: url(' . $cat_image_url . ');">';
+	echo 	'</div>';
+	echo '</div>';
 }
 ?>
 
 <main id="main" role="main">
 
 	<?php
-		if (have_posts()) :
-			$counter = 0;
-			while (have_posts()) : the_post();
-				$counter++;
-				if ($counter < 4) {
-					$in_sidebar = false;
-				} else {
-					$in_sidebar = true;
-				}
-				// ONLY SHOW FEATURED IF IT'S NOT PAGINATED
-				if ((!is_paged() && $counter == 1 || is_category('BBG360'))) {
-					echo '<div class="outer-container">';
-					echo 	'<div class="grid-container">';
-					echo 		'<h3 class="article-title"><a href="'. get_the_permalink() . '">' . get_the_title() . '</a></h3>';
-					echo 		'<span class="lead-in">' . get_the_excerpt() . '</span>';
-					echo 	'</div>';
-					echo '</div>';
-				}
-
-				if ($counter == 2) {
-					echo '<div class="outer-container">';
-					echo 	'<div class="custom-grid-container">';
-					echo 		'<div class="inner-container">';
-					echo 			'<div class="main-content-container">';
-				}
-				if ($counter == 4) {
-					echo 			'</div>';
-					echo 			'<div class="side-content-container">';
-					$moreLabel = "More News";
-					if (is_category('Board Meetings')) {
-						$moreLabel = "More Board Meetings";
-					}
-					echo 	'<h2 class="sidebar-section-header">' . $moreLabel . '</h2>';
-				}
-
-				if ($counter > 1) {
-					$article_markup  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
-					if ($in_sidebar == false) {
-						$article_markup .= '<h3 class="article-title"><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
-						$article_markup .= '<p class="date-meta">' . get_the_date() . '</p>';
-						$article_markup .= '<p>' . get_the_excerpt() . '</p>';
-					} else {
-						$article_markup .= '<h3 class="sidebar-article-title"><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
-					}
-					$article_markup .= '</article>';
-					echo $article_markup;
-				}
-			endwhile;
-
-			echo 		'</div><!-- end .side-content-container -->';
-			echo get_the_posts_navigation();
+		if (have_posts()) {
+			echo '<div class="outer-container">';
+			echo 	'<div class="grid-container">';
+			echo 		'<h2 class="section-header">' . get_the_archive_title() . '</h2>';
+			if (!empty(get_the_archive_description())) {
+				echo 	'<p class="lead-in">' . get_the_archive_description() . '</p>';
+			}
 			echo 	'</div>';
 			echo '</div>';
-		else :
-			get_template_part('template-parts/content', 'none');
-		endif;
-	?>
 
-	</div><!-- .outer-container -->
+			echo '<div class="outer-container">';
+			echo 	'<div class="grid-container">';
+			while (have_posts()) {
+				the_post();
+				$article_markup  = '<article id="'. get_the_ID() . '" style="margin-bottom: 1.5rem">';
+				$article_markup .= '<h3 class="article-title"><a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a></h3>';
+				if (is_category('global-media-matters')) {
+					$article_markup .= '<p class="date-meta">' . get_field('byline_override', get_the_ID()) . '</p>';
+				} else {
+					$article_markup .= '<p class="date-meta">' . get_the_date() . '</p>';
+				}
+				$article_markup .= '<p>' . get_the_excerpt() . '</p>';
+
+				$article_markup .= '</article>';
+				echo $article_markup;
+			}
+			echo get_the_posts_navigation();
+			echo '</div><!-- .grid-container -->';
+		} else {
+			get_template_part('template-parts/content', 'none');
+			echo '</div><!-- .outer-container -->';
+		}
+	?>
 </main>
 
 <?php get_sidebar(); ?>

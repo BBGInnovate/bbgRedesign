@@ -57,13 +57,19 @@
 		wp_reset_postdata();
 		return $quotes;
 	}
-	function getRandomQuote($entity, $idsToExclude) {
+	function getRandomQuote($entity, $idsToExclude, $slider = NULL) {
 		//	allEntities or rfa, rferl, voa, mbn, ocb
 		$allQuotes = getAllQuotes($entity, $idsToExclude);
 		$returnVal = false;
-		if (count($allQuotes)) {
+		/**
+		 * IF SLIDER IS NULL, ONLY SEND BACK ONE VALUE
+		 * IF NOT, SEND BACK ALL VALUES TO DISPLAY ALL AT ONCE
+		 */
+		if (count($allQuotes) && $slider == NULL) {
 			$randKey = array_rand($allQuotes);
 			$returnVal = $allQuotes[$randKey];
+		} elseif ($slider != NULL) {
+			$returnVal = $allQuotes;
 		}
 		return $returnVal;
 	}
@@ -96,7 +102,6 @@
 				}
 			}
 		}
-
 		if ($placement == 'mention') {
 			$quote_data = array(
 				'color' => $networkColor,
@@ -110,9 +115,6 @@
 		}
 		else {
 			$quote  = '<div class="homepage-quote">';
-			// if ($quoteNetwork != '') {
-			// 	$quote .= '<div class="bbg__quotation-label" style="background-color:' . $networkColor . '">' . $quoteNetwork . '</div>';
-			// }
 			if ($mugshot != '') {
 				$quote .= 		'<img src="' . $mugshot . '" class="quote-image" alt="' . $speaker . ' image">';
 			}
@@ -120,7 +122,7 @@
 			$quote .= 	'<p class="quote-name">' . $speaker . '</p>';
 			$quote .= 	'<p class="quote-credit">' . $tagline . '</p>';
 			$quote .= '</div>';
-			echo $quote;
+			return $quote;
 		}
 	}
 

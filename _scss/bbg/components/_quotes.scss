@@ -1,0 +1,76 @@
+.homepage-quote {
+	 text-align: center;
+	 .quote-image {
+		width: 100px;
+		border-radius: 50%;
+	}
+	.quote-line {
+		font-family: $font-sans;
+		font-size: 2.2rem;
+		line-height: 2.6rem;
+		font-weight: $font-light;
+		color: $color-blue;
+		margin: 0 0 1.5rem 0;
+	}
+	.quote-name {
+		font-family: $font-sans;
+		font-size: 1.9rem;
+		margin-bottom: 0;
+	}
+	.quote-credit {
+		font-family: $font-sans;
+		font-size: 1.4rem;
+		text-transform: uppercase;
+	}
+}
+
+.quote-slider {
+	position: relative;
+
+	.quote-sliding-plate {
+		position: absolute;
+		top: 0;
+		border-top: 1px solid #e6e6e6;
+		border-bottom: 1px solid #e6e6e6;
+		padding: 0 0 15px 0;
+		// HEIGHT IS DETERMINED IN MAIN.JS QUOTE SLIDER FUNCTION BASED ON SINGLE QUOTE
+
+		p {margin-bottom: 0;}
+
+		.homepage-quote {
+			vertical-align: top;
+			display: inline-block;
+			padding: 15px;
+			// WIDTH IS DETERMINED IN MAIN.JS QUOTE SLIDER FUNCTION BASED ON PARENT COLUMN
+			overflow: hidden;
+			text-align: left;
+
+			img {display: none;}
+			.quote-line {
+				font-size: 1.75rem;
+				margin-bottom: 15px;
+			}
+			.quote-name {
+				font-size: 1.9rem;
+				font-weight: 100;
+			}
+		}
+	}
+	.slider-nav {
+		width: 100%;
+		position: absolute;
+		* {display: inline-block;}
+		p {
+			text-transform: uppercase;
+			font-family: $font-sans;
+			font-weight: $font-bold;
+			font-size: 0.8em;
+			margin-bottom: 0;
+		}
+		.disabled {color: $black9; cursor: auto;}
+		.enabled {color: $color-blue; cursor: pointer;}
+
+		#prev {width: 50%;}
+		#next {width: 50%; text-align: right;}
+	}
+}

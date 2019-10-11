@@ -154,6 +154,7 @@ function get_soapbox_data() {
 function get_corner_hero_data() {
 	$toggle = get_field('corner_hero_toggle', 'option');
 	$homepage_hero_corner = get_field('homepage_hero_corner', 'option');
+	$featuredEvent = '';
 
 	if ($homepage_hero_corner  == 'event') {
 		$featuredEvent = get_field('homepage_featured_event', 'option');

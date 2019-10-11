@@ -264,34 +264,6 @@ section.usa-section.bbg-banner__section {margin-bottom: $site-margins;}
 	}
 }
 
-// QUOTE
-.homepage-quote {
-	 text-align: center;
-	 .quote-image {
-		width: 100px;
-		border-radius: 50%;
-	}
-	.quote-line {
-		font-family: $font-sans;
-		font-size: 2.2rem;
-		line-height: 2.6rem;
-		font-weight: $font-light;
-		color: $color-blue;
-		margin: 0 0 1.5rem 0;
-	}
-	.quote-name {
-		font-family: $font-sans;
-		font-size: 1.9rem;
-		margin-bottom: 0;
-	}
-	.quote-credit {
-		font-family: $font-sans;
-		font-size: 1.4rem;
-		text-transform: uppercase;
-	}
-}
-
-
 // 2. MEDIUM SCREEN
 @include media($medium-screen) {
 	.bbg-banner {

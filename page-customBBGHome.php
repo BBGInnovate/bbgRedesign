@@ -272,7 +272,8 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				$quote_result = getRandomQuote('allEntities', $postIDsUsed);
 				if ($quote_result) {
 					$postIDsUsed[] = $quote_result["ID"];
-					output_quote($quote_result);
+					$quotes = output_quote($quote_result);
+					echo $quotes;
 				}
 			?>
 		</div>

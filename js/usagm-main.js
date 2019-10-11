@@ -182,10 +182,107 @@ function scaleArticleImages() {
 scaleArticleImages();
 
 
+/**
+ * QUOTATION SLIDER
+ * Set width and height of absolute divs 
+ * and get width for pushing side to side
+ */
+function initiateQuotationSlider() {
+	var columnParent = $('.side-content-container'),
+		sliderBox = $('.quote-slider'),
+		sliderPlate = $('.quote-sliding-plate'),
+		sliderNav = $('.slider-nav');
+	var quoteList = $('.homepage-quote'),
+		quoteHeights = [];
+	var curQuote = 0;
+
+	function configureSliderSize() {
+		// SPECIFY EACH WIDTH AS THE WIDTH OF THE OUTER PARENT COLUMN
+		// GET TALLEST HEIGHT FOR SLIDER HEIGHT
+		$.each(quoteList, function() {
+			$(this).outerWidth(columnParent.outerWidth());
+			quoteHeights.push($(this).outerHeight());
+		});
+		sliderPlate.outerWidth(columnParent.outerWidth() * quoteList.length);
+		var tallestQuote = Math.max.apply(Math, quoteHeights);
+
+		// STYLE SLIDER BOX
+		sliderPlate.outerHeight(tallestQuote);
+		sliderBox.outerHeight(sliderPlate.outerHeight() + sliderNav.outerHeight());
+		sliderNav.css('top', sliderPlate.outerHeight());
+	}
+	configureSliderSize();
+
+
+	function changeSlide(direction, curView) {
+		// GET THE POSITION AND REMOVE ANY CSS TEXT AND MAKE IT A NUMBER
+		curPos = sliderPlate.css('left');
+		curPos = Number(curPos.replace(/\D+/g, ''));
+		newPos = curPos; // WILL ADD TO THIS
+
+		if (direction == 'right') {
+			newPos = -Math.abs(curPos - columnParent.outerWidth());
+		} else if (direction == 'left') {
+			newPos = -Math.abs(curPos + columnParent.outerWidth());
+		}
+		sliderPlate.css('left', newPos);
+		styleNavigation(curQuote);
+	}
+	changeSlide('', curQuote);
+
+
+	function styleNavigation(slide) {
+		if (slide == 0) {
+			$('#prev').removeClass('enabled');
+			$('#prev').addClass('disabled');
+			$('#next').addClass('enabled');
+			$('#prev').removeClass('disabled');
+		} else if (slide == (quoteList.length - 1)) {
+			$('#next').removeClass('enabled');
+			$('#next').addClass('disable');
+		} else {
+			$('#prev').removeClass('disabled');
+			$('#prev').addClass('enabled');
+			$('#next').removeClass('disabled');
+			$('#next').addClass('enabled');
+		}
+	}
+
+	// PREVIOUS QUOTE
+	$('.slider-nav #prev').on('click', function() {
+		if (curQuote != 0) {
+			curQuote--;
+			changeSlide('right', curQuote);
+		}
+	});
+	
+
+	// NEXT QUOTE
+	$('.slider-nav #next').on('click', function() {
+		if (curQuote < (quoteList.length - 1)) {
+			curQuote++;
+			changeSlide('left', curQuote);
+		}
+	});
+
+
+	// WHEN RESIZING
+	$(window).on('resize', function() {
+		configureSliderSize();
+	});
+}
+if ($('.quote-slider').length > 0) {
+	initiateQuotationSlider();
+}
+
+
 $(window).on('resize', function() {
 	scaleRibbonBanner();
 	scaleArticleImages();
 	setResponsiveHeight();
+	if ($('.quote-slider').length > 0) {
+		initiateQuotationSlider();
+	}
 });
 
 }); // END READY

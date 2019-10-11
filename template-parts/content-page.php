@@ -111,7 +111,28 @@ endif;
 			echo 	$sidebarDownloads;
 			echo 	$teamRoster;
 			echo '</article>';
-			?>
+
+			if (is_page('history')) {
+				$postIDsUsed = '';
+				$quote_result = getRandomQuote('allEntities', $postIDsUsed, true);
+
+				if ($quote_result) {
+					$quotes_slider  = '<article class="quote-slider">';
+					$quotes_slider .= 	'<div class="quote-sliding-plate">';
+					foreach ($quote_result as $quote) {
+						$quote_markup = 	output_quote($quote);
+						$quotes_slider .= 	$quote_markup;
+					}
+					$quotes_slider .= 	'</div>';
+					$quotes_slider .= 	'<div class="slider-nav">';
+					$quotes_slider .= 		'<p id="prev">previous</p>';
+					$quotes_slider .= 		'<p id="next">next</p>';
+					$quotes_slider .= 	'</div>';
+					$quotes_slider .= '</article>';
+					// echo $quotes_slider;
+				}
+			}
+		?>
 	</div>
 </div><!-- .usa-grid -->
 
