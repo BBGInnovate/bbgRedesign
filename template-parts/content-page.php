@@ -119,7 +119,9 @@ endif;
 				if ($quote_result) {
 					$quotes_slider  = '<article class="quote-slider">';
 					$quotes_slider .= 	'<div class="quote-sliding-plate">';
+					// var_dump($quote_result);
 					foreach ($quote_result as $quote) {
+					// $quotes_slider .= output_quote($quote_result[2]);
 						$quote_markup = 	output_quote($quote);
 						$quotes_slider .= 	$quote_markup;
 					}
@@ -129,7 +131,7 @@ endif;
 					$quotes_slider .= 		'<p id="next">next</p>';
 					$quotes_slider .= 	'</div>';
 					$quotes_slider .= '</article>';
-					// echo $quotes_slider;
+					echo $quotes_slider;
 				}
 			}
 		?>

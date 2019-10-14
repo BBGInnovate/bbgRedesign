@@ -26,19 +26,20 @@
 
 .quote-slider {
 	position: relative;
+	height: 100%;
+
 
 	.quote-sliding-plate {
 		position: absolute;
 		top: 0;
-		border-top: 1px solid #e6e6e6;
-		border-bottom: 1px solid #e6e6e6;
 		padding: 0 0 15px 0;
+		background-color: #f4f4f6;
 		// HEIGHT IS DETERMINED IN MAIN.JS QUOTE SLIDER FUNCTION BASED ON SINGLE QUOTE
 
 		p {margin-bottom: 0;}
 
 		.homepage-quote {
-			vertical-align: top;
+			vertical-align: middle;
 			display: inline-block;
 			padding: 15px;
 			// WIDTH IS DETERMINED IN MAIN.JS QUOTE SLIDER FUNCTION BASED ON PARENT COLUMN
@@ -47,7 +48,7 @@
 
 			img {display: none;}
 			.quote-line {
-				font-size: 1.75rem;
+				font-size: 2rem;
 				margin-bottom: 15px;
 			}
 			.quote-name {

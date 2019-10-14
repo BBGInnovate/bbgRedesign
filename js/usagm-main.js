@@ -213,23 +213,19 @@ function initiateQuotationSlider() {
 	}
 	configureSliderSize();
 
-
-	function changeSlide(direction, curView) {
+	function setSlide(direction, curView) {
 		// GET THE POSITION AND REMOVE ANY CSS TEXT AND MAKE IT A NUMBER
-		curPos = sliderPlate.css('left');
-		curPos = Number(curPos.replace(/\D+/g, ''));
+		curPos = strToNum(sliderPlate.css('left'));
 		newPos = curPos; // WILL ADD TO THIS
 
-		if (direction == 'right') {
+		if (direction == 'previous') {
 			newPos = -Math.abs(curPos - columnParent.outerWidth());
-		} else if (direction == 'left') {
+		} else if (direction == 'next') {
 			newPos = -Math.abs(curPos + columnParent.outerWidth());
 		}
 		sliderPlate.css('left', newPos);
-		styleNavigation(curQuote);
+		styleNavigation(curView);
 	}
-	changeSlide('', curQuote);
-
 
 	function styleNavigation(slide) {
 		if (slide == 0) {
@@ -247,32 +243,33 @@ function initiateQuotationSlider() {
 			$('#next').addClass('enabled');
 		}
 	}
+	styleNavigation();
 
 	// PREVIOUS QUOTE
 	$('.slider-nav #prev').on('click', function() {
 		if (curQuote != 0) {
 			curQuote--;
-			changeSlide('right', curQuote);
+			setSlide('previous', curQuote);
 		}
 	});
-	
 
 	// NEXT QUOTE
 	$('.slider-nav #next').on('click', function() {
 		if (curQuote < (quoteList.length - 1)) {
 			curQuote++;
-			changeSlide('left', curQuote);
+			setSlide('next', curQuote);
 		}
 	});
 
-
 	// WHEN RESIZING
-	$(window).on('resize', function() {
-		configureSliderSize();
-	});
+	// fix slider resize later
 }
 if ($('.quote-slider').length > 0) {
 	initiateQuotationSlider();
+}
+function strToNum(str) {
+	str = str.replace(/\D+/g, '');
+	return Number(str);
 }
 
 
@@ -280,9 +277,6 @@ $(window).on('resize', function() {
 	scaleRibbonBanner();
 	scaleArticleImages();
 	setResponsiveHeight();
-	if ($('.quote-slider').length > 0) {
-		initiateQuotationSlider();
-	}
 });
 
 }); // END READY

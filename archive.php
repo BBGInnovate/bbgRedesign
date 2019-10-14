@@ -16,9 +16,11 @@ remove_filter('term_description','wpautop');
 $term = get_queried_object();
 $cat_image_url = get_field('category_image', $term);
 if ($cat_image_url != "") {
-	echo '<div class="page-post-featured-graphic">';
-	echo 	'<div class="bbg__article-header__banner" ';
-	echo 		'style="background-image: url(' . $cat_image_url . ');">';
+	echo '<div class="feautre-banner">';
+	echo 	'<div class="page-post-featured-graphic">';
+	echo 		'<div class="bbg__article-header__banner" ';
+	echo 			'style="background-image: url(' . $cat_image_url . ');">';
+	echo 		'</div>';
 	echo 	'</div>';
 	echo '</div>';
 }
