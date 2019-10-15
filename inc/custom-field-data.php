@@ -213,7 +213,7 @@ function get_corner_hero_data() {
 	}
 	else if ($homepage_hero_corner == 'callout' && $featuredCallout) {
 		$c_type = 'callout';
-		outputCallout($featuredCallout, $cornerHeroLabel);
+		return outputCallout($featuredCallout, $cornerHeroLabel);
 	}
 	else {
 		// EITHER USER SELECTED "quotes" or NO VALID CALLOUT, EVENT, ADVISORY SELECTED 

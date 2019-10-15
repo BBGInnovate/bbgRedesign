@@ -188,6 +188,6 @@
 			
 		$quote .= 	'</div>';
 		$quote .= '</div>';
-		echo $quote;
+		return $quote;
 	}
 ?>

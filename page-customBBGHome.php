@@ -161,10 +161,11 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 
 	<?php
 		// IMPACT STORIES AND EVENTS
-		$impact_option = get_field('corner_hero_toggle', 'options');
-		$homepage_hero_corner = get_field('homepage_hero_corner', 'options');
 		$corner_hero_toggle = get_field('corner_hero_toggle', 'options');
+		$homepage_hero_corner = get_field('homepage_hero_corner', 'options');
 		$corner_hero_label = get_field('corner_hero_label', 'options');
+		$corner_hero_content = '';
+
 		if ($corner_hero_toggle == 'on') {
 			$corner_hero_data = get_corner_hero_data();
 		}
@@ -176,14 +177,19 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$corner_hero_section_header = '<h2 class="section-header">' . $corner_hero_label . '</h2>';
 		}
 
-		if (($impact_option == 'on') && ($homepage_hero_corner != 'callout')) {
+		if (($corner_hero_toggle == 'on') && ($homepage_hero_corner != 'callout')) {
 			$impact_result = get_impact_stories_data(1);
 		}
 		else {
 			$impact_result = get_impact_stories_data(2);
 		}
 
-		if (($impact_option == 'on') && ($homepage_hero_corner != 'callout')) {
+		/**
+		 * IMPACT STORIES AND CORNER HERO 
+		 * If corner hero is on, display one impact story and corner hero to right side
+		 * If corner hero is off, display two impact stories
+		 */
+		if ($corner_hero_toggle == 'on') {
 			$impact_and_corner_hero  = '<section class="outer-container">';
 			$impact_and_corner_hero .= 	'<div class="grid-container sidebar-grid--large-gutter">';
 			$impact_and_corner_hero .= 		'<div class="nest-container">';
@@ -195,16 +201,32 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 				$impact_and_corner_hero .= build_article_standard_vertical($impact_post);
 			}
 			$impact_and_corner_hero .= 				'</div>';
+			// CORNER HERO PLACEMENT
 			$impact_and_corner_hero .= 				'<div class="side-column divider-left">';
-			$impact_and_corner_hero .= 					$corner_hero_section_header;
-			$impact_and_corner_hero .= 					build_article_standard_vertical($corner_hero_data['post-id']);
+			if ($homepage_hero_corner == 'quotes') {
+				$quote_result = getRandomQuote('allEntities', $postIDsUsed);
+				if ($quote_result) {
+					$postIDsUsed[] = $quote_result["ID"];
+					$quotes = output_quote($quote_result);
+					$impact_and_corner_hero .=  $quotes;
+				}
+			}
+			else if ($homepage_hero_corner == 'callout') {
+				$impact_and_corner_hero .=  $corner_hero_data;
+			}
+			else {
+				$impact_and_corner_hero .= 					$corner_hero_section_header;
+				$impact_and_corner_hero .= 					build_article_standard_vertical($corner_hero_data['post-id']);
+			}
 			$impact_and_corner_hero .= 				'</div>';
+			// END CORNER HERO PLACEMENT
 			$impact_and_corner_hero .= 			'</div>';
 			$impact_and_corner_hero .= 		'</div>';
 			$impact_and_corner_hero .= 	'</div>';
 			$impact_and_corner_hero .= '</section>';
 			echo $impact_and_corner_hero;
-		} else {
+		}
+		else {
 			$impacts_only  = '<section class="outer-container">';
 			$impacts_only .= 	'<div class="grid-container">';
 			$impacts_only .= 		'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
