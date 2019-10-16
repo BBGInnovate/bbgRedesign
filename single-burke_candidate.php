@@ -57,7 +57,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 <main id="main" role="main">
 	<section class="outer-container">
 		<div class="grid-container">
-			<h2 class="section-header"><a href="<?php echo network_home_url()?>burke-awards/burke-honorees">Burke Awards honorees</a></h2>
+			<h2 class="section-header"><a href="<?php echo network_home_url(); ?>/burke-awards-archive">Burke Awards honorees</a></h2>
 		</div>
 		<div class="grid-container sidebar-grid--large-gutter">
 			<div class="nest-container">
