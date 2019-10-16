@@ -131,22 +131,43 @@ function build_award_dropdown_list($award_package) {
 
 
 // SET UP AWARDS CONTAINER
-function build_award_archive_blocks($awards) {
+function build_award_archive_blocks($awards, $filter) {
+	$filter = strtoupper($filter);
+	if ($filter == 'RFERL') {
+		$filter = 'RFE/RL';
+	}
+
 	$award_markup_string = '';
+	$filtered_award_string = '';
+
 	$block_container  = '<div class="nest-container">';
 	$block_container .= 	'<div class="inner-container">';
 	foreach ($awards as $award_in) {
 		if (isset($award_in[0]) && is_array($award_in[0])) {
 			foreach ($award_in as $award_array) {
-				$block_string = make_award_blocks($award_array);
-				$award_markup_string .= $block_string;
+				if ($award_array['award_recipient'] == $filter) {
+					$filtered_award = make_award_blocks($award_array);
+					$filtered_award_string .= $filtered_award;
+				} else {
+					$block_string = make_award_blocks($award_array);
+					$award_markup_string .= $block_string;
+				}
 			}
 		} else {
-			$block_string = make_award_blocks($award_in);
-			$award_markup_string .= $block_string;
+			if ($award_in['award_recipient'] == $filter) {
+				$filtered_award = make_award_blocks($award_in);
+				$filtered_award_string .= $filtered_award;
+			} else {
+				$block_string = make_award_blocks($award_in);
+				$award_markup_string .= $block_string;
+			}
 		}
 	}
-	$block_container .= 		$award_markup_string;
+	if (!empty($filter)) {
+		$block_container .= 		$filtered_award_string;
+	} else {
+		$block_container .= 		$award_markup_string;
+	}
 	$block_container .= 	'</div>';
 	$block_container .= '</div>';
 
@@ -178,24 +199,7 @@ function make_award_blocks($award_data) {
 	$single_award .= 		'<div class="nest-container">';
 	$single_award .= 			'<div class="inner-container">';
 	$single_award .= 				'<div class="about-the-award-archive">';
-	$single_award .= 					'<p><span class="detail">Network: </span>';
-	switch ($network) {
-		case 'VOA':
-			$single_award .= 				'<img src="' . $upload_dir['url'] . '/voa_award.jpg" title="" alt="">';
-			break;
-		case 'RFE/RL':
-			$single_award .= 				'<img src="' . $upload_dir['url'] . '/rferl_award.jpg" title="" alt="">';
-			break;
-		case 'OCB':
-			$single_award .= 				'<img src="' . $upload_dir['url'] . '/ocb_award.jpg" title="" alt="">';
-			break;
-		case 'RFA':
-			$single_award .= 				'<img src="' . $upload_dir['url'] . '/rfa_award.jpg" title="" alt="">';
-			break;
-		case 'MBN':
-			$single_award .= 				'<img src="' . $upload_dir['url'] . '/mbn_award.jpg" title="" alt="">';
-			break;
-	}
+	$single_award .= 					'<p><span class="detail">Network: ' . $network . '</span>';
 	$single_award .= 					'</p>';
 	$single_award .= 					'<p><span class="detail">Project: </span><a href="' . $award_data['award_link'] . '">' .$award_data['award_winning_work'] . ' (' . $award_data['award_year'] . ')</a></p>';
 	$single_award .= 					'<p><span class="detail">Winner: </span>' . $award_data['award_winner'] . '</p>';

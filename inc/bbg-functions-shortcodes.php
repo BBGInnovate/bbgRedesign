@@ -671,6 +671,13 @@ function list_award_shortcode() {
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 	$posts_per_page = 10;
 
+	// IF USER SELECTS FILTER OPTION IT WILL BE PASSED TO THE ADDRESS BAR
+	if (!empty($_GET['network'])) {
+		$network_param = htmlspecialchars($_GET['network']);
+	} else {
+		$network_param = '';
+	}
+
 	$query_vars = array(
 		'paged' => $paged,
 		'posts_per_page' => $posts_per_page,
@@ -705,18 +712,35 @@ function list_award_shortcode() {
 				$awards_container[] = $standalone_award[0];
 			}
 		}
-		$archive_award_componentes = build_award_archive_blocks($awards_container);
+		$archive_award_componentes = build_award_archive_blocks($awards_container, $network_param);
 	}
 
 	$award_markup  = '<div class="nest-container">';
 	$award_markup .= 	'<div class="inner-container">';
-	$award_markup  = 		$archive_award_componentes;
-	$award_markup .= 		'<div class="post-navigation">';
-	$award_markup .= 			'<div class="nav-next">';
-	$award_markup .= 				get_next_posts_link('Next page', $total_page);
-	$award_markup .= 			'</div>';
-	$award_markup .= 			'<div class="nav-previous">';
-	$award_markup .= 				get_previous_posts_link('Previous page');
+	$award_markup .= 		'<div class="grid-container">';
+
+	$award_markup .= '<p>Filter by: ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'voa', '/awards-archive/') . '">VOA</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'ocb', '/awards-archive/') . '">OCB</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'rferl', '/awards-archive/') . '">RFE/RL</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'rfa', '/awards-archive/') . '">RFA</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'mbn', '/awards-archive/') . '">MBN</a>';
+	if (!empty($network_param)) {
+		$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$url = parse_url($url);
+		$award_archive_url = $url['path'];
+		$award_markup .= '<br><span class="date-meta"><a href="' . $award_archive_url . '">Remove filter</a></span>';
+	}
+	$award_markup .= '</p>';
+
+	$award_markup .= 			$archive_award_componentes;
+	$award_markup .= 			'<div class="post-navigation">';
+	$award_markup .= 				'<div class="nav-next">';
+	$award_markup .= 					get_next_posts_link('Next page', $total_page);
+	$award_markup .= 				'</div>';
+	$award_markup .= 				'<div class="nav-previous">';
+	$award_markup .= 					get_previous_posts_link('Previous page');
+	$award_markup .= 				'</div>';
 	$award_markup .= 			'</div>';
 	$award_markup .= 		'</div>';
 	$award_markup .= 	'</div>';
