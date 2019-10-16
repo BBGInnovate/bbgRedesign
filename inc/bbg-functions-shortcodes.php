@@ -720,11 +720,11 @@ function list_award_shortcode() {
 	$award_markup .= 		'<div class="grid-container">';
 
 	$award_markup .= '<p>Filter by: ';
-	$award_markup .= 	'<a href="' . add_query_arg('network', 'voa', '/awards-archive/') . '">VOA</a>, ';
-	$award_markup .= 	'<a href="' . add_query_arg('network', 'ocb', '/awards-archive/') . '">OCB</a>, ';
-	$award_markup .= 	'<a href="' . add_query_arg('network', 'rferl', '/awards-archive/') . '">RFE/RL</a>, ';
-	$award_markup .= 	'<a href="' . add_query_arg('network', 'rfa', '/awards-archive/') . '">RFA</a>, ';
-	$award_markup .= 	'<a href="' . add_query_arg('network', 'mbn', '/awards-archive/') . '">MBN</a>';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'voa', '/awards/') . '">VOA</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'ocb', '/awards/') . '">OCB</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'rferl', '/awards/') . '">RFE/RL</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'rfa', '/awards/') . '">RFA</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'mbn', '/awards/') . '">MBN</a>';
 	if (!empty($network_param)) {
 		$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$url = parse_url($url);
