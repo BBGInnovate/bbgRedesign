@@ -204,13 +204,13 @@ get_header();
 			}
 
 			if ($custom_query -> have_posts()) {
+				// zero
 				$counter = 0;
 				while ($custom_query -> have_posts())  {
 					$custom_query -> the_post();
-					$counter = $counter + 1;
 
 					$main_top_post = false;
-					if ($counter == 1 && $currentPage == 1 && !$hasIntroFeature) {
+					if ($counter == 0 && $currentPage == 1 && !$hasIntroFeature) {
 						$main_top_post = true;
 						$featured_post  = '<div class="outer-container">';
 						$featured_post .= 	'<div class="grid-container">';
@@ -225,14 +225,15 @@ get_header();
 						echo $featured_post;
 					}
 
-					if ((($counter == 2 && $currentPage == 1) || ($counter == 1 && $currentPage > 1)) && !is_page('deep-dive-series')) {
-						echo '<div class="outer-container">';
-					} else if ((is_page('deep-dive-series') && $counter == 1)) {
+					if (($counter == 0) || ($hasIntroFeature && $counter == 0)) {
 						echo '<div class="outer-container">';
 					}
 
-					if ((is_page('deep-dive-series') && $counter == 1) || ($counter > 1 && $currentPage == 1 || $currentPage > 1)) {
-						echo '<div class="grid-third">';
+					if (
+						(is_page('deep-dive-series') && $counter == 0) || 
+						($hasIntroFeature && $counter >= 0 && $currentPage == 1 || $currentPage > 1) || 
+						(!$hasIntroFeature && $counter > 0)
+					) {
 						$post_image = '<a href="' . get_the_permalink() . '" rel="bookmark" tabindex="-1">';
 						if (has_post_thumbnail()) {
 							$post_image .= get_the_post_thumbnail(get_the_ID(), 'medium-thumb');
@@ -240,7 +241,9 @@ get_header();
 							$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
 						}
 						$post_image .= '</a>';
-						echo $post_image;
+
+						echo '<div class="grid-third">';
+						echo 	$post_image;
 
 						$link_header  = '<h3 class="article-title">';
 						$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
@@ -257,6 +260,7 @@ get_header();
 						}
 						echo '<br><br><br></div>'; // END .grid-third
 					}
+					$counter++;
 				} // END WHILE
 				echo '</div>'; // END .outer-container
 			}
