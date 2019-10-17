@@ -177,7 +177,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$corner_hero_section_header = '<h2 class="section-header">' . $corner_hero_label . '</h2>';
 		}
 
-		if (($corner_hero_toggle == 'on') && ($homepage_hero_corner != 'callout')) {
+		if ($corner_hero_toggle == 'on') {
 			$impact_result = get_impact_stories_data(1);
 		}
 		else {
