@@ -38,6 +38,14 @@ $siteUrl = get_post_meta($entity_page_id, 'entity_site_url', true);
 $entityLogoID = get_post_meta($entity_page_id, 'entity_logo',true);
 $websiteName = get_post_meta($entity_page_id, 'entity_website_name', true);
 
+/**
+ * For some reason the url for the OTF page is not turning into an anchor tag
+ * Force <a> tags here
+ */
+if (is_page('Open Technology Fund')) {
+	$websiteName = '<a href="' . $siteUrl . '">' . $websiteName . '</a>';
+}
+
 
 // GET RSS FEED
 $rss_xml = get_post_meta($id, 'rss_xml', true);
@@ -77,7 +85,6 @@ if (count($entity_link_groups) < 4) {
 	$site_select .= '<select name="entity_sites" id="entity_sites">';
 	$site_select .= '<option>Select a service</option>';
 	foreach ($entity_link_groups as $entity_link) {
-		// echo 'site: ' . $entity_url->name;
 		if ($entity_link->website_url != "") { // EX: mbn digital
 			$site_select .= '<option value="' . $entity_link->website_url . '">' . $entity_link->name . '</option>';
 		}
@@ -454,11 +461,11 @@ get_header();
 					echo $share_icons;
 				}
 
-				echo '<div>';
+				echo '<aside>';
 				if ($entityMission!="") { 
 					echo $entityMission;
 				}
-				echo '</div>';
+				echo '</aside>';
 			?>
 
 		<!-- FAST FACTS -->
@@ -551,9 +558,12 @@ get_header();
 			}
 
 			// SEARCH ENTITY WEBSITE
-			echo '<aside>';
-			echo 	$site_select;
-			echo '</aside>';
+			// Not needed for the OTF page
+			if (!is_page('Open Technology Fund')) {
+				echo '<aside>';
+				echo 	$site_select;
+				echo '</aside>';
+			}
 
 			// CONTACT INFORMATION
 			if ($includeContactBox) {
