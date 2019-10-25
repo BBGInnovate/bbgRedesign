@@ -76,6 +76,9 @@ foreach ($settings_social_media_list as $social_platform) {
 	if ($social_platform['social_media_platform'] == 'LinkedIn') {
 		$linkedin_settings_link = $social_platform['social_media_url'];
 	}
+	if ($social_platform['social_media_platform'] == 'Instagram') {
+		$instagram_settings_link = $social_platform['social_media_url'];
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -280,6 +283,7 @@ gtag('config', 'UA-124338348-1');
 				$social_box .= 		'<li id="twitter-social"><a href="' . $twitter_settings_link . '" target="_blank"><i class="fab fa-twitter"></i></a></li>';
 				$social_box .= 		'<li id="youtube-social"><a href="' . $youtube_settings_link . '" target="_blank"><i class="fab fa-youtube"></i></a></li>';
 				$social_box .= 		'<li id="linkedin-social"><a href="' . $linkedin_settings_link . '" target="_blank"><i class="fab fa-linkedin"></i></a></li>';
+				$social_box .= 		'<li id="instagram-social"><a href="' . $instagram_settings_link . '" target="_blank"><i class="fab fa-instagram"></i></a></li>';
 				$social_box .= 	'</ul>';
 				$social_box .= '</div>';
 
