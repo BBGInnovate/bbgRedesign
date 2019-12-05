@@ -171,7 +171,7 @@ button {
 	}
 }
 @include media($medium-large-screen) {
-	$entity-main-grid: (columns: 5);
+	$entity-main-grid: (columns: 6);
 	.entity-main {
 		@include grid-column(1, $entity-main-grid);
 		.entity-icon {
