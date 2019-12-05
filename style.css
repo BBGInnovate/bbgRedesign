@@ -5656,7 +5656,7 @@ button {
 
 @media screen and (min-width: 900px) {
   .entity-main {
-    width: calc(20% - 24px);
+    width: calc(16.66667% - 23.33333px);
     float: left;
     margin-left: 20px; }
     .entity-main .entity-icon {
