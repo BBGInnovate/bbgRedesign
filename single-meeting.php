@@ -94,7 +94,7 @@ $lists_include = get_field('sidebar_dropdown_include', '', true);
 if (have_rows('board_meeting_speakers')) {
 	$speaker_data_set = array();
 	$speaker_data = '';
-	$speaker_list = '';
+	$speaker_list = array();
 
 	$speakers_label = get_field('board_meeting_speaker_label');
 
@@ -237,7 +237,9 @@ get_header();
 							}
 
 							$event_info  = '<h3 class="sidebar-section-header">Event Information</h3>';
-							$event_info .= '<p class="sans">' . $post_date . ', ' . $meeting_time . '<br><br>';
+							$event_info .= '<p class="sans">' . $post_date;
+							$event_info .= (empty($meeting_time) ? "" : ', ' . $meeting_time);
+							$event_info .= '<br><br>';
 							$event_info .= $meeting_location . '</p>';
 							$event_info .= $event_brite_button_string;
 							$event_info .= '<p class="bbg-tagline bbg-tagline--main">';

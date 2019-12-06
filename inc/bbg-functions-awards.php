@@ -42,7 +42,7 @@ function get_standalone_award($award_post_id, $archive = NULL) {
 // CAN BE MULTIPLE, SO THIS FUNCTION HAS SEARCHS SUB_FIELDS
 function get_press_release_award($award_post_id, $archive = NULL) {
 	$single_award_markup = '';
-	$all_press_release_awards = '';
+	$all_press_release_awards = array();
 
 	if (have_rows('award_repeater', $award_post_id)) {
 		while (have_rows('award_repeater', $award_post_id)) {
