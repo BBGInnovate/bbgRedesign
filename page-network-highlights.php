@@ -92,6 +92,7 @@ get_header();
 		<div class="grid-container sidebar-grid--large-gutter">
 			<div class="nest-container">
 					<?php
+						$pressReleaseCatId = get_category_by_slug('press-release')->term_id;
 						foreach($entity_data as $entity) {
 							$cat_slug = get_category_by_slug($entity['entity-title']);
 							$cat_id = $cat_slug->term_id;
@@ -104,7 +105,7 @@ get_header();
 							$press_release_markup .= 	'<div class="main-column">';
 							$press_release_markup .= 		'<header>';
 							$press_release_markup .= 			'<h3 class="section-subheader">';
-							$press_release_markup .= 				'<a href="' . get_category_link($cat_id) . '">' . strtoupper($entity['entity-title']) . '</a>';
+							$press_release_markup .= 				'<a href="' . get_category_link($pressReleaseCatId) . '">' . strtoupper($entity['entity-title']) . '</a>';
 							$press_release_markup .= 			'</3>';
 							$press_release_markup .= 		'</header>';
 							$press_release_markup .= 		'<div class="entity-press-release">';
@@ -129,7 +130,7 @@ get_header();
 								$press_release_markup .= 		'<p class="date-meta">' . get_the_date('F j, Y', $addtl_release->ID) . '</p>';
 								$press_release_markup .= 	'</div>';
 							}
-							$press_release_markup .= 	'<p class="read-more"><a href="' . get_category_link($cat_id) . '">Read more ' . strtoupper($entity['entity-title']) . ' news</a></p>';
+							$press_release_markup .= 	'<p class="read-more"><a href="' . get_category_link($pressReleaseCatId) . '">Read more ' . strtoupper($entity['entity-title']) . ' news</a></p>';
 							$press_release_markup .= 	'</div>';
 							$press_release_markup .= '</div>';
 
