@@ -98,6 +98,8 @@ $employees = get_post_meta($entity_page_id, 'entity_employees', true);
 $languages = get_post_meta($entity_page_id, 'entity_languages', true);
 $audience = get_post_meta($entity_page_id, 'entity_audience', true);
 $appLink = get_post_meta($entity_page_id, 'entity_mobile_apps_link', true);
+$factSheet = get_post_meta($entity_page_id, 'fact_sheet', true);
+
 $primaryLanguage = get_post_meta($entity_page_id, 'entity_primary_language', true);
 
 if ($budget != "") {
@@ -116,6 +118,10 @@ if ($languages != "") {
 }
 if ($audience != "") {
 	$audience = '<li><span class="sidebar-article-title">Audience estimate: </span>' . $audience . '</li>';
+}
+if ($factSheet != "") {
+	$factSheetUrl = wp_get_attachment_url($factSheet);
+	$factSheet = '<a href="' . $factSheetUrl . '">Download the ' . $abbreviation . ' Fact Sheet</a>';
 }
 if ($appLink != "") {
 	$app_link_markup  = '<h3 class="sidebar-section-header">Download the apps</h3>';
@@ -479,6 +485,7 @@ get_header();
 			echo 		$employees;
 			echo 		$languages;
 			echo 		$audience;
+			echo 		$factSheet;
 			echo 	'</ul>';
 			echo '</aside>';
 
