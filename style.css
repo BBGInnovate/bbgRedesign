@@ -3406,6 +3406,7 @@ a:focus .bbg__article-share__icon {
     margin-bottom: 0; }
 
 .award-archive-block {
+  height: 250px;
   margin-bottom: 8rem; }
   .award-archive-block .award-image {
     width: calc(25% - 25px);
