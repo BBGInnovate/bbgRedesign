@@ -38,14 +38,6 @@ $siteUrl = get_post_meta($entity_page_id, 'entity_site_url', true);
 $entityLogoID = get_post_meta($entity_page_id, 'entity_logo',true);
 $websiteName = get_post_meta($entity_page_id, 'entity_website_name', true);
 
-/**
- * For some reason the url for the OTF page is not turning into an anchor tag
- * Force <a> tags here
- */
-if (is_page('Open Technology Fund')) {
-	$websiteName = '<a href="' . $siteUrl . '">' . $websiteName . '</a>';
-}
-
 // GET RSS FEED
 $rss_xml = get_post_meta($id, 'rss_xml', true);
 if (!empty($rss_xml)) {
