@@ -460,7 +460,7 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 }
 
 // ENTITY FIELDS
-function get_entity_data($grid_class) {
+function get_entity_data($grid_class, $excludePosts = array()) {
 	// $grid_class can be ["grid-five" | "entity-side"]
 	$entityParentPage = get_page_by_path('networks');
 	$entity_id_group = array();
@@ -472,6 +472,9 @@ function get_entity_data($grid_class) {
 		'meta_key' => 'entity_year_established',
 		'order' => 'ASC'
 	);
+	if (!empty($excludePosts)) {
+		$qParams['post__not_in'] = $excludePosts;
+	}
 	$custom_query = new WP_Query($qParams);
 
 	if ($custom_query -> have_posts()) {

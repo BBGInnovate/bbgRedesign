@@ -5670,6 +5670,20 @@ button {
       width: calc(100% - 40px);
       float: left;
       margin-left: 20px; }
+  .entity-main-5-col {
+    width: calc(20% - 24px);
+    float: left;
+    margin-left: 20px; }
+    .entity-main-5-col .entity-icon {
+      width: calc(100% - 40px);
+      float: left;
+      margin-left: 20px; }
+      .entity-main-5-col .entity-icon img {
+        width: 50%; }
+    .entity-main-5-col .entity-desc {
+      width: calc(100% - 40px);
+      float: left;
+      margin-left: 20px; }
   .entity-side .entity-icon {
     width: calc(8.33333% - 21.66667px);
     float: left;
