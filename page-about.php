@@ -367,7 +367,8 @@ get_header();
 		if ($showOtfColumn) {
 			$entity_data = get_entity_data("entity-main");
 		} else {
-			$entity_data = get_entity_data("entity-main-5-col", array(47499)); // 47499 == OTF
+			$otfEntityPage = get_page_by_path('networks/otf');
+			$entity_data = get_entity_data("entity-main-5-col", array($otfEntityPage->ID));
 		}
 	}
 ?>
