@@ -46,7 +46,6 @@ if (is_page('Open Technology Fund')) {
 	$websiteName = '<a href="' . $siteUrl . '">' . $websiteName . '</a>';
 }
 
-
 // GET RSS FEED
 $rss_xml = get_post_meta($id, 'rss_xml', true);
 if (!empty($rss_xml)) {
@@ -70,26 +69,31 @@ $entityAwardsLinkFiltered = add_query_arg('entity', $awardSlug, $entityAwardsPag
 
 $entityMission = get_post_meta($entity_page_id, 'entity_mission', true);
 $entity_link_groups = getEntityLinks_taxonomy($entityCategorySlug);
-$site_select = '<h3 class="sidebar-section-header">Explore the ' . $abbreviation . ' websites</h3>';
-if (count($entity_link_groups) < 4) {
-	$site_select .= '<ul class="bbg__rss__list">';
-	foreach ($entity_link_groups as $entity_link) {
-		if ($entity_link->website_url != "") { // EX: mbn digital
-			$site_select .= '<li class="bbg__rss__list-link">';
-			$site_select .= 	'<a target="_blank" href="' . $entity_link->website_url . '">' . $entity_link->name . '</a>';
-			$site_select .= '</li>';
-		}
-	}
-	$site_select .= '</ul>';
+$site_select = '';
+if (empty($entity_link_groups)) {
+	// Don't display
 } else {
-	$site_select .= '<select name="entity_sites" id="entity_sites">';
-	$site_select .= '<option>Select a service</option>';
-	foreach ($entity_link_groups as $entity_link) {
-		if ($entity_link->website_url != "") { // EX: mbn digital
-			$site_select .= '<option value="' . $entity_link->website_url . '">' . $entity_link->name . '</option>';
+	$site_select = '<h3 class="sidebar-section-header">Explore the ' . $abbreviation . ' websites</h3>';
+	if (count($entity_link_groups) < 4) {
+		$site_select .= '<ul class="bbg__rss__list">';
+		foreach ($entity_link_groups as $entity_link) {
+			if ($entity_link->website_url != "") { // EX: mbn digital
+				$site_select .= '<li class="bbg__rss__list-link">';
+				$site_select .= 	'<a target="_blank" href="' . $entity_link->website_url . '">' . $entity_link->name . '</a>';
+				$site_select .= '</li>';
+			}
 		}
+		$site_select .= '</ul>';
+	} else {
+		$site_select .= '<select name="entity_sites" id="entity_sites">';
+		$site_select .= '<option>Select a service</option>';
+		foreach ($entity_link_groups as $entity_link) {
+			if ($entity_link->website_url != "") { // EX: mbn digital
+				$site_select .= '<option value="' . $entity_link->website_url . '">' . $entity_link->name . '</option>';
+			}
+		}
+		$site_select .= '</select><button class="usa-button" id="entityUrlGo">Go</button>';
 	}
-	$site_select .= '</select><button class="usa-button" id="entityUrlGo">Go</button>';
 }
 
 //Entity fast facts / by-the-numbers
@@ -564,13 +568,9 @@ get_header();
 				echo $cited_post_list;
 			}
 
-			// SEARCH ENTITY WEBSITE
-			// Not needed for the OTF page
-			if (!is_page('Open Technology Fund')) {
-				echo '<aside>';
-				echo 	$site_select;
-				echo '</aside>';
-			}
+			echo '<aside>';
+			echo 	$site_select;
+			echo '</aside>';
 
 			// CONTACT INFORMATION
 			if ($includeContactBox) {

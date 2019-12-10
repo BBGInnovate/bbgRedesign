@@ -808,6 +808,9 @@ function getEntityLinks($entityID) {
 function getEntityLinks_taxonomy($termSlug) {
 
 	$entityTerm = get_term_by('slug', $termSlug, 'language_services');
+	if (empty($entityTerm)) {
+		return array();
+	}
 	$terms = get_terms(array(
 		'taxonomy' => 'language_services',
 		'parent' => $entityTerm ->term_id,
