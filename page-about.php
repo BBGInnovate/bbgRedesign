@@ -363,12 +363,7 @@ get_header();
 	$show_networks = get_field('about_networks_row', $id);
 	if (!empty($show_networks)) {
 		// OPTIONS: $entity_placement arguments ["entity-main" | "entity-side"]
-		$showOtfColumn = isShowOtfColumnOption();
-		if ($showOtfColumn) {
-			$entity_data = get_entity_data("entity-main");
-		} else {
-			$entity_data = get_entity_data("entity-main-5-col", array(47499)); // 47499 == OTF
-		}
+		$entity_data = get_entity_data('entity-main');
 	}
 ?>
 </main>

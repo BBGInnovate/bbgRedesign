@@ -1177,11 +1177,6 @@ function social_media_share_page($page_id) {
 	return $share_markup;
 }
 
-function isShowOtfColumnOption() {
-	$showOtfColumn = get_field('show_otf_column', 'option');
-
-	return !empty($showOtfColumn) && $showOtfColumn == 'yes';
-}
 
 
 

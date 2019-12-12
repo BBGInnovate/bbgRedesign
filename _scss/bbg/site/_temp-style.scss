@@ -180,15 +180,6 @@ button {
 		}
 		.entity-desc {@include grid-column(12);}
 	}
-	$entity-main-grid-5-col: (columns: 5);
-	.entity-main-5-col {
-		@include grid-column(1, $entity-main-grid-5-col);
-		.entity-icon {
-			@include grid-column(12);
-			img {width: 50%;}
-		}
-		.entity-desc {@include grid-column(12);}
-	}
 	.entity-side {
 		.entity-icon {@include grid-column(1);}
 		.entity-desc {@include grid-column(11);}
