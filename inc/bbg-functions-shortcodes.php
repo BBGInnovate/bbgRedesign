@@ -725,7 +725,7 @@ function list_award_shortcode() {
 	$award_markup .= 	'<a href="' . add_query_arg('network', 'rferl', '/awards/') . '">RFE/RL</a>, ';
 	$award_markup .= 	'<a href="' . add_query_arg('network', 'rfa', '/awards/') . '">RFA</a>, ';
 	$award_markup .= 	'<a href="' . add_query_arg('network', 'mbn', '/awards/') . '">MBN</a>, ';
-	$award_markup .= 	'<a href="' . add_query_arg('network', 'otf', '/awards/') . '">OTF</a>, ';
+	$award_markup .= 	'<a href="' . add_query_arg('network', 'otf', '/awards/') . '">OTF</a>';
 	if (!empty($network_param)) {
 		$url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 		$url = parse_url($url);
