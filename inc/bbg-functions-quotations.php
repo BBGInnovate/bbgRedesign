@@ -5,6 +5,7 @@
 			$qParams = array(
 				'post_type' => 'quotation',
 				'post_status' => 'publish',
+				'posts_per_page'   => -1,
 				'order' => 'DESC',
 				'post__not_in' => $idsToExclude
 			);
@@ -87,8 +88,8 @@
 		$mugshot = $q['quoteMugshot'];
 
 		$catArray = $q['quoteNetwork'];
-		$networks = array('VOA','OCB','RFE/RL','RFA','MBN');
-		$networkColors = array('#1330bf','#003a8d','#EA6903','#478406','#E64C66');
+		$networks = array('VOA','OCB','RFE/RL','RFA','MBN','OTF');
+		$networkColors = array('#1330bf','#003a8d','#EA6903','#478406','#E64C66','#26A9E0');
 		$quoteNetwork = '';
 
 		foreach ($catArray as $cat) {
@@ -150,7 +151,8 @@
 			'RFE/RL' => '#EA6903',
 			'RFA' => '#478406',
 			'MBN' => '#E64C66',
-			'BBG' => '#981B1E'
+			'BBG' => '#981B1E',
+			'OTF' => '#26A9E0'
 		);
 		$networkBackgroundColor = $colors[$calloutNetwork];
 

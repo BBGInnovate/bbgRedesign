@@ -140,7 +140,7 @@ if (have_rows('project_team_members')) {
 
 // IF PRESS RELEASE HAS AN ENTITY CATEGORY, GET THE LOGO
 $categories_to_show_entities = ['Press Release', 'Project', 'Media Advisory'];
-$entity_categories = ['voa', 'rfa', 'mbn', 'ocb', 'rferl'];
+$entity_categories = ['voa', 'rfa', 'mbn', 'ocb', 'rferl', 'otf'];
 
 $entity_logos = array();
 $entity_category_data = array();

@@ -292,7 +292,8 @@ function usagm_experts_list_shortcode() {
 	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'ocb', '/usagm-experts/') . '">OCB</a>, ';
 	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'rferl', '/usagm-experts/') . '">RFE/RL</a>, ';
 	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'rfa', '/usagm-experts/') . '">RFA</a>, ';
-	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'mbn', '/usagm-experts/') . '">MBN</a>';
+	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'mbn', '/usagm-experts/') . '">MBN</a>, ';
+	$experts_markup .= 	'<a href="' . add_query_arg('tag', 'otf', '/usagm-experts/') . '">OTF</a>';
 	if (!empty($tag)) {
 		$experts_markup .= '<br><span class="date-meta"><a href="' . get_the_permalink() . '">Remove filter</a></span>';
 	}

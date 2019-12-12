@@ -21,7 +21,7 @@ wp_reset_postdata();
 wp_reset_query();
 
 // GET PRESS RELEASES FOR EACH ENTITY
-$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn'];
+$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn', 'otf'];
 $entity_data = array();
 foreach ($entities as $cur_entity) {
 	$entity_title = $cur_entity;
