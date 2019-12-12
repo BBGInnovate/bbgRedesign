@@ -1177,8 +1177,11 @@ function social_media_share_page($page_id) {
 	return $share_markup;
 }
 
+function isShowNetworkEntityList() {
+	$showNetworkEntityList = get_field('show_network_entity_list', 'option');
 
-
+	return !empty($showNetworkEntityList) && $showNetworkEntityList == 'yes';
+}
 
 function my_login_logo_one() { 
 ?> 

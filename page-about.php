@@ -363,7 +363,9 @@ get_header();
 	$show_networks = get_field('about_networks_row', $id);
 	if (!empty($show_networks)) {
 		// OPTIONS: $entity_placement arguments ["entity-main" | "entity-side"]
-		$entity_data = get_entity_data('entity-main');
+		if (isShowNetworkEntityList()) {
+			$entity_data = get_entity_data('entity-main');
+		}
 	}
 ?>
 </main>

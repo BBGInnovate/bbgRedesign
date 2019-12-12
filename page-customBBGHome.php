@@ -284,7 +284,9 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 	<!-- NETWORK ENTITY LIST -->
 	<?php
 		// $entity_placement can be ["entity-main" | "entity-side"]
-		$entity_data = get_entity_data("entity-main");
+		if (isShowNetworkEntityList()) {
+			$entity_data = get_entity_data("entity-main");
+		}
 	?>
 
 	<?php // QUOTE ?>
