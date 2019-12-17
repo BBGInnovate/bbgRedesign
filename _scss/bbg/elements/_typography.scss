@@ -7,10 +7,10 @@ h3 {clear: none;}
 .section-header,
 .section-header a:link,
 .section-header a:visited {
-    font-family: $font-serif;
+    font-family: $font-sans;
     font-size: 3.4rem;
     line-height: 4.6rem;
-    font-weight: 300;
+    font-weight: 400;
     text-transform: none;
     letter-spacing: 0;
     color: $color-red;
@@ -20,10 +20,10 @@ h3 {clear: none;}
 .section-subheader,
 .section-subheader a:link,
 .section-subheader a:visited {
-    font-family: $font-serif;
+    font-family: $font-sans;
     font-size: 2.7rem;
     line-height: 3.7rem;
-    font-weight: 300;
+    font-weight: 400;
     text-transform: none;
     letter-spacing: 0;
     color: $color-blue-darkest;
