@@ -195,7 +195,7 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" r
 			$impact_and_corner_hero .= 		'<div class="nest-container">';
 			$impact_and_corner_hero .= 			'<div class="inner-container">';
 			$impact_and_corner_hero .= 				'<div class="main-column">';
-			$impact_and_corner_hero .= 					'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Impact Stories</a></h2>';
+			$impact_and_corner_hero .= 					'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path($impact_page_page)) . '">Our Impact</a></h2>';
 			foreach ($impact_result as $impact_post_id) {
 				$impact_post = get_post($impact_post_id);
 				$impact_and_corner_hero .= build_article_standard_vertical($impact_post);
