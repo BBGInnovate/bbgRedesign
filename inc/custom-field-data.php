@@ -107,7 +107,7 @@ function get_soapbox_data() {
 				$soap_class = "bbg__voice--ceo";
 				$soapHeaderText = "From the CEO";
 				$profile_photo = get_field('homepage_soapbox_image', 'options');
-				$profile_name = "John Lansing";
+				$profile_name = "";
 				break;
 			}
 			else if ($cat -> slug == "global-media-matters") {
