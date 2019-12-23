@@ -17,6 +17,18 @@ if (have_posts()) {
 	$page_content = get_the_content();
 	$page_content = wpautop($page_content);
 
+	$subject_area_objects = get_the_terms( $page_id, "subject_area");
+	$subject_areas = array();
+	if (!empty($subject_area_objects)) {
+		$subject_areas = wp_list_pluck($subject_area_objects, 'name');
+	}
+
+	$region_objects = get_the_terms( $page_id, "region");
+	$regions = array();
+	if (!empty($region_objects)) {
+		$regions = wp_list_pluck($region_objects, 'name');
+	}
+
 	rewind_posts();
 }
 
@@ -96,6 +108,16 @@ get_header(); ?>
 							echo $profile_occupation;
 
 							echo $page_content;
+
+							echo '<p>';
+							if (!empty($subject_areas)) {
+								echo '<strong>Expertise: </strong>' . join(", ", $subject_areas);
+							}
+							if (!empty($regions)) {
+								echo '<br />';
+								echo '<strong>Regions: </strong>' . join(", ", $regions);
+							}
+							echo '</p>';
 						?>
 					</div>
 				</div>

@@ -11,7 +11,7 @@
 $include_file = 'single-standard.php';
 
 
-if (in_category('Profile')) {
+if (in_category('Profile') || is_singular('experts')) {
 	$include_file = 'single-profile.php';
 } else if (in_category('Board Meetings') || in_category('Event')) {
 	$include_file = 'single-meeting.php';

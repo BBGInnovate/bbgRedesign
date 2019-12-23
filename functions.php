@@ -278,6 +278,7 @@ require get_template_directory() . '/inc/bbg-functions-jobs.php';
 require get_template_directory() . '/inc/bbg-functions-maps.php';
 require get_template_directory() . '/inc/bbg-functions-nav.php';
 require get_template_directory() . '/inc/bbg-functions-networks.php';
+require get_template_directory() . '/inc/bbg-functions-profile.php';
 require get_template_directory() . '/inc/bbg-functions-quotations.php';
 require get_template_directory() . '/inc/bbg-functions-shortcodes.php';
 require get_template_directory() . '/inc/bbg-functions-sidebar-more.php';
