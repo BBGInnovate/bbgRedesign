@@ -400,6 +400,16 @@ function custom_youtube_settings($code){
 add_filter('embed_handler_html', 'custom_youtube_settings');
 add_filter('embed_oembed_html', 'custom_youtube_settings');
 
+function wp_embed_handler_adobe_spark($matches, $attr, $url, $rawattr) {
+	$embed = '';
+	$embed .= '<script id="asp-embed-script" data-zindex="1000000" type="text/javascript" charset="utf-8" src="https://spark.adobe.com/page-embed.js"></script>';
+	$embed .= '<a class="asp-embed-link" href="https://spark.adobe.com/page/' . $matches[1] .'/" target="_blank">';
+	$embed .= '<img src="https://spark.adobe.com/page/' . $matches[1] . '/embed.jpg" style="width:100%" border="0" />';
+	$embed .= '</a>';
+	return $embed;
+}
+wp_embed_register_handler( 'adobe_spark', '#https://spark\.adobe\.com/page/([a-zA-Z0-9]+)/#i', 'wp_embed_handler_adobe_spark' );
+
 function featured_video($url) {
 	if(strpos($url, 'facebook.com')) {
 		$video_package  = '<div id="fb-root"></div>';
