@@ -233,10 +233,12 @@ if ($prCategorySlug != '') {
 	if (is_object($prCategoryObj)) {
 		$prCategoryID = $prCategoryObj -> term_id;
 		// CATEGORIES TO EXCLUDE: 2280: USAGM Experts (dev testing 2276)
+		$pressReleaseCatObj = get_category_by_slug("press-release");
+		$pressReleaseCatID = $pressReleaseCatObj->term_id;
 		$qParams = array(
 			'post_type' => array('post'),
 			'posts_per_page' => 3,
-			'category__and' => array($prCategoryID),
+			'category__and' => array($prCategoryID, $pressReleaseCatID),
 			'category__not_in' => array(2280),
 			'orderby', 'date',
 			'order', 'DESC'

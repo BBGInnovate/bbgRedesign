@@ -21,7 +21,7 @@ wp_reset_postdata();
 wp_reset_query();
 
 // GET PRESS RELEASES FOR EACH ENTITY
-$entities = ['bbg', 'voa', 'rferl', 'ocb', 'rfa', 'mbn', 'otf'];
+$entities = ['usagm', 'voa', 'rferl', 'ocb', 'rfa', 'mbn', 'otf'];
 $entity_data = array();
 foreach ($entities as $cur_entity) {
 	$entity_title = $cur_entity;
@@ -58,6 +58,7 @@ foreach ($entities as $cur_entity) {
 
 			$entity_group = array(
 				'entity-title' => $entity_title,
+				'entity-slug' => $entity_slug,
 				'press-releases' => $entity_press_releases,
 			);
 			$entity_data[] = $entity_group;
@@ -96,16 +97,14 @@ if ($featured_media_result != "") {
 						foreach($entity_data as $entity) {
 							$cat_slug = get_category_by_slug($entity['entity-title']);
 							$cat_id = $cat_slug->term_id;
-							if ($entity['entity-title'] == 'bbg') {
-								$entity['entity-title'] = 'usagm';
-							} else if ($entity['entity-title'] == 'rferl') {
+							if ($entity['entity-title'] == 'rferl') {
 								$entity['entity-title'] = 'rfe/rl';
 							}
 							$press_release_markup  = '<div class="inner-container entity-press-release-group">';
 							$press_release_markup .= 	'<div class="main-column">';
 							$press_release_markup .= 		'<header>';
 							$press_release_markup .= 			'<h3 class="section-subheader">';
-							$press_release_markup .= 				'<a href="' . get_category_link($pressReleaseCatId) . '">' . strtoupper($entity['entity-title']) . '</a>';
+							$press_release_markup .= 				'<a href="' . get_the_permalink(get_page_by_path('news-and-information/press-releases/' . $entity['entity-slug'])) . '">' . strtoupper($entity['entity-title']) . '</a>';
 							$press_release_markup .= 			'</3>';
 							$press_release_markup .= 		'</header>';
 							$press_release_markup .= 		'<div class="entity-press-release">';
@@ -130,7 +129,7 @@ if ($featured_media_result != "") {
 								$press_release_markup .= 		'<p class="date-meta">' . get_the_date('F j, Y', $addtl_release->ID) . '</p>';
 								$press_release_markup .= 	'</div>';
 							}
-							$press_release_markup .= 	'<p class="read-more"><a href="' . get_category_link($pressReleaseCatId) . '">Read more ' . strtoupper($entity['entity-title']) . ' news</a></p>';
+							$press_release_markup .= 	'<p class="read-more"><a href="' . get_the_permalink(get_page_by_path('news-and-information/press-releases/' . $entity['entity-slug'])) . '">Read more ' . strtoupper($entity['entity-title']) . ' news</a></p>';
 							$press_release_markup .= 	'</div>';
 							$press_release_markup .= '</div>';
 
