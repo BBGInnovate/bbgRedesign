@@ -6295,6 +6295,17 @@ div.banner_readmore h6 a:visited {
   display: inline-block;
   position: relative; }
 
+@media screen and (min-width: 1201px) {
+  .bbg__form__experts-filter {
+    max-width: 100%; }
+    .bbg__form__experts-filter select {
+      display: inline;
+      width: 32rem; }
+    .bbg__form__experts-filter input[type="submit"] {
+      display: inline;
+      margin-top: 0em;
+      margin-bottom: 4em; } }
+
 .bbg__form--required:after {
   color: #e31c3d;
   content: '*';

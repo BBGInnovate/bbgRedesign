@@ -56,35 +56,30 @@ function usagm_experts_list() {
     if (!empty($entity_filter) || !empty($region_filter) || !empty($subject_area_filter)) {
         $experts_markup .= '<br><span class="date-meta"><a href="/experts">Remove all filters</a></span>';
     }
-    // $experts_markup  .= '<div>';
 
-    $experts_markup .= '<form a action="" method="GET">';
+    $experts_markup .= '<form class="bbg__form__experts-filter" action="" method="GET">';
+    $experts_markup .=     '<select name="entity">';
+    $experts_markup .=         '<option value="">ALL</option>';
+    $experts_markup .=         '<option value="voa">VOA</option>';
+    $experts_markup .=         '<option value="ocb">OCB</option>';
+    $experts_markup .=         '<option value="rferl">RFE/RL</option>';
+    $experts_markup .=         '<option value="rfa">RFA</option>';
+    $experts_markup .=         '<option value="mbn">MBN</option>';
+    $experts_markup .=         '<option value="otf">OTF</option>';
+    $experts_markup .=     '</select> ';
 
-    $experts_markup  .= '<select name="entity">';
-    $experts_markup  .= '<option value="">ALL</option>';
-    $experts_markup  .= '<option value="voa">VOA</option>';
-    $experts_markup  .= '<option value="ocb">OCB</option>';
-    $experts_markup  .= '<option value="rferl">RFE/RL</option>';
-    $experts_markup  .= '<option value="rfa">RFA</option>';
-    $experts_markup  .= '<option value="mbn">MBN</option>';
-    $experts_markup  .= '<option value="otf">OTF</option>';
-    $experts_markup  .= '</select>';
-
-    // $experts_markup .= '</div>';
 
     $region_args = array(
         'orderby' => 'name',
         'order' => 'ASC',
         'echo' => 0,
-        // 'selected' => $kat = get_query_var( 'cat' ),
         'show_option_all' => 'ALL',
         'name' => 'region',
         'hide_empty' => 0,
         'value_field' => 'name',
-        // 'hide_if_empty' => false,
         'id' => '',
         'taxonomy' => 'region'
-      );
+    );
     $experts_markup .= wp_dropdown_categories($region_args);
 
     $subject_area_args = array(
@@ -96,10 +91,10 @@ function usagm_experts_list() {
         'hide_empty' => 0,
         'value_field' => 'name',
         'taxonomy' => 'subject_area'
-      );
+    );
     $experts_markup .= wp_dropdown_categories($subject_area_args);
 
-    $experts_markup .= '<input type="submit" name="submit" value="Filter" />';
+    $experts_markup .=     '<input type="submit" name="submit" value="Filter" />';
     $experts_markup .= '</form>';
 
     foreach ($usagm_experts_array as $expert_id) {

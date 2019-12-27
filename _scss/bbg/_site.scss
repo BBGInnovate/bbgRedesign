@@ -552,6 +552,21 @@ div.banner_readmore h6 a:visited {
     position: relative;
 }
 
+.bbg__form__experts-filter {
+    @include media($large-screen) {
+        max-width: 100%;
+        select {
+            display: inline;
+            width: $usa-form-width;
+        }
+        input[type="submit"] {
+            display: inline;
+            margin-top: 0em;
+            margin-bottom: 4em;
+        }
+    }
+}
+
 .bbg__form--required {
     &:after {
         color: $color-secondary;
