@@ -56,10 +56,13 @@ if ($expert_posts->have_posts()) {
             'post_date' => get_the_date("Y-m-d H:i:s"),
         );
 
-        $post_id = wp_insert_post( $post_data );
+        $post_id = wp_insert_post($post_data);
         if ($post_id == 0) {
-            echo 'ERROR inserting post with title: ' . $post_data['post_title'];
+            echo 'ERROR inserting post with title: ' . $post_data['post_title'] . "\n";
         } else {
+            $redirect = get_the_permalink() . ',' . get_the_permalink($post_id) . "\n";
+            echo $redirect;
+
             foreach ($profile_fields as $profile_field) {
                 $field_value = get_field($profile_field['name']);
 
