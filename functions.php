@@ -856,6 +856,43 @@ function my_add_excerpts_to_pages() {
 
 }
 
+/**
+ * Post Type: Experts.
+ */
+function cptui_register_my_cpts_experts() {
+	$labels = array(
+		"name" => __( "Experts", "bbgRedesign" ),
+		"singular_name" => __( "Expert", "bbgRedesign" ),
+	);
+
+	$args = array(
+		"label" => __( "Experts", "bbgRedesign" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "experts", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "editor" ),
+		"taxonomies" => array( "category", "post_tag" ),
+	);
+
+	register_post_type( "experts", $args );
+}
+add_action( 'init', 'cptui_register_my_cpts_experts' );
+
 //http://aaronrutley.com/responsive-images-in-wordpress-with-acf/
 function ar_responsive_image($image_id,$image_size,$max_width){
 	$returnVal = '';

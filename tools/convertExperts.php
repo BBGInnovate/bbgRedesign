@@ -39,11 +39,17 @@ if ($expert_posts->have_posts()) {
 
         $entity_cat_id_array = array();
         $categories = get_the_category();
-        foreach( $categories as $category) {
+        foreach($categories as $category) {
             if (in_array(strtoupper($category->slug), array('VOA', 'RFERL', 'OCB', 'RFA', 'MBN', 'OTF'))) {
                 $entity_cat = get_category_by_slug($category->slug);
                 $entity_cat_id_array[] = $entity_cat->term_id;
             }
+        }
+
+        $entity_tag_id_array = array();
+        $tags = get_the_tags();
+        if (!empty($tags)) {
+            $entity_tag_id_array = wp_list_pluck($tags, 'term_id');
         }
 
         $post_data = array(
@@ -53,6 +59,7 @@ if ($expert_posts->have_posts()) {
             'post_status' => 'publish',
             'post_author' => get_the_author_meta('ID'),
             'post_category' => $entity_cat_id_array,
+            'tags_input' => $entity_tag_id_array,
             'post_date' => get_the_date("Y-m-d H:i:s"),
         );
 
