@@ -17,17 +17,9 @@ if (have_posts()) {
 	$page_content = get_the_content();
 	$page_content = wpautop($page_content);
 
-	$subject_area_objects = get_the_terms( $page_id, "subject_area");
-	$subject_areas = array();
-	if (!empty($subject_area_objects)) {
-		$subject_areas = wp_list_pluck($subject_area_objects, 'name');
-	}
-
-	$region_objects = get_the_terms( $page_id, "region");
-	$regions = array();
-	if (!empty($region_objects)) {
-		$regions = wp_list_pluck($region_objects, 'name');
-	}
+	$expertise = getTermsStringFromPost($page_id, 'expertise');
+	$languages = getTermsStringFromPost($page_id, 'language');
+	$locations = getTermsStringFromPost($page_id, 'location');
 
 	rewind_posts();
 }
@@ -110,12 +102,16 @@ get_header(); ?>
 							echo $page_content;
 
 							echo '<p>';
-							if (!empty($subject_areas)) {
-								echo '<strong>Expertise: </strong>' . join(", ", $subject_areas);
+							if (!empty($expertise)) {
+								echo '<strong>Expertise: </strong>' . $expertise;
 							}
-							if (!empty($regions)) {
+							if (!empty($languages)) {
 								echo '<br />';
-								echo '<strong>Regions: </strong>' . join(", ", $regions);
+								echo '<strong>Languages: </strong>' . $languages;
+							}
+							if (!empty($locations)) {
+								echo '<br />';
+								echo '<strong>Locations: </strong>' . $locations;
 							}
 							echo '</p>';
 						?>

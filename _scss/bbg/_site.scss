@@ -553,16 +553,28 @@ div.banner_readmore h6 a:visited {
 }
 
 .bbg__form__experts-filter {
-    @include media($large-screen) {
+    margin-bottom: 4em;
+    label {
+        margin-top: 1em;
+        margin-left: 0px;
+    }
+    input[type="submit"] {
+        margin-left: 0px;
+    }
+    @include media($medium-large-screen) {
+        margin-bottom: 2em;
         max-width: 100%;
-        select {
-            display: inline;
-            width: $usa-form-width;
+        label {
+            margin-top: 0em;
+            margin-left: 5px;
+        }
+        label:first-of-type {
+            margin-top: 0em;
+            margin-left: 0px;
         }
         input[type="submit"] {
             display: inline;
-            margin-top: 0em;
-            margin-bottom: 4em;
+            margin-left: 5px;
         }
     }
 }

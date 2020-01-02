@@ -1194,6 +1194,15 @@ function isShowNetworkEntityList() {
 	return !empty($showNetworkEntityList) && $showNetworkEntityList == 'yes';
 }
 
+function getTermsStringFromPost($post_id, $taxonomy) {
+	$terms = get_the_terms($post_id, $taxonomy);
+	if (empty($terms)) {
+		return '';
+	} else {
+		return join(', ', wp_list_pluck($terms, 'name'));
+	}
+}
+
 function my_login_logo_one() { 
 ?> 
 	<style type="text/css"> 
