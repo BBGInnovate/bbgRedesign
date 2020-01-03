@@ -2,6 +2,7 @@
 
 /*
     Script to convert Experts posts to custom post type.
+    For categories, this only converts the Entity.
 */
 
 die();

@@ -94,7 +94,7 @@ function usagm_experts_list() {
         'value_field' => 'name',
         'taxonomy' => 'expertise'
     );
-    $experts_markup .= '<label class="grid-five">Expertise:<br />';
+    $experts_markup .= '<label class="grid-five">Expertise<br />';
     $experts_markup .= wp_dropdown_categories($expertise_args);
     $experts_markup .= '</label>';
 
@@ -109,7 +109,7 @@ function usagm_experts_list() {
         'id' => '',
         'taxonomy' => 'language'
     );
-    $experts_markup .= '<label class="grid-five">Language:<br />';
+    $experts_markup .= '<label class="grid-five">Language<br />';
     $experts_markup .= wp_dropdown_categories($language_args);
     $experts_markup .= '</label>';
 
@@ -124,7 +124,7 @@ function usagm_experts_list() {
         'id' => '',
         'taxonomy' => 'location'
     );
-    $experts_markup .= '<label class="grid-five">Location:<br />';
+    $experts_markup .= '<label class="grid-five">Location<br />';
     $experts_markup .= wp_dropdown_categories($location_args);
     $experts_markup .= '</label>';
 
@@ -143,9 +143,11 @@ function usagm_experts_list() {
         $profile_name = $first_name . ' ' . $last_name;
         $profile_link = get_the_permalink($expert_id->ID);
 
-        if  ($profile_photo_id) {
-            $profile_photo = wp_get_attachment_image_src($profile_photo_id , 'mugshot');
+        if ($profile_photo_id) {
+            $profile_photo = wp_get_attachment_image_src($profile_photo_id , 'thumbnail');
             $profile_photo = $profile_photo[0];
+        } else {
+            $profile_photo = get_template_directory_uri() . '/img/photo-not-available-300x300.png';
         }
 
         $expert_profile  = '<div class="grid-half profile-clears">';
