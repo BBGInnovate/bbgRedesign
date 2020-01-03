@@ -91,7 +91,7 @@ function usagm_experts_list() {
         'show_option_all' => 'ALL',
         'name' => 'expertise',
         'hide_empty' => 0,
-        'value_field' => 'name',
+        'value_field' => 'slug',
         'taxonomy' => 'expertise'
     );
     $experts_markup .= '<label class="grid-five">Expertise<br />';
@@ -105,7 +105,7 @@ function usagm_experts_list() {
         'show_option_all' => 'ALL',
         'name' => 'language',
         'hide_empty' => 0,
-        'value_field' => 'name',
+        'value_field' => 'slug',
         'id' => '',
         'taxonomy' => 'language'
     );
@@ -120,7 +120,7 @@ function usagm_experts_list() {
         'show_option_all' => 'ALL',
         'name' => 'location',
         'hide_empty' => 0,
-        'value_field' => 'name',
+        'value_field' => 'slug',
         'id' => '',
         'taxonomy' => 'location'
     );
