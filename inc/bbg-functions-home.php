@@ -131,21 +131,6 @@ function get_recent_posts($qty) {
 						'terms' => array('award'),
 						'operator' => 'NOT IN'
 					)
-				),
-				array(
-					'relation' => 'OR',
-					array(
-						'taxonomy' => 'category',
-						'field' => 'slug',
-						'terms' => array('board-meeting'),
-						'operator' => 'IN'
-					),
-					array(
-						'taxonomy' => 'category',
-						'field' => 'slug',
-						'terms' => array('event'),
-						'operator' => 'NOT IN'
-					)
 				)
 			),
 		);
