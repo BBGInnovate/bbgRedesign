@@ -40,7 +40,10 @@ if (!$active){
 
 // GET PROFILE PHOTO
 $profile_photo = get_field('profile_photo', $page_id);
-$profile_photo_url = $profile_photo['url'];
+if (!empty($profile_photo)) {
+	$profile_photo_url = $profile_photo['url'];
+}
+
 
 
 // GET INTERN INFORMATION
@@ -85,7 +88,11 @@ get_header(); ?>
 			<div class="nest-container">
 				<div class="inner-container">
 					<div class="icon-side-content-container">
-						<img src="<?php echo $profile_photo_url; ?>" alt="Profile photo">
+						<?php
+						if (!empty($profile_photo_url)) {
+							echo '<img src="' . $profile_photo_url . '" alt="Profile photo">';
+						}
+						?>
 					</div>
 					<div class="icon-main-content-container">
 						<?php
