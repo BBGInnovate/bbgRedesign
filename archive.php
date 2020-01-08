@@ -33,9 +33,6 @@ if ($cat_image_url != "") {
 			echo '<div class="outer-container">';
 			echo 	'<div class="grid-container">';
 			echo 		'<h2 class="section-header">' . get_the_archive_title() . '</h2>';
-			if (!empty(get_the_archive_description())) {
-				echo 	'<p class="lead-in">' . get_the_archive_description() . '</p>';
-			}
 			echo 	'</div>';
 			echo '</div>';
 
