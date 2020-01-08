@@ -303,7 +303,7 @@ get_header();
 		$office_information_chuncks .= 				$office_intro_result;
 		if (is_page('media-development')) {
 			$office_information_chuncks .= 				'<div id="map" class="bbg__map--banner"></div>';
-			$office_information_chuncks .= 				'<p class="bbg__article-header__caption">This map displays the training opportunities that the USAGM has offered over on a year by year basis.</p>';
+			$office_information_chuncks .= 				'<p class="bbg__article-header__caption">This map displays the training opportunities that the USAGM has offered over on a year by year basis. Click on a map pin to see details of each workshop.</p>';
 		}
 		$office_information_chuncks .= 				$office_highlights_module;
 		$office_information_chuncks .= 			'</div>';

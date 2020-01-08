@@ -207,7 +207,7 @@ get_header(); ?>
 	<section class="usa-section" style="position: relative;">
 		<div id="map" class="bbg__map--banner"></div>
 		<div class="usa-grid">
-			<p class="bbg__article-header__caption">This map displays the training opportunities that the BBG has offered over on a year by year basis.</p>
+			<p class="bbg__article-header__caption">This map displays the training opportunities that the USAGM has offered over on a year by year basis. Click on a map pin to see details of each workshop.</p>
 		</div>
 		
 		<img id="resetZoom" src="<?php echo get_template_directory_uri(); ?>/img/home.png" class="bbg__map__button" alt="Reset zoom image">
