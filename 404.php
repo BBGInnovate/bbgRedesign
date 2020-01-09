@@ -103,12 +103,13 @@ endif;
 ?>
 
 <?php /* include map stuff */ ?>
-<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
-
-<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-rc.3/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/MarkerCluster.Default.css" />
+<script type="text/javascript" src="https://cdn.rawgit.com/Leaflet/Leaflet.markercluster/v1.0.0-beta.2.0/dist/leaflet.markercluster-src.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/ghybs/Leaflet.FeatureGroup.SubGroup/v1.0.0/dist/leaflet.featuregroup.subgroup-src.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/jseppi/Leaflet.MakiMarkers/master/Leaflet.MakiMarkers.js"></script>
 
 <style>
 	.marker-cluster-small {
@@ -120,9 +121,15 @@ endif;
 </style>
 
 <script type="text/javascript">
-L.mapbox.accessToken = '<?php echo 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw'; ?>';
+	var mbToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
+	var tilesetUrl = 'https://a.tiles.mapbox.com/v4/mapbox.emerald/{z}/{x}/{y}@2x.png?access_token=' + mbToken;
+	var attribStr = '&copy; <a href="https://www.mapbox.com/map-feedback/">Mapbox</a>  &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+	var tiles = L.tileLayer(tilesetUrl, {
+		maxZoom: 18,
+		attribution: attribStr
+	});
 
-var map = L.mapbox.map('map', 'mapbox.emerald')
+	var map = L.map('map', {zoom: 13, layers: [tiles]});
 	var markers = new L.MarkerClusterGroup({
 		iconCreateFunction: function (cluster) {
 			var childCount = cluster.getChildCount();
@@ -138,12 +145,14 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
 		}
 	});
 
+	L.MakiMarkers.accessToken = mbToken;
+
 	for (var i = 1; i < geojson[0].features.length; i++) {
 		var coords = geojson[0].features[i].geometry.coordinates;
 		var title = geojson[0].features[i].properties.title; //a[2];
 		var description = geojson[0].features[i].properties['description'];
 		var marker = L.marker(new L.LatLng(coords[1], coords[0]), {
-			icon: L.mapbox.marker.icon({
+			icon: L.MakiMarkers.icon({
 				'marker-symbol': '',
 				'marker-color': geojson[0].features[i].properties['marker-color']
 			})
