@@ -41,7 +41,7 @@ get_header();
 			echo '<div class="grid-container">';
 			// AJAX LOAD MORE PLUGIN
 			// EXCLUDE USAGM EXPERTS FROM APPEARING IN THIS LIST
-			echo 	do_shortcode('[ajax_load_more post__not_in="'. $post__not_in .'" category__not_in="2280" ]');
+			echo 	do_shortcode('[ajax_load_more post__not_in="'. $post__not_in .'" category__not_in="2280" scroll="false"]');
 			echo '</div>';
 		?>
 		</div>
