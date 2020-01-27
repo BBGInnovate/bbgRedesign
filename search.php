@@ -53,7 +53,7 @@ get_header();
             $googleResults = fetchGoogleResults($apiUrl);
         }
 
-        if (isset($googleResults) && !isset($googleResults['error'])) {
+        if (!empty($googleResults) && !isset($googleResults['error'])) {
             $prevLink = '';
             $nextLink = '';
             $prevIndex = 0;
@@ -96,43 +96,45 @@ get_header();
                 $nextLink = '<a href="' . $nextUrl . '">Next</a>';
             }
 
-            foreach ($googleResults['items'] as $result) {
-                $title = $result['title'];
-                $link = $result['link'];
-                $snippet = $result['snippet'];
-                $htmlSnippet = $result['htmlSnippet'];
+            if (isset($googleResults['items'])) {
+                foreach ($googleResults['items'] as $result) {
+                    $title = $result['title'];
+                    $link = $result['link'];
+                    $snippet = $result['snippet'];
+                    $htmlSnippet = $result['htmlSnippet'];
 
-                /* If the title ends in BBG, don't include that */
-                $pos = strpos($title, ' - BBG');
-                if ($pos && $pos == (strlen($title) - 6)) {
-                    $title = substr($title, 0, strlen($title) - 6);
+                    /* If the title ends in BBG, don't include that */
+                    $pos = strpos($title, ' - BBG');
+                    if ($pos && $pos == (strlen($title) - 6)) {
+                        $title = substr($title, 0, strlen($title) - 6);
+                    }
+
+                    $pos = strpos($snippet, "...");
+                    $date = substr($snippet, 0, $pos);
+                    $restStartPosition = $pos + 3;
+                    $restOfSnippet = substr($snippet, $pos + 3);
+                    $description = $restOfSnippet;
+
+                    if (isset($result['pagemap']) && isset($result['pagemap']['metatags']) && (count($result['pagemap']['metatags'][0]) > 0) && isset($result['pagemap']['metatags'][0]['og:description'])) {
+                        $description = $result['pagemap']['metatags'][0]['og:description'];
+                    }
+
+                    $description = str_replace("&qout;", '"', $description);    //fixes a legacy bug
+                    $description = str_replace("&quot;", '"', $description);
+
+                    $description = preg_replace('/\[nggallery.*\]/', '', $description);
+
+                    echo '<article id="post-' . get_the_ID() . '" class="' . implode(' ', get_post_class('bbg__article')) . '">';
+                    echo     '<header class="entry-header bbg-blog__excerpt-header">';
+                    echo         '<h3 class="article-title"><a href="' . $link . '" rel="bookmark">' . $title . '</a></h3>';
+                    echo     '</header><!-- .bbg-blog__excerpt-header -->';
+                    echo     '<div class="entry-summary bbg-search-results__excerpt-content">';
+                    echo         '<p>';
+                    echo             $description;
+                    echo         '</p>';
+                    echo     '</div><!-- .entry-summary -->';
+                    echo '</article>';
                 }
-
-                $pos = strpos($snippet, "...");
-                $date = substr($snippet, 0, $pos);
-                $restStartPosition = $pos + 3;
-                $restOfSnippet = substr($snippet, $pos + 3);
-                $description = $restOfSnippet;
-
-                if (isset($result['pagemap']) && isset($result['pagemap']['metatags']) && (count($result['pagemap']['metatags'][0]) > 0) && isset($result['pagemap']['metatags'][0]['og:description'])) {
-                    $description = $result['pagemap']['metatags'][0]['og:description'];
-                }
-
-                $description = str_replace("&qout;", '"', $description);    //fixes a legacy bug
-                $description = str_replace("&quot;", '"', $description);
-
-                $description = preg_replace('/\[nggallery.*\]/', '', $description);
-
-                echo '<article id="post-<?php the_ID(); ?>" ' . get_post_class("bbg__article") . '>';
-                echo     '<header class="entry-header bbg-blog__excerpt-header">';
-                echo         '<h3 class="article-title"><a href="' . $link . '" rel="bookmark">' . $title . '</a></h3>';
-                echo     '</header><!-- .bbg-blog__excerpt-header -->';
-                echo     '<div class="entry-summary bbg-search-results__excerpt-content">';
-                echo         '<p>';
-                echo             $description;
-                echo         '</p>';
-                echo     '</div><!-- .entry-summary -->';
-                echo '</article>';
             }
 
             if ($prevLink != '' || $nextLink != '') {
