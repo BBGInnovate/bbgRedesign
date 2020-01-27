@@ -7612,6 +7612,21 @@ section.usa-section.bbg-banner__section {
   color: #5b616b;
   font-size: 1.3rem; }
 
+.bbg__form__search input[type="text"] {
+  max-width: 20em;
+  display: inline; }
+
+.bbg__form__search input[type="submit"] {
+  margin-left: 0px;
+  margin-top: 0px; }
+
+@media screen and (min-width: 600px) {
+  .bbg__form__search {
+    max-width: 100%; }
+    .bbg__form__search input[type="submit"] {
+      display: inline;
+      margin-left: 5px; } }
+
 .act-title {
   text-align: center; }
 

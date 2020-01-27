@@ -27,3 +27,21 @@
 	color: $color-gray;
 	font-size: $small-font-size;
 }
+
+.bbg__form__search {
+    input[type="text"] {
+        max-width: 20em;
+        display: inline;
+    }
+    input[type="submit"] {
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+    @include media($medium-screen) {
+        max-width: 100%;
+        input[type="submit"] {
+            display: inline;
+            margin-left: 5px;
+        }
+    }
+}
