@@ -33,6 +33,7 @@ function build_soapbox_parts($soap_data) {
 	$soap_content .= 	my_excerpt($soap_data['post_id']);
 	$soap_content .= '</p>';
 
+	$soap_image = '';
 	if (!empty($soap_data['profile_image'])) {
 		$soap_image  = '<img src="' . $soap_data['profile_image'] . '" alt="Profile image">';
 		if ($soap_data['profile_name'] != "") {

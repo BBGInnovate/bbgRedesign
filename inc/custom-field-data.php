@@ -123,6 +123,7 @@ function get_soapbox_data() {
 	}
 
 	// IF POST HAS PHOTO, USE THAT
+	$profile_photo = '';
 	if ($soapbox_post) {
 		if (wp_get_attachment_image_src($soapbox_post, 'profile_photo')) {
 			$profile_photo = wp_get_attachment_image_src($soapbox_post , 'profile_photo');
@@ -131,6 +132,7 @@ function get_soapbox_data() {
 	}
 
 	// DEFAULT TO SOAPBOX CAPTION
+	$profile_name = '';
 	$soap_contents_caption = get_field('homepage_soapbox_image_caption', 'option');
 	if ($soap_contents_caption != "" && $is_ceo_post) {
 		$profile_name = $soap_contents_caption;
