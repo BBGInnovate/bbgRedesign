@@ -12,21 +12,29 @@ get_header();
 
 <div class="outer-container" style="margin-bottom: 30px;">
 	<div class="inner-container">
-		<h1><span style="color: #900;">404!</span> That page can’t be found.</h1>
+		<h2><span style="color: #900; font-size: 2em;">404!</span></h2>
+		<h1>Sorry, the page you are looking for doesn’t exist. Just like press freedom in <span id="impact-country" style="color: #900">________</span>.</h1>
 	</div>
 </div>
 
 <main id="main" role="main">
 	<section class="outer-container">
 		<div class="inner-container">
-			<p class="lead-in">But here are some recent USAGM highlights from around the world.</p>
-			<?php
-				/* translators: %1$s: smiley */
-				$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives.', 'bbginnovate' ), convert_smilies( ':)' ) ) . '</p>';
-				the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-			?>
+			<p class="lead-in">Use our search feature for help in finding what you’re looking for.</p>
+			<p>As for press freedom around the world, we’re working on it. Learn how, here: <a href="/news-and-information/threats-to-press/">Threats to Press</a></p>
 		</div>
 	</section>
 </main>
+
+<script type="text/javascript">
+	var countries = <?php echo json_encode(getThreatsToPressCountries()); ?>;
+	var countriesCount = countries.length;
+	setInterval(
+		function() {
+			var rand = Math.floor(Math.random() * countriesCount);
+			document.getElementById('impact-country').innerHTML = countries[rand];
+		},
+	2000);
+</script>
 
 <?php get_footer(); ?>

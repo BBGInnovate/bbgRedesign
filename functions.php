@@ -965,6 +965,28 @@ function special_committee_list_shortcode($atts) {
 }
 add_shortcode('special_committee_list', 'special_committee_list_shortcode');
 
+
+function getThreatsToPressCountries() {
+	$countries = array();
+
+	$qParams = array(
+		'post_type' => 'threat_to_press',
+		'post_status' => 'publish',
+		'posts_per_page' => 1,
+	);
+
+	$custom_query = new WP_Query($qParams);
+
+	if ($custom_query->have_posts()) {
+		$custom_query->the_post();
+		$countries = array_values(get_field_object('threats_to_press_country')['choices']);
+	}
+
+	wp_reset_postdata();
+
+	return $countries;
+}
+
 function getTinyEntityLogo($entityAbbr) {
 	return $imgSrc=get_template_directory_uri().'/img/logo_'.$entityAbbr.'--circle-40.png';
 }
