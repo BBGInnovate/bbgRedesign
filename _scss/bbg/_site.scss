@@ -1109,3 +1109,13 @@ div.banner_readmore h6 a:visited {
     
     article {margin-bottom: $site-margins-small;}
 }
+
+#impact-country {
+    color: #900;
+    clear: both;
+    display: block;
+    @include media($large-screen) {
+        clear: none;
+        display: inline;
+    }
+}

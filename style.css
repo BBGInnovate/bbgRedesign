@@ -6777,6 +6777,15 @@ div.banner_readmore h6 a:visited {
   .bbg__infobox article {
     margin-bottom: 1rem; }
 
+#impact-country {
+  color: #900;
+  clear: both;
+  display: block; }
+  @media screen and (min-width: 1201px) {
+    #impact-country {
+      clear: none;
+      display: inline; } }
+
 .page-post-featured-graphic {
   margin-bottom: 3rem; }
 
