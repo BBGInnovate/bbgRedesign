@@ -193,7 +193,7 @@ get_header();
 								$ceo_post_query = new WP_Query($ceo_articles);
 								$ceo_article_array = $ceo_post_query->posts;
 								if (!empty($ceo_article_array)) {
-									$categoryUrl = 'https://www.usagm.gov/tag/john-lansing/?category_name=appearance,bbg-in-the-news';
+									$categoryUrl = '/tag/john-lansing/?category_name=appearance,bbg-in-the-news';
 									$categoryLabel = 'News & Appearances';
 									// $ceo_post_query = new WP_Query($ceo_articles);
 									// $ceo_article_array = $ceo_post_query->posts;
