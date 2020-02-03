@@ -967,24 +967,15 @@ add_shortcode('special_committee_list', 'special_committee_list_shortcode');
 
 
 function getThreatsToPressCountries() {
-	$countries = array();
-
-	$qParams = array(
-		'post_type' => 'threat_to_press',
-		'post_status' => 'publish',
-		'posts_per_page' => 1,
-	);
-
-	$custom_query = new WP_Query($qParams);
-
-	if ($custom_query->have_posts()) {
-		$custom_query->the_post();
-		$countries = array_values(get_field_object('threats_to_press_country')['choices']);
-	}
-
-	wp_reset_postdata();
-
-	return $countries;
+	return array('Ethiopia', 'Bulgaria', 'Mali', 'Bolivia', 'Nicaragua', 'Gabon', 'Guatemala', 'Congo-Brazzaville',
+			'Tanzania', 'Zambia', 'Nigeria', 'Afghanistan', 'Chad', 'Malaysia', 'Indonesia', 'Uganda', 'Sri Lanka',
+			'Zimbabwe', 'Qatar', 'Colombia', 'Jordan', 'Cameroon', 'Oman', 'United Arab Emirates', 'Philippines',
+			'Morocco/Western Sahara', 'Thailand', 'Palestine', 'Myanmar', 'South Sudan', 'Algeria', 'Pakistan',
+			'Cambodia', 'Mexico', 'Central Afrian Republic', 'Honduras', 'eSwatini', 'Venezuela', 'Russia',
+			'Bangladesh', 'Singapore', 'Brunei', 'Belarus', 'Democratic Republic of Congo', 'Rwanda', 'Iraq',
+			'Turkey', 'Kazakhstan', 'Burundi', 'Uzbekistan', 'Tajikistan', 'Libya', 'Egypt', 'Somalia',
+			'Equatorial Guinea', 'Azerbaijan', 'Bahrain', 'Yemen', 'Cuba', 'Iran', 'Laos', 'Saudia Arabia',
+			'Djibouti', 'Syria', 'Sudan', 'Vietnam', 'China', 'Eritrea', 'North Korea', 'Turkmenistan');
 }
 
 function getTinyEntityLogo($entityAbbr) {
