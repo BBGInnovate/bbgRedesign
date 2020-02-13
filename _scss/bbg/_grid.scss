@@ -67,6 +67,11 @@ $icon-content-grid: (
 
 .icon-side-content-container {
 	@include grid-column(12);
+
+	&.experts {
+		@include grid-column(3, $icon-content-grid);
+	}
+
 	img {width: 25%;}
 }
 .icon-main-content-container {@include grid-column(12);}
@@ -75,9 +80,17 @@ $icon-content-grid: (
 	.icon-side-content-container {
 		@include grid-column(1, $icon-content-grid);
 		img {width: auto; margin-bottom: 3rem;}
+
+		&.experts {
+			@include grid-column(2, $icon-content-grid);
+		}
 	}
 	.icon-main-content-container {
 		@include grid-column(5, $icon-content-grid);
+
+		&.experts {
+			@include grid-column(6, $icon-content-grid);
+		}
 	}
 }
 // ------------------------------------------------------------------------

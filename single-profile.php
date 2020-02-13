@@ -86,42 +86,49 @@ get_header(); ?>
 	<div class="outer-container">
 		<div class="main-content-container">
 			<div class="nest-container">
-				<div class="inner-container">
-					<div class="icon-side-content-container">
-						<?php
-						if (!empty($profile_photo_url)) {
-							echo '<img src="' . $profile_photo_url . '" alt="Profile photo">';
-						}
-						?>
-					</div>
-					<div class="icon-main-content-container">
-						<?php
-							$profile_head  = '<h2 class="section-header">';
-							$profile_head .= 	$page_title;
-							$profile_head .= '</h2>';
-							echo $profile_head;
+			<?php
+				echo '<div class="inner-container">';
+				echo '<div class="icon-side-content-container experts">';
 
-							$profile_occupation  = '<p class="lead-in">';
-							$profile_occupation .= 	$occupation;
-							$profile_occupation .= '</p>';
-							echo $profile_occupation;
+				if (!empty($profile_photo_url)) {
+					echo '<img src="' . $profile_photo_url . '" alt="Profile photo">';
+				}
 
-							echo $page_content;
+				echo '</div>';
 
-							echo '<p>';
-							if (!empty($expertise)) {
-								echo '<strong>Expertise: </strong>' . $expertise;
-							}
-							if (!empty($languages)) {
-								echo '<br />';
-								echo '<strong>Languages: </strong>' . $languages;
-							}
-							if (!empty($locations)) {
-								echo '<br />';
-								echo '<strong>Locations: </strong>' . $locations;
-							}
-							echo '</p>';
-						?>
+				if (get_post_type() == 'experts') {
+					echo '</div>';
+					echo '<div class="inner-container">';
+				}
+
+				echo '<div class="icon-main-content-container experts">';
+
+				$profile_head  = '<h2 class="section-header">';
+				$profile_head .= 	$page_title;
+				$profile_head .= '</h2>';
+				echo $profile_head;
+
+				$profile_occupation  = '<p class="lead-in">';
+				$profile_occupation .= 	$occupation;
+				$profile_occupation .= '</p>';
+				echo $profile_occupation;
+
+				echo $page_content;
+
+				echo '<p>';
+				if (!empty($expertise)) {
+					echo '<strong>Expertise: </strong>' . $expertise;
+				}
+				if (!empty($languages)) {
+					echo '<br />';
+					echo '<strong>Languages: </strong>' . $languages;
+				}
+				if (!empty($locations)) {
+					echo '<br />';
+					echo '<strong>Locations: </strong>' . $locations;
+				}
+				echo '</p>';
+			?>
 					</div>
 				</div>
 			</div>

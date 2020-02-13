@@ -4974,6 +4974,10 @@ e.g. on the intern testimonial page */
   width: calc(100% - 40px);
   float: left;
   margin-left: 20px; }
+  .icon-side-content-container.experts {
+    width: calc(50% - 45px);
+    float: left;
+    margin-left: 30px; }
   .icon-side-content-container img {
     width: 25%; }
 
@@ -4990,10 +4994,18 @@ e.g. on the intern testimonial page */
     .icon-side-content-container img {
       width: auto;
       margin-bottom: 3rem; }
+    .icon-side-content-container.experts {
+      width: calc(33.33333% - 40px);
+      float: left;
+      margin-left: 30px; }
   .icon-main-content-container {
     width: calc(83.33333% - 55px);
     float: left;
-    margin-left: 30px; } }
+    margin-left: 30px; }
+    .icon-main-content-container.experts {
+      width: calc(100% - 60px);
+      float: left;
+      margin-left: 30px; } }
 
 .outer-container {
   max-width: 1200px;
@@ -7231,6 +7243,10 @@ section.usa-section.bbg-banner__section {
   width: 69px;
   height: 69px;
   margin-right: 1.5rem; }
+
+.icon-side-content-container.experts img {
+  width: 100%;
+  height: 100%; }
 
 .icon-side-content-container #reach-entity {
   display: inline-block;
