@@ -11,6 +11,9 @@ $hashtags = '';
 
 $listsInclude = get_field('sidebar_dropdown_include', '', true);
 
+$page_content = do_shortcode(get_the_content());
+$page_content = apply_filters('the_content', $page_content);
+
 include get_template_directory() . '/inc/shared_sidebar.php';
 ?>
 
@@ -33,7 +36,7 @@ include get_template_directory() . '/inc/shared_sidebar.php';
 					if ($lawName) {
 						echo '<h4>' . $lawName . '</h4>';
 					}
-					echo 	'<p>' . get_the_content() . '</p>';
+					echo 	'<p>' . $page_content . '</p>';
 					echo '</div>';
 				?>
 			</div>
