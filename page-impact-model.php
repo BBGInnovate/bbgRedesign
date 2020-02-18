@@ -86,7 +86,7 @@ get_header();
 		<section class="outer-container bbg__impact-model__section">
 			<div class="grid-container">
 				<h3 class="section-subheader">How do we measure impact?</h3>
-				<p>We measure impact across networks, across media, in <?php echo do_shortcode("[languages]"); ?> languages and in more than <?php echo do_shortcode("[countries]"); ?> countries. Our shared mission provides the framework for a common standard to define and measure impact.</p>
+				<p>We measure impact across networks, across media, in <?php echo do_shortcode("[languages]"); ?> and in more than <?php echo do_shortcode("[countries]"); ?> countries. Our shared mission provides the framework for a common standard to define and measure impact.</p>
 			</div>
 			<div class="side-content-container">
 				<h4 class="article-title">5 Networks. </h4>
