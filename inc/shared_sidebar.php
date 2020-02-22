@@ -498,8 +498,66 @@ if ($listsInclude) {
 					}
 					$s .= $download_list;
 				}
-			}
-			elseif (get_row_layout() == 'sidebar_dropdown_internal_links') {
+			} else if (get_row_layout() == 'file_downloads_and_external_links') {
+				$downloadsAndExternalLinksTitle = get_sub_field('downloads_and_external_links_title');
+				$downloadsAndExternalLinksDefaultValue = get_sub_field('downloads_and_external_links_default_value');
+				$downloadsAndExternalLinksObjects = get_sub_field('downloads_and_external_links_objects');
+				$downloadsAndExternalLinksObjectsCount = count($downloadsAndExternalLinksObjects);
+
+				$downloadsAndExternalLinksSelect  = '<div class="sidebar-section">';
+				$downloadsAndExternalLinksSelect .= 	'<h3 class="sidebar-section-header">' . $downloadsAndExternalLinksTitle . '</h3>';
+
+				$downloadsAndExternalLinksSelect .= '<form style="max-width: 100%;">';
+				$downloadsAndExternalLinksSelect .= 	'<select name="downloadsAndExternalLinksList" id="downloadsAndExternalLinksList" style="display: inline-block; max-width: 100%;">';
+				$downloadsAndExternalLinksSelect .= 		'<option>' . $downloadsAndExternalLinksDefaultValue . '</option>';
+
+				if (have_rows('downloads_and_external_links_objects')) {
+					while (have_rows('downloads_and_external_links_objects')) : the_row();
+						$downloadsAndExternalLinkTitle = get_sub_field('download_or_external_link_title');
+						if (have_rows('download_or_external_link_content')) {
+							while (have_rows('download_or_external_link_content')) : the_row();
+								if (get_row_layout() == 'download_or_external_link_content_external_link') {
+									$downloadsAndExternalLinkUrl = get_sub_field('download_or_external_link_content_external_link_url');
+
+									if ($downloadsAndExternalLinkTitle == '' || !$downloadsAndExternalLinkTitle) {
+										$name = $downloadsAndExternalLinkUrl['title'];
+										$downloadsAndExternalLinkTitle = $name;
+									}
+
+									$url = $downloadsAndExternalLinkUrl['url'];
+									$downloadsAndExternalLinksSelect .= 	'<option data-file-or-link="link" value="' . $url . '">' . $downloadsAndExternalLinkTitle . '</option>';
+								} else if (get_row_layout() == 'download_or_external_link_content_file') {
+									$downloadsAndExternalLinkFile = get_sub_field('download_or_external_link_content_file_object');
+
+									$fileLink = $downloadsAndExternalLinkFile['url'];
+									$fileID = $downloadsAndExternalLinkFile['ID'];
+									$file = get_attached_file($fileID);
+									$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+									$size = formatBytes(filesize($file));
+
+									if ($downloadsAndExternalLinkTitle == '' || !$downloadsAndExternalLinkTitle) {
+										$name = $downloadsAndExternalLinkFile['title'];
+										$downloadsAndExternalLinkTitle = $name;
+									}
+
+									$downloadsAndExternalLinksSelect .= 		'<option data-file-or-link="file" value="' . $fileLink . '">';
+									$downloadsAndExternalLinksSelect .= 			$downloadsAndExternalLinkTitle;
+									$downloadsAndExternalLinksSelect .= 			' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
+									$downloadsAndExternalLinksSelect .= 		'</option>';
+								} else {
+									// Shouldn't happen
+								}
+							endwhile;
+						}
+					endwhile;
+				}
+
+				$downloadsAndExternalLinksSelect .= 		'</select>';
+				$downloadsAndExternalLinksSelect .= 	'</form>';
+				$downloadsAndExternalLinksSelect .= 	'<button class="usa-button downloadsAndExternalLinks" id="downloadsAndExternalLinks" style="width: 100%;">View</button>';
+				$downloadsAndExternalLinksSelect .= '</div>';
+				$s .= $downloadsAndExternalLinksSelect;
+			} elseif (get_row_layout() == 'sidebar_dropdown_internal_links') {
 				$sidebarInternalTitle = get_sub_field('sidebar_internal_title');
 				$sidebarInternalDefault = get_sub_field('sidebar_internal_default');
 				$sidebarInternalRows = get_sub_field('sidebar_internal_objects');

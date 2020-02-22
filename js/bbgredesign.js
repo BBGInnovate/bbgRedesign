@@ -101,6 +101,57 @@ jQuery(document).ready(function() {
         });
     }
 
+    /* used on the 2-column page, dropdown nav for sidebar */
+    // File Downloads and External Links
+    if (jQuery('#downloadsAndExternalLinks').length && jQuery('#downloadsAndExternalLinksList').length) {
+        // CHANGE COLOR AND "DISABLE" BUTTON UNTIL USER SELECTS AN OPTION
+        function disableDownloadButtonColor() {
+            jQuery('#downloadsAndExternalLinks').css({'background-color':'#e1e1e1', 'cursor':'default'});
+            jQuery('.usa-button').hover(function() {
+                jQuery('#downloadsAndExternalLinks').css('background-color', '#e1e1e1');
+            });
+        }
+
+        disableDownloadButtonColor();
+
+        jQuery('#downloadsAndExternalLinksList').change(function() {
+            if (jQuery('#downloadsAndExternalLinksList').val() !== 'Select a calendar year') {
+                jQuery('#downloadsAndExternalLinks').css({'background-color':'#0071bc', 'cursor':'pointer'});
+                jQuery('.usa-button').hover(function() {
+                    jQuery('#downloadsAndExternalLinks').css('background-color', '#205493');
+                }, function() {
+                    jQuery('#downloadsAndExternalLinks').css({'background-color':'#0071bc'});
+                });
+            } else {
+                disableDownloadButtonColor();
+            }
+
+            // Change button texton selecting a link or a file
+            if (jQuery('#downloadsAndExternalLinksList option:selected').attr('data-file-or-link') == 'link') {
+                jQuery('button.downloadsAndExternalLinks').html('Open Link');
+            } else if (jQuery('#downloadsAndExternalLinksList option:selected').attr('data-file-or-link') == 'file') {
+                jQuery('button.downloadsAndExternalLinks').html('Download File');
+            } else {
+                jQuery('button.downloadsAndExternalLinks').html('View');
+            }
+        });
+
+        // WHEN USER CLICKS DOWNLOAD, MAKE SURE THERE IS AN OPTION SELECTED TO DOWNLOAD
+        jQuery('button.downloadsAndExternalLinks').click(function() {
+            if (jQuery('#downloadsAndExternalLinksList').val() !== 'Select a calendar year') {
+                url = jQuery(this).parent().find('#downloadsAndExternalLinksList').val();
+
+                if (jQuery('#downloadsAndExternalLinksList option:selected').attr('data-file-or-link') == 'link') {
+                    window.open(url, '_self');
+                } else if (jQuery('#downloadsAndExternalLinksList option:selected').attr('data-file-or-link') == 'file') {
+                    window.open(url, '_blank');
+                } else {
+                    // Do nothing
+                }
+            }
+        });
+    }
+
     /* deliberately using a class rather than ID in case we have two on the same page */
     if (jQuery('.internal_links_list').length) {
         jQuery('.internalLink').click(function() {
