@@ -264,7 +264,7 @@ gtag('config', 'UA-124338348-1');
 		<!-- NAVIGATION BAR -->
 		<nav id="site-navigation" class="bbg__main-navigation" role="navigation">
 			<h1 class="header-outliner">Navigation</h1>
-			<a id="nav-logo" class="site-brand" href="<?php echo get_home_url(); ?>/home"><img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-RGB-hires.png" alt="USAGM Logo"></a>
+			<a id="nav-logo" class="site-brand" href="<?php echo get_home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-RGB-hires.png" alt="USAGM Logo"></a>
 
 			<?php
 				$search_box  = '<div class="bbg__main-navigation__search">';

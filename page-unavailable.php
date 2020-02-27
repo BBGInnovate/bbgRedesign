@@ -274,7 +274,7 @@ require 'inc/custom-field-modules.php';
 <footer id="footer">
 	<div class="outer-container">
 		<div id="grid-container">
-			<a class="site-brand" href="<?php echo get_home_url(); ?>/home">
+			<a class="site-brand" href="<?php echo get_home_url(); ?>">
 				<img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-White-hires.png" alt="USAGM Logo">
 			</a>
 		</div>

@@ -88,7 +88,7 @@ get_header();
 <div class="messaging-section" id="site-link">
 	<div class="outer-container">
 		<div class="grid-container">
-			<p style="font-size: 3.5rem; text-transform: uppercase; font-weight: 300; letter-spacing: 2px;"><a class="site-brand" href="<?php echo get_home_url(); ?>/home">Continue to usagm.gov</a></p>
+			<p style="font-size: 3.5rem; text-transform: uppercase; font-weight: 300; letter-spacing: 2px;"><a class="site-brand" href="<?php echo get_home_url(); ?>">Continue to usagm.gov</a></p>
 		</div>
 	</div>
 </div>
