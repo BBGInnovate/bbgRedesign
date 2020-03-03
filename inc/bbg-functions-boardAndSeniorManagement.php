@@ -123,11 +123,11 @@ function outputBoardMembers($showActive) {
 			$member_block .= '</div>';
 
 			if ($is_chairperson) {
-				$chairperson_markup = $member_block;
+				$chairperson_markup .= $member_block;
 			} else if ($is_secretary) {
-				$secretary_markup = $member_block;
+				$secretary_markup .= $member_block;
 			} else if ($is_under_secretary) {
-				$under_secretary_markup = $member_block;
+				$under_secretary_markup .= $member_block;
 			} else {
 				$board_member_markup .= $member_block;
 			}
