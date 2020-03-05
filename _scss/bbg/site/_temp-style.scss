@@ -69,9 +69,13 @@ ul.meeting-speakers {
 			margin-bottom: 1.5rem;
 		}
 		.speaker-bio {
-			font-size: 1.5rem;
+			font-size: 1.6rem;
 			color: #999999;
 			margin: 0.5rem 0;
+
+	        @include media($medium-large-screen) {
+	            font-size: 1.5rem;
+	        }
 		}
 		.speaker-link {margin-bottom: 1.5rem;}
 	}

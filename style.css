@@ -2823,8 +2823,12 @@ ul li:before {
 
 .side-column ol li,
 .side-column ul li {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 1rem; }
+  @media screen and (min-width: 900px) {
+    .side-column ol li,
+    .side-column ul li {
+      font-size: 1.5rem; } }
 
 .bbg__ribbon .section-header a:link {
   color: #ffffff; }
@@ -5560,9 +5564,12 @@ ul.meeting-speakers .usa-accordion.speaker-accordion {
     padding: 0;
     margin-bottom: 1.5rem; }
   ul.meeting-speakers .usa-accordion.speaker-accordion .speaker-bio {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: #999999;
     margin: 0.5rem 0; }
+    @media screen and (min-width: 900px) {
+      ul.meeting-speakers .usa-accordion.speaker-accordion .speaker-bio {
+        font-size: 1.5rem; } }
   ul.meeting-speakers .usa-accordion.speaker-accordion .speaker-link {
     margin-bottom: 1.5rem; }
 

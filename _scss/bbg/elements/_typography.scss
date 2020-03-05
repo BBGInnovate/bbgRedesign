@@ -164,8 +164,12 @@ ul li:before {
 .side-column {
     ol li,
     ul li {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         margin-bottom: 1rem;
+
+        @include media($medium-large-screen) {
+            font-size: 1.5rem;
+        }
     }
 }
 
