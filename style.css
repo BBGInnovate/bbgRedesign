@@ -4869,7 +4869,7 @@ ul.bbg__article-content__list--inline {
 .bbg-tagline p {
   color: #757575;
   font-family: "Alegreya Sans", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 1.7;
   margin-bottom: 3rem; }
   .bbg__tagline a,
@@ -4878,6 +4878,13 @@ ul.bbg__article-content__list--inline {
   .bbg-tagline p a {
     color: #323a45;
     text-decoration: underline; }
+
+@media screen and (min-width: 900px) {
+  .bbg__tagline,
+  .bbg__tagline p,
+  .bbg-tagline,
+  .bbg-tagline p {
+    font-size: 1.5rem; } }
 
 .bbg__tagline-link {
   display: block;

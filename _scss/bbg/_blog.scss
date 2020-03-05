@@ -613,7 +613,7 @@ ul.bbg__article-content__list--inline {
 	color: $color-gray-medium;
 	font: {
 		family: $font-sans;
-		size: 1.5rem;
+		size: 1.6rem;
 	}
 	line-height: 1.7;
 	margin-bottom: $site-margins;
@@ -621,6 +621,17 @@ ul.bbg__article-content__list--inline {
 	a {
 		color: $color-gray-dark;
 		text-decoration: underline;
+	}
+}
+
+@include media($medium-large-screen) {
+	.bbg__tagline,
+	.bbg__tagline p,
+	.bbg-tagline,
+	.bbg-tagline p {
+		font: {
+			size: 1.5rem;
+		}
 	}
 }
 
