@@ -3658,6 +3658,10 @@ input[type="radio"] + label {
 .bbg__article-content .aligncenter {
   width: auto !important; }
 
+/* Limit width of caption images */
+.wp-caption {
+  max-width: calc(100% - (2 * 40px)) !important; }
+
 /*--------------------------------------------------------------
 ## Galleries
 --------------------------------------------------------------*/
