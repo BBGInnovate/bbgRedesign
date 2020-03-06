@@ -663,3 +663,29 @@ e.g. on the intern testimonial page */
 	}
 	margin-left: $site-margins-small;
 }
+
+/* Ajax Load More Overrides */
+#ajax-load-more .alm-listing .alm-reveal > li {
+
+	padding: 0px;
+
+	img {
+		margin-right: 20px;
+		margin-bottom: 0;
+		position: relative;
+		width: 30%;
+		float: left;
+	}
+
+	@include media($medium-screen) {
+	    padding: 0 0 0 170px;
+
+		img {
+			margin-right: 0;
+			margin-bottom: 27px;
+			position: absolute;
+			width: 150px;
+			float: none;
+		}
+	}
+}
