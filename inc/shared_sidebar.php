@@ -438,10 +438,9 @@ if ($listsInclude) {
 				$sidebarDownloadsRows = get_sub_field('sidebar_downloads' );
 				$sidebarDownloadsTotal = count( $sidebarDownloadsRows);
 
-				$download_select  = '<div class="sidebar-section">';
-				$download_select .= 	'<h3 class="sidebar-section-header">' . $sidebarDownloadsTitle . '</h3>';
-
 				if ($sidebarDownloadsTotal >= 2) {
+					$download_select  = '<div class="sidebar-section">';
+					$download_select .= '<h3 class="sidebar-section-header">' . $sidebarDownloadsTitle . '</h3>';
 					$download_select .= '<form style="max-width: 100%;">';
 					$download_select .= 	'<select name="file_download_list" id="file_download_list" style="display: inline-block; max-width: 100%;">';
 					$download_select .= 		'<option>' . $sidebarDownloadsDefault . '</option>';
@@ -473,10 +472,10 @@ if ($listsInclude) {
 					$s .= $download_select;
 				}
 				else {
-					$sidebarDownloadsTitle = get_sub_field('sidebar_download_title');
 					$sidebarDownloadsRows = get_sub_field('sidebar_downloads');
 
 					$download_list = '';
+					$download_list .= '<h3 class="sidebar-section-header">' . $sidebarDownloadsTitle . '</h3>';
 					foreach ($sidebarDownloadsRows as $row) {
 						$sidebarDownloadsLinkName = $row['sidebar_download_title'];
 						$sidebarDownloadsLinkObj = $row['sidebar_download_file'];
