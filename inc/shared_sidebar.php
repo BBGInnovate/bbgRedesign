@@ -17,7 +17,10 @@ if ($includeSitewideSidebar) {
     $sidebarIncludedTagsIds = get_field('sidebar_included_tags', 'option');
 
     if (is_array($sidebarIncludedTagsIds) && !empty($sidebarIncludedTagsIds) && !has_term($sidebarIncludedTagsIds, 'post_tag')) {
-        // Do nothing
+        $sidebarIncludedPagesOverrideTags = get_field('sidebar_include_override_tags', 'option');
+        if (!empty($sidebarIncludedPagesOverrideTags) && in_array(get_the_ID(), $sidebarIncludedPagesOverrideTags)) {
+            $sidebar .= getSidebarContent('option');
+        }
     } else {
         $sidebar .= getSidebarContent('option');
     }
