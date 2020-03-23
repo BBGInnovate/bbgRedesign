@@ -1124,6 +1124,15 @@ if ( function_exists ('acf_add_options_page') ) {
 		'icon_url' => false
 	));
 	acf_add_options_page (array(
+		'page_title' => 'Sitewide Options',
+		'menu_title' => 'Sitewide Options',
+		'menu_slug' => 'sitewide-options',
+		'capability' => 'edit_posts',
+		'parent_slug' => '',
+		'position' => false,
+		'icon_url' => false
+	));
+	acf_add_options_page (array(
 		'page_title' => 'Site Settings',
 		'menu_title' => 'BBG Settings',
 		'menu_slug' => 'site-settings',

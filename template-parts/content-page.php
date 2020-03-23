@@ -102,7 +102,7 @@ endif;
 
 			echo '<!-- SIDEBAR CONTENT -->';
 			echo '<article>';
-			if ($includeSidebar && $sidebarTitle != "") {
+			if ($includeSidebar) {
 				echo $sidebar;
 			}
 			if (!empty($secondaryColumnContent)) {

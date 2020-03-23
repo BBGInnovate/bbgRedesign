@@ -49,7 +49,7 @@ include get_template_directory() . '/inc/shared_sidebar.php';
 					}
 
 					echo '<article class="bbg__article-sidebar">';
-					if ($includeSidebar && $sidebarTitle != "") {
+					if ($includeSidebar) {
 						echo $sidebar;
 					}
 
