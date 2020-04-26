@@ -1,14 +1,14 @@
 .office-page {
 	.office-highlights {
-		border-top: 1px solid $black-faint;
-		border-bottom: 1px solid $black-faint;
+		border-top: 1px solid $gray-lightest;
+		border-bottom: 1px solid $gray-lightest;
 		padding: 1.5rem 0 0 0;
 		margin-bottom: 1.5rem;
 		h4 {margin-bottom: 0.5rem;}
 		.article-teaser:last-of-type {border-bottom: none;}
 	}
 	.office-contact {
-		background-color: $black-faint;
+		background-color: $gray-lightest;
 		padding: 2rem;
 		margin-bottom: 1.5rem;
 		p {

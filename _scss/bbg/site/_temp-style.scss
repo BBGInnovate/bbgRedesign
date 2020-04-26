@@ -36,7 +36,7 @@ aside {
 	font-family: $font-sans;
 	font-size: 0.9em;
 	font-weight: $font-normal;
-	color: $black6;
+	color: $gray;
 	margin-bottom: 1rem;
 }
 .post-image {margin-bottom: 3rem;}
@@ -61,7 +61,7 @@ ul.meeting-speakers {
 				position: absolute;
 				top: 15px;
 				right: -22px;
-				color: $black9;
+				color: $gray-lighter;
 			}
 		}
 		.usa-accordion-content {
@@ -206,7 +206,7 @@ button {
 .page-sidebar {
 	@include grid-column(3);
 	padding-left: 1.5rem;
-	border-left: 1px solid $black-faint;
+	border-left: 1px solid $gray-lightest;
 }
 
 @include media($medium-screen) {

@@ -128,7 +128,7 @@ button#bbg__menu-toggle {margin-right: 0;}
 				padding: 0;
 
 				a:link, a:visited {
-					color: $black9;
+					color: $gray-lighter;
 					padding: 5px 0 3px 0;
 					margin: 0;
 					background-color: transparent;
@@ -368,23 +368,23 @@ button#bbg__menu-toggle {margin-right: 0;}
 			ul {
 				margin-top: 15px;
 				li#facebook-social {
-					a:link, a:visited {color: $black9; background-color: transparent;}
+					a:link, a:visited {color: $gray-lighter; background-color: transparent;}
 					a:hover, a:active {color: #3b5998; background-color: transparent;}
 				}
 				li#twitter-social {
-					a:link, a:visited {color: $black9; background-color: transparent;}
+					a:link, a:visited {color: $gray-lighter; background-color: transparent;}
 					a:hover, a:active {color: #00aced; background-color: transparent;}
 				}
 				li#youtube-social {
-					a:link, a:visited {color: $black9; background-color: transparent;}
+					a:link, a:visited {color: $gray-lighter; background-color: transparent;}
 					a:hover, a:active {color: #ff0000; background-color: transparent;}
 				}
 				li#linkedin-social {
-					a:link, a:visited {color: $black9; background-color: transparent;}
+					a:link, a:visited {color: $gray-lighter; background-color: transparent;}
 					a:hover, a:active {color: #0077b5; background-color: transparent;}
 				}
 				li#instagram-social {
-					a:link, a:visited {color: $black9; background-color: transparent;}
+					a:link, a:visited {color: $gray-lighter; background-color: transparent;}
 					a:hover, a:active {color: #ee0075; background-color: transparent;}
 				}
 				li {
@@ -498,7 +498,7 @@ button#bbg__menu-toggle {margin-right: 0;}
 				// THIS IS TIED TO A HOVER FUNCTION IN NAVIGATION.JS
 				// IF HOVER COLOR CHANGES HERE, CHANGE IT IN JS TOO.
 				a:hover {
-					color: $black9;
+					color: $gray-lighter;
 					background-color: transparent;
 				}
 

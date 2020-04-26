@@ -2670,7 +2670,7 @@ h3 {
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
-  color: #b2201c;
+  color: #b5231d;
   margin-top: 0; }
 
 .section-subheader,
@@ -2682,7 +2682,7 @@ h3 {
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
-  color: #283166;
+  color: #002a53;
   margin-top: 0; }
 
 .article-title,
@@ -2692,7 +2692,7 @@ h3 {
   font-size: 2.6rem;
   line-height: 3rem;
   font-weight: 300;
-  color: #3f7ad1;
+  color: #147bd1;
   margin: 0 0 0.5rem 0;
   text-decoration: none; }
   .article-title p.sans,
@@ -2709,7 +2709,7 @@ h3 {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 1.9rem;
   font-weight: 500;
-  color: #284f91;
+  color: #1d4f91;
   margin-bottom: 1.5rem;
   text-decoration: none; }
 
@@ -2729,7 +2729,7 @@ h3 {
   font-size: 1.7rem;
   line-height: 2.1rem;
   font-weight: 700;
-  color: #284f91;
+  color: #1d4f91;
   margin: 0 0 1.5rem 0; }
 
 .sidebar-article-title,
@@ -2739,7 +2739,7 @@ h3 {
   font-size: 1.7rem;
   line-height: 2.1rem;
   font-weight: 400;
-  color: #3f7ad1;
+  color: #147bd1;
   margin: 0 0 1.5rem 0; }
 
 .sidebar-paragraph-header,
@@ -2780,7 +2780,7 @@ p.lead-in {
   p.lead-in a:link, p.lead-in a:visited {
     color: #666666; }
   p.lead-in a:hover, p.lead-in a:active {
-    color: #82afd2; }
+    color: #81b0d2; }
 
 p.paragraph-header {
   font-size: 1.8rem;
@@ -3439,7 +3439,7 @@ a:focus .bbg__article-share__icon {
     font-size: 2.2rem;
     line-height: 2.6rem;
     font-weight: 300;
-    color: #3f7ad1;
+    color: #147bd1;
     margin: 0 0 1.5rem 0; }
   .homepage-quote .quote-name {
     font-family: "Alegreya Sans", sans-serif;
@@ -3489,7 +3489,7 @@ a:focus .bbg__article-share__icon {
       color: #999999;
       cursor: auto; }
     .quote-slider .slider-nav .enabled {
-      color: #3f7ad1;
+      color: #147bd1;
       cursor: pointer; }
     .quote-slider .slider-nav #prev {
       width: 50%; }
@@ -4160,7 +4160,7 @@ button#bbg__menu-toggle {
     cursor: pointer;
     color: #8b8278; }
   .menu-item .nav-icon:hover {
-    color: #3f7ad1; }
+    color: #147bd1; }
   .menu-item .displayed-dropdown {
     color: #8b8278; }
   .bbg__main-navigation ul {
@@ -4172,14 +4172,14 @@ button#bbg__menu-toggle {
   .bbg__main-navigation__toggler:focus {
     background-color: transparent; }
   li.menu-item a:link, li.menu-item a:visited {
-    color: #3f7ad1; }
+    color: #147bd1; }
   li.menu-item a:hover, li.menu-item a:active {
-    color: #82afd2;
+    color: #81b0d2;
     text-decoration: none; }
   li.subnav-open a:link, li.subnav-open a:visited {
     color: #d5d1c4 !important; }
   li.subnav-open ul a:link, li.subnav-open ul a:visited {
-    color: #284f91 !important; }
+    color: #1d4f91 !important; }
   li.subnav-open ul a:hover, li.subnav-open ul a:active {
     color: #d5d1c4 !important; }
   .usa-search.usa-search-small [type="submit"],
@@ -4276,7 +4276,7 @@ button#bbg__menu-toggle {
       border-radius: 50%;
       margin-bottom: 0; }
   .avatar-container .avatar-title {
-    color: #3f7ad1;
+    color: #147bd1;
     margin-bottom: 2rem; }
   .avatar-container .avatar-description {
     text-align: left; }
@@ -5563,7 +5563,7 @@ aside {
   font-family: "Alegreya Sans", sans-serif;
   font-size: 14px;
   text-transform: uppercase;
-  color: #3f7ad1;
+  color: #147bd1;
   text-decoration: none; }
 
 ul.meeting-speakers li {
@@ -5649,7 +5649,7 @@ ul.meeting-speakers .speaker-title {
 
 button {
   margin-bottom: 1.5rem;
-  background-color: #284f91; }
+  background-color: #1d4f91; }
 
 .feautre-banner {
   margin-bottom: 6rem; }
@@ -5767,7 +5767,7 @@ button {
   font-size: 2.5rem;
   line-height: 4rem;
   font-style: italic;
-  color: #b2201c;
+  color: #b5231d;
   margin-bottom: 0; }
 
 @media screen and (min-width: 1201px) {
@@ -5839,7 +5839,7 @@ img,
   .internship-sidebar-block a.read-more:link {
     font-family: "Carrara-Regular", serif;
     font-weight: 400;
-    color: #3f7ad1; }
+    color: #147bd1; }
 
 @media screen and (min-width: 600px) {
   .grid-box-container .grid-box-chunk {
@@ -6773,7 +6773,7 @@ div.banner_readmore h6 a:visited {
     background-position: center;
     margin-bottom: 0; }
   .bbg__ribbon h2 {
-    color: #b2201c;
+    color: #b5231d;
     padding-top: 1rem; }
   .bbg__ribbon h4, .bbg__ribbon .bbg__board__committee-list li a, .bbg__board__committee-list li .bbg__ribbon a,
   .bbg__ribbon h4 a:link,
@@ -6782,9 +6782,9 @@ div.banner_readmore h6 a:visited {
   .bbg__ribbon h4 a:visited,
   .bbg__ribbon .bbg__board__committee-list li a a:visited,
   .bbg__board__committee-list li .bbg__ribbon a a:visited {
-    color: #3f7ad1; }
+    color: #147bd1; }
   .bbg__ribbon a {
-    color: #3f7ad1; }
+    color: #147bd1; }
   .bbg__ribbon button a:link {
     color: #ffffff; }
   .bbg__ribbon .outer-container {
@@ -7045,7 +7045,7 @@ section.usa-section.bbg-banner__section {
   #threats-to-journalism .threats-box {
     margin-left: calc(8.33333% - 21.66667px + 40px); }
     #threats-to-journalism .threats-box article {
-      border-bottom: 1px solid #283166; }
+      border-bottom: 1px solid #002a53; }
       #threats-to-journalism .threats-box article::after {
         clear: both;
         content: "";
@@ -8456,10 +8456,10 @@ html, body {
       color: #ffffff;
       text-decoration: none; }
     #usagm-splash-wrapper .messaging-section a:hover, #usagm-splash-wrapper .messaging-section a:active {
-      color: #82afd2;
+      color: #81b0d2;
       text-decoration: none; }
     #usagm-splash-wrapper .messaging-section .message:hover h4, #usagm-splash-wrapper .messaging-section .message:hover .bbg__board__committee-list li a, .bbg__board__committee-list li #usagm-splash-wrapper .messaging-section .message:hover a {
-      color: #82afd2; }
+      color: #81b0d2; }
     #usagm-splash-wrapper .messaging-section .message:hover .message-image img {
       border: 3px solid #aca299; }
     #usagm-splash-wrapper .messaging-section .message {
@@ -8475,7 +8475,7 @@ html, body {
         width: 50%;
         margin: 0 auto 1.5rem auto; }
         #usagm-splash-wrapper .messaging-section .message .message-image img {
-          border: 3px solid #b2201c;
+          border: 3px solid #b5231d;
           border-radius: 50%; }
   #usagm-splash-wrapper #site-link {
     text-align: center;
@@ -8495,7 +8495,7 @@ html, body {
       #usagm-splash-wrapper #site-link button:hover a {
         color: #ffffff; }
   #usagm-splash-wrapper #murrow-quote {
-    background-color: #3f7ad1; }
+    background-color: #147bd1; }
     #usagm-splash-wrapper #murrow-quote .outer-container {
       margin-bottom: 0; }
     #usagm-splash-wrapper #murrow-quote .ed-quote {

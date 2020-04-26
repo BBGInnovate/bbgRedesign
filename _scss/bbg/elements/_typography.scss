@@ -92,7 +92,7 @@ h3 {clear: none;}
     font-size: 1.5rem;
     line-height: 1.8rem;
     font-weight: $font-bold;
-    color: $black6;
+    color: $gray;
     margin: 0 0 1rem 0;
 }
 // END HEADER STYLES
@@ -119,7 +119,7 @@ p.lead-in {
     line-height: 4.5rem;
     font-weight: 100;
     color: #878787;
-    a:link, a:visited {color: $black6;}
+    a:link, a:visited {color: $gray;}
     a:hover, a:active {color: $color-cool-blue;}
 }
 p.paragraph-header {
