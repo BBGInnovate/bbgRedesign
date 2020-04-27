@@ -126,6 +126,10 @@ function setUpRedirectHandler() {
 	$(document).on('click', 'a', function(e) {
 
 		let linkOriginal = $(this).attr('href');
+		if (linkOriginal.startsWith('mailto:') || linkOriginal.startsWith('tel:')) {
+			return;
+		}
+
 		let link = $('<a>', {href: linkOriginal});
 		let linkHref = link[0].href;
 		let linkHostname = link[0].hostname;
