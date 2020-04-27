@@ -180,6 +180,32 @@ function setUpRedirectHandler() {
 
 setUpRedirectHandler();
 
+function setUpCardsVideoPreview() {
+	$('.cards video').on('loadeddata', function() {
+		this.play();
+	});
+
+	$('.cards video').mouseover(function() {
+		this.play();
+	});
+
+	$('.cards video').mouseout(function() {
+		this.pause();
+	});
+
+	$('.cards video').on('timeupdate', function() {
+		let timeToPlay = 3;
+		if (this.currentTime > timeToPlay) {
+			this.currentTime = 0;
+			if (!$(this).is(':hover')) {
+				this.pause();
+			}
+		}
+	});
+}
+
+setUpCardsVideoPreview();
+
 // PRESS CLIPPINGS DROPDOWN
 var clipsListItems = $('.media-clips-entities-dropdown ul li, .award-dropdown ul li');
 clipsListItems.children('ul').hide();

@@ -96,6 +96,9 @@ if (!empty($includeAboutFlexiblePageRows)) {
 	}
 }
 
+foreach (getFlexibleRowsArray() as $arr) {
+	array_push($all_flex_rows, $arr);
+}
 
 // GET RSS FEED
 $rss_xml = get_post_meta($id, 'rss_xml', true);
@@ -358,7 +361,9 @@ get_header();
 				echo '</div>';
 			}
 			else {
+				echo '<div class="outer-container about-flexible-row">';
 				echo $flex_row;
+				echo '</div>';
 			}
 		}
 	}
