@@ -572,222 +572,225 @@ get_header();
 
 				<!-- 2B **** Flexible content rows -->
 		        <?php
-				if (have_rows('kits_flexible_page_rows')):
-					$counter = 0;
-					$pageTotal = 1; // for setting grid based on odd/even count
-					$containerClass = "bbg__kits__child ";
+		        $showKitsFlexiblePageRows = get_field('show_kits_flexible_page_rows');
+		        if (!empty($showKitsFlexiblePageRows)):
+					if (have_rows('kits_flexible_page_rows')):
+						$counter = 0;
+						$pageTotal = 1; // for setting grid based on odd/even count
+						$containerClass = "bbg__kits__child ";
 
-					/* @Check if number of pages is odd or even
-					*  Return BOOL (true/false) */
-					function checkNum($pageTotal) {
-						return ($pageTotal % 2) ? TRUE : FALSE;
-					}
-
-					while (have_rows('kits_flexible_page_rows')) : the_row();
-						$counter++;
-						$sectionClasses = "usa-grid-full bbg__kits__section--row";
-
-						// change section class for ribbon rows
-						if (get_row_layout() == 'kits_ribbon_page') {
-							$sectionClasses .= " bbg__ribbon";
+						/* @Check if number of pages is odd or even
+						*  Return BOOL (true/false) */
+						function checkNum($pageTotal) {
+							return ($pageTotal % 2) ? TRUE : FALSE;
 						}
 
-						echo '<!-- ROW ' . $counter . '-->'; // output counter to keep track of rows
+						while (have_rows('kits_flexible_page_rows')) : the_row();
+							$counter++;
+							$sectionClasses = "usa-grid-full bbg__kits__section--row";
 
-						if (get_row_layout() == 'kits_ribbon_page') {
-							$labelText = get_sub_field('kits_ribbon_label');
-							$labelLink = get_sub_field('kits_ribbon_label_link');
-							$headlineText = get_sub_field('kits_ribbon_headline');
-							$headlineLink = get_sub_field('kits_ribbon_headline_link');
-							$summary = get_sub_field('kits_ribbon_summary');
-							$imageURL = get_sub_field('kits_ribbon_image');
-							$fileDownload = get_sub_field('kits_ribbon_download_button');
-							$fileDownloadURL = get_sub_field('kits_ribbon_download_url');
-							$fileDownloadText = get_sub_field('kits_ribbon_download_prompt');
+							// change section class for ribbon rows
+							if (get_row_layout() == 'kits_ribbon_page') {
+								$sectionClasses .= " bbg__ribbon";
+							}
 
-							$summary = apply_filters('the_content', $summary);
-							$summary = str_replace(']]>', ']]&gt;', $summary);
+							echo '<!-- ROW ' . $counter . '-->'; // output counter to keep track of rows
 
-							echo '<div class="bbg__ribbon">';
-							echo 	'<div class="outer-container">';
-							if (!empty($imageURL)) {
-								echo 	'<div class="side-content-container">';
-								echo 		'<div style="background-image: url(' . $imageURL . ');"></div>';
+							if (get_row_layout() == 'kits_ribbon_page') {
+								$labelText = get_sub_field('kits_ribbon_label');
+								$labelLink = get_sub_field('kits_ribbon_label_link');
+								$headlineText = get_sub_field('kits_ribbon_headline');
+								$headlineLink = get_sub_field('kits_ribbon_headline_link');
+								$summary = get_sub_field('kits_ribbon_summary');
+								$imageURL = get_sub_field('kits_ribbon_image');
+								$fileDownload = get_sub_field('kits_ribbon_download_button');
+								$fileDownloadURL = get_sub_field('kits_ribbon_download_url');
+								$fileDownloadText = get_sub_field('kits_ribbon_download_prompt');
+
+								$summary = apply_filters('the_content', $summary);
+								$summary = str_replace(']]>', ']]&gt;', $summary);
+
+								echo '<div class="bbg__ribbon">';
+								echo 	'<div class="outer-container">';
+								if (!empty($imageURL)) {
+									echo 	'<div class="side-content-container">';
+									echo 		'<div style="background-image: url(' . $imageURL . ');"></div>';
+									echo 	'</div>';
+								}
+								echo 		'<div class="main-content-container">';
+								if (!empty($labelLink)) {
+									echo 		'<h2 class="section-header"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h2>';
+								} else {
+									echo 		'<h2 class="section-header">' . $labelText . '</h2>';
+								}
+
+								if (!empty($headlineLink)) {
+									echo 		'<h3 class="article-title"><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h3>';
+								} else {
+									echo 		'<h3 class="article-title">' . $headlineText . '</h3>';
+								}
+								echo $summary;
+
+								if (!empty($fileDownload)) {
+									echo 		'<button>';
+									echo 			'<a href=' . $fileDownloadURL . ' target="_blank" download><span class="fa fa-download"></span>&emsp;' . $fileDownloadText . '</a>';
+									echo 		'</button>';
+								}
+								echo 		'</div>';
+								echo 	'</div><!-- .outer-container -->';
+								echo '</div><!-- .bbg__ribbon -->';
+							}
+							elseif (get_row_layout() == 'kits_downloads_files') {
+								$downloadsLabel = get_sub_field('kits_downloads_label');
+								echo '<div class="outer-container">';
+								echo 	'<div class="grid-container">';
+								if ($downloadsLabel) {
+									echo '<h3>' . $downloadsLabel . '</h3>';
+								}
+								echo 		'<div class="nest-container">';
+								echo 			'<div class="inner-container">';
+
+								$downloadFiles = get_sub_field('kits_downloads_file');
+								$countFiles = count ($downloadFiles);
+								if (checkNum($countFiles) === true) {
+									$containerClass = 'grid-third';
+								} else {
+									$containerClass = 'grid-half';
+								}
+								if ($downloadFiles) {
+									foreach ($downloadFiles as $file) {
+										$fileImageObject = $file['downloads_file_image'];
+										$thumbSrc = wp_get_attachment_image_src($fileImageObject['ID'] , 'large-thumb');
+										$supportPageTitle = $file['kits_related_page_name'];
+										$supportPage = $file['kits_related_page'];
+										if ($supportPageTitle) {
+											$pageHeadline = $supportPageTitle;
+										} else {
+											$pageHeadline = get_the_title($supportPage -> ID);
+										}
+										$pageURL = get_permalink($supportPage -> ID);
+										$pageExcerpt = my_excerpt($supportPage -> ID);
+										$pageExcerpt = apply_filters('the_content', $pageExcerpt);
+										$pageExcerpt = str_replace(']]>', ']]&gt;', $pageExcerpt);
+
+
+										$fileTitle = $file['downloads_link_name'];
+										$fileObj = $file['downloads_file'];
+										if ($fileTitle) {
+											$fileName = $fileTitle;
+										} else {
+											$fileName = $fileObj['title'];
+										}
+										$fileID = $fileObj['ID'];
+										$fileURL = $fileObj['url'];
+										$file = get_attached_file($fileID);
+										$fileExt = strtoupper(pathinfo( $file, PATHINFO_EXTENSION));
+										$fileSize = formatBytes(filesize($file));
+
+										echo '<article class="' . $containerClass . ' bbg__kits__section--tile">';
+										echo 	'<header class="bbg__kits__section--tile__header">';
+										if ( $supportPage ) {
+											echo '<h4 class="bbg__kits__section--tile__title"><a href="' . $pageURL . '">' . $pageHeadline . '</a></h4>';
+										} else {
+											echo '<h4 class="bbg__kits__section--tile__title"><a href="' . $fileURL . '" target="_blank">' . $fileName . '</a></h4>';
+										}
+										echo 	'</header>';
+
+										if ($thumbSrc) {
+											echo '<a href="' . $fileURL . '" target="_blank">';
+											echo '<img src="' . $thumbSrc[0] . '" alt="">';
+											echo '</a>';
+										}
+										echo $pageExcerpt;
+										echo 	'<p class="bbg__kits__section--tile__downloads"><a href="' . $fileURL . '" target="_blank">' . $fileName . '</a> <span class="bbg__file-size">(' . $fileExt . ', ' . $fileSize . ')</span></p>';
+										echo '</article>';
+									}
+								}
+								echo 			'</div>';
+								echo 		'</div>';
 								echo 	'</div>';
+								echo '</div>'; // END .outer-container
 							}
-							echo 		'<div class="main-content-container">';
-							if (!empty($labelLink)) {
-								echo 		'<h2 class="section-header"><a href="' . get_permalink($labelLink) . '">' . $labelText . '</a></h2>';
-							} else {
-								echo 		'<h2 class="section-header">' . $labelText . '</h2>';
-							}
+							elseif (get_row_layout() == 'kits_recent_awards') {
+								$counter = 0;
 
-							if (!empty($headlineLink)) {
-								echo 		'<h3 class="article-title"><a href="' . get_permalink($headlineLink) . '">' . $headlineText . '</a></h3>';
-							} else {
-								echo 		'<h3 class="article-title">' . $headlineText . '</h3>';
-							}
-							echo $summary;
+								foreach ($awards as $current_award) {
+									$counter++;
 
-							if (!empty($fileDownload)) {
-								echo 		'<button>';
-								echo 			'<a href=' . $fileDownloadURL . ' target="_blank" download><span class="fa fa-download"></span>&emsp;' . $fileDownloadText . '</a>';
-								echo 		'</button>';
-							}
-							echo 		'</div>';
-							echo 	'</div><!-- .outer-container -->';
-							echo '</div><!-- .bbg__ribbon -->';
-						}
-						elseif (get_row_layout() == 'kits_downloads_files') {
-							$downloadsLabel = get_sub_field('kits_downloads_label');
-							echo '<div class="outer-container">';
-							echo 	'<div class="grid-container">';
-							if ($downloadsLabel) {
-								echo '<h3>' . $downloadsLabel . '</h3>';
-							}
-							echo 		'<div class="nest-container">';
-							echo 			'<div class="inner-container">';
+									$id = $current_award['id'];
+									$url = $current_award['url'];
+									$title = $current_award['title'];
+									$awardYears = $current_award['awardYears'];
+									$awardTitle = $current_award['awardTitle'];
+									$awardCategoryLink = get_category_link($awardCategoryObj -> term_id);
 
-							$downloadFiles = get_sub_field('kits_downloads_file');
-							$countFiles = count ($downloadFiles);
-							if (checkNum($countFiles) === true) {
-								$containerClass = 'grid-third';
-							} else {
-								$containerClass = 'grid-half';
-							}
-							if ($downloadFiles) {
-								foreach ($downloadFiles as $file) {
-									$fileImageObject = $file['downloads_file_image'];
-									$thumbSrc = wp_get_attachment_image_src($fileImageObject['ID'] , 'large-thumb');
-									$supportPageTitle = $file['kits_related_page_name'];
-									$supportPage = $file['kits_related_page'];
-									if ($supportPageTitle) {
-										$pageHeadline = $supportPageTitle;
-									} else {
-										$pageHeadline = get_the_title($supportPage -> ID);
-									}
-									$pageURL = get_permalink($supportPage -> ID);
-									$pageExcerpt = my_excerpt($supportPage -> ID);
-									$pageExcerpt = apply_filters('the_content', $pageExcerpt);
-									$pageExcerpt = str_replace(']]>', ']]&gt;', $pageExcerpt);
-
-
-									$fileTitle = $file['downloads_link_name'];
-									$fileObj = $file['downloads_file'];
-									if ($fileTitle) {
-										$fileName = $fileTitle;
-									} else {
-										$fileName = $fileObj['title'];
-									}
-									$fileID = $fileObj['ID'];
-									$fileURL = $fileObj['url'];
-									$file = get_attached_file($fileID);
-									$fileExt = strtoupper(pathinfo( $file, PATHINFO_EXTENSION));
-									$fileSize = formatBytes(filesize($file));
-
-									echo '<article class="' . $containerClass . ' bbg__kits__section--tile">';
-									echo 	'<header class="bbg__kits__section--tile__header">';
-									if ( $supportPage ) {
-										echo '<h4 class="bbg__kits__section--tile__title"><a href="' . $pageURL . '">' . $pageHeadline . '</a></h4>';
-									} else {
-										echo '<h4 class="bbg__kits__section--tile__title"><a href="' . $fileURL . '" target="_blank">' . $fileName . '</a></h4>';
-									}
-									echo 	'</header>';
-
-									if ($thumbSrc) {
-										echo '<a href="' . $fileURL . '" target="_blank">';
-										echo '<img src="' . $thumbSrc[0] . '" alt="">';
-										echo '</a>';
-									}
-									echo $pageExcerpt;
-									echo 	'<p class="bbg__kits__section--tile__downloads"><a href="' . $fileURL . '" target="_blank">' . $fileName . '</a> <span class="bbg__file-size">(' . $fileExt . ', ' . $fileSize . ')</span></p>';
-									echo '</article>';
+									$award_block  = '<div class="outer-container">';
+									$award_block .= 	'<div class="grid-half">';
+									$award_block .= 		'<h3 class="section-subheader">Recent Awards</h3>';
+									$award_block .= 		'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
+									$award_block .= 		'<a href="' . $awardCategoryLink . '" class="read-more">View all awards »</a>';
+									$award_block .= 	'</div>';
 								}
-							}
-							echo 			'</div>';
-							echo 		'</div>';
-							echo 	'</div>';
-							echo '</div>'; // END .outer-container
-						}
-						elseif (get_row_layout() == 'kits_recent_awards') {
-							$counter = 0;
 
-							foreach ($awards as $current_award) {
-								$counter++;
+								$focusPageObj = get_sub_field('kits_recent_awards_focus_page');
+								$focusPageTitle = get_the_title($focusPageObj -> ID);
+								$focusPageURL = get_the_permalink($focusPageObj -> ID);
+								$focusPageExcerpt = my_excerpt($focusPageObj -> ID);
+								$focusPageExcerpt = apply_filters('the_content', $focusPageExcerpt);
+								$focusPageExcerpt = str_replace(']]>', ']]&gt;', $focusPageExcerpt);
 
-								$id = $current_award['id'];
-								$url = $current_award['url'];
-								$title = $current_award['title'];
-								$awardYears = $current_award['awardYears'];
-								$awardTitle = $current_award['awardTitle'];
-								$awardCategoryLink = get_category_link($awardCategoryObj -> term_id);
-
-								$award_block  = '<div class="outer-container">';
-								$award_block .= 	'<div class="grid-half">';
-								$award_block .= 		'<h3 class="section-subheader">Recent Awards</h3>';
-								$award_block .= 		'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
-								$award_block .= 		'<a href="' . $awardCategoryLink . '" class="read-more">View all awards »</a>';
+								$award_block .= 	'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
+								$award_block .= 		'<h3 class="section-subheader">' . $focusPageTitle . '</h3>';
+								$award_block .= 		'<p>' . $focusPageExcerpt . '</p>';
+								$award_block .= 		'<a href="' . $focusPageURL . '" class="read-more">Read more</a>';
 								$award_block .= 	'</div>';
+								$award_block .= '</div>';
+								echo $award_block;
 							}
-
-							$focusPageObj = get_sub_field('kits_recent_awards_focus_page');
-							$focusPageTitle = get_the_title($focusPageObj -> ID);
-							$focusPageURL = get_the_permalink($focusPageObj -> ID);
-							$focusPageExcerpt = my_excerpt($focusPageObj -> ID);
-							$focusPageExcerpt = apply_filters('the_content', $focusPageExcerpt);
-							$focusPageExcerpt = str_replace(']]>', ']]&gt;', $focusPageExcerpt);
-
-							$award_block .= 	'<div class="grid-half bbg__post-excerpt bbg__award__excerpt">';
-							$award_block .= 		'<h3 class="section-subheader">' . $focusPageTitle . '</h3>';
-							$award_block .= 		'<p>' . $focusPageExcerpt . '</p>';
-							$award_block .= 		'<a href="' . $focusPageURL . '" class="read-more">Read more</a>';
-							$award_block .= 	'</div>';
-							$award_block .= '</div>';
-							echo $award_block;
-						}
-						elseif (get_row_layout() == 'kits_umbrella_page') {
-							$kits_umbrella_main_data = get_kits_umbrella_main_data();
-							$content_counter = count(get_sub_field('kits_section_content'));
-							
-							$grid_class = 'bbg-grid--1-2-2';
-							if (isOdd($content_counter)) {
-								$grid_class = 'bbg-grid--1-2-3';
-							}
-							$kit_umbrella  = '<div class="outer-container">';
-							$kit_umbrella .= 	'<div class="grid-container">';
-							$kit_umbrella .= 		'<h3 class="section-subheader">' . $kits_umbrella_main_data['header'] . '</h3>';
-							$kit_umbrella .= 		'<div class="nest-container">';
-							$kit_umbrella .= 			'<div class="inner-container">';
-							$kit_umbrella .= 				'<div class="grid-container">';
-
-							while (have_rows('kits_section_content')) {
-								the_row();
-								$kits_row = get_row_layout();
-								$kit_umbrella_content_data = get_kits_umbrella_content_data($kits_row);
-								if (!empty($kit_umbrella_content_data)) {
-									$kit_umbrella .= 			'<div class="' . $grid_class . '">';
-									$kit_umbrella .= 				'<h4 class="article-title">' . $kit_umbrella_content_data['column_title'] . '</h4>';
-									$kit_umbrella .= 				'<div class="hd_scale umbrella-bg-image" ';
-									$kit_umbrella .= 					'style="background-image: url(\'' . $kit_umbrella_content_data['thumbnail']['url'] . '\')">';
-									$kit_umbrella .= 				'</div>';
-									$kit_umbrella .= 				'<p>' . $kit_umbrella_content_data['description'] . '</p>';
-									if (!empty($kit_umbrella_content_data['file'])) {
-										$kit_umbrella .= 			'<p><a href="'. $kit_umbrella_content_data['file']['url'] . '">' . $kit_umbrella_content_data['file']['title'] . '</a> <span class="bbg__file">(' . $kit_umbrella_content_data['file']['subtype'] . ' ' . formatBytes($kit_umbrella_content_data['file']['filesize']) . ')</span></p>';
-									} else {
-										$kit_umbrella .= 				'<p><a href="'. $kit_umbrella_content_data['link'] . '">' . $kit_umbrella_content_data['post_title'] . '</a></p>';
-									}
-									$kit_umbrella .= 			'</div>';
+							elseif (get_row_layout() == 'kits_umbrella_page') {
+								$kits_umbrella_main_data = get_kits_umbrella_main_data();
+								$content_counter = count(get_sub_field('kits_section_content'));
+								
+								$grid_class = 'bbg-grid--1-2-2';
+								if (isOdd($content_counter)) {
+									$grid_class = 'bbg-grid--1-2-3';
 								}
+								$kit_umbrella  = '<div class="outer-container">';
+								$kit_umbrella .= 	'<div class="grid-container">';
+								$kit_umbrella .= 		'<h3 class="section-subheader">' . $kits_umbrella_main_data['header'] . '</h3>';
+								$kit_umbrella .= 		'<div class="nest-container">';
+								$kit_umbrella .= 			'<div class="inner-container">';
+								$kit_umbrella .= 				'<div class="grid-container">';
+
+								while (have_rows('kits_section_content')) {
+									the_row();
+									$kits_row = get_row_layout();
+									$kit_umbrella_content_data = get_kits_umbrella_content_data($kits_row);
+									if (!empty($kit_umbrella_content_data)) {
+										$kit_umbrella .= 			'<div class="' . $grid_class . '">';
+										$kit_umbrella .= 				'<h4 class="article-title">' . $kit_umbrella_content_data['column_title'] . '</h4>';
+										$kit_umbrella .= 				'<div class="hd_scale umbrella-bg-image" ';
+										$kit_umbrella .= 					'style="background-image: url(\'' . $kit_umbrella_content_data['thumbnail']['url'] . '\')">';
+										$kit_umbrella .= 				'</div>';
+										$kit_umbrella .= 				'<p>' . $kit_umbrella_content_data['description'] . '</p>';
+										if (!empty($kit_umbrella_content_data['file'])) {
+											$kit_umbrella .= 			'<p><a href="'. $kit_umbrella_content_data['file']['url'] . '">' . $kit_umbrella_content_data['file']['title'] . '</a> <span class="bbg__file">(' . $kit_umbrella_content_data['file']['subtype'] . ' ' . formatBytes($kit_umbrella_content_data['file']['filesize']) . ')</span></p>';
+										} else {
+											$kit_umbrella .= 				'<p><a href="'. $kit_umbrella_content_data['link'] . '">' . $kit_umbrella_content_data['post_title'] . '</a></p>';
+										}
+										$kit_umbrella .= 			'</div>';
+									}
+								}
+								$kit_umbrella .= 				'</div>'; // END .grid-container
+								$kit_umbrella .= 			'</div>';// END .inner-container
+								$kit_umbrella .= 		'</div>'; // END .nest-container
+								$kit_umbrella .= 	'</div>'; // END .grid-container
+								$kit_umbrella .= '</div>'; // END .outer-container
+								echo $kit_umbrella;
 							}
-							$kit_umbrella .= 				'</div>'; // END .grid-container
-							$kit_umbrella .= 			'</div>';// END .inner-container
-							$kit_umbrella .= 		'</div>'; // END .nest-container
-							$kit_umbrella .= 	'</div>'; // END .grid-container
-							$kit_umbrella .= '</div>'; // END .outer-container
-							echo $kit_umbrella;
-						}
-					endwhile;
-					echo '<!-- END ROWS -->';
+						endwhile;
+						echo '<!-- END ROWS -->';
+					endif;
 				endif;
 				?>
 				<!-- END 2B **** Flexible content rows -->

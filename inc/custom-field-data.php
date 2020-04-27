@@ -330,13 +330,33 @@ function get_ribbon_data() {
 		$ribbon_bg_color = '';
 	}
 	$ribbon_data_package = array(
+		'label' => get_sub_field('ribbon_label'),
+		'label_link' => get_sub_field('ribbon_label_link'),
+		'headline' => get_sub_field('ribbon_headline'),
+		'headline_link' => get_sub_field('ribbon_headline_link'),
+		'summary' => get_sub_field('ribbon_summary'),
+		'image_url' => get_sub_field('ribbon_image'),
+		'image_position' => get_sub_field('ribbon_image_position'),
+		'bg_color' => $ribbon_bg_color
+	);
+	return $ribbon_data_package;
+}
+
+function get_about_ribbon_data() {
+	$ribbon_bg_option = get_sub_field('change_ribbon_background_color');
+	if ($ribbon_bg_option == 'yes') {
+		$ribbon_bg_color = get_sub_field('about_ribbon_background_color');
+	} else {
+		$ribbon_bg_color = '';
+	}
+	$ribbon_data_package = array(
 		'label' => get_sub_field('about_ribbon_label'),
 		'label_link' => get_sub_field('about_ribbon_label_link'),
 		'headline' => get_sub_field('about_ribbon_headline'),
 		'headline_link' => get_sub_field('about_ribbon_headline_link'),
 		'summary' => get_sub_field('about_ribbon_summary'),
 		'image_url' => get_sub_field('about_ribbon_image'),
-		'image_position' => get_sub_field('ribbon_image_position'),
+		'image_position' => get_sub_field('about_ribbon_image_position'),
 		'bg_color' => $ribbon_bg_color
 	);
 	return $ribbon_data_package;
@@ -399,9 +419,11 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 
 		$thumb_src = "";
 		if ($show_featured_image) {
-			$thumb_src = wp_get_attachment_image_src(get_post_thumbnail_id($id) , 'medium-thumb');
-			if ($thumb_src) {
-				$thumb_src = $thumb_src[0];
+			if (!empty($page_object)) {
+				$thumb_src = wp_get_attachment_image_src(get_post_thumbnail_id($id) , 'medium-thumb');
+				if ($thumb_src) {
+					$thumb_src = $thumb_src[0];
+				}
 			}
 		}
 

@@ -7,7 +7,7 @@
 // CONTENTS:
 // ----------------
 // HOMEPACE OPTIONS
-// ABOUT FLEXIBLE ROWS
+// FLEXIBLE ROWS
 // ENTITY FIELDS
 // ABOUT (OFFICE)
 
@@ -80,7 +80,7 @@ function build_threat_parts($threat_data) {
 	return $threat_markup_set;
 }
 
-// ABOUT FLEXIBLE ROWS
+// FLEXIBLE ROWS
 function build_ribbon_parts($ribbon_data) {
 	if ($ribbon_data['label_link'] != "") {
 		$ribbon_label  = '<h2 class="section-header">';
@@ -97,6 +97,7 @@ function build_ribbon_parts($ribbon_data) {
 		$ribbon_headline = '<h3 class="article-title">' . $ribbon_data['headline'] . '</h3>';
 	}
 	$ribbon_summary = $ribbon_data['summary'];
+	$ribbon_image = '';
 	if (!empty($ribbon_data['image_url'])) {
 		$ribbon_image = '<div class="ribbon-image" style="background-image: url(' . $ribbon_data['image_url'] . ');"></div>';
 	}

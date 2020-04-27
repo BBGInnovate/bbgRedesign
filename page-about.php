@@ -31,63 +31,67 @@ if (have_posts()) {
 	}
 }
 
+$all_flex_rows = array();
 
-if (have_rows('about_flexible_page_rows')) {
-	$all_flex_rows = array();
-	$umbrella_group = array();
-	while (have_rows('about_flexible_page_rows')) {
-		the_row();
-		if (get_row_layout() == 'umbrella') {
-			// GET UMBRELLA'S MAIN DATA			
-			$main_umbrella_data = get_umbrella_main_data();
-			$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
-			// DETERMINE GRID
-			$content_counter = count(get_sub_field('umbrella_content'));
-			$umbrella_column_grouping = get_sub_field('umbrella_grouping');
-			if ($umbrella_column_grouping != 'default') {
-				$special_umbrella_group = true;
-			} else {
-				$special_umbrella_group = false;
-			}
+$includeAboutFlexiblePageRows = get_field('include_about_flexible_page_rows');
+if (!empty($includeAboutFlexiblePageRows)) {
+	if (have_rows('about_flexible_page_rows')) {
 
-			if ($umbrella_column_grouping == 'default') {
-				$grid_class = 'bbg-grid--1-2-2';
-				if (isOdd($content_counter)) {
-					$grid_class = 'bbg-grid--1-2-3';
+		$umbrella_group = array();
+		while (have_rows('about_flexible_page_rows')) {
+			the_row();
+			if (get_row_layout() == 'umbrella') {
+				// GET UMBRELLA'S MAIN DATA			
+				$main_umbrella_data = get_umbrella_main_data();
+				$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
+				// DETERMINE GRID
+				$content_counter = count(get_sub_field('umbrella_content'));
+				$umbrella_column_grouping = get_sub_field('umbrella_grouping');
+				if ($umbrella_column_grouping != 'default') {
+					$special_umbrella_group = true;
+				} else {
+					$special_umbrella_group = false;
 				}
-			} elseif ($umbrella_column_grouping == 'four') {
-				$grid_class = 'grid-four';
-			} elseif ($umbrella_column_grouping == 'five') {
-				$grid_class = 'grid-five';
-			}
 
-			$umbrella_main_data_group = assemble_umbrella_main($main_umbrella_parts);
-			array_push($umbrella_group, $umbrella_main_data_group);
-			// GET UMBRELLA'S CONTENT DATA
-			$content_parts_group = array();
-			while (have_rows('umbrella_content')) {
-				the_row();
-				$umbrella_content_type = get_row_layout();
-				$content_data_result = get_umbrella_content_data($umbrella_content_type, $grid_class);
-				$content_parts_result = build_umbrella_content_parts($content_data_result);
-				array_push($content_parts_group, $content_parts_result);
+				if ($umbrella_column_grouping == 'default') {
+					$grid_class = 'bbg-grid--1-2-2';
+					if (isOdd($content_counter)) {
+						$grid_class = 'bbg-grid--1-2-3';
+					}
+				} elseif ($umbrella_column_grouping == 'four') {
+					$grid_class = 'grid-four';
+				} elseif ($umbrella_column_grouping == 'five') {
+					$grid_class = 'grid-five';
+				}
+
+				$umbrella_main_data_group = assemble_umbrella_main($main_umbrella_parts);
+				array_push($umbrella_group, $umbrella_main_data_group);
+				// GET UMBRELLA'S CONTENT DATA
+				$content_parts_group = array();
+				while (have_rows('umbrella_content')) {
+					the_row();
+					$umbrella_content_type = get_row_layout();
+					$content_data_result = get_umbrella_content_data($umbrella_content_type, $grid_class);
+					$content_parts_result = build_umbrella_content_parts($content_data_result);
+					array_push($content_parts_group, $content_parts_result);
+				}
+				$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group, $special_umbrella_group);
+				array_push($umbrella_group, $umbrella_content_markup);
+				array_push($all_flex_rows, $umbrella_group);
+				$umbrella_group = array();
 			}
-			$umbrella_content_markup = assemble_umbrella_content_section($content_parts_group, $special_umbrella_group);
-			array_push($umbrella_group, $umbrella_content_markup);
-			array_push($all_flex_rows, $umbrella_group);
-			$umbrella_group = array();
-		}
-		elseif (get_row_layout() == 'marquee') {
-			$marquee_data_result = get_marquee_data();
-			$marquee_parts_result = build_marquee_parts($marquee_data_result);
-			$marquee_module = assemble_marquee_module($marquee_parts_result);
-			array_push($all_flex_rows, $marquee_module);
-		}
-		elseif (get_row_layout() == 'about_ribbon_page') {
-			$ribbon_data_result = get_ribbon_data();
-			$ribbon_parts_result = build_ribbon_parts($ribbon_data_result);
-			$ribbon_module = assemble_ribbon_module($ribbon_parts_result);
-			array_push($all_flex_rows, $ribbon_module);
+			elseif (get_row_layout() == 'marquee') {
+				$marquee_data_result = get_marquee_data();
+				$marquee_parts_result = build_marquee_parts($marquee_data_result);
+				$marquee_module = assemble_marquee_module($marquee_parts_result);
+				array_push($all_flex_rows, $marquee_module);
+			}
+			elseif (get_row_layout() == 'about_ribbon_page') {
+				$ribbon_data_result = get_about_ribbon_data();
+				$ribbon_parts_result = build_ribbon_parts($ribbon_data_result);
+				$ribbon_module = assemble_ribbon_module($ribbon_parts_result);
+				array_push($all_flex_rows, $ribbon_module);
+			}
 		}
 	}
 }
@@ -360,7 +364,7 @@ get_header();
 	}
 
 	// FLEXIBLE ROWS: NETWORKS
-	$show_networks = get_field('about_networks_row', $id);
+	$show_networks = get_field('show_about_networks_row', $id);
 	if (!empty($show_networks)) {
 		// OPTIONS: $entity_placement arguments ["entity-main" | "entity-side"]
 		if (isShowNetworkEntityList()) {

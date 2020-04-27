@@ -7,7 +7,7 @@
  * show Constant Contact sign-up form
  * @var [boolean]
  */
-$includeSignup = get_post_meta(get_the_ID(), 'kits_signup', true);
+$includeSignup = get_post_meta(get_the_ID(), 'include_kits_signup', true);
 $signupForm = "";
 
 if ($includeSignup) {
