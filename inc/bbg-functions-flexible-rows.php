@@ -307,7 +307,7 @@ function parsePostGroup($postGroup) {
     return $card;
 }
 
-function getRowsDataHeader() {
+function getRowsDataHeader($postId = null) {
     $card = array();
 
     $card['background'] = parseBackgroundGroup(get_sub_field('background'));
@@ -614,7 +614,7 @@ function createFooter($card) {
         return '';
     }
 
-    $tag = $card['tag'];
+    $tag = $card['tag'] ?? '';
     $title = $card['title'];
     $color = $title['color'];
 
@@ -622,7 +622,7 @@ function createFooter($card) {
     $result .= '            <div class="cards__footer">';
     if (!empty($tag['text'])) {
         $result .= '                <div class="cards__tag">';
-        if (!empty($tag['url'])) {
+        if (isset($tag['url'])) {
             $result .= '                <a href="' . $tag['url'] . '">' . $tag['text'] . '</a>';
         } else {
             $result .= '                ' . $tag['text'];
