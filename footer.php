@@ -11,7 +11,7 @@
 if (!is_page_template('usagm-intro.php')) {
 ?>
 
-<div id="redirect__overlay">
+<div id="redirect__overlay" style="display: none;">
     <div id="redirect__dialog">
         <div id="redirect__dialog--close"></div>
         <h2>Confirm External Link</h2>
