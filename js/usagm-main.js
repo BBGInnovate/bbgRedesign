@@ -134,7 +134,8 @@ function setUpRedirectHandler() {
 		let linkHref = link[0].href;
 		let linkHostname = link[0].hostname;
 		let currentHostname = window.location.hostname;
-		if (linkHostname != currentHostname && !linkHostname.endsWith('.' + currentHostname)) {
+		let expectedPosition = linkHostname.length - (currentHostname.length + 1)
+		if (linkHostname != currentHostname && linkHostname.indexOf('.' + currentHostname) != expectedPosition) {
 			e.preventDefault();
 
 			$('#redirect__dialog').click(function(e) {
