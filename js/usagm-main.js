@@ -126,7 +126,7 @@ function setUpRedirectHandler() {
 	$(document).on('click', 'a', function(e) {
 
 		let linkOriginal = $(this).attr('href');
-		if (linkOriginal.startsWith('mailto:') || linkOriginal.startsWith('tel:')) {
+		if (linkOriginal.indexOf('mailto:') == 0 || linkOriginal.indexOf('tel:') == 0) {
 			return;
 		}
 
