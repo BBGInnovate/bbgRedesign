@@ -11,6 +11,19 @@
 if (!is_page_template('usagm-intro.php')) {
 ?>
 
+<div id="redirect__overlay">
+    <div id="redirect__dialog">
+        <div id="redirect__dialog--close"></div>
+        <h2>Confirm External Link</h2>
+        <p>
+            Are you sure you want to navigate to this external link?
+            <div id="redirect__link"></div>
+        </p>
+        <button id="redirect__button--cancel" type="button">Cancel</button>
+        <button id="redirect__button--confirm" type="button">Continue</button>
+    </div>
+</div>
+
 <footer id="footer">
 	<div class="outer-container">
 		<div id="grid-container">

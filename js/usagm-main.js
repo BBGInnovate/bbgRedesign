@@ -122,6 +122,58 @@ function scaleRibbonBanner() {
 }
 scaleRibbonBanner();
 
+function setUpRedirectHandler() {
+	$("main#main").on('click', 'a', function(e) {
+
+		let linkOriginal = $(this).attr('href');
+		let link = $('<a>', {href: linkOriginal});
+		let linkHref = link[0].href;
+		let linkHostname = link[0].hostname;
+		let currentHostname = window.location.hostname;
+		if (linkHostname != currentHostname && !linkHostname.endsWith('.' + currentHostname)) {
+			e.preventDefault();
+
+			$('#redirect__dialog').click(function(e) {
+				e.stopPropagation();
+			});
+
+			$('#redirect__button--cancel').click(function(e) {
+				hideOverlay($('#redirect__overlay'));
+			});
+
+			$('#redirect__button--confirm').click(function(e) {
+				hideOverlay($('#redirect__overlay'));
+				window.location = linkHref;
+			});
+
+			$('#redirect__dialog--close').click(function(e) {
+				hideOverlay($('#redirect__overlay'));
+			});
+
+			$('#redirect__link').html(linkHref);
+
+			showOverlay($('#redirect__overlay'));
+		}
+	});
+
+	$('#redirect__overlay').click(function(e) {
+		hideOverlay($('#redirect__overlay'));
+	});
+
+	function showOverlay(overlay) {
+		overlay.width('100%');
+		overlay.height('100%');
+		overlay.show();
+	}
+
+	function hideOverlay(overlay) {
+		overlay.hide();
+		overlay.width('0');
+		overlay.height('0');
+	}
+}
+
+setUpRedirectHandler();
 
 // PRESS CLIPPINGS DROPDOWN
 var clipsListItems = $('.media-clips-entities-dropdown ul li, .award-dropdown ul li');

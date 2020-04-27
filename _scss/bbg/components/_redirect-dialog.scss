@@ -1,0 +1,42 @@
+#redirect__overlay {
+    position: fixed;
+    display: none;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: rgba(0,0,0, 0.5);
+    z-index: 10000;
+}
+
+#redirect__dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 400px;
+    min-height: 300px;
+    max-width: 90%;
+    max-height: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    /*border-radius: 3px;*/
+    box-shadow: 0px 2px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#redirect__dialog--close {
+    float: right;
+    cursor: pointer;
+}
+
+#redirect__dialog--close:before{
+    display: inline-block;
+    content: "\2715";
+    right: 0;
+}
+
+#redirect__link {
+    font-weight: bold;
+}
