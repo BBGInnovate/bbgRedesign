@@ -123,7 +123,7 @@ function scaleRibbonBanner() {
 scaleRibbonBanner();
 
 function setUpRedirectHandler() {
-	$("main#main").on('click', 'a', function(e) {
+	$(document).on('click', 'a', function(e) {
 
 		let linkOriginal = $(this).attr('href');
 		let link = $('<a>', {href: linkOriginal});
