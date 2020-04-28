@@ -23,7 +23,7 @@ get_header();
         <div class="grid-container">
             <div class="nest-container">
                 <?php
-                    echo getFlexibleRows('option');
+                    echo getCardsRows('option');
                 ?>
             </div>
         </div>

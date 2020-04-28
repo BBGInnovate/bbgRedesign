@@ -269,9 +269,9 @@ require get_template_directory() . '/inc/bbg-custom-post-types-and-taxonomies.ph
 require get_template_directory() . '/inc/bbg-functions-awards.php';
 require get_template_directory() . '/inc/bbg-functions-boardAndSeniorManagement.php';
 require get_template_directory() . '/inc/bbg-functions-bizOpps.php';
+require get_template_directory() . '/inc/bbg-functions-cards.php';
 require get_template_directory() . '/inc/bbg-functions-congressional-committees.php';
 require get_template_directory() . '/inc/bbg-functions-contactCards.php';
-require get_template_directory() . '/inc/bbg-functions-flexible-rows.php';
 require get_template_directory() . '/inc/bbg-functions-header.php';
 require get_template_directory() . '/inc/bbg-functions-impact.php';
 require get_template_directory() . '/inc/bbg-functions-interns.php';

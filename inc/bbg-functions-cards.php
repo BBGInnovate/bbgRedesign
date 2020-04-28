@@ -152,7 +152,7 @@ function getTweetParts($tweet) {
 
 function getColorParts($color, $isBgColor = false) {
 
-    if (empty($color)) {
+    if (!isset($color) || empty($color)) {
         $color = 'white';
     }
 
@@ -394,9 +394,7 @@ function getRowsDataFlexText() {
     return $card;
 }
 
-function getCardsRows($postId = null) {
-    // $postId = 'options';
-    $postId = '';
+function getCardsRowsData($postId = null) {
 
     $cardsRows = array();
     if (have_rows('cards_rows', $postId)) {
@@ -406,6 +404,7 @@ function getCardsRows($postId = null) {
             $cardsRow = array();
             $cardsRow['cards_heading'] = get_sub_field('cards_heading');
             $cardsRow['cards_heading_url'] = get_sub_field('cards_heading_url');
+            $cardsRow['cards_heading_intro'] = get_sub_field('cards_heading_intro');
             $cardsRow['cards_margin_top'] = get_sub_field('cards_margin_top');
             $cardsRow['cards_margin_bottom'] = get_sub_field('cards_margin_bottom');
             $cardsRow['cards_height'] = get_sub_field('cards_height');
@@ -697,11 +696,15 @@ function getCardsLayout($cardsRows) {
         $result .= '<div class="inner-container gutter-' . $gutterSize .'">';
         $cardsHeading = $cardsRow['cards_heading'];
         $cardsHeadingUrl = $cardsRow['cards_heading_url'];
+        $cardsHeadingIntro = $cardsRow['cards_heading_intro'];
         if (!empty($cardsHeading)) {
             if (!empty($cardsHeadingUrl)) {
                 $result .= '<h3><a href="' . $cardsRow['cards_heading_url'] . '">' . $cardsRow['cards_heading'] . '</a></h3>';
             } else {
                 $result .= '<h3>' . $cardsRow['cards_heading'] . '</h3>';
+            }
+            if (!empty($cardsHeadingIntro)) {
+                $result .= '    <p class="lead-in">' . $cardsHeadingIntro . '</p>';
             }
         }
         foreach ($cardsRow['cards_content'] as $card) {
@@ -736,62 +739,10 @@ function getCardsLayout($cardsRows) {
     return $result;
 }
 
-function getFlexibleRowsArray($postId = null) {
-	$all_flex_rows = array();
-
-	if (have_rows('flexible_page_rows', $postId)) {
-		$includeFlexiblePageRows = get_field('include_flexible_page_rows', $postId);
-		if (!empty($includeFlexiblePageRows)) {
-			$umbrella_group = array();
-			while (have_rows('flexible_page_rows', $postId)) {
-				the_row();
-
-				if (get_row_layout() == 'cards') {
-					$cardsRows = getCardsRows($postId);
-					$cardsLayout = getCardsLayout($cardsRows);
-					array_push($all_flex_rows, $cardsLayout);
-				}
-				elseif (get_row_layout() == 'marquee') {
-					$marquee_data_result = get_marquee_data();
-					$marquee_parts_result = build_marquee_parts($marquee_data_result);
-					$marquee_module = assemble_marquee_module($marquee_parts_result);
-					array_push($all_flex_rows, $marquee_module);
-				}
-				elseif (get_row_layout() == 'ribbon_page') {
-					$ribbon_data_result = get_ribbon_data();
-					$ribbon_parts_result = build_ribbon_parts($ribbon_data_result);
-					$ribbon_module = assemble_ribbon_module($ribbon_parts_result);
-					array_push($all_flex_rows, $ribbon_module);
-				}
-			}
-		}
-	}
-
-	return $all_flex_rows;
-}
-
-function getFlexibleRows($postId = null) {
-	$flexRows = getFlexibleRowsArray($postId);
-
-	$result = '';
-
-	foreach ($flexRows as $flexRow) {
-		if (is_array($flexRow)) {
-			$result .= '<div class="outer-container about-flexible-row">';
-			foreach ($flexRow as $row) {
-				$result .= $row;
-			}
-			$result .= '</div>';
-		}
-		else {
-			// echo $flex_row;
-			$result .= '<div class="outer-container">';
-			$result .= $flexRow;
-			$result .= '</div>';
-		}
-	}
-
-	return $result;
+function getCardsRows($postId) {
+    $cardsRowsData = getCardsRowsData($postId);
+    $cardsLayout = getCardsLayout($cardsRowsData);
+    return $cardsLayout;
 }
 
 ?>

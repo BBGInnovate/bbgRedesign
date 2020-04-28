@@ -175,29 +175,52 @@ function build_umbrella_content_parts($content_data) {
 		}
 	}
 
-	if ($content_data['item_title']) {
-		$item_title  = '<h4 class="article-title">';
-		if (!empty($content_data['link'])) {
-			$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>' . $content_data['item_title'] . '</a>';
-		} else {
-			$item_title .= 		$content_data['item_title'];
+	if ($content_data['should_use_card'] == true) {
+		if ($content_data['item_title']) {
+			$item_title  = '<h2>';
+			if (!empty($content_data['link'])) {
+				$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>' . $content_data['item_title'] . '</a>';
+			} else {
+				$item_title .= 		$content_data['item_title'];
+			}
+			$item_title .= '</h2>';
 		}
-		if ($content_data['column_type'] == 'umbrella_content_file') {
-			$item_title .= ' <p class="sans">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
+
+		if ($content_data['thumb_src']) {
+			$image .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>';
+			$image .= 		'<img src="' . $content_data['thumb_src'] . '" alt="Thumbnail image">';
+			$image .= 	'</a>';
+			$image .= '<div class="cards__backdrop-shadow"></div>';
 		}
-		$item_title .= '</h4>';
-	}
 
-	if ($content_data['thumb_src']) {
-		$image  = '<div class="hd_scale">';
-		$image .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>';
-		$image .= 		'<img src="' . $content_data['thumb_src'] . '" alt="Thumbnail image">';
-		$image .= 	'</a>';
-		$image .= '</div>';
-	}
+		if ($content_data['description']) {
+			$description  = '<p>' . $content_data['description'] . '</p>';
+		}
+	} else {
+		if ($content_data['item_title']) {
+			$item_title  = '<h4 class="article-title">';
+			if (!empty($content_data['link'])) {
+				$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>' . $content_data['item_title'] . '</a>';
+			} else {
+				$item_title .= 		$content_data['item_title'];
+			}
+			if ($content_data['column_type'] == 'umbrella_content_file') {
+				$item_title .= ' <p class="sans">(' . $content_data['file_ext'] . ', ' . $content_data['file_size'] . ')</p>';
+			}
+			$item_title .= '</h4>';
+		}
 
-	if ($content_data['description']) {
-		$description  = '<p>' . $content_data['description'] . '</p>';
+		if ($content_data['thumb_src']) {
+			$image  = '<div class="hd_scale">';
+			$image .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>';
+			$image .= 		'<img src="' . $content_data['thumb_src'] . '" alt="Thumbnail image">';
+			$image .= 	'</a>';
+			$image .= '</div>';
+		}
+
+		if ($content_data['description']) {
+			$description  = '<p>' . $content_data['description'] . '</p>';
+		}
 	}
 	
 	$content_parts = array(
@@ -205,7 +228,8 @@ function build_umbrella_content_parts($content_data) {
 		'column_title' => $column_title,
 		'item_title' => $item_title,
 		'image' => $image,
-		'description' => $description
+		'description' => $description,
+		'should_use_card' => $content_data['should_use_card']
 	);
 	return $content_parts;
 }

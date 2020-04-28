@@ -53,17 +53,6 @@ if (!empty($includeAboutFlexiblePageRows)) {
 					$special_umbrella_group = false;
 				}
 
-				if ($umbrella_column_grouping == 'default') {
-					$grid_class = 'bbg-grid--1-2-2';
-					if (isOdd($content_counter)) {
-						$grid_class = 'bbg-grid--1-2-3';
-					}
-				} elseif ($umbrella_column_grouping == 'four') {
-					$grid_class = 'grid-four';
-				} elseif ($umbrella_column_grouping == 'five') {
-					$grid_class = 'grid-five';
-				}
-
 				$umbrella_main_data_group = assemble_umbrella_main($main_umbrella_parts);
 				array_push($umbrella_group, $umbrella_main_data_group);
 				// GET UMBRELLA'S CONTENT DATA
@@ -71,7 +60,7 @@ if (!empty($includeAboutFlexiblePageRows)) {
 				while (have_rows('umbrella_content')) {
 					the_row();
 					$umbrella_content_type = get_row_layout();
-					$content_data_result = get_umbrella_content_data($umbrella_content_type, $grid_class);
+					$content_data_result = get_umbrella_content_data($umbrella_content_type, $umbrella_column_grouping, $content_counter);
 					$content_parts_result = build_umbrella_content_parts($content_data_result);
 					array_push($content_parts_group, $content_parts_result);
 				}
@@ -94,10 +83,6 @@ if (!empty($includeAboutFlexiblePageRows)) {
 			}
 		}
 	}
-}
-
-foreach (getFlexibleRowsArray() as $arr) {
-	array_push($all_flex_rows, $arr);
 }
 
 // GET RSS FEED
@@ -361,9 +346,7 @@ get_header();
 				echo '</div>';
 			}
 			else {
-				echo '<div class="outer-container about-flexible-row">';
 				echo $flex_row;
-				echo '</div>';
 			}
 		}
 	}

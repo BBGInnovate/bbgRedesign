@@ -3560,7 +3560,7 @@ a:focus .bbg__article-share__icon {
       .cards .cards__fixed .cards__wrapper .cards__backdrop {
         position: relative;
         height: 100%; }
-        .cards .cards__fixed .cards__wrapper .cards__backdrop a img {
+        .cards .cards__fixed .cards__wrapper .cards__backdrop img {
           object-fit: cover;
           width: 100%;
           height: 100%;
@@ -3627,8 +3627,10 @@ a:focus .bbg__article-share__icon {
           margin: 0 0 -6px 0;
           padding: 0;
           font-size: 2.2rem;
-          font-weight: 400; }
+          font-weight: 400;
+          color: #ffffff; }
           .cards .cards__fixed .cards__wrapper .cards__footer h2 a {
+            color: #ffffff;
             text-decoration: none; }
         .cards .cards__fixed .cards__wrapper .cards__footer p {
           margin: 0;
@@ -3638,11 +3640,11 @@ a:focus .bbg__article-share__icon {
   .cards .cards__flexible .cards__flex-text {
     font-size: 20px;
     font-weight: bold; }
-  .cards .cards__flexible .cards__excerpt p {
+  .cards .cards__flexible p {
     margin: 0;
     padding: 16px;
-    font-size: 1.5rem;
-    line-height: 2rem; }
+    font-size: 1.8rem;
+    line-height: 2.6rem; }
   .cards.cards--layout-split .cards__backdrop {
     height: 40%; }
   .cards.cards--layout-split .cards__footer {

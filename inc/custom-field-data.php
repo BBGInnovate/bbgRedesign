@@ -379,12 +379,55 @@ function get_umbrella_main_data() {
 	return $umbrella_data;
 }
 
-function get_umbrella_content_data($umbrella_content_type, $grid_class) {
+function get_umbrella_should_use_card($umbrella_content_type, $title, $thumb_src) {
+    if ($umbrella_content_type == 'umbrella_content_external' || $umbrella_content_type == 'umbrella_content_internal') {
+        if (!empty($title) && !empty($thumb_src)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function get_grid_class($umbrella_column_grouping, $content_counter, $should_use_card) {
+    if ($should_use_card) {
+        if ($content_counter == 1 || $content_counter == 2) {
+            $height = 'normal';
+        } else {
+            $height = 'small';
+        }
+
+        $grid_class = 'cards--size-1-' . $content_counter . '-' . $height . '-small';
+    } else {
+        switch($umbrella_column_grouping) {
+            case 'default':
+                if (isOdd($content_counter)) {
+                    $grid_class = 'bbg-grid--1-2-3';
+                } else {
+                    $grid_class = 'bbg-grid--1-2-2';
+                }
+                break;
+
+            case 'four':
+                $grid_class = 'grid-four';
+                break;
+
+            case 'five':
+                $grid_class = 'grid-five';
+                break;
+        }
+    }
+
+    return $grid_class;
+}
+
+function get_umbrella_content_data($umbrella_content_type, $umbrella_column_grouping, $content_counter) {
+
 	$force_content_labels = '';
 	$file_ext = '';
 	$file_size = '';
 	$layout = '';
 	$law_name = '';
+
 	if ($umbrella_content_type == 'umbrella_content_internal') {
 		$column_title = get_sub_field('umbrella_content_internal_column_title');
 		$page_object = get_sub_field('umbrella_content_internal_link');
@@ -465,6 +508,10 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 		$file_ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
 		$file_size = formatBytes(filesize($file));
 	}
+
+    $should_use_card = get_umbrella_should_use_card($umbrella_content_type, $title, $thumb_src);
+    $grid_class = get_grid_class($umbrella_column_grouping, $content_counter, $should_use_card);
+
 	// TRY DELETING 'force_content_labels'
 	$data_package = array (
 		'column_title' => $column_title,
@@ -479,6 +526,7 @@ function get_umbrella_content_data($umbrella_content_type, $grid_class) {
 		'sub_title' => $law_name,
 		'file_ext' => $file_ext,
 		'file_size' => $file_size,
+        'should_use_card' => $should_use_card,
 	);
 	return $data_package;
 }

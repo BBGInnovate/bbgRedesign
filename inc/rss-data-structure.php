@@ -5,7 +5,7 @@ function get_rss_feed($id, $url) {
 	$feedFilepath = get_template_directory() . '/external-feed-cache/' . $id . '.xml';
 	if (fileExpired($feedFilepath, 60)) { //one hour expiration
 		$feedStr = fetchUrl($url);
-		file_put_contents($feedFilepath, $feedStr);
+		//file_put_contents($feedFilepath, $feedStr);
 	} else {
 		$feedStr = file_get_contents($feedFilepath);
 	}
