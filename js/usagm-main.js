@@ -354,6 +354,38 @@ function strToNum(str) {
 	return Number(str);
 }
 
+function ieHandler() {
+	var ua = window.navigator.userAgent;
+	var msie = ua.indexOf('MSIE ');
+	var trident = ua.indexOf('Trident/');
+
+	if (msie > 0 || trident > 0) {
+		function updateImages(t, backgroundSize) {
+
+	        let imgSrc = 'url(' + t.attr('src') + ')';
+	        let parents = t.parents('.cards__backdrop');
+	        parents.css({
+	            'background-size'       : backgroundSize,
+	            'background-repeat'     : 'no-repeat',
+	            'background-position'   : 'center center',
+	            'background-image'      : imgSrc
+	        });
+
+	        t.hide();
+		}
+
+	    $('.cards__backdrop--image').not('.cards--layout-image').each(function() {
+			let t = $(this);
+			updateImages(t, 'cover');
+	    });
+
+	    $('.cards--layout-image .cards__backdrop--image').each(function() {
+			let t = $(this);
+			updateImages(t, 'auto');
+	    });
+	}
+}
+ieHandler();
 
 $(window).on('resize', function() {
 	scaleRibbonBanner();

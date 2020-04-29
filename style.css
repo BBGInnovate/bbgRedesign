@@ -3672,20 +3672,20 @@ a:focus .bbg__article-share__icon {
       -webkit-box-orient: vertical; }
   .cards.cards--layout-image {
     margin-bottom: 0px; }
-    .cards.cards--layout-image .cards__backdrop.cards__backdrop-image a {
+    .cards.cards--layout-image .cards__fixed .cards__wrapper .cards__backdrop a {
       position: relative;
       display: block;
       height: 100%;
       width: 100%; }
-      .cards.cards--layout-image .cards__backdrop.cards__backdrop-image a img {
-        display: block;
-        position: absolute;
-        height: 100px;
-        width: 100px;
-        object-fit: contain;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); }
+    .cards.cards--layout-image .cards__fixed .cards__wrapper .cards__backdrop img {
+      display: block;
+      position: absolute;
+      height: auto;
+      width: auto;
+      object-fit: contain;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
   .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer {
     width: 100%; }
     .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer .cards__tag {

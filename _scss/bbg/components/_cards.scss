@@ -393,21 +393,22 @@
         &layout-image {
             margin-bottom: 0px;
 
-            .cards__backdrop {
+            .cards__fixed {
+                .cards__wrapper {
+                    .cards__backdrop {
 
-                &.cards__backdrop-image {
-
-                    a {
-                        position: relative;
-                        display: block;
-                        height: 100%;
-                        width: 100%;
+                        a {
+                            position: relative;
+                            display: block;
+                            height: 100%;
+                            width: 100%;
+                        }
 
                         img {
                             display: block;
                             position: absolute;
-                            height: 100px;
-                            width: 100px;
+                            height: auto;
+                            width: auto;
                             object-fit: contain;
                             top: 50%;
                             left: 50%;

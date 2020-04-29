@@ -18,13 +18,14 @@ function getBackgroundImagePartsFromPost($postArg) {
         return array();
     }
 
+    $classArray = array('class' => 'cards__backdrop--image');
     $wpPost = $postArg[0];
     $post = array();
     if ($wpPost->post_type == 'experts') {
         $profile_photo_id = get_post_meta($wpPost->ID, 'profile_photo', true);
-        $post['image'] = wp_get_attachment_image($profile_photo_id, 'large-thumb');
+        $post['image'] = wp_get_attachment_image($profile_photo_id, 'large-thumb', '', $classArray);
     } else {
-        $post['image'] = get_the_post_thumbnail($wpPost, 'large-thumb');
+        $post['image'] = get_the_post_thumbnail($wpPost, 'large-thumb', $classArray);
     }
 
     $post['url'] = get_the_permalink($wpPost);
@@ -38,10 +39,11 @@ function getImageTagFromImage($image, $dimensions = array()) {
     }
     $result = '';
 
-    if (!empty($dimension['width']) && !empty($dimension['height'])) {
-        $result = wp_get_attachment_image($image['id'], array($dimensions['width'], $dimensions['height']));
+    $classArray = array('class' => 'cards__backdrop--image');
+    if (!empty($dimensions['width']) && !empty($dimensions['height'])) {
+        $result = wp_get_attachment_image($image['id'], array($dimensions['width'], $dimensions['height']), '', $classArray);
     } else {
-        $result = wp_get_attachment_image($image['id'], 'large-thumb');
+        $result = wp_get_attachment_image($image['id'], 'large-thumb', '', $classArray);
     }
 
     return $result;
@@ -485,9 +487,13 @@ function createBackground($card) {
             break;
 
         case 'image':
-            $result .= '                <a href="' . $card['background']['url'] . '">';
-            $result .= '                    ' . $card['background']['image'];
-            $result .= '                </a>';
+            if (!empty($card['background']['url'])) {
+                $result .= '            <a href="' . $card['background']['url'] . '">';
+                $result .= '                ' . $card['background']['image'];
+                $result .= '            </a>';
+            } else {
+                $result .= '                ' . $card['background']['image'];
+            }
 
             break;
 
@@ -721,11 +727,7 @@ function getCardsLayout($cardsRows) {
             $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
             $result .= '    <div class="cards__fixed">';
             $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') . '">';
-            if ($card['type'] == 'image') {
-                $result .= '        <div class="cards__backdrop cards__backdrop-image">';
-            } else {
-                $result .= '        <div class="cards__backdrop">';
-            }
+            $result .= '        <div class="cards__backdrop">';
             $result .=                  createBackground($card);
             $result .=                  createWatermark($card);
             $result .= '            </div>';
