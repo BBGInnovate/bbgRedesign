@@ -380,9 +380,12 @@ function get_umbrella_main_data() {
 }
 
 function get_umbrella_should_use_card($umbrella_content_type, $title, $thumb_src) {
-    if ($umbrella_content_type == 'umbrella_content_external' || $umbrella_content_type == 'umbrella_content_internal') {
-        if (!empty($title) && !empty($thumb_src)) {
-            return true;
+    $shouldUseUmbrellaCards = get_field('should_use_umbrella_cards', 'option');
+    if ($shouldUseUmbrellaCards) {
+        if ($umbrella_content_type == 'umbrella_content_external' || $umbrella_content_type == 'umbrella_content_internal') {
+            if (!empty($title) && !empty($thumb_src)) {
+                return true;
+            }
         }
     }
     return false;
