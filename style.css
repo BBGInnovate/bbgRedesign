@@ -3551,6 +3551,8 @@ a:focus .bbg__article-share__icon {
     margin-bottom: 2rem; }
   .cards .cards__fixed {
     position: relative; }
+    .cards .cards__fixed.cards__fixed--hidden {
+      display: none; }
     .cards .cards__fixed .cards__wrapper {
       position: absolute;
       top: 0;
@@ -3593,7 +3595,6 @@ a:focus .bbg__article-share__icon {
           text-align: center;
           display: table; }
         .cards .cards__fixed .cards__wrapper .cards__header h3 {
-          font-size: 2rem;
           margin: 0;
           padding: 0; }
           .cards .cards__fixed .cards__wrapper .cards__header h3 a {
@@ -3607,6 +3608,18 @@ a:focus .bbg__article-share__icon {
           .cards .cards__fixed .cards__wrapper .cards__header h3.align-vertical-middle {
             display: table-cell;
             vertical-align: middle; }
+          .cards .cards__fixed .cards__wrapper .cards__header h3.font-tiny {
+            font-size: 1.3rem;
+            line-height: 1.8rem; }
+          .cards .cards__fixed .cards__wrapper .cards__header h3.font-small {
+            font-size: 1.5rem;
+            line-height: 2.3rem; }
+          .cards .cards__fixed .cards__wrapper .cards__header h3.font-medium {
+            font-size: 2.2rem;
+            line-height: 2.5rem; }
+          .cards .cards__fixed .cards__wrapper .cards__header h3.font-large {
+            font-size: 2.5rem;
+            line-height: 2.8rem; }
         .cards .cards__fixed .cards__wrapper .cards__header .cards__date {
           margin-bottom: .5em; }
         .cards .cards__fixed .cards__wrapper .cards__header p {
@@ -3650,9 +3663,19 @@ a:focus .bbg__article-share__icon {
     font-weight: bold; }
   .cards .cards__flexible p {
     margin: 0;
-    padding: 16px;
-    font-size: 1.8rem;
-    line-height: 2.6rem; }
+    padding: 16px; }
+    .cards .cards__flexible p.font-tiny {
+      font-size: 1.3rem;
+      line-height: 1.8rem; }
+    .cards .cards__flexible p.font-small {
+      font-size: 1.5rem;
+      line-height: 2.3rem; }
+    .cards .cards__flexible p.font-medium {
+      font-size: 1.8rem;
+      line-height: 2.6rem; }
+    .cards .cards__flexible p.font-large {
+      font-size: 2.2rem;
+      line-height: 3rem; }
   .cards.cards--layout-split .cards__backdrop {
     height: 40%; }
   .cards.cards--layout-split .cards__footer {
@@ -4335,8 +4358,6 @@ a:focus .bbg__article-share__icon {
     font-size: 1.7rem;
     line-height: 2rem;
     -webkit-line-clamp: 4; }
-  .cards.cards--layout-header .cards__header h3 {
-    font-size: 1.5rem; }
   .cards--size-1-1-none-none {
     width: calc(100%);
     float: left;
@@ -4879,9 +4900,6 @@ a:focus .bbg__article-share__icon {
       padding-top: calc((12 / (2 * 6)  * 0.6 * 100%) + (12 / (2 * 6) * 0.6 * 1.5rem)); } }
 
 @media screen and (min-width: 900px) {
-  .cards .cards__wrapper .cards__footer p {
-    font-size: .8em;
-    line-height: 1.2em; }
   .cards.cards--layout-split .cards__footer h3 {
     font-size: 2rem; }
   .cards.cards--layout-split .cards__footer p {

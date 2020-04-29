@@ -210,11 +210,12 @@ function getVideoUrl($video) {
     return $result;
 }
 
-function parseTitleGroup($titleGroup) {
+function parseTextGroup($titleGroup) {
     $result = array();
 
     $result['text'] = $titleGroup['text'] ?? '';
     $result['url'] = $titleGroup['url'] ?? '';
+    $result['size'] = $titleGroup['size'] ?? '';
     $result['color'] = getColorParts($titleGroup['color'] ?? '', false);
     $result['alignment'] = $titleGroup['alignment'] ?? '';
     $result['vertical_alignment'] = $titleGroup['vertical_alignment'] ?? '';
@@ -235,16 +236,6 @@ function parseBackgroundGroup($backgroundGroup) {
     $result['url'] = $backgroundGroup['url'] ?? '';
 
     $result['color'] = getColorParts($backgroundGroup['color'] ?? '', true);
-
-    return $result;
-}
-
-function parseTextGroup($textGroup) {
-    $result = array();
-
-    $result['color'] = getColorParts($textGroup['color'] ?? '', false);
-
-    $result['alignment'] = $textGroup['alignment'] ?? '';
 
     return $result;
 }
@@ -279,7 +270,7 @@ function getRowsDataGeneral($postId) {
                     break;
                 case 'external':
                     $titleGroup = get_sub_field('title');
-                    $card['title'] = parseTitleGroup($titleGroup);
+                    $card['title'] = parseTextGroup($titleGroup);
                     $backgroundGroup = get_sub_field('background');
                     $card['background'] = parseBackgroundGroup($backgroundGroup);
                     break;
@@ -335,7 +326,7 @@ function getRowsDataHeader($postId = null) {
                     break;
                 case 'custom':
                     $titleGroup = get_sub_field('title');
-                    $card['title'] = parseTitleGroup($titleGroup);
+                    $card['title'] = parseTextGroup($titleGroup);
 
                     break;
             }
@@ -392,7 +383,8 @@ function getRowsDataImage() {
 function getRowsDataFlexText() {
     $card = array();
 
-    $card['title'] = parseTitleGroup(get_sub_field('title'));
+    $card['flexText'] = parseTextGroup(get_sub_field('text'));
+    $card['background'] = parseBackgroundGroup(get_sub_field('background'));
 
     return $card;
 }
@@ -599,9 +591,14 @@ function createHeaderTitle($card) {
                     $alignment .= ' align-' . $title['alignment'];
                 }
 
+                $size = '';
+                if (!empty($title['size'])) {
+                    $size .= ' font-' . $title['size'];
+                }
+
                 $color = ' ' . $title['color'];
 
-                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $color . '">';
+                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $color . $size . '">';
                 if (!empty($title['url'])) {
                     $result .= '                    <a class="' . $color .'" href="' . $title['url'] . '">' . $title['text'] . '</a>';
                 } else {
@@ -671,19 +668,24 @@ function createFlexText($card) {
     $result = '';
     switch ($card['type']) {
         case 'flex_text':
-            if (!empty($card['title']['text'])) {
-                $title = $card['title'];
+            if (!empty($card['flexText']['text'])) {
+                $flexText = $card['flexText'];
 
-                $color = ' ' . $title['color'];
+                $color = ' ' . $flexText['color'];
 
                 $alignment = '';
-                if (!empty($title['alignment'])) {
-                    $alignment .= ' align-' . $title['alignment'];
+                if (!empty($flexText['alignment'])) {
+                    $alignment .= ' align-' . $flexText['alignment'];
                 }
 
-                $result .= '        <div class="cards__flex-text">';
-                $result .= '            <p class="' . $color . $alignment. '">';
-                $result .= '                ' . $title['text'];
+                $size = '';
+                if (!empty($flexText['size'])) {
+                    $size .= ' font-' . $flexText['size'];
+                }
+
+                $result .= '        <div class="cards__flex-text ' . ($card['background']['color'] ?? '') . '">';
+                $result .= '            <p class="' . $color . $alignment . $size . '">';
+                $result .= '                ' . $flexText['text'];
                 $result .= '            </p>';
                 $result .= '        </div>';
             }
@@ -725,8 +727,8 @@ function getCardsLayout($cardsRows) {
                 $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
             }
             $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
-            $result .= '    <div class="cards__fixed">';
-            $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') . '">';
+            $result .= '    <div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
+            $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') .  '">';
             $result .= '        <div class="cards__backdrop">';
             $result .=                  createBackground($card);
             $result .=                  createWatermark($card);
