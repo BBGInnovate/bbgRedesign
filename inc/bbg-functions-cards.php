@@ -215,6 +215,7 @@ function parseTitleGroup($titleGroup) {
     $result['url'] = $titleGroup['url'] ?? '';
     $result['color'] = getColorParts($titleGroup['color'] ?? '', false);
     $result['alignment'] = $titleGroup['alignment'] ?? '';
+    $result['vertical_alignment'] = $titleGroup['vertical_alignment'] ?? '';
 
     return $result;
 }
@@ -407,11 +408,11 @@ function getCardsRowsData($postId = null) {
             $cardsRow['cards_heading_intro'] = get_sub_field('cards_heading_intro');
             $cardsRow['cards_margin_top'] = get_sub_field('cards_margin_top');
             $cardsRow['cards_margin_bottom'] = get_sub_field('cards_margin_bottom');
-            $cardsRow['cards_height'] = get_sub_field('cards_height');
             $cardsRow['cards_gutter_size'] = get_sub_field('cards_gutter_size');
             $layout = get_sub_field('cards_layout');
 
             $cardsRow['cards_layout'] = explode('-', $layout);
+            $cardsRow['cards_height'] = array_pop($cardsRow['cards_layout']);
 
             if (have_rows('cards_content', $postId)) {
                 while (have_rows('cards_content', $postId)) {
@@ -582,6 +583,11 @@ function createHeaderTitle($card) {
             if (!empty($card['type']) && !empty($card['title'])) {
                 $title = $card['title'];
 
+                $verticalAlignment = '';
+                if (!empty($title['vertical_alignment'])) {
+                    $verticalAlignment .= ' align-vertical-' . $title['vertical_alignment'];
+                }
+
                 $alignment = '';
                 if (!empty($title['alignment'])) {
                     $alignment .= ' align-' . $title['alignment'];
@@ -589,13 +595,13 @@ function createHeaderTitle($card) {
 
                 $color = ' ' . $title['color'];
 
-                $result .= '                <h2 class="' . $alignment . $color . '">';
+                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $color . '">';
                 if (!empty($title['url'])) {
                     $result .= '                    <a class="' . $color .'" href="' . $title['url'] . '">' . $title['text'] . '</a>';
                 } else {
                     $result .= '                    ' . $title['text'];
                 }
-                $result .= '                </h2>';
+                $result .= '                </h3>';
             }
 
             break;
@@ -628,9 +634,9 @@ function createFooter($card) {
         }
         $result .= '                </div>';
     }
-    $result .= '                <h2>';
+    $result .= '                <h3>';
     $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
-    $result .= '                </h2>';
+    $result .= '                </h3>';
     $result .= '            </div>';
 
     return $result;
@@ -699,15 +705,19 @@ function getCardsLayout($cardsRows) {
         $cardsHeadingIntro = $cardsRow['cards_heading_intro'];
         if (!empty($cardsHeading)) {
             if (!empty($cardsHeadingUrl)) {
-                $result .= '<h3><a href="' . $cardsRow['cards_heading_url'] . '">' . $cardsRow['cards_heading'] . '</a></h3>';
+                $result .= '<h2><a href="' . $cardsRow['cards_heading_url'] . '">' . $cardsRow['cards_heading'] . '</a></h3>';
             } else {
-                $result .= '<h3>' . $cardsRow['cards_heading'] . '</h3>';
-            }
-            if (!empty($cardsHeadingIntro)) {
-                $result .= '    <p class="lead-in">' . $cardsHeadingIntro . '</p>';
+                $result .= '<h2>' . $cardsRow['cards_heading'] . '</h3>';
             }
         }
+        if (!empty($cardsHeadingIntro)) {
+            $result .= '    <p class="lead-in">' . $cardsHeadingIntro . '</p>';
+        }
         foreach ($cardsRow['cards_content'] as $card) {
+            $verticalAlignment = '';
+            if (!empty($card['title']['vertical_alignment'])) {
+                $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
+            }
             $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
             $result .= '    <div class="cards__fixed">';
             $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') . '">';
@@ -719,7 +729,7 @@ function getCardsLayout($cardsRows) {
             $result .=                  createBackground($card);
             $result .=                  createWatermark($card);
             $result .= '            </div>';
-            $result .= '            <div class="cards__header">';
+            $result .= '            <div class="cards__header ' . $verticalAlignment . '">';
             $result .=                  createDate($card);
             $result .=                  createHeaderTitle($card);
             $result .= '            </div>';
