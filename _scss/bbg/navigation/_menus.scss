@@ -18,6 +18,7 @@
 	width: 100%;
 	margin-top: 10px;
 	background-color: rgba(255, 255, 255, 0.95);
+	border-bottom: 1px solid #ddd;
 }
 
 .site-brand {img {width: 290px;}}
@@ -452,30 +453,30 @@ button#bbg__menu-toggle {margin-right: 0;}
 
 	.bbg__main-navigation {
 		position: relative;
-		padding: 1.5rem 0;
+		padding: 2.7rem 0;
 
 		:not(a.site-logo):not(.mag-search) {text-align: right;}
 
 		.bbg__top-nav__link-text {width: auto;}
 
 
-		ul li a {padding: 0.9rem 0.8rem;}
+		ul li a {padding: 1.9rem 0.8rem;}
 		a:hover {text-decoration: underline; background-color: transparent;}
 
 		.menu-usagm-container {
 			position: absolute;
-			top: 11rem;
+			top: 11.5rem;
 			right: 0;
-			text-align: right;
+			text-align: center;
 			margin: 0;
 			padding-left: 5%;
 			width: 100%;
 			
-			a {text-align: left; width: 100%;}
+			a {text-align: center; width: 100%;}
 			ul li.menu-item-has-children {
 				display: inline-block;
 				vertical-align: top;
-				width: 19%;
+				width: 15%;
 				padding: 0 1rem;
 
 				ul.sub-menu {
@@ -547,6 +548,9 @@ button#bbg__menu-toggle {margin-right: 0;}
 // 4. LARGE SCREEN
 @include media($large-screen) {
 	.bbg__main-navigation {
-		.menu-usagm-container {padding-left: 25%;}
+		.menu-usagm-container {
+			padding-left: 10%;
+			padding-right: 10%;
+		}
 	}
 }

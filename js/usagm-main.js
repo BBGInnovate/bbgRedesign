@@ -8,8 +8,7 @@ if ($('.feautre-banner').length < 1) {
 	$('#nav-border').css({
 		'width' : '95%',
 		'height' : '1px',
-		'margin' : '15px auto 0 auto',
-		'border-bottom' : '1px solid #f1f1f1'
+		'margin' : '15px auto 0 auto'
 	});
 }
 
