@@ -5343,91 +5343,91 @@ a:focus .bbg__article-share__icon {
     float: left;
     margin-left: 0rem; }
     .cards--size-5-12-medium-none .cards__fixed {
-      padding-top: calc((12 / (5 * 5)  * 0.6 * 100%) + (12 / (5 * 5) * 0.6 * 0rem)); }
+      padding-top: calc((12 / (2 * 5)  * 0.6 * 100%) + (12 / (2 * 5) * 0.6 * 0rem)); }
   .cards--size-5-12-medium-tiny {
     width: calc(41.66667% - 0.14167rem);
     float: left;
     margin-left: 0.1rem; }
     .cards--size-5-12-medium-tiny .cards__fixed {
-      padding-top: calc((12 / (5 * 5)  * 0.6 * 100%) + (12 / (5 * 5) * 0.6 * 0.1rem)); }
+      padding-top: calc((12 / (2 * 5)  * 0.6 * 100%) + (12 / (2 * 5) * 0.6 * 0.1rem)); }
   .cards--size-5-12-medium-small {
     width: calc(41.66667% - 0.70833rem);
     float: left;
     margin-left: 0.5rem; }
     .cards--size-5-12-medium-small .cards__fixed {
-      padding-top: calc((12 / (5 * 5)  * 0.6 * 100%) + (12 / (5 * 5) * 0.6 * 0.5rem)); }
+      padding-top: calc((12 / (2 * 5)  * 0.6 * 100%) + (12 / (2 * 5) * 0.6 * 0.5rem)); }
   .cards--size-5-12-medium-medium {
     width: calc(41.66667% - 1.41667rem);
     float: left;
     margin-left: 1rem; }
     .cards--size-5-12-medium-medium .cards__fixed {
-      padding-top: calc((12 / (5 * 5)  * 0.6 * 100%) + (12 / (5 * 5) * 0.6 * 1rem)); }
+      padding-top: calc((12 / (2 * 5)  * 0.6 * 100%) + (12 / (2 * 5) * 0.6 * 1rem)); }
   .cards--size-5-12-medium-large {
     width: calc(41.66667% - 2.125rem);
     float: left;
     margin-left: 1.5rem; }
     .cards--size-5-12-medium-large .cards__fixed {
-      padding-top: calc((12 / (5 * 5)  * 0.6 * 100%) + (12 / (5 * 5) * 0.6 * 1.5rem)); }
+      padding-top: calc((12 / (2 * 5)  * 0.6 * 100%) + (12 / (2 * 5) * 0.6 * 1.5rem)); }
   .cards--size-4-12-medium-none {
     width: calc(33.33333%);
     float: left;
     margin-left: 0rem; }
     .cards--size-4-12-medium-none .cards__fixed {
-      padding-top: calc((12 / (5 * 4)  * 0.6 * 100%) + (12 / (5 * 4) * 0.6 * 0rem)); }
+      padding-top: calc((12 / (2 * 4)  * 0.6 * 100%) + (12 / (2 * 4) * 0.6 * 0rem)); }
   .cards--size-4-12-medium-tiny {
     width: calc(33.33333% - 0.13333rem);
     float: left;
     margin-left: 0.1rem; }
     .cards--size-4-12-medium-tiny .cards__fixed {
-      padding-top: calc((12 / (5 * 4)  * 0.6 * 100%) + (12 / (5 * 4) * 0.6 * 0.1rem)); }
+      padding-top: calc((12 / (2 * 4)  * 0.6 * 100%) + (12 / (2 * 4) * 0.6 * 0.1rem)); }
   .cards--size-4-12-medium-small {
     width: calc(33.33333% - 0.66667rem);
     float: left;
     margin-left: 0.5rem; }
     .cards--size-4-12-medium-small .cards__fixed {
-      padding-top: calc((12 / (5 * 4)  * 0.6 * 100%) + (12 / (5 * 4) * 0.6 * 0.5rem)); }
+      padding-top: calc((12 / (2 * 4)  * 0.6 * 100%) + (12 / (2 * 4) * 0.6 * 0.5rem)); }
   .cards--size-4-12-medium-medium {
     width: calc(33.33333% - 1.33333rem);
     float: left;
     margin-left: 1rem; }
     .cards--size-4-12-medium-medium .cards__fixed {
-      padding-top: calc((12 / (5 * 4)  * 0.6 * 100%) + (12 / (5 * 4) * 0.6 * 1rem)); }
+      padding-top: calc((12 / (2 * 4)  * 0.6 * 100%) + (12 / (2 * 4) * 0.6 * 1rem)); }
   .cards--size-4-12-medium-large {
     width: calc(33.33333% - 2rem);
     float: left;
     margin-left: 1.5rem; }
     .cards--size-4-12-medium-large .cards__fixed {
-      padding-top: calc((12 / (5 * 4)  * 0.6 * 100%) + (12 / (5 * 4) * 0.6 * 1.5rem)); }
+      padding-top: calc((12 / (2 * 4)  * 0.6 * 100%) + (12 / (2 * 4) * 0.6 * 1.5rem)); }
   .cards--size-3-12-medium-none {
     width: calc(25%);
     float: left;
     margin-left: 0rem; }
     .cards--size-3-12-medium-none .cards__fixed {
-      padding-top: calc((12 / (5 * 3)  * 0.6 * 100%) + (12 / (5 * 3) * 0.6 * 0rem)); }
+      padding-top: calc((12 / (2 * 3)  * 0.6 * 100%) + (12 / (2 * 3) * 0.6 * 0rem)); }
   .cards--size-3-12-medium-tiny {
     width: calc(25% - 0.125rem);
     float: left;
     margin-left: 0.1rem; }
     .cards--size-3-12-medium-tiny .cards__fixed {
-      padding-top: calc((12 / (5 * 3)  * 0.6 * 100%) + (12 / (5 * 3) * 0.6 * 0.1rem)); }
+      padding-top: calc((12 / (2 * 3)  * 0.6 * 100%) + (12 / (2 * 3) * 0.6 * 0.1rem)); }
   .cards--size-3-12-medium-small {
     width: calc(25% - 0.625rem);
     float: left;
     margin-left: 0.5rem; }
     .cards--size-3-12-medium-small .cards__fixed {
-      padding-top: calc((12 / (5 * 3)  * 0.6 * 100%) + (12 / (5 * 3) * 0.6 * 0.5rem)); }
+      padding-top: calc((12 / (2 * 3)  * 0.6 * 100%) + (12 / (2 * 3) * 0.6 * 0.5rem)); }
   .cards--size-3-12-medium-medium {
     width: calc(25% - 1.25rem);
     float: left;
     margin-left: 1rem; }
     .cards--size-3-12-medium-medium .cards__fixed {
-      padding-top: calc((12 / (5 * 3)  * 0.6 * 100%) + (12 / (5 * 3) * 0.6 * 1rem)); }
+      padding-top: calc((12 / (2 * 3)  * 0.6 * 100%) + (12 / (2 * 3) * 0.6 * 1rem)); }
   .cards--size-3-12-medium-large {
     width: calc(25% - 1.875rem);
     float: left;
     margin-left: 1.5rem; }
     .cards--size-3-12-medium-large .cards__fixed {
-      padding-top: calc((12 / (5 * 3)  * 0.6 * 100%) + (12 / (5 * 3) * 0.6 * 1.5rem)); } }
+      padding-top: calc((12 / (2 * 3)  * 0.6 * 100%) + (12 / (2 * 3) * 0.6 * 1.5rem)); } }
 
 .homepage-quote {
   text-align: center; }

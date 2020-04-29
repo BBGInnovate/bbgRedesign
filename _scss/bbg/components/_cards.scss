@@ -725,15 +725,15 @@
     }
 
     .cards--size-5-12-medium {
-        @include cardLayoutGroup(5, 12, 'fifth');
+        @include cardLayoutGroup(5, 12, 'half');
     }
 
     .cards--size-4-12-medium {
-        @include cardLayoutGroup(4, 12, 'fifth');
+        @include cardLayoutGroup(4, 12, 'half');
     }
 
     .cards--size-3-12-medium {
-        @include cardLayoutGroup(3, 12, 'fifth');
+        @include cardLayoutGroup(3, 12, 'half');
     }
 
 
