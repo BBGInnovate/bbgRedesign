@@ -177,13 +177,13 @@ function build_umbrella_content_parts($content_data) {
 
 	if ($content_data['should_use_card'] == true) {
 		if ($content_data['item_title']) {
-			$item_title  = '<h2>';
+			$item_title  = '<h3>';
 			if (!empty($content_data['link'])) {
 				$item_title .= 	'<a href="' . $content_data['link'] . '" ' . $link_target . '>' . $content_data['item_title'] . '</a>';
 			} else {
 				$item_title .= 		$content_data['item_title'];
 			}
-			$item_title .= '</h2>';
+			$item_title .= '</h3>';
 		}
 
 		if ($content_data['thumb_src']) {

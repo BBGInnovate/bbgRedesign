@@ -390,8 +390,10 @@ function get_umbrella_should_use_card($umbrella_content_type, $title, $thumb_src
 
 function get_grid_class($umbrella_column_grouping, $content_counter, $should_use_card) {
     if ($should_use_card) {
-        if ($content_counter == 1 || $content_counter == 2) {
-            $height = 'normal';
+        if ($content_counter == 1) {
+            $height = 'large';
+        } else if ($content_counter == 2) {
+            $height = 'medium';
         } else {
             $height = 'small';
         }
