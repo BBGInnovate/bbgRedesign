@@ -3684,6 +3684,8 @@ a:focus .bbg__article-share__icon {
     .cards .cards__flexible p.font-large {
       font-size: 2.2rem;
       line-height: 3rem; }
+  .cards.cards--layout-video_internal .cards__backdrop {
+    background-color: #58595b; }
   .cards.cards--layout-split .cards__backdrop {
     height: 40%; }
   .cards.cards--layout-split .cards__footer {

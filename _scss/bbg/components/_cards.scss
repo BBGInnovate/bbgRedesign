@@ -416,6 +416,12 @@
     // Overrides //
 
     &.cards-- {
+        &layout-video_internal {
+            .cards__backdrop {
+                background-color: $gray-darker;
+            }
+        }
+
         // Split
         &layout-split {
             .cards__backdrop {

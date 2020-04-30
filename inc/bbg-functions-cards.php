@@ -464,7 +464,7 @@ function createBackground($card) {
     switch ($card['type']) {
         case 'video_internal':
             $result .= '                <div style="width:100%;">';
-            $result .= '                    <video style="width: 100%;" muted playsinline>';
+            $result .= '                    <video style="width: 100%;" muted autoplay playsinline>';
             $result .= '                        <source src="' . $card['video']['url'] . '" type="video/' . $card['video']['filetype'] . '"/>';
             $result .= '                        Sorry, your browser doesn\'t support embedded videos.';
             $result .= '                    </video>';
