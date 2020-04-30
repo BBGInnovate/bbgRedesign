@@ -3593,7 +3593,9 @@ a:focus .bbg__article-share__icon {
         .cards .cards__fixed .cards__wrapper .cards__header.align-vertical-middle {
           height: 100%;
           text-align: center;
-          display: table; }
+          display: table;
+          padding-top: 0;
+          padding-bottom: 0; }
         .cards .cards__fixed .cards__wrapper .cards__header h3 {
           margin: 0;
           padding: 0; }
