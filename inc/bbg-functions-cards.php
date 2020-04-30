@@ -717,9 +717,9 @@ function getCardsLayout($cardsRows) {
         $cardsHeadingIntro = $cardsRow['cards_heading_intro'];
         if (!empty($cardsHeading)) {
             if (!empty($cardsHeadingUrl)) {
-                $result .= '<h2><a href="' . $cardsRow['cards_heading_url'] . '">' . $cardsRow['cards_heading'] . '</a></h3>';
+                $result .= '<h2><a href="' . $cardsRow['cards_heading_url'] . '">' . $cardsRow['cards_heading'] . '</a></h2>';
             } else {
-                $result .= '<h2>' . $cardsRow['cards_heading'] . '</h3>';
+                $result .= '<h2>' . $cardsRow['cards_heading'] . '</h2>';
             }
         }
         if (!empty($cardsHeadingIntro)) {
