@@ -116,7 +116,7 @@
 
     @include grid-column($cols, $cards-grid);
     .cards__fixed {
-        padding-top: calc((#{$totalCols} / (#{$factor} * #{$cols})  * 0.6 * 100%) + (#{$totalCols} / (#{$factor} * #{$cols}) * 0.6 * #{$gutter}));
+        padding-top: calc((#{$totalCols} / (#{$factor} * #{$cols})  * 0.5625 * 100%) + (#{$totalCols} / (#{$factor} * #{$cols}) * 0.5625 * #{$gutter}));
     }
 }
 
