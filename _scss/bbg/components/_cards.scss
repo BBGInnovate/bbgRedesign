@@ -246,12 +246,12 @@
                 top: 0;
                 padding: 16px;
                 color: #fff;
-                height: 100%;
 
                 &.align-vertical-default {
                 }
 
                 &.align-vertical-middle {
+                    height: 100%;
                     text-align: center;
                     display: table;
                 }

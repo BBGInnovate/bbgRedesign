@@ -3589,9 +3589,9 @@ a:focus .bbg__article-share__icon {
         width: 100%;
         top: 0;
         padding: 16px;
-        color: #fff;
-        height: 100%; }
+        color: #fff; }
         .cards .cards__fixed .cards__wrapper .cards__header.align-vertical-middle {
+          height: 100%;
           text-align: center;
           display: table; }
         .cards .cards__fixed .cards__wrapper .cards__header h3 {

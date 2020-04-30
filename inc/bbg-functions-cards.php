@@ -80,8 +80,8 @@ function parseTagGroup($tag) {
         return array();
     }
     $result = array();
-    $result['text'] = $tag['text'];
-    $result['url'] = $tag['url'];
+    $result['text'] = $tag['text'] ?? '';
+    $result['url'] = $tag['url'] ?? '';
 
     return $result;
 }
@@ -289,6 +289,10 @@ function parsePostGroup($postGroup) {
     $card['title'] = getTitlePartsFromPost($postField);
     $card['title']['color'] = getColorParts($postGroup['color'] ?? '', false);
     $card['title']['alignment'] = $postGroup['alignment'] ?? '';
+
+    if (!empty($postGroup['override_title']) && !empty($postGroup['title_override'])) {
+        $card['title']['text'] = $postGroup['title_override'];
+    }
 
     $card['background'] = getBackgroundImagePartsFromPost($postField);
 
@@ -622,7 +626,7 @@ function createFooter($card) {
         return '';
     }
 
-    $tag = $card['tag'] ?? '';
+    $tag = $card['tag'];
     $title = $card['title'];
     $color = $title['color'];
 
@@ -630,7 +634,7 @@ function createFooter($card) {
     $result .= '            <div class="cards__footer">';
     if (!empty($tag['text'])) {
         $result .= '                <div class="cards__tag">';
-        if (isset($tag['url'])) {
+        if (!empty($tag['url'])) {
             $result .= '                <a href="' . $tag['url'] . '">' . $tag['text'] . '</a>';
         } else {
             $result .= '                ' . $tag['text'];
