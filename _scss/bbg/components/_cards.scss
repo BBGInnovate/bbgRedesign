@@ -236,7 +236,7 @@
                     width: 100%;
                     bottom: 0;
                     position: absolute;
-                    background: linear-gradient(rgba(0,0,0,0), 90%, rgba(0,0,0,.9));
+                    background: linear-gradient(rgba(0,0,0,0), 70%, rgba(0,0,0,.9));
                 }
             }
 
@@ -601,6 +601,16 @@
 @include media($medium-screen) {
 
     .cards {
+        .cards__fixed {
+            .cards__wrapper {
+                .cards__backdrop {
+                    .cards__backdrop-shadow {
+                        background: linear-gradient(rgba(0,0,0,0), 80%, rgba(0,0,0,.9));
+                    }
+                }
+            }
+        }
+
         &.cards-- {
             &layout-split {
                 .cards__footer {
@@ -703,11 +713,12 @@
 @include media($medium-large-screen) {
 
     .cards {
-        .cards__wrapper {
-            .cards__footer {
-                p {
-                    // font-size: 5.8em;
-                    // line-height: 1.2em;
+        .cards__fixed {
+            .cards__wrapper {
+                .cards__backdrop {
+                    .cards__backdrop-shadow {
+                        background: linear-gradient(rgba(0,0,0,0), 90%, rgba(0,0,0,.9));
+                    }
                 }
             }
         }
