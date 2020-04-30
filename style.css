@@ -3664,6 +3664,12 @@ a:focus .bbg__article-share__icon {
   .cards .cards__flexible p {
     margin: 0;
     padding: 16px; }
+    .cards .cards__flexible p.align-left {
+      text-align: left; }
+    .cards .cards__flexible p.align-center {
+      text-align: center; }
+    .cards .cards__flexible p.align-right {
+      text-align: right; }
     .cards .cards__flexible p.font-tiny {
       font-size: 1.3rem;
       line-height: 1.8rem; }
