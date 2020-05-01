@@ -749,29 +749,31 @@ function getCardsLayout($cardsRows) {
             $result .= '    <p class="lead-in">' . $cardsHeadingIntro . '</p>';
         }
         foreach ($cardsRow['cards_content'] as $card) {
-            $verticalAlignment = '';
-            if (!empty($card['title']['vertical_alignment'])) {
-                $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
+            if (count($layouts) > 0) {
+                $verticalAlignment = '';
+                if (!empty($card['title']['vertical_alignment'])) {
+                    $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
+                }
+                $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
+                $result .= '    <div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
+                $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') .  '">';
+                $result .= '        <div class="cards__backdrop">';
+                $result .=                  createBackground($card);
+                $result .=                  createWatermark($card);
+                $result .= '            </div>';
+                $result .= '            <div class="cards__header ' . $verticalAlignment . '">';
+                $result .=                  createDate($card);
+                $result .=                  createHeaderTitle($card);
+                $result .= '            </div>';
+                $result .=              createFooter($card);
+                $result .= '        </div>';
+                $result .= '    </div>';
+                $result .= '    <div class="cards__flexible">';
+                $result .=          createExcerpt($card);
+                $result .=          createFlexText($card);
+                $result .= '    </div>';
+                $result .= '</div>';
             }
-            $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
-            $result .= '    <div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
-            $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') .  '">';
-            $result .= '        <div class="cards__backdrop">';
-            $result .=                  createBackground($card);
-            $result .=                  createWatermark($card);
-            $result .= '            </div>';
-            $result .= '            <div class="cards__header ' . $verticalAlignment . '">';
-            $result .=                  createDate($card);
-            $result .=                  createHeaderTitle($card);
-            $result .= '            </div>';
-            $result .=              createFooter($card);
-            $result .= '        </div>';
-            $result .= '    </div>';
-            $result .= '    <div class="cards__flexible">';
-            $result .=          createExcerpt($card);
-            $result .=          createFlexText($card);
-            $result .= '    </div>';
-            $result .= '</div>';
         }
         $result .= '</div>';
     }
