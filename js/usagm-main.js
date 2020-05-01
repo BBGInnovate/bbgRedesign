@@ -387,6 +387,19 @@ function ieHandler() {
 }
 ieHandler();
 
+function handleImageCardHover() {
+	let fadeSpeed = 300;
+	$('.cards--layout-image a').hover(function() {
+		let img = $(this).children('img.hidden');
+		img.fadeIn(fadeSpeed);
+	},
+	function() {
+		let img = $(this).children('img.hidden');
+		img.fadeOut(fadeSpeed);
+	});
+}
+handleImageCardHover();
+
 $(window).on('resize', function() {
 	scaleRibbonBanner();
 	scaleArticleImages();

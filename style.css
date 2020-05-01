@@ -3719,6 +3719,8 @@ a:focus .bbg__article-share__icon {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%); }
+      .cards.cards--layout-image .cards__fixed .cards__wrapper .cards__backdrop img.hidden {
+        display: none; }
   .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer {
     width: 100%; }
     .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer .cards__tag {

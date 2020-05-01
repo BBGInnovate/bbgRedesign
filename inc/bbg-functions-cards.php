@@ -33,20 +33,40 @@ function getBackgroundImagePartsFromPost($postArg) {
     return $post;
 }
 
-function getImageTagFromImage($image, $dimensions = array()) {
+function getImageTagFromImage($image, $dimensions = array(), $attr = array()) {
     if (empty($image)) {
         return '';
     }
     $result = '';
 
-    $classArray = array('class' => 'cards__backdrop--image');
-    if (!empty($dimensions['width']) && !empty($dimensions['height'])) {
-        $result = wp_get_attachment_image($image['id'], array($dimensions['width'], $dimensions['height']), '', $classArray);
+    if (isset($attr['class'])) {
+        $attr['class'] .= ' cards__backdrop--image';
     } else {
-        $result = wp_get_attachment_image($image['id'], 'large-thumb', '', $classArray);
+        $attr['class'] = 'cards__backdrop--image';
+    }
+
+    if (!empty($dimensions['width']) && !empty($dimensions['height'])) {
+        $result = wp_get_attachment_image($image['id'], array($dimensions['width'], $dimensions['height']), '', $attr);
+    } else {
+        $result = wp_get_attachment_image($image['id'], 'large-thumb', '', $attr);
     }
 
     return $result;
+}
+
+function getImageSrcFromImage($image, $dimensions = array()) {
+    if (empty($image)) {
+        return '';
+    }
+    $result = '';
+
+    if (!empty($dimensions['width']) && !empty($dimensions['height'])) {
+        $result = wp_get_attachment_image_src($image['id'], array($dimensions['width'], $dimensions['height']));
+    } else {
+        $result = wp_get_attachment_image_src($image['id'], 'large-thumb');
+    }
+
+    return $result[0];
 }
 
 function getDateFromPost($postArg) {
@@ -231,7 +251,10 @@ function parseBackgroundGroup($backgroundGroup) {
     $result['dimensions'] = parseDimensionsGroup($backgroundGroup['dimensions'] ?? '');
     $dimensions = $result['dimensions'];
 
+    $hoverImage = getImageSrcFromImage($backgroundGroup['hover_image'] ?? '', $dimensions);
+
     $result['image'] = getImageTagFromImage($backgroundGroup['image'] ?? '', $dimensions);
+    $result['hover_image'] = getImageTagFromImage($backgroundGroup['hover_image'] ?? '', $dimensions, array('class' => 'hidden'));
 
     $result['url'] = $backgroundGroup['url'] ?? '';
 
@@ -485,10 +508,10 @@ function createBackground($card) {
         case 'image':
             if (!empty($card['background']['url'])) {
                 $result .= '            <a href="' . $card['background']['url'] . '">';
-                $result .= '                ' . $card['background']['image'];
+                $result .= '                ' . $card['background']['image'] . ($card['background']['hover_image'] ?? '');
                 $result .= '            </a>';
             } else {
-                $result .= '                ' . $card['background']['image'];
+                $result .= '                ' . $card['background']['image'] . ($card['background']['hover_image'] ?? '');
             }
 
             break;
