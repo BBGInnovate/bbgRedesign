@@ -236,6 +236,7 @@ function parseTextGroup($titleGroup) {
     $result['text'] = $titleGroup['text'] ?? '';
     $result['url'] = $titleGroup['url'] ?? '';
     $result['size'] = $titleGroup['size'] ?? '';
+    $result['family'] = $titleGroup['family'] ?? '';
     $result['color'] = getColorParts($titleGroup['color'] ?? '', false);
     $result['alignment'] = $titleGroup['alignment'] ?? '';
     $result['vertical_alignment'] = $titleGroup['vertical_alignment'] ?? '';
@@ -620,7 +621,7 @@ function createHeaderTitle($card) {
 
                 $size = '';
                 if (!empty($title['size'])) {
-                    $size .= ' font-' . $title['size'];
+                    $size .= ' font-size-' . $title['size'];
                 }
 
                 $color = ' ' . $title['color'];
@@ -707,11 +708,16 @@ function createFlexText($card) {
 
                 $size = '';
                 if (!empty($flexText['size'])) {
-                    $size .= ' font-' . $flexText['size'];
+                    $size .= ' font-size-' . $flexText['size'];
+                }
+
+                $family = '';
+                if (!empty($flexText['family'])) {
+                    $family .= ' font-family-' . $flexText['family'];
                 }
 
                 $result .= '        <div class="cards__flex-text ' . ($card['background']['color'] ?? '') . '">';
-                $result .= '            <p class="' . $color . $alignment . $size . '">';
+                $result .= '            <p class="' . $color . $alignment . $size . $family . '">';
                 $result .= '                ' . $flexText['text'];
                 $result .= '            </p>';
                 $result .= '        </div>';
