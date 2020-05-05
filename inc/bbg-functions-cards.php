@@ -314,7 +314,7 @@ function parsePostGroup($postGroup) {
     $card['title']['color'] = getColorParts($postGroup['color'] ?? '', false);
     $card['title']['alignment'] = $postGroup['alignment'] ?? '';
 
-    if (!empty($postGroup['override_title']) && !empty($postGroup['title_override'])) {
+    if (!empty($postGroup['override_title']) && $postGroup['override_title'] == true && !empty($postGroup['title_override'])) {
         $card['title']['text'] = $postGroup['title_override'];
     }
 

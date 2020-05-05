@@ -3725,15 +3725,13 @@ a:focus .bbg__article-share__icon {
       transform: translate(-50%, -50%); }
       .cards.cards--layout-image .cards__fixed .cards__wrapper .cards__backdrop img.hidden {
         display: none; }
-  .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer {
-    width: 100%; }
-    .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer .cards__tag {
-      border: 1px solid #ffffff; }
-    .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer p {
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical; }
+  .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer .cards__tag {
+    border: 1px solid #ffffff; }
+  .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; }
   .cards.cards--layout-social_media_twitter .cards__fixed .cards__wrapper .cards__header h3 {
     margin-bottom: 2rem; }
 
