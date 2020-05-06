@@ -3572,15 +3572,15 @@ a:focus .bbg__article-share__icon {
           z-index: 1;
           bottom: 12px;
           right: 12px;
-          width: 32px;
-          height: 32px; }
+          width: 28px;
+          height: 28px; }
           .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-logo a {
             display: block; }
             .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-logo a img {
               display: block;
               margin-bottom: -10px;
-              width: 32px;
-              height: 32px;
+              width: 28px;
+              height: 28px;
               opacity: 0.6; }
         .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-shadow {
           pointer-events: none;
