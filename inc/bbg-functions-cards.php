@@ -113,38 +113,38 @@ function getWatermarkParts($watermark) {
 
     switch($watermark) {
         case 'usagm':
-            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_usagm.png';
+            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_usagm--watermark.png';
             $result['url'] = get_home_url();
             break;
 
         case 'voa':
-            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_voa.png';
+            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_voa--watermark.png';
             $result['url'] = $brandPageUrlBase . '/voa/';
             break;
 
         case 'rferl':
-            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_rferl.png';
+            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_rferl--watermark.png';
             $result['url'] = $brandPageUrlBase . '/rferl/';
             break;
 
         case 'ocb':
-            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_ocb.png';
+            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_ocb--watermark.png';
             $result['url'] = $brandPageUrlBase . '/ocb/';
             break;
 
         case 'rfa':
-            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_rfa.png';
+            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_rfa--watermark.png';
             $result['url'] = $brandPageUrlBase . '/rfa/';
             break;
 
         case 'mbn':
-            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_mbn.png';
+            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_mbn--watermark.png';
             $result['url'] = $brandPageUrlBase . '/mbn/';
             break;
 
         case 'otf':
-            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_otf.png';
-            $result['url'] = $brandPageUrlBase . '/otf/';
+            $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_otf--watermark.png';
+            // $result['url'] = $brandPageUrlBase . '/otf/';
             break;
 
         case 'twitter':

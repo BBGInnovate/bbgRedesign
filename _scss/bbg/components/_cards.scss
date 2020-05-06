@@ -219,14 +219,21 @@
                 .cards__backdrop-logo {
                     position: absolute;
                     z-index: 1;
-                    bottom:8px;
-                    right: 8px;
+                    bottom: 12px;
+                    right: 12px;
+                    width: 28px;
+                    height: 28px;
 
-                    img {
-                        margin-bottom: -10px; // Override default
-                        width: 36px;
-                        height: 36px;
-                        opacity: 0.6;
+                    a {
+                        display: block;
+
+                        img {
+                            display: block;
+                            margin-bottom: -10px; // Override default
+                            width: 28px;
+                            height: 28px;
+                            opacity: 0.6;
+                        }
                     }
                 }
 
