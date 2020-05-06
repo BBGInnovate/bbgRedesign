@@ -144,7 +144,7 @@ function getWatermarkParts($watermark) {
 
         case 'otf':
             $result['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_otf--watermark.png';
-            // $result['url'] = $brandPageUrlBase . '/otf/';
+            $result['url'] = $brandPageUrlBase . '/otf/';
             break;
 
         case 'twitter':
