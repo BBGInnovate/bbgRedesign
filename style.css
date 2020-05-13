@@ -3477,6 +3477,8 @@ a:focus .bbg__article-share__icon {
 .cards {
   overflow: hidden;
   position: relative; }
+  .cards.three-wide:nth-child(3n+1) {
+    clear: left; }
   .cards .card-color-white {
     color: #ffffff; }
   .cards .card-color-black {

@@ -124,6 +124,10 @@
     overflow: hidden;
     position: relative;
 
+    &.three-wide:nth-child(3n+1) {
+        clear: left;
+    }
+
     .card-color-white { color: $color-white };
     .card-color-black { color: $color-black };
     .card-color-primary1 { color: $color-blue-darkest };

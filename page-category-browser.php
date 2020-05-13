@@ -114,10 +114,10 @@ if ($category_browser_type == "Page Children") {
 	if ($categoryBrowsePostType == 'burke_candidate') {
 		$qParams['posts_per_page'] = -1;
 		$qParams['meta_query'] = array(
-		    'relation' => 'OR',
-		    array('key' => 'burke_award_info_0_burke_ceremony_year','compare' => '=','value' => $burkeYear),
-		    array('key' => 'burke_award_info_1_burke_ceremony_year','compare' => '=','value' => $burkeYear),
-		    array('key' => 'burke_award_info_2_burke_ceremony_year','compare' => '=','value' => $burkeYear)
+			'relation' => 'OR',
+			array('key' => 'burke_award_info_0_burke_ceremony_year','compare' => '=','value' => $burkeYear),
+			array('key' => 'burke_award_info_1_burke_ceremony_year','compare' => '=','value' => $burkeYear),
+			array('key' => 'burke_award_info_2_burke_ceremony_year','compare' => '=','value' => $burkeYear)
 		);
 		$qParams['post_status'] = array( 'publish' ); // you can add 'private','pending','draft' for development
 	}
@@ -204,6 +204,8 @@ get_header();
 			}
 
 			if ($custom_query -> have_posts()) {
+				$shouldUseCards = get_field('should_use_cards', 'option');
+
 				// zero
 				$counter = 0;
 				while ($custom_query -> have_posts())  {
@@ -234,34 +236,69 @@ get_header();
 						($hasIntroFeature && $counter >= 0 && $currentPage == 1 || $currentPage > 1) || 
 						(!$hasIntroFeature && $counter > 0)
 					) {
-						$post_image = '<a href="' . get_the_permalink() . '" rel="bookmark" tabindex="-1">';
-						if (has_post_thumbnail()) {
-							$post_image .= get_the_post_thumbnail(get_the_ID(), 'medium-thumb');
+						if ($shouldUseCards) {
+							echo '		<div class="cards three-wide cards--layout-general cards--size-1-3-small-small margin-top-small">';
+							echo '			<div class="cards__fixed">';
+							echo '				<div class="cards__wrapper">';
+							echo '					<div class="cards__backdrop">';
+							echo '						<a href="' . get_the_permalink() . '">';
+							if (has_post_thumbnail()) {
+								echo						  get_the_post_thumbnail(get_the_ID(), 'medium-thumb');
+							} else {
+								echo '						<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
+							}
+							echo '						</a>';
+							echo '						<div class="cards__backdrop-shadow"></div>';
+							echo '					</div>';
+							echo '					<div class="cards__footer">';
+							echo '						<h3><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h3>';
+							echo '					</div>';
+							echo '				</div>';
+							echo '			</div>';
+							echo '			<div class="cards__flexible">';
+							echo '				<div class="cards__excerpt">';
+							if (is_page('deep-dive-series')) {
+								echo '				<p style="padding-bottom: 0;">' . get_the_date() . '</p>';
+								echo '				<p>' . get_the_excerpt() . '</p>';
+							} else {
+								echo '				<p>' . wp_trim_words(get_the_excerpt(), 10) . '</p>';
+							}
+							echo '				</div>';
+							echo '			</div>';
+							echo '		</div>'; // END .cards
 						} else {
-							$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
+							$post_image = '<a href="' . get_the_permalink() . '" rel="bookmark" tabindex="-1">';
+							if (has_post_thumbnail()) {
+								$post_image .= get_the_post_thumbnail(get_the_ID(), 'medium-thumb');
+							} else {
+								$post_image .= '<img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
+							}
+							$post_image .= '</a>';
+
+							echo '<div class="grid-third">';
+							echo 	$post_image;
+
+							$link_header  = '<h3 class="article-title">';
+							$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
+							$link_header .= 		get_the_title();
+							$link_header .= 	'</a>';
+							$link_header .= '</h3>';
+							echo $link_header;
+
+							if (is_page('deep-dive-series')) {
+								echo '<p style="margin-bottom: 1.5rem;">' . get_the_date() . '</p>';
+								echo get_the_excerpt();
+							} else {
+								echo wp_trim_words(get_the_excerpt(), 10);
+							}
+							echo '<br><br><br></div>'; // END .grid-third
 						}
-						$post_image .= '</a>';
-
-						echo '<div class="grid-third">';
-						echo 	$post_image;
-
-						$link_header  = '<h3 class="article-title">';
-						$link_header .= 	'<a href="' . get_the_permalink() . '" rel="bookmark">';
-						$link_header .= 		get_the_title();
-						$link_header .= 	'</a>';
-						$link_header .= '</h3>';
-						echo $link_header;
-
-						if (is_page('deep-dive-series')) {
-							echo '<p style="margin-bottom: 1.5rem;">' . get_the_date() . '</p>';
-							echo get_the_excerpt();
-						} else {
-							echo wp_trim_words(get_the_excerpt(), 10);
-						}
-						echo '<br><br><br></div>'; // END .grid-third
 					}
 					$counter++;
 				} // END WHILE
+				if ($shouldUseCards) {
+					echo '</div>'; // END .inner-container
+				}
 				echo '</div>'; // END .outer-container
 			}
 
