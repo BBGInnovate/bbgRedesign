@@ -111,6 +111,10 @@ if (have_rows('board_meeting_speakers')) {
 					$profile_name = get_the_title($profile_id);
 					$isActing = get_post_meta($profile_id, 'acting', true);
 					$profile_bio = get_sub_field('bbg_speaker_bio');
+					if (empty($profile_bio)) {
+						$profile_bio = get_post_field('post_content', $profile_id);
+						$profile_bio = do_shortcode($profile_bio);
+					}
 					$occupation = get_post_meta($profile_id, 'occupation', true);
 					$profile_link = get_page_link($profile_id);
 
