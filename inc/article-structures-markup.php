@@ -27,7 +27,52 @@ function build_main_head_article($article_data) {
 	return $article_structure;
 }
 
-function build_article_standard_vertical($article_data) {
+function build_article_standard_vertical_card($article_data) {
+	$image = '';
+	if (!empty(get_the_post_thumbnail_url($article_data))) {
+		$image_url = get_the_post_thumbnail_url($article_data, 'large');
+		$image = '<a href="' . get_the_permalink($article_data) . '"><img src="' . $image_url . '"/></a>';
+		$image .= '<div class="cards__backdrop-shadow"></div>';
+	}
+
+	$title = '<h3><a href="' . get_the_permalink($article_data) . '">' . get_the_title($article_data) . '</a></h3>';
+
+	$description = '';
+	if (!empty($article_data->post_excerpt)) {
+		$description .= '<p class="excerpt">' . $article_data->post_excerpt . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
+	} else {
+		if (!empty($article_data->post_content)) {
+			$content = wpautop($article_data->post_content);
+			$shortened_text = substr($content, 0, strpos($content, '</p>') + 4);
+			$description .= '<p class="content-teaser">' . strip_tags($shortened_text, '<a>') . ' <a class="read-more" href="' . get_the_permalink($article_data) . '">Read More</a></p>';
+		}
+	}
+
+	$article_structure = '';
+	$article_structure .= '<div class="inner-container gutter-small">';
+	$article_structure .= '    <div class="cards cards--layout-general cards--size-1-1-large-small margin-top-small">';
+	$article_structure .= '        <div class="cards__fixed">';
+	$article_structure .= '            <div class="cards__wrapper">';
+	$article_structure .= '                <div class="cards__backdrop">';
+	$article_structure .=                      $image;
+	$article_structure .= '        	 	   </div>';
+	$article_structure .= '        		   <div class="cards__footer">';
+	$article_structure .=                      $title;
+	$article_structure .= '        		   </div>';
+	$article_structure .= '            </div>';
+	$article_structure .= '        </div>';
+	$article_structure .= '        <div class="cards__flexible">';
+	$article_structure .= '            <div class="cards__excerpt">';
+	$article_structure .=                  $description;
+	$article_structure .= '            </div>';
+	$article_structure .= '        </div>';
+	$article_structure .= '    </div>';
+	$article_structure .= '</div>';
+
+	return $article_structure;
+}
+
+function build_article_standard_vertical_noncard($article_data) {
 	$article_structure  = '<article class="vertical-article article-teaser">';
 	if (!empty(get_the_post_thumbnail_url($article_data))) {
 		$image_url = get_the_post_thumbnail_url($article_data, 'large');
@@ -53,6 +98,15 @@ function build_article_standard_vertical($article_data) {
 	$article_structure .= 	'</div>';
 	$article_structure .= '</article>';
 	return $article_structure;
+}
+
+function build_article_standard_vertical($article_data) {
+	$shouldUseUmbrellaCards = get_field('should_use_umbrella_cards', 'option');
+	if ($shouldUseUmbrellaCards) {
+		return build_article_standard_vertical_card($article_data);
+	} else {
+		return build_article_standard_vertical_noncard($article_data);
+	}
 }
 
 function build_horizontal_half_article($article_data) {
