@@ -154,7 +154,7 @@ function setUpRedirectHandler() {
 				hideOverlay($('#redirect__overlay'));
 			});
 
-			$('#redirect__link').html(linkHref);
+			$('#redirect__link').html(linkHostname);
 
 			showOverlay($('#redirect__overlay'));
 		}
