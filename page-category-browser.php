@@ -229,6 +229,9 @@ get_header();
 
 					if (($counter == 0) || ($hasIntroFeature && $counter == 0)) {
 						echo '<div class="outer-container">';
+						if ($shouldUseCards) {
+							echo '<div class="inner-container gutter-small">';
+						}
 					}
 
 					if (
