@@ -15,7 +15,7 @@ There are some nuances to this.  Note that we're not using the paged parameter b
 http://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
 ****/
 
-$featuredEvent = get_field('featured_event');
+$featuredEventField = get_field('featured_event');
 
 $currentPage =  (get_query_var('paged')) ? get_query_var('paged') : 1;
 
@@ -34,31 +34,31 @@ if ($currentPage > 1) {
 $hasTeamFilter = false;
 
 /* Featured Event */
-if ($featuredEvent && has_category('event', $featuredEvent)) {
-	$postIDsUsed[] = $featuredEvent->ID;
+$featuredEvent = '';
+if ($featuredEventField && has_category('event', $featuredEventField)) {
+	$postIDsUsed[] = $featuredEventField->ID;
 	$qParamsFirst = array(
-		'p' => $featuredEvent->ID,
+		'p' => $featuredEventField->ID,
 		'post_status' => array('publish', 'future')
 	);
-}
 
-$featured_event_query = new WP_Query($qParamsFirst);
+	$featured_event_query = new WP_Query($qParamsFirst);
 
-$featuredEvent = '';
-if (!is_paged()) {
-	if ($featured_event_query->have_posts()) {
-		$featuredEvent .= '<h3 class="section-subheader">Featured Event</h3>';
-		$featuredEvent .= '<div class="inner-container">';
-		while ($featured_event_query->have_posts()) {
-			$featured_event_query->the_post();
+	if (!is_paged()) {
+		if ($featured_event_query->have_posts()) {
+			$featuredEvent .= '<h3 class="section-subheader">Featured Event</h3>';
+			$featuredEvent .= '<div class="inner-container">';
+			while ($featured_event_query->have_posts()) {
+				$featured_event_query->the_post();
 
-			$featuredEvent .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
+				$featuredEvent .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
+			}
+			$featuredEvent .= '</div>';
 		}
-		$featuredEvent .= '</div>';
 	}
+	wp_reset_query();
+	wp_reset_postdata();
 }
-wp_reset_query();
-wp_reset_postdata();
 
 /* Future Events */
 $qParamsUpcoming = array(
