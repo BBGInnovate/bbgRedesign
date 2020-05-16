@@ -15,13 +15,13 @@ There are some nuances to this.  Note that we're not using the paged parameter b
 http://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
 ****/
 
-$featuredEvent = get_field('homepage_featured_event', 'option');
+$featuredEvent = get_field('featured_event');
 
 $currentPage =  (get_query_var('paged')) ? get_query_var('paged') : 1;
 
 $postIDsUsed = array();
 
-$numPostsFirstPage = 10;
+$numPostsFirstPage = 9;
 $numPostsSubsequentPages = 9;
 
 $postsPerPage = $numPostsFirstPage;
@@ -33,45 +33,34 @@ if ($currentPage > 1) {
 
 $hasTeamFilter = false;
 
-// QUERY TO GET FIRST POST - EITHER FEATURED OR FIRST REVERSE CHRON
+/* Featured Event */
 if ($featuredEvent && has_category('event', $featuredEvent)) {
+	$postIDsUsed[] = $featuredEvent->ID;
 	$qParamsFirst = array(
 		'p' => $featuredEvent->ID,
 		'post_status' => array('publish', 'future')
 	);
-} else {
-	$qParamsFirst = array(
-		'post_type' => array('post'),
-		'cat' => get_cat_id('Event'),
-		'posts_per_page' => 1,
-		'post_status' => array('publish')
-	);
 }
 
 $featured_event_query = new WP_Query($qParamsFirst);
-while ($featured_event_query->have_posts()) {
-	$featured_event_query->the_post(); 
-	// $postIDsUsed[] = get_the_ID();
+
+$featuredEvent = '';
+if (!is_paged()) {
+	if ($featured_event_query->have_posts()) {
+		$featuredEvent .= '<h3 class="section-subheader">Featured Event</h3>';
+		$featuredEvent .= '<div class="inner-container">';
+		while ($featured_event_query->have_posts()) {
+			$featured_event_query->the_post();
+
+			$featuredEvent .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
+		}
+		$featuredEvent .= '</div>';
+	}
 }
+wp_reset_query();
+wp_reset_postdata();
 
-// QUERY PAST EVENTS FOR MAIN PAGE LOOP
-$past_event_parameters = array(
-	'post_type' => array('post'),
-	'cat' => get_cat_id('Event'),
-	'posts_per_page' => $postsPerPage,
-	'offset' => $offset,
-	'post_status' => array('publish'),
-	'post__not_in' => $postIDsUsed
-);
-$past_events_query_args = $past_event_parameters;
-$past_events_query = new WP_Query($past_events_query_args);
-
-$totalPages = 1;
-if ($past_events_query->found_posts > $numPostsFirstPage) {
-	$totalPages = 1 + ceil(($past_events_query->found_posts - $numPostsFirstPage) / $numPostsSubsequentPages);
-}
-
-/**** QUERY FUTURE EVENTS + BUILD STRING  ***/
+/* Future Events */
 $qParamsUpcoming = array(
 	'post_type' => array('post'),
 	'cat' => get_cat_id('Event'),
@@ -88,46 +77,98 @@ $future_events_query = new WP_Query($future_events_query_args);
 $upcomingEvents = "";
 if (!is_paged()) {
 	if ($future_events_query->have_posts()) {
-		$upcomingEvents = '<h3 class="section-subheader">Upcoming events</h3>';
+		$upcomingEvents .= '<h3 class="section-subheader events-header">Upcoming Events</h3>';
+		$upcomingEvents .= '<div class="inner-container css--grid-3">';
 		while ($future_events_query->have_posts()) {
 			$future_events_query->the_post(); 
-			$upcomingEvents .= '<div id="post-' .get_the_ID() . '" class="' . implode(" ", get_post_class()) . '">';
 			global $post;
 			$my_post = clone $post;
 			$my_post->post_status = 'published';
 			$my_post->post_name = sanitize_title($my_post->post_name ? $my_post->post_name : $my_post->post_title, $my_post->ID);
 			$permalink = get_permalink($my_post);
-			$upcomingEvents .= '<h4 class="article-title"><a href="' . $permalink . '">' . get_the_title() . '</a></h4>';
-			$upcomingEvents .= '<p>' . get_the_excerpt() . '</p>';
-			$upcomingEvents .= '</div>';
+
+			$upcomingEvents .= getCard($permalink, has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
 		}
+		$upcomingEvents .= '</div>';
 	}
 }
 wp_reset_query();
 wp_reset_postdata();
 
+/* Past Events */
+$past_event_parameters = array(
+	'post_type' => array('post'),
+	'cat' => get_cat_id('Event'),
+	'posts_per_page' => $postsPerPage,
+	'offset' => $offset,
+	'post_status' => array('publish'),
+	'post__not_in' => $postIDsUsed
+);
+$past_events_query_args = $past_event_parameters;
+$past_events_query = new WP_Query($past_events_query_args);
+
+$totalPages = 1;
+if ($past_events_query->found_posts > $numPostsFirstPage) {
+	$totalPages = 1 + ceil(($past_events_query->found_posts - $numPostsFirstPage) / $numPostsSubsequentPages);
+}
+
+$pastEvents = '';
+if ($past_events_query->have_posts()) {
+	$pastEvents .= '<h3 class="section-subheader events-header">Past Events</h3>';
+	$pastEvents .= '<div class="inner-container css--grid-3">';
+	while ($past_events_query->have_posts()) {
+		$past_events_query->the_post();
+
+		$pastEvents .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
+	}
+	$pastEvents .= '</div>';
+}
+
+wp_reset_query();
+wp_reset_postdata();
+
+
+
+
+function getCard($permalink, $hasPostThumbnail, $id, $title, $date, $excerpt) {
+	$event = '';
+	$event .= '    <div class="cards cards--layout-general cards--size-1-3-small-small cards--events css--grid margin-top-small">';
+	$event .= '        <div class="cards__fixed">';
+	$event .= '            <div class="cards__wrapper">';
+	$event .= '                <div class="cards__backdrop">';
+	$event .= '                    <a href="' . $permalink . '">';
+	if ($hasPostThumbnail) {
+		$event .=                      get_the_post_thumbnail($id, 'medium-thumb');
+	} else {
+		$event .= '                    <img src="' . get_template_directory_uri() . '/img/BBG-portfolio-project-default.png" alt="White USAGM logo on medium gray background" />';
+	}
+	$event .= '                    </a>';
+	$event .= '                    <div class="cards__backdrop-shadow"></div>';
+	$event .= '                </div>';
+	$event .= '                <div class="cards__footer">';
+	$event .= '                    <h3><a href="' . $permalink . '">' . $title . '</a></h3>';
+	$event .= '                </div>';
+	$event .= '            </div>';
+	$event .= '        </div>';
+	$event .= '        <div class="cards__flexible">';
+	$event .= '            <div class="cards__excerpt">';
+	$event .= '                <div class="cards__date">' . $date . '</div>';
+	$event .= '                <p>' . $excerpt . '</p>';
+	$event .= '            </div>';
+	$event .= '        </div>';
+	$event .= '    </div>'; // END .cards
+
+	return $event;
+}
+
 get_header();
 ?>
-
 <?php
-	if (!is_paged()) {
-		while ($featured_event_query->have_posts()) {
-			$featured_event_query->the_post();
-			$featured_post_id = get_the_ID();
-			$banner_position = get_field('adjust_the_banner_image', $featured_post_id, true);
-			$thumbnail_image = get_posts(array('p' => get_post_thumbnail_id($featured_post_id), 'post_type' => 'attachment'));
-			$src = wp_get_attachment_image_src(get_post_thumbnail_id($featured_post_id), array(700, 450), false, '');
-
-			$post_featured_image  = '<div class="feautre-banner">';
-			$post_featured_image .= 	'<div class="bbg__article-header__banner" ';
-			$post_featured_image .= 		'style="background-image: url(' . $src[0] . '); background-position: ' . $banner_position . '">';
-			$post_featured_image .= 	'</div>';
-			$post_featured_image .= '</div>';
-			echo $post_featured_image;
-		}
+	$featured_media_result = get_feature_media_data();
+	if ($featured_media_result != "") {
+		echo $featured_media_result;
 	}
 ?>
-
 <main id="main" role="main">
 	
 	<div class="outer-container">
@@ -143,28 +184,29 @@ get_header();
 	</div>
 
 	<div class="outer-container">
-		<div class="custom-grid-container">
-			<div class="inner-container">
-				<div class="main-content-container">
-					<?php echo $upcomingEvents; ?>
-				</div>
-				<div class="side-content-container past-events">
-					<?php
-						if ($past_events_query->have_posts()) {
-							echo '<h3 class="sidebar-section-header">Past events</h3>';
-							while ($past_events_query->have_posts()) {
-								$past_events_query->the_post(); 
+		<div class="grid-container sidebar-grid--large-gutter">
+			<div class="nest-container">
+				<div class="inner-container">
+					<div class="main-column">
+						<?php echo $featuredEvent; ?>
+						<?php echo $upcomingEvents; ?>
+						<?php echo $pastEvents; ?>
+					</div>
+					<div class="side-column">
+						<?php
+							$secondaryColumnLabel = get_field('secondary_column_label');
+							$secondaryColumnContent = get_field('secondary_column_content');
 
-								$past_event  = '<div id="'. get_the_ID() . '">';
-								$past_event .= 	'<p class="date-meta">' . get_the_date() . '</p>';
-								$past_event .= 	'<h4 class="sidebar-article-title">';
-								$past_event .= 		'<a href="' . esc_url(get_permalink()) . '">' . get_the_title() . '</a>';
-								$past_event .= 	'</h4>';
-								$past_event .= '</div>';
-								echo $past_event;
+							if ($secondaryColumnContent != "") {
+								echo '<aside>';
+								if ($secondaryColumnLabel != "") {
+									echo '<h2 class="sidebar-section-header">' . $secondaryColumnLabel . '</h2>';
+								}
+								echo $secondaryColumnContent;
+								echo '</aside>';
 							}
-						}
-					?>
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
