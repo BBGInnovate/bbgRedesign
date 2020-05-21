@@ -196,4 +196,35 @@ function usagm_experts_list() {
     return $experts_markup;
 }
 
+/* Get the excerpts for sidebar items that are Press Releases under the Threats to Press page */
+function getSidebarPressReleaseExcerpts($profile_id) {
+    $pressReleaseExcerpts = '';
+
+    $parentId = wp_get_post_parent_id($profile_id);
+
+    $threatsToPressPage = get_page_by_path('/news-and-information/threats-to-press');
+    if ($parentId == $threatsToPressPage->ID) {
+        if (have_rows('sidebar_items', $profile_id)) {
+            while (have_rows('sidebar_items', $profile_id)) {
+                the_row();
+                if (get_row_layout() == 'sidebar_internal_link') {
+                    $sidebarInternalLocation = get_sub_field('sidebar_internal_location');
+                    $id = $sidebarInternalLocation->ID;
+                    $excerpt = $sidebarInternalLocation->post_excerpt;
+
+                    $categories = wp_list_pluck(get_the_category($id), 'slug');
+                    if (in_array('press-release', $categories) && in_array('threats-to-press', $categories)) {
+                        $pressReleaseExcerpts .= '<p>' . $excerpt . '</p>';
+                    }
+                }
+            }
+            reset_rows('sidebar_items', $profile_id);
+        }
+    }
+
+    $pressReleaseExcerpts = do_shortcode($pressReleaseExcerpts);
+
+    return $pressReleaseExcerpts;
+}
+
 ?>

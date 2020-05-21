@@ -18,6 +18,9 @@ if (have_posts()) {
 	$page_content = do_shortcode(get_the_content());
 	$page_content = apply_filters('the_content', $page_content);
 
+	$pressReleaseExcerpts = getSidebarPressReleaseExcerpts($profile_id);
+	$page_content .= $pressReleaseExcerpts;
+
 	$metaAuthor = get_the_author();
 	$metaKeywords = strip_tags( get_the_tag_list('',', ',''));
 
