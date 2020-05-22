@@ -15,6 +15,7 @@ There are some nuances to this.  Note that we're not using the paged parameter b
 http://codex.wordpress.org/Making_Custom_Queries_using_Offset_and_Pagination
 ****/
 
+$featuredEventTypeField = get_field('featured_event_type');
 $featuredEventField = get_field('featured_event');
 
 $currentPage =  (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -34,30 +35,61 @@ if ($currentPage > 1) {
 $hasTeamFilter = false;
 
 /* Featured Event */
+
 $featuredEvent = '';
-if ($featuredEventField && has_category('event', $featuredEventField)) {
-	$postIDsUsed[] = $featuredEventField->ID;
-	$qParamsFirst = array(
-		'p' => $featuredEventField->ID,
-		'post_status' => array('publish', 'future')
+
+if ($featuredEventTypeField == 'next') {
+	$qParamsNextEvent = array(
+		'post_type' => array('post'),
+		'cat' => get_cat_id('Event'),
+		'posts_per_page' => 1,
+		'post_status' => array('future'),
+		'order' => 'ASC'
 	);
 
-	$featured_event_query = new WP_Query($qParamsFirst);
+	$next_event_query_args = $qParamsNextEvent;
+	$next_event_query = new WP_Query($next_event_query_args);
 
-	if (!is_paged()) {
-		if ($featured_event_query->have_posts()) {
-			$featuredEvent .= '<h3 class="section-subheader">Featured Event</h3>';
-			$featuredEvent .= '<div class="inner-container">';
-			while ($featured_event_query->have_posts()) {
-				$featured_event_query->the_post();
+	if ($next_event_query->have_posts()) {
+		$featuredEvent .= '<h3 class="section-subheader">Featured Event</h3>';
+		$featuredEvent .= '<div class="inner-container">';
+		while ($next_event_query->have_posts()) {
+			$next_event_query->the_post();
+			$postIDsUsed[] = get_the_ID();
 
-				$featuredEvent .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
-			}
-			$featuredEvent .= '</div>';
+			$featuredEvent .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
 		}
+		$featuredEvent .= '</div>';
 	}
 	wp_reset_query();
 	wp_reset_postdata();
+} else if ($featuredEventTypeField == 'manual') {
+	if ($featuredEventField && has_category('event', $featuredEventField)) {
+		$postIDsUsed[] = $featuredEventField->ID;
+		$qParamsFirst = array(
+			'p' => $featuredEventField->ID,
+			'post_status' => array('publish', 'future')
+		);
+
+		$featured_event_query = new WP_Query($qParamsFirst);
+
+		if (!is_paged()) {
+			if ($featured_event_query->have_posts()) {
+				$featuredEvent .= '<h3 class="section-subheader">Featured Event</h3>';
+				$featuredEvent .= '<div class="inner-container">';
+				while ($featured_event_query->have_posts()) {
+					$featured_event_query->the_post();
+
+					$featuredEvent .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
+				}
+				$featuredEvent .= '</div>';
+			}
+		}
+		wp_reset_query();
+		wp_reset_postdata();
+	}
+} else {
+	// Do nothing
 }
 
 /* Future Events */
