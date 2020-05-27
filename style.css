@@ -9833,6 +9833,8 @@ section.usa-section.bbg-banner__section {
   float: none;
   margin-bottom: 0 !important;
   max-width: 100%; }
+  .bbg__profile-excerpt--sidebar h3.bbg__profile__name:first-of-type {
+    margin-top: 15px; }
 
 .bbg__profile-excerpt__photo {
   border: 1px solid #CCC;
