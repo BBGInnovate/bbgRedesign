@@ -214,10 +214,7 @@ if($journos) {
 		$featuredJournalistsObj = get_sub_field('featured_journalist');
 
 		if ($featuredJournalistsObj) {
-			$featuredJournalists .= '<div class="usa-grid-full">';
-			$featuredJournalists .= 	'<header class="page-header">';
-			$featuredJournalists .= 		'<h5 class="bbg__label">' . $featuredJournalistsSectionLabel . '</h5>';
-			$featuredJournalists .= 	'</header>';
+			$featuredJournalists .= '<h3 class="sidebar-section-header">' . $featuredJournalistsSectionLabel . '</h3>';
 
 			foreach ($featuredJournalistsObj as $journalists) {
 				foreach ($journalists as $journalist) {
@@ -241,7 +238,6 @@ if($journos) {
 					$featuredJournalists .= '</div>';
 				}
 			}
-			$featuredJournalists .= '</div>';
 		}
 	}
 }
