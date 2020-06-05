@@ -108,8 +108,9 @@ $future_events_query = new WP_Query($future_events_query_args);
 
 $upcomingEvents = "";
 if (!is_paged()) {
+	$upcomingEvents .= '<h3 class="section-subheader events-header">Upcoming Events</h3>';
+
 	if ($future_events_query->have_posts()) {
-		$upcomingEvents .= '<h3 class="section-subheader events-header">Upcoming Events</h3>';
 		$upcomingEvents .= '<div class="inner-container css--grid-3">';
 		while ($future_events_query->have_posts()) {
 			$future_events_query->the_post(); 
@@ -121,6 +122,10 @@ if (!is_paged()) {
 
 			$upcomingEvents .= getCard($permalink, has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
 		}
+		$upcomingEvents .= '</div>';
+	} else {
+		$upcomingEvents .= '<div>';
+		$upcomingEvents .= get_field('no_upcoming_events_message');
 		$upcomingEvents .= '</div>';
 	}
 }
