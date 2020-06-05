@@ -598,7 +598,14 @@ function get_journalistic_code_of_ethics_data() {
 
 // ABOUT (OFFICE)
 function get_office_intro_data() {
-	$office_introduction = get_field('office_page_introduction');
+	$office_introduction = '';
+
+	$include_office_page_information = get_field('include_office_page_information');
+
+	if (isset($include_office_page_information) && $include_office_page_information === 'yes') {
+		$office_introduction = get_field('office_page_introduction');
+	}
+
 	return $office_introduction;
 }
 
