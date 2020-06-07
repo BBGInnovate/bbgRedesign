@@ -129,6 +129,28 @@ if (isset($ceo)) {
 					)
 				)
 			);
+		} else if ($slug == 'michael-pack') {
+			$ceo_params = array(
+				'post_type' => array('post'),
+				'posts_per_page' => 2,
+				'orderby' => 'date',
+				'order' => 'DESC',
+				'tax_query' => array(
+					'relation' => 'AND',
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'michael-pack' ),
+						'operator' => 'IN'
+					),
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'bbg-ceo' ),
+						'operator' => 'IN'
+					)
+				)
+			);
 		}
 		return $ceo_params;
 	}
