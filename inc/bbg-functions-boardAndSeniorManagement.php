@@ -156,7 +156,9 @@ function outputSeniorManagement($type) {
 	$mgmt_page = get_page_by_title('Management Team');
 	$mgmt_id = $mgmt_page -> ID;
 
-	if ($type == 'ibb') {
+	if ($type == 'ceo') {
+		$mgmt_profile_ids = array(get_field('senior_management_ceo', $mgmt_id, true));
+	} else if ($type == 'ibb') {
 		$mgmt_profile_ids = get_field('senior_management_management_team_ordered', $mgmt_id, true);
 	} else if ($type == 'broadcast') {
 		$mgmt_profile_ids = get_field('senior_management_network_leaders_ordered', $mgmt_id, true);
@@ -170,6 +172,7 @@ function outputSeniorManagement($type) {
 		$active = get_post_meta($id, 'active', true);
 
 		if ($active) {
+			$isCEO = get_post_meta($id, 'ceo', true);
 			$isGrantee = get_post_meta($id, 'grantee_leadership', true);
 			$occupation = get_post_meta($id, 'occupation', true);
 			$is_acting = get_post_meta($id, 'acting', true);
@@ -192,7 +195,12 @@ function outputSeniorManagement($type) {
 
 			$profileName = get_the_title($id);
 			// .senior-profile is tracked in js/usagm-main.js 
-			$b  = '<div class="grid-half profile-clears">';
+			$b = '';
+			if ($isCEO) {
+				$b  .= '<div class="grid-full bbg__profile-ceo profile-clears">';
+			} else {
+				$b  .= '<div class="grid-half profile-clears">';
+			}
 
 			if ($profilePhoto != "") {
 				$b .= 	'<a href="' . get_the_permalink($id) . '">';

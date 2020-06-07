@@ -206,6 +206,29 @@
 	margin-bottom: $site-margins-small;
 }
 
+.bbg__profile-ceo {
+	margin-left: 20px;
+	margin-right: 20px;
+
+	a {
+		display: inline-block;
+	}
+
+	.bbg__profile-excerpt__photo {
+		max-width: 300px;
+		width: 100%;
+	}
+
+	h3 {
+		margin-top: 20px;
+	}
+
+	p {
+		font-size: 2.1rem;
+		line-height: 1.6;
+	}
+}
+
 .page-template-page-board .content-area .usa-grid > p:first-of-type {
 	@extend .readin;
 }

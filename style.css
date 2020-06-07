@@ -9869,6 +9869,20 @@ section.usa-section.bbg-banner__section {
   font-style: italic;
   margin-bottom: 1rem; }
 
+.bbg__profile-ceo {
+  margin-left: 20px;
+  margin-right: 20px; }
+  .bbg__profile-ceo a {
+    display: inline-block; }
+  .bbg__profile-ceo .bbg__profile-excerpt__photo {
+    max-width: 300px;
+    width: 100%; }
+  .bbg__profile-ceo h3 {
+    margin-top: 20px; }
+  .bbg__profile-ceo p {
+    font-size: 2.1rem;
+    line-height: 1.6; }
+
 .bbg-search-results--list {
   margin-bottom: 3.75rem; }
   .bbg-search-results--list:after {
