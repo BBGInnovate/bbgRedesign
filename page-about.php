@@ -328,13 +328,17 @@ get_header();
 		echo 	'</div>';
 		echo '</div>';
 
-		echo '<div class="outer-container">';
 		foreach ($umbrella_end as $rest_of_umbrella) {
-			foreach ($rest_of_umbrella as $umbrella_chunk) {
-				echo $umbrella_chunk;
+			if (is_array($rest_of_umbrella)) {
+				echo '<div class="outer-container about-flexible-row">';
+				foreach ($rest_of_umbrella as $umbrella_chunk) {
+					echo $umbrella_chunk;
+				}
+				echo '</div>';
+			} else {
+				echo $rest_of_umbrella;
 			}
 		}
-		echo '</div>';
 	}
 	elseif (!is_page('who-we-are') && !empty($all_flex_rows)) {
 		foreach ($all_flex_rows as $flex_row) {

@@ -67,7 +67,7 @@ function assemble_marquee_module($umbrella_parts) {
 
 function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 	if (!empty($umbrella_parts)) {
-		$umbrella_content_block  = '<div class="outer-container about-flexible-row">';
+		$umbrella_content_block  = '';
 		if (!$special_grouping) {
 			$umbrella_content_block .= 	'<div class="grid-container">';
 		}
@@ -82,7 +82,6 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 		if (!$special_grouping) {
 			$umbrella_content_block .= 	'</div>';
 		}
-		$umbrella_content_block .= '</div>';
 		$umbrella_content_block .= '</div>'; // THIS SERVES AS DIV ENDING FOR .inner-container TO UMBRELLA MAIN CONTENT OPENING IN assemble_umbrella_main() ABOVE
 		return $umbrella_content_block;
 	}
