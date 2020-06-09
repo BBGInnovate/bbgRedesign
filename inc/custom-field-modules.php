@@ -182,7 +182,7 @@ function assemble_entity_section($entity_data) {
 	$entity_markup  = 	'<section class="outer-container" id="entities">';
 	$entity_markup .= 		'<div class="grid-container">';
 	$entity_markup .= 			'<h1 class="header-outliner">Entities</h1>';
-	$entity_markup .= 			'<h2 class="section-header"><a href="' . get_permalink(get_page_by_path('networks')) . '">Our Networks</a></h2>';
+	$entity_markup .= 			'<h2 class="section-subheader"><a href="' . get_permalink(get_page_by_path('networks')) . '">Our Networks</a></h2>';
 	$entity_markup .= 			'<p class="lead-in">Every week, more than ' . do_shortcode('[audience]') . ' listeners, viewers and internet users around the world turn on, tune in and log onto U.S. international broadcasting programs. The day-to-day broadcasting activities are carried out by the individual USAGM international broadcasters.</p>';
 	$entity_markup .= 		'</div>';
 	$entity_markup .= 	'<div class="outer-container">';

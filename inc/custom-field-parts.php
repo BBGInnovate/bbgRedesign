@@ -18,9 +18,9 @@ function build_soapbox_parts($soap_data) {
 
 	// BUILD PARTS
 	if (!empty($soap_data['post_link'])) {
-		$soap_heading = '<h2 class="section-header"><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
+		$soap_heading = '<h2 class="section-subheader"><a href="' . $soap_data['header_link'] . '">' . $soap_data['header_text'] . '</a></h2>';
 	} else if (!empty($soap_data['header_text'])) {
-		$soap_heading = '<h2 class="section-header">' . $soap_data['header_text'] . '</h2>';
+		$soap_heading = '<h2 class="section-subheader">' . $soap_data['header_text'] . '</h2>';
 	}
 
 	$soap_title  = '<h3 class="article-title">';
@@ -83,11 +83,11 @@ function build_threat_parts($threat_data) {
 // FLEXIBLE ROWS
 function build_ribbon_parts($ribbon_data) {
 	if ($ribbon_data['label_link'] != "") {
-		$ribbon_label  = '<h2 class="section-header">';
+		$ribbon_label  = '<h2 class="section-subheader">';
 		$ribbon_label .= 	'<a href="'. get_permalink($ribbon_data['label_link']) . '">' . $ribbon_data['label'] . '</a>';
 		$ribbon_label .= '</h2>';
 	} else {
-		$ribbon_label = '<h2 class="section-header">' . $ribbon_data['label'] . '</h2>';
+		$ribbon_label = '<h2 class="section-subheader">' . $ribbon_data['label'] . '</h2>';
 	}
 	if ($ribbon_data['headline_link'] != "") {
 		$ribbon_headline  = '<h3 class="article-title">';
