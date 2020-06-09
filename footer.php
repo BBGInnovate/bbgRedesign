@@ -28,7 +28,7 @@ if (!is_page_template('usagm-intro.php')) {
 	<div class="outer-container">
 		<div id="grid-container">
 			<a class="site-brand" href="<?php echo get_home_url(); ?>">
-				<img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-BBG-logo-horiz-White-hires.png">
+				<img src="<?php echo get_template_directory_uri(); ?>/img/USAGM-Logo-white.png">
 			</a>
 		</div>
 	</div>

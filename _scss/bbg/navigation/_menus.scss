@@ -21,7 +21,11 @@
 	border-bottom: 1px solid #ddd;
 }
 
-.site-brand {img {width: 290px;}}
+.site-brand {
+	img {
+		width: 201px;
+	}
+}
 button#bbg__menu-toggle {margin-right: 0;}
 .bbg__main-navigation {
 	position: relative;
@@ -32,7 +36,7 @@ button#bbg__menu-toggle {margin-right: 0;}
 	
 	.site-brand {
 		display: inline;
-		margin-left: 0.5rem;
+		margin-left: 1.5rem;
 	}
 
 	ul {

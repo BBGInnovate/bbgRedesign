@@ -6002,7 +6002,7 @@ object {
   border-bottom: 1px solid #ddd; }
 
 .site-brand img {
-  width: 290px; }
+  width: 201px; }
 
 button#bbg__menu-toggle {
   margin-right: 0; }
@@ -6014,7 +6014,7 @@ button#bbg__menu-toggle {
   padding: 1.5rem 0 1rem 0; }
   .bbg__main-navigation .site-brand {
     display: inline;
-    margin-left: 0.5rem; }
+    margin-left: 1.5rem; }
   .bbg__main-navigation ul {
     width: 100%;
     margin-top: 0;
