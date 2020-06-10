@@ -152,70 +152,57 @@ function board_member_list_shortcode($atts) {
 add_shortcode('board_member_list', 'board_member_list_shortcode');
 
 function outputFormerCeos() {
-	$management_team_page = get_page_by_title('Management Team');
-	$management_team_page_id = $management_team_page->ID;
+    $formerCeosLandingPage = get_page_by_title('Former CEOs');
+    $formerCeosLandingPageId = $formerCeosLandingPage->ID;
 
-	$management_team_page_query = array(
-		'post_type' => array('page'),
-		'post_status' => array('publish'),
-		'post_parent' => $management_team_page_id,
-		'order' => 'DESC',
-		'posts_per_page' => 100
-	);
-	$management_team_query = new WP_Query($management_team_page_query);
+    $ceos_markup = '';
+    if (have_rows('former_ceos_ordered', $formerCeosLandingPageId)) {
+        while (have_rows('former_ceos_ordered', $formerCeosLandingPageId)) {
+            the_row();
 
-	$ceos_markup = '';
+            $formerCeoPageId = get_sub_field('ceo');
 
-	while ($management_team_query->have_posts())  {
-		$management_team_query->the_post();
-		$management_team_id = get_the_ID();
-		$management_team_name = get_the_title();
-		$management_team_excerpt = get_the_excerpt();
-		$management_team_permalink = get_the_permalink();
+            $formerCeoName = get_the_title($formerCeoPageId);
+            $formerCeoExcerpt = my_excerpt($formerCeoPageId);
+            $formerCeoPermalink = get_the_permalink($formerCeoPageId);
 
-		$active = get_post_meta($management_team_id, 'active', true);
-		$isCeo = get_post_meta($management_team_id, 'ceo', true);
+            $ceos_markup .= '<div class="grid-half profile-clears">';
 
-		if ($isCeo && isset($active) && !$active) {
-			$ceos_markup .= '<div class="grid-half profile-clears">';
+            $formerCeoPhotoId = get_post_meta($formerCeoPageId, 'profile_photo', true);
 
-			$management_team_photo_id = get_post_meta($management_team_id, 'profile_photo', true);
-			$management_team_photo = '';
+            if ($formerCeoPhotoId) {
+                $formerCeoPhoto = wp_get_attachment_image_src($formerCeoPhotoId , 'mugshot');
+                $formerCeoPhoto = $formerCeoPhoto[0];
 
-			if ($management_team_photo_id) {
-				$management_team_photo = wp_get_attachment_image_src($management_team_photo_id , 'mugshot');
-				$management_team_photo = $management_team_photo[0];
+                $ceos_markup .= '<a href="' . $formerCeoPermalink . '">';
+                $ceos_markup .=     '<img src="';
+                $ceos_markup .=         $formerCeoPhoto;
+                $ceos_markup .=         '" class="bbg__profile-excerpt__photo';
+                $ceos_markup .=         ' bbg__former-member';
+                $ceos_markup .=         '" alt="Photo of former CEO ';
+                $ceos_markup .=         $formerCeoName;
+                $ceos_markup .=         '"';
+                $ceos_markup .=     '>';
+                $ceos_markup .= '</a>';
+            }
 
-				$ceos_markup .= '<a href="' . $management_team_permalink . '">';
-				$ceos_markup .= 	'<img src="';
-				$ceos_markup .= 		$management_team_photo;
-				$ceos_markup .= 		'" class="bbg__profile-excerpt__photo';
-				$ceos_markup .= 		' bbg__former-member';
-				$ceos_markup .= 		'" alt="Photo of former CEO ';
-				$ceos_markup .= 		$management_team_name;
-				$ceos_markup .= 		'"';
-				$ceos_markup .= 	'>';
-				$ceos_markup .= '</a>';
-			}
+            $ceos_markup .= '<p class="article-title">';
+            $ceos_markup .=     '<a href="' . $formerCeoPermalink . '">';
+            $ceos_markup .=         $formerCeoName;
+            $ceos_markup .=     '</a>';
+            $ceos_markup .= '</p>';
+            $ceos_markup .= '<p>' . $formerCeoExcerpt . '</p>';
 
-			$ceos_markup .= '<p class="article-title">';
-			$ceos_markup .= 	'<a href="' . $management_team_permalink . '">';
-			$ceos_markup .= 		$management_team_name;
-			$ceos_markup .= 	'</a>';
-			$ceos_markup .= '</p>';
+            $ceos_markup .= '</div>';
+        }
+    }
 
-			$ceos_markup .= '<p>' . $management_team_excerpt . '</p>';
-
-			$ceos_markup .= '</div>';
-		}
-	}
-
-	return $ceos_markup;
+    return $ceos_markup;
 }
-function former_ceo_list_shortcode() {
+function former_ceos_list_shortcode() {
 	return outputFormerCeos();
 }
-add_shortcode('former_ceo_list', 'former_ceo_list_shortcode');
+add_shortcode('former_ceos_list', 'former_ceos_list_shortcode');
 
 function outputSeniorManagement($type) {
 	$mgmt_page = get_page_by_title('Management Team');
