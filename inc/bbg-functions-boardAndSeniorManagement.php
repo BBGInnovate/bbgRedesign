@@ -161,9 +161,18 @@ function outputFormerCeos() {
             the_row();
 
             $formerCeoPageId = get_sub_field('ceo');
+            $shouldOverrideExcerpt = get_sub_field('should_override_excerpt');
+            $formerCeoExcerptOverride = get_sub_field('excerpt_override');
 
             $formerCeoName = get_the_title($formerCeoPageId);
-            $formerCeoExcerpt = my_excerpt($formerCeoPageId);
+
+            $formerCeoExcerpt = '';
+            if ($shouldOverrideExcerpt) {
+                $formerCeoExcerpt = $formerCeoExcerptOverride;
+            } else {
+                $formerCeoExcerpt = my_excerpt($formerCeoPageId);
+            }
+
             $formerCeoPermalink = get_the_permalink($formerCeoPageId);
 
             $ceos_markup .= '<div class="grid-half profile-clears">';
