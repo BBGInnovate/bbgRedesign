@@ -9700,6 +9700,64 @@ section.usa-section.bbg-banner__section {
   .page-id-37417 .bbg__footer__return-to-top {
     background-color: #fff; }
 
+.gmm__grid .gutter-sizer {
+  width: 0%; }
+
+.gmm__grid .grid-item {
+  overflow: hidden;
+  opacity: 0;
+  width: 100%;
+  margin-bottom: 2%;
+  border: 1px solid #bbb;
+  border-radius: 5px; }
+  .gmm__grid .grid-item img {
+    margin-bottom: 0px; }
+
+@media screen and (min-width: 600px) {
+  .gmm__grid .grid-item {
+    width: 49%; }
+  .gmm__grid .gutter-sizer {
+    width: 2%; } }
+
+@media screen and (min-width: 900px) {
+  .gmm__grid .grid-item {
+    width: 32%; } }
+
+.gmm__grid .grid-item__top img {
+  width: 100%; }
+
+.gmm__grid .grid-item__top .gmm__media--video-youtube {
+  padding-top: 56.25%;
+  position: relative; }
+
+.gmm__grid .grid-item__top .gmm__media--video-youtube iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.gmm__grid .grid-item__top .gmm__media--video-internal {
+  display: block; }
+
+.gmm__grid .grid-item__top .gmm__media--video-internal video {
+  display: block;
+  width: 100%; }
+
+.gmm__grid .grid-item__bottom {
+  padding: 16px; }
+  .gmm__grid .grid-item__bottom h3 {
+    margin: 0 0 8px 0; }
+  .gmm__grid .grid-item__bottom h4, .gmm__grid .grid-item__bottom .bbg__board__committee-list li a, .bbg__board__committee-list li .gmm__grid .grid-item__bottom a {
+    margin: 0 0 8px 0;
+    font-size: 1.6rem;
+    color: #666;
+    font-weight: normal; }
+  .gmm__grid .grid-item__bottom p {
+    margin: 0px;
+    font-size: 1.6rem;
+    line-height: 2.3rem; }
+
 .profile-clears {
   margin-bottom: 2rem; }
   .profile-clears h4, .profile-clears .bbg__board__committee-list li a, .bbg__board__committee-list li .profile-clears a {

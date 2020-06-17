@@ -209,6 +209,11 @@ function bbginnovate_scripts() {
 	wp_enqueue_script( 'bbginnovate-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 	wp_enqueue_script( 'bbginnovate-bbgredesign', get_template_directory_uri() . '/js/bbgredesign.js', array('jquery'), '20160223', true );
 
+    if (is_page_template('page-global-media-matters.php')) {
+        wp_enqueue_script('masonry-grid', get_template_directory_uri() . '/js/vendor/masonry.min.js', array('jquery'), '20200617', true);
+        wp_enqueue_script('global-media-matters', get_template_directory_uri() . '/js/global-media-matters.js', array('jquery'), '20200617', true);
+        wp_localize_script('global-media-matters', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+    }
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -287,6 +292,7 @@ require get_template_directory() . '/inc/bbg-functions-tinyMCE.php';
 //require get_template_directory() . '/inc/bbg-functions-category-tooltip.php';
 require get_template_directory() . '/inc/bbg-functions-tag-hierarchy.php'; // sets up hierarchy in tags
 require get_template_directory() . '/inc/bbg-functions-users.php'; // outputs current user role
+require get_template_directory() . '/inc/bbg-global-media-matters.php';
 
 /**
  * Add Twitter handle to author metadata using built-in wp hook for contact methods
@@ -1262,6 +1268,24 @@ function getTermsStringFromPost($post_id, $taxonomy) {
 		return join(', ', wp_list_pluck($terms, 'name'));
 	}
 }
+
+function get_more_gmm_entries() {
+	$maxNumOfEntries = 10;
+
+	$numOfEntries = intval($_POST['numOfEntries']);
+	$gmmBlogOffset = intval($_POST['gmmBlogOffset']);
+	$gmmMediaOffset = intval($_POST['gmmMediaOffset']);
+
+	$numOfEntries = min($numOfEntries, $maxNumOfEntries);
+
+	$gmmProviders = new GlobalMediaMattersProviders($gmmBlogOffset, $gmmMediaOffset);
+
+	$globalMediaMattersArray = $gmmProviders->getEntries($numOfEntries);
+
+	wp_send_json_success($globalMediaMattersArray);
+}
+add_action( 'wp_ajax_get_more_gmm_entries', 'get_more_gmm_entries' );
+add_action( 'wp_ajax_nopriv_get_more_gmm_entries', 'get_more_gmm_entries' );
 
 function my_login_logo_one() { 
 ?> 
