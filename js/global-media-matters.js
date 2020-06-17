@@ -70,7 +70,9 @@
                             opacity: 1
                         }, 750);
 
-                        redrawBricks();
+                        setTimeout(function() {
+                            redrawBricks();
+                        }, 200);
                     }
                 }
             });
