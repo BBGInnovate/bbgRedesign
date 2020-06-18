@@ -62,7 +62,7 @@
 
                         setUpVideoPreview('.grid-item');
 
-                        $('.video__internal').on('loadedmetadata', (event) => {
+                        $('.video__internal').on('loadedmetadata', function() {
                             redrawBricks();
                         });
 
