@@ -164,7 +164,7 @@
             markup += '<div class="grid-item item-blog hidden">';
             markup += '    <div class="grid-item__top">';
             markup += '        <a href="' + data.url + '">';
-            markup +=             data.image;
+            markup += '            <img src="' + data.imageUrl + '"/>';
             markup += '        </a>';
             markup += '    </div>';
             markup += '    <div class="grid-item__bottom">';

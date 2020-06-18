@@ -103,7 +103,7 @@ class GlobalMediaMattersProviders {
                     $gmmBlogItem['title'] = get_the_title();
                     $gmmBlogItem['url'] = get_the_permalink();
                     $gmmBlogItem['date'] = get_the_date();
-                    $gmmBlogItem['image'] = get_the_post_thumbnail();
+                    $gmmBlogItem['image'] = get_the_post_thumbnail(get_the_ID(), 'medium-thumb');
                     $gmmBlogItem['excerpt'] = get_the_excerpt();
 
                     $gmmBlogArray[] = array('date' => get_the_date(), 'type' => 'blog', 'offset' => $currentOffset++, 'data' => $gmmBlogItem);
@@ -171,7 +171,8 @@ class GlobalMediaMattersProviders {
 
                             case 'image':
                                 $image = get_sub_field('image');
-                                $gmmMediaItem['image'] = wp_get_attachment_image($image['id'], 'large-thumb');
+                                $imageObj = wp_get_attachment_image_src($image['id'], 'medium-thumb');
+                                $gmmMediaItem['imageUrl'] = $imageObj[0];
                                 $gmmMediaItem['url'] = get_sub_field('link');
                                 $gmmMediaItem['text'] = get_sub_field('text');
 
