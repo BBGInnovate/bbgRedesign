@@ -214,8 +214,9 @@ function former_ceos_list_shortcode() {
 add_shortcode('former_ceos_list', 'former_ceos_list_shortcode');
 
 function outputSeniorManagement($type) {
-	$mgmt_page = get_page_by_title('Management Team');
-	$mgmt_id = $mgmt_page -> ID;
+	// $mgmt_page = get_page_by_title('Management Team');
+	// $mgmt_id = $mgmt_page -> ID;
+	$mgmt_id = get_the_ID();
 
 	if ($type == 'ceo') {
 		$mgmt_profile_ids = array(get_field('senior_management_ceo', $mgmt_id, true));
