@@ -296,6 +296,13 @@ function senior_management_list_shortcode($atts) {
 			'hide_profile_photo' => false
 	), $atts);
 
+	$hideProfilePhoto = $attributes['hide_profile_photo'];
+	if ($hideProfilePhoto === 'true') {
+		$attributes['hide_profile_photo'] = true;
+	} else if ($hideProfilePhoto === 'false') {
+		$attributes['hide_profile_photo'] = false;
+	}
+
 	return outputSeniorManagement($attributes['type'], $attributes['hide_profile_photo']);
 }
 add_shortcode('senior_management_list', 'senior_management_list_shortcode');
