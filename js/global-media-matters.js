@@ -151,7 +151,6 @@
             } else {
                 markup +=          data.title;
             }
-
             markup += '        </h3>';
             markup += '    </div>';
             markup += '</div>';
@@ -164,7 +163,7 @@
             markup += '<div class="grid-item item-blog hidden">';
             markup += '    <div class="grid-item__top">';
             markup += '        <a href="' + data.url + '">';
-            markup += '            <img src="' + data.imageUrl + '"/>';
+            markup +=              data.image;
             markup += '        </a>';
             markup += '    </div>';
             markup += '    <div class="grid-item__bottom">';
@@ -174,9 +173,12 @@
             markup +=                  data.title;
             markup += '            </a>';
             markup += '        </h3>';
-            markup += '        <p>';
-            markup +=             data.text;
-            markup += '        </p>';
+            markup += '        <h3>';
+            if ('text' in data && data.text.length != 0) {
+                markup += '    <p>';
+                markup +=          data.text;
+                markup += '    </p>';
+            }
             markup += '    </div>';
             markup += '</div>';
 

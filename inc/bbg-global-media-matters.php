@@ -171,8 +171,7 @@ class GlobalMediaMattersProviders {
 
                             case 'image':
                                 $image = get_sub_field('image');
-                                $imageObj = wp_get_attachment_image_src($image['id'], 'medium-thumb');
-                                $gmmMediaItem['imageUrl'] = $imageObj[0];
+                                $gmmMediaItem['image'] = wp_get_attachment_image($image['id'], 'medium-thumb');
                                 $gmmMediaItem['url'] = get_sub_field('link');
                                 $gmmMediaItem['text'] = get_sub_field('text');
 
