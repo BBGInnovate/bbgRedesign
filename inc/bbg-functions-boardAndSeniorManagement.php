@@ -213,7 +213,7 @@ function former_ceos_list_shortcode() {
 }
 add_shortcode('former_ceos_list', 'former_ceos_list_shortcode');
 
-function outputSeniorManagement($type) {
+function outputSeniorManagement($type, $shouldHideProfilePhoto) {
 	// $mgmt_page = get_page_by_title('Management Team');
 	// $mgmt_id = $mgmt_page -> ID;
 	$mgmt_id = get_the_ID();
@@ -250,7 +250,7 @@ function outputSeniorManagement($type) {
 				$actingTitle = 'Acting ';
 			}
 
-			if  ($profilePhotoID) {
+			if  ($shouldHideProfilePhoto != true && $profilePhotoID) {
 				$profilePhoto = wp_get_attachment_image_src($profilePhotoID , 'mugshot');
 				$profilePhoto = $profilePhoto[0];
 			}
@@ -291,7 +291,12 @@ function outputSeniorManagement($type) {
 	return $s;
 }
 function senior_management_list_shortcode($atts) {
-	return outputSeniorManagement($atts['type']);
+	$attributes = shortcode_atts(array(
+			'type' => '',
+			'hide_profile_photo' => false
+	), $atts);
+
+	return outputSeniorManagement($attributes['type'], $attributes['hide_profile_photo']);
 }
 add_shortcode('senior_management_list', 'senior_management_list_shortcode');
 
