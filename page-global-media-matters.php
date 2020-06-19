@@ -11,11 +11,13 @@
 require 'inc/bbg-functions-assemble.php';
 
 if (have_posts()) {
+    the_post();
+
     $current_page_id = get_the_id();
     $current_page_title = get_the_title();
 
-    wp_reset_query();
-    wp_reset_postdata();
+    $page_content = do_shortcode(get_the_content());
+    $page_content = apply_filters('the_content', $page_content);
 }
 
 $customCardsArray = array();
@@ -36,9 +38,13 @@ get_header();
                 echo '<h2 class="section-header">' . $current_page_title . '</h2>';
             ?>
         </div>
-    </div>
-
-    <div class="outer-container">
+        <?php
+            if ($page_content != '') {
+                echo '<div class="grid-container page-content">';
+                echo $page_content;
+                echo '</div>';
+            }
+        ?>
         <div class="grid-container">
             <div class="gmm__grid">
                 <div class="gutter-sizer"></div>
