@@ -10331,6 +10331,23 @@ div.appropriations-small > p.header {
   .bbg__profile-grid__profile.usa-width-one-sixth:nth-child(2n), .bbg__profile-grid__profile:nth-child(2n) {
     margin-right: 0; } }
 
+.featured-journalist__dropdown {
+  margin-bottom: 2rem; }
+  .featured-journalist__dropdown label {
+    margin-top: 2rem; }
+
+.featured-journalist__status {
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  font-weight: 700;
+  color: #b5231d;
+  margin-bottom: 2rem; }
+
+.featured-journalist__no-status {
+  display: none;
+  font-style: italic; }
+
 /* Fallen journalists memorial wall */
 .bbg__profile-grid__profile {
   float: none !important;

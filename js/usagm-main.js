@@ -387,6 +387,34 @@ function ieHandler() {
 }
 ieHandler();
 
+function threatsJournalistsStatusDropdown() {
+	$('select[name="featured-journalist__dropdown"]').on('change', function() {
+		$('.featured-journalist__grid-item').show();
+		$('.featured-journalist__no-status').hide();
+
+		let status = $(this).val();
+		if (status) {
+			$('.featured-journalist__grid-item').not('.status-' + status).hide();
+		}
+
+		let index = 0;
+		$('.featured-journalist__grid-item:visible').each(function() {
+			if (index % 2 == 0) {
+				$(this).css('clear', 'left');
+			} else {
+				$(this).css('clear', 'none');
+			}
+			index++;
+		});
+
+		if (index == 0) {
+			$('.featured-journalist__no-status').show();
+		}
+	});
+}
+threatsJournalistsStatusDropdown();
+
+
 function handleImageCardHover() {
 	let fadeSpeed = 300;
 	$('.cards--layout-image a').hover(function() {

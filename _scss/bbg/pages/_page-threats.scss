@@ -106,6 +106,28 @@
 	}
 }
 
+.featured-journalist__dropdown {
+	margin-bottom: 2rem;
+
+	label {
+		margin-top: 2rem;
+	}
+}
+
+.featured-journalist__status {
+	font-family: $font-sans;
+	font-size: 1.4rem;
+	line-height: 1.4rem;
+	font-weight: $font-bold;
+	color: $color-red;
+	margin-bottom: 2rem;
+}
+
+.featured-journalist__no-status {
+	display: none;
+	font-style: italic;
+}
+
 /* Fallen journalists memorial wall */
 .bbg__profile-grid__profile {
 	@extend .usa-width-one-sixth;

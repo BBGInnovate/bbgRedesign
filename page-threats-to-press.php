@@ -169,48 +169,73 @@ get_header();
 		$featuredJournalists = "";
 		$profilePhoto = "";
 
-		if (have_rows('featured_journalists_section')) {
-		    while (have_rows('featured_journalists_section')) {
-		    	the_row();
-				$featuredJournalistsSectionLabel = get_sub_field('featured_journalists_section_label');
+		$choices = array();
 
-				if (have_rows('featured_journalist')) {
-					$featuredJournalists .= '<section class="outer-container">';
-					$featuredJournalists .= 	'<div class="grid-container">';
-					$featuredJournalists .= 		'<h2 class="section-subheader">' . $featuredJournalistsSectionLabel . '</h2>';
-					$featuredJournalists .=  		'<div class="nest-container">';
-					$featuredJournalists .=  			'<div class="inner-container">';
-
-					while (have_rows('featured_journalist')) {
-						the_row();	
-						$relatedPages = get_sub_field('featured_journalist_profile');
-						$profileTitle = $relatedPages->post_title;
-						$profileName = $relatedPages->first_name . ' ' . $relatedPages->last_name;
-						$profileOccupation = $relatedPages->occupation;
-						$profilePhoto = $relatedPages->profile_photo;
-						$profileUrl = get_permalink($relatedPages->ID);
-						$profileExcerpt = my_excerpt($relatedPages->ID);
-
-						if ($profilePhoto) {
-							$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
-							$profilePhoto = $profilePhoto[0];
-							$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo" alt="Profile photo"></a>';
-						}
-
-						$featuredJournalists .= 			'<div class="grid-half profile-clears">';
-						$featuredJournalists .= 				$profilePhoto;
-						$featuredJournalists .= 				'<h4 class="article-title"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
-						$featuredJournalists .= 				'<p class="sans">' . $profileOccupation . '</p>';
-						$featuredJournalists .= 				'<p>' . $profileExcerpt . '</p>';
-						$featuredJournalists .= 			'</div>';
-					}
-					$featuredJournalists .= 			'</div>';
-					$featuredJournalists .= 		'</div>';
-					$featuredJournalists .= 	'</div>';
-					$featuredJournalists .= '</section>';
+		if (have_rows('featured_journalists')) {
+			while (have_rows('featured_journalists')) {
+				the_row();
+				if (empty($choices)) {
+					$choices = get_sub_field_object('status')['choices'];
 				}
 			}
+			reset_rows();
+
+			$featuredJournalists .= '<section class="outer-container">';
+			$featuredJournalists .= 	'<div class="grid-container">';
+			$featuredJournalists .= 		'<h2 class="section-subheader">Cases We\'re Watching</h2>';
+
+			$featuredJournalists .= '        <div class="nest-container">';
+			$featuredJournalists .= '            <div class="inner-container featured-journalist__dropdown">';
+			$featuredJournalists .= '                <label class="grid-four">Status';
+			$featuredJournalists .= '                    <select name="featured-journalist__dropdown">';
+			$featuredJournalists .= '                        <option value="">ALL</option>';
+
+			foreach ($choices as $choice) {
+				$featuredJournalists .= '                    <option value="' . strtolower($choice) . '">' . $choice . '</option>';
+			}
+			$featuredJournalists .= '                    </select>';
+			$featuredJournalists .= '                </label>';
+			$featuredJournalists .= '            </div>';
+
+			$featuredJournalists .= '            <div class="inner-container">';
+
+			while (have_rows('featured_journalists')) {
+				the_row();
+
+				$status = get_sub_field('status');
+				$featuredJournalist = get_sub_field('journalist');
+
+				$profileTitle = $featuredJournalist->post_title;
+				$profileName = $featuredJournalist->first_name . ' ' . $featuredJournalist->last_name;
+				$profileOccupation = $featuredJournalist->occupation;
+				$profilePhoto = $featuredJournalist->profile_photo;
+				$profileUrl = get_permalink($featuredJournalist->ID);
+				$profileExcerpt = my_excerpt($featuredJournalist->ID);
+
+				if ($profilePhoto) {
+					$profilePhoto = wp_get_attachment_image_src( $profilePhoto , 'Full');
+					$profilePhoto = $profilePhoto[0];
+					$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo" alt="Profile photo"></a>';
+				}
+
+				$featuredJournalists .= 			'<div class="grid-half profile-clears featured-journalist__grid-item status-' . strtolower($status) . '">';
+				$featuredJournalists .= 				$profilePhoto;
+				$featuredJournalists .= 				'<h4 class="article-title"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
+				$featuredJournalists .= 				'<p class="sans" style="margin-bottom: 1rem;">' . $profileOccupation . '</p>';
+				$featuredJournalists .= 				'<p class="featured-journalist__status">' . strtoupper($status) . '</p>';
+				$featuredJournalists .= 				'<p>' . $profileExcerpt . '</p>';
+				$featuredJournalists .= 			'</div>';
+			}
+
+			$featuredJournalists .= 			    '<div class="grid-half featured-journalist__no-status">';
+			$featuredJournalists .= 			        'There are no journalists with this status.';
+			$featuredJournalists .= 			    '</div>';
+			$featuredJournalists .= 			'</div>';
+			$featuredJournalists .= 		'</div>';
+			$featuredJournalists .= 	'</div>';
+			$featuredJournalists .= '</section>';
 		}
+
 		echo $featuredJournalists;
 	?>
 
