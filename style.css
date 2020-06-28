@@ -2821,6 +2821,14 @@ ul li:before {
   display: none;
   padding-right: 0; }
 
+.main-column ol li,
+.main-column ul li {
+  font-family: "Carrara-Regular", serif; }
+
+.page-content ol li,
+.page-content ul li {
+  font-family: "Carrara-Regular", serif; }
+
 .side-column ol li,
 .side-column ul li {
   font-size: 1.6rem;

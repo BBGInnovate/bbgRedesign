@@ -160,6 +160,20 @@ ul li:before {
     padding-right: 0;
 }
 
+.main-column {
+    ol li,
+    ul li {
+        font-family: $font-serif;
+    }
+}
+
+.page-content {
+    ol li,
+    ul li {
+        font-family: $font-serif;
+    }
+}
+
 // SIDEBAR CONTENT
 .side-column {
     ol li,
