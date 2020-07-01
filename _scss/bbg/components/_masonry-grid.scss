@@ -1,4 +1,4 @@
-.gmm__grid {
+.masonry__grid {
 
     .gutter-sizer {
         width: 0%;
@@ -6,7 +6,7 @@
 
     .grid-item {
         overflow: hidden;
-        opacity: 0;
+        opacity: 1;
         width: 100%;
         margin-bottom: 2%;
         border: 1px solid #bbb;
@@ -37,6 +37,33 @@
         img {
             width: 100%;
         }
+    }
+
+    .grid-item__bottom {
+        padding: 16px;
+
+        h3 {
+            margin: 0 0 8px 0;
+        }
+
+        h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.6rem;
+            color: #666;
+            font-weight: normal;
+        }
+
+        p {
+            margin: 0px;
+            font-size: 1.6rem;
+            line-height: 2.3rem;
+        }
+    }
+
+    &.gmm__grid {
+        .grid-item {
+            opacity: 0;
+        }
 
         .gmm__media--video-youtube {
             padding-top: 56.25%;
@@ -62,27 +89,6 @@
                 display: block;
                 width: 100%;
             }
-        }
-    }
-
-    .grid-item__bottom {
-        padding: 16px;
-
-        h3 {
-            margin: 0 0 8px 0;
-        }
-
-        h4 {
-            margin: 0 0 8px 0;
-            font-size: 1.6rem;
-            color: #666;
-            font-weight: normal;
-        }
-
-        p {
-            margin: 0px;
-            font-size: 1.6rem;
-            line-height: 2.3rem;
         }
     }
 }

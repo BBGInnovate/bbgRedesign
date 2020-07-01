@@ -213,6 +213,10 @@ function bbginnovate_scripts() {
         wp_enqueue_script('masonry-grid', get_template_directory_uri() . '/js/vendor/masonry.min.js', array('jquery'), '20200617', true);
         wp_enqueue_script('global-media-matters', get_template_directory_uri() . '/js/global-media-matters.js', array('jquery'), '20200617', true);
         wp_localize_script('global-media-matters', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+	}
+
+	if (is_page_template('page-masonry-layout.php')) {
+        wp_enqueue_script('masonry-grid', get_template_directory_uri() . '/js/vendor/masonry.min.js', array('jquery'), '20200617', true);
     }
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

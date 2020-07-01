@@ -79,7 +79,7 @@
         });
 
         function redrawBricks() {
-            var elem = document.querySelector('.gmm__grid');
+            var elem = document.querySelector('.masonry__grid.gmm__grid');
             var msnry = new Masonry(elem, {
                 itemSelector: '.grid-item',
                 columnWidth: '.grid-item',

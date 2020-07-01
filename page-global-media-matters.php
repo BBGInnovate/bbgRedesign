@@ -46,7 +46,7 @@ get_header();
             }
         ?>
         <div class="grid-container">
-            <div class="gmm__grid">
+            <div class="masonry__grid gmm__grid">
                 <div class="gutter-sizer"></div>
             </div>
             <button type="button" class="button__load-more" name="more-matters">Load More</button>
