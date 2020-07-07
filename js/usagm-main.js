@@ -147,7 +147,7 @@ function setUpRedirectHandler() {
 
 			$('#redirect__button--confirm').click(function(e) {
 				hideOverlay($('#redirect__overlay'));
-				window.location = linkHref;
+				window.open(linkHref, '_blank');
 			});
 
 			$('#redirect__dialog--close').click(function(e) {
@@ -157,24 +157,30 @@ function setUpRedirectHandler() {
 			$('#redirect__link').html(linkHostname);
 
 			showOverlay($('#redirect__overlay'));
+
+			$('#redirect__overlay').click(function(e) {
+				hideOverlay($('#redirect__overlay'));
+			});
+
+			function showOverlay(overlay) {
+				overlay.width('100%');
+				overlay.height('100%');
+				overlay.show();
+			}
+
+			function hideOverlay(overlay) {
+				$('#redirect__dialog').off('click');
+				$('#redirect__button--cancel').off('click');
+				$('#redirect__button--confirm').off('click');
+				$('#redirect__dialog--close').off('click');
+				$('#redirect__overlay').off('click');
+
+				overlay.hide();
+				overlay.width('0');
+				overlay.height('0');
+			}
 		}
 	});
-
-	$('#redirect__overlay').click(function(e) {
-		hideOverlay($('#redirect__overlay'));
-	});
-
-	function showOverlay(overlay) {
-		overlay.width('100%');
-		overlay.height('100%');
-		overlay.show();
-	}
-
-	function hideOverlay(overlay) {
-		overlay.hide();
-		overlay.width('0');
-		overlay.height('0');
-	}
 }
 
 setUpRedirectHandler();
