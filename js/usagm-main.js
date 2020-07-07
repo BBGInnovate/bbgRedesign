@@ -423,12 +423,14 @@ threatsJournalistsStatusDropdown();
 function initializeMasonryGrid() {
 	setTimeout(function() {
 		const elem = document.querySelector('.masonry__grid');
-		const masonry = new Masonry(elem, {
-			itemSelector: '.grid-item',
-			columnWidth: '.grid-item',
-			gutter: '.gutter-sizer',
-			percentPosition: true
-		});
+		if (elem) {
+			const masonry = new Masonry(elem, {
+				itemSelector: '.grid-item',
+				columnWidth: '.grid-item',
+				gutter: '.gutter-sizer',
+				percentPosition: true
+			});
+		}
 	}, 200);
 }
 initializeMasonryGrid();
