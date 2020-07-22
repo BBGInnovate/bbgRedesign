@@ -147,6 +147,39 @@ function getSidebarContent($postId) {
                 }
                 $internal_links .= '</div>';
                 $sidebar_markup .= $internal_links;
+            } else if (get_row_layout() == 'sidebar_posts_for_tag') {
+                $sidebarPostsTag = get_sub_field('sidebar_posts_tag', false);
+                $sidebarPostsMax = get_sub_field('sidebar_posts_max', false);
+
+                $sidebarPostsMax = intval($sidebarPostsMax);
+
+                $qParams = array(
+                    'post_type' => array('post'),
+                    'posts_per_page' => $sidebarPostsMax,
+                    'orderby' => 'post_date',
+                    'order' => 'desc',
+                    'tag__in' => array($sidebarPostsTag)
+                );
+
+                $custom_query = new WP_Query($qParams);
+
+                $posts_for_tag = '';
+                while ($custom_query->have_posts())  {
+                    $custom_query->the_post();
+
+                    error_log(get_the_title());
+
+                    $posts_for_tag .= '<div class="sidebar-related">';
+                    $posts_for_tag .=     '<h4 class="sidebar-article-title">';
+                    $posts_for_tag .=         '<a href="' . get_the_permalink() . '">';
+                    $posts_for_tag .= get_the_title();
+                    $posts_for_tag .=         '</a>';
+                    $posts_for_tag .=     '</h4>';
+                    $posts_for_tag .= '</div>';
+                }
+                wp_reset_postdata();
+
+                $sidebar_markup .= $posts_for_tag;
             } else if (get_row_layout() == 'sidebar_photo') {
                 $sidebarPhotoImage = get_sub_field('sidebar_photo_image');
                 $sidebarPhotoTitle = get_sub_field('sidebar_photo_title', false);
