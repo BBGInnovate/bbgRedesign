@@ -99,10 +99,10 @@ $social-icon-home:				40px;
 // Site margins
 // $site-margins = 3 rem
 $site-margins-small: 		1rem;
-$site-margins-medium: 		$site-margins / 2; // 1.5rem
-$site-margins-medium-plus: 	$site-margins-small * 2; // 2rem
-$site-margins-large: 		$site-margins * 2; // 6rem
-$side-margins-xlarge: 		$site-margins * 2.5; // 7.5rem
+$site-margins-medium: 		$site-margins-small * 2; // 2rem
+$site-margins-medium-plus: 	$site-margins-small * 2.5; // 2.5rem
+$site-margins-large: 		$site-margins-small * 3; // 3rem
+$side-margins-xlarge: 		$site-margins-small * 4; // 4rem
 $bbg-grid-gutter: 			2.35765%;
 
 

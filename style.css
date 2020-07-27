@@ -2905,7 +2905,7 @@ a:not(.bbg__article-share__icon):focus *[class*="thumbnail"] {
     background-color: transparent;
     color: #981b1e;
     display: block;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     padding: 0; }
     .bbg__label--mobile a {
       color: #981b1e; }
@@ -2922,7 +2922,7 @@ a:not(.bbg__article-share__icon):focus *[class*="thumbnail"] {
     text-transform: uppercase; }
     @media screen and (min-width: 481px) {
       .bbg__label--mobile.large, .bbg__label.large {
-        margin-bottom: 1.5rem; } }
+        margin-bottom: 2rem; } }
   .bbg__label--mobile.large {
     margin-bottom: 1rem; }
 
@@ -5818,7 +5818,7 @@ table th, table td {
   .bbg__article__form--inline td,
   .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__section--tile__table--borderless td {
     border: none;
-    padding: 0 1.5rem; }
+    padding: 0 2rem; }
 
 .bbg__table__money thead th {
   text-align: center; }
@@ -5929,9 +5929,9 @@ input[type="radio"] + label {
 
 @media screen and (min-width: 481px) {
   .bbg__article-content .alignleft {
-    margin-right: 1.5rem; }
+    margin-right: 2rem; }
   .bbg__article-content .alignright {
-    margin-left: 1.5rem; } }
+    margin-left: 2rem; } }
 
 /* Fixing the slignment on full-column photos in posts */
 .bbg__article-content .alignnone,
@@ -6059,7 +6059,7 @@ object {
   position: relative; }
 
 .bbg__main-navigation__search {
-  padding: 1.5rem; }
+  padding: 2rem; }
 
 .menu-usagm-container {
   position: absolute;
@@ -6674,7 +6674,7 @@ button#bbg__menu-toggle {
   margin-bottom: 3rem; }
   @media screen and (min-width: 600px) {
     .bbg__staff__author {
-      margin-bottom: 6rem; } }
+      margin-bottom: 3rem; } }
 
 .bbg__staff__author__text {
   width: 100%; }
@@ -6735,7 +6735,7 @@ button#bbg__menu-toggle {
 
 .bbg__staff__author-occupation {
   font-weight: 300;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   text-align: center;
   text-transform: uppercase; }
   @media screen and (min-width: 481px) {
@@ -6776,7 +6776,7 @@ button#bbg__menu-toggle {
   margin-top: 3rem; }
   @media screen and (min-width: 600px) {
     .bbg__article--no-featured-image {
-      margin-top: 6rem; } }
+      margin-top: 3rem; } }
 
 /* Post title */
 .bbg__article-header__title {
@@ -6797,7 +6797,7 @@ button#bbg__menu-toggle {
     .bbg__article-meta {
       font-size: 1.6rem;
       /*margin-bottom: $site-margins * 1.3;*/
-      margin-bottom: 1.5rem; } }
+      margin-bottom: 2rem; } }
   .bbg__article-meta .author {
     font-weight: 700;
     font-style: italic; }
@@ -6859,7 +6859,7 @@ button#bbg__menu-toggle {
   line-height: 1.3;
   text-transform: uppercase; }
   .bbg__article-content .bbg__article-content__subhead + .bbg__article-content__section-title {
-    margin-top: 1.5rem; }
+    margin-top: 2rem; }
 
 .bbg__article-content .bbg__article-content__section-title {
   color: #323a45;
@@ -6874,7 +6874,7 @@ button#bbg__menu-toggle {
   color: #323a45;
   font-size: 2rem;
   line-height: 1.3;
-  margin-top: 6rem;
+  margin-top: 3rem;
   margin-bottom: 0; }
 
 .bbg__article-content .bbg__article-content__image--extra-large {
@@ -6887,7 +6887,7 @@ button#bbg__menu-toggle {
   /* Assumes Questions are wrapped in <strong/> */ }
   .bbg__article-content .bbg__interview p strong {
     display: block;
-    margin-top: 1.5rem; }
+    margin-top: 2rem; }
     @media screen and (min-width: 600px) {
       .bbg__article-content .bbg__interview p strong {
         margin-top: 3rem; } }
@@ -7174,7 +7174,7 @@ ul.bbg__article-content__list--inline {
   max-width: 600px; }
 
 .bbg__article-footer {
-  margin-top: 6rem; }
+  margin-top: 3rem; }
 
 /* At the end of a post, add a small tagline credit for authors
 e.g. on the intern testimonial page */
@@ -7321,7 +7321,7 @@ e.g. on the intern testimonial page */
 
 .outer-container {
   max-width: 1200px;
-  margin: 0 auto 7.5rem auto; }
+  margin: 0 auto 4rem auto; }
   .outer-container::after {
     clear: both;
     content: "";
@@ -7738,7 +7738,7 @@ ol li:before {
     height: 45rem; }
 
 .bbg-header__container, .bbg-header__container--home {
-  padding-right: 6rem; }
+  padding-right: 3rem; }
   .bbg-header__container:after, .bbg-header__container--home:after {
     content: ".";
     display: block;
@@ -7810,7 +7810,7 @@ ol li:before {
 
 /* FILE CONTENTS */
 aside {
-  margin-bottom: 4rem; }
+  margin-bottom: 1rem; }
 
 .entity-press-release-group {
   margin-bottom: 6rem; }
@@ -8262,14 +8262,14 @@ img,
     color: #757575;
     font-size: 90%;
     margin-top: 0;
-    margin-bottom: 1.5rem; }
+    margin-bottom: 2rem; }
   .bbg__article-sidebar .bbg__article-sidebar__emphasis--italic {
     color: #5b616b;
     font-size: 1.6rem;
     font-style: italic; }
   .bbg__article-sidebar .bbg__article-sidebar__promo-photo {
     float: left;
-    margin-right: 1.5rem;
+    margin-right: 2rem;
     max-width: 140px;
     width: 50%; }
   .bbg__article-sidebar .bbg__sidebar__photo-caption {
@@ -8423,7 +8423,7 @@ img,
   text-transform: uppercase; }
 
 .bbg__excerpt-meta--featured {
-  margin-bottom: 1.5rem; }
+  margin-bottom: 2rem; }
 
 .bbg-blog__excerpt--featured {
   margin-bottom: 3rem; }
@@ -8433,7 +8433,7 @@ img,
     margin-bottom: 3rem; } }
 
 .bbg-blog__excerpt-title--featured {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   margin-bottom: 1rem; }
   @media screen and (min-width: 600px) {
     .bbg-blog__excerpt-title--featured {
@@ -8481,7 +8481,7 @@ img,
 .bbg__excerpt-header__thumbnail--small {
   display: block;
   float: left;
-  margin-right: 1.5rem;
+  margin-right: 2rem;
   max-width: 200px;
   width: 50%; }
 
@@ -8493,7 +8493,7 @@ img,
   border-top: 1px dotted #CCC;
   display: block;
   margin-top: 4rem;
-  padding-top: 1.5rem; }
+  padding-top: 2rem; }
   @media screen and (min-width: 600px) {
     .tertiary-stories {
       border-top: none;
@@ -8511,7 +8511,7 @@ img,
       .tertiary-stories .bbg__excerpt__event-date:after {
         content: " | "; } }
   .tertiary-stories .nav-previous {
-    margin-top: 1.5rem; }
+    margin-top: 2rem; }
   @media screen and (min-width: 900px) {
     .tertiary-stories {
       border-top: none;
@@ -8711,7 +8711,7 @@ div.banner_readmore h6 a:visited {
 
 .bbg__quotation .bbg__quotation-attribution {
   font-family: "Alegreya Sans", sans-serif;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: table-row; }
   @media screen and (min-width: 900px) {
     .bbg__quotation .bbg__quotation-attribution {
@@ -8738,7 +8738,7 @@ div.banner_readmore h6 a:visited {
 .bbg__quotation.bbg-grid--1-3-3 {
   background-color: #f1f1f1;
   border-radius: 0.3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   padding: 2rem; }
   .bbg__quotation.bbg-grid--1-3-3 .bbg__quotation-text--large {
     font-weight: 500;
@@ -8763,7 +8763,7 @@ div.banner_readmore h6 a:visited {
 .usa-width-one-third .bbg__quotation {
   background-color: #f1f1f1;
   border-radius: 0.3rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   padding: 2rem; }
   .usa-width-one-third .bbg__quotation .bbg__quotation-label {
     color: white;
@@ -8799,7 +8799,7 @@ div.banner_readmore h6 a:visited {
       font-size: 1rem; } }
 
 .bbg__entity__pullquote {
-  margin-top: 6rem;
+  margin-top: 3rem;
   margin-right: 20px;
   margin-left: 20px; }
 
@@ -8953,7 +8953,7 @@ div.banner_readmore h6 a:visited {
     .bbg__board__committee-list li:after {
       display: none; }
   .bbg__board__committee-list li {
-    margin-bottom: 1.5rem; }
+    margin-bottom: 2rem; }
 
 .bbg__ribbon--thin {
   background-color: #323a45;
@@ -9069,7 +9069,7 @@ div.banner_readmore h6 a:visited {
 
 .bbg__ribbon {
   background-color: #f3f3f3;
-  margin-bottom: 2rem; }
+  margin-bottom: 2.5rem; }
   .bbg__ribbon *[style*="background-image"] {
     background-repeat: no-repeat;
     background-size: cover;
@@ -9537,7 +9537,7 @@ section.usa-section.bbg-banner__section {
 .bbg__jobs__table {
   font-size: 90%;
   margin-top: 0;
-  margin-bottom: 6rem; }
+  margin-bottom: 3rem; }
   .bbg__jobs__table td,
   .bbg__jobs__table th {
     padding-left: 0; }
@@ -9693,7 +9693,7 @@ section.usa-section.bbg-banner__section {
   .bbg__contact-card.bbg__contact-card--include-map {
     padding: 0; }
     .bbg__contact-card.bbg__contact-card--include-map .bbg__contact-card__text {
-      padding: 1.5rem;
+      padding: 2rem;
       width: 100%; }
       @media screen and (min-width: 600px) {
         .bbg__contact-card.bbg__contact-card--include-map .bbg__contact-card__text {
@@ -9858,7 +9858,7 @@ section.usa-section.bbg-banner__section {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 2rem; }
   .bbg__profile__related-link__list li {
     display: list-item;
     margin: 0; }
@@ -9889,10 +9889,10 @@ section.usa-section.bbg-banner__section {
     direction: rtl; }
   @media screen and (min-width: 900px) {
     .bbg__rss__list .bbg__rss__list-link {
-      margin-bottom: 1.5rem; } }
+      margin-bottom: 2rem; } }
 
 .bbg__article-sidebar__aside {
-  margin-bottom: 6rem; }
+  margin-bottom: 3rem; }
 
 .category-board-meeting .bbg__article-header {
   margin-bottom: 0; }
@@ -10465,11 +10465,11 @@ a.bbg__kits__intro__more--link {
       margin: 0 1rem 0 0;
       right: 1.2rem; }
   .bbg__kits__section .bbg__contact-card .bbg__kits__contacts {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     margin-bottom: 0; }
 
 .bbg__kits__section .bbg__kits__section--row {
-  margin-bottom: 6rem; }
+  margin-bottom: 3rem; }
   .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile {
     display: block;
     min-height: 15rem;
@@ -10479,7 +10479,7 @@ a.bbg__kits__intro__more--link {
       display: block;
       background-color: #f1f1f1;
       border-radius: 0.3rem;
-      padding: 1.5rem; }
+      padding: 2rem; }
       .bbg__kits__section .bbg__kits__section--row .bbg__kits__section--tiles .bbg__kits__section--tile .bbg__kits__pitch--rev p {
         color: #981b1e;
         font-family: "Alegreya Sans", sans-serif;
@@ -10616,11 +10616,11 @@ a.bbg__kits__intro__more--link {
       padding-top: 0; }
       .bbg__kits__section .bbg__kits__section--row.bbg__ribbon--thin .bbg__announcement__flexbox .bbg__announcement__headline,
       .bbg__kits__section .bbg__kits__section--row.bbg__ribbon--thin .bbg__announcement__flexbox p {
-        padding-right: 2rem;
-        padding-left: 2rem; }
+        padding-right: 2.5rem;
+        padding-left: 2.5rem; }
       .bbg__kits__section .bbg__kits__section--row.bbg__ribbon--thin .bbg__announcement__flexbox .bbg__announcement__container--button {
-        margin-top: -1.5rem;
-        margin-bottom: 1.5rem;
+        margin-top: -2rem;
+        margin-bottom: 2rem;
         padding-right: 10%;
         text-align: right;
         width: 100%; }
@@ -11266,7 +11266,7 @@ html, body {
   .bbg__map-area__text .bbg__map__entity-global {
     font-family: "Carrara-Regular", serif;
     font-weight: 700;
-    margin-top: 2rem; }
+    margin-top: 2.5rem; }
   @media screen and (min-width: 600px) {
     .bbg__map-area__text .bbg__map-area__country-name {
       font-size: 2.5rem; } }

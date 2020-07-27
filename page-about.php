@@ -270,7 +270,7 @@ get_header();
 	$body_copy .= 		'<h2 class="section-header">' . get_the_title() . '</h2>';
 	$body_copy .= 	'</div>';
 	if ($page_content != "") {
-		$body_copy .= '<div class="grid-container page-content">';
+		$body_copy .= '<div class="grid-container">';
 		$body_copy .= 	$page_content;
 		$body_copy .= '</div>';
 	}
@@ -289,7 +289,7 @@ get_header();
 		$office_highlights_module = assemble_office_highlights_module($office_highlights_parts_result);
 
 		$office_information_chuncks  = '<div class="outer-container office-page">';
-		$office_information_chuncks .= 	'<div class="custom-grid-container">';
+		$office_information_chuncks .= 	'<div>';
 		$office_information_chuncks .= 		'<div class="inner-container">';
 		$office_information_chuncks .= 			'<div class="main-content-container">';
 		$office_information_chuncks .= 				$office_intro_result;
