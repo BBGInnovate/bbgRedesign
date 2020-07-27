@@ -656,6 +656,10 @@
     @include cardLayoutGroup(2, 2, 'full');
 }
 
+.cards--size-1-2-large {
+    @include cardLayoutGroup(1, 1, 'full');
+}
+
 .cards--size-1-3-small {
     @include cardLayoutGroup(3, 3, 'full');
 }
@@ -766,6 +770,10 @@
         @include cardLayoutGroup(1, 2, 'half');
     }
 
+    .cards--size-1-2-large {
+        @include cardLayoutGroup(1, 2, 'full');
+    }
+
     .cards--size-1-3-small {
         @include cardLayoutGroup(3, 3, 'full');
     }
@@ -868,6 +876,10 @@
 
     .cards--size-1-2-medium {
         @include cardLayoutGroup(1, 2, 'half');
+    }
+
+    .cards--size-1-2-large {
+        @include cardLayoutGroup(1, 2, 'full');
     }
 
     .cards--size-1-3-small {
