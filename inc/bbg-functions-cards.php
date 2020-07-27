@@ -417,6 +417,32 @@ function getRowsDataFlexText() {
     return $card;
 }
 
+function getOperationsMapData() {
+    $data = '';
+    $data .= getNetworkExcerptJS();
+    $data .= getMapData();
+    $data .= getMapScripts();
+    $data .= getMapMarkup();
+
+    return $data;
+}
+
+function getRowsDataWidget() {
+    $card = array();
+
+    $widgetType = get_sub_field('type');
+    switch($widgetType) {
+        case 'operations_map':
+            $card['data'] = getOperationsMapData();
+            break;
+        default:
+            $card['data'] = '';
+            break;
+    }
+
+    return $card;
+}
+
 function getCardsRowsData($postId) {
 
     $cardsRows = array();
@@ -462,6 +488,9 @@ function getCardsRowsData($postId) {
                             break;
                         case 'flex_text':
                             $card = getRowsDataFlexText();
+                            break;
+                        case 'widget':
+                            $card = getRowsDataWidget();
                             break;
                     }
 
@@ -724,6 +753,11 @@ function createFlexText($card) {
             }
 
             break;
+
+        case 'widget':
+            $result .= $card['data'];
+            break;
+
         default:
             break;
     }
@@ -767,10 +801,12 @@ function getCardsLayout($cardsRows) {
                 $result .=                  createBackground($card);
                 $result .=                  createWatermark($card);
                 $result .= '            </div>';
-                $result .= '            <div class="cards__header ' . $verticalAlignment . '">';
-                $result .=                  createDate($card);
-                $result .=                  createHeaderTitle($card);
-                $result .= '            </div>';
+                if ($card['type'] != 'widget') {
+                    $result .= '        <div class="cards__header ' . $verticalAlignment . '">';
+                    $result .=              createDate($card);
+                    $result .=              createHeaderTitle($card);
+                    $result .= '        </div>';
+                }
                 $result .=              createFooter($card);
                 $result .= '        </div>';
                 $result .= '    </div>';

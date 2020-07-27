@@ -53,7 +53,7 @@ function outputTerm($t, $headerTag) {
 	echo "<br /><br />";
 }
 
-function getMapData() {
+function getTheMapData() {
 	$networks = array();
 	$terms = get_terms(  "language_services" , array('hide_empty' => false));
 	if ($terms) {
@@ -75,7 +75,7 @@ get_header(); ?>
 
 <main id="main" role="main">
 	<div class="usa-grid-full">
-		<?php getMapData(); ?>
+		<?php getTheMapData(); ?>
 	</div>
 </main>
 
