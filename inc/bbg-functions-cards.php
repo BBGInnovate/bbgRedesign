@@ -417,7 +417,7 @@ function getRowsDataFlexText() {
     return $card;
 }
 
-function getCardsRowsData($postId = null) {
+function getCardsRowsData($postId) {
 
     $cardsRows = array();
     if (have_rows('cards_rows', $postId)) {
@@ -788,7 +788,7 @@ function getCardsLayout($cardsRows) {
     return $result;
 }
 
-function getCardsRows($postId) {
+function getCardsRows($postId = null) {
     $cardsRowsData = getCardsRowsData($postId);
     $cardsLayout = getCardsLayout($cardsRowsData);
     return $cardsLayout;
