@@ -154,24 +154,6 @@ $(window).on('resize', function() {
 	setMegaNav();
 });
 
-
-// SUB NAV MENU HOVER CONNECTORS
-// Highlight parent nav item when hovering on child
-$('.sub-menu li').hover(function() {
-	$(this).parent().parent().children('a').css('color', '#999999');
-}, function() {
-	$(this).parent().parent().children('a').css('color', 'inherit');
-});
-/*
- *  This breaks css hover functionality after first run for each <ul>
- *  Must reassign hover functionality via js
- */
-$('.menu-item-has-children').hover(function() {
-	$(this).children('a').css('color', '#999999');
-}, function() {
-	$(this).children('a').css('color', '#323a45');
-});
-
 }); // END READY
 })(jQuery);
 
