@@ -766,7 +766,7 @@ function createFlexText($card) {
 }
 
 function getCardsLayout($cardsRows) {
-    $result = '';
+    $result = '<div class="cards--container">';
 
     foreach($cardsRows as $cardsRow) {
         $gutterSize = $cardsRow['cards_gutter_size'];
@@ -819,6 +819,8 @@ function getCardsLayout($cardsRows) {
         }
         $result .= '</div>';
     }
+
+    $result .= '</div>';
 
 	$result = do_shortcode($result);
     return $result;
