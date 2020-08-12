@@ -75,6 +75,45 @@ if ($('.sidebar-section').length > 0) {
 	});
 }
 
+// Align the sidebar top to the main content
+function setSidebarMarginTop() {
+	if (window.innerWidth >= 900) {
+
+		// Posts
+		const singlePostHeight = $('.single-post .main-column header').outerHeight(true) ?? 0;
+		if (singlePostHeight != 0) {
+			const extraHeight = 7;
+			$('.side-column').css('margin-top', singlePostHeight + extraHeight);
+		}
+
+		// Default pages
+		const pageDefaultHeight = $('.page-template-default .main-content-container .section-header').outerHeight(true) ?? 0;
+		const pageDefaultLeadInHeight = $('.page-template-default .main-content-container .lead-in').outerHeight(true) ?? 0;
+		if (pageDefaultHeight != 0) {
+			$('.side-content-container').css('margin-top', pageDefaultHeight + pageDefaultLeadInHeight);
+		}
+
+		// Entity page
+		const pageEntityHeight = $('.page-template-page-entity .icon-main-content-container .section-header').outerHeight(true) ?? 0;
+		const pageEntityLeadInHeight = $('.page-template-page-entity .icon-main-content-container .lead-in').outerHeight(true) ?? 0;
+		if (pageEntityHeight != 0) {
+			$('.side-content-container').css('margin-top', pageEntityHeight + pageEntityLeadInHeight);
+		}
+
+		// Profile Expanded page
+		const pageProfileExpandedHeight = $('.page-template-page-profile-expanded .icon-main-content-container .section-header').outerHeight(true) ?? 0;
+		const pageProfileExpandedLeadInHeight = $('.page-template-page-profile-expanded .icon-main-content-container .lead-in').outerHeight(true) ?? 0;
+		if (pageProfileExpandedHeight != 0) {
+			$('.side-content-container').css('margin-top', pageProfileExpandedHeight + pageProfileExpandedLeadInHeight);
+		}
+
+	} else {
+		$('.side-content-container').css('margin-top', 0);
+		$('.side-column').css('margin-top', 0);
+	}
+}
+setSidebarMarginTop();
+$(window).resize(setSidebarMarginTop);
 
 // FIVE GRID BOX MODULE: Hover
 if ($('.grid-box-chunk').length > 0) {
