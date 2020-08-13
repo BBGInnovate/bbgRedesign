@@ -230,6 +230,18 @@
                     width: 100%;
                     height: 100%;
                     margin-bottom: 0px; // Override default
+
+                    &.image-position- {
+                        &left-top { object-position: left top; }
+                        &left-center { object-position: left center; }
+                        &left-bottom { object-position: left bottom; }
+                        &center-top { object-position: center top; }
+                        &center-center { object-position: center center; }
+                        &center-bottom { object-position: center bottom; }
+                        &right-top { object-position: right top; }
+                        &right-center { object-position: right center; }
+                        &right-bottom { object-position: right bottom; }
+                    }
                 }
 
                 .cards__backdrop-logo {

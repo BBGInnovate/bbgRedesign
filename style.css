@@ -3584,6 +3584,24 @@ a:focus .bbg__article-share__icon {
           width: 100%;
           height: 100%;
           margin-bottom: 0px; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-left-top {
+            object-position: left top; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-left-center {
+            object-position: left center; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-left-bottom {
+            object-position: left bottom; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-center-top {
+            object-position: center top; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-center-center {
+            object-position: center center; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-center-bottom {
+            object-position: center bottom; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-right-top {
+            object-position: right top; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-right-center {
+            object-position: right center; }
+          .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-right-bottom {
+            object-position: right bottom; }
         .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-logo {
           position: absolute;
           z-index: 1;

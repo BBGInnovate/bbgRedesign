@@ -13,12 +13,15 @@ function getTitlePartsFromPost($wpPost) {
     return $post;
 }
 
-function getBackgroundImagePartsFromPost($postArg) {
+function getBackgroundImagePartsFromPost($postArg, $imageAlignment = null) {
     if (empty($postArg)) {
         return array();
     }
 
     $classArray = array('class' => 'cards__backdrop--image');
+    if ($imageAlignment != null) {
+        $classArray['class'] .= (' image-position-' . $imageAlignment);
+    }
     $wpPost = $postArg[0];
     $post = array();
     if ($wpPost->post_type == 'experts') {
@@ -254,7 +257,14 @@ function parseBackgroundGroup($backgroundGroup) {
 
     $hoverImage = getImageSrcFromImage($backgroundGroup['hover_image'] ?? '', $dimensions);
 
-    $result['image'] = getImageTagFromImage($backgroundGroup['image'] ?? '', $dimensions);
+    $attr = array();
+
+    if (array_key_exists('image_alignment', $backgroundGroup)) {
+        $imageAlignment = $backgroundGroup['image_alignment'];
+        $attr['class'] = 'image-position-' . $imageAlignment;
+    }
+
+    $result['image'] = getImageTagFromImage($backgroundGroup['image'] ?? '', $dimensions, $attr);
     $result['hover_image'] = getImageTagFromImage($backgroundGroup['hover_image'] ?? '', $dimensions, array('class' => 'hidden'));
 
     $result['url'] = $backgroundGroup['url'] ?? '';
@@ -318,7 +328,8 @@ function parsePostGroup($postGroup) {
         $card['title']['text'] = $postGroup['title_override'];
     }
 
-    $card['background'] = getBackgroundImagePartsFromPost($postField);
+    $imageAlignment = $postGroup['image_alignment'] ?? null;
+    $card['background'] = getBackgroundImagePartsFromPost($postField, $imageAlignment);
 
     $card['date'] = getDateFromPost($postField);
     if ($postGroup['include_excerpt'] == true) {
