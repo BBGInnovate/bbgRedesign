@@ -696,6 +696,22 @@ function createFooter($card) {
 
     $result = '';
     $result .= '            <div class="cards__footer">';
+    $result .= '                <h3>';
+    $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
+    $result .= '                </h3>';
+    $result .= '            </div>';
+
+    return $result;
+}
+
+function createTag($card) {
+    if (empty($card) || empty($card['tag'])) {
+        return '';
+    }
+
+    $tag = $card['tag'];
+
+    $result = '';
     if (!empty($tag['text'])) {
         $result .= '                <div class="cards__tag">';
         if (!empty($tag['url'])) {
@@ -705,9 +721,18 @@ function createFooter($card) {
         }
         $result .= '                </div>';
     }
-    $result .= '                <h3>';
-    $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
-    $result .= '                </h3>';
+
+    return $result;
+}
+
+function createOverlay($card) {
+
+    $result = '';
+    $result .= '            <div class="cards__overlay">';
+
+    $result .= createTag($card);
+    $result .= createWatermark($card);
+
     $result .= '            </div>';
 
     return $result;
@@ -808,10 +833,10 @@ function getCardsLayout($cardsRows) {
                 $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
                 $result .= '    <div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
                 $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') .  '">';
-                $result .= '        <div class="cards__backdrop">';
+                $result .= '            <div class="cards__backdrop">';
                 $result .=                  createBackground($card);
-                $result .=                  createWatermark($card);
                 $result .= '            </div>';
+                $result .=              createOverlay($card);
                 if ($card['type'] != 'widget') {
                     $result .= '        <div class="cards__header ' . $verticalAlignment . '">';
                     $result .=              createDate($card);

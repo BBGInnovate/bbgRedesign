@@ -244,27 +244,6 @@
                     }
                 }
 
-                .cards__backdrop-logo {
-                    position: absolute;
-                    z-index: 1;
-                    bottom: 12px;
-                    right: 12px;
-                    width: 28px;
-                    height: 28px;
-
-                    a {
-                        display: block;
-
-                        img {
-                            display: block;
-                            margin-bottom: -10px; // Override default
-                            width: 28px;
-                            height: 28px;
-                            opacity: 0.6;
-                        }
-                    }
-                }
-
                 .cards__backdrop-shadow {
                     pointer-events: none;
                     height: 100%;
@@ -364,21 +343,6 @@
                 width: 90%;
                 padding: 16px;
 
-                .cards__tag {
-                    background-color: $color-red;
-                    display: inline-block;
-                    padding: 3px 5px;
-                    border: 1px solid white;
-                    margin-bottom: .5em;
-                    font-size: .8em;
-                    color: $color-white;
-
-                    a {
-                        color: $color-white;
-                        text-decoration: none;
-                    }
-                }
-
                 h3 {
                     margin: 0 0 -6px 0;
                     padding: 0;
@@ -399,6 +363,55 @@
                     font-size: 1em;
                     line-height: 2rem;
                 }
+            }
+
+            .cards__overlay {
+                display: none;
+                position: absolute;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                background-color: rgba(0,0,0,.3);
+
+                .cards__tag {
+                    display: inline-block;
+                    pointer-events:all;
+                    background-color: $color-red;
+                    padding: 3px 5px;
+                    border: 1px solid white;
+                    margin-top: 16px;
+                    margin-left: 16px;
+                    font-size: 18px;
+                    color: $color-white;
+
+                    a {
+                        color: $color-white;
+                        text-decoration: none;
+                    }
+                }
+
+                .cards__backdrop-logo {
+                    position: absolute;
+                    z-index: 1;
+                    top: 16px;
+                    right: 16px;
+                    width: 32px;
+                    height: 32px;
+                    pointer-events:all;
+
+                    a {
+                        display: block;
+
+                        img {
+                            display: block;
+                            margin-bottom: -10px; // Override default
+                            width: 32px;
+                            height: 32px;
+                            opacity: 0.6;
+                        }
+                    }
+                }
+
             }
         }
     }
@@ -486,7 +499,7 @@
                         width: 100%;
 
                         .cards__tag {
-                            border: 1px solid #777;
+                            // border: 1px solid #777;
                         }
 
                         h3 {
@@ -549,10 +562,6 @@
             .cards__fixed {
                 .cards__wrapper {
                     .cards__footer {
-                        .cards__tag {
-                            border: 1px solid #ffffff;
-                        }
-
                         p {
                             display: -webkit-box;
                             overflow: hidden;
@@ -922,6 +931,5 @@
     .cards--size-3-12-medium {
         @include cardLayoutGroup(3, 12, 'half');
     }
-
 
 }

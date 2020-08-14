@@ -474,6 +474,19 @@ function initializeMasonryGrid() {
 }
 initializeMasonryGrid();
 
+function handleCardHoverOverlay() {
+	const fadeSpeed = 300;
+	$('.cards--layout-general .cards__backdrop, .cards--layout-header .cards__backdrop').mouseenter(function() {
+		const overlay = $(this).siblings('.cards__overlay');
+		overlay.fadeIn(fadeSpeed);
+	});
+
+	$('.cards--layout-general .cards__overlay, .cards--layout-header .cards__overlay').mouseleave(function() {
+		$(this).fadeOut(fadeSpeed);
+	});
+}
+handleCardHoverOverlay();
+
 function handleImageCardHover() {
 	let fadeSpeed = 300;
 	$('.cards--layout-image a').hover(function() {

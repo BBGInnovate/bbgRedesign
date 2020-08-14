@@ -3602,21 +3602,6 @@ a:focus .bbg__article-share__icon {
             object-position: right center; }
           .cards .cards__fixed .cards__wrapper .cards__backdrop img.image-position-right-bottom {
             object-position: right bottom; }
-        .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-logo {
-          position: absolute;
-          z-index: 1;
-          bottom: 12px;
-          right: 12px;
-          width: 28px;
-          height: 28px; }
-          .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-logo a {
-            display: block; }
-            .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-logo a img {
-              display: block;
-              margin-bottom: -10px;
-              width: 28px;
-              height: 28px;
-              opacity: 0.6; }
         .cards .cards__fixed .cards__wrapper .cards__backdrop .cards__backdrop-shadow {
           pointer-events: none;
           height: 100%;
@@ -3674,17 +3659,6 @@ a:focus .bbg__article-share__icon {
         bottom: 0;
         width: 90%;
         padding: 16px; }
-        .cards .cards__fixed .cards__wrapper .cards__footer .cards__tag {
-          background-color: #b5231d;
-          display: inline-block;
-          padding: 3px 5px;
-          border: 1px solid white;
-          margin-bottom: .5em;
-          font-size: .8em;
-          color: #ffffff; }
-          .cards .cards__fixed .cards__wrapper .cards__footer .cards__tag a {
-            color: #ffffff;
-            text-decoration: none; }
         .cards .cards__fixed .cards__wrapper .cards__footer h3 {
           margin: 0 0 -6px 0;
           padding: 0;
@@ -3700,6 +3674,42 @@ a:focus .bbg__article-share__icon {
           padding: 0;
           font-size: 1em;
           line-height: 2rem; }
+      .cards .cards__fixed .cards__wrapper .cards__overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.3); }
+        .cards .cards__fixed .cards__wrapper .cards__overlay .cards__tag {
+          display: inline-block;
+          pointer-events: all;
+          background-color: #b5231d;
+          padding: 3px 5px;
+          border: 1px solid white;
+          margin-top: 16px;
+          margin-left: 16px;
+          font-size: 18px;
+          color: #ffffff; }
+          .cards .cards__fixed .cards__wrapper .cards__overlay .cards__tag a {
+            color: #ffffff;
+            text-decoration: none; }
+        .cards .cards__fixed .cards__wrapper .cards__overlay .cards__backdrop-logo {
+          position: absolute;
+          z-index: 1;
+          top: 16px;
+          right: 16px;
+          width: 32px;
+          height: 32px;
+          pointer-events: all; }
+          .cards .cards__fixed .cards__wrapper .cards__overlay .cards__backdrop-logo a {
+            display: block; }
+            .cards .cards__fixed .cards__wrapper .cards__overlay .cards__backdrop-logo a img {
+              display: block;
+              margin-bottom: -10px;
+              width: 32px;
+              height: 32px;
+              opacity: 0.6; }
   .cards .cards__flexible .cards__flex-text {
     font-size: 20px;
     font-weight: bold; }
@@ -3737,8 +3747,6 @@ a:focus .bbg__article-share__icon {
     .cards.cards--layout-split .cards__fixed .cards__wrapper .cards__footer {
       position: relative;
       width: 100%; }
-      .cards.cards--layout-split .cards__fixed .cards__wrapper .cards__footer .cards__tag {
-        border: 1px solid #777; }
       .cards.cards--layout-split .cards__fixed .cards__wrapper .cards__footer h3 {
         font-size: 1.8rem;
         line-height: 1em;
@@ -3769,8 +3777,6 @@ a:focus .bbg__article-share__icon {
       transform: translate(-50%, -50%); }
       .cards.cards--layout-image .cards__fixed .cards__wrapper .cards__backdrop img.hidden {
         display: none; }
-  .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer .cards__tag {
-    border: 1px solid #ffffff; }
   .cards.cards--layout-video_internal .cards__fixed .cards__wrapper .cards__footer p {
     display: -webkit-box;
     overflow: hidden;
