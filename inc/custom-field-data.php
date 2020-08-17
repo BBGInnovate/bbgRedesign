@@ -491,6 +491,7 @@ function get_umbrella_content_data($umbrella_content_type, $umbrella_column_grou
 		if ($thumb_src) {
 			$thumb_src = $thumb_src[0];
 		}
+		$doNotScaleToHd = get_sub_field('umbrella_content_external_do_not_scale_to_hd');
 	}
 	elseif ($umbrella_content_type == 'umbrella_content_file') {
 		$column_title = get_sub_field('umbrella_content_file_column_title');
@@ -505,6 +506,7 @@ function get_umbrella_content_data($umbrella_content_type, $umbrella_column_grou
 		if ($thumb_src) {
 			$thumb_src = $thumb_src[0];
 		}
+		$doNotScaleToHd = get_sub_field('umbrella_content_file_do_not_scale_to_hd');
 
 		$file_id = $file_object['ID'];
 		$fileURL = $file_object['url'];
@@ -524,6 +526,7 @@ function get_umbrella_content_data($umbrella_content_type, $umbrella_column_grou
 		'description' => $description,
 		'link' => $link, 
 		'thumb_src' => $thumb_src,
+		'do_not_scale_to_hd' => ($doNotScaleToHd ?? false),
 		'grid_class' => $grid_class,
 		'force_content_labels' => $force_content_labels,
 		'column_type' => $umbrella_content_type,
