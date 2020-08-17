@@ -127,7 +127,7 @@ $icon-content-grid: (
 .grid-half {@include grid-column(12);}
 .grid-third {@include grid-column(12);}
 .grid-four {@include grid-column(12); margin-right: 0;}
-.grid-five {margin-left: 20px;}
+.grid-five {@include grid-column(12);}
 @include media($medium-screen) {
 	.grid-half {@include grid-column(12);}
 	.grid-third {@include grid-column(12); clear: none;}
