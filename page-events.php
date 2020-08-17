@@ -111,7 +111,8 @@ if (!is_paged()) {
 	$upcomingEvents .= '<h3 class="section-subheader events-header">Upcoming Events</h3>';
 
 	if ($future_events_query->have_posts()) {
-		$upcomingEvents .= '<div class="inner-container css--grid-3">';
+		$upcomingEvents .= '<div class="cards--container">';
+		$upcomingEvents .= '    <div class="inner-container css--grid-3">';
 		while ($future_events_query->have_posts()) {
 			$future_events_query->the_post(); 
 			global $post;
@@ -122,6 +123,7 @@ if (!is_paged()) {
 
 			$upcomingEvents .= getCard($permalink, has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
 		}
+		$upcomingEvents .= '    </div>';
 		$upcomingEvents .= '</div>';
 	} else {
 		$upcomingEvents .= '<div>';
@@ -152,12 +154,14 @@ if ($past_events_query->found_posts > $numPostsFirstPage) {
 $pastEvents = '';
 if ($past_events_query->have_posts()) {
 	$pastEvents .= '<h3 class="section-subheader events-header">Past Events</h3>';
-	$pastEvents .= '<div class="inner-container css--grid-3">';
+	$pastEvents .= '<div class="cards--container">';
+	$pastEvents .= '    <div class="inner-container css--grid-3">';
 	while ($past_events_query->have_posts()) {
 		$past_events_query->the_post();
 
 		$pastEvents .= getCard(get_permalink(), has_post_thumbnail(), get_the_ID(), get_the_title(), get_the_date(), get_the_excerpt());
 	}
+	$pastEvents .= '    </div>';
 	$pastEvents .= '</div>';
 }
 
