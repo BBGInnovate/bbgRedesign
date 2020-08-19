@@ -393,7 +393,7 @@ function getRowsDataVideoInternal() {
 function getRowsDataVideoYouTube() {
     $card = array();
 
-    $card['video']['url'] = get_sub_field('url');
+    $card['video']['url'] = get_sub_field('url') . '?rel=0';
 
     return $card;
 }
