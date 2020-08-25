@@ -667,11 +667,6 @@ function createHeaderTitle($card) {
                     $alignment .= ' align-' . $title['alignment'];
                 }
 
-                $padding = '';
-                if (!empty($title['padding'])) {
-                    $padding .= ' padding-' . $title['padding'];
-                }
-
                 $size = '';
                 if (!empty($title['size'])) {
                     $size .= ' font-size-' . $title['size'];
@@ -686,7 +681,7 @@ function createHeaderTitle($card) {
 
                 $color = ' ' . $title['color'];
 
-                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $padding . $color . $size . $dynamicTextFit . '" ' . $dynamicTextFitSizing . '>';
+                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $color . $size . $dynamicTextFit . '" ' . $dynamicTextFitSizing . '>';
                 if (!empty($title['url'])) {
                     $result .= '                    <a class="' . $color .'" href="' . $title['url'] . '">' . $title['text'] . '</a>';
                 } else {
@@ -852,6 +847,10 @@ function getCardsLayout($cardsRows) {
                 if (!empty($card['title']['vertical_alignment'])) {
                     $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
                 }
+                $headerPadding = '';
+                if (!empty($card['title']['padding'])) {
+                    $headerPadding .= ' padding-' . $card['title']['padding'];
+                }
                 $card['sizing'] = array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'];
                 $result .= '<div id="cards-card-' . $cardNumber++ . '" class="cards cards--layout-' . $card['type'] . ' cards--size-' . $card['sizing'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
                 $result .= '    <div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
@@ -861,7 +860,7 @@ function getCardsLayout($cardsRows) {
                 $result .= '            </div>';
                 $result .=              createOverlay($card);
                 if ($card['type'] != 'widget') {
-                    $result .= '        <div class="cards__header ' . $verticalAlignment . '">';
+                    $result .= '        <div class="cards__header ' . $headerPadding . $verticalAlignment . '">';
                     $result .=              createDate($card);
                     $result .=              createHeaderTitle($card);
                     $result .= '        </div>';
