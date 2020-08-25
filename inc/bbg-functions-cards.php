@@ -242,6 +242,7 @@ function parseTextGroup($titleGroup) {
     $result['family'] = $titleGroup['family'] ?? '';
     $result['color'] = getColorParts($titleGroup['color'] ?? '', false);
     $result['alignment'] = $titleGroup['alignment'] ?? '';
+    $result['padding'] = $titleGroup['padding'] ?? false;
     $result['vertical_alignment'] = $titleGroup['vertical_alignment'] ?? '';
     $result['dynamic_text_fit'] = $titleGroup['dynamic_text_fit'] ?? false;
 
@@ -665,6 +666,11 @@ function createHeaderTitle($card) {
                     $alignment .= ' align-' . $title['alignment'];
                 }
 
+                $padding = '';
+                if (!empty($title['padding'])) {
+                    $padding .= ' padding-' . $title['padding'];
+                }
+
                 $size = '';
                 if (!empty($title['size'])) {
                     $size .= ' font-size-' . $title['size'];
@@ -679,7 +685,7 @@ function createHeaderTitle($card) {
 
                 $color = ' ' . $title['color'];
 
-                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $color . $size . $dynamicTextFit . '" ' . $dynamicTextFitSizing . '>';
+                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $padding . $color . $size . $dynamicTextFit . '" ' . $dynamicTextFitSizing . '>';
                 if (!empty($title['url'])) {
                     $result .= '                    <a class="' . $color .'" href="' . $title['url'] . '">' . $title['text'] . '</a>';
                 } else {

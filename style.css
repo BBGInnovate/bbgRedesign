@@ -3613,7 +3613,6 @@ a:focus .bbg__article-share__icon {
         position: absolute;
         width: 100%;
         top: 0;
-        padding: 16px;
         color: #fff; }
         .cards .cards__fixed .cards__wrapper .cards__header.align-vertical-middle {
           height: 100%;
@@ -3635,6 +3634,12 @@ a:focus .bbg__article-share__icon {
           .cards .cards__fixed .cards__wrapper .cards__header h3.align-vertical-middle {
             display: table-cell;
             vertical-align: middle; }
+          .cards .cards__fixed .cards__wrapper .cards__header h3.padding-normal {
+            padding: 16px; }
+          .cards .cards__fixed .cards__wrapper .cards__header h3.padding-large {
+            padding: 32px; }
+          .cards .cards__fixed .cards__wrapper .cards__header h3.padding-xlarge {
+            padding: 64px; }
           .cards .cards__fixed .cards__wrapper .cards__header h3.font-size-tiny {
             font-size: 1.3rem;
             line-height: 1.8rem; }
