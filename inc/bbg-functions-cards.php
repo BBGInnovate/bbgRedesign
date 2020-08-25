@@ -850,6 +850,8 @@ function getCardsLayout($cardsRows) {
                 $headerPadding = '';
                 if (!empty($card['title']['padding'])) {
                     $headerPadding .= ' padding-' . $card['title']['padding'];
+                } else {
+                    $headerPadding .= ' padding-normal';
                 }
                 $card['sizing'] = array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'];
                 $result .= '<div id="cards-card-' . $cardNumber++ . '" class="cards cards--layout-' . $card['type'] . ' cards--size-' . $card['sizing'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
