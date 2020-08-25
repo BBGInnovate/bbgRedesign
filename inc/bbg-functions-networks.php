@@ -39,8 +39,10 @@ function getNetworkExcerptJS() {
 		}
 	}
 	wp_reset_postdata();
+	$usagmDescription = get_field('site_setting_usagm_description', 'options', 'false');
+	$usagmDescription = do_shortcode($usagmDescription);
 	$entity_group['usagm'] = array(
-		'description' => 'The five networks of the BBG are trusted news sources, providing high-quality journalism and programming to more than 278 million people each week. They provide international, U.S. and local news in more than 100 countries and in 59 languages.',
+		'description' => $usagmDescription,
 		'url' => 'https://www.usagm.gov',
 		'fullName' => 'U.S. Agency for Global Media'
 	);
