@@ -156,8 +156,6 @@ function getWatermarkParts($watermark) {
             break;
 
         default:
-            $result['image'] = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
-            $result['url'] = get_home_url();
             break;
     }
 
@@ -741,13 +739,17 @@ function createTag($card) {
 }
 
 function createOverlay($card) {
+    $tag = createTag($card);
+    $watermark = createWatermark($card);
+
+    if (empty($tag) && empty($watermark)) {
+        return '';
+    }
 
     $result = '';
     $result .= '            <div class="cards__overlay">';
-
-    $result .= createTag($card);
-    $result .= createWatermark($card);
-
+    $result .= $tag;
+    $result .= $watermark;
     $result .= '            </div>';
 
     return $result;
