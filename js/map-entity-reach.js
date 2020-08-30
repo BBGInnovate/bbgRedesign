@@ -253,7 +253,11 @@ function shadeColor(color, percent) {
 				var subgroupListString = '';
 				var article = getArticleByEntity(selectedEntity);
 
-				subgroupListString += '<option value="0">Select ' + article + ' ' + selectedEntity.toUpperCase() + ' service...</option>';
+				$serviceOrLanguage = 'service';
+				if (entity == 'voa' || entity == 'rfa' || entity == 'rferl') {
+					$serviceOrLanguage = 'language';
+				}
+				subgroupListString += '<option value="0">Select ' + article + ' ' + selectedEntity.toUpperCase() + ' ' + $serviceOrLanguage + '...</option>';
 
 				for (var i = 0; i < entitiesByName[entity].services.length; i++) {
 					var srv = entitiesByName[entity].services[i];
