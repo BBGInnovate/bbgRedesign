@@ -347,7 +347,6 @@ function getRowsDataHeader($postId = null) {
     $card['background'] = parseBackgroundGroup(get_sub_field('background'));
     $card['text'] = parseTextGroup(get_sub_field('text'));
     $card['watermark'] = getWatermarkParts(get_sub_field('watermark'));
-    $card['overlay_image_bottom']['image'] = getImageSrcFromImage(get_sub_field('overlay_image_bottom') ?? '');
 
     if (have_rows('content', $postId)) {
         while (have_rows('content', $postId)) {
@@ -584,13 +583,11 @@ function createBackground($card) {
 }
 
 function createWatermark($card) {
-    if (empty($card) ||
-            (empty($card['watermark']) && empty($card['overlay_image_bottom']))) {
+    if (empty($card) || empty($card['watermark'])) {
         return '';
     }
 
-    $watermark = $card['watermark'] ?? '';
-    $overlayImageBottom = $card['overlay_image_bottom'] ?? '';
+    $watermark = $card['watermark'];
 
     $result = '';
     if (!empty($watermark['image'])) {
@@ -603,12 +600,10 @@ function createWatermark($card) {
             $result .= '                </a>';
         }
         $result .= '                </div>';
-    }
-
-    if (!empty($overlayImageBottom['image'])) {
-        $result .= '                <div class="cards__backdrop-logo--bottom">';
-        $result .= '                    <img src="' . $overlayImageBottom['image'] . '"/>';
-        $result .= '                </div>';
+    } else if (!empty($watermark['image'])) {
+        $result .= $watermark['image'];
+    } else {
+        //
     }
 
     return $result;
