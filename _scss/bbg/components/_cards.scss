@@ -258,6 +258,7 @@
                 position: absolute;
                 width: 100%;
                 top: 0;
+                padding: 16px;
                 color: #fff;
 
                 &.align-vertical-default {
@@ -298,21 +299,6 @@
                     }
 
                     &.align-vertical-default {
-                    }
-
-                    &.padding-none {
-                    }
-
-                    &.padding-normal {
-                        padding: 16px;
-                    }
-
-                    &.padding-large {
-                        padding: 32px;
-                    }
-
-                    &.padding-xlarge {
-                        padding: 64px;
                     }
 
                     &.font-size {
