@@ -243,7 +243,6 @@ function parseTextGroup($titleGroup) {
     $result['color'] = getColorParts($titleGroup['color'] ?? '', false);
     $result['alignment'] = $titleGroup['alignment'] ?? '';
     $result['vertical_alignment'] = $titleGroup['vertical_alignment'] ?? '';
-    $result['dynamic_text_fit'] = $titleGroup['dynamic_text_fit'] ?? false;
 
     return $result;
 }
@@ -665,16 +664,9 @@ function createHeaderTitle($card) {
                     $size .= ' font-size-' . $title['size'];
                 }
 
-                $dynamicTextFit = '';
-                $dynamicTextFitSizing = '';
-                if (!empty($title['dynamic_text_fit']) && $title['dynamic_text_fit'] == true) {
-                    $dynamicTextFit .= ' dynamic-text-fit';
-                    $dynamicTextFitSizing .= 'data-sizing=' . $card['sizing'];
-                }
-
                 $color = ' ' . $title['color'];
 
-                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $color . $size . $dynamicTextFit . '" ' . $dynamicTextFitSizing . '>';
+                $result .= '                <h3 class="' . $verticalAlignment . $alignment . $color . $size . '">';
                 if (!empty($title['url'])) {
                     $result .= '                    <a class="' . $color .'" href="' . $title['url'] . '">' . $title['text'] . '</a>';
                 } else {
@@ -812,8 +804,6 @@ function createFlexText($card) {
 function getCardsLayout($cardsRows) {
     $result = '<div class="cards--container">';
 
-    $cardNumber = 0;
-
     foreach($cardsRows as $cardsRow) {
         $gutterSize = $cardsRow['cards_gutter_size'];
         $layouts = $cardsRow['cards_layout'];
@@ -840,8 +830,7 @@ function getCardsLayout($cardsRows) {
                 if (!empty($card['title']['vertical_alignment'])) {
                     $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
                 }
-                $card['sizing'] = array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'];
-                $result .= '<div id="cards-card-' . $cardNumber++ . '" class="cards cards--layout-' . $card['type'] . ' cards--size-' . $card['sizing'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
+                $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
                 $result .= '    <div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
                 $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') .  '">';
                 $result .= '            <div class="cards__backdrop">';
