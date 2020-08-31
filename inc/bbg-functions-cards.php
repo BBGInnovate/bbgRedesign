@@ -242,7 +242,7 @@ function parseTextGroup($titleGroup) {
     $result['family'] = $titleGroup['family'] ?? '';
     $result['color'] = getColorParts($titleGroup['color'] ?? '', false);
     $result['alignment'] = $titleGroup['alignment'] ?? '';
-    $result['padding'] = $titleGroup['padding'] ?? '';
+    $result['padding'] = $titleGroup['padding'] ?? false;
     $result['vertical_alignment'] = $titleGroup['vertical_alignment'] ?? '';
     $result['dynamic_text_fit'] = $titleGroup['dynamic_text_fit'] ?? false;
 
@@ -325,7 +325,6 @@ function parsePostGroup($postGroup) {
     $card['title'] = getTitlePartsFromPost($postField);
     $card['title']['color'] = getColorParts($postGroup['color'] ?? '', false);
     $card['title']['alignment'] = $postGroup['alignment'] ?? '';
-    $card['title']['padding'] = $postGroup['padding'] ?? '';
 
     if (!empty($postGroup['override_title']) && $postGroup['override_title'] == true && !empty($postGroup['title_override'])) {
         $card['title']['text'] = $postGroup['title_override'];
