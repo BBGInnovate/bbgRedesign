@@ -271,22 +271,6 @@
                     padding-bottom: 0;
                 }
 
-                &.padding-none {
-                    padding: 0px;
-                }
-
-                &.padding-normal {
-                    padding: 16px;
-                }
-
-                &.padding-large {
-                    padding: 32px;
-                }
-
-                &.padding-xlarge {
-                    padding: 64px;
-                }
-
                 h3 {
                     margin: 0;
                     padding: 0;
@@ -314,6 +298,21 @@
                     }
 
                     &.align-vertical-default {
+                    }
+
+                    &.padding-none {
+                    }
+
+                    &.padding-normal {
+                        padding: 16px;
+                    }
+
+                    &.padding-large {
+                        padding: 32px;
+                    }
+
+                    &.padding-xlarge {
+                        padding: 64px;
                     }
 
                     &.font-size {
