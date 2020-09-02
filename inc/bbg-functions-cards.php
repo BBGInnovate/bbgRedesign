@@ -715,26 +715,13 @@ function createHeaderTitle($card) {
 }
 
 function createFooter($card) {
-    if (empty($card) || empty($card['type'])) {
+    if (empty($card) || empty($card['type']) || $card['type'] == 'header') {
         return '';
     }
 
     $result = '';
 
     switch($card['type']) {
-        case 'header':
-            if (!empty($card['title'])) {
-                $title = $card['title'];
-                $color = $title['color'];
-
-                $result .= '            <div class="cards__footer">';
-                $result .= '                <h3>';
-                $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
-                $result .= '                </h3>';
-                $result .= '            </div>';
-            }
-            break;
-
         case 'tagline_and_brands':
             if (!empty($card['logos'])) {
                 $result .= '            <div class="cards__footer">';
@@ -748,6 +735,19 @@ function createFooter($card) {
                     $result .= '                </div>';
                 }
                 $result .= '                </div>';
+                $result .= '            </div>';
+            }
+            break;
+
+        default:
+            if (!empty($card['title'])) {
+                $title = $card['title'];
+                $color = $title['color'];
+
+                $result .= '            <div class="cards__footer">';
+                $result .= '                <h3>';
+                $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
+                $result .= '                </h3>';
                 $result .= '            </div>';
             }
             break;
