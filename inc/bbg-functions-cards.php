@@ -454,6 +454,26 @@ function getRowsDataWidget() {
     return $card;
 }
 
+function getRowsDataTaglineAndBrands() {
+    $card = array();
+
+    $card['text'] = get_sub_field('text');
+
+    $brandPageUrlBase = get_home_url() . '/networks';
+    $brands = array('voa', 'rferl', 'ocb', 'rfa', 'mbn', 'otf');
+
+    $card['logos'] = array();
+
+    foreach ($brands as $brand) {
+        $logo = array();
+        $logo['image'] = get_home_url() . '/wp-content/themes/bbgRedesign/img/logo_' . $brand . '--circle-200.png';
+        $logo['url'] = $brandPageUrlBase . '/' . $brand . '/';
+        $card['logos'][] = $logo;
+    }
+
+    return $card;
+}
+
 function getCardsRowsData($postId) {
 
     $cardsRows = array();
@@ -502,6 +522,9 @@ function getCardsRowsData($postId) {
                             break;
                         case 'widget':
                             $card = getRowsDataWidget();
+                            break;
+                        case 'tagline_and_brands':
+                            $card = getRowsDataTaglineAndBrands();
                             break;
                     }
 
@@ -677,6 +700,12 @@ function createHeaderTitle($card) {
 
             break;
 
+        case 'tagline_and_brands':
+            $result .= '                <h3 class="dynamic-text-fit">';
+            $result .= '                    ' . $card['text'];
+            $result .= '                </h3>';
+            break;
+
         default:
             // do nothing
             break;
@@ -686,20 +715,43 @@ function createHeaderTitle($card) {
 }
 
 function createFooter($card) {
-    if (empty($card) || empty($card['type']) || empty($card['title']) || $card['type'] == 'header') {
+    if (empty($card) || empty($card['type'])) {
         return '';
     }
 
-    $tag = $card['tag'];
-    $title = $card['title'];
-    $color = $title['color'];
-
     $result = '';
-    $result .= '            <div class="cards__footer">';
-    $result .= '                <h3>';
-    $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
-    $result .= '                </h3>';
-    $result .= '            </div>';
+
+    switch($card['type']) {
+        case 'header':
+            if (!empty($card['title'])) {
+                $title = $card['title'];
+                $color = $title['color'];
+
+                $result .= '            <div class="cards__footer">';
+                $result .= '                <h3>';
+                $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
+                $result .= '                </h3>';
+                $result .= '            </div>';
+            }
+            break;
+
+        case 'tagline_and_brands':
+            if (!empty($card['logos'])) {
+                $result .= '            <div class="cards__footer">';
+                $result .= '                <div class="grid-container">';
+                $logos = $card['logos'];
+                for ($i = 0; $i < count($logos); $i++) {
+                    $result .= '                <div class="logo__container">';
+                    $result .= '                    <a href="' . $logos[$i]['url'] . '">';
+                    $result .= '                        <img src="' . $logos[$i]['image'] . '"/>';
+                    $result .= '                    </a>';
+                    $result .= '                </div>';
+                }
+                $result .= '                </div>';
+                $result .= '            </div>';
+            }
+            break;
+    }
 
     return $result;
 }

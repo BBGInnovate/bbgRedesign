@@ -583,6 +583,52 @@
                 }
             }
         }
+
+        &layout-tagline_and_brands {
+            .cards__fixed {
+                .cards__wrapper {
+                    .cards__header {
+                        padding: 24px 24px;
+
+                        h3 {
+                            margin-bottom: 2rem;
+                            color: #333333;
+                            font-size: 2.5rem;
+                        }
+                    }
+
+                    .cards__footer {
+                        width: 100%;
+                        padding-left: 0px;
+                        padding-right: 0px;
+
+                        .grid-container {
+                            .logo__container {
+                                $cards-grid: (
+                                    columns: 6,
+                                    gutter: 0rem
+                                );
+
+                                @include grid-column(1, $cards-grid);
+
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                a {
+                                    display: inline-block;
+
+                                    img {
+                                        display: inline-block;
+                                        max-width: 35px;
+                                        margin-bottom: 0px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     &.cards--events {
@@ -744,6 +790,28 @@
                     }
                 }
             }
+
+            &layout-tagline_and_brands {
+                .cards__fixed {
+                    .cards__wrapper {
+                        .cards__header {
+                            padding: 48px 24px;
+                        }
+
+                        .cards__footer {
+                            .grid-container {
+                                .logo__container {
+                                    a {
+                                        img {
+                                            max-width: 35px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -849,6 +917,28 @@
                         font-size: 1em;
                         line-height: 2rem;
                         -webkit-line-clamp: 3;
+                    }
+                }
+            }
+
+            &layout-tagline_and_brands {
+                .cards__fixed {
+                    .cards__wrapper {
+                        .cards__header {
+                            padding: 96px 48px;
+                        }
+
+                        .cards__footer {
+                            .grid-container {
+                                .logo__container {
+                                    a {
+                                        img {
+                                            max-width: 45px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

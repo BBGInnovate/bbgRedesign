@@ -247,8 +247,23 @@ function setUpCardsVideoPreview() {
 		}
 	});
 }
-
 setUpCardsVideoPreview();
+
+function setUpFitText() {
+	$('.cards .dynamic-text-fit').each(function(index) {
+		if (window.innerWidth < 600) {
+			compression = 2.65;
+		} else if (window.innerWidth < 900) {
+			compression = 1.8;
+		} else {
+			compression = 1.7;
+		}
+
+		$(this).css('line-height', 'normal');
+		$(this).fitText(compression);
+	});
+}
+setUpFitText();
 
 // PRESS CLIPPINGS DROPDOWN
 var clipsListItems = $('.media-clips-entities-dropdown ul li, .award-dropdown ul li');
@@ -504,6 +519,7 @@ $(window).on('resize', function() {
 	scaleRibbonBanner();
 	scaleArticleImages();
 	setResponsiveHeight();
+	setUpFitText();
 });
 
 }); // END READY

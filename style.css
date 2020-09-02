@@ -3783,6 +3783,29 @@ a:focus .bbg__article-share__icon {
     -webkit-box-orient: vertical; }
   .cards.cards--layout-social_media_twitter .cards__fixed .cards__wrapper .cards__header h3 {
     margin-bottom: 2rem; }
+  .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__header {
+    padding: 24px 24px; }
+    .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__header h3 {
+      margin-bottom: 2rem;
+      color: #333333;
+      font-size: 2.5rem; }
+  .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__footer {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px; }
+    .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__footer .grid-container .logo__container {
+      width: calc(16.66667%);
+      float: left;
+      margin-left: 0rem;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__footer .grid-container .logo__container a {
+        display: inline-block; }
+        .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__footer .grid-container .logo__container a img {
+          display: inline-block;
+          max-width: 35px;
+          margin-bottom: 0px; }
   .cards.cards--events {
     border: 1px solid #bbb; }
     .cards.cards--events .cards__fixed .cards__wrapper .cards__footer h3 {
@@ -4578,6 +4601,10 @@ a:focus .bbg__article-share__icon {
     font-size: 1.7rem;
     line-height: 2rem;
     -webkit-line-clamp: 4; }
+  .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__header {
+    padding: 48px 24px; }
+  .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__footer .grid-container .logo__container a img {
+    max-width: 35px; }
   .cards--size-1-1-none-none:not(.cards--events) {
     width: calc(100%);
     float: left;
@@ -5158,6 +5185,10 @@ a:focus .bbg__article-share__icon {
     font-size: 1em;
     line-height: 2rem;
     -webkit-line-clamp: 3; }
+  .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__header {
+    padding: 96px 48px; }
+  .cards.cards--layout-tagline_and_brands .cards__fixed .cards__wrapper .cards__footer .grid-container .logo__container a img {
+    max-width: 45px; }
   .cards--size-1-1-none-none:not(.cards--events) {
     width: calc(100%);
     float: left;
