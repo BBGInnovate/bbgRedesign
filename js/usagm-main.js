@@ -527,6 +527,18 @@ function overlayCardClickHandler() {
 }
 overlayCardClickHandler();
 
+function taglineAndBrandsCardReorder() {
+	$('.cards--layout-tagline_and_brands').each(function() {
+		if (window.innerWidth < 600) {
+			$(this).parent().css('display', 'flex').css('flex-direction', 'column');
+			$(this).css('order', '-1');
+		} else {
+			$(this).parent().css('display', 'block');
+		}
+	});
+}
+taglineAndBrandsCardReorder();
+
 function handleImageCardHover() {
 	let fadeSpeed = 300;
 	$('.cards--layout-image a').hover(function() {
@@ -545,6 +557,7 @@ $(window).on('resize', function() {
 	scaleArticleImages();
 	setResponsiveHeight();
 	setUpFitText();
+	taglineAndBrandsCardReorder();
 });
 
 }); // END READY
