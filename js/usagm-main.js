@@ -160,68 +160,76 @@ function scaleRibbonBanner() {
 }
 scaleRibbonBanner();
 
-function setUpRedirectHandler() {
-	$(document).on('click', 'a', function(e) {
+function redirectHandler(linkOriginal, clickEvent) {
+	if (linkOriginal.indexOf('mailto:') == 0 || linkOriginal.indexOf('tel:') == 0) {
+		return false;
+	}
 
-		let linkOriginal = $(this).attr('href');
-		if (linkOriginal.indexOf('mailto:') == 0 || linkOriginal.indexOf('tel:') == 0) {
-			return;
+	let link = $('<a>', {href: linkOriginal});
+	let linkHref = link[0].href;
+	let linkHostname = link[0].hostname;
+	let currentHostname = window.location.hostname;
+	let expectedPosition = linkHostname.length - (currentHostname.length + 1)
+	if (linkHostname != currentHostname && linkHostname.indexOf('.' + currentHostname) != expectedPosition) {
+		if (clickEvent !== undefined) {
+			clickEvent.preventDefault();
 		}
 
-		let link = $('<a>', {href: linkOriginal});
-		let linkHref = link[0].href;
-		let linkHostname = link[0].hostname;
-		let currentHostname = window.location.hostname;
-		let expectedPosition = linkHostname.length - (currentHostname.length + 1)
-		if (linkHostname != currentHostname && linkHostname.indexOf('.' + currentHostname) != expectedPosition) {
-			e.preventDefault();
+		$('#redirect__dialog').click(function(e) {
+			e.stopPropagation();
+		});
 
-			$('#redirect__dialog').click(function(e) {
-				e.stopPropagation();
-			});
+		$('#redirect__button--cancel').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+		});
 
-			$('#redirect__button--cancel').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-			});
+		$('#redirect__button--confirm').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+			window.open(linkHref, '_blank');
+		});
 
-			$('#redirect__button--confirm').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-				window.open(linkHref, '_blank');
-			});
+		$('#redirect__dialog--close').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+		});
 
-			$('#redirect__dialog--close').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-			});
+		$('#redirect__link').html(linkHostname);
 
-			$('#redirect__link').html(linkHostname);
+		showOverlay($('#redirect__overlay'));
 
-			showOverlay($('#redirect__overlay'));
+		$('#redirect__overlay').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+		});
 
-			$('#redirect__overlay').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-			});
-
-			function showOverlay(overlay) {
-				overlay.width('100%');
-				overlay.height('100%');
-				overlay.show();
-			}
-
-			function hideOverlay(overlay) {
-				$('#redirect__dialog').off('click');
-				$('#redirect__button--cancel').off('click');
-				$('#redirect__button--confirm').off('click');
-				$('#redirect__dialog--close').off('click');
-				$('#redirect__overlay').off('click');
-
-				overlay.hide();
-				overlay.width('0');
-				overlay.height('0');
-			}
+		function showOverlay(overlay) {
+			overlay.width('100%');
+			overlay.height('100%');
+			overlay.show();
 		}
-	});
+
+		function hideOverlay(overlay) {
+			$('#redirect__dialog').off('click');
+			$('#redirect__button--cancel').off('click');
+			$('#redirect__button--confirm').off('click');
+			$('#redirect__dialog--close').off('click');
+			$('#redirect__overlay').off('click');
+
+			overlay.hide();
+			overlay.width('0');
+			overlay.height('0');
+		}
+
+		return true;
+	} else {
+		return false;
+	}
 }
 
+function setUpRedirectHandler() {
+	$(document).on('click', 'a', function(e) {
+		let linkOriginal = $(this).attr('href');
+		redirectHandler(linkOriginal, e);
+	});
+}
 setUpRedirectHandler();
 
 function setUpCardsVideoPreview() {
@@ -501,6 +509,23 @@ function handleCardHoverOverlay() {
 	});
 }
 handleCardHoverOverlay();
+
+function overlayCardClickHandler() {
+	$('.cards__backdrop-logo').click(function(event) {
+		event.stopPropagation();
+	});
+
+	$('.cards__overlay').click(function() {
+		const url = $(this).data('href');
+		if (url) {
+			const result = redirectHandler(url);
+			if (!result) {
+				window.location.href = url;
+			}
+		}
+	});
+}
+overlayCardClickHandler();
 
 function handleImageCardHover() {
 	let fadeSpeed = 300;

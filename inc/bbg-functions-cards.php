@@ -744,7 +744,12 @@ function createFooter($card) {
 
                 $result .= '            <div class="cards__footer">';
                 $result .= '                <h3>';
-                $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
+                if (!empty($title['url'])) {
+                    $result .= '                <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
+                } else {
+                    $result .= '                <span class="' . $color . '">' . $title['text'] . '</span>';
+                }
+
                 $result .= '                </h3>';
                 $result .= '            </div>';
             }
@@ -784,8 +789,15 @@ function createOverlay($card) {
         return '';
     }
 
+    $dataHref = '';
+    $cursor = ' cursor-default';
+    if (isset($card['title']['url']) && !empty($card['title']['url'])) {
+        $dataHref = ' data-href="' . $card['title']['url'] . '"';
+        $cursor = ' cursor-pointer';
+    }
+
     $result = '';
-    $result .= '            <div class="cards__overlay">';
+    $result .= '            <div class="cards__overlay' . $cursor . '"' . $dataHref . '>';
     $result .= $tag;
     $result .= $watermark;
     $result .= '            </div>';
@@ -891,7 +903,6 @@ function getCardsLayout($cardsRows) {
                 $result .= '            <div class="cards__backdrop">';
                 $result .=                  createBackground($card);
                 $result .= '            </div>';
-                $result .=              createOverlay($card);
                 if ($card['type'] != 'widget') {
                     $result .= '        <div class="cards__header ' . $verticalAlignment . '">';
                     $result .=              createDate($card);
@@ -899,6 +910,7 @@ function getCardsLayout($cardsRows) {
                     $result .= '        </div>';
                 }
                 $result .=              createFooter($card);
+                $result .=              createOverlay($card);
                 $result .= '        </div>';
                 $result .= '    </div>';
                 $result .= '    <div class="cards__flexible">';

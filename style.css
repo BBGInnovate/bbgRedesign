@@ -3657,7 +3657,6 @@ a:focus .bbg__article-share__icon {
       .cards .cards__fixed .cards__wrapper .cards__footer {
         position: absolute;
         bottom: 0;
-        width: 90%;
         padding: 16px; }
         .cards .cards__fixed .cards__wrapper .cards__footer h3 {
           margin: 0 0 -2px 0;
@@ -3681,6 +3680,10 @@ a:focus .bbg__article-share__icon {
         height: 100%;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.3); }
+        .cards .cards__fixed .cards__wrapper .cards__overlay.cursor-default {
+          cursor: default; }
+        .cards .cards__fixed .cards__wrapper .cards__overlay.cursor-pointer {
+          cursor: pointer; }
         .cards .cards__fixed .cards__wrapper .cards__overlay .cards__tag {
           display: inline-block;
           pointer-events: all;

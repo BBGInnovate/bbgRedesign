@@ -340,7 +340,6 @@
             .cards__footer {
                 position: absolute;
                 bottom: 0;
-                width: 90%;
                 padding: 16px;
 
                 h3 {
@@ -372,6 +371,14 @@
                 height: 100%;
                 width: 100%;
                 background-color: rgba(0,0,0,.3);
+
+                &.cursor-default {
+                    cursor: default;
+                }
+
+                &.cursor-pointer {
+                    cursor: pointer;
+                }
 
                 .cards__tag {
                     display: inline-block;
