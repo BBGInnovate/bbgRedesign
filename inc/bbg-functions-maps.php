@@ -262,6 +262,7 @@ add_shortcode( 'pressFreedomMap', 'pressFreedomMap' );
 		$scripts = '';
 		$scripts .= '<script type="text/javascript">';
 		$scripts .= '    var template_directory_uri = "' . get_template_directory_uri() . '";';
+		$scripts .= '    var uploads_dir = "' . (wp_get_upload_dir()['baseurl']) . '";';
 		$scripts .= '    for (serviceName in servicesByName) {';
 		$scripts .= '        if (servicesByName.hasOwnProperty(serviceName)) {';
 		$scripts .= '            s = servicesByName[serviceName];';
