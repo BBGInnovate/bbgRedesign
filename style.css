@@ -11306,6 +11306,9 @@ html, body {
     @media screen and (min-width: 600px) {
       .bbg__map-area__text .bbg__map__entity {
         margin: 0; } }
+    .bbg__map-area__text .bbg__map__entity ul {
+      margin-top: 0;
+      padding-left: 0; }
     .bbg__map-area__text .bbg__map__entity .bbg__map__entity-logo__container {
       border-radius: 50%;
       display: table-cell;
@@ -11340,6 +11343,7 @@ html, body {
         text-align: left;
         text-transform: uppercase; }
         .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text .bbg__map__entity-text__name--small {
+          margin-top: 4px;
           font-size: 1.8rem;
           text-transform: none; }
     .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text__details {
