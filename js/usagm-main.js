@@ -499,7 +499,7 @@ initializeMasonryGrid();
 
 function handleCardHoverOverlay() {
 	const fadeSpeed = 300;
-	$('.cards--layout-general .cards__backdrop, .cards--layout-header .cards__backdrop').mouseenter(function() {
+	$('.cards--layout-general .cards__backdrop, .cards--layout-header .cards__backdrop, .cards__footer').mouseenter(function() {
 		const overlay = $(this).siblings('.cards__overlay');
 		overlay.fadeIn(fadeSpeed);
 	});
