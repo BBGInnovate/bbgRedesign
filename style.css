@@ -3446,22 +3446,22 @@ a:focus .bbg__article-share__icon {
 
 .cards--container .inner-container.gutter-none {
   padding: 0 2rem; }
-  .cards--container .inner-container.gutter-none h3 {
+  .cards--container .inner-container.gutter-none > h3 {
     padding: 0 2rem; }
 
 .cards--container .inner-container.gutter-tiny {
   padding: 0 1.9rem; }
-  .cards--container .inner-container.gutter-tiny h3 {
+  .cards--container .inner-container.gutter-tiny > h3 {
     padding: 0 1.9rem; }
 
 .cards--container .inner-container.gutter-small {
   padding: 0 1.5rem; }
-  .cards--container .inner-container.gutter-small h3 {
+  .cards--container .inner-container.gutter-small > h3 {
     padding: 0 1.5rem; }
 
 .cards--container .inner-container.gutter-medium {
   padding: 0 1rem; }
-  .cards--container .inner-container.gutter-medium h3 {
+  .cards--container .inner-container.gutter-medium > h3 {
     padding: 0 1rem; }
 
 .cards--container .inner-container.gutter-large {
@@ -3715,30 +3715,30 @@ a:focus .bbg__article-share__icon {
   .cards .cards__flexible .cards__flex-text {
     font-size: 20px;
     font-weight: bold; }
-  .cards .cards__flexible p {
+  .cards .cards__flexible > p {
     margin: 0;
     padding: 16px; }
-    .cards .cards__flexible p.align-left {
+    .cards .cards__flexible > p.align-left {
       text-align: left; }
-    .cards .cards__flexible p.align-center {
+    .cards .cards__flexible > p.align-center {
       text-align: center; }
-    .cards .cards__flexible p.align-right {
+    .cards .cards__flexible > p.align-right {
       text-align: right; }
-    .cards .cards__flexible p.font-size-tiny {
+    .cards .cards__flexible > p.font-size-tiny {
       font-size: 1.3rem;
       line-height: 1.8rem; }
-    .cards .cards__flexible p.font-size-small {
+    .cards .cards__flexible > p.font-size-small {
       font-size: 1.5rem;
       line-height: 2.3rem; }
-    .cards .cards__flexible p.font-size-medium {
+    .cards .cards__flexible > p.font-size-medium {
       font-size: 1.8rem;
       line-height: 2.6rem; }
-    .cards .cards__flexible p.font-size-large {
+    .cards .cards__flexible > p.font-size-large {
       font-size: 2.2rem;
       line-height: 3rem; }
-    .cards .cards__flexible p.font-family-serif {
+    .cards .cards__flexible > p.font-family-serif {
       font-family: 'Carrara-Regular', serif; }
-    .cards .cards__flexible p.font-family-sans-serif {
+    .cards .cards__flexible > p.font-family-sans-serif {
       font-family: 'Alegreya Sans', sans-serif; }
   .cards.cards--layout-video_internal .cards__backdrop {
     background-color: #58595b; }

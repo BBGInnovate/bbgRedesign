@@ -13,7 +13,7 @@
         &.gutter-none {
             padding: 0 2rem;
 
-            h3 {
+            > h3 {
                 padding: 0 2rem;
             }
         }
@@ -21,7 +21,7 @@
         &.gutter-tiny {
             padding: 0 1.9rem;
 
-            h3 {
+            > h3 {
                 padding: 0 1.9rem;
             }
         }
@@ -29,7 +29,7 @@
         &.gutter-small {
             padding: 0 1.5rem;
 
-            h3 {
+            > h3 {
                 padding: 0 1.5rem;
             }
         }
@@ -37,7 +37,7 @@
         &.gutter-medium {
             padding: 0 1rem;
 
-            h3 {
+            > h3 {
                 padding: 0 1rem;
             }
         }
@@ -429,7 +429,7 @@
 
         }
 
-        p {
+        > p {
             margin: 0;
             padding: 16px;
 
