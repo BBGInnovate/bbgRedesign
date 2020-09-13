@@ -221,8 +221,18 @@ function shadeColor(color, percent) {
 				globalStr += '<div class="bbg__map__entity">';
 				globalStr +=     '<ul style="margin-bottom: 0;">';
 				globalStr += 	     '<li><a target="_blank" href="https://www.voanews.com/">English-language News Center</a></li>';
-				globalStr += 	     '<li><a target="_blank" href="https://learningenglish.voanews.com/">Learning English programming</a></li>';
 				globalStr +=     '</ul>';
+				globalStr += '</div>';
+
+				globalStr += '<div id="entityDisplay" class="bbg__map__entity--small">';
+				globalStr += 	'<div id="entityLogo" class="bbg__map__entity-logo__container--small">';
+				globalStr += 		'<a href="https://learningenglish.voanews.com/" tabindex="-1">';
+				globalStr += 			'<div class="bbg__map__entity-logo__image--large" style="background-image: url(' + template_directory_uri + '/img/LearningEnglish_Horizontal-newcolors.png);"></div>';
+				globalStr += 		'</a>';
+				globalStr += 	'</div>';
+				globalStr += 	'<div class="bbg__map__entity-text">';
+				globalStr += 		'<p>Learning English is VOA’s multimedia source of news and information for millions of English learners worldwide.</p>';
+				globalStr += 	'</div>';
 				globalStr += '</div>';
 			}
 
@@ -232,9 +242,9 @@ function shadeColor(color, percent) {
 				globalStr += 		'<a href="https://www.currenttime.tv" tabindex="-1">';
 				globalStr += 			'<div class="bbg__map__entity-logo__image--small" style="background-image: url(' + template_directory_uri + '/img/logo_ct--circle-40.png);"></div>';
 				globalStr += 		'</a>';
+				globalStr += 		'<a href="https://www.currenttime.tv" tabindex="-1"><h2 id="entityName">Current Time</h2></a>';
 				globalStr += 	'</div>';
 				globalStr += 	'<div class="bbg__map__entity-text">';
-				globalStr += 		'<h2 id="entityName" class="bbg__map__entity-text__name--small"><a href="https://www.currenttime.tv" tabindex="-1">Current Time</a></h2>';
 				globalStr += 		'<p>A 24/7 Russian-language digital network, led by Radio Free Europe/Radio Liberty (RFE/RL) in cooperation with the Voice of America (VOA), that provides news and information to Russian speakers worldwide.</p>';
 				globalStr += 	'</div>';
 				globalStr += '</div>';
@@ -244,9 +254,9 @@ function shadeColor(color, percent) {
 				globalStr += 		'<a href="' + uploads_dir + '/2019/03/VOA-365-Brochure_Rev.pdf" tabindex="-1">';
 				globalStr += 			'<div class="bbg__map__entity-logo__image--small" style="background-image: url(' + template_directory_uri + '/img/logo_voa365--square-40.png);"></div>';
 				globalStr += 		'</a>';
+				globalStr += 		'<a href="' + uploads_dir + '/2019/03/VOA-365-Brochure_Rev.pdf" tabindex="-1"><h2 id="entityName">VOA 365</h2></a>';
 				globalStr += 	'</div>';
 				globalStr += 	'<div class="bbg__map__entity-text">';
-				globalStr += 		'<h2 id="entityName" class="bbg__map__entity-text__name--small"><a href="' + uploads_dir + '/2019/03/VOA-365-Brochure_Rev.pdf" tabindex="-1">VOA 365</a></h2>';
 				globalStr += 		'<p>A 24/7 Persian-language global network, led by VOA in partnership with RFE/RL, providing live and unfiltered coverage of global news and events.</p>';
 				globalStr += 	'</div>';
 				globalStr += '</div>';

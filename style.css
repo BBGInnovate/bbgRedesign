@@ -11363,15 +11363,31 @@ html, body {
         border-radius: 50%; }
       .bbg__map-area__text .bbg__map__entity .bbg__map__entity-logo__container--small {
         border-radius: 50%;
-        display: table-cell;
-        max-width: 40px;
-        padding-right: 0.5rem; }
+        padding-right: 0.5rem;
+        margin-bottom: 4px; }
         .bbg__map-area__text .bbg__map__entity .bbg__map__entity-logo__container--small .bbg__map__entity-logo__image--small {
+          display: inline-block;
+          margin-bottom: 4px;
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center center;
           height: 30px;
-          width: 30px; }
+          width: 30px;
+          vertical-align: middle; }
+        .bbg__map-area__text .bbg__map__entity .bbg__map__entity-logo__container--small .bbg__map__entity-logo__image--large {
+          display: inline-block;
+          background-size: contain;
+          background-repeat: no-repeat;
+          height: 20px;
+          width: 100%;
+          margin-bottom: 0; }
+        .bbg__map-area__text .bbg__map__entity .bbg__map__entity-logo__container--small h2 {
+          display: inline-block;
+          margin-bottom: 0;
+          margin-left: 8px;
+          margin-top: 0px;
+          font-size: 1.8rem;
+          text-transform: none; }
     .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text {
       display: table-cell;
       padding-left: 0;
