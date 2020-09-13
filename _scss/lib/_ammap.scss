@@ -139,7 +139,6 @@
 	}
 
 	.bbg__map__entity {
-		margin: $site-margins 0;
 		min-height: $bbg__avatar-width-small;
 
 		@include media($medium-screen) {
@@ -236,7 +235,6 @@
 			}
 
 		&--small {
-			// margin: -2rem 0 0;
 
 			p {
 				font: {
