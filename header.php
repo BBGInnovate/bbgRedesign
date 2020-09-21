@@ -243,14 +243,53 @@ gtag('config', 'UA-124338348-1');
 			// 	display_development_alert_banner("This is the Development Server");
 			// }
 		?>
-		
+
 		<!-- OFFICIAL SITE OF USA GOV -->
 		<div class="usa-disclaimer<?php echo $moveUSAbannerBecauseOfAlert; ?>">
 			<div class="usa-grid">
 				<span class="usa-disclaimer-official">
-					<img class="usa-flag_icon" alt="U.S. flag signifying that this is a United States federal government website" src="<?php echo get_template_directory_uri() ?>/img/us_flag_small.png">
-					An official website of <span class="u--no-wrap">the&nbsp;United&nbsp;States&nbsp;government</span>
+					<div class="usa-disclaimer__header">
+						<div class="usa-disclaimer__flag">
+							<img class="usa-flag_icon" alt="U.S. flag signifying that this is a United States federal government website" src="<?php echo get_template_directory_uri() ?>/img/us_flag_small.png">
+						</div>
+						<div class="usa-disclaimer__text">
+							An official website of <span class="u--no-wrap">the&nbsp;United&nbsp;States&nbsp;government</span>
+						</div>
+						<button class="usa-disclaimer__button rotated" aria-expanded="false" aria-controls="gov-banner">
+							<span class="usa-disclaimer__button--text">Here’s how you know</span>
+						</button>
+					</div>
 				</span>
+			</div>
+			<div class="usa-banner__content outer-container">
+				<div class="usa-banner__guidance grid-half">
+					<img class="usa-banner__icon usa-media-block__img" src="<?php echo get_template_directory_uri() ?>/img/icon-dot-gov.svg" role="img" alt="Dot gov">
+					<div class="usa-media-block__body">
+						<p>
+							<strong>Official websites use .gov</strong>
+							<br />
+							A <strong>.gov</strong> website belongs to an official government organization in the United States.
+						</p>
+					</div>
+				</div>
+				<div class="usa-banner__guidance grid-half">
+					<img class="usa-banner__icon usa-media-block__img" src="<?php echo get_template_directory_uri() ?>/img/icon-https.svg" role="img" alt="Https">
+					<div class="usa-media-block__body">
+						<p>
+							<strong>Secure .gov websites use HTTPS</strong>
+							<br />
+							A <strong>lock</strong> (
+							<span class="icon-lock">
+								<svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-title banner-lock-description">
+									<title id="banner-lock-title">Lock</title>
+									<desc id="banner-lock-description">A locked padlock</desc>
+									<path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z" />
+								</svg>
+							</span>
+							) or <strong>https://</strong> means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 

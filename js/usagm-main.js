@@ -487,6 +487,24 @@ function handleImageCardHover() {
 }
 handleImageCardHover();
 
+function handleGovDisclaimerDropdown() {
+	$('.usa-disclaimer__button').toggleClass('rotated');
+
+	$('.usa-disclaimer__button').click(function() {
+		$('.usa-banner__content').toggle();
+
+		$('.usa-disclaimer__button').toggleClass('rotated');
+
+		let ariaExpanded = $('.usa-disclaimer__button').attr('aria-expanded');
+		if (ariaExpanded == 'true') {
+			$(".usa-disclaimer__button").attr("aria-expanded", false);
+		} else {
+			$(".usa-disclaimer__button").attr("aria-expanded", true);
+		}
+	});
+}
+handleGovDisclaimerDropdown();
+
 $(window).on('resize', function() {
 	scaleRibbonBanner();
 	scaleArticleImages();
