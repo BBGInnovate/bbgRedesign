@@ -11367,6 +11367,7 @@ html, body {
         .bbg__map-area__text .bbg__map__entity .bbg__map__entity-logo__container--small .bbg__map__entity-logo__image--small {
           display: inline-block;
           margin-bottom: 4px;
+          margin-right: 8px;
           background-size: cover;
           background-repeat: no-repeat;
           background-position: center center;
@@ -11383,7 +11384,6 @@ html, body {
         .bbg__map-area__text .bbg__map__entity .bbg__map__entity-logo__container--small h2 {
           display: inline-block;
           margin-bottom: 0;
-          margin-left: 8px;
           margin-top: 0px;
           font-size: 1.8rem;
           text-transform: none; }
@@ -11400,6 +11400,8 @@ html, body {
           margin-top: 4px;
           font-size: 1.8rem;
           text-transform: none; }
+      .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text p {
+        margin-bottom: 0px; }
     .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text__details {
       margin-top: 0; }
       .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text__details p {
@@ -11410,33 +11412,35 @@ html, body {
           .bbg__map-area__text .bbg__map__entity .bbg__map__entity-text__details p {
             font-size: 1.6rem;
             line-height: 1.4; } }
-    .bbg__map-area__text .bbg__map__entity--small p {
-      font-family: "Alegreya Sans", sans-serif;
-      font-size: 1.6rem;
-      line-height: 1.7; }
-      @media screen and (min-width: 481px) {
-        .bbg__map-area__text .bbg__map__entity--small p {
-          font-size: 1.3rem;
-          line-height: 1.4; } }
-    .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text {
-      display: table-cell;
-      padding-left: 0;
-      vertical-align: middle; }
-      .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text .bbg__map__entity-text__name {
-        font-size: 2rem;
-        margin: 0;
-        text-align: left;
-        text-transform: uppercase; }
-    .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details {
-      margin-top: 0; }
-      .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details p {
+    .bbg__map-area__text .bbg__map__entity--small {
+      margin-bottom: 2rem; }
+      .bbg__map-area__text .bbg__map__entity--small p {
         font-family: "Alegreya Sans", sans-serif;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         line-height: 1.7; }
-        @media screen and (min-width: 600px) {
-          .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details p {
-            font-size: 1.6rem;
+        @media screen and (min-width: 481px) {
+          .bbg__map-area__text .bbg__map__entity--small p {
+            font-size: 1.3rem;
             line-height: 1.4; } }
+      .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text {
+        display: table-cell;
+        padding-left: 0;
+        vertical-align: middle; }
+        .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text .bbg__map__entity-text__name {
+          font-size: 2rem;
+          margin: 0;
+          text-align: left;
+          text-transform: uppercase; }
+      .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details {
+        margin-top: 0; }
+        .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details p {
+          font-family: "Alegreya Sans", sans-serif;
+          font-size: 1.8rem;
+          line-height: 1.7; }
+          @media screen and (min-width: 600px) {
+            .bbg__map-area__text .bbg__map__entity--small .bbg__map__entity-text__details p {
+              font-size: 1.6rem;
+              line-height: 1.4; } }
   .bbg__map-area__text .bbg__map-area__list-item {
     line-height: 1; }
   .bbg__map-area__text .subgroup-block {

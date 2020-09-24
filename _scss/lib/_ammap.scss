@@ -172,6 +172,7 @@
 				.bbg__map__entity-logo__image--small {
 					display: inline-block;
 					margin-bottom: 4px;
+					margin-right: 8px;
 					@include backgroundCover;
 					height: $bbg__avatar-width-tiny;
 					width: $bbg__avatar-width-tiny;
@@ -190,7 +191,6 @@
 				h2 {
 					display: inline-block;
 					margin-bottom: 0;
-					margin-left: 8px;
 					margin-top: 0px;
 					font-size: $medium-font-size;
 					text-transform: none;
@@ -215,6 +215,10 @@
 					text-transform: none;
 				}
 			}
+
+			p {
+				margin-bottom: 0px;
+			}
 		}
 
 		.bbg__map__entity-text__details {
@@ -235,6 +239,7 @@
 			}
 
 		&--small {
+			margin-bottom: 2rem;
 
 			p {
 				font: {
