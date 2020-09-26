@@ -236,6 +236,14 @@ function shadeColor(color, percent) {
 				globalStr += '</div>';
 			}
 
+			if (entity == "rferl") {
+				globalStr += '<div id="entityDisplay" class="bbg__map__entity--small">';
+				globalStr += 	'<div class="bbg__map__entity-logo__container--small">';
+				globalStr += 		'<a href="https://www.rferl.org/" tabindex="-1"><h2 id="entityName">English-language news</h2></a>';
+				globalStr += 	'</div>';
+				globalStr += '</div>';
+			}
+
 			if (entity == "voa" || entity == "rferl") {
 				globalStr += '<div id="entityDisplay" class="bbg__map__entity--small">';
 				globalStr += 	'<div class="bbg__map__entity-logo__container--small">';
@@ -258,14 +266,6 @@ function shadeColor(color, percent) {
 				globalStr += 	'</div>';
 				globalStr += 	'<div class="bbg__map__entity-text">';
 				globalStr += 		'<p>A 24/7 Persian-language global network, led by VOA in partnership with RFE/RL, providing live and unfiltered coverage of global news and events.</p>';
-				globalStr += 	'</div>';
-				globalStr += '</div>';
-			}
-
-			if (entity == "rferl") {
-				globalStr += '<div id="entityDisplay" class="bbg__map__entity--small">';
-				globalStr += 	'<div class="bbg__map__entity-logo__container--small">';
-				globalStr += 		'<a href="https://www.rferl.org/" tabindex="-1"><h2 id="entityName">English-language news</h2></a>';
 				globalStr += 	'</div>';
 				globalStr += '</div>';
 			}
