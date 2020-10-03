@@ -117,7 +117,9 @@ endif;
 				$quote_result = getRandomQuote('allEntities', $postIDsUsed, true);
 
 				if ($quote_result) {
-					$quotes_slider  = '<article class="quote-slider">';
+					$quotes_slider = '';
+					$quotes_slider .= '<h2 class="sidebar-section-header">What people are saying</h2>';
+					$quotes_slider .= '<article class="quote-slider">';
 					$quotes_slider .= 	'<div class="quote-sliding-plate">';
 					// var_dump($quote_result);
 					foreach ($quote_result as $quote) {
