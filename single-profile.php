@@ -29,6 +29,7 @@ $occupation = get_post_meta($page_id, 'occupation', true);
 $email = get_post_meta($page_id, 'email', true);
 $phone = get_post_meta($page_id, 'phone', true);
 $twitterProfileHandle = get_post_meta($page_id, 'twitter_handle', true);
+$instagramProfileHandle = get_post_meta($page_id, 'instagram_handle', true);
 $relatedLinksTag = get_post_meta($page_id, 'related_links_tag', true);
 
 // ADJUSTMENTS FOR RETIRED EMPLOYEETS
@@ -145,9 +146,15 @@ get_header(); ?>
 				}
 				if ($twitterProfileHandle != "") {
 					$twitter_link  = 	'<br><a href="https://twitter.com/' . $twitterProfileHandle . '" title="Follow ' . $page_title . ' on Twitter">';
-					$twitter_link .= 		'<span class="bbg__article-share__text">@' . $twitterProfileHandle . '</span>';
+					$twitter_link .= 		'<span class="bbg__article-share__text fab fa-twitter"> @' . $twitterProfileHandle . '</span>';
 					$twitter_link .= 	'</a>';
 					echo $twitter_link;
+				}
+				if ($instagramProfileHandle != "") {
+					$instagram_link  = 	'<br><a href="https://www.instagram.com/' . $instagramProfileHandle . '" title="Follow ' . $page_title . ' on Instagram">';
+					$instagram_link .= 		'<span class="bbg__article-share__text fab fa-instagram"> @' . $instagramProfileHandle . '</span>';
+					$instagram_link .= 	'</a>';
+					echo $instagram_link;
 				}
 				if ($phone != "") {
 					$phone_string = '<br><span class="bbg__article-share__text">' . $phone . '</span>';

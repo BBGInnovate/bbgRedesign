@@ -45,6 +45,7 @@ if (have_posts()) {
 	$email = get_post_meta($profile_id, 'email', true);
 	$phone = get_post_meta($profile_id, 'phone', true);
 	$twitterProfileHandle = get_post_meta($profile_id, 'twitter_handle', true);
+	$instagramProfileHandle = get_post_meta($profile_id, 'instagram_handle', true);
 	$relatedLinksTag = get_post_meta($profile_id, 'related_links_tag', true);
 
 	/**** CREATE $formerCSS - applies black and white to retired board members ***/
@@ -303,6 +304,16 @@ get_header();
 					}
 					echo 	'</ul>';
 					echo '</aside>';
+				}
+
+				if ($instagramProfileHandle != "") {
+					$instagram_markup  = '<aside>';
+					$instagram_markup .= 	'<h2 class="sidebar-section-header">Follow on Instagram</h2>';
+					$instagram_markup .= 	'<a href="https://www.instagram.com/' . $instagramProfileHandle . '" target="_blank" title="Follow ' . get_the_title() . ' on Instagram">';
+					$instagram_markup .= 		'<i class="fab fa-instagram"></i> @' . $instagramProfileHandle;
+					$instagram_markup .= 	'</a>';
+					$instagram_markup .= '</aside>';
+					echo $instagram_markup;
 				}
 
 				// IF TWITTER HANDLE, SHOW IT, SHOW RECENT TWEETS IF ENABLED ON PAGE
