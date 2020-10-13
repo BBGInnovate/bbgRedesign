@@ -1302,7 +1302,7 @@ function my_login_logo_one() {
 ?> 
 	<style type="text/css"> 
 		body.login div#login h1 a {
-			background-image: url(http://dev.usagm.com/USAGM-Logo.png);
+			background-image: url('<?php echo get_template_directory_uri(); ?>/img/USAGM-Logo-small.png');
 			background-size: 286px;
 			width: 268px;
 			height: 133px;

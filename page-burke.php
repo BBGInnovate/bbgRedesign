@@ -134,7 +134,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 		<div class="grid-container">
 			<div class="usagm-quotation">
 				<h2 class="header-outliner">John Lansing Quote</h2>
-				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot" alt="John Lansing image">
+				<img class="quote-image" src="<?php echo get_template_directory_uri(); ?>/img/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot" alt="John Lansing image">
 				<p class="article-title">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</p>
 				<p class="quote-byline">
 					John Lansing<br>

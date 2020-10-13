@@ -94,7 +94,7 @@ function build_award_dropdown_list($award_package) {
 		if ($cur_award_data['award_logo']) {
 			$award_markup .= 					'<img class="award-logo" src="' . $cur_award_data['award_logo'] . '">';
 		} else {
-			$award_markup .= 					'<img class="award-logo" src="http://dev.usagm.com/wp-content/uploads/2019/08/blank_award.jpg">';
+			$award_markup .= 					'<img class="award-logo" src="' . get_template_directory_uri() . '/img/blank_award.jpg">';
 		}
 		$award_markup .= 					'</div>';
 		$award_markup .= 					'<div class="award-title">';
@@ -183,7 +183,7 @@ function make_award_blocks($award_data) {
 	if ($award_data['award_logo']) {
 		$single_award .= 		'<img src="' . $award_data['award_logo'] . '">';
 	} else {
-		$single_award .= 		'<img src="http://dev.usagm.com/wp-content/uploads/2019/08/blank_award.jpg">';
+		$single_award .= 		'<img src="' . get_template_directory_uri() . '/img/blank_award.jpg">';
 	}
 	$single_award .= 		'</div>';
 	$single_award .= 		'<div class="award-title">';

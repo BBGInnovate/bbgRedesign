@@ -163,7 +163,7 @@ if ($ceremony_post -> have_posts()) {
 		<div class="bbg__ribbon inner-ribbon">
 			<div class="outer-container">
 				<div class="side-content-container">
-					<div style="background-image: url('http://dev.usagm.com/wp-content/uploads/2017/08/David-Burke-profile.png');"></div>
+					<div style="background-image: url('<?php echo get_template_directory_uri(); ?>/img/David-Burke-profile.png');"></div>
 				</div>
 				<div class="main-content-container">
 					<h4>David W. Burke</h4>
@@ -177,7 +177,7 @@ if ($ceremony_post -> have_posts()) {
 	<div class="outer-container">
 		<div class="grid-container">
 			<div class="usagm-quotation">
-				<img class="quote-image" src="http://dev.usagm.com/wp-content/uploads/2016/07/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot" alt="John Lansing image">
+				<img class="quote-image" src="<?php echo get_template_directory_uri(); ?>/img/john_lansing_ceo-sq.jpg" class="bbg__quotation-attribution__mugshot" alt="John Lansing image">
 				<h4 class="quote-text">These journalists have exemplified the definition of bravery and courage by risking their lives to report from some of the most dangerous places in the world.</h4>
 				<p class="quote-byline">
 					John Lansing<br>
