@@ -27,6 +27,8 @@ $page_content = get_the_content();
 $page_content = apply_filters('the_content', $page_content);
 $page_content = do_shortcode($page_content);
 
+$post_subtitle = get_post_meta($post_id, 'post_subtitle', true) ?? '';
+
 $post_byline = '';
 if (get_field('include_byline', $post_id)) {
 	$post_byline = get_post_meta($post_id, 'byline_override');
@@ -429,6 +431,9 @@ $hideFeaturedImage = false;
 						<?php
 							echo '<header>';
 							echo 	'<h3 class="article-title">' . $page_title . '</h3>';
+							if (!empty($post_subtitle)) {
+								echo 	'<h4 class="article-subtitle">' . $post_subtitle . '</h4>';
+							}
 							echo 	'<p class="date-meta">';
 							if (!empty($post_byline)) {
 								echo 	'by ' . $post_byline . '<br>';

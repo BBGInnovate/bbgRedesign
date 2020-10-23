@@ -55,6 +55,17 @@ h3 {clear: none;}
     text-decoration: none;
 }
 
+.article-subtitle {
+    font-family: $font-sans;
+    font-size: 2rem;
+    line-height: 1.6rem;
+    font-weight: $font-light;
+    color: $color-gray-medium;
+    margin: 0 0 2rem 0;
+    text-decoration: none;
+    p.sans {display: inline;}
+}
+
 .sidebar-section-header,
 .sidebar-section-header a:link,
 .sidebar-section-header a:visited {
