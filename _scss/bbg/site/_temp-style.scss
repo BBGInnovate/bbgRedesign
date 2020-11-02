@@ -18,6 +18,12 @@ aside {
 
 .entity-press-release-group {
 	margin-bottom: 6rem;
+
+	.entity-press-release-image {
+		img {
+			width: 100%;
+		}
+	}
 	.sidebar-article-title {margin-bottom: 0;}
 	.read-more {
 		border-top: 1px solid #f1f1f1;

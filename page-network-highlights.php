@@ -114,6 +114,17 @@ if ($featured_media_result != "") {
 							$press_release_markup .= 				'</h4>';
 							$press_release_markup .= 			'<header>';
 							$press_release_markup .= 			'<p class="date-meta">' . get_the_date('F j, Y', $entity['press-releases'][0]->ID) . '</p>';
+
+							$thumbnail = get_the_post_thumbnail_url($entity['press-releases'][0]->ID, 'large');
+							if ($thumbnail) {
+								$press_release_markup .= 		'<div class="entity-press-release-image">';
+								$press_release_markup .= 			'<a href="' . get_the_permalink($entity['press-releases'][0]->ID) . '">';
+								$press_release_markup .= 				'<img src="' . $thumbnail . '" alt="Image link to ' . get_the_title($entity['press-releases'][0]->ID) . ' post">';
+								$press_release_markup .= 			'</a>';
+								$press_release_markup .= 		'</div>';
+							}
+
+
 							$press_release_markup .= 			'<p>' . $entity['press-releases'][0]->post_excerpt . '</p>';
 							$press_release_markup .= 		'</div>';
 							$press_release_markup .= 	'</div>';

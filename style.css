@@ -8035,6 +8035,8 @@ aside {
 
 .entity-press-release-group {
   margin-bottom: 6rem; }
+  .entity-press-release-group .entity-press-release-image img {
+    width: 100%; }
   .entity-press-release-group .sidebar-article-title {
     margin-bottom: 0; }
   .entity-press-release-group .read-more {
