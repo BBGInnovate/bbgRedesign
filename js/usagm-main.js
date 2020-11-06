@@ -505,6 +505,19 @@ function handleGovDisclaimerDropdown() {
 }
 handleGovDisclaimerDropdown();
 
+function handleInstagramLinksHover() {
+	const fadeSpeed = 250;
+	$('.instagram-links .grid-third').each(function() {
+		$(this).children('a').hide();
+		$(this).hover(function() {
+			$(this).children('a').fadeIn(fadeSpeed);
+		}, function() {
+			$(this).children('a').fadeOut(fadeSpeed);
+		})
+	});
+}
+handleInstagramLinksHover();
+
 $(window).on('resize', function() {
 	scaleRibbonBanner();
 	scaleArticleImages();
