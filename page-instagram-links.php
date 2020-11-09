@@ -36,7 +36,12 @@ if ($custom_query->have_posts()) {
         $custom_query->the_post();
 
         $instagramLink['title'] = get_the_title();
-        $instagramLink['image_src'] = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+        $thumbnailUrl = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+        $thumbnailFiletype = wp_check_filetype($thumbnailUrl);
+        if ($thumbnailFiletype['ext'] == 'gif') {
+            $thumbnailUrl = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+        }
+        $instagramLink['image_src'] = $thumbnailUrl;
         $instagramLink['url'] = get_post_meta( get_the_ID(), 'instagram_link_url', true );
 
         if ($instagramLink['image_src']) {
