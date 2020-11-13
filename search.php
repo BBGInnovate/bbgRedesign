@@ -43,14 +43,17 @@ get_header();
         $googleResults = array();
 
         if (defined('GOOGLE_SITE_SEARCH_API_KEY') && defined('GOOGLE_SITE_SEARCH_CX')) {
-            $start = '';
-            if (isset($_GET['start'])) {
-                $start = $_GET['start'];
+            $searchBlacklist = array('system.collections.arraylist');
+            if (!in_array($searchQuery, $searchBlacklist)) {
+                $start = '';
+                if (isset($_GET['start'])) {
+                    $start = $_GET['start'];
+                }
+
+                $apiUrl = getGoogleSearchUrl($searchQuery, $start);
+
+                $googleResults = fetchGoogleResults($apiUrl);
             }
-
-            $apiUrl = getGoogleSearchUrl($searchQuery, $start);
-
-            $googleResults = fetchGoogleResults($apiUrl);
         }
 
         if (!empty($googleResults) && !isset($googleResults['error'])) {
