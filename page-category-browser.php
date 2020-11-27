@@ -73,6 +73,7 @@ if ($currentPage > 1) {
 
 $hasTeamFilter = false;
 $mobileAppsPostContent = "";
+$isBurkeCandidate = false;
 
 if ($category_browser_type == "Page Children") {
 	/*** USED FOR APPS LANDING PAGE ****/
@@ -112,6 +113,7 @@ if ($category_browser_type == "Page Children") {
 	}
 
 	if ($categoryBrowsePostType == 'burke_candidate') {
+		$isBurkeCandidate = true;
 		$qParams['posts_per_page'] = -1;
 		$qParams['meta_query'] = array(
 			'relation' => 'OR',
@@ -199,6 +201,14 @@ get_header();
 				echo 		'<div class="page-content">';
 				echo 			$page_content;
 				echo 		'</div>';
+				echo 	'</div>';
+				echo '</div>';
+			}
+
+			if ($isBurkeCandidate) {
+				echo '<div class="outer-container">';
+				echo 	'<div class="grid-container">';
+				echo 		$page_content;
 				echo 	'</div>';
 				echo '</div>';
 			}
@@ -332,7 +342,7 @@ get_header();
 		else {
 			get_template_part('template-parts/content', 'none');
 		}
-		if (!is_page('deep-dive-series')) {
+		if (!is_page('deep-dive-series') && !$isBurkeCandidate) {
 			echo $page_content;
 		}
 	?>
