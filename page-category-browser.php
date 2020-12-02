@@ -205,7 +205,7 @@ get_header();
 				echo '</div>';
 			}
 
-			if ($isBurkeCandidate) {
+			if ($isBurkeCandidate && $page_content != '') {
 				echo '<div class="outer-container">';
 				echo 	'<div class="grid-container">';
 				echo 		$page_content;
