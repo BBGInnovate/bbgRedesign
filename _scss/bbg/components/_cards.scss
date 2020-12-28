@@ -682,7 +682,7 @@
 }
 
 .cards--size-1-5-small {
-    @include cardLayoutGroup(5, 5, 'full');
+    @include cardLayoutGroup(5, 5, 'half');
 }
 
 .cards--size-1-6-small {
@@ -796,7 +796,7 @@
     }
 
     .cards--size-1-5-small {
-        @include cardLayoutGroup(5, 5, 'full');
+        @include cardLayoutGroup(1, 5, 'third');
     }
 
     .cards--size-1-6-small {
@@ -904,7 +904,7 @@
     }
 
     .cards--size-1-5-small {
-        @include cardLayoutGroup(1, 5, 'fifth');
+        @include cardLayoutGroup(1, 5, 'fourth');
     }
 
     .cards--size-1-6-small {
