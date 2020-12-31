@@ -9,6 +9,9 @@
  */
 
 require 'inc/bbg-functions-assemble.php';
+require 'inc/custom-field-data.php';
+require 'inc/custom-field-parts.php';
+require 'inc/custom-field-modules.php';
 
 // PAGE INFORMATION
 $page_content = "";
@@ -163,6 +166,23 @@ get_header();
 		$threat_structure .= 	'</div>';
 		$threat_structure .= '</section>';
 		echo $threat_structure;
+	?>
+
+	<?php
+		$includeRibbon = get_field('include_ribbon');
+		if (!empty($includeRibbon) && $includeRibbon == true) {
+			if (have_rows('ribbon_group')) {
+				while (have_rows('ribbon_group')) {
+					the_row();
+
+					$ribbonData = get_ribbon_data();
+					$ribbonParts = build_ribbon_parts($ribbonData);
+					$ribbonModule = assemble_ribbon_module($ribbonParts);
+
+					echo $ribbonModule;
+				}
+			}
+		}
 	?>
 
 	<?php
