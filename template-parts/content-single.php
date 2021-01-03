@@ -544,11 +544,12 @@ $hideFeaturedImage = false;
 
 <?php if (!empty($media_dev_map) && !empty($mapHeadline)) { ?>
 
-<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
+<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
 <script type="text/javascript">
 	L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
-	var map = L.mapbox.map('map-featured', 'mapbox.streets')
+	var map = L.mapbox.map('map-featured')
+	.addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
 	<?php echo '.setView(['. $media_dev_map['lat'] . ', ' . $media_dev_map['lng'] . '], ' . $zoom . ');'; ?>
 	// MEDIA DEV JS
 	map.scrollWheelZoom.disable();
@@ -583,11 +584,12 @@ $hideFeaturedImage = false;
 <?php
 if (!empty($addFeaturedMap) && $media_dev_map == "") {
 ?>
-	<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
-	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
+	<script type="text/javascript" src='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
 	<script type="text/javascript">
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
-		var map = L.mapbox.map('map-featured', 'mapbox.emerald')
+		var map = L.mapbox.map('map-featured')
+		.addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/light-v10'))
 	    var markers = L.mapbox.featureLayer();
 	    for (var i = 0; i < geojson[0].features.length; i++) {
 	        var coords = geojson[0].features[i].geometry.coordinates;
@@ -642,12 +644,13 @@ if (!empty($addFeaturedMap) && $media_dev_map == "") {
 // IF MAP, LOAD JS, CSS
 if ($includeMap && $mapLocation) {
 ?>
-	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.js'></script>
-	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css' rel='stylesheet' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.3.0/mapbox.css' rel='stylesheet' />
 
 	<script>
 		L.mapbox.accessToken = 'pk.eyJ1IjoiYmJnd2ViZGV2IiwiYSI6ImNpcDVvY3VqYjAwbmx1d2tyOXlxdXhxcHkifQ.cD-q14aQKbS6gjG2WO-4nw';
-		var map = L.mapbox.map('map', 'mapbox.streets')
+		var map = L.mapbox.map('map')
+		.addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'))
 		<?php echo '.setView(['. $lat . ', ' . $lng . '], ' . $zoom . ');'; ?>
 
 		map.scrollWheelZoom.disable();
