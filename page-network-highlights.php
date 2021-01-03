@@ -122,6 +122,8 @@ if ($featured_media_result != "") {
 								$press_release_markup .= 				'<img src="' . $thumbnail . '" alt="Image link to ' . get_the_title($entity['press-releases'][0]->ID) . ' post">';
 								$press_release_markup .= 			'</a>';
 								$press_release_markup .= 		'</div>';
+							} else {
+								$press_release_markup .= 		'<img src="' . get_template_directory_uri() . '/img/unavailable-image.png" alt="Image unavailable" />';
 							}
 
 
