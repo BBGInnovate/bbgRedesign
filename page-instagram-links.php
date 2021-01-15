@@ -36,7 +36,7 @@ if ($custom_query->have_posts()) {
         $custom_query->the_post();
 
         $instagramLink['title'] = get_the_title();
-        $thumbnailUrl = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+        $thumbnailUrl = get_the_post_thumbnail_url( get_the_ID(), 'large-mugshot' );
         $thumbnailFiletype = wp_check_filetype($thumbnailUrl);
         if ($thumbnailFiletype['ext'] == 'gif') {
             $thumbnailUrl = get_the_post_thumbnail_url( get_the_ID(), 'full' );
