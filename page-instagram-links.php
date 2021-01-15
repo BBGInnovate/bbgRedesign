@@ -81,7 +81,7 @@ get_header();
             <div class="inner-container instagram-links">
             <?php
                 foreach ($instagramLinks as $instagramLink) {
-                    echo '<div class="grid-third instagram-link">';
+                    echo '<div class="grid-third instagram-link instagram-link-clears">';
                     echo     '<img src="' . $instagramLink['image_src'] . '"/>';
                     echo     '<a href="' . $instagramLink['url'] . '"/>';
                     echo         '<h3>' . $instagramLink['title'] . '</h3>';

@@ -458,3 +458,7 @@ $custom-entity-fifth: (
 		}
 	}
 }
+
+@include media($medium-large-screen) {
+	.instagram-link.instagram-link-clears:nth-of-type(3n+1) {clear: left;}
+}

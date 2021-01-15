@@ -8426,6 +8426,10 @@ img,
       font-size: 2.5rem;
       color: #000000; }
 
+@media screen and (min-width: 900px) {
+  .instagram-link.instagram-link-clears:nth-of-type(3n+1) {
+    clear: left; } }
+
 /**
  * CH 02 - 2- and 3-COLUMN PAGE STRUCTURE
  * CH 03 - FOOTER STYLES
