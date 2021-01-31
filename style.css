@@ -8067,6 +8067,15 @@ aside {
   color: #147bd1;
   text-decoration: none; }
 
+p.featured-image-caption {
+  font-family: "Alegreya Sans", sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  line-height: 1.7rem;
+  color: #666666;
+  margin-bottom: 2.5rem;
+  margin-top: -1.5em; }
+
 ul.meeting-speakers li {
   margin-bottom: 2rem; }
 

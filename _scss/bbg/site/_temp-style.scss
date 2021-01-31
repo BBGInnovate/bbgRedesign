@@ -54,6 +54,16 @@ aside {
 	text-decoration: none;
 }
 
+p.featured-image-caption {
+	font-family: $font-sans;
+	font-size: 0.9em;
+	font-weight: $font-normal;
+	line-height: 1.7rem;
+	color: $gray;
+	margin-bottom: 2.5rem;
+	margin-top: -1.5em;
+}
+
 // SPEAKER ACCORDIONS ON EVENTS PAGES
 ul.meeting-speakers {
 	li {margin-bottom: 2rem;}

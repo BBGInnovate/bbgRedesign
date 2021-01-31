@@ -45,6 +45,8 @@ if ($dateline != "") {
 	}
 }
 
+$show_featured_image_caption = get_post_meta($post_id, 'show_featured_image_caption', true) ?? false;
+
 // RELATIVE PROFILE? SHOW IN RIGHT SIDEBAR
 $relatedProfileID = get_post_meta(get_the_ID(), 'statement_related_profile', true);
 $includeRelatedProfile = false;
@@ -456,6 +458,14 @@ $hideFeaturedImage = false;
 							}
 							elseif (!empty($post_thumbnail_url)) {
 								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
+								if ($show_featured_image_caption) {
+									$caption = wp_get_attachment_caption(get_post_thumbnail_id());
+									if (!empty($caption)) {
+										echo '<p class="featured-image-caption">';
+										echo $caption;
+										echo '</p>';
+									}
+								}
 							}
 
 							if ($isPodcast) {
