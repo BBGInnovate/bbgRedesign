@@ -509,7 +509,7 @@ function getSidebarDropdownContent() {
                             $download_select .= '<h3 class="sidebar-section-header">' . $sidebarDownloadsTitle . '</h3>';
                         }
                         $download_select .= '<form style="max-width: 100%;">';
-                        $download_select .=     '<select name="file_download_list" id="file_download_list" style="display: inline-block; max-width: 100%;">';
+                        $download_select .=     '<select name="file_download_list" id="file_download_list" class="file_download_list" style="display: inline-block; max-width: 100%;">';
                         $download_select .=         '<option>' . $sidebarDownloadsDefault . '</option>';
 
                         foreach ($sidebarDownloadsRows as $row) {

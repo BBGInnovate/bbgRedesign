@@ -68,33 +68,36 @@ jQuery(document).ready(function() {
 
     /* used on the 2-column page, dropdown nav for sidebar */
     // file downloads
-   if (jQuery('#downloadFile').length && jQuery('#file_download_list').length) {
+   if (jQuery('.downloadFile').length && jQuery('.file_download_list').length) {
         // CHANGE COLOR AND "DISABLE" BUTTON UNTIL USER SELECTS AN OPTION
-        function disableDownloadButtonColor() {
-          jQuery('#downloadFile').css({'background-color':'#e1e1e1', 'cursor':'default'});
-          jQuery('.usa-button').hover(function() {
-            jQuery('#downloadFile').css('background-color', '#e1e1e1');
+        function disableDownloadButton(downloadFileButtonSelector) {
+          downloadFileButtonSelector.css({'background-color':'#e1e1e1', 'cursor':'default'});
+          downloadFileButtonSelector.off('mouseenter mouseleave');
+        }
+        disableDownloadButton(jQuery('.downloadFile'));
+
+        function enableDownloadButton(downloadFileButtonSelector) {
+          downloadFileButtonSelector.css({'background-color':'#0071bc', 'cursor':'pointer'});
+          downloadFileButtonSelector.hover(function() {
+            jQuery(this).css('background-color', '#205493');
+          }, function() {
+            jQuery(this).css('background-color', '#0071bc');
           });
         }
-        disableDownloadButtonColor();
 
-        jQuery('#file_download_list').change(function() {
-          if (jQuery('#file_download_list').val() !== 'Select a calendar year') {
-            jQuery('#downloadFile').css({'background-color':'#0071bc', 'cursor':'pointer'});
-            jQuery('.usa-button').hover(function() {
-              jQuery('#downloadFile').css('background-color', '#205493');
-            }, function() {
-              jQuery('#downloadFile').css({'background-color':'#0071bc'});
-            });
-          }
-          else {
-            disableDownloadButtonColor();
+        jQuery('.file_download_list').change(function() {
+          const downloadFileButton = jQuery(this).closest('.sidebar-section').find('.downloadFile');
+          if (jQuery(this).val() !== 'Select a calendar year' && jQuery(this).val() !== 'Select a download') {
+            enableDownloadButton(downloadFileButton);
+          } else {
+            disableDownloadButton(downloadFileButton);
           }
 
           // WHEN USER CLICKS DOWNLOAD, MAKE SURE THERE IS AN OPTION SELECTED TO DOWNLOAD
           jQuery('button.downloadFile').click(function() {
-            if (jQuery('#file_download_list').val() !== 'Select a calendar year') {
-              url=jQuery(this).parent().find('#file_download_list').val();
+            const fileDownloadListVal = jQuery(this).parent().find('.file_download_list').val();
+            if (fileDownloadListVal !== 'Select a calendar year' && fileDownloadListVal !== 'Select a download') {
+              const url = fileDownloadListVal;
               window.open(url, '_blank');
             }
           });
