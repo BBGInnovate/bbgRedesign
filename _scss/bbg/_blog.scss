@@ -667,6 +667,11 @@ e.g. on the intern testimonial page */
 /* Ajax Load More Overrides */
 #ajax-load-more .alm-listing .alm-reveal > li {
 
+	background: 0 0;
+	margin: 0 0 30px;
+	padding: 0 0 0 170px;
+	overflow: hidden;
+	position: relative;
 	padding: 0px;
 
 	img {
@@ -675,6 +680,17 @@ e.g. on the intern testimonial page */
 		position: relative;
 		width: 30%;
 		float: left;
+		left: 0;
+		top: 0;
+		border-radius: 2px
+	}
+
+	h3 {
+		margin: 0 0 10px
+	}
+
+	p {
+		margin: 0 0 5px 0;
 	}
 
 	@include media($medium-screen) {

@@ -7412,13 +7412,25 @@ e.g. on the intern testimonial page */
 
 /* Ajax Load More Overrides */
 #ajax-load-more .alm-listing .alm-reveal > li {
+  background: 0 0;
+  margin: 0 0 30px;
+  padding: 0 0 0 170px;
+  overflow: hidden;
+  position: relative;
   padding: 0px; }
   #ajax-load-more .alm-listing .alm-reveal > li img {
     margin-right: 20px;
     margin-bottom: 0;
     position: relative;
     width: 30%;
-    float: left; }
+    float: left;
+    left: 0;
+    top: 0;
+    border-radius: 2px; }
+  #ajax-load-more .alm-listing .alm-reveal > li h3 {
+    margin: 0 0 10px; }
+  #ajax-load-more .alm-listing .alm-reveal > li p {
+    margin: 0 0 5px 0; }
   @media screen and (min-width: 600px) {
     #ajax-load-more .alm-listing .alm-reveal > li {
       padding: 0 0 0 170px; }
