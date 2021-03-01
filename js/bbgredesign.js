@@ -1,4 +1,4 @@
-/**
+/*
  * bbgWPtheme.js
  *
  * Custom JS for the bbgWPtheme
@@ -168,7 +168,7 @@ jQuery(document).ready(function() {
         //jQuery("div[data-name='committee_members'] select").chosen();
     }
 
-    /*** Add client side validation to the content request form.  We use Fast Secure Contact Form to generate it ***/
+    /* Add client side validation to the content request form.  We use Fast Secure Contact Form to generate it */
     if (jQuery("form#fscf_form4").length) {
         
         //hide the selector for the form item
@@ -182,10 +182,10 @@ jQuery(document).ready(function() {
           var selectedNetwork = jQuery('#fscf_mail_to4').val();
           var email = jQuery('#fscf_email4').val();
           var audience = jQuery('#fscf_field4_4').val(); 
-          var textChecked = jQuery('#fscf_field4_5_1').attr('checked');
-          var photosChecked = jQuery('#fscf_field4_5_2').attr('checked');
-          var videoChecked = jQuery('#fscf_field4_5_3').attr('checked');
-          var audioChecked = jQuery('#fscf_field4_5_4').attr('checked');
+          var textChecked = jQuery('#fscf_field4_5_1').prop('checked');
+          var photosChecked = jQuery('#fscf_field4_5_2').prop('checked');
+          var videoChecked = jQuery('#fscf_field4_5_3').prop('checked');
+          var audioChecked = jQuery('#fscf_field4_5_4').prop('checked');
           var link = jQuery('#fscf_field4_6').val();
           var awareThirdYes = jQuery('#fscf_field4_8_1').prop('checked');
           var awareContentYes = jQuery('#fscf_field4_9_1').prop('checked');
@@ -199,7 +199,7 @@ jQuery(document).ready(function() {
             errorMsg += "Please enter your email address\n\n";
           }
           if (audience == "") {
-            errorMsg += "Please enter the target audience\n\n"
+            errorMsg += "Please enter the target audience\n\n";
           }
           if ( ! (textChecked || photosChecked || videoChecked || audioChecked) ) {
             errorMsg += "Please select one or more content types you're interested in\n\n";
@@ -208,7 +208,7 @@ jQuery(document).ready(function() {
             errorMsg += "Please enter a link to the content you're interested in from a BBG website\n\n";
           }
           if (!awareThirdYes) {
-            errorMsg += "Please acknowledge that you are aware that our content often contains material from third parties such as the Associated Press (AP), Agence France-Presse (AFP) and Reuters.\n\n"
+            errorMsg += "Please acknowledge that you are aware that our content often contains material from third parties such as the Associated Press (AP), Agence France-Presse (AFP) and Reuters.\n\n";
           }
           if (!awareContentYes) {
             errorMsg += "Please acknowledge that you are aware that we require our content to be aired or used in a way in which its source is made clear.\n\n"
