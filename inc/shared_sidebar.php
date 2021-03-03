@@ -167,8 +167,6 @@ function getSidebarContent($postId) {
                 while ($custom_query->have_posts())  {
                     $custom_query->the_post();
 
-                    error_log(get_the_title());
-
                     $posts_for_tag .= '<div class="sidebar-related">';
                     $posts_for_tag .=     '<h4 class="sidebar-article-title">';
                     $posts_for_tag .=         '<a href="' . get_the_permalink() . '">';
