@@ -4,7 +4,11 @@ function getTitlePartsFromPost($wpPost) {
     if (empty($wpPost)) {
         return array();
     }
-    $wpPost = $wpPost[0];
+
+    if (is_array($wpPost)) {
+        $wpPost = $wpPost[0];
+    }
+
     $post = array();
 
     $post['text'] = $wpPost->post_title;
@@ -76,7 +80,12 @@ function getDateFromPost($postArg) {
     if (empty($postArg)) {
         return array();
     }
-    $wpPost = $postArg[0];
+
+    $wpPost = $postArg;
+    if (is_array($postArg)) {
+        $wpPost = $postArg[0];
+    }
+
     $result = array();
 
     $result = date_format(date_create($wpPost->post_date), 'F d, Y');
@@ -454,6 +463,64 @@ function getRowsDataWidget() {
     return $card;
 }
 
+function getRowsDataPressReleases() {
+    $cards = array();
+
+    $backgroundGroup = get_sub_field('background');
+    $background = parseBackgroundGroup($backgroundGroup);
+    $color = getColorParts(get_sub_field('color'), false);
+    $excludedPosts = get_sub_field('excluded_posts');
+
+    $postsNotIn = array();
+    foreach($excludedPosts as $excludedPost) {
+        $postsNotIn[] = $excludedPost['post']->ID;
+    }
+
+    $labelCard = array();
+    $labelCard['background'] = $background;
+    $labelCard['title']['text'] = 'Press Releases';
+    $labelCard['title']['color'] = $color;
+    $cards[] = $labelCard;
+
+    $pressReleaseObj = get_category_by_slug('press-release');
+    $pressReleaseID = $pressReleaseObj->term_id;
+
+    $qParams = array(
+        'post_type' => 'post',
+        'posts_per_page' => 3,
+        'post__not_in' => $postsNotIn,
+        'category__and' => array($pressReleaseID),
+        'category__not_in' => array(2280),
+        'orderby', 'date',
+        'order', 'DESC'
+    );
+
+    $pressReleases = get_posts($qParams);
+    foreach ($pressReleases as $pressRelease) {
+        $card = array();
+
+        $categories = wp_list_pluck(get_the_category($pressRelease->ID), 'slug');
+
+        $entities = array('usagm', 'voa', 'rferl', 'ocb', 'rfa', 'mbn');
+        $found = array_intersect($entities, $categories);
+        if (!empty($found)) {
+            $slug = array_shift($found);
+            $watermark = getWatermarkParts($slug);
+            $card['watermark'] = $watermark;
+        }
+
+        $card['title'] = getTitlePartsFromPost($pressRelease);
+        $card['title']['color'] = $color;
+        $card['date'] = getDateFromPost($pressRelease);
+        $card['include_date'] = true;
+        $card['background'] = $background;
+
+        $cards[] = $card;
+    }
+
+    return $cards;
+}
+
 function getCardsRowsData($postId) {
 
     $cardsRows = array();
@@ -468,48 +535,65 @@ function getCardsRowsData($postId) {
             $cardsRow['cards_margin_top'] = get_sub_field('cards_margin_top');
             $cardsRow['cards_margin_bottom'] = get_sub_field('cards_margin_bottom');
             $cardsRow['cards_gutter_size'] = get_sub_field('cards_gutter_size');
-            $layout = get_sub_field('cards_layout');
+            $cardsLayout = get_sub_field('cards_layout');
 
-            $cardsRow['cards_layout'] = explode('-', $layout);
-            $cardsRow['cards_height'] = array_pop($cardsRow['cards_layout']);
+            if ($cardsLayout == 'press-releases') {
+                $cardsLayout = '3-5-5-5-small';
 
-            if (have_rows('cards_content', $postId)) {
-                while (have_rows('cards_content', $postId)) {
-                    the_row();
-                    $card = array();
-
-                    switch(get_row_layout()) {
-                        case 'general':
-                            $card = getRowsDataGeneral($postId);
-                            break;
-                        case 'header':
-                            $card = getRowsDataHeader();
-                            break;
-                        case 'video_internal':
-                            $card = getRowsDataVideoInternal();
-                            break;
-                        case 'video_youtube':
-                            $card = getRowsDataVideoYouTube();
-                            break;
-                        case 'social_media_twitter':
-                            $card = getRowsDataSocialMediaTwitter();
-                            break;
-                        case 'image':
-                            $card = getRowsDataImage();
-                            break;
-                        case 'flex_text':
-                            $card = getRowsDataFlexText();
-                            break;
-                        case 'widget':
-                            $card = getRowsDataWidget();
-                            break;
+                $cards = array();
+                if (have_rows('press_releases', $postId)) {
+                    while (have_rows('press_releases', $postId)) {
+                        the_row();
+                        $cards = getRowsDataPressReleases();
                     }
+                }
 
-                    $card['type'] = get_row_layout();
-
+                foreach($cards as $card) {
+                    $card['type'] = 'header';
                     $cardsRow['cards_content'][] = $card;
                 }
+            } else {
+                if (have_rows('cards_content', $postId)) {
+                    while (have_rows('cards_content', $postId)) {
+                        the_row();
+                        $card = array();
+
+                        $layout = get_row_layout();
+
+                        switch($layout) {
+                            case 'general':
+                                $card = getRowsDataGeneral($postId);
+                                break;
+                            case 'header':
+                                $card = getRowsDataHeader();
+                                break;
+                            case 'video_internal':
+                                $card = getRowsDataVideoInternal();
+                                break;
+                            case 'video_youtube':
+                                $card = getRowsDataVideoYouTube();
+                                break;
+                            case 'social_media_twitter':
+                                $card = getRowsDataSocialMediaTwitter();
+                                break;
+                            case 'image':
+                                $card = getRowsDataImage();
+                                break;
+                            case 'flex_text':
+                                $card = getRowsDataFlexText();
+                                break;
+                            case 'widget':
+                                $card = getRowsDataWidget();
+                                break;
+                        }
+                        $card['type'] = $layout;
+                        $cardsRow['cards_content'][] = $card;
+                    }
+                }
             }
+
+            $cardsRow['cards_layout'] = explode('-', $cardsLayout);
+            $cardsRow['cards_height'] = array_pop($cardsRow['cards_layout']);
             $cardsRows[] = $cardsRow;
         }
     }
