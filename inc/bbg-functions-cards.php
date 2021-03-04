@@ -480,7 +480,7 @@ function getRowsDataPressReleases() {
     $labelCard['background'] = $background;
     $labelCard['title']['text'] = 'Press Releases';
     $labelCard['title']['color'] = $color;
-    $labelCard['title']['size'] = 'large';
+    $labelCard['title']['size'] = 'medium';
     $cards[] = $labelCard;
 
     $pressReleaseObj = get_category_by_slug('press-release');
