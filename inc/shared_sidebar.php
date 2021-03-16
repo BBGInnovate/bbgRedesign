@@ -464,6 +464,13 @@ function getSidebarContent($postId) {
                     }
                     wp_reset_postdata();
                 }
+            } else if (get_row_layout() == 'sidebar_related_posts') {
+                $relatedPostsTitle = get_sub_field('sidebar_related_posts_title');
+                if ($relatedPostsTitle != "") {
+                    $sidebar_markup .= '<h3 class="sidebar-section-header">' . $relatedPostsTitle . '</h3>';
+                }
+
+                $sidebar_markup .= do_shortcode('[yarpp template="yarpp-template-related-posts"]');
             }
         }
     }
