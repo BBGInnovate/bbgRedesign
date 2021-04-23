@@ -465,6 +465,13 @@ function getSidebarContent($postId) {
                 }
 
                 $sidebar_markup .= do_shortcode('[yarpp template="yarpp-template-related-posts"]');
+            } else if (get_row_layout() == 'sidebar_free_text') {
+                $freeTextTitle = get_sub_field('sidebar_free_text_title');
+                if ($freeTextTitle != "") {
+                    $sidebar_markup .= '<h3 class="sidebar-section-header">' . $freeTextTitle . '</h3>';
+                }
+
+                $sidebar_markup .= get_sub_field('sidebar_free_text_text');
             }
         }
     }
