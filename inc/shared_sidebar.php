@@ -472,6 +472,49 @@ function getSidebarContent($postId) {
                 }
 
                 $sidebar_markup .= get_sub_field('sidebar_free_text_text');
+            } else if (get_row_layout() == 'sidebar_languages_served') {
+                $sidebar_markup .= '<div class="nest-container">';
+                $sidebar_markup .=     '<div class="inner-container">';
+                $sidebar_markup .=         '<div class="grid-container">';
+                $sidebar_markup .=             '<h3 class="sidebar-section-header">Languages Served</h3>';
+                $sidebar_markup .=         '</div>';
+
+                while(have_rows('sidebar_languages_served_languages')) {
+                    the_row();
+
+                    $sidebar_markup .=     '<div class="grid-container">';
+                    $sidebar_markup .=         '<h6>' . get_sub_field('sidebar_languages_served_language_name') . '</h6>';
+                    $sidebar_markup .=     '</div>';
+
+                    if(have_rows('sidebar_languages_served_language_sites')) {
+                        while(have_rows('sidebar_languages_served_language_sites')) {
+                            the_row();
+
+                            $link = get_sub_field('sidebar_languages_served_language_site_url');
+                            $serviceInLanguage = get_sub_field('sidebar_languages_served_language_site_name_in_language');
+                            $serviceInEnglish = get_sub_field('sidebar_languages_served_language_site_name_in_english');
+                            $network = get_sub_field('sidebar_languages_served_language_site_network');
+                            $serviceName = $serviceInLanguage;
+                            $entityLogo = getTinyEntityLogo($network);
+
+                            if (!$entityLogo) {
+                                $entityLogo = '';
+                            }
+
+                            $sidebar_markup .= '<div class="inner-container">';
+                            $sidebar_markup .=     '<div class="small-side-content-container">';
+                            $sidebar_markup .=         '<img width="20" height="20" style="height:20px !important; width:20px !important; max-width:none; margin-bottom:0;" src="' . $entityLogo . '" alt="Entity logo">';
+                            $sidebar_markup .=         '<a title="' . $serviceInEnglish . '" target="_blank" href="' . $link . '" class="bbg__jobs-list__title">' . $serviceName . '</a>';
+                            $sidebar_markup .=     '</div>';
+                            $sidebar_markup .=     '<div class="small-main-content-container">';
+                            $sidebar_markup .=         str_replace(array('https://', 'http://'), '', $link);
+                            $sidebar_markup .=     '</div>';
+                            $sidebar_markup .= '</div>';
+                        }
+                    }
+                }
+                $sidebar_markup .=     '</div>';
+                $sidebar_markup .= '</div>';
             }
         }
     }
