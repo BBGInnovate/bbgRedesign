@@ -472,28 +472,30 @@ function getSidebarContent($postId) {
                 }
 
                 $sidebar_markup .= get_sub_field('sidebar_free_text_text');
-            } else if (get_row_layout() == 'sidebar_languages_served') {
+            } else if (get_row_layout() == 'sidebar_language_sites') {
+                $sectionTitle = get_sub_field('sidebar_language_sites_title') ?: '';
+
                 $sidebar_markup .= '<div class="nest-container">';
                 $sidebar_markup .=     '<div class="inner-container">';
                 $sidebar_markup .=         '<div class="grid-container">';
-                $sidebar_markup .=             '<h3 class="sidebar-section-header">Languages Served</h3>';
+                $sidebar_markup .=             '<h3 class="sidebar-section-header">' . $sectionTitle . '</h3>';
                 $sidebar_markup .=         '</div>';
 
-                while(have_rows('sidebar_languages_served_languages')) {
+                while(have_rows('sidebar_language_sites_lists')) {
                     the_row();
 
                     $sidebar_markup .=     '<div class="grid-container">';
-                    $sidebar_markup .=         '<h6>' . get_sub_field('sidebar_languages_served_language_name') . '</h6>';
+                    $sidebar_markup .=         '<h6>' . get_sub_field('sidebar_language_sites_language_name') . '</h6>';
                     $sidebar_markup .=     '</div>';
 
-                    if(have_rows('sidebar_languages_served_language_sites')) {
-                        while(have_rows('sidebar_languages_served_language_sites')) {
+                    if(have_rows('sidebar_language_sites_language_sites')) {
+                        while(have_rows('sidebar_language_sites_language_sites')) {
                             the_row();
 
-                            $link = get_sub_field('sidebar_languages_served_language_site_url');
-                            $serviceInLanguage = get_sub_field('sidebar_languages_served_language_site_name_in_language');
-                            $serviceInEnglish = get_sub_field('sidebar_languages_served_language_site_name_in_english');
-                            $network = get_sub_field('sidebar_languages_served_language_site_network');
+                            $link = get_sub_field('sidebar_language_sites_language_site_url');
+                            $serviceInLanguage = get_sub_field('sidebar_language_sites_language_site_name_in_language');
+                            $serviceInEnglish = get_sub_field('sidebar_language_sites_language_site_name_in_english');
+                            $network = get_sub_field('sidebar_language_sites_language_site_network');
                             $serviceName = $serviceInLanguage;
                             $entityLogo = getTinyEntityLogo($network);
 
