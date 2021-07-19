@@ -459,7 +459,7 @@ $hideFeaturedImage = false;
 							elseif (!empty($post_thumbnail_url)) {
 								echo '<img src="' . $post_thumbnail_url . '" alt="' . $page_title . '">';
 								if ($show_featured_image_caption) {
-									$caption = wp_get_attachment_caption(get_post_thumbnail_id());
+									$caption = wp_get_attachment_caption(get_post_thumbnail_id($post_id));
 									if (!empty($caption)) {
 										echo '<p class="featured-image-caption">';
 										echo $caption;
