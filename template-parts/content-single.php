@@ -45,7 +45,7 @@ if ($dateline != "") {
 	}
 }
 
-$show_featured_image_caption = get_post_meta($post_id, 'show_featured_image_caption', true) ?? false;
+$show_featured_image_caption = get_post_meta($post_id, 'show_featured_image_caption', true) ? true : false;
 
 // RELATIVE PROFILE? SHOW IN RIGHT SIDEBAR
 $relatedProfileID = get_post_meta(get_the_ID(), 'statement_related_profile', true);
