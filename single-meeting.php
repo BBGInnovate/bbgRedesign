@@ -21,6 +21,8 @@ if (have_posts()) {
 	$post_thumbnail_url = get_the_post_thumbnail_url();
 	$page_content = apply_filters('the_content', get_the_content());
 
+	$post_subtitle = get_post_meta($page_id, 'post_subtitle', true) ?? '';
+
 	$project_category_id = get_cat_id('Project');
 	$isProject = has_category($project_category_id);
 
@@ -183,6 +185,9 @@ get_header();
 						<?php
 							$post_header  = '<header>';
 							$post_header .= 	'<h3 class="article-title">' . $page_title . '</h3>';
+							if (!empty($post_subtitle)) {
+								$post_header .= '<h4 class="article-subtitle">' . $post_subtitle . '</h4>';
+							}
 							$post_header .= 	'<p class="date-meta">' . $post_date . '</p>';
 							$post_header .= '</header>';
 							echo $post_header;
