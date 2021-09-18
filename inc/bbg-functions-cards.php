@@ -26,7 +26,12 @@ function getBackgroundImagePartsFromPost($postArg, $imageAlignment = null) {
     if ($imageAlignment != null) {
         $classArray['class'] .= (' image-position-' . $imageAlignment);
     }
-    $wpPost = $postArg[0];
+    if (is_array($postArg)) {
+        $wpPost = $postArg[0];
+    } else {
+        $wpPost = $postArg;
+    }
+
     $post = array();
     if ($wpPost->post_type == 'experts') {
         $profile_photo_id = get_post_meta($wpPost->ID, 'profile_photo', true);
@@ -88,7 +93,7 @@ function getDateFromPost($postArg) {
 
     $result = array();
 
-    $result = date_format(date_create($wpPost->post_date), 'F d, Y');
+    $result['text'] = date_format(date_create($wpPost->post_date), 'F d, Y');
 
     return $result;
 }
@@ -118,8 +123,13 @@ function parseTagGroup($tag) {
     return $result;
 }
 
-function getWatermarkParts($watermark) {
+function getWatermarkParts($watermark, $shouldInvertColor = false) {
     $result = array();
+    if ($shouldInvertColor === true) {
+        $result['shouldInvertColor'] = true;
+    } else {
+        $result['shouldInvertColor'] = false;
+    }
 
     $brandPageUrlBase = get_home_url() . '/networks';
 
@@ -292,7 +302,7 @@ function parseDimensionsGroup($dimensionsGroup) {
     return $result;
 }
 
-function getRowsDataGeneral($postId) {
+function getRowsDataGeneral($postId = null) {
     $card = array();
 
     $card['tag'] = parseTagGroup(get_sub_field('tag'));
@@ -324,6 +334,117 @@ function getRowsDataGeneral($postId) {
     return $card;
 }
 
+function getRowsDataHero($postId = null) {
+    $cards = array();
+
+    $overrideHero = get_sub_field('override_hero');
+    if ($overrideHero === true) {
+        $cards[] = getRowsDataGeneral($postId);
+        return $cards;
+    }
+
+    $qParams = array(
+        'post_type' => 'post',
+        'posts_per_page' => 1,
+        'orderby', 'date',
+        'order', 'DESC'
+    );
+
+    $heroCards = get_posts($qParams);
+    foreach ($heroCards as $heroCard) {
+        $card = array();
+
+        $card['title'] = getTitlePartsFromPost($heroCard);
+        $card['title']['color'] = getColorParts('white');
+        $card['title']['size'] = 'large';
+
+        $imageAlignment = 'center-center';
+        $card['background'] = getBackgroundImagePartsFromPost($heroCard, $imageAlignment);
+
+        $categorySlugs = wp_list_pluck(get_the_category($heroCard->ID), 'slug');
+
+        $entitySlugs = array('usagm', 'voa', 'rferl', 'ocb', 'rfa', 'mbn');
+        $foundEntitySlugs = array_intersect($entitySlugs, $categorySlugs);
+        if (!empty($foundEntitySlugs)) {
+            $entitySlug = array_shift($foundEntitySlugs);
+            $watermark = getWatermarkParts($entitySlug);
+            $card['watermark'] = $watermark;
+        }
+
+        $foundCategorySlugs = array_diff($categorySlugs, $entitySlugs);
+        if (!empty($foundCategorySlugs)) {
+            $categorySlug = array_shift($foundCategorySlugs);
+            $category = get_category_by_slug($categorySlug);
+
+            $card['tag']['text'] = $category->name;
+            $card['tag']['url'] = get_category_link($category);
+        } else {
+            $card['tag'] = array();
+        }
+
+        $cards[] = $card;
+
+        break;
+    }
+
+    return $cards;
+}
+
+function getRowsDataGlobalMediaMatters() {
+    $cards = array();
+
+    $overrideGmm = get_sub_field('override_gmm');
+    if ($overrideGmm === true) {
+        if (have_rows('gmm_overrides')) {
+            while (have_rows('gmm_overrides')) {
+                the_row();
+                $cards[] = getRowsDataGeneral();
+            }
+        }
+        return $cards;
+    }
+
+    $qParams = array(
+        'post_type' => 'post',
+        'posts_per_page' => 3,
+        'orderby', 'date',
+        'order', 'DESC',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => array('global-media-matters'),
+            )
+        ),
+        'category__not_in' => get_category_by_slug('press-release')->term_id
+    );
+
+    $gmmCards = get_posts($qParams);
+    foreach ($gmmCards as $gmmCard) {
+        $card = array();
+
+        $card['title'] = getTitlePartsFromPost($gmmCard);
+        $card['title']['color'] = getColorParts('white');
+
+        $imageAlignment = 'center-center';
+        $card['background'] = getBackgroundImagePartsFromPost($gmmCard, $imageAlignment);
+
+        $categorySlugs = wp_list_pluck(get_the_category($gmmCard->ID), 'slug');
+
+        $entitySlugs = array('usagm', 'voa', 'rferl', 'ocb', 'rfa', 'mbn');
+        $foundEntitySlugs = array_intersect($entitySlugs, $categorySlugs);
+        if (!empty($foundEntitySlugs)) {
+            $entitySlug = array_shift($foundEntitySlugs);
+            $watermark = getWatermarkParts($entitySlug);
+            $card['watermark'] = $watermark;
+        }
+
+        $cards[] = $card;
+    }
+
+    return $cards;
+}
+
 function parsePostGroup($postGroup) {
     $card = array();
 
@@ -341,6 +462,7 @@ function parsePostGroup($postGroup) {
     $card['background'] = getBackgroundImagePartsFromPost($postField, $imageAlignment);
 
     $card['date'] = getDateFromPost($postField);
+    $card['date']['color'] = getColorParts($postGroup['color'] ?? '', false);
     if ($postGroup['include_excerpt'] == true) {
         $card['excerpt'] = getExcerptFromPost($postField);
     }
@@ -466,22 +588,16 @@ function getRowsDataWidget() {
 function getRowsDataPressReleases() {
     $cards = array();
 
-    $backgroundGroup = get_sub_field('background');
-    $background = parseBackgroundGroup($backgroundGroup);
-    $color = getColorParts(get_sub_field('color'), false);
+    $titleGroup = get_sub_field('title'); // size and color
+
     $excludedPosts = get_sub_field('excluded_posts');
 
     $postsNotIn = array();
-    foreach($excludedPosts as $excludedPost) {
-        $postsNotIn[] = $excludedPost['post']->ID;
+    if (!empty($excludedPosts)) {
+        foreach($excludedPosts as $excludedPost) {
+            $postsNotIn[] = $excludedPost['post']->ID;
+        }
     }
-
-    $labelCard = array();
-    $labelCard['background'] = $background;
-    $labelCard['title']['text'] = 'Press Releases';
-    $labelCard['title']['color'] = $color;
-    $labelCard['title']['size'] = 'medium';
-    $cards[] = $labelCard;
 
     $pressReleaseObj = get_category_by_slug('press-release');
     $pressReleaseID = $pressReleaseObj->term_id;
@@ -499,6 +615,7 @@ function getRowsDataPressReleases() {
     $pressReleases = get_posts($qParams);
     foreach ($pressReleases as $pressRelease) {
         $card = array();
+        $card['title'] = parseTextGroup($titleGroup);
 
         $categories = wp_list_pluck(get_the_category($pressRelease->ID), 'slug');
 
@@ -506,15 +623,18 @@ function getRowsDataPressReleases() {
         $found = array_intersect($entities, $categories);
         if (!empty($found)) {
             $slug = array_shift($found);
-            $watermark = getWatermarkParts($slug);
+            $watermark = getWatermarkParts($slug, true);
             $card['watermark'] = $watermark;
         }
 
-        $card['title'] = getTitlePartsFromPost($pressRelease);
-        $card['title']['color'] = $color;
+        $pressReleaseData = getTitlePartsFromPost($pressRelease);
+        $card['title']['text'] = $pressReleaseData['text'];
+        $card['title']['url'] = $pressReleaseData['url'];
+        $card['watermark'] = getWatermarkParts('voa', true);
         $card['date'] = getDateFromPost($pressRelease);
+        $card['date']['color'] = $card['title']['color'];
         $card['include_date'] = true;
-        $card['background'] = $background;
+        $card['header_padding_horizontal'] = 'small';
 
         $cards[] = $card;
     }
@@ -533,13 +653,46 @@ function getCardsRowsData($postId) {
             $cardsRow['cards_heading'] = get_sub_field('cards_heading');
             $cardsRow['cards_heading_url'] = get_sub_field('cards_heading_url');
             $cardsRow['cards_heading_intro'] = get_sub_field('cards_heading_intro');
+            $cardsRow['cards_heading_alignment'] = get_sub_field('cards_heading_alignment');
+            $cardsRow['cards_heading_margin_top'] = get_sub_field('cards_heading_margin_top');
+            $cardsRow['cards_heading_margin_bottom'] = get_sub_field('cards_heading_margin_bottom');
             $cardsRow['cards_margin_top'] = get_sub_field('cards_margin_top');
             $cardsRow['cards_margin_bottom'] = get_sub_field('cards_margin_bottom');
             $cardsRow['cards_gutter_size'] = get_sub_field('cards_gutter_size');
             $cardsLayout = get_sub_field('cards_layout');
 
-            if ($cardsLayout == 'press-releases') {
-                $cardsLayout = '3-5-5-5-small';
+            if ($cardsLayout == 'hero') {
+                $cardsLayout = '1-large';
+
+                $cards = array();
+                if (have_rows('hero')) {
+                    while (have_rows('hero')) {
+                        the_row();
+                        $cards = getRowsDataHero();
+                    }
+                }
+
+                foreach($cards as $card) {
+                    $card['type'] = 'hero';
+                    $cardsRow['cards_content'][] = $card;
+                }
+            } else if ($cardsLayout == 'global-media-matters') {
+                $cardsLayout = '1-1-1-small';
+
+                $cards = array();
+                if (have_rows('global_media_matters')) {
+                    while (have_rows('global_media_matters')) {
+                        the_row();
+                        $cards = getRowsDataGlobalMediaMatters();
+                    }
+                }
+
+                foreach($cards as $card) {
+                    $card['type'] = 'global-media-matters';
+                    $cardsRow['cards_content'][] = $card;
+                }
+            } else if ($cardsLayout == 'press-releases') {
+                $cardsLayout = '1-1-1-tiny';
 
                 $cards = array();
                 if (have_rows('press_releases', $postId)) {
@@ -550,7 +703,7 @@ function getCardsRowsData($postId) {
                 }
 
                 foreach($cards as $card) {
-                    $card['type'] = 'header';
+                    $card['type'] = 'flex_text';
                     $cardsRow['cards_content'][] = $card;
                 }
             } else {
@@ -672,6 +825,10 @@ function createWatermark($card) {
     }
 
     $watermark = $card['watermark'];
+    $invertColor = '';
+    if ($watermark['shouldInvertColor']) {
+        $invertColor = ' invert-color';
+    }
 
     $result = '';
     if (!empty($watermark['image'])) {
@@ -679,7 +836,7 @@ function createWatermark($card) {
         if (!empty($watermark['url'])) {
             $result .= '                    <a href="' . $watermark['url'] . '">';
         }
-        $result .= '                    <img src="' . $watermark['image'] . '"/>';
+        $result .= '                    <img class="' . $invertColor . '" src="' . $watermark['image'] . '"/>';
         if (!empty($watermark['url'])) {
             $result .= '                </a>';
         }
@@ -698,10 +855,12 @@ function createDate($card) {
         return '';
     }
 
-    $date = $card['date'];
+    $date = $card['date']['text'];
+    $color = $card['date']['color'];
+    $color = ' ' . $color;
 
     $result = '';
-    $result .= '                <div class="cards__date">';
+    $result .= '                <div class="cards__date' . $color . '">';
     $result .= '                    ' . $date;
     $result .= '                </div>';
 
@@ -731,6 +890,7 @@ function createHeaderTitle($card) {
             break;
 
         case 'header':
+        case 'flex_text':
             if (!empty($card['type']) && !empty($card['title'])) {
                 $title = $card['title'];
 
@@ -775,13 +935,20 @@ function createFooter($card) {
         return '';
     }
 
-    $tag = $card['tag'];
+    if (array_key_exists('tag', $card)) {
+        $tag = $card['tag'];
+    }
     $title = $card['title'];
     $color = $title['color'];
 
+    $size = '';
+    if (!empty($card['title']['size'])) {
+        $size .= ' font-size-' . $card['title']['size'] . ' ';
+    }
+
     $result = '';
     $result .= '            <div class="cards__footer">';
-    if (!empty($tag['text'])) {
+    if (isset($tag) && !empty($tag['text'])) {
         $result .= '                <div class="cards__tag">';
         if (!empty($tag['url'])) {
             $result .= '                <a href="' . $tag['url'] . '">' . $tag['text'] . '</a>';
@@ -790,9 +957,12 @@ function createFooter($card) {
         }
         $result .= '                </div>';
     }
-    $result .= '                <h3>';
-    $result .= '                    <a class="' . $color . '" href="' . $title['url'] . '">' . $title['text'] . '</a>';
-    $result .= '                </h3>';
+
+    if (isset($title['text']) && isset($title['url'])) {
+        $result .= '                <h3 class="' . $size . $color . '">';
+        $result .= '                    <a href="' . $title['url'] . '">' . $title['text'] . '</a>';
+        $result .= '                </h3>';
+    }
     $result .= '            </div>';
 
     return $result;
@@ -867,50 +1037,79 @@ function getCardsLayout($cardsRows) {
     foreach($cardsRows as $cardsRow) {
         $gutterSize = $cardsRow['cards_gutter_size'];
         $layouts = $cardsRow['cards_layout'];
-        $marginTop = $cardsRow['cards_margin_top'];
-        $marginBottom = $cardsRow['cards_margin_top'];
+        $cardsHeadingMarginTop = ' margin-top-' . $cardsRow['cards_heading_margin_top'];
+        $cardsHeadingMarginBottom = ' margin-bottom-' . $cardsRow['cards_heading_margin_bottom'];
+        $cardsMarginTop = ' margin-top-' . $cardsRow['cards_margin_top'];
+        $cardsMarginBottom = ' margin-bottom-' . $cardsRow['cards_margin_bottom'];
         $layoutsSum = array_sum($layouts);
         $result .= '<div class="inner-container gutter-' . $gutterSize .'">';
         $cardsHeading = $cardsRow['cards_heading'];
         $cardsHeadingUrl = $cardsRow['cards_heading_url'];
         $cardsHeadingIntro = $cardsRow['cards_heading_intro'];
+        $cardsHeadingAlignment = $cardsRow['cards_heading_alignment'];
+        if (!empty($cardsHeadingAlignment)) {
+            if (is_array($cardsHeadingAlignment)) {
+                $cardsHeadingAlignment = ' text-align-' . $cardsHeadingAlignment[0];
+            } else {
+                $cardsHeadingAlignment = ' text-align-' . $cardsHeadingAlignment;
+            }
+        }
+
+        $result .= '<div class="cards--heading' . $cardsHeadingMarginTop . $cardsHeadingMarginBottom . '">';
         if (!empty($cardsHeading)) {
             if (!empty($cardsHeadingUrl)) {
-                $result .= '<h2><a href="' . $cardsRow['cards_heading_url'] . '">' . $cardsRow['cards_heading'] . '</a></h2>';
+                $result .= '<h2 class="' . $cardsHeadingAlignment . '"><a href="' . $cardsRow['cards_heading_url'] . '">' . $cardsRow['cards_heading'] . '</a></h2>';
             } else {
-                $result .= '<h2>' . $cardsRow['cards_heading'] . '</h2>';
+                $result .= '<h2 class="' . $cardsHeadingAlignment . '">' . $cardsRow['cards_heading'] . '</h2>';
             }
         }
         if (!empty($cardsHeadingIntro)) {
-            $result .= '    <p class="lead-in">' . $cardsHeadingIntro . '</p>';
+            $result .= '    <p class="lead-in' . $cardsHeadingAlignment . '">' . $cardsHeadingIntro . '</p>';
         }
-        foreach ($cardsRow['cards_content'] as $card) {
-            if (count($layouts) > 0) {
-                $verticalAlignment = '';
-                if (!empty($card['title']['vertical_alignment'])) {
-                    $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
+        $result .= '</div>';
+
+        if (array_key_exists('cards_content', $cardsRow)) {
+            foreach ($cardsRow['cards_content'] as $card) {
+                if (count($layouts) > 0) {
+                    $verticalAlignment = '';
+                    if (!empty($card['title']['vertical_alignment'])) {
+                        $verticalAlignment .= ' align-vertical-' . $card['title']['vertical_alignment'];
+                    }
+                    $headerPaddingHorizontal = '';
+                    if (!empty($card['header_padding_horizontal'])) {
+                        $headerPaddingHorizontal .= ' padding-horizontal-' . $card['header_padding_horizontal'];
+                    }
+                    $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . $cardsMarginTop . $cardsMarginBottom . '">';
+                    if ($card['type'] != 'widget') {
+                        if ($card['type'] !== 'flex_text') {
+                            $result .= '<div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
+                            $result .= '    <div class="cards__wrapper ' . ($card['background']['color'] ?? '') .  '">';
+                            $result .= '        <div class="cards__backdrop">';
+                            $result .=              createBackground($card);
+                            $result .=              createWatermark($card);
+                            $result .= '        </div>';
+                            $result .= '        <div class="cards__header ' . $headerPaddingHorizontal . $verticalAlignment . '">';
+                            $result .=              createDate($card);
+                            $result .=              createHeaderTitle($card);
+                            $result .= '        </div>';
+                            $result .=          createFooter($card);
+                            $result .= '    </div>';
+                            $result .= '</div>';
+                        }
+                    }
+                    if ($card['type'] === 'flex_text' || $card['type'] === 'widget') {
+                        $result .= '    <div class="cards__flexible">';
+                        $result .= '        <div class="cards__header ' . $headerPaddingHorizontal . $verticalAlignment . '">';
+                        $result .=          createDate($card);
+                        $result .=          createHeaderTitle($card);
+                        $result .=              createWatermark($card);
+                        $result .= '        </div>';
+                        $result .=          createExcerpt($card);
+                        $result .=          createFlexText($card);
+                        $result .= '    </div>';
+                    }
+                    $result .=     '</div>';
                 }
-                $result .= '<div class="cards cards--layout-' . $card['type'] . ' cards--size-' . array_shift($layouts) . '-' . $layoutsSum . '-' . $cardsRow['cards_height'] . '-' . $gutterSize . ' margin-top-' . $marginTop . '">';
-                $result .= '    <div class="cards__fixed' . ($card['type'] == 'flex_text' ? ' cards__fixed--hidden' : '') . '">';
-                $result .= '        <div class="cards__wrapper ' . ($card['background']['color'] ?? '') .  '">';
-                $result .= '        <div class="cards__backdrop">';
-                $result .=                  createBackground($card);
-                $result .=                  createWatermark($card);
-                $result .= '            </div>';
-                if ($card['type'] != 'widget') {
-                    $result .= '        <div class="cards__header ' . $verticalAlignment . '">';
-                    $result .=              createDate($card);
-                    $result .=              createHeaderTitle($card);
-                    $result .= '        </div>';
-                }
-                $result .=              createFooter($card);
-                $result .= '        </div>';
-                $result .= '    </div>';
-                $result .= '    <div class="cards__flexible">';
-                $result .=          createExcerpt($card);
-                $result .=          createFlexText($card);
-                $result .= '    </div>';
-                $result .= '</div>';
             }
         }
         $result .= '</div>';

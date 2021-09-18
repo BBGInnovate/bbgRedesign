@@ -32,7 +32,10 @@ get_header();
     <section class="outer-container">
         <div class="grid-container">
             <?php
-                echo '<h2 class="section-header">' . $current_page_title . '</h2>';
+                $showPageTitle = get_field('show_page_title');
+                if ($showPageTitle === true) {
+                    echo '<h2 class="section-header">' . $current_page_title . '</h2>';
+                }
             ?>
         </div>
         <?php
