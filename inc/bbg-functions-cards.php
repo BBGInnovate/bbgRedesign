@@ -630,7 +630,6 @@ function getRowsDataPressReleases() {
         $pressReleaseData = getTitlePartsFromPost($pressRelease);
         $card['title']['text'] = $pressReleaseData['text'];
         $card['title']['url'] = $pressReleaseData['url'];
-        $card['watermark'] = getWatermarkParts('voa', true);
         $card['date'] = getDateFromPost($pressRelease);
         $card['date']['color'] = $card['title']['color'];
         $card['include_date'] = true;
