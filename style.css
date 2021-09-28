@@ -11656,11 +11656,11 @@ html, body {
   width: 4rem; }
   .entity-buttons button.selected {
     box-shadow: 0px 0px 3px #CCC; }
-  .entity-buttons button.bbg {
-    background-image: url("img/logo_bbg.png"); }
-    .entity-buttons button.bbg.selected {
+  .entity-buttons button.usagm {
+    background-image: url("img/logo_usagm.png"); }
+    .entity-buttons button.usagm.selected {
       background-color: #981b1e;
-      background-image: url("img/logo_bbg--selected.png"); }
+      background-image: url("img/logo_usagm--selected.png"); }
   .entity-buttons button.voa {
     background-image: url("img/logo_voa.png"); }
     .entity-buttons button.voa.selected {
@@ -11679,7 +11679,7 @@ html, body {
   .entity-buttons button.ocb {
     background-image: url("img/logo_ocb.png"); }
     .entity-buttons button.ocb.selected {
-      background-color: #653792;
+      background-color: #b5231d;
       background-image: url("img/logo_ocb--selected.png"); }
   .entity-buttons button.mbn {
     background-image: url("img/logo_mbn.png"); }
@@ -11823,9 +11823,9 @@ html, body {
       background: #0071bc; }
     .entity-buttons button .bbg__map__button-text {
       display: block; }
-    .entity-buttons button.bbg, .entity-buttons button.voa, .entity-buttons button.rfa, .entity-buttons button.rferl, .entity-buttons button.ocb, .entity-buttons button.mbn {
+    .entity-buttons button.usagm, .entity-buttons button.voa, .entity-buttons button.rfa, .entity-buttons button.rferl, .entity-buttons button.ocb, .entity-buttons button.mbn {
       background-image: none; }
-    .entity-buttons button.selected.bbg {
+    .entity-buttons button.selected.usagm {
       background-image: none;
       background-color: #981b1e; }
     .entity-buttons button.selected.voa {
