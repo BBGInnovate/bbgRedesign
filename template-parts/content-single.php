@@ -363,17 +363,47 @@ if (have_rows('media_dev_presenters')) {
 	$media_dev_presenters .= '</aside>';
 }
 
+$media_dev_additional_files = '';
+if (have_rows('media_dev_additional_files')) {
+	while (have_rows('media_dev_additional_files')) {
+		the_row();
+
+		$mediaDevAdditionalFileObj = get_sub_field('media_dev_additional_file');
+		if (!empty($mediaDevAdditionalFileObj)) {
+			$fileID = $mediaDevAdditionalFileObj['ID'];
+			$fileLink = $mediaDevAdditionalFileObj['url'];
+			$file = get_attached_file($fileID);
+			$ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+			$filesize = formatBytes(filesize($file));
+			$title = $mediaDevAdditionalFileObj['title'];
+
+			$media_dev_additional_files .= '<h4 class="sidebar-article-title">';
+			$media_dev_additional_files .=     '<a target="_blank" href="' . $fileLink . '">' . $title . '</a>';
+			$media_dev_additional_files .=     '<br /><span class="bbg__file-size">(' . $ext . ', ' . $filesize . ')</span>';
+			$media_dev_additional_files .= '<h4>';
+		}
+	}
+}
+
+// Need to use this logic due to side effect of old acf min/max values
+if (!empty($media_dev_additional_files)) {
+	$openingTags = '';
+	$openingTags .= '<aside>';
+	$openingTags .=     '<h3 class="sidebar-section-header">Supplemental Files</h3>';
+	$closingTags = '</aside>';
+	$media_dev_additional_files = $openingTags . $media_dev_additional_files . $closingTags;
+}
+
+$addtl_image_set = '';
 $media_dev_addtl_images = get_field('media_dev_additional_images');
 if (!empty($media_dev_addtl_images)) {
-	$addtl_images = '';
-	if (!empty($addtl_images)) {
-		foreach($media_dev_addtl_images as $addtl_dev_image) {
-			foreach($addtl_dev_image as $media_image) {
-				$addtl_image_set .= '<div><img src="' . $media_image['url'] . ' alt="Additional media image"></div>';
+	foreach($media_dev_addtl_images as $addtl_dev_image) {
+		foreach($addtl_dev_image as $media_image) {
+			if (!empty($media_image)) {
+				$addtl_image_set .= '<div><img src="' . $media_image['url'] . '" alt="Additional media image"></div>';
 			}
 		}
 	}
-
 }
 
 $isPodcast = has_category('podcast');
@@ -536,6 +566,7 @@ $hideFeaturedImage = false;
 							}
 							echo $media_dev_sponsors;
 							echo $media_dev_presenters;
+							echo $media_dev_additional_files;
 							echo $team_roster;
 							echo getAccordion();
 
