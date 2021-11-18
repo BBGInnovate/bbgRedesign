@@ -113,7 +113,7 @@ function build_award_dropdown_list($award_package) {
 		$award_markup .= 					'<p><span class="detail">Winner:</span> ' . $cur_award_data['award_winner'] . '</p>';
 		$award_markup .= 					'<p><span class="detail">Network:</span> ' . $cur_award_data['award_recipient'] . '</p>';
 		$award_markup .= 					'<p><span class="detail">Presented By: </span>';
-		$award_markup .= 						'<a href="' . $cur_award_data['award_org_url'] . ' target="_blank">' . $cur_award_data['award_organization'] . '</a>';
+		$award_markup .= 						'<a href="' . $cur_award_data['award_org_url'] . '" target="_blank">' . $cur_award_data['award_organization'] . '</a>';
 		$award_markup .= 					'</p>';
 		$award_markup .= 					'<p>' . $cur_award_data['award_description'] . '</p>';
 		$award_markup .= 				'</div>';
