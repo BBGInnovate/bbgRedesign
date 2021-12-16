@@ -1,7 +1,7 @@
 <?php
 
 	function pressFreedomMap() {
-	$freeNotFreeObj = array_map('str_getcsv', file(get_stylesheet_directory_uri() . '/data/freeNotFree.csv'));
+	$freeNotFreeObj = array_map('str_getcsv', file(get_template_directory() . '/data/freeNotFree.csv'));
 	if (count($freeNotFreeObj)) {
 
 		//remove the first row from the array because it's headers, not data
