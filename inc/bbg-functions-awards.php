@@ -48,7 +48,7 @@ function get_press_release_award($award_post_id, $archive = NULL) {
 		while (have_rows('award_repeater', $award_post_id)) {
 			the_row();
 			$award_organization = get_sub_field('award_organization');
-			$award_organization = $award_organization->name;
+			$award_organization = $award_organization ? $award_organization->name : '';
 			$award_logo = get_sub_field('award_logo');
 			$award_logo = $award_logo['url'];
 

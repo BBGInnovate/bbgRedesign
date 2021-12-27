@@ -275,71 +275,118 @@ if (count($pressReleases)) {
 // PRESS RELEASE SHORTCODE
 $page_content = str_replace("[press releases]", $press_markup, $page_content);
 
+function awards_posts_where( $where ) {
+	$where = str_replace("meta_key = 'award_repeater_$", "meta_key LIKE 'award_repeater_%", $where);
+	return $where;
+}
+
+add_filter('posts_where', 'awards_posts_where');
 
 // START FETCH AWARDS
+$maxAwardResults = 3;
+
 $awards = array();
+
 $qParams = array(
-	'posts_per_page' => 3,
-	'post_type' => 'award',
+	'posts_per_page' => $maxAwardResults,
 	'orderby' => 'date',
 	'order' => 'DESC',
-	'meta_key' => 'standardpost_award_recipient',
-	'meta_value' => $awardSlug
+	'suppress_filters' => false,
+	'category_name' => 'award',
+	'meta_query' => array(
+		'relation' => 'OR',
+		array(
+			'key' => 'award_repeater_$_award_entity_recipient',
+			'compare' => '=',
+			'value' => strtoupper($awardSlug)
+		),
+		array(
+			'key' => 'standardpost_award_recipient',
+			'compare' => '=',
+			'value'	=> strtoupper($awardSlug)
+		)
+	)
 );
 $custom_query = new WP_Query($qParams);
+
 if ($custom_query -> have_posts()) {
+	$awards = array();
+
 	while ($custom_query -> have_posts())  {
 		$custom_query -> the_post();
-		$award_post_id = get_the_ID();
 
-		$awardYears  = get_post_meta($award_post_id, 'standardpost_award_year');
-		$awardTitle = get_post_meta($award_post_id, 'standardpost_award_title', true);
-		$orgTerms = get_field('standardpost_award_organization', $award_post_id);
-	    $organizations = array();
-	    if (!empty($organizations)) {
-	    	$organizations[] = $orgTerms -> name;
-	    } else {
-	    	$organizations = '';
-	    }
-
-
-		$recipients = get_post_meta( $award_post_id, 'standardpost_award_recipient' );
-		$awards[] = array(
-			'id'=> $award_post_id,
-			'url'=> get_permalink($award_post_id),
-			'title'=> get_the_title($award_post_id),
-			'excerpt'=> get_the_excerpt(),
-			'awardYears'=> $awardYears,
-			'awardTitle'=> $awardTitle,
-			'organizations'=> $organizations,
-			'recipients'=> $recipients
-		);
+		if (has_category('press-release', get_the_ID())) {
+			$press_award = get_press_release_award(get_the_ID(), true);
+			if (!empty($press_award)) {
+				foreach ($press_award as $cur_press_award) {
+					$awards[] = $cur_press_award;
+				}
+			}
+		} else {
+			$standalone_award = get_standalone_award(get_the_ID(), true);
+			$awards[] = $standalone_award[0];
+		}
 	}
 }
-wp_reset_postdata();
-$awards_markup = '';
-if (count($awards)) {
-	foreach ($awards as $cur_award) {
-		$award_post_id = $cur_award['id'];
-		$url = $cur_award['url'];
-		$title = $cur_award['title'];
-		$awardYears = $cur_award['awardYears'];
-		$awardTitle = $cur_award['awardTitle'];
-		$organizations = $cur_award['organizations'];
-		$recipients = $cur_award['recipients'];
-		$excerpt = $cur_award['excerpt'];
 
-		// Concat this beginning variable to show more than one. It collects five posts now. See line 308. Same with press releases, line: 244
-		$awards_markup .= '<div>';
-		$awards_markup .= 	'<h4 class="article-title"><a href="' . $url . '">' . $title . '</a></h4>';
-		$awards_markup .= 	'<p class="date-meta">';
-		if (!empty($organizations)) {
-			$awards_markup .= 		'<span>' . $awardTitle . ', ' . join($organizations) . '</span>';
+wp_reset_postdata();
+
+$awards_markup = '';
+$validAwards = 0;
+if (count($awards)) {
+	for ($i = 0; $i < count($awards) && $validAwards < $maxAwardResults; $i++) {
+		$cur_award = $awards[$i];
+
+		$awardTitle = $cur_award['award_title'];
+		$awardOrPressReleaseUrl = '';
+		if (isset($cur_award['press_release_url'])) {
+			$awardOrPressReleaseUrl = $cur_award['press_release_url'];
+		} else {
+			$awardOrPressReleaseUrl = $cur_award['award_page_url'];
 		}
-		$awards_markup .= 		'(' . join($awardYears) . ')';
-		$awards_markup .= 	'</p>';
-		$awards_markup .= 	'<p>' . $excerpt . '</p>';
-		$awards_markup .= '</div>';
+
+		$awardLink = $cur_award['award_link'];
+		$awardWinningWork = $cur_award['award_winning_work'];
+		$awardYear = $cur_award['award_year'];
+		$awardWinner = $cur_award['award_winner'];
+		$awardOrgUrl = $cur_award['award_org_url'];
+		$awardOrganization = $cur_award['award_organization'];
+		$recipient = $cur_award['award_recipient'];
+
+		// It's possible to have a post with multiple awards, each from a different entity
+		if ($recipient !== strtoupper($awardSlug)) {
+			continue;
+		} else {
+			$validAwards++;
+		}
+
+		$awardWinningWorkMarkup = '';
+		if (!empty($awardWinningWork)) {
+			if (!empty($awardLink)) {
+				$awardWinningWorkMarkup = '<a href="' . $awardLink . '">' . $awardWinningWork . ' (' . $awardYear . ')</a>';
+			} else {
+				$awardWinningWorkMarkup = $awardWinningWork . ' (' . $awardYear . ')';
+			}
+		}
+
+		$awardOrganizationMarkup = '';
+		if (!empty($awardOrganization)) {
+			if (!empty($awardOrgUrl)) {
+				$awardOrganizationMarkup = '<a href="' . $awardOrgUrl . '" target="_blank">' . $awardOrganization . '</a>';
+			} else {
+				$awardOrganizationMarkup = $awardOrganization;
+			}
+		}
+
+		$awards_markup .=	'<div>';
+		$awards_markup .= 		'<h4 class="article-title"><a href="' . $awardOrPressReleaseUrl . '">' . $awardTitle . '</a></h4>';
+		$awards_markup .=		'<div class="about-the-award">';
+		$awards_markup .= 			'<p><span class="detail">Project: </span>' . $awardWinningWorkMarkup . '</p>';
+		$awards_markup .= 			'<p><span class="detail">Winner: </span>' . $awardWinner . '</p>';
+		$awards_markup .= 			'<p><span class="detail">Presented by: </span>' . $awardOrganizationMarkup . '</p>';
+		$awards_markup .=     	'</div>';
+		$awards_markup .=     	'<p></p>';
+		$awards_markup .=	'</div>';
 	}
 	$awards_markup .= '<div>';
 	$awards_markup .= 	'<p class="read-more sans">';
