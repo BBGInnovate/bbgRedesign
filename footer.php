@@ -55,6 +55,8 @@ if (!is_page_template('usagm-intro.php')) {
 </footer>
 <?php } ?>
 
+</div><!-- #page -->
+
 <?php wp_footer(); ?>
 </body>
 </html>
