@@ -43,7 +43,7 @@ function create_rss_markup($id, $rss_xml_url, $page_name = NULL) {
 		foreach ($itemContainer->item as $e) {
 			$title = $e->title;
 			$url = $e->link;
-			$description = $e->description;
+			// $description = $e->description ?? '';
 			$enclosureUrl = '';
 			if (property_exists($e, 'enclosure') && property_exists($e->enclosure, '@attributes') && property_exists($e->enclosure->{'@attributes'}, 'url')) {
 				$enclosureUrl = ($e->enclosure->{'@attributes'}->url );
@@ -51,7 +51,7 @@ function create_rss_markup($id, $rss_xml_url, $page_name = NULL) {
 			$rssItems[] = array(
 				'title' => $title,
 				'url' => $url,
-				'description' => $description,
+				// 'description' => $description,
 				'image' => $enclosureUrl
 			);
 		}
@@ -68,7 +68,7 @@ function create_rss_markup($id, $rss_xml_url, $page_name = NULL) {
 		$maxRelatedStories = 3;
 		for ($i = 0; $i < min($maxRelatedStories, count($rssItems)); $i++) {
 			$cur_rss_item = $rssItems[$i];
-			$short_copy = wp_trim_words($cur_rss_item['description'], 15, ' ...');
+			// $short_copy = wp_trim_words($cur_rss_item['description'], 15, ' ...');
 
 			$rss_markup .= '<div class="nest-container post-group">';
 			$rss_markup .= 	'<div class="inner-container">';
