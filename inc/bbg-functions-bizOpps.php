@@ -88,7 +88,8 @@
 
 	// Add shortcode to output the jobs list
 	function bizopps_shortcode() {
-		return outputBizOpps();
+		// return outputBizOpps();
+		return '';
 	}
 	add_shortcode('bizopps', 'bizopps_shortcode');
 
