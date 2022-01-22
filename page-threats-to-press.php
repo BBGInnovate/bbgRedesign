@@ -191,8 +191,8 @@ get_header();
 
 		$choices = array();
 
-		if (have_rows('featured_journalists')) {
-			while (have_rows('featured_journalists')) {
+		if (have_rows('watching_journalists_section')) {
+			while (have_rows('watching_journalists_section')) {
 				the_row();
 				if (empty($choices)) {
 					$choices = get_sub_field_object('status')['choices'];
@@ -219,7 +219,7 @@ get_header();
 
 			$featuredJournalists .= '            <div class="inner-container">';
 
-			while (have_rows('featured_journalists')) {
+			while (have_rows('watching_journalists_section')) {
 				the_row();
 
 				$status = get_sub_field('status');

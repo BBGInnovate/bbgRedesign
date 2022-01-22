@@ -206,13 +206,13 @@ if ( has_category('Media Advisory')) {
 	}
 }
 
-$journos = get_field('featured_journalists_section');
+$journos = get_field('featured_journalists_section', $post_id);
 $featuredJournalists = "";
 $profilePhoto = "";
 
 // FLEXIBLE CONTENT FIELD HAVE ROWS OF DATA?
 if($journos) {
-	while (have_rows('featured_journalists_section')) {
+	while (have_rows('featured_journalists_section', $post_id)) {
 		the_row();
 		$featuredJournalistsSectionLabel = get_sub_field('featured_journalists_section_label');
 		$featuredJournalistsObj = get_sub_field('featured_journalist');
