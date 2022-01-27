@@ -215,6 +215,11 @@ function bbginnovate_scripts() {
         wp_localize_script('global-media-matters', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
 	}
 
+	if (is_page_template('page-2-column.php')) {
+		wp_enqueue_script('biz-opps', get_template_directory_uri() . '/js/biz-opps.js', array('jquery'), '20220127', true);
+		wp_localize_script('biz-opps', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+	}
+
 	if (is_page_template('page-masonry-layout.php')) {
         wp_enqueue_script('masonry-grid', get_template_directory_uri() . '/js/vendor/masonry.min.js', array('jquery'), '20200617', true);
     }
@@ -1297,6 +1302,13 @@ function get_more_gmm_entries() {
 }
 add_action( 'wp_ajax_get_more_gmm_entries', 'get_more_gmm_entries' );
 add_action( 'wp_ajax_nopriv_get_more_gmm_entries', 'get_more_gmm_entries' );
+
+function get_biz_opps() {
+	$opportunites = getBizOpps();
+	wp_send_json_success($opportunites);
+}
+add_action( 'wp_ajax_get_biz_opps', 'get_biz_opps' );
+add_action( 'wp_ajax_nopriv_get_biz_opps', 'get_biz_opps' );
 
 function my_login_logo_one() { 
 ?> 

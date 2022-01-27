@@ -9413,6 +9413,13 @@ div.banner_readmore h6 a:visited {
       clear: none;
       display: inline; } }
 
+#loading-biz-opps {
+  display: block;
+  z-index: 9997;
+  margin: 5rem auto;
+  width: 30px;
+  height: 30px; }
+
 .page-post-featured-graphic {
   margin-bottom: 3rem; }
 

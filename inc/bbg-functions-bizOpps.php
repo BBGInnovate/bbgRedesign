@@ -1,96 +1,150 @@
-<?php 
+<?php
 
-	function getBizOpps() {
-		$bizOppsFilepath = get_template_directory() . "/external-feed-cache/biz.json";
-		if (fileExpired($bizOppsFilepath, 1440)  ) {  //1440 min = 1 day
-			$searchParams = array(
-				'documents_to_search' => 'active',
-				'notice_type' => 'COMBINE'
-			);
+function fetchSamOppsRemote($postedFromDate, $postedToDate, $resultsLimit) {
 
-			$baseUrl = 'https://www.fbo.gov';
-			$wsdlUrl = $baseUrl . '/ws/fbo_api.php?wsdl';
-			$username = FBO_USERNAME;
-			$pw = FBO_PW;
-			
-			try {
-				// BASIC AUTH
-				$client = new SoapClient($wsdlUrl,array('login'=> $username, 'password'=>$pw));
+	if (!defined('SAM_GOV_API_KEY')) {
+		throw new Exception('Missing SAM_GOV_API_KEY constant.');
+	}
 
-				//SOAP HEADER AUTH
-				// $client = new SoapClient($wsdlUrl);
-				// $header = new SoapHeader($baseUrl,'AuthenticationData',array('username'=>$username,'password'=>$pw));
-				// $client->__setSoapHeaders(array($header));
+	$samGovApiKey = SAM_GOV_API_KEY;
+	$samGovBase = 'https://api.sam.gov/prod/opportunities/v1/search';
+	$deptName = 'UNITED STATES AGENCY FOR GLOBAL MEDIA, BBG';
 
-				$response = $client->getList($searchParams);
-				if ($response->success) {
-					$postings = array();
-					foreach ($response->data as $d) {
-						$p = array();
-						$p["id"] = $d -> notice_id;
-						$p["baseType"] = $d -> base_type;
-						$p["currentType"] = "";
-						if (property_exists($d, 'current_type')) {
-							$p["currentType"] = $d -> current_type;
-						}
-						$p["lastPostedDate"] = $d -> last_posted_date;
-						$p["solutionNumber"] = $d -> solnbr;
-						$p["subject"] = $d -> subject;
-						$postings[] = $p;
-					}
-					$result = json_encode($postings);
-					file_put_contents($bizOppsFilepath, $result);
-				}
-			} catch (Exception $e){
-				echo "error ";
-				var_dump($e);
+	$queryParams = array(
+		'api_key' => $samGovApiKey,
+		'postedFrom' => $postedFromDate,
+		'postedTo' => $postedToDate,
+		'deptname' => $deptName,
+		'limit' => $resultsLimit
+	);
+
+	$samGovUrl = $samGovBase . '?' . http_build_query($queryParams);
+
+	try {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $samGovUrl);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+		$response = curl_exec($ch);
+		if ($response === false) {
+			throw new Exception('Error making request to SAM.gov: ' . curl_error($ch));
+		}
+
+		$responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if ($responseCode >= 500) {
+			throw new Exception('Error making request to SAM.gov. Received response code: ' . $responseCode);
+		}
+
+		$results = json_decode($response, true);
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			throw new Exception('Error decoding the JSON response from SAM.gov.');
+		}
+
+		$totalRecords = $results['totalRecords'] ?? 0;
+		$opportunities = $results['opportunitiesData'] ?? array();
+		if ($totalRecords === 0 || empty($opportunities)) {
+			$errorCode = $results['errorCode'] ?? '';
+			$errorMessage = $results['errorMessage'] ?? '';
+			$errorMessageAlt = $results['error']['message'] ?? '';
+			if ($errorCode && $errorMessage) {
+				throw new Exception('Received error response from SAM.gov: (Error code: '. $errorCode . ') ' . $errorMessage);
+			} else if ($errorMessageAlt) {
+				throw new Exception('Received error response from SAM.gov: ' . $errorMessageAlt);
+			} else {
+				return array();
 			}
 		}
 
-		$result=file_get_contents($bizOppsFilepath);
-		$opps = json_decode($result, true);
-		return $opps;
+		return $opportunities;
+	} finally {
+		curl_close($ch);
 	}
-	function outputBizOpps() {
-		$opps = getBizOpps();
-		$fboSearchLink = 'https://www.fbo.gov/index?s=agency&mode=form&tab=notices&id=50e78d8b5e1bacce4caf0f645e07e253';
-		$s = "";
-		///$s .= "View all business opportunities at <a target='_blank' href='$fboSearchLink'>fbo.gov</a>.<BR>";\
+}
 
-		array_splice($opps, 5); //show the most recent 5 
+function fetchSamOpps() {
+	$resultsLimit = 5;
+	$relativeYear = 0;
+	$yearsToSearch = 1;
+	$daysInYear = 365;
 
-		if (count($opps)==0) {
-			
+	$opportunities = array();
+
+	while ($relativeYear < $yearsToSearch && $resultsLimit > 0) {
+		$relativePostedTo = 0 - ($relativeYear * $daysInYear);
+		$relativePostedFrom = $relativePostedTo - ($daysInYear - 1);
+
+		$postedFromDate = date('m/d/Y', strtotime($relativePostedFrom . ' days', time()));
+		$postedToDate = date('m/d/Y', strtotime($relativePostedTo . ' days', time()));
+
+		try {
+			$moreOpportunities = fetchSamOppsRemote($postedFromDate, $postedToDate, $resultsLimit);
+			for ($i = 0; $i < count($moreOpportunities) && $resultsLimit > 0; $i++) {
+				array_push($opportunities, $moreOpportunities[$i]);
+				$resultsLimit--;
+			}
+		} catch(Exception $e) {
+			error_log($e->getMessage());
+			return $opportunities;
+		}
+
+		$relativeYear++;
+	}
+
+	return $opportunities;
+}
+
+function getSamOpps() {
+	$samOppsCacheFilepath = get_template_directory() . '/external-feed-cache/biz-opps-cache.json';
+	$opportunities = array();
+
+	if (fileExpired($samOppsCacheFilepath, 60)) {
+		$opportunities = fetchSamOpps();
+
+		if (!empty($opportunities)) {
+			file_put_contents($samOppsCacheFilepath, json_encode($opportunities));
 		} else {
-			//$s = "<p class='bbg__article-sidebar__tagline'>Includes postings from the International Broadcasting Bureau, Voice of America and Office of Cuba Broadcasting. All federal job opportunities are available on <a target='_blank' href='$jobSearchLink'>USAjobs.gov</a></p>";
-			$s .= '<table class="usa-table-borderless bbg__jobs__table">';
-			$s .= '<thead><tr><th scope="col">Title</th><th scope="col" width="95">Posted On</th></tr></thead>';
-			$s .= '<tbody>';
-
-			for ($i = 0; $i < count($opps); $i++) {
-				$o = $opps[$i];
-				//var_dump($j);
-				$id = $o['id'];
-				$title = $o['subject'];
-				$lastPostedDateObj = DateTime::createFromFormat(
-					DateTime::ISO8601,
-					$o['lastPostedDate']
-				);
-				$lastPostedDate = $lastPostedDateObj->format('n/j/Y');
-				$solutionNumber = $o['solutionNumber'];
-				$link = 'https://www.fbo.gov/index?s=opportunity&mode=form&id=' . $id . '&tab=core&_cview=0';
-				$s .= '<tr><td><a target="_blank" href="' . $link . '" class="bbg__jobs-list__title">' . $title . '</a></td><td>' . $lastPostedDate . '</td></tr>';
-			}
-			$s .= '</tbody></table>';
+			$opportunities = json_decode(file_get_contents($samOppsCacheFilepath), true);
 		}
-		return $s;
+	} else {
+		$opportunities = json_decode(file_get_contents($samOppsCacheFilepath), true);
 	}
 
-	// Add shortcode to output the jobs list
-	function bizopps_shortcode() {
-		// return outputBizOpps();
-		return '';
+	return $opportunities;
+}
+
+function bizopps_shortcode() {
+	$markup = '';
+	$markup .= '<div id="biz-opps">';
+	$markup .= '<img id="loading-biz-opps" src="' . get_template_directory_uri() . '/img/loading.gif" alt="loader"/>';
+	$markup .= '</div>';
+
+	return $markup;
+}
+
+function getBizOpps() {
+	$samMarkup = '';
+	$samMarkup .= '<table class="usa-table-borderless bbg__jobs__table">';
+	$samMarkup .= '<thead><tr><th scope="col">Title</th><th scope="col" width="95">Posted On</th></tr></thead>';
+	$samMarkup .= '<tbody>';
+
+	$opportunities = getSamOpps();
+
+	foreach ($opportunities as $opportunity) {
+		$oppTitle = $opportunity['title'];
+		$oppTitle = wp_trim_words($oppTitle, 10, ' ...');
+
+		$oppLink = $opportunity['uiLink'];
+
+		$postedDate = $opportunity['postedDate'];
+
+		$samMarkup .= '<tr><td><a target="_blank" href="' . $oppLink . '" class="bbg__jobs-list__title">' . $oppTitle . '</a></td><td>' . $postedDate . '</td></tr>';
 	}
-	add_shortcode('bizopps', 'bizopps_shortcode');
+
+	$samMarkup .= '</tbody>';
+	$samMarkup .= '</table>';
+
+	return $samMarkup;
+}
+add_shortcode('bizopps', 'bizopps_shortcode');
 
 ?>

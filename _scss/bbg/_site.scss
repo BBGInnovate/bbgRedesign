@@ -1149,3 +1149,11 @@ div.banner_readmore h6 a:visited {
         display: inline;
     }
 }
+
+#loading-biz-opps {
+    display: block;
+    z-index: 9997;
+    margin: 5rem auto;
+    width: 30px;
+    height: 30px;
+}
