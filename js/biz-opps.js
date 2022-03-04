@@ -1,5 +1,10 @@
 (function($) {
     $('document').ready(function() {
+        let loadingSpinner = $('#loading-biz-opps');
+        if (!loadingSpinner.length) {
+            return;
+        }
+
         $.ajax({
             method: 'POST',
             url: ajax_object.ajax_url,
@@ -9,7 +14,7 @@
             },
             success: function(response) {
                 if (response.data.length != 0) {
-                    $('#loading-biz-opps').hide();
+                    loadingSpinner.hide();
                     $('#biz-opps').append(response.data);
                 }
             }
