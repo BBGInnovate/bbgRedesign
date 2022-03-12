@@ -13,8 +13,10 @@ if (! is_admin()) {
 				break;
 				case "site_setting_default_og_image":
 					$defaultImage = wp_get_attachment_image_src( $value , 'Full');
-					$defaultImageUrl = $defaultImage[0];
-					define("DEFAULT_IMAGE", $defaultImageUrl);
+					if ($defaultImage) {
+						$defaultImageUrl = $defaultImage[0];
+						define("DEFAULT_IMAGE", $defaultImageUrl);
+					}
 				break;
 				case "site_setting_site_title_markup":
 					define("SITE_TITLE_MARKUP", $value);
