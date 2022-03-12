@@ -471,7 +471,7 @@ button#bbg__menu-toggle {margin-right: 0;}
 			position: absolute;
 			top: 11.5rem;
 			right: 0;
-			text-align: center;
+			text-align: right;
 			margin: 0;
 			padding-left: 5%;
 			width: 100%;
@@ -552,9 +552,6 @@ button#bbg__menu-toggle {margin-right: 0;}
 // 4. LARGE SCREEN
 @include media($large-screen) {
 	.bbg__main-navigation {
-		.menu-usagm-container {
-			padding-left: 10%;
-			padding-right: 10%;
-		}
+		.menu-usagm-container {padding-left: 25%;}
 	}
 }
