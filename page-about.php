@@ -45,7 +45,7 @@ if (!empty($includeAboutFlexiblePageRows)) {
 				$main_umbrella_data = get_umbrella_main_data();
 				$main_umbrella_parts = build_umbrella_main_parts($main_umbrella_data);
 				// DETERMINE GRID
-				$content_counter = count(get_sub_field('umbrella_content'));
+				$content_counter = get_sub_field('umbrella_content') ? count(get_sub_field('umbrella_content')) : 0;
 				$umbrella_column_grouping = get_sub_field('umbrella_grouping');
 				if ($umbrella_column_grouping != 'default') {
 					$special_umbrella_group = true;
