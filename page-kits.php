@@ -554,7 +554,7 @@ get_header();
 															// fiscal year column
 															echo '<th scope="row">' . $budgetFY . ' <span class="bbg__file-size">(' . $budgetStatus  . ')</span></th>';
 															// amount column
-															echo '<td class="bbg__kits__section--tile__list--sans">' . money_format( '%.1n', $budgetAmount ) . 'M</td>';
+															echo '<td class="bbg__kits__section--tile__list--sans">' . sprintf("$%.1f", $budgetAmount) . 'M</td>';
 														echo '</tr>';
 
 														if ( $maxYears++ == 3 ) break; // change max number here to set new limit — current max is 4 (starting from 0)
