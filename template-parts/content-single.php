@@ -334,16 +334,6 @@ if (!empty($addFeaturedMap)) {
 	echo '</script>';
 }
 
-$presenters = array();
-if (have_rows('media_dev_presenters')) {
-	while (have_rows('media_dev_presenters')) {
-		the_row();
-		$presenterName = get_sub_field('media_dev_participant_name');
-		$presenterTitle = get_sub_field('media_dev_participant_job_title');
-		$presenters[] = array('name' => $presenterName, 'title' => $presenterTitle);
-	}
-}
-
 $media_dev_sidebar_meta = '';
 if (in_category('media-development-map')) {
 	$media_dev_sidebar_meta .= '<aside>';
@@ -362,11 +352,15 @@ if (in_category('media-development-map')) {
 	$media_dev_sidebar_meta .= '<h3 class="sidebar-section-header">Date</h3>';
 	$media_dev_sidebar_meta .= '<p class="sidebar-article-title">' . $trainingDate . '</p>';
 
-	if (!empty($presenters)) {
-		$firstPresenterName = $presenters[0]['name'];
-		if ($firstPresenterName) {
-			$media_dev_sidebar_meta .= '<h3 class="sidebar-section-header">Trainer</h3>';
-			$media_dev_sidebar_meta .= '<p class="sidebar-article-title">' . $firstPresenterName . '</p>';
+	if (have_rows('media_dev_presenters')) {
+		$media_dev_sidebar_meta .= '<h3 class="sidebar-section-header">Trainers</h3>';
+		while (have_rows('media_dev_presenters')) {
+			the_row();
+			$presenterName = get_sub_field('media_dev_participant_name');
+			$presenterTitle = get_sub_field('media_dev_participant_job_title');
+
+			$media_dev_sidebar_meta .= '<p class="sidebar-article-title">' . $presenterName . '</p>';
+			$media_dev_sidebar_meta .= '<p class="sans">' . $presenterTitle . '</p>';
 		}
 	}
 
@@ -389,20 +383,6 @@ if (have_rows('media_dev_sponsors')) {
 		}
 	}
 	$media_dev_sponsors .= '</aside>';
-}
-
-$media_dev_presenters = "";
-if (!empty($presenters)) {
-	$media_dev_presenters .= '<aside>';
-	$media_dev_presenters .= 	'<h3 class="sidebar-section-header">Presenters</h3>';
-	foreach ($presenters as $presenter) {
-		$presenterName = $presenter['name'];
-		$presenterTitle = $presenter['title'];
-
-		$media_dev_presenters .= '<p class="sidebar-article-title">' . $presenterName . '</p>';
-		$media_dev_presenters .= '<p class="sans">' . $presenterTitle . '</p>';
-	}
-	$media_dev_presenters .= '</aside>';
 }
 
 $media_dev_additional_files = '';
@@ -609,7 +589,6 @@ $hideFeaturedImage = false;
 
 							echo $media_dev_sidebar_meta;
 							echo $media_dev_sponsors;
-							echo $media_dev_presenters;
 							echo $media_dev_additional_files;
 							echo $team_roster;
 							echo getAccordion();
