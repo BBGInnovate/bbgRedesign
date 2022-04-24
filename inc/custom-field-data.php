@@ -485,11 +485,14 @@ function get_umbrella_content_data($umbrella_content_type, $umbrella_column_grou
 		$title = get_sub_field('umbrella_content_external_item_title');
 		$description = get_sub_field('umbrella_content_external_description');
 		$link = get_sub_field('umbrella_content_external_link');
+		$thumb_src = '';
 		$thumbnail = get_sub_field('umbrella_content_external_thumbnail');
-		$thumbnail_id = $thumbnail['ID'];
-		$thumb_src = wp_get_attachment_image_src($thumbnail_id , 'medium-thumb');
-		if ($thumb_src) {
-			$thumb_src = $thumb_src[0];
+		if (!empty($thumbnail)) {
+			$thumbnail_id = $thumbnail['ID'];
+			$thumb_src = wp_get_attachment_image_src($thumbnail_id , 'medium-thumb');
+			if ($thumb_src) {
+				$thumb_src = $thumb_src[0];
+			}
 		}
 		$doNotScaleToHd = get_sub_field('umbrella_content_external_do_not_scale_to_hd');
 	}
@@ -499,12 +502,14 @@ function get_umbrella_content_data($umbrella_content_type, $umbrella_column_grou
 		$title = get_sub_field('umbrella_content_file_item_title'); // FILENAME
 		$description = get_sub_field('umbrella_content_file_description');
 		$layout = get_sub_field('umbrella_content_file_layout');
-
+		$thumb_src = '';
 		$thumbnail = get_sub_field('umbrella_content_file_thumbnail');
-		$thumbnail_id = $thumbnail['ID'];
-		$thumb_src = wp_get_attachment_image_src( $thumbnail_id , 'medium-thumb' );
-		if ($thumb_src) {
-			$thumb_src = $thumb_src[0];
+		if (!empty($thumbnail)) {
+			$thumbnail_id = $thumbnail['ID'];
+			$thumb_src = wp_get_attachment_image_src( $thumbnail_id , 'medium-thumb' );
+			if ($thumb_src) {
+				$thumb_src = $thumb_src[0];
+			}
 		}
 		$doNotScaleToHd = get_sub_field('umbrella_content_file_do_not_scale_to_hd');
 

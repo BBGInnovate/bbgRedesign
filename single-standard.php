@@ -14,7 +14,9 @@ if (have_posts()) {
 	$metaKeywords = strip_tags(get_the_tag_list('', ', ', ''));
 
 	$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'Full');
-	$ogImage = $thumb['0'];
+	if (!empty($thumb)) {
+		$ogImage = $thumb['0'];
+	}
 
 	$socialImageID = get_post_meta($post->ID, 'social_image', true);
 	$coordinates = get_post_meta($post->ID, 'media_dev_coordinates', true);

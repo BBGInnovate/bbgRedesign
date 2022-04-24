@@ -56,39 +56,47 @@ function getSidebarContent($postId) {
                 $sidebarDownloadLinkObj = get_sub_field('sidebar_download_link');
                 $sidebarDownloadDescription = get_sub_field('sidebar_download_description', false);
 
-                $fileID = $sidebarDownloadLinkObj['ID'];
-                $sidebarDownloadLink = $sidebarDownloadLinkObj['url'];
-                $file = get_attached_file($fileID);
-                $ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
-                $filesize = formatBytes(filesize($file));
-
-                // GET FILE NAME IF NOT ENTERED IN CUSTOM FIELD
-                if (empty($sidebarDownloadTitle)) {
-                    echo $sidebarDownloadTitle;
-                    if (!empty($sidebarDownloadLinkObj['post_title'])) {
-                        $sidebarDownloadTitle = $sidebarDownloadLinkObj['post_title'];
-                    } else {
-                        $sidebarDownloadLinkObj['title'];
+                if (!empty($sidebarDownloadLinkObj)) {
+                    $fileID = $sidebarDownloadLinkObj['ID'];
+                    $sidebarDownloadLink = $sidebarDownloadLinkObj['url'];
+                    $file = get_attached_file($fileID);
+                    $ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+                    $filesize = 0;
+                    $filesizeRaw = filesize($file);
+                    if (!empty($filesizeRaw)) {
+                        $filesize = formatBytes($filesizeRaw);
                     }
-                }
 
-                $sidebar_download  = '<div class="sidebar-related">';
-                if (!empty($sidebarDownloadThumbnail)) {
-                    $sidebar_download .= '<a target="_blank" href="' . $sidebarDownloadLink . '">';
-                    $sidebar_download .=    '<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download" style="margin-bottom: 0.5rem;">';
-                    $sidebar_download .= '</a>';
-                }
-                $sidebar_download .=    '<p class="sidebar-article-title"><a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
-                $sidebar_download .=    '<br><span class="date-meta">(' . $ext . ', ' . $filesize . ')</span></p>';
+                    // GET FILE NAME IF NOT ENTERED IN CUSTOM FIELD
+                    if (empty($sidebarDownloadTitle)) {
+                        echo $sidebarDownloadTitle;
+                        if (!empty($sidebarDownloadLinkObj['post_title'])) {
+                            $sidebarDownloadTitle = $sidebarDownloadLinkObj['post_title'];
+                        } else {
+                            $sidebarDownloadLinkObj['title'];
+                        }
+                    }
 
-                if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
-                    $sidebar_download .= '<p class="sans">';
-                    $sidebar_download .=    $sidebarDownloadDescription;
-                    $sidebar_download .= '</p>';
-                }
-                $sidebar_download .= '</div>';
+                    $sidebar_download  = '<div class="sidebar-related">';
+                    if (!empty($sidebarDownloadThumbnail)) {
+                        $sidebar_download .= '<a target="_blank" href="' . $sidebarDownloadLink . '">';
+                        $sidebar_download .=    '<img src="' . $sidebarDownloadThumbnail . '" alt="Thumbnail image for download" style="margin-bottom: 0.5rem;">';
+                        $sidebar_download .= '</a>';
+                    }
+                    $sidebar_download .=    '<p class="sidebar-article-title"><a target="_blank" href="' . $sidebarDownloadLink . '">' . $sidebarDownloadTitle . '</a>';
+                    if (!empty($filesize)) {
+                        $sidebar_download .=    '<br><span class="date-meta">(' . $ext . ', ' . $filesize . ')</span></p>';
+                    }
 
-                $sidebar_markup .= $sidebar_download;
+                    if ($sidebarDownloadDescription && $sidebarDownloadDescription != "") {
+                        $sidebar_download .= '<p class="sans">';
+                        $sidebar_download .=    $sidebarDownloadDescription;
+                        $sidebar_download .= '</p>';
+                    }
+                    $sidebar_download .= '</div>';
+
+                    $sidebar_markup .= $sidebar_download;
+                }
             } else if (get_row_layout() == 'sidebar_quote') {
                 $sidebarQuotationText = get_sub_field('sidebar_quotation_text', false);
                 $sidebarQuotationSpeaker = get_sub_field('sidebar_quotation_speaker');

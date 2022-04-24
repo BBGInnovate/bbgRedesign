@@ -6,7 +6,9 @@ function get_standalone_award($award_post_id, $archive = NULL) {
 		$award_organization = get_field('standardpost_award_organization', $award_post_id, true);
 		$award_organization = $award_organization->name;
 		$award_logo = get_field('standardpost_award_logo', $award_post_id, true);
-		$award_logo = $award_logo['url'];
+		if (!empty($award_logo)) {
+			$award_logo = $award_logo['url'];
+		}
 	} else {
 		$award_organization = '';
 		$award_organization = '';
@@ -50,7 +52,9 @@ function get_press_release_award($award_post_id, $archive = NULL) {
 			$award_organization = get_sub_field('award_organization');
 			$award_organization = $award_organization ? $award_organization->name : '';
 			$award_logo = get_sub_field('award_logo');
-			$award_logo = $award_logo['url'];
+			if (!empty($award_logo)) {
+				$award_logo = $award_logo['url'];
+			}
 
 			$award_info = array(
 				'award_title' => get_sub_field('award_title'),
