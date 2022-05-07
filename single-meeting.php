@@ -52,6 +52,7 @@ if (have_posts()) {
 		$meeting_registration_close_date_string = $meeting_registration_close_date_object->format("F j, Y");
 	}
 
+	$comment_form_close_string = '';
 	$comment_form_is_closed = false;
 	if ($comment_form_close_time) {
 		$comment_form_is_closed = ($comment_form_close_time <  $today_string);
@@ -273,10 +274,12 @@ get_header();
 								echo '<ul>';
 								while (have_rows('board_meeting_related_documents')) { 
 									the_row();
-									echo '<li>';
 									$dl = get_sub_field('board_meeting_related_document');
-									echo '<a href="' . $dl['url'] . '">' . $dl['title'] . '</a>';
-									echo '</li>';
+									if ($dl) {
+										echo '<li>';
+										echo '<a href="' . $dl['url'] . '">' . $dl['title'] . '</a>';
+										echo '</li>';
+									}
 								}
 								echo '</ul>';
 							}

@@ -140,21 +140,23 @@ function getSidebarContent($postId) {
                 $sidebarInternalLocation = get_sub_field('sidebar_internal_location');
                 $sidebarInternalDescription = get_sub_field('sidebar_internal_description', false);
 
-                $internal_links  = '<div class="sidebar-related">';
-                $internal_links .=  '<h4 class="sidebar-article-title">';
-                $internal_links .=      '<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
-                if ($sidebarInternalTitle && $sidebarInternalTitle != "") {
-                    $internal_links .= $sidebarInternalTitle;
-                } else {
-                    $internal_links .= $sidebarInternalLocation -> post_title;
+                if ($sidebarInternalLocation) {
+                    $internal_links  = '<div class="sidebar-related">';
+                    $internal_links .=  '<h4 class="sidebar-article-title">';
+                    $internal_links .=      '<a href="' . get_permalink($sidebarInternalLocation -> ID) . '">';
+                    if ($sidebarInternalTitle && $sidebarInternalTitle != "") {
+                        $internal_links .= $sidebarInternalTitle;
+                    } else {
+                        $internal_links .= $sidebarInternalLocation -> post_title;
+                    }
+                    $internal_links .=      '</a>';
+                    $internal_links .=  '</h4>';
+                    if (!empty($sidebarInternalDescription)) {
+                        $internal_links .=  $sidebarInternalDescription;
+                    }
+                    $internal_links .= '</div>';
+                    $sidebar_markup .= $internal_links;
                 }
-                $internal_links .=      '</a>';
-                $internal_links .=  '</h4>';
-                if (!empty($sidebarInternalDescription)) {
-                    $internal_links .=  $sidebarInternalDescription;
-                }
-                $internal_links .= '</div>';
-                $sidebar_markup .= $internal_links;
             } else if (get_row_layout() == 'sidebar_posts_for_tag') {
                 $sidebarPostsTag = get_sub_field('sidebar_posts_tag', false);
                 $sidebarPostsMax = get_sub_field('sidebar_posts_max', false);
@@ -574,22 +576,23 @@ function getSidebarDropdownContent() {
                         foreach ($sidebarDownloadsRows as $row) {
                             $sidebarDownloadsLinkName = $row['sidebar_download_title'];
                             $sidebarDownloadsLinkObj = $row['sidebar_download_file'];
-                            // echo $sidebarDownloadsLinkObj;
-                            $fileLink = $sidebarDownloadsLinkObj['url'];
-                            $fileID = $sidebarDownloadsLinkObj['ID'];
-                            $file = get_attached_file( $fileID );
-                            $ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
-                            $size = formatBytes(filesize($file));
+                            if ($sidebarDownloadsLinkObj) {
+                                $fileLink = $sidebarDownloadsLinkObj['url'];
+                                $fileID = $sidebarDownloadsLinkObj['ID'];
+                                $file = get_attached_file( $fileID );
+                                $ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+                                $size = formatBytes(filesize($file));
 
-                            if ($sidebarDownloadsLinkName == "" || !$sidebarDownloadsLinkName) {
-                                $name = $sidebarDownloadsLinkObj['title'];
-                                $sidebarDownloadsLinkName = $name;
+                                if ($sidebarDownloadsLinkName == "" || !$sidebarDownloadsLinkName) {
+                                    $name = $sidebarDownloadsLinkObj['title'];
+                                    $sidebarDownloadsLinkName = $name;
+                                }
+
+                                $download_select .=         '<option value="' . $fileLink . '">';
+                                $download_select .=             $sidebarDownloadsLinkName;
+                                $download_select .=             ' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
+                                $download_select .=         '</option>';
                             }
-
-                            $download_select .=         '<option value="' . $fileLink . '">';
-                            $download_select .=             $sidebarDownloadsLinkName;
-                            $download_select .=             ' <span class="bbg__file-size">(' . $ext . ', ' . $size . ')</span>';
-                            $download_select .=         '</option>';
                         }
 
                         $download_select .=         '</select>';

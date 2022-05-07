@@ -17,7 +17,9 @@ if (have_posts()) {
 	$ogDescription = get_the_excerpt();
 	$ogTitle = get_the_title();
 	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id( $post -> ID ) , 'Full');
-	$ogImage = $thumb['0'];
+	if (!empty($thumb)) {
+		$ogImage = $thumb['0'];
+	}
 	$socialImageID = get_post_meta($post -> ID, 'social_image', true);
 	if ( $socialImageID ) {
 		$socialImage = wp_get_attachment_image_src($socialImageID, 'Full');

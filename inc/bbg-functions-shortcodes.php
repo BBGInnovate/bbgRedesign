@@ -24,7 +24,7 @@
 	    }
 
         if ( $orgName === 'bbg' ) {
-			$fullName = "the BBG";
+			$fullName = "the USAGM";
 			$boilerplate = get_field( 'site_setting_boilerplate_bbg', 'options', 'false') ; // Load BBG description from 'BBG Settings' custom field
 			$boilerplate = apply_filters('the_content', $boilerplate); // allowing shortcodes in the boilerplate entry
 

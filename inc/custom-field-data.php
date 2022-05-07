@@ -513,12 +513,17 @@ function get_umbrella_content_data($umbrella_content_type, $umbrella_column_grou
 		}
 		$doNotScaleToHd = get_sub_field('umbrella_content_file_do_not_scale_to_hd');
 
-		$file_id = $file_object['ID'];
-		$fileURL = $file_object['url'];
-		$link = $fileURL;
-		$file = get_attached_file($file_id);
-		$file_ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
-		$file_size = formatBytes(filesize($file));
+		$link = '';
+		$file_ext = '';
+		$file_size = '';
+		if ($file_object) {
+			$file_id = $file_object['ID'];
+			$fileURL = $file_object['url'];
+			$link = $fileURL;
+			$file = get_attached_file($file_id);
+			$file_ext = strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+			$file_size = formatBytes(filesize($file));
+		}
 	}
 
     $should_use_card = get_umbrella_should_use_card($umbrella_content_type, $title, $thumb_src);

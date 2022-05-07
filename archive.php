@@ -23,9 +23,12 @@ $feature_post_arg = array(
 
 $feature_post_query = new WP_Query($feature_post_arg);
 $feature_post = $feature_post_query->posts;
-$do_not_duplicate[] = $feature_post[0]->ID;
+$post__not_in = '';
+if (!empty($feature_post)) {
+    $do_not_duplicate[] = $feature_post[0]->ID;
+    $post__not_in = ($do_not_duplicate) ? implode(',', $do_not_duplicate) : '';
+}
 wp_reset_query();
-$post__not_in = ($do_not_duplicate) ? implode(',', $do_not_duplicate) : '';
 ?>
 
 <main id="main" role="main">

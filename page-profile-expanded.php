@@ -31,7 +31,9 @@ if (have_posts()) {
 
 	/**** CREATE OG:IMAGE *****/
 	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($profile_id), 'Full');
-	$ogImage = $thumb['0'];
+	if (!empty($thumb)) {
+		$ogImage = $thumb['0'];
+	}
 
 	$socialImageID = get_post_meta($profile_id, 'social_image', true);
 	if ($socialImageID) {
