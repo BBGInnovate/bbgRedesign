@@ -172,6 +172,7 @@ if (in_category($categories_to_show_entities))  {
 					);
 					$entity_logos[] = $entity_category_data;
 				}
+				wp_reset_postdata();
 			}
 		}
 	}
