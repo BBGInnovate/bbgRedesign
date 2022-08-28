@@ -408,6 +408,32 @@ if (have_rows('media_dev_additional_files')) {
 	}
 }
 
+$media_dev_additional_internal_videos = '';
+if (have_rows('media_dev_additional_internal_videos')) {
+	$media_dev_additional_internal_videos .= '<aside>';
+	$media_dev_additional_internal_videos .=     '<h3 class="sidebar-section-header">Videos</h3>';
+	while (have_rows('media_dev_additional_internal_videos')) {
+		the_row();
+
+		$mediaDevAdditionalInternalVideoObj = get_sub_field('media_dev_additional_internal_video');
+
+		if (!empty($mediaDevAdditionalInternalVideoObj)) {
+			$fileUrl = $mediaDevAdditionalInternalVideoObj['url'];
+			$fileMimeType = $mediaDevAdditionalInternalVideoObj['mime_type'];
+
+			$media_dev_additional_internal_videos .= '<p class="sidebar-article-title">';
+			$media_dev_additional_internal_videos .= '    <div display: flex;">';
+			$media_dev_additional_internal_videos .= '        <video style="width: 100%;" controls muted playsinline>';
+			$media_dev_additional_internal_videos .= '            <source src="' . $fileUrl . '" type="' . $fileMimeType . '"/>';
+			$media_dev_additional_internal_videos .= '            Sorry, your browser doesn\'t support embedded videos.';
+			$media_dev_additional_internal_videos .= '        </video>';
+			$media_dev_additional_internal_videos .= '    </div>';
+			$media_dev_additional_internal_videos .= '</p>';
+		}
+	}
+	$media_dev_additional_internal_videos .= '</aside>';
+}
+
 // Need to use this logic due to side effect of old acf min/max values
 if (!empty($media_dev_additional_files)) {
 	$openingTags = '';
@@ -591,6 +617,7 @@ $hideFeaturedImage = false;
 							echo $media_dev_sidebar_meta;
 							echo $media_dev_sponsors;
 							echo $media_dev_additional_files;
+							echo $media_dev_additional_internal_videos;
 							echo $team_roster;
 							echo getAccordion();
 
