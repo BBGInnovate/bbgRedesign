@@ -7,14 +7,14 @@ function fetchSamOppsRemote($postedFromDate, $postedToDate, $resultsLimit) {
 	}
 
 	$samGovApiKey = SAM_GOV_API_KEY;
-	$samGovBase = 'https://api.sam.gov/prod/opportunities/v1/search';
-	$deptName = 'UNITED STATES AGENCY FOR GLOBAL MEDIA, BBG';
+	$samGovBase = 'https://api.sam.gov/opportunities/v2/search';
+	$organizationCode = 514;
 
 	$queryParams = array(
 		'api_key' => $samGovApiKey,
 		'postedFrom' => $postedFromDate,
 		'postedTo' => $postedToDate,
-		'deptname' => $deptName,
+		'organizationCode' => $organizationCode,
 		'limit' => $resultsLimit
 	);
 
