@@ -25,9 +25,9 @@ if (have_posts()) {
 	while (have_posts()) {
 		the_post();
 		$id = get_the_ID();
+		$ogDescription = get_the_excerpt();
 		$page_content = do_shortcode(get_the_content());
 		$page_content = apply_filters('the_content', $page_content);
-		$ogDescription = get_the_excerpt();
 	}
 }
 wp_reset_postdata();
