@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/BBGInnovate/bbgRedesign#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-sass": "^3.2.1",
     "gulp-sourcemaps": "^2.6.4",
