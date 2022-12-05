@@ -619,7 +619,12 @@
 			$title = $bPost['title'];
 			$reason = $bPost['reason'];
 			
-			$imgSrc = get_template_directory_uri() . '/img/logo_' . strtolower($network) . '--circle-200.png'; //
+			$networkForLogo = $network;
+			if ($network == 'tsi') {
+				$networkForLogo = 'usagm';
+			}
+
+			$imgSrc = get_template_directory_uri() . '/img/logo_' . strtolower($networkForLogo) . '--circle-200.png';
 
 			if ( $newYear != $oldYear ) {
 				$oldYear = $newYear;
