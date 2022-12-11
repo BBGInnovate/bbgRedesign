@@ -151,7 +151,7 @@ echo '<style>.bbg__main-navigation ul li ul li:hover {background-color: #d7e1e2;
 
 							$award_list .= '<p class="sidebar-section-subheader">';
 							if ($burkeTitle) {
-								$award_list .= $burkeTitle . '<br/>';
+								$award_list .= $burkeTitle . '<br/><br />';
 								if ($burkeService) {
 									$award_list .= $burkeNetwork . ', ' . $burkeService;
 								} else {
