@@ -419,6 +419,10 @@ function get_grid_class($umbrella_column_grouping, $content_counter, $should_use
             case 'five':
                 $grid_class = 'grid-five';
                 break;
+
+            case 'six':
+                $grid_class = 'grid-six';
+                break;
         }
     }
 

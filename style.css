@@ -7609,6 +7609,11 @@ e.g. on the intern testimonial page */
   float: left;
   margin-left: 20px; }
 
+.grid-six {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px; }
+
 @media screen and (min-width: 600px) {
   .grid-half {
     width: calc(100% - 40px);
@@ -7655,6 +7660,10 @@ e.g. on the intern testimonial page */
     margin-left: 20px; }
   .grid-five {
     width: calc(20% - 24px);
+    float: left;
+    margin-left: 20px; }
+  .grid-six {
+    width: calc(16.66667% - 23.33333px);
     float: left;
     margin-left: 20px; } }
 
@@ -11342,7 +11351,7 @@ html, body {
       display: inline-block; }
       .outer-container .about-flexible-row .hd_scale {
         display: block; }
-      .outer-container .about-flexible-row .grid-four, .outer-container .about-flexible-row .grid-five, .outer-container .about-flexible-row .bbg-grid--1-2-3 {
+      .outer-container .about-flexible-row .grid-four, .outer-container .about-flexible-row .grid-five, .outer-container .about-flexible-row .grid-six, .outer-container .about-flexible-row .bbg-grid--1-2-3 {
         display: grid;
         grid-column-gap: 15px;
         grid-template-columns: 20% 75%;
