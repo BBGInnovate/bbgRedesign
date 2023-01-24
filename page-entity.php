@@ -102,7 +102,16 @@ if ($budget != "") {
 	$budget = '<li><span class="sidebar-article-title">Annual budget: </span>' . $budget . '</li>';
 }
 if ($employees != "") {
+	$employees = str_replace(",", "", $employees);
+	$hasPlusSymbol = false;
+	if (substr($employees, -1) == "+") {
+		$hasPlusSymbol = true;
+		$employees = substr($employees, 0, -1);
+	}
 	$employees = number_format( floatval( $employees ), 0, '.', ',' );
+	if ($hasPlusSymbol) {
+		$employees .= '+';
+	}
 	$employees = '<li><span class="sidebar-article-title">Employees: </span>' . $employees . '</li>';
 }
 if ($languages != "") {
