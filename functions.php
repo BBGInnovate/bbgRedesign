@@ -313,6 +313,16 @@ function bbg_extendAuthorContacts( $c ) {
 }
 add_filter( 'user_contactmethods', 'bbg_extendAuthorContacts', 10, 1 );
 
+// Disable REST access to users
+add_filter( 'rest_endpoints', function( $endpoints ){
+    if ( isset( $endpoints['/wp/v2/users'] ) ) {
+        unset( $endpoints['/wp/v2/users'] );
+    }
+    if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+        unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+    }
+    return $endpoints;
+});
 
 /**
  * Add Twitter handle to author metadata using built-in wp hook for contact methods
