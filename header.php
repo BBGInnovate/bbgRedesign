@@ -161,7 +161,7 @@ foreach ($settings_social_media_list as $social_platform) {
 	<script src="<?php echo get_template_directory_uri() ?>/js/vendor/picturefill.min.js"></script>
 
 	<!-- FortAwesome kit of 20 Font Awesome icons -->
-	<script src="https://use.fortawesome.com/e3cb8134.js"></script>
+	<!-- <script src="https://use.fortawesome.com/e3cb8134.js"></script> -->
 
 	<!-- Original FULL FontAwesome embed -->
 	<!-- <script src="https://use.fontawesome.com/41d1f06a97.js"></script> -->
