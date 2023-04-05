@@ -72,7 +72,7 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 			$umbrella_content_block .= 	'<div class="grid-container">';
 		}
 		foreach($umbrella_parts as $umbrella_chunk) {
-			if (false || $umbrella_chunk['should_use_card']) {
+			if ($umbrella_chunk['should_use_card']) {
 				$umbrella_content_block .= assemble_umbrella_content_section_card($umbrella_chunk);
 			} else {
 				$umbrella_content_block .= assemble_umbrella_content_section_umbrella($umbrella_chunk);
@@ -90,7 +90,7 @@ function assemble_umbrella_content_section($umbrella_parts, $special_grouping) {
 function assemble_umbrella_content_section_umbrella($umbrella_chunk) {
 	$umbrella_content_block = '';
 
-	$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '">';
+	$umbrella_content_block .= '<div class="' . $umbrella_chunk['grid'] . '" style="float: left; padding: 16px;">';
 	if (!empty($umbrella_chunk['column_title'])) {
 		$umbrella_content_block .= 	'<div>';
 		$umbrella_content_block .= 		$umbrella_chunk['column_title'];
