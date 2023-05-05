@@ -37,8 +37,8 @@ if (get_field('include_byline', $post_id)) {
 
 
 if ($dateline != "") {
-	$needle = '<p>';
-	$replaceNeedle = '<p>' . $dateline;
+	$needle = '>';
+	$replaceNeedle = '>' . $dateline;
 	$pos = strpos($page_content, $needle);
 	if ($pos !== false) {
 		$page_content = substr_replace($page_content, $replaceNeedle, $pos, strlen($needle));
