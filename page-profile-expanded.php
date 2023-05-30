@@ -87,7 +87,6 @@ $ceo = get_post_meta($profile_id, 'ceo', true);
 
 if (isset($ceo)) {
 	function get_ceo_article_arguments($slug) {
-		// CHECK FOR JOHN LANSING OR GRANT TURNER
 		if ($slug == 'john-lansing-chief-executive-officer-and-director') {
 			$ceo_params = array(
 				'post_type' => array('post'),
@@ -150,6 +149,28 @@ if (isset($ceo)) {
 						'taxonomy' => 'post_tag',
 						'field' => 'slug',
 						'terms' => array( 'bbg-ceo' ),
+						'operator' => 'IN'
+					)
+				)
+			);
+		} else if ($slug == 'amanda-bennett') {
+			$ceo_params = array(
+				'post_type' => array('post'),
+				'posts_per_page' => 2,
+				'orderby' => 'date',
+				'order' => 'DESC',
+				'tax_query' => array(
+					'relation' => 'AND',
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'amanda-bennett' ),
+						'operator' => 'IN'
+					),
+					array(
+						'taxonomy' => 'post_tag',
+						'field' => 'slug',
+						'terms' => array( 'usagm-ceo' ),
 						'operator' => 'IN'
 					)
 				)
@@ -223,7 +244,7 @@ get_header();
 								$ceo_post_query = new WP_Query($ceo_articles);
 								$ceo_article_array = $ceo_post_query->posts;
 								if (!empty($ceo_article_array)) {
-									$categoryUrl = '/tag/grant-turner/?category_name=appearance,bbg-in-the-news';
+									$categoryUrl = '/tag/amanda-bennett/?category_name=appearance,bbg-in-the-news';
 									$categoryLabel = 'News & Appearances';
 									// $ceo_post_query = new WP_Query($ceo_articles);
 									// $ceo_article_array = $ceo_post_query->posts;
