@@ -170,7 +170,7 @@ foreach ($settings_social_media_list as $social_platform) {
 
 	<!-- Original FULL FontAwesome embed -->
 	<!-- <script src="https://use.fontawesome.com/41d1f06a97.js"></script> -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/87180f5c1c.js" crossorigin="anonymous"></script>
 <!-- Favicons
 ================================================== -->
 	<!-- 128x128 -->
@@ -323,11 +323,11 @@ gtag('config', 'UA-124338348-1');
 
 				$social_box  = '<div class="social-header">';
 				$social_box .= 	'<ul class="unstyled-list">';
-				$social_box .= 		'<li id="facebook-social"><a href="' . $facebook_settings_link . '" target="_blank"><i class="fab fa-facebook"></i></a></li>';
-				$social_box .= 		'<li id="twitter-social"><a href="' . $twitter_settings_link . '" target="_blank"><i class="fab fa-twitter"></i></a></li>';
-				$social_box .= 		'<li id="youtube-social"><a href="' . $youtube_settings_link . '" target="_blank"><i class="fab fa-youtube"></i></a></li>';
-				$social_box .= 		'<li id="linkedin-social"><a href="' . $linkedin_settings_link . '" target="_blank"><i class="fab fa-linkedin"></i></a></li>';
-				$social_box .= 		'<li id="instagram-social"><a href="' . $instagram_settings_link . '" target="_blank"><i class="fab fa-instagram"></i></a></li>';
+				$social_box .= 		'<li id="facebook-social"><a href="' . $facebook_settings_link . '" target="_blank"><i class="fa-brands fa-square-facebook"></i></a></li>';
+				$social_box .= 		'<li id="twitter-social"><a href="' . $twitter_settings_link . '" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a></li>';
+				$social_box .= 		'<li id="youtube-social"><a href="' . $youtube_settings_link . '" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>';
+				$social_box .= 		'<li id="linkedin-social"><a href="' . $linkedin_settings_link . '" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>';
+				$social_box .= 		'<li id="instagram-social"><a href="' . $instagram_settings_link . '" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>';
 				$social_box .= 	'</ul>';
 				$social_box .= '</div>';
 

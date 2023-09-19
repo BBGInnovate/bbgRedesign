@@ -1271,10 +1271,10 @@ function social_media_share_page($page_id) {
 	$share_markup  = '<aside class="social-media-icons">';
 	$share_markup .= 	'<h3 class="sidebar-section-header">Share</h3>';
 	$share_markup .= 	'<a class="facebook-icon" href="' . $facebook_share_url . '" target="_blank">';
-	$share_markup .= 		'<i class="fab fa-facebook-square"></i>';
+	$share_markup .= 		'<i class="fa-brands fa-square-facebook"></i>';
 	$share_markup .= 	'</a>';
 	$share_markup .= 	'<a class="twitter-icon" href="' . $twitter_share_url . '" target="_blank">';
-	$share_markup .= 		'<i class="fab fa-twitter-square"></i>';
+	$share_markup .= 		'<i class="fa-brands fa-square-x-twitter"></i>';
 	$share_markup .= 	'</a>';
 	$share_markup .= '</aside>';
 	return $share_markup;

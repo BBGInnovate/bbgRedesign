@@ -484,17 +484,17 @@ get_header();
 									echo 	'<p class="social-media-icons">';
 									if (!empty($facebook)) {
 										echo '<a class="facebook-icon" href="' . $facebook . '" title="Like ' . get_the_title() . ' on Facebook">';
-										echo 	'<i class="fab fa-facebook-square"></i>';
+										echo 	'<i class="fa-brands fa-square-facebook"></i>';
 										echo '</a>';
 									}
 									if (!empty($twitter_profile_handle)) {
 										echo '<a class="twitter-icon" href="https://twitter.com/' . $twitter_profile_handle . '" title="Follow ' . get_the_title() . ' on Twitter">';
-										echo 	'<i class="fab fa-twitter-square"></i>';
+										echo 	'<i class="fa-brands fa-square-x-twitter"></i>';
 										echo '</a>';
 									}
 									if (!empty($instagram)) {
 										echo '<a class="instagram-icon" href="https://instagram.com/' . $instagram . '" title="Follow ' . get_the_title() . ' on Instagram">';
-										echo 	'<i class="fab fa-instagram"></i>';
+										echo 	'<i class="fa-brands fa-instagram"></i>';
 										echo '</a>';
 									}
 									echo 	'</p>';

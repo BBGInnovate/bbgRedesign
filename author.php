@@ -248,7 +248,7 @@ get_header();
 				echo 					'<h2 class="sidebar-section-header">Follow on Twitter</h2>';
 				// echo 					'<h2 class="sidebar-section-header"><a target="_blank" href="https://twitter.com/' . $twitterProfileHandle . '">Featured Tweet</a></h2>';
 				echo 					'<a href="https://twitter.com/' . $twitterProfileHandle . '" target="_blank" title="Follow ' . get_the_title() . ' on Twitter">';
-				echo 						'<i class="fab fa-twitter"></i> @' . $twitterProfileHandle;
+				echo 						'<i class="fa-brands fa-square-x-twitter"></i> @' . $twitterProfileHandle;
 				echo 					'</a>';
 				echo 				'</aside>';
 				echo 				'<aside style="background-color: #e1f3f8;">';
