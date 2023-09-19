@@ -333,7 +333,7 @@ get_header();
 					$instagram_markup  = '<aside>';
 					$instagram_markup .= 	'<h2 class="sidebar-section-header">Follow on Instagram</h2>';
 					$instagram_markup .= 	'<a href="https://www.instagram.com/' . $instagramProfileHandle . '" target="_blank" title="Follow ' . get_the_title() . ' on Instagram">';
-					$instagram_markup .= 		'<i class="fa-brands fa-instagram"></i> @' . $instagramProfileHandle;
+					$instagram_markup .= 		'<i class="fa-brands fa-square-instagram"></i> @' . $instagramProfileHandle;
 					$instagram_markup .= 	'</a>';
 					$instagram_markup .= '</aside>';
 					echo $instagram_markup;

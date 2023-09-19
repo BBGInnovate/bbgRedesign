@@ -152,7 +152,7 @@ get_header(); ?>
 				}
 				if ($instagramProfileHandle != "") {
 					$instagram_link  = 	'<br><a href="https://www.instagram.com/' . $instagramProfileHandle . '" title="Follow ' . $page_title . ' on Instagram">';
-					$instagram_link .= 		'<span class="bbg__article-share__text fa-brands fa-instagram"> @' . $instagramProfileHandle . '</span>';
+					$instagram_link .= 		'<span class="bbg__article-share__text fa-brands fa-square-instagram"> @' . $instagramProfileHandle . '</span>';
 					$instagram_link .= 	'</a>';
 					echo $instagram_link;
 				}

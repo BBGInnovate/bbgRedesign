@@ -327,7 +327,7 @@ gtag('config', 'UA-124338348-1');
 				$social_box .= 		'<li id="twitter-social"><a href="' . $twitter_settings_link . '" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a></li>';
 				$social_box .= 		'<li id="youtube-social"><a href="' . $youtube_settings_link . '" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>';
 				$social_box .= 		'<li id="linkedin-social"><a href="' . $linkedin_settings_link . '" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>';
-				$social_box .= 		'<li id="instagram-social"><a href="' . $instagram_settings_link . '" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>';
+				$social_box .= 		'<li id="instagram-social"><a href="' . $instagram_settings_link . '" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></li>';
 				$social_box .= 	'</ul>';
 				$social_box .= '</div>';
 
