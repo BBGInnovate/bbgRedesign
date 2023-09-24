@@ -130,12 +130,6 @@ foreach ($settings_social_media_list as $social_platform) {
 <!-- Title, meta description and CSS
 ================================================== -->
 
-<script type="text/javascript">
-  var utag_data={
-      "slug"  : "test-slug"
-  };
-</script>
-
 <?php wp_head(); ?>
 
 <script type="text/javascript">
@@ -210,15 +204,6 @@ gtag('config', 'UA-124338348-1');
 
 
 <body <?php body_class(); ?>>
-
-<!-- Loading tealium script asynchronously -->
-<script type="text/javascript">
-    (function(a,b,c,d){
-    a='//tags.tiqcdn.com/utag/bbg/main/prod/utag.js';
-    b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
-    a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
-    })();
-</script>
 
 <h1 class="header-outliner">United States Agency for Global Media</h1>
 <div id="page" class="site main-content" role="main">

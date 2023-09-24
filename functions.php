@@ -1333,3 +1333,64 @@ function my_login_logo_one() {
  <?php 
 } add_action( 'login_enqueue_scripts', 'my_login_logo_one' );
 ?>
+ <?php
+
+function addToTealiumDataObject() {
+	global $utagdata;
+	global $post;
+
+	$siteUrl = get_site_url();
+	$parsedUrl = parse_url($siteUrl);
+	$domain = $parsedUrl['host'];
+	$slug = $post->post_name;
+
+	unset($utagdata['pageType']);
+	unset($utagdata['scUserType']);
+	unset($utagdata['siteDescription']);
+	unset($utagdata['siteName']);
+	unset($utagdata['userRole']);
+
+	$utagdata['url'] = $siteUrl;
+
+	// $utagdata['pageType'] = '';
+	// $utagdata['subcontentType'] = '';
+	// $utagdata['section'] = '';
+
+	$utagdata['postTitle'] = strtolower($utagdata['postTitle']);
+
+	$utagdata['postSlug'] = $slug;
+
+	$utagdata['language'] = 'english';
+	$utagdata['language_service'] = 'usagm english';
+	$utagdata['short_language_service'] = 'en';
+
+	$utagdata['platform'] = 'web';
+	$utagdata['platform_short'] = 'w';
+
+	// $utagdata['entity'] = '';
+
+	$utagdata['property_name'] = 'usagm';
+	$utagdata['property_id'] = 'bbg';
+
+	$utagdata['domain'] = $domain;
+
+	if ( get_site_url() == 'https://www.usagm.gov' ) {
+		$utagdata['rsid_acct'] = 'bbgprod';
+	} else {
+		$utagdata['rsid_acct'] = 'bbgdev';
+	}
+}
+add_action( 'tealium_addToDataObject', 'addToTealiumDataObject' );
+
+/*
+ * Switch Tealium environment based on website URL
+ */
+function switchTealiumEnvironment() {
+	global $tealiumtag;
+
+	if ( get_site_url() != 'https://www.usagm.gov' ) {
+		$tealiumtag = str_replace( '/prod/', '/dev/', $tealiumtag );
+	}
+}
+add_action( 'tealium_tagCode', 'switchTealiumEnvironment' );
+?>
