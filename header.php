@@ -164,7 +164,6 @@ foreach ($settings_social_media_list as $social_platform) {
 
 	<!-- Original FULL FontAwesome embed -->
 	<!-- <script src="https://use.fontawesome.com/41d1f06a97.js"></script> -->
-	<script src="https://kit.fontawesome.com/87180f5c1c.js" crossorigin="anonymous"></script>
 <!-- Favicons
 ================================================== -->
 	<!-- 128x128 -->

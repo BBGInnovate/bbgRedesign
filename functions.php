@@ -240,6 +240,10 @@ function bbginnovate_scripts() {
 	wp_enqueue_style( 'selector-css', get_stylesheet_directory_uri() . '/js/vendor/selection-sharer.css' );
 	wp_enqueue_script( 'selector-script', get_stylesheet_directory_uri() . '/js/vendor/selection-sharer.js' );
 
+	wp_enqueue_style( 'fontawesome-css-brands', get_stylesheet_directory_uri() . '/css/fa/css/brands.css' );
+	wp_enqueue_style( 'fontawesome-css-solid', get_stylesheet_directory_uri() . '/css/fa/css/solid.css' );
+	wp_enqueue_style( 'fontawesome-css', get_stylesheet_directory_uri() . '/css/fa/css/fontawesome.css' );
+
 }
 add_action( 'wp_enqueue_scripts', 'bbginnovate_scripts' );
 
@@ -1380,7 +1384,7 @@ function addToTealiumDataObject() {
 		$utagdata['rsid_acct'] = 'bbgdev';
 	}
 }
-add_action( 'tealium_addToDataObject', 'addToTealiumDataObject' );
+// add_action( 'tealium_addToDataObject', 'addToTealiumDataObject' );
 
 /*
  * Switch Tealium environment based on website URL
@@ -1392,5 +1396,8 @@ function switchTealiumEnvironment() {
 		$tealiumtag = str_replace( '/prod/', '/dev/', $tealiumtag );
 	}
 }
-add_action( 'tealium_tagCode', 'switchTealiumEnvironment' );
+// add_action( 'tealium_tagCode', 'switchTealiumEnvironment' );
+
+
+
 ?>
