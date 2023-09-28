@@ -1384,7 +1384,7 @@ function addToTealiumDataObject() {
 		$utagdata['rsid_acct'] = 'bbgdev';
 	}
 }
-// add_action( 'tealium_addToDataObject', 'addToTealiumDataObject' );
+add_action( 'tealium_addToDataObject', 'addToTealiumDataObject' );
 
 /*
  * Switch Tealium environment based on website URL
@@ -1396,7 +1396,7 @@ function switchTealiumEnvironment() {
 		$tealiumtag = str_replace( '/prod/', '/dev/', $tealiumtag );
 	}
 }
-// add_action( 'tealium_tagCode', 'switchTealiumEnvironment' );
+add_action( 'tealium_tagCode', 'switchTealiumEnvironment' );
 
 
 
