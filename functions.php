@@ -1389,15 +1389,13 @@ add_action( 'tealium_addToDataObject', 'addToTealiumDataObject' );
 /*
  * Switch Tealium environment based on website URL
  */
-function switchTealiumEnvironment() {
+function removeTealiumFromPlugin() {
 	global $tealiumtag;
 
 	if ( get_site_url() != 'https://www.usagm.gov' ) {
-		$tealiumtag = str_replace( '/prod/', '/dev/', $tealiumtag );
+		$tealiumtag = '';
 	}
 }
-add_action( 'tealium_tagCode', 'switchTealiumEnvironment' );
-
-
+add_action( 'tealium_tagCode', 'removeTealiumFromPlugin' );
 
 ?>
