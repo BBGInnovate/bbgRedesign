@@ -12,6 +12,7 @@ require 'inc/bbg-functions-assemble.php';
 require 'inc/custom-field-data.php';
 require 'inc/custom-field-parts.php';
 require 'inc/custom-field-modules.php';
+include 'inc/shared_sidebar.php';
 
 // PAGE INFORMATION
 $page_content = "";
@@ -48,7 +49,8 @@ get_header();
 ?>
 <main id="main" role="main">
 	<?php
-		$contact_us_structure  = '<section class="outer-container contact-us">';
+		$contact_us_structure  = '<div class="outer-container contact-us">';
+		$contact_us_structure .= '<div class="main-content-container">';
 		$contact_us_structure .= 	'<div class="grid-container">';
 		$contact_us_structure .= 		'<h2 class="section-header">' . $page_title . '</h2>';
 		$contact_us_structure .= 		'<p>' . $page_content . '</p>';
@@ -59,7 +61,13 @@ get_header();
 		$contact_us_structure .= 	'<div class="grid-half" id="contact-us-col-2">';
 		$contact_us_structure .= 		$contactUsColumn2;
 		$contact_us_structure .= 	'</div>';
-		$contact_us_structure .= '</section>';
+		$contact_us_structure .= '</div>';
+		if ($includeSidebar) {
+			$contact_us_structure .= '<div class="side-content-container">';
+			$contact_us_structure .= $sidebar;
+			$contact_us_structure .= '</div>';
+		}
+		$contact_us_structure .= '</div>';
 		echo $contact_us_structure;
 	?>
 </main>
