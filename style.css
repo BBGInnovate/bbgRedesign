@@ -6634,6 +6634,12 @@ button#bbg__menu-toggle {
       .bbg__main-navigation .social-header ul li#instagram-social a:hover, .bbg__main-navigation .social-header ul li#instagram-social a:active {
         color: #ee0075;
         background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#contact-us a:link, .bbg__main-navigation .social-header ul li#contact-us a:visited {
+        color: #999999;
+        background-color: transparent; }
+      .bbg__main-navigation .social-header ul li#contact-us a:hover, .bbg__main-navigation .social-header ul li#contact-us a:active {
+        color: #0071bc;
+        background-color: transparent; }
       .bbg__main-navigation .social-header ul li {
         display: inline-block;
         line-height: 0;

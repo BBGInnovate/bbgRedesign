@@ -392,6 +392,10 @@ button#bbg__menu-toggle {margin-right: 0;}
 					a:link, a:visited {color: $gray-lighter; background-color: transparent;}
 					a:hover, a:active {color: #ee0075; background-color: transparent;}
 				}
+				li#contact-us {
+					a:link, a:visited {color: $gray-lighter; background-color: transparent;}
+					a:hover, a:active {color: $color-primary; background-color: transparent;}
+				}
 				li {
 					display: inline-block;
 					line-height: 0;

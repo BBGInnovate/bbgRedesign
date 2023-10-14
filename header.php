@@ -326,6 +326,7 @@ if ( get_site_url() === 'https://www.usagm.gov' ) {
 				$social_box .= 		'<li id="youtube-social"><a href="' . $youtube_settings_link . '" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>';
 				$social_box .= 		'<li id="linkedin-social"><a href="' . $linkedin_settings_link . '" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>';
 				$social_box .= 		'<li id="instagram-social"><a href="' . $instagram_settings_link . '" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></li>';
+				$social_box .= 		'<li id="contact-us"><a href="/contact-us" target="_blank"><i class="fa fa-contact-card"></i></a></li>';
 				$social_box .= 	'</ul>';
 				$social_box .= '</div>';
 
