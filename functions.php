@@ -1337,7 +1337,57 @@ function my_login_logo_one() {
  <?php 
 } add_action( 'login_enqueue_scripts', 'my_login_logo_one' );
 ?>
- <?php
+
+<?php
+function getEntityInTags($tags) {
+    $entitySet = [
+        "usagm" => true,
+        "voa" => true,
+        "rferl" => true,
+        "ocb" => true,
+        "rfa" => true,
+        "mbn" => true,
+        "otf" => true
+    ];
+
+    $foundEntity = 'usagm';
+
+    if (empty($tags) || !is_array($tags)) {
+        return $foundEntity;
+    }
+
+    foreach ($tags as $tag) {
+        if (isset($entitySet[$tag])) {
+            $foundEntity = $tag;
+            break;
+        }
+    }
+
+    return $foundEntity;
+}
+
+function getSlugPortionTitle($segmentIndex) {
+    global $wp;
+
+    if (get_post_type() !== 'page') {
+        return '';
+    }
+
+    $segments = explode('/', $wp->request);
+    if (!isset($segments[$segmentIndex]) || !$segments[$segmentIndex]) {
+        return '';
+    }
+
+    $segment = implode('/', array_slice($segments, 0, $segmentIndex + 1));
+
+    $page = get_page_by_path($segment);
+    if ($page) {
+        return get_the_title($page);
+    }
+
+    return '';
+}
+
 
 function addToTealiumDataObject() {
 	global $utagdata;
@@ -1348,7 +1398,6 @@ function addToTealiumDataObject() {
 	$domain = $parsedUrl['host'];
 	$slug = $post->post_name;
 
-	unset($utagdata['pageType']);
 	unset($utagdata['scUserType']);
 	unset($utagdata['siteDescription']);
 	unset($utagdata['siteName']);
@@ -1356,9 +1405,10 @@ function addToTealiumDataObject() {
 
 	$utagdata['url'] = $siteUrl;
 
-	// $utagdata['pageType'] = '';
-	// $utagdata['subcontentType'] = '';
-	// $utagdata['section'] = '';
+	$slug0Title = getSlugPortionTitle(0);
+	$slug1Title = getSlugPortionTitle(1);
+	$utagdata['contentType'] = $slug0Title;
+	$utagdata['subcontentType'] = $slug1Title;
 
 	$utagdata['postTitle'] = strtolower($utagdata['postTitle']);
 
@@ -1371,7 +1421,7 @@ function addToTealiumDataObject() {
 	$utagdata['platform'] = 'web';
 	$utagdata['platform_short'] = 'w';
 
-	// $utagdata['entity'] = '';
+	$utagdata['entity'] = getEntityInTags($utagdata['postTags'] ?? '');
 
 	$utagdata['property_name'] = 'usagm';
 	$utagdata['property_id'] = 'bbg';
