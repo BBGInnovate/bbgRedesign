@@ -210,8 +210,8 @@ get_header();
 			$featuredJournalists .= '                    <select name="featured-journalist__dropdown">';
 			$featuredJournalists .= '                        <option value="">ALL</option>';
 
-			foreach ($choices as $choice) {
-				$featuredJournalists .= '                    <option value="' . strtolower($choice) . '">' . $choice . '</option>';
+			foreach ($choices as $value => $label) {
+				$featuredJournalists .= '                    <option value="' . $value . '">' . $label . '</option>';
 			}
 			$featuredJournalists .= '                    </select>';
 			$featuredJournalists .= '                </label>';
@@ -238,11 +238,11 @@ get_header();
 					$profilePhoto = '<a href="' . $profileUrl . '"><img src="' . $profilePhoto . '" class="bbg__profile-excerpt__photo" alt="Profile photo"></a>';
 				}
 
-				$featuredJournalists .= 			'<div class="grid-half profile-clears featured-journalist__grid-item status-' . strtolower($status) . '">';
+				$featuredJournalists .= 			'<div class="grid-half profile-clears featured-journalist__grid-item status-' . $status['value'] . '">';
 				$featuredJournalists .= 				$profilePhoto;
 				$featuredJournalists .= 				'<h4 class="article-title"><a href="' . $profileUrl . '">'. $profileName .'</a></h4>';
 				$featuredJournalists .= 				'<p class="sans" style="margin-bottom: 1rem;">' . $profileOccupation . '</p>';
-				$featuredJournalists .= 				'<p class="featured-journalist__status">' . strtoupper($status) . '</p>';
+				$featuredJournalists .= 				'<p class="featured-journalist__status">' . $status['label'] . '</p>';
 				$featuredJournalists .= 				'<p>' . $profileExcerpt . '</p>';
 				$featuredJournalists .= 			'</div>';
 			}
