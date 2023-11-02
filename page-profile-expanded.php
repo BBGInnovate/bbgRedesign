@@ -250,7 +250,8 @@ get_header();
 									// $ceo_article_array = $ceo_post_query->posts;
 
 									echo '<div class="ceo-news-posts">';
-									echo 	'<h3 class="section-subheader"><a href="' . $categoryUrl . '">' . $categoryLabel . '</a></h3>';
+									// echo 	'<h3 class="section-subheader"><a href="' . $categoryUrl . '">' . $categoryLabel . '</a></h3>';
+									echo 	'<h3 class="section-subheader">' . $categoryLabel . '</h3>';
 									foreach($ceo_article_array as $ceo_article_data) {
 										$ceo_news_post = build_article_standard_vertical($ceo_article_data);
 										echo $ceo_news_post;
