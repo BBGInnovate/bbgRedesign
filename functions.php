@@ -1402,6 +1402,8 @@ function addToTealiumDataObject() {
 	unset($utagdata['siteDescription']);
 	unset($utagdata['siteName']);
 	unset($utagdata['userRole']);
+	unset($utagdata['postAuthor']);
+	unset($utagdata['postId']);
 
 	$utagdata['url'] = $siteUrl;
 
