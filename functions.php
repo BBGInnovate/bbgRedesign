@@ -1369,6 +1369,14 @@ function getEntityInTags($tags) {
 function getSlugPortionTitle($segmentIndex) {
     global $wp;
 
+	if (is_front_page()) {
+		if ($segmentIndex == 0) {
+			return "index";
+		} else if ($segmentIndex == 1) {
+			return "main";
+		}
+	}
+
     if (get_post_type() !== 'page') {
         return '';
     }
@@ -1382,39 +1390,87 @@ function getSlugPortionTitle($segmentIndex) {
 
     $page = get_page_by_path($segment);
     if ($page) {
-        return get_the_title($page);
+        return strtolower(html_entity_decode(get_the_title($page)));
     }
 
     return '';
 }
 
+function getTitle() {
+    if (is_home() && !is_front_page()) {
+        $posts_page_id = get_option('page_for_posts');
+        $title = get_the_title($posts_page_id);
+    } elseif (is_front_page()) {
+        $front_page_id = get_option('page_on_front');
+        $title = get_the_title($front_page_id);
+    } elseif (is_archive()) {
+        $title = get_the_archive_title();
+    } elseif (is_single() || is_page()) {
+        $title = get_the_title();
+    } else {
+        $title = get_bloginfo('name');
+    }
+
+    return html_entity_decode($title);
+}
+
+
+function getSlug() {
+    if (is_singular()) {
+        $post_id = get_queried_object_id();
+        $post = get_post($post_id);
+        return $post->post_name;
+    }
+
+    if (is_category() || is_tag() || is_tax()) {
+        $term = get_queried_object();
+        return $term->slug;
+    }
+
+    if (is_post_type_archive()) {
+        $post_type = get_queried_object();
+        return isset($post_type->rewrite) ? $post_type->rewrite['slug'] : null;
+    }
+
+    if (is_author()) {
+        $author = get_queried_object();
+        return $author->user_nicename;
+    }
+
+    return '';
+}
 
 function addToTealiumDataObject() {
 	global $utagdata;
-	global $post;
-
-	$siteUrl = get_site_url();
-	$parsedUrl = parse_url($siteUrl);
-	$domain = $parsedUrl['host'];
-	$slug = $post->post_name;
+	global $wp;
 
 	unset($utagdata['scUserType']);
 	unset($utagdata['siteDescription']);
 	unset($utagdata['siteName']);
 	unset($utagdata['userRole']);
 	unset($utagdata['postAuthor']);
-	unset($utagdata['postId']);
 
-	$utagdata['url'] = $siteUrl;
+	$utagdata['url'] = home_url($wp->request);
 
 	$slug0Title = getSlugPortionTitle(0);
 	$slug1Title = getSlugPortionTitle(1);
 	$utagdata['contentType'] = $slug0Title;
 	$utagdata['subcontentType'] = $slug1Title;
 
-	$utagdata['postTitle'] = strtolower($utagdata['postTitle']);
+	$utagdata['postTitle'] = strtolower(getTitle());
 
-	$utagdata['postSlug'] = $slug;
+	if (is_singular('post')) {
+		if (isset($utagdata['postDate'])) {
+			$utagdata['postDate'] = DateTime::createFromFormat('Y/m/d', $utagdata['postDate'])->format('m/d/Y');
+		} else {
+			unset($utagdata['postDate']);
+		}
+	} else {
+		unset($utagdata['postDate']);
+		unset($utagdata['postId']);
+	}
+
+	$utagdata['postSlug'] = getSlug();
 
 	$utagdata['language'] = 'english';
 	$utagdata['language_service'] = 'usagm english';
@@ -1428,6 +1484,9 @@ function addToTealiumDataObject() {
 	$utagdata['property_name'] = 'usagm';
 	$utagdata['property_id'] = 'bbg';
 
+	$siteUrl = get_site_url();
+	$parsedUrl = parse_url($siteUrl);
+	$domain = $parsedUrl['host'];
 	$utagdata['domain'] = $domain;
 
 	if ( get_site_url() == 'https://www.usagm.gov' ) {
