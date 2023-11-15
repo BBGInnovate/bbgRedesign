@@ -1454,8 +1454,12 @@ function addToTealiumDataObject() {
 
 	$slug0Title = getSlugPortionTitle(0);
 	$slug1Title = getSlugPortionTitle(1);
-	$utagdata['contentType'] = $slug0Title;
-	$utagdata['subcontentType'] = $slug1Title;
+	if (!empty($slug0Title)) {
+		$utagdata['contentType'] = $slug0Title;
+	}
+	if (!empty($slug1Title)) {
+		$utagdata['subcontentType'] = $slug1Title;
+	}
 
 	$utagdata['postTitle'] = strtolower(getTitle());
 
