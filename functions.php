@@ -1366,34 +1366,37 @@ function getEntityInTags($tags) {
     return $foundEntity;
 }
 
-function getSlugPortionTitle($segmentIndex) {
+function getSlugPortionTitles() {
     global $wp;
 
-	if (is_front_page()) {
-		if ($segmentIndex == 0) {
-			return "index";
-		} else if ($segmentIndex == 1) {
-			return "main";
-		}
-	}
-
-    if (get_post_type() !== 'page') {
-        return '';
+    if (is_single() && get_post_type() === 'post') {
+        return ['article', 'article'];
     }
 
-    $segments = explode('/', $wp->request);
-    if (!isset($segments[$segmentIndex]) || !$segments[$segmentIndex]) {
-        return '';
+    if (is_category()) {
+        return ['category', strtolower(html_entity_decode(single_cat_title('', false)))];
     }
 
-    $segment = implode('/', array_slice($segments, 0, $segmentIndex + 1));
-
-    $page = get_page_by_path($segment);
-    if ($page) {
-        return strtolower(html_entity_decode(get_the_title($page)));
+    if (is_home() && $page_for_posts = get_option('page_for_posts')) {
+        return [strtolower(html_entity_decode(get_the_title($page_for_posts)))];
     }
 
-    return '';
+    $path = $wp->request;
+    $path_segments = explode('/', trim($path, '/'));
+
+    $titles = [];
+    for ($i = 0; $i < min(2, count($path_segments)); $i++) {
+        $segment_path = implode('/', array_slice($path_segments, 0, $i + 1));
+        $segment_url = home_url($segment_path);
+        $post_id = url_to_postid($segment_url);
+        if ($post_id && get_post_type($post_id) != 'post') {
+            $titles[] = strtolower(html_entity_decode(get_the_title($post_id)));
+        } else {
+            $titles[] = null;
+        }
+    }
+
+    return $titles;
 }
 
 function getTitle() {
@@ -1411,9 +1414,9 @@ function getTitle() {
         $title = get_bloginfo('name');
     }
 
-    return html_entity_decode($title);
+    $title = html_entity_decode($title);
+    return function_exists('mb_strtolower') ? mb_strtolower($title, 'UTF-8') : strtolower($title);
 }
-
 
 function getSlug() {
     if (is_singular()) {
@@ -1452,16 +1455,15 @@ function addToTealiumDataObject() {
 
 	$utagdata['url'] = home_url($wp->request);
 
-	$slug0Title = getSlugPortionTitle(0);
-	$slug1Title = getSlugPortionTitle(1);
-	if (!empty($slug0Title)) {
-		$utagdata['contentType'] = $slug0Title;
+	$slugTitles = getSlugPortionTitles();
+	if (isset($slugTitles[0])) {
+		$utagdata['contentType'] = $slugTitles[0];
 	}
-	if (!empty($slug1Title)) {
-		$utagdata['subcontentType'] = $slug1Title;
+	if (isset($slugTitles[1])) {
+		$utagdata['subcontentType'] = $slugTitles[1];
 	}
 
-	$utagdata['postTitle'] = strtolower(getTitle());
+	$utagdata['postTitle'] = getTitle();
 
 	if (is_singular('post')) {
 		if (isset($utagdata['postDate'])) {
