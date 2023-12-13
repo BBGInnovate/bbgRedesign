@@ -1515,4 +1515,16 @@ function removeTealiumFromPlugin() {
 }
 add_action( 'tealium_tagCode', 'removeTealiumFromPlugin' );
 
+add_action('save_post', function($post_id) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (wp_is_post_revision($post_id)) {
+        return;
+    }
+    if (function_exists('w3tc_pgcache_flush')) {
+        w3tc_pgcache_flush();
+    }
+}, 10, 1);
+
 ?>
