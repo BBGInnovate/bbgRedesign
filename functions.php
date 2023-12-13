@@ -1527,4 +1527,10 @@ add_action('save_post', function($post_id) {
     }
 }, 10, 1);
 
+add_action('deleted_post', function($post_id) {
+    if (function_exists('w3tc_pgcache_flush')) {
+        w3tc_pgcache_flush();
+    }
+}, 10, 1);
+
 ?>
