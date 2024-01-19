@@ -222,10 +222,11 @@ function outputSeniorManagement($type, $shouldHideProfilePhoto) {
 		$mgmt_profile_ids = array(get_field('senior_management_ceo', $mgmt_id, true));
 	} else if ($type == 'ibb') {
 		$mgmt_profile_ids = get_field('senior_management_management_team_ordered', $mgmt_id, true);
+	} else if ($type == 'ibab') {
+		$mgmt_profile_ids = get_field('senior_management_ibab_ordered', $mgmt_id, true);
 	} else if ($type == 'broadcast') {
 		$mgmt_profile_ids = get_field('senior_management_network_leaders_ordered', $mgmt_id, true);
-	}
-	else if ($type == 'experts') {
+	} else if ($type == 'experts') {
 		$mgmt_profile_ids = get_field('senior_management_senior_experts', $mgmt_id, true);
 	}
 	$mgmg_profile_block = "";
