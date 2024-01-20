@@ -290,6 +290,7 @@ require get_template_directory() . '/inc/bbg-functions-bizOpps.php';
 require get_template_directory() . '/inc/bbg-functions-cards.php';
 require get_template_directory() . '/inc/bbg-functions-congressional-committees.php';
 require get_template_directory() . '/inc/bbg-functions-contactCards.php';
+require get_template_directory() . '/inc/bbg-functions-events.php';
 require get_template_directory() . '/inc/bbg-functions-header.php';
 require get_template_directory() . '/inc/bbg-functions-impact.php';
 require get_template_directory() . '/inc/bbg-functions-interns.php';
