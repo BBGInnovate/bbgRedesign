@@ -63,6 +63,7 @@ if (have_posts()) {
 
 	//EVENT FIELDS - MEETING DATA
 	$meeting_location = get_post_meta($page_id, 'board_meeting_location', true);
+	$meeting_disable_date_and_time = get_post_meta($page_id, 'board_meeting_disable_date_and_time', true);
 	$meeting_time = get_post_meta($page_id, 'board_meeting_time', true);
 	$meeting_summary = get_post_meta($page_id, 'board_meeting_summary', true);
 	$meeting_contact_tagline = get_post_meta($page_id, 'board_meeting_contact_tagline', true);
@@ -247,10 +248,16 @@ get_header();
 							}
 
 							$event_info  = '<h3 class="sidebar-section-header">Event Information</h3>';
-							$event_info .= '<p class="sans">' . $post_date;
-							$event_info .= (empty($meeting_time) ? "" : ', ' . $meeting_time);
+							$event_info .= '<p class="sans">';
+							if (!$meeting_disable_date_and_time) {
+								$event_info .= $post_date;
+								$event_info .= empty($meeting_time) ? '' : ', ' . $meeting_time;
+								$event_info .= '<br><br>';
+							}
+							$event_info .= $meeting_summary;
 							$event_info .= '<br><br>';
-							$event_info .= $meeting_location . '</p>';
+							$event_info .= $meeting_location;
+							$event_info .= '</p>';
 							$event_info .= $event_brite_button_string;
 							$event_info .= '<p class="bbg-tagline bbg-tagline--main">';
 							$event_info .= 	$meeting_contact_tagline;
