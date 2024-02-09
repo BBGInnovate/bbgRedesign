@@ -491,13 +491,14 @@ function getRowsDataPressReleases() {
 
     $pressReleaseObj = get_category_by_slug('press-release');
     $pressReleaseID = $pressReleaseObj->term_id;
+    $categoryNotIn = array(get_cat_id('IBAB'), get_cat_id('USAGM Experts'));
 
     $qParams = array(
         'post_type' => 'post',
         'posts_per_page' => 3,
         'post__not_in' => $postsNotIn,
         'category__and' => array($pressReleaseID),
-        'category__not_in' => array(2280),
+        'category__not_in' => $categoryNotIn,
         'orderby', 'date',
         'order', 'DESC'
     );

@@ -29,11 +29,13 @@ $entityCatID = $entityCatObj->term_id;
 $pressReleaseObj = get_category_by_slug("press-release");
 $pressReleaseID = $pressReleaseObj->term_id;
 
+$categoryNotIn = array(get_cat_id('IBAB'), get_cat_id('USAGM Experts'));
+
 $qParams = array(
     'post_type' => 'post',
     'posts_per_page' => 1,
     'category__and' => array($entityCatID, $pressReleaseID),
-    'category__not_in' => array(2280),
+    'category__not_in' => $categoryNotIn,
     'orderby', 'date',
     'order', 'DESC'
 );
@@ -63,7 +65,7 @@ $post__not_in = ($do_not_duplicate) ? implode(',', $do_not_duplicate) : '';
 
         echo         '<div class="grid-container">';
         echo             do_shortcode('[ajax_load_more post__not_in="' . $post__not_in .
-                                 '" category__and="' . $entityCatID . ', ' . $pressReleaseID .'" category__not_in="2280" scroll="false"]');
+                                 '" category__and="' . $entityCatID . ', ' . $pressReleaseID .'" category__not_in="' . implode(",", $categoryNotIn) . '" scroll="false"]');
         echo         '</div>';
         echo     '</div>';
         echo '</div><!-- .outer-container -->';

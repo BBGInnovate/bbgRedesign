@@ -244,11 +244,12 @@ if ($prCategorySlug != '') {
 		// CATEGORIES TO EXCLUDE: 2280: USAGM Experts (dev testing 2276)
 		$pressReleaseCatObj = get_category_by_slug("press-release");
 		$pressReleaseCatID = $pressReleaseCatObj->term_id;
+		$categoryNotIn = array(get_cat_id('IBAB'), get_cat_id('USAGM Experts'));
 		$qParams = array(
 			'post_type' => array('post'),
 			'posts_per_page' => 3,
 			'category__and' => array($prCategoryID, $pressReleaseCatID),
-			'category__not_in' => array(2280),
+			'category__not_in' => $categoryNotIn,
 			'orderby', 'date',
 			'order', 'DESC'
 		);

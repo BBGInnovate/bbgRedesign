@@ -38,6 +38,7 @@ foreach ($entities as $cur_entity) {
 						$prCategoryID,
 						get_cat_ID('Press Release')
 				),
+				'category__not_in' => get_cat_id('IBAB'),
 				'orderby', 'date',
 				'order', 'DESC',
 				'tax_query' => array(
