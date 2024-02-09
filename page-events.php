@@ -42,6 +42,7 @@ if ($featuredEventTypeField == 'next') {
 	$qParamsNextEvent = array(
 		'post_type' => array('post'),
 		'cat' => get_cat_id('Event'),
+		'category__not_in' => get_cat_id('IBAB Meetings'),
 		'posts_per_page' => 1,
 		'post_status' => array('future'),
 		'order' => 'ASC'
@@ -96,6 +97,7 @@ if ($featuredEventTypeField == 'next') {
 $qParamsUpcoming = array(
 	'post_type' => array('post'),
 	'cat' => get_cat_id('Event'),
+	'category__not_in' => get_cat_id('IBAB Meetings'),
 	'posts_per_page' => $postsPerPage,
 	'offset' => $offset,
 	'post_status' => array('future'),
@@ -138,6 +140,7 @@ wp_reset_postdata();
 $past_event_parameters = array(
 	'post_type' => array('post'),
 	'cat' => get_cat_id('Event'),
+	'category__not_in' => get_cat_id('IBAB Meetings'),
 	'posts_per_page' => $postsPerPage,
 	'offset' => $offset,
 	'post_status' => array('publish'),
