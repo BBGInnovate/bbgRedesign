@@ -274,7 +274,7 @@ get_header();
 								echo '				<p style="padding-bottom: 0;">' . get_the_date() . '</p>';
 								echo '				<p>' . get_the_excerpt() . '</p>';
 							} else {
-								echo '				<p>' . wp_trim_words(get_the_excerpt(), 10) . '</p>';
+								echo '				<p>' . wp_trim_words(get_the_excerpt(), 30) . '</p>';
 							}
 							echo '				</div>';
 							echo '			</div>';
