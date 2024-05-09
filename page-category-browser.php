@@ -74,6 +74,8 @@ if ($currentPage > 1) {
 $hasTeamFilter = false;
 $mobileAppsPostContent = "";
 $isBurkeCandidate = false;
+/*** USED FOR AWARDS AND BURKE CANDIDATES ****/
+$categoryBrowsePostType = get_post_meta(get_the_ID(), 'category_browser_post_type', true);
 
 if ($category_browser_type == "Page Children") {
 	/*** USED FOR APPS LANDING PAGE ****/
@@ -89,9 +91,6 @@ if ($category_browser_type == "Page Children") {
 		$qParams['order'] = 'ASC';
 	}
 } else if ($category_browser_type == "Custom Post Type") {
-	/*** USED FOR AWARDS AND BURKE CANDIDATES ****/
-	$categoryBrowsePostType = get_post_meta(get_the_ID(), 'category_browser_post_type', true);
-
 	/*** categoryBrowsePostType ***/
 	$qParams = array(
 		'post_type' => array($categoryBrowsePostType),
@@ -249,6 +248,10 @@ get_header();
 						($hasIntroFeature && $counter >= 0 && $currentPage == 1 || $currentPage > 1) || 
 						(!$hasIntroFeature && $counter > 0)
 					) {
+						$excerptLength = 10;
+						if ($categoryBrowsePostType == 'burke_candidate') {
+							$excerptLength = 30;
+						}
 						if ($shouldUseCards) {
 							echo '		<div class="cards three-wide cards--layout-general cards--size-1-3-small-small margin-top-small">';
 							echo '			<div class="cards__fixed">';
@@ -274,7 +277,7 @@ get_header();
 								echo '				<p style="padding-bottom: 0;">' . get_the_date() . '</p>';
 								echo '				<p>' . get_the_excerpt() . '</p>';
 							} else {
-								echo '				<p>' . wp_trim_words(get_the_excerpt(), 30) . '</p>';
+								echo '				<p>' . wp_trim_words(get_the_excerpt(), $excerptLength) . '</p>';
 							}
 							echo '				</div>';
 							echo '			</div>';
