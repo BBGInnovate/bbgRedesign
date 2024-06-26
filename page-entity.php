@@ -95,6 +95,7 @@ $languages = get_post_meta($entity_page_id, 'entity_languages', true);
 $audience = get_post_meta($entity_page_id, 'entity_audience', true);
 $appLink = get_post_meta($entity_page_id, 'entity_mobile_apps_link', true);
 $factSheet = get_post_meta($entity_page_id, 'fact_sheet', true);
+$boardOfDirectorsLink = get_post_meta($entity_page_id, 'entity_board_of_directors_link', true);
 
 $primaryLanguage = get_post_meta($entity_page_id, 'entity_primary_language', true);
 
@@ -126,11 +127,14 @@ if ($audience != "") {
 }
 if ($factSheet != "") {
 	$factSheetUrl = wp_get_attachment_url($factSheet);
-	$factSheet = '<a href="' . $factSheetUrl . '">Download the ' . $abbreviation . ' Fact Sheet</a>';
+	$factSheet = '<li><a href="' . $factSheetUrl . '">Download the ' . $abbreviation . ' Fact Sheet</a></li>';
 }
 if ($appLink != "") {
 	$app_link_markup  = '<h3 class="sidebar-section-header">Download the apps</h3>';
 	$app_link_markup .= '<p class="sans">' . $appLink . '<br><a href="https://www.bbg.gov/apps/">Visit the apps page</a></p>';
+}
+if ($boardOfDirectorsLink != "") {
+	$boardOfDirectorsLinkMarkup  = '<li><a href="' . $boardOfDirectorsLink . '">Visit the Board of Directors page</a></li>';
 }
 
 
@@ -532,7 +536,7 @@ get_header();
 		<!-- FAST FACTS -->
 		<?php
 			echo '<aside>';
-			if ($budget != "" || $employees != "" || $languages != "" || $audience != "" || $app_link_markup != "") {
+			if ($budget != "" || $employees != "" || $languages != "" || $audience != "" || $app_link_markup != "" || $boardOfDirectorsLinkMarkup != "") {
 				echo '<h3 class="sidebar-section-header">Fast facts</h3>';
 			}
 			echo 	'<ul class="unstyled-list">';
@@ -541,6 +545,7 @@ get_header();
 			echo 		$languages;
 			echo 		$audience;
 			echo 		$factSheet;
+			echo		$boardOfDirectorsLinkMarkup;
 			echo 	'</ul>';
 			echo '</aside>';
 
