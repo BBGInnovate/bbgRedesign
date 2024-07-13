@@ -161,64 +161,51 @@ function scaleRibbonBanner() {
 scaleRibbonBanner();
 
 function setUpRedirectHandler() {
-	$(document).on('click', 'a', function(e) {
+	$(document).ready(function() {
+    $('#redirect__button--cancel').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+    });
 
-		let linkOriginal = $(this).attr('href');
-		if (linkOriginal.indexOf('mailto:') == 0 || linkOriginal.indexOf('tel:') == 0) {
-			return;
-		}
+    $('#redirect__button--confirm').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+			window.open($('#redirect__link').text(), '_blank');
+    });
 
-		let link = $('<a>', {href: linkOriginal});
-		let linkHref = link[0].href;
-		let linkHostname = link[0].hostname;
-		let currentHostname = window.location.hostname;
-		let expectedPosition = linkHostname.length - (currentHostname.length + 1)
-		if (linkHostname != currentHostname && linkHostname.indexOf('.' + currentHostname) != expectedPosition) {
-			e.preventDefault();
+    $('#redirect__dialog--close').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+    });
 
-			$('#redirect__dialog').click(function(e) {
-				e.stopPropagation();
-			});
+    $('#redirect__overlay').click(function(e) {
+			hideOverlay($('#redirect__overlay'));
+    });
 
-			$('#redirect__button--cancel').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-			});
-
-			$('#redirect__button--confirm').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-				window.open(linkHref, '_blank');
-			});
-
-			$('#redirect__dialog--close').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-			});
-
-			$('#redirect__link').html(linkHostname);
-
-			showOverlay($('#redirect__overlay'));
-
-			$('#redirect__overlay').click(function(e) {
-				hideOverlay($('#redirect__overlay'));
-			});
-
-			function showOverlay(overlay) {
-				overlay.width('100%');
-				overlay.height('100%');
-				overlay.show();
+    $(document).on('click', 'a', function(e) {
+			let linkOriginal = $(this).attr('href');
+			if (!linkOriginal.startsWith('mailto:') && !linkOriginal.startsWith('tel:')) {
+				let link = $('<a>', {href: linkOriginal});
+				let linkHref = link[0].href;
+				let linkHostname = link[0].hostname;
+				let currentHostname = window.location.hostname;
+				let expectedPosition = linkHostname.length - (currentHostname.length + 1)
+				if (linkHostname !== currentHostname && linkHostname.indexOf('.' + currentHostname) !== expectedPosition) {
+					e.preventDefault();
+					$('#redirect__link').text(linkHref);
+					showOverlay($('#redirect__overlay'));
+				}
 			}
+    });
 
-			function hideOverlay(overlay) {
-				$('#redirect__dialog').off('click');
-				$('#redirect__button--cancel').off('click');
-				$('#redirect__button--confirm').off('click');
-				$('#redirect__dialog--close').off('click');
-				$('#redirect__overlay').off('click');
+    function showOverlay(overlay) {
+			overlay.width('100%');
+			overlay.height('100%');
+			overlay.show();
+    }
 
-				overlay.hide();
-				overlay.width('0');
-				overlay.height('0');
-			}
-		}
+    function hideOverlay(overlay) {
+			overlay.width('0');
+			overlay.height('0');
+			overlay.hide();
+    }
 	});
 }
 
