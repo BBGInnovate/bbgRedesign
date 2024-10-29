@@ -20,7 +20,7 @@ $secondaryColumnContent = get_field( 'secondary_column_content', '', true );
 get_header();
 ?>
 
-<main id="main" role="main">
+<main id="main" role="main" class="bbg__impact-model">
 
 	<?php while (have_posts()) : the_post(); ?>
 		<?php
@@ -60,170 +60,113 @@ get_header();
 		<section class="outer-container bbg__impact-model__section">
 			<div class="grid-container">
 				<p class="lead-in">USAGM networks operate in a competitive, diverse, fragmented global media environment undergoing revolutionary change. There is more information, more channels of distribution and limited freedom of the press.</p>
-
-				<div class="grid-half">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/01_pie_free-press.png" alt="" class="bbg__impact-model__graphic large" >
-					<h4 class="bbg__big-type">6,233,903,487</h4>
-					<p class="bbg__infobox__tagline">people live in countries that have a press that is partly free or not free</p>
+			</div>
+			<div class="grid-container bbg__impact-model__grid-6-3-container">
+				<div class="bbg__impact-model__grid-6">
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_01.png" alt="" class="bbg__impact-model__graphic large" >
 				</div>
-				<div class="grid-half">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/02_pictograph_free-press.png" alt="" class="bbg__impact-model__graphic large" >
-					<h4 class="bbg__big-type">6 out of 7 people</h4>
-					<p class="bbg__infobox__tagline">live in countries without a free press</p>
-					<br/>
-					<h4>They face more: </h4>
-					<ul>
-						<li>CENSORSHIP</li>
-						<li>PROPAGANDA</li>
-						<li>DISINFORMATION</li>
-						<li>THREATS TO JOURNALISTS</li>
-						<li>RESTRICTIVE LAWS</li>
-					</ul>
+				<div class="bbg__impact-model__grid-3">
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_02.png" alt="" class="bbg__impact-model__graphic large" >
+				</div>
+			</div>
+			<div class="grid-container">
+			<hr style="background-color: #eee; width: 90%; opacity: 0.8; height: 2px; border: none;" />
+			</div>
+			<div class="grid-container">
+				<div class="grid-four">
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_03.png" alt="" class="bbg__impact-model__graphic large" >
+				</div>
+				<div class="grid-four">
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_04.png" alt="" class="bbg__impact-model__graphic large" >
+				</div>
+				<div class="grid-four">
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_05.png" alt="" class="bbg__impact-model__graphic large" >
+				</div>
+				<div class="grid-four">
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_06.png" alt="" class="bbg__impact-model__graphic large" >
 				</div>
 			</div>
 		</section>
+
+		<?php
+		$impactModelFactSheetId = get_field('impact_model_fact_sheet');
+		$impactModelFactSheetUrl = wp_get_attachment_url($impactModelFactSheetId);
+
+		$impactModelFactSheetAnchorTag = '<a href="' . esc_url($impactModelFactSheetUrl) . '" target="_blank">USAGM Impact Model</a>';
+		?>
 
 		<section class="outer-container bbg__impact-model__section">
 			<div class="grid-container">
 				<h3 class="section-subheader">How do we measure impact?</h3>
-				<p>We measure impact across networks, across media, in <?php echo do_shortcode("[languages]"); ?> and in more than <?php echo do_shortcode("[countries]"); ?> countries. Our shared mission provides the framework for a common standard to define and measure impact.</p>
-			</div>
-			<div class="side-content-container">
-				<h4 class="article-title">5 Networks. </h4>
-				<h4 class="article-title">1 Mission. </h4>
-			</div>
-			<div class="main-content-container">
-				<h4 class="article-title">To inform, engage and connect people around the world in support of freedom and democracy.</h4>
+				<p>For any media organization, understanding the audience is critical to developing programming that is appealing and impactful. USAGM has a unique challenge in that our content appears in <?php echo do_shortcode("[languages]"); ?> languages and our audiences are located in more than <?php echo do_shortcode("[countries]"); ?> countries.</p>
+				<p>The <?php echo $impactModelFactSheetAnchorTag ?> serves as a framework for collecting data on our audiences and measuring the effectiveness of our programming. It comprises over 35 indicators organized around the agency’s mission: to inform, engage, and connect people around the world in support of freedom and democracy. The model looks beyond sheer audience size to assess the change that USAGM’s network and entity programming has made in the lives of audience members, in the local media sector, and among governments.</p>
+				<p>To assess programming performance, the Impact Model draws from a diverse set of evidence complementing quantitative measures such as survey data and digital analytics with structured anecdotal data.</p>
 			</div>
 		</section>
 
 		<section class="outer-container bbg__impact-model__section">
 			<div class="grid-container">
-				<h3 class="section-subheader">Impact</h3>
-				<p>The guiding principle we use to drive our strategy, implementation and review cycle.</p>
-				<img src="<?php echo get_template_directory_uri() ?>/img/impact/03_cycle_impact.png" alt="" class="usagm__impact-model__graphic full" >
+				<h3 class="section-subheader">Sources of evidence that inform the Impact Model</h3>
+			</div>
+			<div class="grid-container">
+				<div class="grid-half bbg__impact-model__sources">
+					<div class="bbg__impact-model__sources-img-container">
+						<img src="<?php echo get_template_directory_uri() ?>/img/impact/impact-model-sources-1.png" alt="" class="bbg__impact-model__graphic large" >
+					</div>
+					<div class="bbg__impact-model__sources-text-container">
+						<h4 class="bbg__impact-model__sources-header">Survey Data</h4>
+						<ul>
+							<li>USAGM Surveys</li>
+							<li>Omnibus Surveys</li>
+						</ul>
+					</div>
+				</div>
+				<div class="grid-half bbg__impact-model__sources">
+					<div class="bbg__impact-model__sources-img-container">
+						<img src="<?php echo get_template_directory_uri() ?>/img/impact/impact-model-sources-2.png" alt="" class="bbg__impact-model__graphic large" >
+					</div>
+					<div class="bbg__impact-model__sources-text-container">
+						<h4 class="bbg__impact-model__sources-header">Survey Data</h4>
+						<ul>
+							<li>Website and App Analytics</li>
+							<li>Social Media Analytics (aggregated and analyzed in the USAGM Data Portal)</li>
+						</ul>
+					</div>
+				</div>
+				<div class="grid-half bbg__impact-model__sources">
+					<div class="bbg__impact-model__sources-img-container">
+						<img src="<?php echo get_template_directory_uri() ?>/img/impact/impact-model-sources-3.png" alt="" class="bbg__impact-model__graphic large" >
+					</div>
+					<div class="bbg__impact-model__sources-text-container">
+						<h4 class="bbg__impact-model__sources-header">Survey Data</h4>
+						<ul>
+							<li>Evidence on guest appearances, impact stories, news pick-ups, co-productions with media partners, government reactions, etc.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="grid-half bbg__impact-model__sources">
+					<div class="bbg__impact-model__sources-img-container">
+						<img src="<?php echo get_template_directory_uri() ?>/img/impact/impact-model-sources-4.png" alt="" class="bbg__impact-model__graphic large" >
+					</div>
+					<div class="bbg__impact-model__sources-text-container">
+						<h4 class="bbg__impact-model__sources-header">Survey Data</h4>
+						<ul>
+							<li>Databases (CRM, etc.)</li>
+							<li>Internal Records</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</section>
 
 		<section class="outer-container bbg__impact-model__section">
 			<div class="grid-container" style="margin-bottom: 6rem;">
-				<h3 class="section-subheader">Impact Pillars + Indicators</h3>
-				<p>Below are illustrative samples of core and optional indicators. The full impact model offers USAGM networks 12 core and 28 optional indicators that they can use to fit with market conditions for each region. The indicators do not attempt to assess causality; they examine correlations.</p>
+				<h3 class="section-subheader">Impact Pillars and Select Indicators</h3>
+				<p>Below are illustrative samples of indicators in the Impact Model. The full model offers USAGM networks 36 indicators that they can use to fit with market conditions for each region.</p>
 
-				<div class="nest-container">
-					<div class="inner-container">
-						<div class="grid-half">
-							<h4 class="article-title">Inform</h4>
-							<h5 class="paragraph-header">Reach Audiences</h5>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/04a_inform_reach.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Weekly reach</p>
-							</div>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/04b_inform_visits.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Weekly digital visits</p>
-							</div>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/04c_inform_targeted.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Weekly reach of target segment*</p>
-							</div>
-						</div>
-						<div class="grid-half">
-							<h4 class="article-title">Provide Value</h4>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/05a_inform_unique.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Provide exceptional or unique information</p>
-							</div>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/05b_inform_credibility.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Audience finds information or service trustworthy / credible.</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Pillars-and-Sector-Indicators.png" alt="" class="bbg__impact-model__graphic" style="width: 100%;" >
 			</div>
 		</section>
-
-		<section class="outer-container bbg__impact-model__section">
-			<div class="grid-container">
-				<h4 class="article-title">Engage/Connect</h4>
-
-				<div class="nest-container">
-					<div class="inner-container">
-						<div class="grid-third">
-							<h5 class="paragraph-header">Engage Audiences</h5>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/06a_engage_digital.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Digital engagement</p>
-							</div>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/06b_engage_share.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Shared something or talked with someone as a result of reporting*</p>
-							</div>
-						</div>
-						<div class="grid-third">
-							<h5 class="paragraph-header">Engage Media</h5>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/07a_engage_cocreate.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Content co-creation with affiliates*</p>
-							</div>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/07b_engage_downloaded.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Content downloaded by affiliates*</p>
-							</div>
-						</div>
-						<div class="grid-third">
-							<h5 class="paragraph-header">Create Loyalty</h5>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/08a_engage_loyalty.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Audience is likely to continue to use</p>
-							</div>
-							<div class="bbg__impact-model__subsection">
-								<img src="<?php echo get_template_directory_uri() ?>/img/impact/08b_engage_appointment.png" alt="" class="bbg__impact-model__graphic" >
-								<p class="sans">Appointment listening or viewing*</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="outer-container bbg__impact-model__section">
-			<div class="grid-container">
-				<h4 class="article-title">BE INFLUENTIAL</h4>
-				<p>in support of freedom and democracy</p>
-
-				<div class="nest-container">
-					<div class="inner-container">
-						<div class="grid-third bbg__impact-model__subsection">
-							<img src="<?php echo get_template_directory_uri() ?>/img/impact/09a_influence_people.png" alt="" class="bbg__impact-model__graphic" >
-							<h5 class="paragraph-header">People</h5>
-							<p class="sans">Increased audience understanding of current events</p>
-						</div>
-						<div class="grid-third bbg__impact-model__subsection">
-							<img src="<?php echo get_template_directory_uri() ?>/img/impact/09b_influence_media.png" alt="" class="bbg__impact-model__graphic" >
-							<h5 class="paragraph-header">Media</h5>
-							<p class="sans">Drive the news agenda/high profile news pickups*</p>
-						</div>
-						<div class="grid-third bbg__impact-model__subsection">
-							<img src="<?php echo get_template_directory_uri() ?>/img/impact/09c_influence_government.png" alt="" class="bbg__impact-model__graphic" >
-							<h5 class="paragraph-header">Government</h5>
-							<p class="sans">Attention from government officials*</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="grid-container">
-				<p class="sans"  style="text-align: right;"><span style="font-size:3rem; vertical-align: -40%;">*</span> Optional indicator</p>
-			</div>
-		</section>
-
-		<div class="outer-container">
-			<div class="grid-container">
-				<p class="article-title">“Everyone has the right to freedom of opinion and expression; this right includes freedom to hold opinions without interference, and impart information and ideas through any media regardless of frontiers.”</p>
-				<p quote-name>— The Universal Declaration of Human Rights</p>
-			</div>
-		</div>
 
 		<div class="outer-container">
 			<div class="grid-container">
