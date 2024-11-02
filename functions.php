@@ -1534,4 +1534,45 @@ add_action('deleted_post', function($post_id) {
     }
 }, 10, 1);
 
+add_action('login_enqueue_scripts', 'add_custom_login_terms_interstitial');
+function add_custom_login_terms_interstitial() {
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const interstitial = document.createElement('div');
+            interstitial.style.position = 'fixed';
+            interstitial.style.top = '0';
+            interstitial.style.left = '0';
+            interstitial.style.width = '100%';
+            interstitial.style.height = '100%';
+            interstitial.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            interstitial.style.color = '#000';
+            interstitial.style.display = 'flex';
+            interstitial.style.alignItems = 'center';
+            interstitial.style.justifyContent = 'center';
+            interstitial.style.zIndex = '9999';
+            interstitial.innerHTML = `
+                <div style="background: #fff; padding: 32px; border-radius: 4px;">
+                    <h2 style="text-align: center;">Accept Terms and Conditions</h2>
+                    <p style="text-align: justify; width:400px; margin-top: 16px; margin-bottom: 32px; font-size: 1.1em;">You are accessing a U.S. Government (USG) Information System that is provided for USG-authorized use only. This Information System, which includes this agency computer, the agency computer network, and all other computers and devices connected to the agency network, is subject to monitoring by the USG and you should have no expectation of privacy with its use. Unauthorized or improper use of this system may result in disciplinary action, as well as civil and criminal penalties, as described in USAGMs Acceptable Use Policy for information technology. By using this Information System, you understand and consent to the following: Communications using, or data stored on, this Information System are not private. They are subject to routine USG monitoring, interception, and discovery. They may be seized, disclosed and/or used for any lawful government purpose. This Information System includes security measures to protect USG interests -- not for your personal benefit or privacy. Only authorized IT personnel may make alterations to them.</p>
+                    <div style="text-align: center;">
+                        <button id="decline-button" style="padding: 8px;">Decline</button>
+                        <button id="accept-button" style="padding: 8px; margin-left:8px;">Accept Terms and Conditions</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(interstitial);
+
+            document.getElementById('accept-button').addEventListener('click', function() {
+                interstitial.style.display = 'none';
+            });
+
+            document.getElementById('decline-button').addEventListener('click', function() {
+                window.location.href = '<?php echo home_url(); ?>';
+            });
+        });
+    </script>
+    <?php
+}
+
 ?>
