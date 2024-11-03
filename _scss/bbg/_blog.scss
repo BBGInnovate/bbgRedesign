@@ -665,7 +665,8 @@ e.g. on the intern testimonial page */
 }
 
 /* Ajax Load More Overrides */
-#ajax-load-more .alm-listing .alm-reveal > li {
+#ajax-load-more .alm-listing .alm-reveal > li,
+#ajax-load-more .alm-listing > li {
 
 	background: 0 0;
 	margin: 0 0 30px;
