@@ -63,10 +63,10 @@ get_header();
 			</div>
 			<div class="grid-container bbg__impact-model__grid-6-3-container">
 				<div class="bbg__impact-model__grid-6">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_01.png" alt="" class="bbg__impact-model__graphic large" >
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_01.jpg" alt="" class="bbg__impact-model__graphic large" >
 				</div>
 				<div class="bbg__impact-model__grid-3">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_02.png" alt="" class="bbg__impact-model__graphic large" >
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_02.jpg" alt="" class="bbg__impact-model__graphic large" >
 				</div>
 			</div>
 			<div class="grid-container">
@@ -74,16 +74,16 @@ get_header();
 			</div>
 			<div class="grid-container">
 				<div class="grid-four">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_03.png" alt="" class="bbg__impact-model__graphic large" >
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_03.jpg" alt="" class="bbg__impact-model__graphic large" >
 				</div>
 				<div class="grid-four">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_04.png" alt="" class="bbg__impact-model__graphic large" >
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_04.jpg" alt="" class="bbg__impact-model__graphic large" >
 				</div>
 				<div class="grid-four">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_05.png" alt="" class="bbg__impact-model__graphic large" >
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_05.jpg" alt="" class="bbg__impact-model__graphic large" >
 				</div>
 				<div class="grid-four">
-					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_06.png" alt="" class="bbg__impact-model__graphic large" >
+					<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Model_Our-Challenges_06.jpg" alt="" class="bbg__impact-model__graphic large" >
 				</div>
 			</div>
 		</section>
@@ -98,7 +98,7 @@ get_header();
 		<section class="outer-container bbg__impact-model__section">
 			<div class="grid-container">
 				<h3 class="section-subheader">How do we measure impact?</h3>
-				<p>For any media organization, understanding the audience is critical to developing programming that is appealing and impactful. USAGM has a unique challenge in that our content appears in <?php echo do_shortcode("[languages]"); ?> languages and our audiences are located in more than <?php echo do_shortcode("[countries]"); ?> countries.</p>
+				<p>For any media organization, understanding the audience is critical to developing programming that is appealing and impactful. USAGM has a unique challenge in that our content appears in <?php echo do_shortcode("[languages]"); ?> and our audiences are located in more than <?php echo do_shortcode("[countries]"); ?>.</p>
 				<p>The <?php echo $impactModelFactSheetAnchorTag ?> serves as a framework for collecting data on our audiences and measuring the effectiveness of our programming. It comprises over 35 indicators organized around the agency’s mission: to inform, engage, and connect people around the world in support of freedom and democracy. The model looks beyond sheer audience size to assess the change that USAGM’s network and entity programming has made in the lives of audience members, in the local media sector, and among governments.</p>
 				<p>To assess programming performance, the Impact Model draws from a diverse set of evidence complementing quantitative measures such as survey data and digital analytics with structured anecdotal data.</p>
 			</div>
@@ -162,7 +162,7 @@ get_header();
 		<section class="outer-container bbg__impact-model__section">
 			<div class="grid-container" style="margin-bottom: 6rem;">
 				<h3 class="section-subheader">Impact Pillars and Select Indicators</h3>
-				<p>Below are illustrative samples of indicators in the Impact Model. The full model offers USAGM networks 36 indicators that they can use to fit with market conditions for each region.</p>
+				<p>Below is an illustrative sample of indicators in the Impact Model. The full model offers USAGM networks 36 indicators that they can use to fit with market conditions for each region.</p>
 
 				<img src="<?php echo get_template_directory_uri() ?>/img/impact/Impact-Pillars-and-Sector-Indicators.png" alt="" class="bbg__impact-model__graphic" style="width: 100%;" >
 			</div>
